@@ -16,6 +16,10 @@ WEKA 3.7
 #	./tools/download_wepages
 
 
+download_webpages.py
+This script reads a text file. The text file contains a list of links from MetaCritic. MetaCritic is a site that posts reviews on movies, tv, games, music, etc. The script reads the file and creates a list of links. It then iterates through the list
+of links, opening each link, and writing the information pulled from each link into a new file.
+
 
 ### TASK OVERVIEW
 Our goal is to extract and build models of various features of the Metacritic.com reviews.
