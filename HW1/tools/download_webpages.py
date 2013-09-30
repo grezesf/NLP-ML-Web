@@ -27,9 +27,9 @@ for item in links:
 # Iterates through list of links and prints html source code to file
 for link in cleanLinks:
     print("processing: " + link)
-    linkList = link.split('/')
+
 #Cleans and formats string
-    title = str(linkList[4:]).replace('[', '').replace(']','').replace(", ",'+').replace("'",'').strip() 
+    title = link.replace("/", "_")
     
 # Opens each link and reads source code    
     print("title: " + title)         
