@@ -24,7 +24,7 @@ for item in links:
         cleanLinks.append(item.strip())
 
 
-for link in cleanLinks[:1]: #Iterates through list of links and prints html source code to file
+for link in cleanLinks: #Iterates through list of links and prints html source code to file
     linkList= link.split('/')
     title= linkList[-1]   
          
