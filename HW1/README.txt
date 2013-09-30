@@ -13,6 +13,8 @@ WEKA 3.7
 
 
 ### FILE DESCRIPTIONS
+#	./tools/download_wepages
+
 
 
 ### TASK OVERVIEW
@@ -32,6 +34,19 @@ Cat1: MEDIA
 Cat2: GRADE
 	This label describes the general reaction of the review aggregation. It is represented on the page by the score color (green, yellow red)
 	labels: good; average; bad
+Cat3: OLD/NEW
+	We divided the training data into 2 categories, media from 2000/03, and media from 2010/13. For the training data we only have media from those 6 years.
+	labels: old; new
+Cat4: SCORE
+	This label is the metascore given to the media by Metacritic. It is out of 100
+	labels: 0-100
+Cat5: #USER-RATINGS
+	This label is the total number of ratings given by users of Metacritic. It is NOT the user rating score.
+	labels: 0-+inf
+
+#	Our approach
+
+#	Our results
 
 
 ###TODOs
