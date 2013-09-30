@@ -6,7 +6,7 @@ from urllib import *
 
 
 ###README
-#TODO add description here and to main README.txt
+#TODO add description  of script here and to main README.txt
 
 
 
@@ -14,24 +14,30 @@ from urllib import *
 # MetaCritic is a site that posts reviews on movies, tv, games, music, etc.
 # This link connects specifically to game reviews for the iPhone/iPad
 
+filename = 'link-list.txt'
+links_file = open(filename) # Opens text file that contains list of links
+print("working on list of link file: " + filename)
 
-links_file= open('link-list.txt') # Opens text file that contains list of links
-links= links_file.readlines()
+links = links_file.readlines()
 
-cleanLinks= [] # Contains a cleaned list of all links to metacritic
+cleanLinks = [] # Contains a cleaned list of all links to metacritic
 for item in links:
     if item != "\n":
         cleanLinks.append(item.strip())
 
 
-for link in cleanLinks: #Iterates through list of links and prints html source code to file
-    linkList= link.split('/')
-    title= linkList[-1]   
+#Iterates through list of links and prints html source code to file
+for link in cleanLinks:
+    print("processing: " + link)
+    linkList = link.split('/')
+    title = linkList[-1]
+    print("title: " + title)
          
-    webPage= URLopener().open(link)
-    htmlDoc= webPage.read()
+    webPage = URLopener().open(link)
+    htmlDoc = webPage.read()
     webPage.close()
-    outFile= open('../data/train/'+title+'.htm', 'w')
-    writeToFile= outFile.write(htmlDoc)
+    outFile = open('../data/train/' + title + '.htm', 'w')
+    writeToFile = outFile.write(htmlDoc)
+    print("wrote to file: " + '../data/train/' + title + '.htm\n')
     
 
