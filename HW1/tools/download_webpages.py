@@ -29,8 +29,8 @@ for link in cleanLinks:
     print("processing: " + link)
 
 #Cleans and formats string
-    title = link.replace("/", "_")
-    
+    title = link.replace('http://', '').replace("/", "_")
+
 # Opens each link and reads source code    
     print("title: " + title)         
     webPage = URLopener().open(link) #Opens link
