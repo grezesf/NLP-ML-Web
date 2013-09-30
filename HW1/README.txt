@@ -34,13 +34,13 @@ Our training data was balanced according to our features, but our test data was 
 We identified 5 label categories that we deemed interesting to modelize. We tried to vary to types of the labels to make it interesting for the machine learning tools.
 Cat1: MEDIA
 	This label describes if the page is a movie, music, tv show or game review.
-	labels: movie; game; TV; music
+	labels: MOVIE; GAME; TV; MUSIC
 Cat2: GRADE
 	This label describes the general reaction of the review aggregation. It is represented on the page by the score color (green, yellow red)
-	labels: good; average; bad
+	labels: GOOD; AVERAGE; BAD
 Cat3: OLD/NEW
 	We divided the training data into 2 categories, media from 2000/03, and media from 2010/13. For the training data we only have media from those 6 years.
-	labels: old; new
+	labels: OLD; NEW
 Cat4: SCORE
 	This label is the metascore given to the media by Metacritic. It is out of 100
 	labels: 0-100
