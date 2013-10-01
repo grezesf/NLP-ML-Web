@@ -8,7 +8,12 @@ from bs4 import BeautifulSoup
 import random
 
 ###README
-#TODO add to main readme
+# This web scraper takes a directory as its one argument. The script
+# contains one function named crawl. Crawl is given 1 argument, which must be a link
+# The function then does a random walk through the site searching for valid links. In this
+# case valid links would be a link to a specific review. All valid links are written into
+# a new file within the given directory. The function will recursively search exhaustively
+# until all links have been followed.
 
 # This script takes one argument, the argument should be a web link
 directory= sys.argv[1]
