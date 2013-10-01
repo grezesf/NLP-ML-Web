@@ -10,10 +10,17 @@ from urllib import *
 # MetaCritic is a site that posts reviews on movies, tv, games, music, etc.
 # The script reads the file and creates a list of links. It then iterates through the list
 # of links, opening each link, and writing the information pulled from each link into a new file.
+# to call this file, give it as input the path to the links.text
+# ex : download_pages.py ../data/train/train-links.txt
 
-filename = 'link-list.txt'
+
+filename = sys.argv[1]
 links_file = open(filename) # Opens text file that contains list of links
 print("working on list of link file: " + filename)
+
+# work directory
+workdir = '/'.join(filename.split('/')[:-1]) + '/'
+print "saving files in: " + workdir + '\n'
 
 links = links_file.readlines()
 
@@ -38,8 +45,8 @@ for link in cleanLinks:
     webPage.close()
     
 # Creates and writes to a new file that will contain all the information taken from that link
-    outFile = open('../data/train/' + title + '.htm', 'w')
+    outFile = open(workdir + title + '.htm', 'w')
     writeToFile = outFile.write(htmlDoc)
-    print("wrote to file: " + '../data/train/' + title + '.htm\n')
+    print("wrote to file: " + workdir + title + '.htm\n')
     
 
