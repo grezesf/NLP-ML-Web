@@ -16,8 +16,8 @@ import random
 # until all links have been followed.
 
 # This script takes one argument, the argument should be a web link
-directory= sys.argv[1]
-fileName= directory.split('/')[-1]
+directory = sys.argv[1]
+fileName = directory.split('/')[-1]
 print fileName
 metacritic = "http://www.metacritic.com"
 
@@ -49,23 +49,23 @@ def crawl(webPage):
         
     # Lists all links that must be ignored!
     mc = 'http://www.metacritic.com/'
-    mcGame= 'http://www.metacritic.com/game/'
+    mcGame = 'http://www.metacritic.com/game/'
     ignoreList = [mc + 'music', mc + 'tv', mc + 'movie', mcGame + 'pc', mcGame + 'ios', mcGame + 'playstation-3', 
     mcGame + 'xbox', mcGame +'wii-u', mcGame + '3ds', mcGame + 'playstation-vita', mcGame + 'wii', mcGame + 'psp', mcGame + 'legacy']
 
     # # Random walk through valid links, writes every link that is a review to a new file
     goodLinks = []
-    checkAgain= []
+    checkAgain = []
     newLinkFile = open(directory + "/" + fileName + "-links.txt", 'w')
     for link in validLinks: 
         if "http" not in link:
             newLink = 'http://www.metacritic.com'+link 
         else:
-            newLink= link 
+            newLink = link 
         try:
-            followLink= URLopener().open(newLink)
-            checkLink= followLink.read()
-            soupIt= BeautifulSoup(checkLink)
+            followLink = URLopener().open(newLink)
+            checkLink = followLink.read()
+            soupIt = BeautifulSoup(checkLink)
             if 'Reviews - Metacritic' in soupIt.title.string and 'Metascore' and 'Release Date' and 'User Score' in soupIt.get_text() and newLink not in ignoreList:
                 print "Wrote to file good link: " +  newLink + '\n'
                 newLinkFile.write(newLink + '\n') 
@@ -75,7 +75,7 @@ def crawl(webPage):
         except IOError:
             print "Link no longer valid: " + newLink + '\n'
     # Removes duplicates
-    checkList= list(set(checkAgain))
+    checkList = list(set(checkAgain))
     # Shuffle list of links
     random.shuffle(checkList)
     crawl(checkList[0])
