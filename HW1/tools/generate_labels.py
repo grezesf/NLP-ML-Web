@@ -10,21 +10,22 @@ print '\n'
 ###README
 # this script takes a directory of html pages 
 # and outputs the proper training labels in the same dir
-# example call: generate_labels.py ../data/train 
+# examples
+# call: generate_labels.py ../data/train 
 # file: www.metacritic.com/movie/pokmon-the-first-movie---mewtwo-strikes-back!
 # line in labels file: http:__www.metacritic.com_movie_pokmon-the-first-movie---mewtwo-strikes-back!,MOVIE,BAD,OLD,35,67
 
 
 # directory containing the html pages
 htm_dir = sys.argv[1]
-print "directory containing the htm files: " + htm_dir
+print "directory containing the .htm files: " + htm_dir
 
 #directory to save the labels file in (deprecated, used to be one above ie cd .. )
 # work_dir = '/'.join(htm_dir.split('/')[:-1])
 # print work_dir
 
 # name of label.txt
-labels_name = htm_dir.split('/')[-1] + "_labels.txt"
+labels_name = htm_dir.split('/')[-1] + "-labels.txt"
 print "name of the labels file to be created: " + labels_name
 print '\n'
 
@@ -92,6 +93,8 @@ for (path, dirs, files) in os.walk(htm_dir):
                 else:
                     grade = "BAD"
             print "GRADE :" , grade
+
+            print '\n'
             
 
             # write to file

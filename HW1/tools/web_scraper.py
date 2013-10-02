@@ -14,9 +14,9 @@ import random
 # case valid links would be a link to a specific review. All valid links are written into
 # a new file within the given directory. The function will recursively search exhaustively
 # until all links have been followed.
+# ex: web_scraper ../data/dev/
 
-# This script takes one argument, the argument should be a web link
-directory = sys.argv[1]
+# This script takes one argument, the argument should be a directory
 fileName = directory.split('/')[-1]
 print fileName
 metacritic = "http://www.metacritic.com"
