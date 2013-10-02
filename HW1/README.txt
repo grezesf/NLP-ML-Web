@@ -52,7 +52,7 @@ Cat4: SCORE
 	This label is the metascore given to the media by Metacritic. It is out of 100
 	labels: 0-100
 Cat5: #USER-RATINGS
-	This label is the total number of ratings given by users of Metacritic. It is NOT the user rating score.
+	This label is the total number of ratings given by users of Metacritic. It is NOT the user rating score, nor the number of user reviews.
 	labels: 0-+inf
 
 #	Our approach

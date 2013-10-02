@@ -48,5 +48,6 @@ for link in cleanLinks:
     outFile = open(workdir + title + '.htm', 'w')
     writeToFile = outFile.write(htmlDoc)
     print("wrote to file: " + workdir + title + '.htm\n')
+    outFile.close()
     
 

@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import os
 import sys
+import re
 
 from bs4 import BeautifulSoup
 
@@ -42,19 +43,59 @@ for (path, dirs, files) in os.walk(htm_dir):
             #link
             page_link = soup_obj.find_all(rel="canonical")[0]['href'].replace('/','_')
             print page_link
-            # MEDIA
-            media = soup_obj.find("meta")
-            # [0]['content'].upper()
-            print media
-            # GRADE
-            # OLD/NEW
-            # SCORE
-            # score = soup_obj.findAll(<span class="score_value" itemprop="ratingValue">
-            # USER-RATINGS
 
+            # extract the labels
+            # ALL the following are rather ugly hacks
+            # MEDIA
+            media = page_link.split('_')[3].upper()
+            print "media: " , media
+            # OLD/NEW
+            if media == "TV":
+                date = soup_obj.get_text()
+                regexp = re.search( '\d, 20\d\d', date).group(0)
+                date = regexp[-4:]
+                if  int(date) <= 2006:
+                    date = "OLD"
+                else:
+                    date = "NEW"
+            else:
+                date = soup_obj.find_all(itemprop="datePublished")[0].get_text().strip()
+                date = date[-4:]
+                if int(date) <= 2006:
+                    date = "OLD"
+                else:
+                    date = "NEW"
+            print "OLD/NEW: " , date
+            # SCORE
+            score = int(soup_obj.find_all(itemprop="ratingValue")[0].get_text())
+            print "Score: " , score
+            # USER-RATINGS
+            num_ratings = soup_obj.strong
+            if num_ratings == None:
+                num_ratings = 0
+            else:
+                num_ratings = int(num_ratings.get_text()[:-8])
+            print "#RATINGS: " , num_ratings
+            # GRADE
+            if media == "GAMES":
+                if score >= 75:
+                    grade = "GOOD"
+                elif score >= 50:
+                    grade = "AVERAGE"
+                else:
+                    grade = "BAD"
+            else:
+                if score >= 61:
+                    grade = "GOOD"
+                elif score >= 40:
+                    grade = "AVERAGE"
+                else:
+                    grade = "BAD"
+            print "GRADE :" , grade
             
 
-
+            # write to file
+            labels.write("%s;%s;%s;%s;%d;%d\n" % (page_link, media, grade, date, score, num_ratings))
 
 
 # close file
