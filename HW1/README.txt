@@ -9,26 +9,34 @@ Beautiful Soup 4
 WEKA 3.7
 
 
+############################
 ### INSTRUCTIONS
+############################
 
 
+############################
 ### FILE DESCRIPTIONS
-#	./tools/download_wepages
-
-
+############################
 download_webpages.py
-This script reads a text file. The text file contains a list of links from MetaCritic. MetaCritic is a site that posts reviews on movies, tv, games, music, etc. The script reads the file and creates a list of links. It then iterates through the list
-of links, opening each link, and writing the information pulled from each link into a new file.
+This script reads a text file. The text file contains a list of links from MetaCritic. MetaCritic is a site that posts reviews on movies, tv, games, music, etc. The script reads the file and creates a list of links. It then iterates through the listof links, opening each link, and writing the information pulled from each link into a new file.
+# ex : download_pages.py ../data/train/train-links.txt
+
+generate_labels.py
+this script takes a directory of html pages and outputs the proper training labels in the same dir
+# examples
+call: generate_labels.py ../data/train 
+file: www.metacritic.com/movie/pokmon-the-first-movie---mewtwo-strikes-back!
+line in labels file: http:__www.metacritic.com_movie_pokmon-the-first-movie---mewtwo-strikes-back!,MOVIE,BAD,OLD,35,67
 
 web_scraper.py
-This web scraper takes a directory as its one argument. The script
-contains one function named crawl. Crawl is given 1 argument, which must be a link
-The function then does a random walk through the site searching for valid links. In this
-case valid links would be a link to a specific review. All valid links are written into
-a new file within the given directory. The function will recursively search exhaustively
-until all links have been followed.
+This web scraper takes a directory as its one argument. The script contains one function named crawl. Crawl is given 1 argument, which must be a link
+The function then does a random walk through the site searching for valid links. In this case valid links would be a link to a specific review. All valid links are written into a new file within the given directory. The function will recursively search exhaustively until all links have been followed.
+# ex: web_scraper ../data/dev/
 
-### TASK OVERVIEW
+
+############################
+### PROJECT OVERVIEW
+############################
 Our goal is to extract and build models of various features of the Metacritic.com reviews.
 Metacritic.com is a website that aggregates reviews for various media., with the hope of being able to combine them into one single score.
 
@@ -60,6 +68,4 @@ Cat5: #USER-RATINGS
 #	Our results
 
 
-###TODOs
-add links to tools
 

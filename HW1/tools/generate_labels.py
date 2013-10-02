@@ -5,6 +5,7 @@ import re
 
 from bs4 import BeautifulSoup
 
+# newline for shell readability
 print '\n'
 
 ###README
@@ -25,7 +26,7 @@ print "directory containing the .htm files: " + htm_dir
 # print work_dir
 
 # name of label.txt
-labels_name = htm_dir.split('/')[-1] + "-labels.txt"
+labels_name = os.path.basename(os.path.normpath(htm_dir)) + "-labels.txt"
 print "name of the labels file to be created: " + labels_name
 print '\n'
 
