@@ -42,8 +42,8 @@ for (path, dirs, files) in os.walk(htm_dir):
             # make soup object
             soup_obj = BeautifulSoup(open(path + '/' + f))
 
-            #link
-            page_link = 'http:__' + f.rstrip('.htm')
+            #link is filename +http-.htm
+            page_link = 'http:__' + f[:-4]
             print page_link
 
             # extract the labels
