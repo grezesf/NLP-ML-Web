@@ -18,75 +18,174 @@ import random
 
 # This script takes one argument, the argument should be a directory
 directory = sys.argv[1]
-fileName = os.path.basename(os.path.normpath(directory))
-print fileName
-metacritic = "http://www.metacritic.com"
+fileName = os.path.basename(os.path.normpath(directory)) + "-links.txt"
+print "creating: " + directory + '/' + fileName
+newLinkFile = open(directory + '/' + fileName, 'w+')
 
-def crawl(webPage):
-    print("processing: " + webPage + '\n')
-
-    # Opens link and reads source code
-    openPage = URLopener().open(webPage) 
-    htmlDoc = openPage.read()
-    openPage.close()
-
-    # print htmlDoc
-
-    # Creates a beautifulSoup object
-    soup = BeautifulSoup(htmlDoc)
-
-    # Finds all links on webpage
-    linkList = []
-    for link in soup.find_all('a'):
-        linkList.append(link.get('href'))
-
-    # Finds valid links (only links within metacritic)
-    validLinks = []
-    for link in linkList:
-        if 'metacritic' not in link and '.com' in link or 'twitter' in link:
-            continue
-        else:
-            validLinks.append(link)
+# subfunction that checks if a given link is a review page for a specific movie, game, show, album
+def isReview(link):
+    # try to open the link        
+    try:
+        followLink = URLopener().open(link)
+        checkLink = followLink.read()
         
-    # Lists all links that must be ignored!
-    mc = 'http://www.metacritic.com/'
-    mcGame = 'http://www.metacritic.com/game/'
-    ignoreList = [mc + 'music', mc + 'tv', mc + 'movie', mcGame + 'pc', mcGame + 'ios', mcGame + 'playstation-3', 
-    mcGame + 'xbox', mcGame +'wii-u', mcGame + '3ds', mcGame + 'playstation-vita', mcGame + 'wii', mcGame + 'psp', mcGame + 'legacy']
+        # link works
+        soupIt = BeautifulSoup(checkLink)
+        
+        if 'Reviews - Metacritic' in soupIt.title.string and 'Metascore' and 'Release Date' and 'User Score' in soupIt.get_text() and 'Metacritic Reports' not in soupIt.get_text():
+           # check if link has a Score
+            try:
+                # find SCORE
+                score = int(soupIt.find_all(itemprop="ratingValue")[0].get_text())
+                return True
+            except:
+                print "No score found"
+                return False
+        
+    # if we can't open the link
+    except IOError:
+        print "Link no longer valid: " + link + '\n'
+        return False
+    
 
-    # # Random walk through valid links, writes every link that is a review to a new file
-    goodLinks = []
-    checkAgain = []
-    newLinkFile = open(directory + "/" + fileName + "-links.txt", 'w')
-    for link in validLinks: 
-        if "http" not in link:
-            newLink = 'http://www.metacritic.com'+link 
-        else:
-            newLink = link 
-        try:
-            followLink = URLopener().open(newLink)
-            checkLink = followLink.read()
-            soupIt = BeautifulSoup(checkLink)
-            if 'Reviews - Metacritic' in soupIt.title.string and 'Metascore' and 'Release Date' and 'User Score' in soupIt.get_text() and newLink not in ignoreList:
-                # check if link has a Score
-                try:
-                    # find SCORE
-                    score = int(soupIt.find_all(itemprop="ratingValue")[0].get_text())
 
-                    print "Wrote to file good link: " +  newLink + '\n'
-                    newLinkFile.write(newLink + '\n')
-                except:
-                    print "No score found"
+# starting link
+metacritic = "http://www.metacritic.com"
+print "starting link is: " + "http://www.metacritic.com"
 
-            else: 
-                print 'Will check again: ' + newLink + '\n'
-                checkAgain.append(newLink)
-        except IOError:
-            print "Link no longer valid: " + newLink + '\n'
-    # Removes duplicates
-    checkList = list(set(checkAgain))
-    # Shuffle list of links
-    random.shuffle(checkList)
-    crawl(checkList[0])
 
-crawl(metacritic)
+futureLinks = [metacritic]
+visitedLinks = []
+
+
+
+
+while futureLinks != []:
+    #choose random link to visit
+    random.shuffle(futureLinks)
+    webPage = futureLinks[0]
+    del futureLinks[0]
+    visitedLinks.append(webPage)
+    print("processing: " + webPage + '\n')
+    
+    # Opens link and reads source code
+    try:
+        openPage = URLopener().open(webPage) 
+        htmlDoc = openPage.read()
+        openPage.close()
+
+        # Creates a beautifulSoup object
+        soup = BeautifulSoup(htmlDoc)
+    
+        # Finds all links on webpage
+        linkList = []
+        for link in soup.find_all('a'):
+            linkList.append(link.get('href'))
+    #     print linkList
+        
+        # Finds valid links (only links within metacritic)
+        validLinks = []
+        for link in linkList:
+            if "http" not in link:
+                validLinks.append('http://www.metacritic.com'+link)
+            elif 'metacritic.com' in link:
+                validLinks.append(link)
+    
+    #     print validLinks
+    
+        # go through all non visted valid links, find reviews and continue crawling
+        for link in [x for x in validLinks if x not in visitedLinks]:
+                # making a list and checking it twice
+                if link not in visitedLinks:
+                    print "checking if review: " + link
+                    # check if link is a review
+                    if isReview(link):
+                            # add to link list file
+                            print "Wrote to file good link: " +  link + '\n'
+                            newLinkFile.write(link + '\n')
+                            # add to visted links
+                            visitedLinks.append(link)
+                    else:
+                        # add to list of future links
+                        print "add link for future visit"
+                        futureLinks.append(link)
+    except:
+        print "Something about the link was wrong, ignore it"   
+
+
+# close file
+newLinkFile.close()
+
+
+
+# def crawl(futureLinks, visitedLinks):
+#     webPage= random.shuffle(futureLinks)[0]
+#     print futureLinks[0], webPage
+#     del futureLinks[0]
+#     visitedLinks.append(webPage)
+#     print("processing: " + webPage + '\n')
+# 
+#     # Opens link and reads source code
+#     openPage = URLopener().open(webPage) 
+#     htmlDoc = openPage.read()
+#     openPage.close()
+# 
+#     # print htmlDoc
+# 
+#     # Creates a beautifulSoup object
+#     soup = BeautifulSoup(htmlDoc)
+# 
+#     # Finds all links on webpage
+#     linkList = []
+#     for link in soup.find_all('a'):
+#         linkList.append(link.get('href'))
+# 
+#     # Finds valid links (only links within metacritic)
+#     validLinks = []
+#     for link in linkList:
+#         if 'metacritic' not in link and '.com' in link or 'twitter' in link:
+#             continue
+#         else:
+#             validLinks.append(link)
+#         
+#     # Lists all links that must be ignored!
+#     mc = 'http://www.metacritic.com/'
+#     mcGame = 'http://www.metacritic.com/game/'
+#     ignoreList = [mc + 'music', mc + 'tv', mc + 'movie', mcGame + 'pc', mcGame + 'ios', mcGame + 'playstation-3', 
+#     mcGame + 'xbox', mcGame +'wii-u', mcGame + '3ds', mcGame + 'playstation-vita', mcGame + 'wii', mcGame + 'psp', mcGame + 'legacy']
+# 
+#     # # Random walk through valid links, writes every link that is a review to a new file
+#     checkAgain = []
+#     newLinkFile = open(directory + "/" + fileName + "-links.txt", 'w')
+#     for link in validLinks: 
+#         if "http" not in link:
+#             newLink = 'http://www.metacritic.com'+link 
+#         else:
+#             newLink = link 
+#         try:
+#             followLink = URLopener().open(newLink)
+#             checkLink = followLink.read()
+#             soupIt = BeautifulSoup(checkLink)
+#             if 'Reviews - Metacritic' in soupIt.title.string and 'Metascore' and 'Release Date' and 'User Score' in soupIt.get_text() and newLink not in ignoreList:
+#                 # check if link has a Score
+#                 try:
+#                     # find SCORE
+#                     score = int(soupIt.find_all(itemprop="ratingValue")[0].get_text())
+# 
+#                     print "Wrote to file good link: " +  newLink + '\n'
+#                     newLinkFile.write(newLink + '\n')
+#                 except:
+#                     print "No score found"
+# 
+#             else: 
+#                 print 'Will check again: ' + newLink + '\n'
+#                 checkAgain.append(newLink)
+#         except IOError:
+#             print "Link no longer valid: " + newLink + '\n'
+#     # Removes duplicates
+#     checkList = list(set(checkAgain))
+#     # Shuffle list of links
+#     random.shuffle(checkList)
+#     crawl(checkList[0])
+# 
+# crawl(metacritic, [])
