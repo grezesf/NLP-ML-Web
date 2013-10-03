@@ -17,7 +17,8 @@ import random
 # ex: web_scraper ../data/dev/
 
 # This script takes one argument, the argument should be a directory
-fileName = directory.split('/')[-1]
+directory = sys.argv[1]
+fileName = os.path.basename(os.path.normpath(directory))
 print fileName
 metacritic = "http://www.metacritic.com"
 
@@ -67,8 +68,16 @@ def crawl(webPage):
             checkLink = followLink.read()
             soupIt = BeautifulSoup(checkLink)
             if 'Reviews - Metacritic' in soupIt.title.string and 'Metascore' and 'Release Date' and 'User Score' in soupIt.get_text() and newLink not in ignoreList:
-                print "Wrote to file good link: " +  newLink + '\n'
-                newLinkFile.write(newLink + '\n') 
+                # check if link has a Score
+                try:
+                    # find SCORE
+                    score = int(soupIt.find_all(itemprop="ratingValue")[0].get_text())
+
+                    print "Wrote to file good link: " +  newLink + '\n'
+                    newLinkFile.write(newLink + '\n')
+                except:
+                    print "No score found"
+
             else: 
                 print 'Will check again: ' + newLink + '\n'
                 checkAgain.append(newLink)
