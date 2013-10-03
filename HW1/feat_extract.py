@@ -31,15 +31,15 @@ arff.write("%% 1. METACRITIC %s database\n"  % (arff_filename))
 arff.write("@RELATION metacritic\n\n")
 
 # write the basic attributes
-arff.write("%%ATRIBUTE name string\n")
-arff.write("%%ATRIBUTE MEDIA {MOVIE,GAME,TV,MUSIC}\n")
-arff.write("%%ATRIBUTE GRADE {GOOD,AVERAGE,BAD}\n")
-arff.write("%%ATRIBUTE OLD-NEW {OLD,NEW}\n")
-arff.write("%%ATRIBUTE SCORE numeric\n")
-arff.write("%%ATRIBUTE NUM-RATINGS numeric\n")
+arff.write("@ATTRIBUTE  name string\n")
+arff.write("@ATTRIBUTE  MEDIA {MOVIE,GAME,TV,MUSIC}\n")
+arff.write("@ATTRIBUTE  GRADE {GOOD,AVERAGE,BAD}\n")
+arff.write("@ATTRIBUTE  OLD_NEW {OLD,NEW}\n")
+arff.write("@ATTRIBUTE  SCORE numeric\n")
+arff.write("@ATTRIBUTE  NUM_RATINGS numeric\n")
 
 # write our own features
-arff.write("%%ATRIBUTE text string\n")
+arff.write("@ATTRIBUTE  text string\n")
 
 # write data line
 arff.write("\n@DATA\n")
@@ -71,7 +71,7 @@ for line in labels_file:
 
     # write to arff file
     # arff.write("%s,%s,%s,%s,%s,%s\n" % (htm_name, media, grade, old_new, score, num_ratings))
-    arff.write("%s,%s,%s,%s,%s,%s,\'%s\'\n" % (htm_name, media, grade, old_new, score, num_ratings,text))
+    arff.write("\'%s\',%s,%s,%s,%s,%s,\'%s\'\n" % (htm_name, media, grade, old_new, score, num_ratings,text))
 
     
 
