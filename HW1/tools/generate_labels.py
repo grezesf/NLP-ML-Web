@@ -76,7 +76,10 @@ for (path, dirs, files) in os.walk(htm_dir):
             if num_ratings == None:
                 num_ratings = 0
             else:
-                num_ratings = int(num_ratings.get_text()[:-8])
+                try:
+                    num_ratings = int(num_ratings.get_text()[:-8])
+                except:
+                     num_ratings = 0
             print "#RATINGS: " , num_ratings
             # GRADE
             if media == "GAMES":
