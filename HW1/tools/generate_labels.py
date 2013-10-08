@@ -12,7 +12,7 @@ print '\n'
 # this script takes a directory of html pages 
 # and outputs the proper training labels in the same dir
 # examples
-# call: generate_labels.py ../data/train 
+# call: python generate_labels.py ../data/train 
 # file: www.metacritic.com/movie/pokmon-the-first-movie---mewtwo-strikes-back!
 # line in labels file: http:__www.metacritic.com_movie_pokmon-the-first-movie---mewtwo-strikes-back!,MOVIE,BAD,OLD,35,67
 

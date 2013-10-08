@@ -11,8 +11,10 @@ print '\n'
 
 ###README
 # this script takes a data directory as input (with the .htm files)
+# (it assumes both the data and labels are in this directory)
+
 # and output a .arff file with the extracted features in it
-# ex: feat_extract.py ./data/train/
+# ex: python feat_extract.py ./data/train/
 # writes: train-feats.arff
 
 # work directory

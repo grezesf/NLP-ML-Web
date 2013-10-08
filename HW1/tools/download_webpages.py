@@ -11,7 +11,7 @@ from urllib import *
 # The script reads the file and creates a list of links. It then iterates through the list
 # of links, opening each link, and writing the information pulled from each link into a new file.
 # to call this file, give it as input the path to the links.text
-# ex : download_pages.py ../data/train/train-links.txt
+# ex : python download_pages.py ../data/train/train-links.txt
 
 
 filename = sys.argv[1]

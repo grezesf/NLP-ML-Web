@@ -7,9 +7,6 @@
 
 
 # path to Weka's jar file
-# weka_jar=/cygdrive/c/Program\ Files\ \(x86\)/Weka-3-7/weka.jar
-# weka_jar=/cygdrive/c/weka.jar
-
 weka_jar=/home/apps/weka-3-7-9/weka.jar
 
 # test if weka_jar found
