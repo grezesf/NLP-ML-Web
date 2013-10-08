@@ -83,7 +83,7 @@ run_exp.sh
 conver_predictions.py
 this script takes as input a Weka style prediction file 
 ex: inst#     actual  predicted error distribution ()
-        1     2:GAME     2:GAME       0.333,*0.5,0.167,0 
+		1     2:GAME     2:GAME       0.333,*0.5,0.167,0 
 and the corresponding arff file and outputs a file with predictions as in the homework
 ex: http:__www.metacritic.com_game_pc_alien-rage;GAME;GAME,+
 it also prints the accuracy for nominal classes, for numeric classes, it only creates a file
@@ -128,14 +128,14 @@ Our results can be reviewed in the table below.
 NOTE: since the webpages change all the time, the results depends on when they were downloaded.
 
 _______________RESULTS___________________
-	                Bag-	Bi-	    Tri-
-			        words   gram    gram
-			    		        
-Media name	        100	    100	    100
-Grade	            81.53	94.14	94.14
-Old/new	            77.93	77.03	81.98
+					Bag-	Bi-		Tri-
+					words	gram	gram
+								
+Media named			100		100	100
+Grade				81.53	94.14	94.14
+Old/new				77.93	77.03	81.98
 *_________________________________________*
-Score	            0.75	0.49	0.88
+Score				0.75	0.49	0.88
 Number of Ratings	0.06	-0.16	0.21
 
 *The line separates different result types, above the line (categories-media/grade/oldnew)
