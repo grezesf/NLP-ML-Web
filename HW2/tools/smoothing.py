@@ -21,9 +21,12 @@ dev = dev_file.read()
 
 print 'DOMAIN: Shakespeare'
 
+# applies smoothing 
+est =  lambda fdist, bins: LidstoneProbDist(fdist, 0.2) 
+
 # creates n-gram language model object using nltk, builds model on train data, calculates perplexity on dev set
 for n in range(6)[2:6]:
-    model = nltk.model.ngram.NgramModel(n, train)
+    model = nltk.model.ngram.NgramModel(n, train, estimator = est)
     perp = model.perplexity(dev.split())
     print 'n-gram language model: n = %d\nperplexity = %.06f' %(n, perp)
     print '\n'
@@ -42,7 +45,7 @@ dev = dev_file.read()
 print 'DOMAIN: Movie Reviews'
 # creates n-gram language model object using nltk, builds model on train data, calculates perplexity on dev set
 for n in range(6)[2:6]:
-    model = nltk.model.ngram.NgramModel(n, train)
+    model = nltk.model.ngram.NgramModel(n, train, estimator = est)
     perp = model.perplexity(dev.split())
-    print 'n-gram language model: n = %d\nperplexity = %.06f' %(n, perp)
+    print 'n-gram language model: n = %d\n perplexity = %.06f' %(n, perp)
     print '\n'
