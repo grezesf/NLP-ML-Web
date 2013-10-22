@@ -38,8 +38,8 @@ movies_dev = movies_dev_file.read()
 print "1.c Smoothing"
 
 # shorten for dev purposes
-# movies_train = movies_train[0:1000]
-# movies_dev = movies_dev[0:1000]
+movies_train = movies_train[0:1000]
+movies_dev = movies_dev[0:1000]
 
 # make word list
 movies_train_words = nltk.word_tokenize(movies_train)
@@ -84,7 +84,7 @@ movies_test_file = open(movies_test_path, 'r')
 movies_test = movies_test_file.read()
 
 # shorten for dev purposes
-# movies_test = movies_test[0:1000]
+movies_test = movies_test[0:1000]
 
 # make word list
 movies_test_words = nltk.word_tokenize(movies_test)
@@ -96,7 +96,7 @@ print
 
 
 # 1.d
-
+# not present in NTLK?
 
 
 
@@ -118,8 +118,8 @@ shakespeare_dev_file = open(shakespeare_dev_path, 'r')
 shakespeare_dev = shakespeare_dev_file.read()
 
 # shorten for dev purposes
-# shakespeare_train = shakespeare_train[0:1000]
-# shakespeare_dev = shakespeare_dev[0:1000]
+shakespeare_train = shakespeare_train[0:1000]
+shakespeare_dev = shakespeare_dev[0:1000]
 
 # make word list
 shakespeare_train_words = nltk.word_tokenize(shakespeare_train)
@@ -167,7 +167,7 @@ shakespeare_test_file = open(shakespeare_test_path, 'r')
 shakespeare_test = shakespeare_test_file.read()
 
 # shorten for dev purposes
-# shakespeare_test = shakespeare_test[0:1000]
+shakespeare_test = shakespeare_test[0:1000]
 
 # make word list
 shakespeare_test_words = nltk.word_tokenize(shakespeare_test)
