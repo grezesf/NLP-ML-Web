@@ -3,7 +3,7 @@ NLP/ML/WEB by Pr. Andrew Rosenberg
 
 original GitHub URL: https://github.com/grezesf/NLP-ML-Web/tree/master/HW2
 
-This repository contains the work of Michelle Morales and Felix Grezes on homework 1 of this class.
+This repository contains the work of Michelle Morales and Felix Grezes on homework 2 of this class.
 This README file describes the data, files and how to use the tools.
 
 ### EXTERNAL LIBRARIES AND TOOLS:
