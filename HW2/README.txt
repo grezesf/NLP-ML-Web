@@ -39,6 +39,8 @@ divide_data_movies
 divide_data_shakespeare
     these scripts take the previously created large text files and divides them into thirds for train, dev and test purposes.
 
+perplexity.py and smoothing.py are old scripts that are no longer used (and probably don't work anymore)
+
 
 ############################
 ### HOMEWORK OVERVIEW
