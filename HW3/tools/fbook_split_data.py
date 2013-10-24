@@ -22,7 +22,7 @@ test_dob = open('../data/test/test_unfamous_dob.txt', 'w')
 
 counter = 0
 
-# iterates through each line and writes birthday and name to file
+# iterates through each line, formats and writes birthday and name to file
 for line in data:
     if 'Birthday'  in line:
         name = line.replace("'s Birthday\n", '')
