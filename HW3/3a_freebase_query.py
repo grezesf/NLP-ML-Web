@@ -20,7 +20,7 @@ api_key = 'AIzaSyAaPCPkY7cY5sPbM5vprwA-ZsUpdF6mxmY'
 service_url = 'https://www.googleapis.com/freebase/v1/mqlread'
 
 # creates new file to write found DOBs 
-name_file = open(sys.argv[2], 'w')
+dobs_file = open(sys.argv[2], 'w')
 
 # iterates through list of names, constructs a freebase query, and makes a list of found DOBs for query
 # then prints one DOB for each query(if multiple people under same name, DOB picked is the first result, the most common person)
@@ -52,14 +52,14 @@ for name in names:
         if len(date) == 1:
             new_dob = '-'.join(['xx','xx',date[0]])
             print new_dob
-            name_file.write(new_dob.encode('ascii','ignore')+'\n')
+            dobs_file.write(new_dob.encode('ascii','ignore')+'\n')
         else:
             new_dob = '-'.join([date[-1], date[1], date[0]])
             print new_dob
-            name_file.write(new_dob.encode('ascii','ignore')+'\n')
+            dobs_file.write(new_dob.encode('ascii','ignore')+'\n')
  
     except:
         # if query can't be found or no DOB exists, print out no DOB
         print 'No DOB for ' + name
-        name_file.write('No DOB for ' + name)
+        dobs_file.write('No DOB for ' + name)
         

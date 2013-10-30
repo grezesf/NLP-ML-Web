@@ -9,7 +9,7 @@ import sys
 # this work corresponds to part 3.b of the homework
 
 # open files
-# shoudl be './data/train/train_dob.txt' and './data/found_dobs.txt'
+# should be './data/train/train_dob.txt' and './data/found_dobs.txt'
 actual_data = open (sys.argv[1], 'r')
 found_data = open (sys.argv[2], 'r')
 
