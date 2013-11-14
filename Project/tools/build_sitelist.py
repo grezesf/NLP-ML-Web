@@ -6,11 +6,10 @@ import random
 from bs4 import BeautifulSoup
 
 ### README
-# This program takes as input the website Stack Exchange (http://stackexchange.com)
-# It randomly opens up different category sites, and pulls data from these sites
-# The most important data it looks for is edit/revision text on questions/answers
-# ../data/site_list.txt
+# This script displays all the StackExchange sub-categories
+# saved as site_list.txt in /data
 
+# call: python ./build_sitelist.py > site_list.txt
 
 # website 
 url = 'http://www.stackexchange.com/sites'
@@ -28,17 +27,18 @@ for link in soup.findAll('a'):
 # separates the important links (topic site likes) from unimportant ones (twitter, fbook, etc.)
 start = sites.index('/sites?view=list')
 end = sites.index('/feeds/sites')
-print start, end
+# print start, end
 
-write_file = open('../data/site_list.txt', 'w')
+# write_file = open('../data/site_list.txt', 'w')
 
 # creates a new list of important links and prints list to file, site_list.txt
 important_links = sites[start+1 : end]
-print important_links
+# print important_links
 for link in important_links:
-    write_file.write(link + '\n')
+    # write_file.write(link + '\n')
+    print link
 
-write_file.close()
+# write_file.close()
 
 
 
