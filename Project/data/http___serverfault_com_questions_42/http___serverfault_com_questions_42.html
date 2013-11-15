@@ -1,0 +1,1988 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>linux - Securing a fresh Ubuntu server - Server Fault</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/serverfault/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/serverfault/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Server Fault" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ServerFault" />
+    <meta name="twitter:domain" content="serverfault.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/serverfault/img/apple-touch-icon@2.png?v=9b1f48ae296b"/>
+    <meta name="og:title" content="Securing a fresh Ubuntu server" />
+    <meta name="og:description" content="Say I&#39;ve got a fresh install of Ubuntu, what steps should I take to secure it for use as a Rails application server?
+" />
+    <meta name="og:url" content="http://serverfault.com/questions/42/securing-a-fresh-ubuntu-server"/>
+    <link rel="canonical" href="http://serverfault.com/questions/42/securing-a-fresh-ubuntu-server" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/serverfault/all.css?v=4f10362b7e0d">
+    
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:1,shownCommentCount:1,highlightColor:'#F3F1D9',backgroundColor:'#FFF',questionId:42});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('2', '42');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('2');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1384533397,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Server Fault","description":"Q&A for professional system and network administrators","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LcDNwYAAAAAAG_X1rC8kTtLBP6XS2Ym1N0n9kSY","enableSocialMediaInSharePopup":true},"user":{"fkey":"ccf6c05702b5b74dbae85362e422ac2d","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"978b6ac79763","js/full.en.js":"9c04c877896f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+    </script>
+    <script type="text/javascript">
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f42%2fsecuring-a-fresh-ubuntu-server">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f42%2fsecuring-a-fresh-ubuntu-server">log in</a>
+
+ <span class="lsep">|</span>
+                    <a href="http://careers.serverfault.com">careers 2.0</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Server Fault
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/serverfault/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Server Fault is a question and answer site for professional system and network administrators. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/42/securing-a-fresh-ubuntu-server" class="question-hyperlink">Securing a fresh Ubuntu server [closed]</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="42"  id="question">
+    
+                <script type="text/javascript">
+                var ados = ados || {};ados.run = ados.run || [];
+                ados.run.push(function() { ados_add_placement(22,8278,"adzerk1815994897",4).setZone(49) ; });                    
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk1815994897">
+            </div>  
+
+
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="42">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">34</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>53</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>Say I've got a fresh install of Ubuntu, what steps should I take to secure it for use as a Rails application server?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/linux" class="post-tag" title="show questions tagged &#39;linux&#39;" rel="tag">linux</a> <a href="/questions/tagged/ubuntu" class="post-tag" title="show questions tagged &#39;ubuntu&#39;" rel="tag">ubuntu</a> <a href="/questions/tagged/security" class="post-tag" title="show questions tagged &#39;security&#39;" rel="tag">security</a> <a href="/questions/tagged/application-server" class="post-tag" title="show questions tagged &#39;application-server&#39;" rel="tag">application-server</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/42" title="short permalink to this question" class="short-link" id="link-post-42">share</a><span class="lsep">|</span><a href="/posts/42/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2009-04-30 08:10:42Z" class="relativetime">Apr 30 '09 at 8:10</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature">
+        
+<div class="user-info">
+    <div class="user-details">
+        <span class="community-wiki" title="This post is community owned as of May 4 &#39;09 at 17:27. Votes do not generate reputation, and it can be edited by users with 100 rep">
+            community wiki
+        </span>
+    </div><br>
+    <div class="user-details">
+        <a id="history-42" href="/posts/42/revisions" title="show revision history for this post">
+        Codebeef
+        </a>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-42" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-15163" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">there is a similar question here, it may help; <a href="http://serverfault.com/questions/11659">serverfault.com/questions/11659</a></span>
+	&ndash;&nbsp;
+		<a href="/users/2417/hayalci" 
+		   title="2495 reputation" 
+		   class="comment-user">hayalci</a>
+	<span class="comment-date" dir="ltr"><span title="2009-06-07 21:45:54Z" class="relativetime-clean">Jun 7 '09 at 21:45</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-42" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+    <div class="question-status">
+        <h2>                    <b>closed</b> as not a real question by <a href="/users/33417/chris-s">Chris S</a><span class="mod-flair" title="moderator">&#9830;</span> <span title="2012-01-26 04:26:03Z" class="relativetime">Jan 26 '12 at 4:26</span>
+</h2>
+        <p>It&#39;s difficult to tell what is being asked here. This question is ambiguous, vague, incomplete, overly broad, or rhetorical and 
+cannot be reasonably answered in its current form. For help clarifying this question so that it can be reopened, 
+<a href="http://serverfault.com/help/reopen-questions">visit the help center</a>.<span class="close-status-suffix">If this question can be reworded to fit the rules in the 
+<a href="/help/closed-questions">help center</a>, please <a href="/posts/42/edit">edit the question</a>.</span></p>
+    </div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								10 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/42/securing-a-fresh-ubuntu-server?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/42/securing-a-fresh-ubuntu-server?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/42/securing-a-fresh-ubuntu-server?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="101"></a>
+<div id="answer-101" class="answer accepted-answer" data-answerid="101" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="101">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">23</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>I can't think of any Ubuntu-specific tweaks, but here's a few that apply to all distributions:</p>
+
+<ol>
+<li>Uninstall all unnecessary packages</li>
+<li>Use public-key only authentication in SSH</li>
+<li>Disable root logins via SSH (doesn't apply to Ubuntu)</li>
+<li>Use the production settings for PHP (php.ini-recommended)</li>
+<li>Configure MySQL to use sockets only</li>
+</ol>
+
+<p>Of course this list isn't complete, and you'll never be completely safe, but it covers all the exploits <em>I</em> have seen in real life.</p>
+
+<p>Also, the exploits I have seen were almost always related to unsecure user code, not unsecure configuration. The default configurations in minimal, server distributions tend to be pretty secure.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/101" title="short permalink to this answer" class="short-link" id="link-post-101">share</a><span class="lsep">|</span><a href="/posts/101/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2009-04-30 08:30:43Z" class="relativetime">Apr 30 '09 at 8:30</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/89/can-berk-guder"><div><img src="https://www.gravatar.com/avatar/2c56a82b6d13e243848a55fedca24b71?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/89/can-berk-guder">Can Berk G&#252;der</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">641</span><span title="6 silver badges"><span class="badge2"></span><span class="badgecount">6</span></span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-101" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-168" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Change the port for services like MySQL (useless if to configure it to use sockets only), FTP (although, if you are being secure you shouldnt use FTP at all), SSH and all sorts.</span>
+	&ndash;&nbsp;
+		<a href="/users/350/david-pearce" 
+		   title="315 reputation" 
+		   class="comment-user">David Pearce</a>
+	<span class="comment-date" dir="ltr"><span title="2009-04-30 11:52:36Z" class="relativetime-clean">Apr 30 '09 at 11:52</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-17987" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">3</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">&quot;Uninstall all unnecessary packages&quot;. OK. Thats pretty vague. What &#39;unnecessary&#39; packages?</span>
+	&ndash;&nbsp;
+		<a href="/users/1205/luke" 
+		   title="813 reputation" 
+		   class="comment-user">Luke</a>
+	<span class="comment-date" dir="ltr"><span title="2009-06-13 05:18:52Z" class="relativetime-clean">Jun 13 '09 at 5:18</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-30243" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Luke: Anything you&#39;re not using is unnecessary. More specific, running services that you don&#39;t need put machines in unnecessary risk.</span>
+	&ndash;&nbsp;
+		<a href="/users/1876/andrioid" 
+		   title="1273 reputation" 
+		   class="comment-user">Andrioid</a>
+	<span class="comment-date" dir="ltr"><span title="2009-07-11 15:23:38Z" class="relativetime-clean">Jul 11 '09 at 15:23</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-324058" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Luke: cat /etc/services should give you some ideas.</span>
+	&ndash;&nbsp;
+		<a href="/users/100827/jeshurun" 
+		   title="196 reputation" 
+		   class="comment-user">jeshurun</a>
+	<span class="comment-date" dir="ltr"><span title="2011-11-14 06:29:28Z" class="relativetime-clean">Nov 14 '11 at 6:29</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-101" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+            <script type="text/javascript">
+                var ados = ados || {};ados.run = ados.run || [];
+                ados.run.push(function() { ados_add_placement(22,8278,"adzerk969208743",4).setZone(51) ; });                    
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk969208743">
+            </div>  
+
+
+
+  
+<a name="165"></a>
+<div id="answer-165" class="answer" data-answerid="165" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="165">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">16</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>One quick thing that I do early on is install <a href="http://denyhosts.sourceforge.net/" rel="nofollow">DenyHosts</a>.  It will regularly look through the /var/log/secure, looking for failed logins, and after a couple of failures, block the IP. I set it to block after the first no-such-user, on the second attempt at root, and after a couple of tries for real users (in case you mess up, but you should be using a SSH public key to login).</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/165" title="short permalink to this answer" class="short-link" id="link-post-165">share</a><span class="lsep">|</span><a href="/posts/165/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2009-04-30 08:52:46Z" class="relativetime">Apr 30 '09 at 8:52</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/181/alister-bulman"><div><img src="https://www.gravatar.com/avatar/d11c05af90d9c432de203535f553c4cb?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/181/alister-bulman">Alister Bulman</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,270</span><span title="7 silver badges"><span class="badge2"></span><span class="badgecount">7</span></span><span title="12 bronze badges"><span class="badge3"></span><span class="badgecount">12</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-165" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-4845" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">3</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">as you link to the sourceforge homepage - denyhosts is also available in the repository (universe) via &quot;sudo aptitude install denyhosts&quot;</span>
+	&ndash;&nbsp;
+		<a href="/users/2435/olaf" 
+		   title="766 reputation" 
+		   class="comment-user">Olaf</a>
+	<span class="comment-date" dir="ltr"><span title="2009-05-11 20:12:41Z" class="relativetime-clean">May 11 '09 at 20:12</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-4867" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">good point @olaf. Most of the servers I installed it on were RHEL, where it&#39;s also in DAG&#39;s repo.</span>
+	&ndash;&nbsp;
+		<a href="/users/181/alister-bulman" 
+		   title="1270 reputation" 
+		   class="comment-user">Alister Bulman</a>
+	<span class="comment-date" dir="ltr"><span title="2009-05-11 21:55:22Z" class="relativetime-clean">May 11 '09 at 21:55</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-252960" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">+1 For denyhosts</span>
+	&ndash;&nbsp;
+		<a href="/users/34890/wimvds" 
+		   title="121 reputation" 
+		   class="comment-user">wimvds</a>
+	<span class="comment-date" dir="ltr"><span title="2011-05-24 15:02:05Z" class="relativetime-clean">May 24 '11 at 15:02</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-324057" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">DenyHosts seems to only detect and block ssh brute force attacks. A better choice would be fail2ban (it is available in the repos as well), which monitors a variety of things, including the apache logs among other things. Check out the community wiki at <a href="https://help.ubuntu.com/community/Fail2ban" rel="nofollow">help.ubuntu.com/community/Fail2ban</a></span>
+	&ndash;&nbsp;
+		<a href="/users/100827/jeshurun" 
+		   title="196 reputation" 
+		   class="comment-user">jeshurun</a>
+	<span class="comment-date" dir="ltr"><span title="2011-11-14 06:01:14Z" class="relativetime-clean">Nov 14 '11 at 6:01</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-165" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="688"></a>
+<div id="answer-688" class="answer" data-answerid="688" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="688">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">10</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Ubuntu is based off Debian and I've found the <a href="http://www.debian.org/doc/manuals/securing-debian-howto/" rel="nofollow">Securing Debian Manual </a> to be very useful in Debian-based distributions in completely walking you through your system and checking every part. It's basically a really, really comprehensive answer to your question.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/688" title="short permalink to this answer" class="short-link" id="link-post-688">share</a><span class="lsep">|</span><a href="/posts/688/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2009-04-30 13:01:57Z" class="relativetime">Apr 30 '09 at 13:01</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/570/mike-mcquaid"><div><img src="https://www.gravatar.com/avatar/215e0166d4d8265395c5d9076da73c70?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/570/mike-mcquaid">Mike McQuaid</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">295</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-688" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-486" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Do you have a link for that?</span>
+	&ndash;&nbsp;
+		<a href="/users/860/flame" 
+		   title="101 reputation" 
+		   class="comment-user">Flame</a>
+	<span class="comment-date" dir="ltr"><span title="2009-04-30 16:39:15Z" class="relativetime-clean">Apr 30 '09 at 16:39</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-3293" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Sorry, thought the link was in the post. It&#39;s at:
+<a href="http://www.debian.org/doc/manuals/securing-debian-howto/" rel="nofollow">debian.org/doc/manuals/securing-debian-howto</a></span>
+	&ndash;&nbsp;
+		<a href="/users/570/mike-mcquaid" 
+		   title="295 reputation" 
+		   class="comment-user">Mike McQuaid</a>
+	<span class="comment-date" dir="ltr"><span title="2009-05-06 13:32:01Z" class="relativetime-clean">May 6 '09 at 13:32</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-688" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="404"></a>
+<div id="answer-404" class="answer" data-answerid="404" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="404">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Install logcheck, but tweak so that you never receive messages from regular events, otherwise you'll get in the habit of ignoring the emails.</p>
+
+<p>Check which processes are listening using netstat, and make sure nothing's running that doesn't need to run. Many daemons can be configured only to listen on the internal IP (or localhost) instead of all interfaces.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/404" title="short permalink to this answer" class="short-link" id="link-post-404">share</a><span class="lsep">|</span><a href="/posts/404/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2009-04-30 11:21:20Z" class="relativetime">Apr 30 '09 at 11:21</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/28/mikeage"><div><img src="https://www.gravatar.com/avatar/5cbc338df6f1a74e2aa34bc9cf595b07?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/28/mikeage">Mikeage</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,941</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="13 silver badges"><span class="badge2"></span><span class="badgecount">13</span></span><span title="28 bronze badges"><span class="badge3"></span><span class="badgecount">28</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-404" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-404" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="597"></a>
+<div id="answer-597" class="answer" data-answerid="597" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="597">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>I usually install RKHunter, which scans for rootkits and does integrity checks of various important system binaries. It's in the standard repo, and will run daily from cron. It's not perfect, securitywise, but it's a low-effort item to add, and it provides a measure of protection.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/597" title="short permalink to this answer" class="short-link" id="link-post-597">share</a><span class="lsep">|</span><a href="/posts/597/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2009-04-30 12:35:54Z" class="relativetime">Apr 30 '09 at 12:35</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/413/tim-howland"><div><img src="https://www.gravatar.com/avatar/6e24f47aa88626872c16e0f740739e8a?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/413/tim-howland">Tim Howland</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">3,320</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="12 silver badges"><span class="badge2"></span><span class="badgecount">12</span></span><span title="21 bronze badges"><span class="badge3"></span><span class="badgecount">21</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-597" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-597" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="113"></a>
+<div id="answer-113" class="answer" data-answerid="113" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="113">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Do what Can suggests...</p>
+
+<p>Nmap the host and disable all non-essential services. Use iptables if necessary.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/113" title="short permalink to this answer" class="short-link" id="link-post-113">share</a><span class="lsep">|</span><a href="/posts/113/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2009-04-30 08:33:48Z" class="relativetime">Apr 30 '09 at 8:33</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/97/jauder-ho"><div><img src="https://www.gravatar.com/avatar/3689cb59f60f4793739be46a12e5ec66?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/97/jauder-ho">Jauder Ho</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,624</span><span title="9 silver badges"><span class="badge2"></span><span class="badgecount">9</span></span><span title="17 bronze badges"><span class="badge3"></span><span class="badgecount">17</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-113" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-9425" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">On any server that is accessible via the Internet, iptables is <i>always</i> necessary. ;-)</span>
+	&ndash;&nbsp;
+		<a href="/users/1770/christopher-cashell" 
+		   title="5125 reputation" 
+		   class="comment-user">Christopher Cashell</a>
+	<span class="comment-date" dir="ltr"><span title="2009-05-27 18:28:38Z" class="relativetime-clean">May 27 '09 at 18:28</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-113" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="18293"></a>
+<div id="answer-18293" class="answer" data-answerid="18293" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="18293">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Use separate partitions for various directories like <code>/tmp</code> or <code>/var</code> and mount them with <code>nosuid</code>, <code>nodev</code> and <code>noexec</code> if possible.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/18293" title="short permalink to this answer" class="short-link" id="link-post-18293">share</a><span class="lsep">|</span><a href="/posts/18293/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/18293/revisions" title="show all edits to this post">edited <span title="2009-07-11 17:40:37Z" class="relativetime">Jul 11 '09 at 17:40</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info">
+    <div class="user-details">
+        <span class="community-wiki" title="This post is community owned as of Jun 2 &#39;09 at 23:06. Votes do not generate reputation, and it can be edited by users with 100 rep">
+            community wiki
+        </span>
+    </div><br>
+    <div class="user-details">
+        <a id="history-18293" href="/posts/18293/revisions" title="show revision history for this post">
+        2 revs<br><a href="/users/4276">Cristian Ciupitu</a>
+        </a>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-18293" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-18293" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="128"></a>
+<div id="answer-128" class="answer" data-answerid="128" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="128">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>If you're going anywhere near the Internet with the server, install an intrusion detection system like snort. </p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/128" title="short permalink to this answer" class="short-link" id="link-post-128">share</a><span class="lsep">|</span><a href="/posts/128/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2009-04-30 08:38:12Z" class="relativetime">Apr 30 '09 at 8:38</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/147/timo-geusch"><div><img src="https://www.gravatar.com/avatar/cd97c2b8d86fed53a0bc1e400d25a04f?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/147/timo-geusch">Timo Geusch</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">373</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="8 bronze badges"><span class="badge3"></span><span class="badgecount">8</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-128" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-128" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="39330"></a>
+<div id="answer-39330" class="answer" data-answerid="39330" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="39330">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>As well as other suggestions here I'll mention three that are obvious but perhaps worth mentioning for completeness:</p>
+
+<ol>
+<li>If you don't think you need a firewall, think again. ufw is simple but designed for Ubuntu and based on iptables</li>
+<li>Update the packages: as a minimum apply all the security patches</li>
+<li>Document what you've done to secure the server and why. Include configuring (automated) processes to monitor logs, test the configuration and report security updates that are needed.</li>
+</ol>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/39330" title="short permalink to this answer" class="short-link" id="link-post-39330">share</a><span class="lsep">|</span><a href="/posts/39330/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered 
+<a href="/posts/39330/revisions" title="show all edits to this post"><span title="2009-07-11 15:13:56Z" class="relativetime">Jul 11 '09 at 15:13</span></a>
+
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info">
+    <div class="user-details">
+        <span class="community-wiki" title="This post is community owned as of Jul 11 &#39;09 at 15:13. Votes do not generate reputation, and it can be edited by users with 100 rep">
+            community wiki
+        </span>
+    </div><br>
+    <div class="user-details">
+        <a id="history-39330" href="/posts/39330/revisions" title="show revision history for this post">
+        mas
+        </a>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-39330" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-39330" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="136386"></a>
+<div id="answer-136386" class="answer" data-answerid="136386" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="136386">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h2>Some firewall suggestions.</h2>
+
+<p>Learn to use a firewall and the concepts of properly locking a box down. Changing default ports is largely a useless thing; proper application and firewall configuration are much more important.</p>
+
+<p>Both are in the Ubuntu repos: </p>
+
+<h3><a href="http://firehol.sourceforge.net/" rel="nofollow">FireHOL</a></h3>
+
+<p>has terrific documentation and very easy to learn syntax. I was able to set up a gateway/firewall in twenty minutes. The only reason I've moved away from this is that it doesn't seem to be maintained (last release 2 yrs ago). Doesn't mean it doesn't work, but...</p>
+
+<h3><a href="http://ferm.foo-projects.org/" rel="nofollow">Ferm</a></h3>
+
+<p>is another one. More iptables-like syntax, but same concept. More community maintained than FireHOL, but takes longer to pick up.</p>
+
+<h3><a href="http://www.shorewall.net/" rel="nofollow">Shorewall</a></h3>
+
+<p>is what I currently use. Its documentation is extensive, and its configuration format is tabular. It took me about an hour and a half to understand all the files needed (6) to get a working firewall/gateway configuration running. It's quite powerful. TIP: The man pages for the different config files are REALLY helpful! </p>
+
+<p>All of these load firewall configurations from a config file. Very effective, easier to use than iptables straight up, and (in my opinion) easier to use and manage than ufw.</p>
+
+<h2>Other:</h2>
+
+<ul>
+<li><p>I second the recommendations for SSH key use.</p></li>
+<li><p>Set up an IDS.</p></li>
+<li><p>Learn about AppArmor. It restricts the file access of executables to only specified directories and files it needs. Similar to SELinux in the RHEL world. It's installed and enabled with pre-configured 'profiles' for many well-used programs.</p></li>
+</ul>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/136386" title="short permalink to this answer" class="short-link" id="link-post-136386">share</a><span class="lsep">|</span><a href="/posts/136386/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/136386/revisions" title="show all edits to this post">edited <span title="2010-07-29 14:21:14Z" class="relativetime">Jul 29 '10 at 14:21</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info">
+    <div class="user-details">
+        <span class="community-wiki" title="This post is community owned as of Apr 27 &#39;10 at 19:22. Votes do not generate reputation, and it can be edited by users with 100 rep">
+            community wiki
+        </span>
+    </div><br>
+    <div class="user-details">
+        <a id="history-136386" href="/posts/136386/revisions" title="show revision history for this post">
+        3 revs, 2 users 81%<br><a href="/users/28559">Luke has no name</a>
+
+        </a>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-136386" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-136386" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+				
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/linux" class="post-tag" title="show questions tagged &#39;linux&#39;" rel="tag">linux</a> <a href="/questions/tagged/ubuntu" class="post-tag" title="show questions tagged &#39;ubuntu&#39;" rel="tag">ubuntu</a> <a href="/questions/tagged/security" class="post-tag" title="show questions tagged &#39;security&#39;" rel="tag">security</a> <a href="/questions/tagged/application-server" class="post-tag" title="show questions tagged &#39;application-server&#39;" rel="tag">application-server</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/linux" class="post-tag" title="show questions tagged &#39;linux&#39;" rel="tag">linux</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">21326</span></span><br>
+<a href="/questions/tagged/ubuntu" class="post-tag" title="show questions tagged &#39;ubuntu&#39;" rel="tag">ubuntu</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">8394</span></span><br>
+<a href="/questions/tagged/security" class="post-tag" title="show questions tagged &#39;security&#39;" rel="tag">security</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">3943</span></span><br>
+<a href="/questions/tagged/application-server" class="post-tag" title="show questions tagged &#39;application-server&#39;" rel="tag">application-server</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">73</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2009-04-30 08:10:42Z"><b>4 years ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>11151 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2010-07-29 14:21:14Z">3 years ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			            <script type="text/javascript">
+                var ados = ados || {};ados.run = ados.run || [];
+                ados.run.push(function() { ados_add_placement(22,8278,"adzerk1408177191",17).setZone(50) ; });                    
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk1408177191">
+            </div>  
+    <div id="hireme">
+        <script type="text/javascript">
+window.careers_adurl="//careers.stackoverflow.com/gethired/js",window.careers_cssurl="//cdn-careers.sstatic.net/careers/gethired/sidebar.min.css?v=7ae83073b37e",window.careers_leaderboardcssurl="//cdn-careers.sstatic.net/careers/gethired/ninja.min.css?v=78ccbfa5c59f",window.careers_companycssurl="//cdn-careers.sstatic.net/careers/gethired/company",window.careers_adselector="div.hireme, div#hireme",StackExchange.ready(function(){$.ajax({url:"//cdn-careers.sstatic.net/careers/gethired/loader.min.js?v=607ab2dda910",dataType:"script",cache:!0})})        </script>
+    </div>
+
+
+
+			
+  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/11659" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">51</div>
+	</a>
+	<a href="/questions/11659/what-steps-do-you-take-to-secure-a-debian-server" class="question-hyperlink">What steps do you take to secure a Debian server?</a>
+</div><div class="spacer">
+	<a href="/q/3004" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">15</div>
+	</a>
+	<a href="/questions/3004/resources-for-beginning-linux-administrators" class="question-hyperlink">Resources for beginning Linux administrators</a>
+</div><div class="spacer">
+	<a href="/q/239061" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">2</div>
+	</a>
+	<a href="/questions/239061/securing-an-apache-setup-with-a-fresh-ubuntu-web-server-with-users-and-permissio" class="question-hyperlink">Securing an Apache Setup with a Fresh Ubuntu Web Server with users and permissions</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/19349" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/19349/compromising-between-fresh-and-secure-php-packages-on-production-servers" class="question-hyperlink">Compromising between fresh and secure PHP packages on production servers?</a>
+</div>
+<div class="spacer">
+<a href="/q/29673" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/29673/optimize-a-fresh-ubuntu-server-installation" class="question-hyperlink">Optimize a fresh Ubuntu server installation</a>
+</div>
+<div class="spacer">
+<a href="/q/51861" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/51861/upgrade-from-ubuntu-6-06-lts-to-8-04-lts-or-do-a-fresh-installation" class="question-hyperlink">Upgrade from Ubuntu 6.06 LTS to 8.04 LTS or do a fresh installation?</a>
+</div>
+<div class="spacer">
+<a href="/q/145735" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/145735/ubuntu-server-security-is-this-enough" class="question-hyperlink">Ubuntu server security; Is this enough?</a>
+</div>
+<div class="spacer">
+<a href="/q/239061" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/239061/securing-an-apache-setup-with-a-fresh-ubuntu-web-server-with-users-and-permissio" class="question-hyperlink">Securing an Apache Setup with a Fresh Ubuntu Web Server with users and permissions</a>
+</div>
+<div class="spacer">
+<a href="/q/257809" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/257809/is-my-vps-server-secure-steps-needed-to-make-it-secure-if-not" class="question-hyperlink">Is my VPS server secure? Steps needed to make it secure, if not?</a>
+</div>
+<div class="spacer">
+<a href="/q/276240" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/276240/linux-ubuntu-environment-variables-shells-and-security" class="question-hyperlink">Linux (Ubuntu) environment variables, shells and security</a>
+</div>
+<div class="spacer">
+<a href="/q/324513" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/324513/fresh-install-of-ubuntu-raid-dev-server" class="question-hyperlink">Fresh install of Ubuntu RAID (Dev Server)</a>
+</div>
+<div class="spacer">
+<a href="/q/385695" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/385695/securing-erlang-ubuntu-server" class="question-hyperlink">Securing Erlang / Ubuntu server</a>
+</div>
+<div class="spacer">
+<a href="/q/505445" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">-2
+    </div>
+</a><a href="/questions/505445/more-server-in-a-net-security" class="question-hyperlink">More server in a net security</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+		<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/42/ivc/7ebf');});
+</script>
+<noscript>
+    <div><img src="/posts/42/ivc/7ebf" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.serverfault.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://engine.adzerk.net/r?e=eyJhdiI6NDE0LCJhdCI6MjAsImNtIjo5NTQsImNoIjoxMTc4LCJjciI6Mjg0NCwiZG0iOjQsImZjIjoyODY2LCJmbCI6Mjc1MSwibnciOjIyLCJydiI6MCwicHIiOjExNSwic3QiOjAsInVyIjoiaHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL2Fib3V0L2NvbnRhY3QiLCJyZSI6MX0&amp;s=VDtCBUNLxM-9o4t1cLMpl1AJKh4">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/42/securing-a-fresh-ubuntu-server")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.serverfault.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.15.1158
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Server Fault works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+<script type="text/javascript">var p = "http", d = "static"; if (document.location.protocol == "https:") { p += "s"; d = "engine"; } var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = p + "://" + d + ".adzerk.net/ados.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script>
+<script type="text/javascript">
+    var ados = ados || {};
+    ados.run = ados.run || [];
+    ados.run.push(function () { ados_setKeywords('linux,ubuntu,security,application-server');; ados_load(); });         
+</script>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-2']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|linux|ubuntu|security|application-server|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>algorithm - Efficiently get sorted sums of a sorted list - Stack Overflow</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/stackoverflow/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="stackoverflow.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon@2.png?v=fde65a5a78c6"/>
+    <meta name="og:title" content="Efficiently get sorted sums of a sorted list" />
+    <meta name="og:description" content="You have an ascending list of numbers, what is the most efficient algorithm you can think of to get the ascending list of sums of every two numbers in that list.  Duplicates in the resulting list are " />
+    <meta name="og:url" content="http://stackoverflow.com/questions/826/efficiently-get-sorted-sums-of-a-sorted-list"/>
+    <link rel="canonical" href="http://stackoverflow.com/questions/826/efficiently-get-sorted-sums-of-a-sorted-list" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/stackoverflow/all.css?v=249ba31059a9">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Efficiently get sorted sums of a sorted list&#39;" href="/feeds/question/826">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:1,shownCommentCount:1,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:826});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('1', '826');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1384480341,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","enableSocialMediaInSharePopup":true},"user":{"fkey":"82821a89f0c67097b7d51a9c12f23f92","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"966b32ee87ea","js/full.en.js":"e94c087665cb","js/wmd.en.js":"d6091b481fe0","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"7cf8f6099119","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+    </script>
+    <script type="text/javascript">
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f826%2fefficiently-get-sorted-sums-of-a-sorted-list">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f826%2fefficiently-get-sorted-sums-of-a-sorted-list">log in</a>
+
+ <span class="lsep">|</span>
+                    <a href="http://careers.stackoverflow.com">careers 2.0</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Stack Overflow
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Stack Overflow is a question and answer site for professional and enthusiast programmers. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/826/efficiently-get-sorted-sums-of-a-sorted-list" class="question-hyperlink">Efficiently get sorted sums of a sorted list</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="826"  id="question">
+    
+                <script type="text/javascript">
+                var ados = ados || {};ados.run = ados.run || [];
+                ados.run.push(function() { ados_add_placement(22,8277,"adzerk1303618014",4).setZone(43) ; });                    
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk1303618014">
+            </div>  
+
+
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="826">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">7</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>2</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>You have an ascending list of numbers, what is the most efficient algorithm you can think of to get the ascending list of sums of every two numbers in that list.  Duplicates in the resulting list are irrelevant, you can remove them or avoid them if you like.</p>
+
+<p>To be clear, I'm interested in the algorithm.  Feel free to post code in any language and paradigm that you like.</p>
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/algorithm" class="post-tag" title="show questions tagged &#39;algorithm&#39;" rel="tag">algorithm</a> <a href="/questions/tagged/language-agnostic" class="post-tag" title="show questions tagged &#39;language-agnostic&#39;" rel="tag">language-agnostic</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/826" title="short permalink to this question" class="short-link" id="link-post-826">share</a><span class="lsep">|</span><a href="/posts/826/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/826/revisions" title="show all edits to this post">edited <span title="2008-08-03 21:38:52Z" class="relativetime">Aug 3 '08 at 21:38</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2008-08-03 21:08:54Z" class="relativetime">Aug 3 '08 at 21:08</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/101/peter-burns"><div><img src="https://www.gravatar.com/avatar/cfd2734f1de31db479ec2a8a4ecbd649?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/101/peter-burns">Peter Burns</a><br>
+        <span class="reputation-score" title="reputation score 13695" dir="ltr">13.7k</span><span title="4 gold badges"><span class="badge1"></span><span class="badgecount">4</span></span><span title="21 silver badges"><span class="badge2"></span><span class="badgecount">21</span></span><span title="35 bronze badges"><span class="badge3"></span><span class="badgecount">35</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-826" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-31633" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I&#39;ve written a fuller comment at <a href="http://porg.es/blog/sorted-sums-of-a-sorted-list" rel="nofollow">porg.es/blog/sorted-sums-of-a-sorted-list</a></span>
+	&ndash;&nbsp;
+		<a href="/users/10311/porges" 
+		   title="16146 reputation" 
+		   class="comment-user">Porges</a>
+	<span class="comment-date" dir="ltr"><span title="2008-09-24 20:49:40Z" class="relativetime-clean">Sep 24 '08 at 20:49</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-826" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								8 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/826/efficiently-get-sorted-sums-of-a-sorted-list?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/826/efficiently-get-sorted-sums-of-a-sorted-list?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/826/efficiently-get-sorted-sums-of-a-sorted-list?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="97294"></a>
+<div id="answer-97294" class="answer accepted-answer" data-answerid="97294" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="97294">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">8</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>If you write out the sums like this:</p>
+
+<pre><code>1 4  5  6  8  9
+---------------
+2 5  6  7  9 10
+  8  9 10 12 13
+    10 11 13 14
+       12 14 15
+          16 17
+             18
+</code></pre>
+
+<p>You'll notice that since M[i,j] &lt;= M[i,j+1] and M[i,j] &lt;= M[i+1,j], then you only need to examine the top left "corners" and choose the lowest one.</p>
+
+<p>e.g.</p>
+
+<ul>
+<li>only 1 top left corner, pick 2</li>
+<li>only 1, pick 5</li>
+<li>6 or 8, pick 6</li>
+<li>7 or 8, pick 7</li>
+<li>9 or 8, pick 8</li>
+<li>9 or 9, pick both :)</li>
+<li>10 or 10 or 10, pick all</li>
+<li>12 or 11, pick 11</li>
+<li>12 or 12, pick both</li>
+<li>13 or 13, pick both</li>
+<li>14 or 14, pick both</li>
+<li>15 or 16, pick 15</li>
+<li>only 1, pick 16</li>
+<li>only 1, pick 17</li>
+<li>only 1, pick 18</li>
+</ul>
+
+<p>Of course, when you have <em>lots</em> of top left corners then this solution devolves.</p>
+
+<p>I'm pretty sure this problem is Ω(n²), because you have to calculate the sums for each M[i,j] -- unless someone has a better algorithm for the summation :)</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/97294" title="short permalink to this answer" class="short-link" id="link-post-97294">share</a><span class="lsep">|</span><a href="/posts/97294/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/97294/revisions" title="show all edits to this post">edited <span title="2008-09-18 23:17:46Z" class="relativetime">Sep 18 '08 at 23:17</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2008-09-18 21:41:13Z" class="relativetime">Sep 18 '08 at 21:41</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/10311/porges"><div><img src="https://www.gravatar.com/avatar/4ee697b9dc2411d50fb66a4f330ba4df?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/10311/porges">Porges</a><br>
+        <span class="reputation-score" title="reputation score 16146" dir="ltr">16.1k</span><span title="27 silver badges"><span class="badge2"></span><span class="badgecount">27</span></span><span title="62 bronze badges"><span class="badge3"></span><span class="badgecount">62</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-97294" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-2155713" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I think this is O(n^3) since there are n potential &#39;top left corners&#39; at each stage.</span>
+	&ndash;&nbsp;
+		<span title="0 reputation" 
+		      class="comment-user">user97370</span>
+	<span class="comment-date" dir="ltr"><span title="2010-02-05 02:56:47Z" class="relativetime-clean">Feb 5 '10 at 2:56</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-4093307" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">You can implement this algorithm in O(n^2 log n) time by storing the first unpicked entry in each row in a priority queue, but asymptotically this is no better than just generating all sums and sorting.</span>
+	&ndash;&nbsp;
+		<a href="/users/190376/reid-barton" 
+		   title="2858 reputation" 
+		   class="comment-user">Reid Barton</a>
+	<span class="comment-date" dir="ltr"><span title="2010-10-03 19:08:44Z" class="relativetime-clean">Oct 3 '10 at 19:08</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-16216351" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">If you have two lists instead of one, of length m and n with m&lt;n, then the k-way merge-based approach gives O(mn log m) rather than O(mn log(mn)). Furthermore, if m is fairly small (up to a few hundred elements, I would guess), the merge-based approach will make far better use of processor cache (because the priority queue or merge tree will fit in L1 cache), which could easily improve the speed by a factor of 100 or more, and if it&#39;s written very carefully can make good use of the processor pipeline, in which case it should really scream.</span>
+	&ndash;&nbsp;
+		<a href="/users/1477667/dfeuer" 
+		   title="133 reputation" 
+		   class="comment-user">dfeuer</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-25 23:10:13Z" class="relativetime-clean">Aug 25 '12 at 23:10</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-16516352" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">On reflection 4 years later, this seems like a really bad version of merge sort :)</span>
+	&ndash;&nbsp;
+		<a href="/users/10311/porges" 
+		   title="16146 reputation" 
+		   class="comment-user">Porges</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-06 21:53:47Z" class="relativetime-clean">Sep 6 '12 at 21:53</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-97294" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+            <script type="text/javascript">
+                var ados = ados || {};ados.run = ados.run || [];
+                ados.run.push(function() { ados_add_placement(22,8277,"adzerk1927904459",4).setZone(44) ; });                    
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk1927904459">
+            </div>  
+
+
+
+  
+<a name="884"></a>
+<div id="answer-884" class="answer" data-answerid="884" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="884">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Rather than coding this out, I figure I'll pseudo-code it in steps and explain my logic, so that better programmers can poke holes in my logic if necessary. </p>
+
+<p>On the first step we start out with a list of numbers length n. For each number we need to create a list of length n-1 becuase we aren't adding a number to itself. By the end we have a list of about n sorted lists that was generated in O(n^2) time.</p>
+
+<pre><code>step1(startinglist) 
+for each number num1 in startinglist
+   for each number num2 in startinglist
+      add num1 plus num2 into templist
+   add templist to sumlist
+return sumlist 
+</code></pre>
+
+<p>In step 2 because the lists were sorted by design (add a number to each element in a sorted list and the list will still be sorted) we can simply do a mergesort by merging each list together rather than mergesorting the whole lot.  In the end this should take O(n^2) time.</p>
+
+<pre><code>step2(sumlist) 
+create an empty list mergedlist
+for each list templist in sumlist
+   set mergelist equal to: merge(mergedlist,templist)
+return mergedlist
+</code></pre>
+
+<p>The merge method would be then the normal merge step with a check to make sure that there are no duplicate sums.  I won't write this out because anyone can look up mergesort.</p>
+
+<p>So there's my solution.  The entire algorithm is O(n^2) time.  Feel free to point out any mistakes or improvements.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/884" title="short permalink to this answer" class="short-link" id="link-post-884">share</a><span class="lsep">|</span><a href="/posts/884/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/884/revisions" title="show all edits to this post">edited <span title="2013-07-23 14:41:11Z" class="relativetime">Jul 23 at 14:41</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/96780/daniel-daranas"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/HW6VJ.jpg?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/96780/daniel-daranas">Daniel Daranas</a><br>
+        <span class="reputation-score" title="reputation score 13991" dir="ltr">14k</span><span title="4 gold badges"><span class="badge1"></span><span class="badgecount">4</span></span><span title="33 silver badges"><span class="badge2"></span><span class="badgecount">33</span></span><span title="70 bronze badges"><span class="badge3"></span><span class="badgecount">70</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2008-08-03 23:06:15Z" class="relativetime">Aug 3 '08 at 23:06</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/159/holtorf"><div><img src="https://www.gravatar.com/avatar/1491e514b67ed23715af56afcb8460d2?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/159/holtorf">Holtorf</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">948</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="11 silver badges"><span class="badge2"></span><span class="badgecount">11</span></span><span title="23 bronze badges"><span class="badge3"></span><span class="badgecount">23</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-884" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-2155711" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I think this is O(N^3) since there are n comparisons at each stage in step 2.</span>
+	&ndash;&nbsp;
+		<span title="0 reputation" 
+		      class="comment-user">user97370</span>
+	<span class="comment-date" dir="ltr"><span title="2010-02-05 02:56:20Z" class="relativetime-clean">Feb 5 '10 at 2:56</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-884" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="7842"></a>
+<div id="answer-7842" class="answer" data-answerid="7842" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="7842">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>You can do this in two lines in python with</p>
+
+<pre><code>allSums = set(a+b for a in X for b in X)
+allSums = sorted(allSums)
+</code></pre>
+
+<p>The cost of this is n^2 (maybe an extra log factor for the set?) for the iteration and s * log(s) for the sorting where s is the size of the set. </p>
+
+<p>The size of the set could be as big as n*(n-1)/2 for example if X = [1,2,4,...,2^n]. So if you want to generate this list it will take at least n^2/2 in the worst case since this is the size of the output.</p>
+
+<p>However if you want to select the first k elements of the result you can do this in O(kn) using a selection algorithm for sorted X+Y matrices by Frederickson and Johnson (<a href="http://arxiv.org/abs/0804.0936" rel="nofollow" title="Presentation Zen">see here for gory details)</a>. Although this can probably be modified to generate them online by reusing computation and get an efficient generator for this set. </p>
+
+<p>@deuseldorf, Peter
+There is some confusion about (n!) I seriously doubt deuseldorf meant "n factorial" but simply "n, (very excited)!" </p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/7842" title="short permalink to this answer" class="short-link" id="link-post-7842">share</a><span class="lsep">|</span><a href="/posts/7842/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2008-08-11 14:47:31Z" class="relativetime">Aug 11 '08 at 14:47</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <span class="anonymous-gravatar"></span>
+    </div>
+    <div class="user-details">
+        Pall Melsted<br>
+        
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-7842" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-2155726" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">This has better complexity than all of the other solutions I think! O(n^2.log(n)). It&#39;s also the most readable and the shortest.</span>
+	&ndash;&nbsp;
+		<span title="0 reputation" 
+		      class="comment-user">user97370</span>
+	<span class="comment-date" dir="ltr"><span title="2010-02-05 03:00:27Z" class="relativetime-clean">Feb 5 '10 at 3:00</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-7842" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="840"></a>
+<div id="answer-840" class="answer" data-answerid="840" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="840">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>The best I could come up with is to produce a matrix of sums of each pair, and then merge the rows together, a-la merge sort.  I feel like I'm missing some simple insight that will reveal a much more efficient solution.</p>
+
+<p>My algorithm, in Haskell:</p>
+
+<pre><code>matrixOfSums list = [[a+b | b &lt;- list, b &gt;= a] | a &lt;- list]<br><br>sortedSums = foldl merge [] matrixOfSums<br><br>--A normal merge, save that we remove duplicates<br>merge xs [] = xs<br>merge [] ys = ys<br>merge (x:xs) (y:ys) = case compare x y of<br>    LT -&gt; x:(merge xs (y:ys))<br>    EQ -&gt; x:(merge xs (dropWhile (==x) ys))<br>    GT -&gt; y:(merge (x:xs) ys)<br></code></pre>
+
+<p>I found a minor improvement, one that's more amenable to lazy stream-based coding.  Instead of merging the columns pair-wise, merge all of them at once.  The advantage being that you start getting elements of the list immediately.</p>
+
+<pre><code>-- wide-merge does a standard merge (ala merge-sort) across an arbitrary number of lists<br>-- wideNubMerge does this while eliminating duplicates<br>wideNubMerge :: Ord a =&gt; [[a]] -&gt; [a]<br>wideNubMerge ls = wideNubMerge1 $ filter (/= []) ls<br>wideNubMerge1 [] = []<br>wideNubMerge1 ls = mini:(wideNubMerge rest)<br>    where mini = minimum $ map head ls<br>          rest = map (dropWhile (== mini)) ls<br><br>betterSortedSums = wideNubMerge matrixOfSums<br></code></pre>
+
+<p>However, if you know you're going to use all of the sums, and there's no advantage to getting some of them earlier, go with '<code>foldl merge []</code>', as it's faster.</p></div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/840" title="short permalink to this answer" class="short-link" id="link-post-840">share</a><span class="lsep">|</span><a href="/posts/840/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/840/revisions" title="show all edits to this post">edited <span title="2008-08-06 18:56:00Z" class="relativetime">Aug 6 '08 at 18:56</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature owner">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2008-08-03 21:36:25Z" class="relativetime">Aug 3 '08 at 21:36</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/101/peter-burns"><div><img src="https://www.gravatar.com/avatar/cfd2734f1de31db479ec2a8a4ecbd649?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/101/peter-burns">Peter Burns</a><br>
+        <span class="reputation-score" title="reputation score 13695" dir="ltr">13.7k</span><span title="4 gold badges"><span class="badge1"></span><span class="badgecount">4</span></span><span title="21 silver badges"><span class="badge2"></span><span class="badgecount">21</span></span><span title="35 bronze badges"><span class="badge3"></span><span class="badgecount">35</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-840" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-2155708" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I think (my haskell is rusty) this is O(N^3) since there are O(n) comparisons done for each thing in the result.</span>
+	&ndash;&nbsp;
+		<span title="0 reputation" 
+		      class="comment-user">user97370</span>
+	<span class="comment-date" dir="ltr"><span title="2010-02-05 02:55:23Z" class="relativetime-clean">Feb 5 '10 at 2:55</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-840" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="6458"></a>
+<div id="answer-6458" class="answer" data-answerid="6458" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6458">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><P>In SQL:</P><PRE><CODE>create table numbers(n int not null)
+insert into numbers(n) values(1),(1), (2), (2), (3), (4)
+
+
+select distinct num1.n+num2.n sum2n
+from numbers num1
+inner join numbers num2 
+    on num1.n&lt;&gt;num2.n
+order by sum2n
+</CODE></PRE>
+<P>C# LINQ:</P><PRE><CODE>List&lt;int&gt; num = new List&lt;int&gt;{ 1, 1, 2, 2, 3, 4};
+var uNum = num.Distinct().ToList();
+var sums=(from num1 in uNum
+        from num2 in uNum 
+        where num1!=num2
+        select num1+num2).Distinct();
+foreach (var s in sums)
+{
+    Console.WriteLine(s);
+}
+</CODE></PRE></div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/6458" title="short permalink to this answer" class="short-link" id="link-post-6458">share</a><span class="lsep">|</span><a href="/posts/6458/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/6458/revisions" title="show all edits to this post">edited <span title="2008-08-08 23:31:25Z" class="relativetime">Aug 8 '08 at 23:31</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2008-08-08 23:05:47Z" class="relativetime">Aug 8 '08 at 23:05</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/224/vzczc"><div><img src="https://www.gravatar.com/avatar/1887903198095d29f1bb9624898e9bc5?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/224/vzczc">vzczc</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">4,628</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="30 silver badges"><span class="badge2"></span><span class="badgecount">30</span></span><span title="46 bronze badges"><span class="badge3"></span><span class="badgecount">46</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6458" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6458" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="97567"></a>
+<div id="answer-97567" class="answer" data-answerid="97567" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="97567">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>No matter what you do, without additional constraints on the input values, you cannot do better than O(n^2), simply because you have to iterate through all pairs of numbers.  The iteration will dominate sorting (which you can do in O(n log n) or faster).</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/97567" title="short permalink to this answer" class="short-link" id="link-post-97567">share</a><span class="lsep">|</span><a href="/posts/97567/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2008-09-18 22:15:18Z" class="relativetime">Sep 18 '08 at 22:15</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/18308/florin"><div><img src="https://www.gravatar.com/avatar/b9106901e4706c95c5d0c8dc680f0a19?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/18308/florin">florin</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">6,031</span><span title="4 gold badges"><span class="badge1"></span><span class="badgecount">4</span></span><span title="19 silver badges"><span class="badge2"></span><span class="badgecount">19</span></span><span title="34 bronze badges"><span class="badge3"></span><span class="badgecount">34</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-97567" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-2155730" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Yes, but to sort n^2 things takes O(n^2 log n) so sorting never dominates.</span>
+	&ndash;&nbsp;
+		<span title="0 reputation" 
+		      class="comment-user">user97370</span>
+	<span class="comment-date" dir="ltr"><span title="2010-02-05 03:01:27Z" class="relativetime-clean">Feb 5 '10 at 3:01</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-97567" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="20701"></a>
+<div id="answer-20701" class="answer" data-answerid="20701" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="20701">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>This question has been wracking my brain for about a day now. Awesome.</p>
+
+<p>Anyways, you can't get away from the n^2 nature of it easily, but you can do slightly better with the merge since you can bound the range to insert each element in.</p>
+
+<p>If you look at all the lists you generate, they have the following form:</p>
+
+<p><code>(a[i], a[j]) | j&gt;=i</code></p>
+
+<p>If you flip it 90 degrees, you get:</p>
+
+<p><code>(a[i], a[j]) | i&lt;=j</code></p>
+
+<p>Now, the merge process should be taking two lists <code>i</code> and <code>i+1</code> (which correspond to lists where the first member is always <code>a[i]</code> and <code>a[i+1]</code>), you can bound the range to insert element <code>(a[i + 1], a[j])</code> into list <code>i</code> by the location of <code>(a[i], a[j])</code> and the location of <code>(a[i + 1], a[j + 1])</code>.</p>
+
+<p>This means that you should merge in reverse in terms of <code>j</code>. I don't know (yet) if you can leverage this across <code>j</code> as well, but it seems possible.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/20701" title="short permalink to this answer" class="short-link" id="link-post-20701">share</a><span class="lsep">|</span><a href="/posts/20701/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/20701/revisions" title="show all edits to this post">edited <span title="2012-07-03 14:49:57Z" class="relativetime">Jul 3 '12 at 14:49</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/142162/tim-cooper"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/F5xn2.png?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/142162/tim-cooper">Tim Cooper</a><br>
+        <span class="reputation-score" title="reputation score 43231" dir="ltr">43.2k</span><span title="11 gold badges"><span class="badge1"></span><span class="badgecount">11</span></span><span title="75 silver badges"><span class="badge2"></span><span class="badgecount">75</span></span><span title="104 bronze badges"><span class="badge3"></span><span class="badgecount">104</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2008-08-21 18:16:13Z" class="relativetime">Aug 21 '08 at 18:16</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1799/mat-noguchi"><div><img src="https://www.gravatar.com/avatar/760aafd86bcb54793ea59786f6a3f50c?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1799/mat-noguchi">Mat Noguchi</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">803</span><span title="5 silver badges"><span class="badge2"></span><span class="badgecount">5</span></span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-20701" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-20701" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="834"></a>
+<div id="answer-834" class="answer downvoted-answer" data-answerid="834" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="834">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">-4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>If you are looking for a truly language agnostic solution then you will be sorely disappointed in my opinion because you'll be stuck with a for loop and some conditionals. However if you opened it up to functional languages or functional language features (I'm looking at you LINQ) then my colleagues here can fill this page with elegant examples in Ruby, Lisp, Erlang, and others.</p></div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/834" title="short permalink to this answer" class="short-link" id="link-post-834">share</a><span class="lsep">|</span><a href="/posts/834/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2008-08-03 21:24:56Z" class="relativetime">Aug 3 '08 at 21:24</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/200/john-downey"><div><img src="https://www.gravatar.com/avatar/58376779023f009fc13d160bb3e82515?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/200/john-downey">John Downey</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">5,936</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="22 silver badges"><span class="badge2"></span><span class="badgecount">22</span></span><span title="28 bronze badges"><span class="badge3"></span><span class="badgecount">28</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-834" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-834" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/826/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="826" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="82821a89f0c67097b7d51a9c12f23f92">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f826%2fefficiently-get-sorted-sums-of-a-sorted-list%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f826%2fefficiently-get-sorted-sums-of-a-sorted-list%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/algorithm" class="post-tag" title="show questions tagged &#39;algorithm&#39;" rel="tag">algorithm</a> <a href="/questions/tagged/language-agnostic" class="post-tag" title="show questions tagged &#39;language-agnostic&#39;" rel="tag">language-agnostic</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/algorithm" class="post-tag" title="show questions tagged &#39;algorithm&#39;" rel="tag">algorithm</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">34899</span></span><br>
+<a href="/questions/tagged/language-agnostic" class="post-tag" title="show questions tagged &#39;language-agnostic&#39;" rel="tag">language-agnostic</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">6473</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2008-08-03 21:08:54Z"><b>5 years ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>1333 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-07-23 14:41:11Z">3 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+			<div class="module community-bulletin" data-tracker="cb=1">
+    <h4>Community Bulletin</h4>
+    <div class="related">
+
+            <div class="spacer">
+                <div class="bulletin-item-type"><a href="http://blog.stackoverflow.com" class="event-date" target="_blank">blog</a></div>
+                <div class="bulletin-item-content">
+                    <a href="http://blog.stackoverflow.com/2013/11/podcast-54-the-one-with-all-the-anachronisms/" class="question-hyperlink" target="_blank">Podcast #54 – The One With All The Anachronisms</a>
+                </div>
+                <br class="cbt" />
+            </div>
+    </div>
+</div>
+
+			
+			            <script type="text/javascript">
+                var ados = ados || {};ados.run = ados.run || [];
+                ados.run.push(function() { ados_add_placement(22,8277,"adzerk655384894",17).setZone(45) ; });                    
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk655384894">
+            </div>  
+    <div id="hireme">
+        <script type="text/javascript">
+window.careers_adurl="//careers.stackoverflow.com/gethired/js",window.careers_cssurl="//cdn-careers.sstatic.net/careers/gethired/sidebar.min.css?v=7ae83073b37e",window.careers_leaderboardcssurl="//cdn-careers.sstatic.net/careers/gethired/ninja.min.css?v=78ccbfa5c59f",window.careers_companycssurl="//cdn-careers.sstatic.net/careers/gethired/company",window.careers_adselector="div.hireme, div#hireme",StackExchange.ready(function(){$.ajax({url:"//cdn-careers.sstatic.net/careers/gethired/loader.min.js?v=607ab2dda910",dataType:"script",cache:!0})})        </script>
+    </div>
+
+
+
+			
+  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/1436669" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">4</div>
+	</a>
+	<a href="/questions/1436669/how-to-find-kth-largest-number-in-pairwise-sums-like-seta-setb" class="question-hyperlink">How to find kth largest number in pairwise sums like setA + setB?</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/300907" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">6
+    </div>
+</a><a href="/questions/300907/sort-numbers-by-sum-algorithm" class="question-hyperlink">Sort numbers by sum algorithm</a>
+</div>
+<div class="spacer">
+<a href="/q/350005" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">5
+    </div>
+</a><a href="/questions/350005/algorithm-for-best-suiting-peoples-choices-from-a-definite-list-of-items-where" class="question-hyperlink">Algorithm for best suiting people&#39;s choices from a definite list of items where there is only one of each available?</a>
+</div>
+<div class="spacer">
+<a href="/q/464960" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/464960/code-golf-combining-multiple-sorted-lists-into-a-single-sorted-list" class="question-hyperlink">Code golf: combining multiple sorted lists into a single sorted list</a>
+</div>
+<div class="spacer">
+<a href="/q/2129525" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">9
+    </div>
+</a><a href="/questions/2129525/algorithm-to-merge-two-lists-lacking-comparison-between-them" class="question-hyperlink">Algorithm to merge two lists lacking comparison between them</a>
+</div>
+<div class="spacer">
+<a href="/q/2300709" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">9
+    </div>
+</a><a href="/questions/2300709/an-algorithm-to-find-a-pair-of-sums-from-a-list-of-numbers" class="question-hyperlink">An algorithm to find a pair of sums from a list of numbers?</a>
+</div>
+<div class="spacer">
+<a href="/q/3859010" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/3859010/efficient-algorithm-to-find-a-point-not-touched-by-a-set-of-rectangles" class="question-hyperlink">Efficient algorithm to find a point not touched by a set of rectangles</a>
+</div>
+<div class="spacer">
+<a href="/q/4239215" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">18
+    </div>
+</a><a href="/questions/4239215/getting-the-lowest-possible-sum-from-numbers-difference" class="question-hyperlink">Getting the lowest possible sum from numbers&#39; difference</a>
+</div>
+<div class="spacer">
+<a href="/q/12865007" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/12865007/efficiently-computing-pairs-from-two-weighted-sets-in-order-of-summed-weight-of" class="question-hyperlink">Efficiently computing pairs from two weighted sets, in order of summed weight of each pair</a>
+</div>
+<div class="spacer">
+<a href="/q/13545790" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/13545790/world-needs-an-algorithm-to-find-numbers-summing-up-to-the-same-number-in-a-2d-s" class="question-hyperlink">world needs an algorithm to find numbers summing up to the same number in a 2d square</a>
+</div>
+<div class="spacer">
+<a href="/q/14415881" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted extra-large">1625
+    </div>
+</a><a href="/questions/14415881/how-to-pair-socks-from-a-pile-efficiently" class="question-hyperlink">How to pair socks from a pile efficiently?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/826" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/826/ivc/bcad');});
+</script>
+<noscript>
+    <div><img src="/posts/826/ivc/bcad" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackoverflow.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://engine.adzerk.net/r?e=eyJhdiI6NDE0LCJhdCI6MjAsImNtIjo5NTQsImNoIjoxMTc4LCJjciI6Mjc3NiwiZG0iOjQsImZjIjoyODYyLCJmbCI6Mjc1MSwibnciOjIyLCJydiI6MCwicHIiOjExNSwic3QiOjAsInVyIjoiaHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL2Fib3V0L2NvbnRhY3QiLCJyZSI6MX0&amp;s=hRods5B22XvRBwWIwtIMekcyNF8">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/826/efficiently-get-sorted-sums-of-a-sorted-list")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.stackoverflow.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.14.1156
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Stack Overflow works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+<script type="text/javascript">var p = "http", d = "static"; if (document.location.protocol == "https:") { p += "s"; d = "engine"; } var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = p + "://" + d + ".adzerk.net/ados.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script>
+<script type="text/javascript">
+    var ados = ados || {};
+    ados.run = ados.run || [];
+    ados.run.push(function () { ados_setKeywords('algorithm,language-agnostic');; ados_load(); });         
+</script>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-1']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|algorithm|language-agnostic|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

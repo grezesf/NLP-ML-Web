@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Backup solution for 10TB of data and 3 servers - Server Fault</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/serverfault/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/serverfault/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Server Fault" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ServerFault" />
+    <meta name="twitter:domain" content="serverfault.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/serverfault/img/apple-touch-icon@2.png?v=9b1f48ae296b"/>
+    <meta name="og:title" content="Backup solution for 10TB of data and 3 servers" />
+    <meta name="og:description" content="I am looking for a backup solution for this scenario:
+
+
+3 servers (One Linux mail server, 2 Windows Servers)
+~ 10TB of data
+2 TB of which are in daily use
+a few GB of activity/change per day
+abilit..." />
+    <meta name="og:url" content="http://serverfault.com/questions/25/backup-solution-for-10tb-of-data-and-3-servers"/>
+    <link rel="canonical" href="http://serverfault.com/questions/25/backup-solution-for-10tb-of-data-and-3-servers" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/serverfault/all.css?v=4f10362b7e0d">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Backup solution for 10TB of data and 3 servers&#39;" href="/feeds/question/25">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:0,shownCommentCount:0,highlightColor:'#F3F1D9',backgroundColor:'#FFF',questionId:25});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('2', '25');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('2');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1384534332,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Server Fault","description":"Q&A for professional system and network administrators","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LcDNwYAAAAAAG_X1rC8kTtLBP6XS2Ym1N0n9kSY","enableSocialMediaInSharePopup":true},"user":{"fkey":"ccf6c05702b5b74dbae85362e422ac2d","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"978b6ac79763","js/full.en.js":"9c04c877896f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+    </script>
+    <script type="text/javascript">
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f25%2fbackup-solution-for-10tb-of-data-and-3-servers">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f25%2fbackup-solution-for-10tb-of-data-and-3-servers">log in</a>
+
+ <span class="lsep">|</span>
+                    <a href="http://careers.serverfault.com">careers 2.0</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Server Fault
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/serverfault/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Server Fault is a question and answer site for professional system and network administrators. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/25/backup-solution-for-10tb-of-data-and-3-servers" class="question-hyperlink">Backup solution for 10TB of data and 3 servers</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="25"  id="question">
+    
+                <script type="text/javascript">
+                var ados = ados || {};ados.run = ados.run || [];
+                ados.run.push(function() { ados_add_placement(22,8278,"adzerk1352255485",4).setZone(49) ; });                    
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk1352255485">
+            </div>  
+
+
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="25">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">8</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>2</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I am looking for a backup solution for this scenario:</p>
+
+<ul>
+<li>3 servers (One Linux mail server, 2 Windows Servers)</li>
+<li>~ 10TB of data</li>
+<li>2 TB of which are in daily use</li>
+<li>a few GB of activity/change per day</li>
+<li>ability to restore data from any point in time</li>
+<li>backing up is performed on a live system (international office)</li>
+<li>A MSSQL database needs backing up as well</li>
+<li>There is no sufficient network connection to back data up off-site</li>
+<li>Uncomplicated access (native file system) to the secured data.</li>
+</ul>
+
+<p>At the moment the backing up of data is handled by carrying out the delta on portable disks to an off-site location. But the software is not completely reliable (something home cooked).</p>
+
+<p>We pondered whether to purchase a tape library solution from Dell, but are not very convinced that tapes are the way to go for this relatively small amout of data.</p>
+
+<p>How would you set up this kind of data backup?
+What software would you recommend?</p>
+
+<p>Carrying disks with the delta to an off-site server to a mirror server is an option. What kind of hardware would you use?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/backup" class="post-tag" title="show questions tagged &#39;backup&#39;" rel="tag">backup</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/25" title="short permalink to this question" class="short-link" id="link-post-25">share</a><span class="lsep">|</span><a href="/posts/25/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2009-04-30 08:06:50Z" class="relativetime">Apr 30 '09 at 8:06</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/49/ttobiass"><div><img src="https://www.gravatar.com/avatar/03139555843cfc2960313db10a69203f?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/49/ttobiass">ttobiass</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">141</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-25" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-25" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								3 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/25/backup-solution-for-10tb-of-data-and-3-servers?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/25/backup-solution-for-10tb-of-data-and-3-servers?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/25/backup-solution-for-10tb-of-data-and-3-servers?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="156"></a>
+<div id="answer-156" class="answer" data-answerid="156" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="156">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>What i would recommend for an on-site solution to start off with is to invest in a a backup server that has a good amount of room for expansion. </p>
+
+<p>I was recently looking into the possibly deploying a tape drive solution with HP tape drivers and i was very turned off by the low amount of storage per tape, high price and the fact if i need to upgrade it i might as well throw the old tape drive out the window.</p>
+
+<p>One thing you might want to look at is <a href="http://drobo.com/products/drobopro/" rel="nofollow">Drobo pro</a>, if you load one of them up with 2tb drives you can get 16tb. I have been looking to give one of these a go ( When i get the funds :) ) but i have herd great reviews about them and the fact that a few years down the track you need to upgrade you just take a few drives out and put in some new hard drive that has yet more ridiculous amounts of space.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/156" title="short permalink to this answer" class="short-link" id="link-post-156">share</a><span class="lsep">|</span><a href="/posts/156/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2009-04-30 08:49:08Z" class="relativetime">Apr 30 '09 at 8:49</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/123/shard"><div><img src="https://www.gravatar.com/avatar/1059b0ac1ead5a69e5911479bfae03e4?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/123/shard">Shard</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,110</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="14 silver badges"><span class="badge2"></span><span class="badgecount">14</span></span><span title="30 bronze badges"><span class="badge3"></span><span class="badgecount">30</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-156" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-6311" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Agree, tape is dead.  HD is cheap, most of the prior advantages of tape have become stale, and in a disaster tape&#39;s not &quot;uncomplicated access&quot; as the OP put it.</span>
+	&ndash;&nbsp;
+		<a href="/users/2302/nedm" 
+		   title="4022 reputation" 
+		   class="comment-user">nedm</a>
+	<span class="comment-date" dir="ltr"><span title="2009-05-16 18:40:25Z" class="relativetime-clean">May 16 '09 at 18:40</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-13585" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Our off-site backup solution for our datacentre is a server in our office with a 4.5TB RAID6 array. The server currently uses 8 of 16 drive bays, so when we need to upgrade, we can just install more drives.</span>
+	&ndash;&nbsp;
+		<a href="/users/7342/david-pashley" 
+		   title="15695 reputation" 
+		   class="comment-user">David Pashley</a>
+	<span class="comment-date" dir="ltr"><span title="2009-06-04 11:33:32Z" class="relativetime-clean">Jun 4 '09 at 11:33</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-156" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+            <script type="text/javascript">
+                var ados = ados || {};ados.run = ados.run || [];
+                ados.run.push(function() { ados_add_placement(22,8278,"adzerk1588665945",4).setZone(51) ; });                    
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk1588665945">
+            </div>  
+
+
+
+  
+<a name="1083"></a>
+<div id="answer-1083" class="answer" data-answerid="1083" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="1083">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>You will probably be best off if you invest in a proven solution. </p>
+
+<p>Tapes are definitely not the way to go, for your size a disk based solution would be better and much easier to maintain. </p>
+
+<p>When you are on the TB scale, you should consider using something with compression and <a href="http://en.wikipedia.org/wiki/Deduplication" rel="nofollow">deduplication</a>.  In a solution like this you will only store unique data that is common on several copmuters ,and have references to these unique files or blocks. </p>
+
+<p>You should also make sure that whatever your backup server starts with, the product supports expandable storage.  So you can start with 10TB, and add on more disks as you go. </p>
+
+<p>With several computers an agentless backup client would also be favorable.  So that you can backup your whole LAN from a single backup client.   Some products also include a virtual computer based on an FTP/SFTP/FTPS location.  So you could have your backup client on windows and backup all the LAN machines + the linux machine from the same interface. </p>
+
+<p>I wouldn't use an approach based on either of 1) Incremental backups and 2) differential backups.  With incremental backups, you will want to do another full backup eventually, or at restore time you'll have to restore too many backups.  With differential backups, you will want to do another full backup eventually, or eventually your differential backup will get too big.  In your case you would have to re-send the 10TB.  That is not acceptable.  </p>
+
+<p>Make sure when you seed the data to your backup server, that the data will NEVER need a new re-transfer if it is not changed. </p>
+
+<p>Make sure that you don't NEED to restore full backups, and that you can restore only a subset of what you backed up and that you can select from backups as they were on the day you are restoring from. </p>
+
+<p>Backing up data should be allowed from offsite locations, and even if the backup client is offline.  In the case that they are offline there should be a 'large initial backup' option for later importing at the server. </p>
+
+<p>Be sure to chose a solution that has built in MS SQL backups and exchange backups, and that you don't need to re-transfer everything each time you back them up.  It should support hot backups of these items. </p>
+
+<p>An example of a product at this scale that supports all of the above is <a href="http://www.robobak.com/" rel="nofollow">ROBOBAK</a>. (I also work for this company)</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/1083" title="short permalink to this answer" class="short-link" id="link-post-1083">share</a><span class="lsep">|</span><a href="/posts/1083/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/1083/revisions" title="show all edits to this post">edited <span title="2009-05-01 16:16:42Z" class="relativetime">May 1 '09 at 16:16</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2009-04-30 15:43:05Z" class="relativetime">Apr 30 '09 at 15:43</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/481/brian-r-bondy"><div><img src="https://www.gravatar.com/avatar/84af4c25398f072ce1462795fd67bf49?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/481/brian-r-bondy">Brian R. Bondy</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">463</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="7 silver badges"><span class="badge2"></span><span class="badgecount">7</span></span><span title="14 bronze badges"><span class="badge3"></span><span class="badgecount">14</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1083" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-2281" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Can ROBOBAK handle the following?
+
+- Two locations (1 on-site (&quot;live&quot;), 1 off-site (backup))
+- Keep the two locations in-sync through data exchange via portable hard disk.
+
+So ROBOBAK would have to put the delta onto the portable disks and the off-site server reads the portable disks and is then up-to-date again. Preferably all via the same software and with little manual tinkering.
+
+Thanks!</span>
+	&ndash;&nbsp;
+		<a href="/users/49/ttobiass" 
+		   title="141 reputation" 
+		   class="comment-user owner">ttobiass</a>
+	<span class="comment-date" dir="ltr"><span title="2009-05-04 11:15:13Z" class="relativetime-clean">May 4 '09 at 11:15</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-2285" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">That should of course happen with support for the full feature set, e.g. versioning and customizable handling of file deletion.</span>
+	&ndash;&nbsp;
+		<a href="/users/49/ttobiass" 
+		   title="141 reputation" 
+		   class="comment-user owner">ttobiass</a>
+	<span class="comment-date" dir="ltr"><span title="2009-05-04 11:19:01Z" class="relativetime-clean">May 4 '09 at 11:19</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-2631" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@ttobiass: If you are interested, please call the number at robobak.com.  They will be able to answer any advanced questions.</span>
+	&ndash;&nbsp;
+		<a href="/users/481/brian-r-bondy" 
+		   title="463 reputation" 
+		   class="comment-user">Brian R. Bondy</a>
+	<span class="comment-date" dir="ltr"><span title="2009-05-05 00:25:37Z" class="relativetime-clean">May 5 '09 at 0:25</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-6908" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Backula might be your option, and then go disk to disk to disk for your redundancy.  The last set of disks are offsite.  If you distill both of these answers you will be able to get what you want done.  Don&#39;t skimp on the hardware, make the investment, give yourself room to grow and you will be pleased with the results....Skimp on the hardware and it will be a headache till you upgrade!</span>
+	&ndash;&nbsp;
+		<a href="/users/2012/thomas-denton" 
+		   title="611 reputation" 
+		   class="comment-user">Thomas Denton</a>
+	<span class="comment-date" dir="ltr"><span title="2009-05-19 02:44:00Z" class="relativetime-clean">May 19 '09 at 2:44</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-1083" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="19587"></a>
+<div id="answer-19587" class="answer" data-answerid="19587" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="19587">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Looking at the scenario, The best backup solution can be given by "faubackup", Go through this <a href="http://faubackup.sourceforge.net/" rel="nofollow">http://faubackup.sourceforge.net/</a> .</p>
+
+<p>Faubackup  uses  a  filesystem on a hard drive for incremental and full backups.  This enables the backup to be accessable through standard filesystem tools. </p>
+
+<p>Later Backups to the same filesystem will automatically be incremental, as unchanged files are only hard-linked with the  existing version of the file.</p>
+
+<p>Executing ’faubackup srcdir destdir’ is a bit like ’cp -a srcdir destdir/‘date‘’.  That is, it will copy everything from srcdir to a subdirectory of destdir.  This directory is named after the time of the backup (format ’YYYY-MM-DD@hh:mm:ss’).   All  filenames,   permissions, contents will be preserved.  It can cope with soft-, hardlinks and with holes in files.</p>
+
+<p>The  big advantage over a simple copy is the use of hard-links between unchanged files to minimize disk space usage.  You can exe‐cute faubackup on a regular basis, and any files which haven’t  changed  between  these  calls  are  not  copied  again,  but  are      hardlinked  between  the various backup-directories.  This is similar to incremental backups, where only changed files are written to the tape.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/19587" title="short permalink to this answer" class="short-link" id="link-post-19587">share</a><span class="lsep">|</span><a href="/posts/19587/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/19587/revisions" title="show all edits to this post">edited <span title="2012-03-14 16:16:44Z" class="relativetime">Mar 14 '12 at 16:16</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/8897/svw"><div><img src="https://www.gravatar.com/avatar/bed0912b2f8f31af31b8871a0ae10a6a?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/8897/svw">SvW</a><br>
+        <span class="reputation-score" title="reputation score 37462" dir="ltr">37.5k</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="41 silver badges"><span class="badge2"></span><span class="badgecount">41</span></span><span title="79 bronze badges"><span class="badge3"></span><span class="badgecount">79</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2009-06-04 11:13:24Z" class="relativetime">Jun 4 '09 at 11:13</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3947/caterpillar"><div><img src="https://www.gravatar.com/avatar/94020602382f6c1c479b1cfea04327a9?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3947/caterpillar">Caterpillar</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">734</span><span title="7 silver badges"><span class="badge2"></span><span class="badgecount">7</span></span><span title="19 bronze badges"><span class="badge3"></span><span class="badgecount">19</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-19587" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-376127" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">The last release is from 2006? I don&#39;t think faubackup is a good solution.</span>
+	&ndash;&nbsp;
+		<a href="/users/90324/guettli" 
+		   title="189 reputation" 
+		   class="comment-user">guettli</a>
+	<span class="comment-date" dir="ltr"><span title="2012-03-14 15:49:38Z" class="relativetime-clean">Mar 14 '12 at 15:49</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-376596" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">ttobiass might have gone some other solution :) You are answering this question very late.</span>
+	&ndash;&nbsp;
+		<a href="/users/3947/caterpillar" 
+		   title="734 reputation" 
+		   class="comment-user">Caterpillar</a>
+	<span class="comment-date" dir="ltr"><span title="2012-03-15 13:28:01Z" class="relativetime-clean">Mar 15 '12 at 13:28</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-19587" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/25/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="25" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="ccf6c05702b5b74dbae85362e422ac2d">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f25%2fbackup-solution-for-10tb-of-data-and-3-servers%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f25%2fbackup-solution-for-10tb-of-data-and-3-servers%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/backup" class="post-tag" title="show questions tagged &#39;backup&#39;" rel="tag">backup</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/backup" class="post-tag" title="show questions tagged &#39;backup&#39;" rel="tag">backup</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">2634</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2009-04-30 08:06:50Z"><b>4 years ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>2704 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2012-03-14 16:16:44Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			            <script type="text/javascript">
+                var ados = ados || {};ados.run = ados.run || [];
+                ados.run.push(function() { ados_add_placement(22,8278,"adzerk1495377574",17).setZone(50) ; });                    
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk1495377574">
+            </div>  
+    <div id="hireme">
+        <script type="text/javascript">
+window.careers_adurl="//careers.stackoverflow.com/gethired/js",window.careers_cssurl="//cdn-careers.sstatic.net/careers/gethired/sidebar.min.css?v=7ae83073b37e",window.careers_leaderboardcssurl="//cdn-careers.sstatic.net/careers/gethired/ninja.min.css?v=78ccbfa5c59f",window.careers_companycssurl="//cdn-careers.sstatic.net/careers/gethired/company",window.careers_adselector="div.hireme, div#hireme",StackExchange.ready(function(){$.ajax({url:"//cdn-careers.sstatic.net/careers/gethired/loader.min.js?v=607ab2dda910",dataType:"script",cache:!0})})        </script>
+    </div>
+
+
+
+			
+  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/49510" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/49510/backup-solution-needed-for-file-server" class="question-hyperlink">Backup solution needed for file server</a>
+</div>
+<div class="spacer">
+<a href="/q/53301" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/53301/backup-solutions-for-small-medium-sized-company" class="question-hyperlink">Backup solution(s) for small-medium sized company</a>
+</div>
+<div class="spacer">
+<a href="/q/186862" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/186862/server-tape-backup-solutions" class="question-hyperlink">Server tape backup solutions?</a>
+</div>
+<div class="spacer">
+<a href="/q/274240" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/274240/backup-solution-for-10tb-using-ubuntu" class="question-hyperlink">Backup solution for 10TB using ubuntu</a>
+</div>
+<div class="spacer">
+<a href="/q/346911" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/346911/looking-for-suitable-backup-solution-mac-os-x-to-offsite-centos-6-server-1tb-of" class="question-hyperlink">Looking for suitable backup solution Mac OS X to offsite Centos 6 server 1TB of working data</a>
+</div>
+<div class="spacer">
+<a href="/q/386304" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/386304/backup-solution-for-road-warriors" class="question-hyperlink">Backup solution for road warriors</a>
+</div>
+<div class="spacer">
+<a href="/q/432610" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/432610/offsite-backup-solutions-for-40tb-of-data-35-million-files-on-single-drive" class="question-hyperlink">Offsite backup solutions for 40TB of data/35 Million Files on single drive</a>
+</div>
+<div class="spacer">
+<a href="/q/457301" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">66
+    </div>
+</a><a href="/questions/457301/how-to-backup-20tb-of-data" class="question-hyperlink">How to backup 20+TB of data?</a>
+</div>
+<div class="spacer">
+<a href="/q/474430" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/474430/data-backup-solution" class="question-hyperlink">Data Backup Solution</a>
+</div>
+<div class="spacer">
+<a href="/q/541711" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">-4
+    </div>
+</a><a href="/questions/541711/backup-server-solution-in-production-environment" class="question-hyperlink">Backup Server Solution in production environment</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/25" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/25/ivc/be7e');});
+</script>
+<noscript>
+    <div><img src="/posts/25/ivc/be7e" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.serverfault.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://engine.adzerk.net/r?e=eyJhdiI6NDE0LCJhdCI6MjAsImNtIjo5NTQsImNoIjoxMTc4LCJjciI6Mjg0NCwiZG0iOjQsImZjIjoyODY2LCJmbCI6Mjc1MSwibnciOjIyLCJydiI6MCwicHIiOjExNSwic3QiOjAsInVyIjoiaHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL2Fib3V0L2NvbnRhY3QiLCJyZSI6MX0&amp;s=VDtCBUNLxM-9o4t1cLMpl1AJKh4">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/25/backup-solution-for-10tb-of-data-and-3-servers")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.serverfault.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.15.1158
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Server Fault works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+<script type="text/javascript">var p = "http", d = "static"; if (document.location.protocol == "https:") { p += "s"; d = "engine"; } var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = p + "://" + d + ".adzerk.net/ados.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script>
+<script type="text/javascript">
+    var ados = ados || {};
+    ados.run = ados.run || [];
+    ados.run.push(function () { ados_setKeywords('backup');; ados_load(); });         
+</script>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-2']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|backup|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>
