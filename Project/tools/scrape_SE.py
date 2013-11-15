@@ -6,9 +6,10 @@ import urllib
 from bs4 import BeautifulSoup
 
 ### README
-# ../data/full/quest1/2files+edits
-# master txt link list
-# format = <site>_quest_number.txt9(.html or .edit1.html)
+# takes 2 text files of lists (site_list and master_list). Processes site_list and randomly walks
+# through the links to retrieve question/answer links and edit links. Saves every link visited, saves
+# link name to txt file, saves html for Q&A sites, and saves all edit sites html. Data is saved in...
+
 
 file_list = open('../data/site_list.txt', 'r')
 site_list = file_list.readlines()
