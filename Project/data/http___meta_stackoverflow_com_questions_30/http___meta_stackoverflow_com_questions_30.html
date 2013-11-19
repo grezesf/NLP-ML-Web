@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Behind the curtain - Meta Stack Overflow</title>
+    <link rel="shortcut icon" href="/content/stackoverflowmeta/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="/content/stackoverflowmeta/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Meta Stack Overflow" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="meta.stackoverflow.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="/content/stackoverflowmeta/img/apple-touch-icon@2.png?v=22bf083906e2"/>
+    <meta name="og:title" content="Behind the curtain" />
+    <meta name="og:description" content="I&#39;d like to read more about design decisions, optimizations, scaling techniques applied during  development.
+" />
+    <meta name="og:url" content="http://meta.stackoverflow.com/questions/30/behind-the-curtain"/>
+    <link rel="canonical" href="http://meta.stackoverflow.com/questions/30/behind-the-curtain" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/content/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/content/stackoverflowmeta/all.css?v=5361683ac358">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Behind the curtain&#39;" href="/feeds/question/30">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({totalCommentCount:0,shownCommentCount:0,highlightColor:'#DAD6B8',backgroundColor:'#FFF',questionId:30});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('4', '30');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('4');
+                            StackExchange.realtime.subscribeToTopBarNotifications('4');
+        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1384899453,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Meta Stack Overflow","description":"Q&A for meta-discussion of the Stack Exchange family of Q&A websites","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","isMetaStackOverflow":true,"enableSocialMediaInSharePopup":true},"user":{"fkey":"4ab26ce662274c083a120c968f6ae8f4","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"0bae9e603b5a","js/full.en.js":"4e67ead1b5c6","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(false);
+        });
+        
+    </script>
+    
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+
+
+
+<div class="topbar">
+    <div class="topbar-wrapper">
+        
+        <div class="js-topbar-dialog-corral">
+
+<div class="topbar-dialog siteSwitcher-dialog dno">
+    <div class="header">
+        <h3>Explore our sites</h3>
+    </div>
+    <div class="modal-content">
+        <ul class="current-site">
+                <li>
+                        <a href="//stackoverflow.com">
+        <img src="//cdn.sstatic.net/stackoverflow/img/favicon.ico" class="site-icon" alt="Stack Overflow" />
+        Stack Overflow
+    </a>
+
+                    
+                </li>
+                <li class="related-site">
+                        <a href="//meta.stackoverflow.com" class="current-site-link">
+        <img src="/content/stackoverflowmeta/img/favicon.ico" class="site-icon" alt="Meta Stack Overflow" />
+        Meta Stack Overflow
+    </a>
+        <div class="related-links">
+                <a href="http://chat.meta.stackoverflow.com">chat</a>
+                            <a href="http://blog.stackoverflow.com">blog</a>
+                    </div>
+
+                </li>
+                            <li class="related-site">
+                    <a href="//careers.stackoverflow.com">
+                        <img src="http://cdn.sstatic.net/careers/Img/logos/favicon.ico" class="site-icon" alt="Careers 2.0" /> 
+                        Stack Overflow Careers 2.0
+                    </a>
+                </li>
+        </ul>
+        
+
+
+        
+            <div class="child-content"></div>
+
+    </div>
+</div>        </div>
+
+        <div class="network-items">
+            
+            <a href="//stackexchange.com" 
+               class="topbar-icon icon-site-switcher js-site-switcher-button"
+               data-child-content-url="/topbar/site-switcher/site-list"
+               data-on-class="icon-site-switcher-on"
+               title="Explore our sites">
+                <span class="hidden-text">Stack Exchange</span>
+            </a>
+            
+        </div>
+
+        <div class="topbar-links">
+            
+                <div class="links-container">
+                    <span class="topbar-menu-links">
+                        <a href="/users/login?returnurl=%2fquestions%2f30%2fbehind-the-curtain" class="login-link">sign up</a>
+                        <a href="/users/login?returnurl=%2fquestions%2f30%2fbehind-the-curtain" class="login-link">log in</a>
+                        <a href="/tour">tour</a>
+                        <a href="/help">help</a>
+                    </span>
+                </div>
+
+			<div class="search-container">
+                <form id="search" action="/search" method="get" autocomplete="off">
+                    <input name="q" type="text" placeholder="search" value="" tabindex="1" autocomplete="off" maxlength="240" />
+                </form>
+			</div>
+            	
+        </div>      
+    </div> 
+</div>
+<script>
+    StackExchange.ready(function () { topbar.init(); });
+</script>    <div class="container">
+        <div id="header" >
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Meta Stack Overflow
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs ">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                            <li><a id="nav-badges" href="/help/badges">Badges</a></li>
+                            <li><a id="nav-unanswered" href="/unanswered">Unanswered</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="/content/stackoverflowmeta/img/apple-touch-icon.png">
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/30/behind-the-curtain" class="question-hyperlink">Behind the curtain</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="30"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="30">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">10</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I'd like to read more about design decisions, optimizations, scaling techniques applied during  development.</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/discussion" class="post-tag required-tag" title="show questions tagged &#39;discussion&#39;" rel="tag">discussion</a> <a href="/questions/tagged/design" class="post-tag" title="show questions tagged &#39;design&#39;" rel="tag">design</a> <a href="/questions/tagged/development" class="post-tag" title="show questions tagged &#39;development&#39;" rel="tag">development</a> <a href="/questions/tagged/optimization" class="post-tag" title="show questions tagged &#39;optimization&#39;" rel="tag">optimization</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/30" title="short permalink to this question" class="short-link" id="link-post-30">share</a><span class="lsep">|</span><a href="/posts/30/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/30/revisions" title="show all edits to this post">edited <span title="2009-07-10 13:48:02Z" class="relativetime">Jul 10 '09 at 13:48</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/23354/marc-gravell"><div><img src="https://www.gravatar.com/avatar/b4ae7f8b50a2c32287e456394570679e?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/23354/marc-gravell">Marc Gravell</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score 68253" dir="ltr">68.3k</span><span title="19 gold badges"><span class="badge1"></span><span class="badgecount">19</span></span><span title="135 silver badges"><span class="badge2"></span><span class="badgecount">135</span></span><span title="295 bronze badges"><span class="badge3"></span><span class="badgecount">295</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2009-06-28 09:52:06Z" class="relativetime">Jun 28 '09 at 9:52</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/69424/pestaa"><div><img src="https://www.gravatar.com/avatar/1f18e9019a41d06bd887d6408552f0df?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/69424/pestaa">pestaa</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">196</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-30" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-30" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for clarification or add more information. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								4 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/30/behind-the-curtain?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/30/behind-the-curtain?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/30/behind-the-curtain?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="113"></a>
+<div id="answer-113" class="answer accepted-answer" data-answerid="113" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="113">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">7</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Jeff and Jarrod posted self-deprecating answers, but as an outsider, let me tell you that the database code and schema are really tight.  (And I should add that has absolutely nothing to do with me, hahaha.)  If you're going to scale a SQL Server database fast to a large audience at a low cost, you don't want any extraneous business logic in the database.  No triggers, no <a href="http://en.wikipedia.org/wiki/User_Defined_Function" rel="nofollow">UDF</a>s, no CLR code, no record-by-record operations.</p>
+
+<p>Normally when I do performance tuning for clients, I start tracing queries with a duration of more than 10 seconds.  At Stack Overflow, I have to crank my filters down to 150-200 ms just to see any activity. It always gives me a grin.</p>
+
+<p>Just generally speaking, application servers are cheap, and SQL Server is expensive ($5k-$25k per CPU).  Even if you use open source databases, it's easier to scale application servers than it is to scale database servers.  Every added web/application server is relatively easy to implement with a load balancer - every added database server, not so much.  Every time you have to do anything even remotely CPU-related, do it in the web/application tier, not the database tier.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/113" title="short permalink to this answer" class="short-link" id="link-post-113">share</a><span class="lsep">|</span><a href="/posts/113/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/113/revisions" title="show all edits to this post">edited <span title="2010-08-13 12:21:34Z" class="relativetime">Aug 13 '10 at 12:21</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/63550/peter-mortensen"><div><img src="https://www.gravatar.com/avatar/2898f6c373e52c34c1c70f20a10ce770?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/63550/peter-mortensen">Peter Mortensen</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">3,914</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="17 silver badges"><span class="badge2"></span><span class="badgecount">17</span></span><span title="35 bronze badges"><span class="badge3"></span><span class="badgecount">35</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2009-06-28 12:21:51Z" class="relativetime">Jun 28 '09 at 12:21</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/26837/brent-ozar"><div><img src="https://www.gravatar.com/avatar/77f776c2eaf0cc691e8a0880bb8a191f?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/26837/brent-ozar">Brent Ozar</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,547</span><span title="7 silver badges"><span class="badge2"></span><span class="badgecount">7</span></span><span title="18 bronze badges"><span class="badge3"></span><span class="badgecount">18</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-113" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-462" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy"><i>Blush</i> - You are too kind, sir!</span>
+	&ndash;&nbsp;
+		<a href="/users/3/jarrod-dixon" 
+		   title="26307 reputation" 
+		   class="comment-user">Jarrod Dixon<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2009-06-29 01:03:49Z" class="relativetime-clean">Jun 29 '09 at 1:03</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-646" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">No, you&#39;re just too fast. ;-)</span>
+	&ndash;&nbsp;
+		<a href="/users/26837/brent-ozar" 
+		   title="1547 reputation" 
+		   class="comment-user">Brent Ozar</a>
+	<span class="comment-date" dir="ltr"><span title="2009-06-29 11:58:50Z" class="relativetime-clean">Jun 29 '09 at 11:58</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-1046" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">But how many queries does this structure require for an average pageview?</span>
+	&ndash;&nbsp;
+		<a href="/users/69424/pestaa" 
+		   title="196 reputation" 
+		   class="comment-user owner">pestaa</a>
+	<span class="comment-date" dir="ltr"><span title="2009-06-29 20:06:07Z" class="relativetime-clean">Jun 29 '09 at 20:06</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-113" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for clarification or add more information. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="53"></a>
+<div id="answer-53" class="answer" data-answerid="53" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="53">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">6</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>A typical night of development:</p>
+
+<blockquote>
+  <p><strong>Jeff</strong>: Let's see the latest feature.<br />
+  <strong>Me/Dalgas</strong>: Here you go!<br />
+  <strong>Jeff</strong>: What is that? I don't know what that's supposed to be..<br />
+  <strong>Me/Dalgas</strong>: Isn't that what you wanted?<br />
+  <strong>Jeff</strong>: But there's no words on it..<br />
+  <strong>Me/Dalgas</strong>: Want us to redo it?<br />
+  <strong>Jeff</strong>: No.. no time.. we'll do it live - <a href="http://www.youtube.com/watch?v=2tJjNVVwRCY" rel="nofollow">DO IT LIVE.</a></p>
+</blockquote>
+
+<p>I wouldn't have it any other way. </p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/53" title="short permalink to this answer" class="short-link" id="link-post-53">share</a><span class="lsep">|</span><a href="/posts/53/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2009-06-28 10:49:41Z" class="relativetime">Jun 28 '09 at 10:49</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3/jarrod-dixon"><div><img src="https://www.gravatar.com/avatar/2dfa19bf5dc5826c1fe54c2c049a1ff1?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3/jarrod-dixon">Jarrod Dixon</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score 26307" dir="ltr">26.3k</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="67 silver badges"><span class="badge2"></span><span class="badgecount">67</span></span><span title="107 bronze badges"><span class="badge3"></span><span class="badgecount">107</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-53" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-31" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Hey, best place to test is always in production....</span>
+	&ndash;&nbsp;
+		<a href="/users/95071/john-pirie" 
+		   title="1628 reputation" 
+		   class="comment-user">John Pirie</a>
+	<span class="comment-date" dir="ltr"><span title="2009-06-28 10:54:39Z" class="relativetime-clean">Jun 28 '09 at 10:54</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-32" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Exactly - this meta site is a testament to that philosophy :)</span>
+	&ndash;&nbsp;
+		<a href="/users/3/jarrod-dixon" 
+		   title="26307 reputation" 
+		   class="comment-user">Jarrod Dixon<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2009-06-28 10:56:31Z" class="relativetime-clean">Jun 28 '09 at 10:56</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-33" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Something like this?
+<a href="http://www.projectcartoon.com/cartoon/2" rel="nofollow">projectcartoon.com/cartoon/2</a></span>
+	&ndash;&nbsp;
+		<a href="/users/8205/igal-tabachnik" 
+		   title="1912 reputation" 
+		   class="comment-user">Igal Tabachnik</a>
+	<span class="comment-date" dir="ltr"><span title="2009-06-28 10:57:07Z" class="relativetime-clean">Jun 28 '09 at 10:57</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-62" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Bwahaha, yeah, I can just imagine.</span>
+	&ndash;&nbsp;
+		<a href="/users/26837/brent-ozar" 
+		   title="1547 reputation" 
+		   class="comment-user">Brent Ozar</a>
+	<span class="comment-date" dir="ltr"><span title="2009-06-28 12:16:00Z" class="relativetime-clean">Jun 28 '09 at 12:16</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-357924" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Closed as historical interest.</span>
+	&ndash;&nbsp;
+		<a href="/users/130213/kevin-montrose" 
+		   title="44244 reputation" 
+		   class="comment-user">Kevin Montrose<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2012-04-26 01:11:36Z" class="relativetime-clean">Apr 26 '12 at 1:11</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-357933" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@kevin notification received.</span>
+	&ndash;&nbsp;
+		<a href="/users/3/jarrod-dixon" 
+		   title="26307 reputation" 
+		   class="comment-user">Jarrod Dixon<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2012-04-26 01:45:36Z" class="relativetime-clean">Apr 26 '12 at 1:45</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-53" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for clarification or add more information. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="37"></a>
+<div id="answer-37" class="answer" data-answerid="37" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="37">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>You should definitely listen to the podcasts - Jeff gives away a lot of stuff in them.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/37" title="short permalink to this answer" class="short-link" id="link-post-37">share</a><span class="lsep">|</span><a href="/posts/37/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2009-06-28 10:05:08Z" class="relativetime">Jun 28 '09 at 10:05</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3146/1800-information"><div><img src="https://www.gravatar.com/avatar/acc637690f49e2b5a2146deb17874d6f?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3146/1800-information">1800 INFORMATION</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">462</span><span title="3 silver badges"><span class="badge2"></span><span class="badgecount">3</span></span><span title="4 bronze badges"><span class="badge3"></span><span class="badgecount">4</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-37" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-37" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for clarification or add more information. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="54"></a>
+<div id="answer-54" class="answer" data-answerid="54" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="54">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p><a href="http://www.bugbash.net/comic/113.html" rel="nofollow"><img src="http://i.stack.imgur.com/puOPF.png"></a></p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/54" title="short permalink to this answer" class="short-link" id="link-post-54">share</a><span class="lsep">|</span><a href="/posts/54/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/54/revisions" title="show all edits to this post">edited <span title="2012-04-07 20:17:41Z" class="relativetime">Apr 7 '12 at 20:17</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/179428/neysor"><div><img src="https://www.gravatar.com/avatar/4ccb23faf8c8a739ebc3e2d95c727482?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/179428/neysor">Neysor</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">383</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="4 silver badges"><span class="badge2"></span><span class="badgecount">4</span></span><span title="17 bronze badges"><span class="badge3"></span><span class="badgecount">17</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2009-06-28 10:54:48Z" class="relativetime">Jun 28 '09 at 10:54</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1/jeff-atwood"><div><img src="https://www.gravatar.com/avatar/51d623f33f8b83095db84ff35e15dbe8?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1/jeff-atwood">Jeff Atwood</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score 232021" dir="ltr">232k</span><span title="66 gold badges"><span class="badge1"></span><span class="badgecount">66</span></span><span title="629 silver badges"><span class="badge2"></span><span class="badgecount">629</span></span><span title="1066 bronze badges"><span class="badge3"></span><span class="badgecount">1066</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-54" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-42" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">It&#39;s funny as hell, although I&#39;m more interested in that particular &#39;all-nighter&#39;. ;)</span>
+	&ndash;&nbsp;
+		<a href="/users/69424/pestaa" 
+		   title="196 reputation" 
+		   class="comment-user owner">pestaa</a>
+	<span class="comment-date" dir="ltr"><span title="2009-06-28 11:29:46Z" class="relativetime-clean">Jun 28 '09 at 11:29</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-54" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for clarification or add more information. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+							<h2 class="bottom-notice">You must <a href="/users/login?returnurl=%2fquestions%2f30">log in</a> to answer this question.</h2>
+				
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/discussion" class="post-tag required-tag" title="show questions tagged &#39;discussion&#39;" rel="tag">discussion</a> <a href="/questions/tagged/design" class="post-tag" title="show questions tagged &#39;design&#39;" rel="tag">design</a> <a href="/questions/tagged/development" class="post-tag" title="show questions tagged &#39;development&#39;" rel="tag">development</a> <a href="/questions/tagged/optimization" class="post-tag" title="show questions tagged &#39;optimization&#39;" rel="tag">optimization</a> .						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+
+
+
+<script type="text/javascript">
+    window.showNewUser = true;
+
+    
+    (function(){
+        if (window.localStorage && showNewUser){
+            var c = parseInt(localStorage['nuCounter'],10); 
+            c = isNaN(c) ? 1 : c+1;
+            window.localStorage['nuCounter'] = c; 
+            showNewUser = c < 10;
+        }
+    })();
+    
+</script>
+
+<div class="module newuser newuser-greeting" id="newuser-box" style="display:none;">
+    <h4>Welcome!</h4>
+    <div>
+        This site is intended for <b>bugs, features, and discussion</b> of <a href="http://stackoverflow.com">Stack Overflow</a> and the Stack Exchange Q&amp;A engine. You must have an account on a <a href="http://stackexchange.com/sites">Stack Exchange network website</a> to participate.
+        <p class="ar">
+                <a href="/about?mnu=1">about &raquo;</a>&nbsp;&nbsp;&nbsp;
+            <a href="/help?mnu=1">help &raquo;</a>
+        </p>
+    </div>
+</div>
+    <script type="text/javascript">
+    if (showNewUser) {
+        document.getElementById('newuser-box').style.display = '';
+    }
+    </script>							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/discussion" class="post-tag required-tag" title="show questions tagged &#39;discussion&#39;" rel="tag">discussion</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">22772</span></span><br>
+<a href="/questions/tagged/design" class="post-tag" title="show questions tagged &#39;design&#39;" rel="tag">design</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">519</span></span><br>
+<a href="/questions/tagged/development" class="post-tag" title="show questions tagged &#39;development&#39;" rel="tag">development</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">16</span></span><br>
+<a href="/questions/tagged/optimization" class="post-tag" title="show questions tagged &#39;optimization&#39;" rel="tag">optimization</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">13</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2009-06-28 09:52:06Z"><b>4 years ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>409 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2012-04-07 20:17:41Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+<div class="module" id="chat-feature">
+    
+
+    
+<h4><a href="http://chat.meta.stackoverflow.com" id="h-chat-link">Visit Chat</a></h4>
+
+<div class="related" id="ad502-rooms"></div>
+<script type="text/javascript">
+// <!--
+    StackExchange.ready(
+    function () {
+        var options = {
+            chatUrl: 'http://chat.meta.stackoverflow.com',
+            reloadUrl: '/api/recent-chat',
+            preloadData: {"activeUsers":30,"activeRooms":8,"rooms":[{"name":"Tavern on the Meta","id":89,"lastPost":1384893806,"posts":425698,"users":[{"name":"animuson","id":141525,"emailhash":"!http://i.stack.imgur.com/JGMKr.jpg?s=128\u0026g=1","lastPost":1384891607},{"name":"Nick Craver","id":135201,"emailhash":"!http://i.stack.imgur.com/nGCYr.jpg?s=128\u0026g=1","lastPost":1384859373},{"name":"Tim Stone","id":150235,"emailhash":"3981cd271c302f5cba628c6b6d2b32ee","lastPost":1384835403},{"name":"ThiefMaster","id":147015,"emailhash":"bc66db28aa7c3fa8e4ce4238b696dee9","lastPost":1384823368},{"name":"Tim Post","id":50049,"emailhash":"84432a12912341ff38e157b3d2f4d145","lastPost":1384539679},{"name":"Pops","id":131713,"emailhash":"!http://i.stack.imgur.com/rd2rr.png?s=128\u0026g=1","lastPost":1383973898},{"name":"jcolebrand","id":146986,"emailhash":"fc62b586b7a6e298551ac69188390bb8","lastPost":1377726998}],"messages":[{"date":1384893806,"user":"jadarnel27","userid":168428}],"singleImage":false,"tags":["bug","crickets","discussion","excuses","support","waffles"]},{"name":"Chat feedback","id":77,"lastPost":1384811019,"posts":15750,"users":[{"name":"Tim Stone","id":150235,"emailhash":"3981cd271c302f5cba628c6b6d2b32ee","lastPost":1384811019}],"messages":[{"date":1384811019,"user":"Tim Stone","userid":150235}],"singleImage":false,"tags":["chat"]}]} 
+        };
+
+        StackExchange.chatAd.init(options);
+    });
+// -->
+</script>
+
+</div>
+			    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('/content/stackoverflowmeta/img//newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=meta.stackoverflow.com" id="newsletter-preview">example newsletter</a></p>
+</div>
+
+    </div>
+  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/22447" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">91
+    </div>
+</a><a href="/questions/22447/what-is-the-reasoning-behind-the-reputation-cap" class="question-hyperlink">What is the reasoning behind the reputation cap?</a>
+</div>
+<div class="spacer">
+<a href="/q/22958" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">8
+    </div>
+</a><a href="/questions/22958/whos-behind-the-ui-design-of-stack-overflow" class="question-hyperlink">Who&#39;s behind the UI design of Stack Overflow?</a>
+</div>
+<div class="spacer">
+<a href="/q/28304" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">6
+    </div>
+</a><a href="/questions/28304/with-regards-to-stack-overflow-why-and-what-is-the-philosophy-behind-tagging" class="question-hyperlink">With regards to Stack Overflow, why and what is the philosophy behind tagging?</a>
+</div>
+<div class="spacer">
+<a href="/q/29931" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/29931/what-is-the-rationale-behind-the-no-cursing-rule" class="question-hyperlink">What is the rationale behind the &ldquo;no cursing&rdquo; rule?</a>
+</div>
+<div class="spacer">
+<a href="/q/66097" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">9
+    </div>
+</a><a href="/questions/66097/what-is-the-logic-behind-not-allowing-people-to-rescind-a-great-comment-vote" class="question-hyperlink">What is the logic behind not allowing people to rescind a great comment vote?</a>
+</div>
+<div class="spacer">
+<a href="/q/147079" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">5
+    </div>
+</a><a href="/questions/147079/question-on-reasoning-behind-auto-ban" class="question-hyperlink">Question on reasoning behind auto-&#39;ban&#39;</a>
+</div>
+<div class="spacer">
+<a href="/q/158302" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/158302/logic-behind-review-functionality" class="question-hyperlink">logic behind review functionality</a>
+</div>
+<div class="spacer">
+<a href="/q/163363" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/163363/decision-behind-closing-duplicate-questions" class="question-hyperlink">Decision behind closing duplicate questions</a>
+</div>
+<div class="spacer">
+<a href="/q/185606" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">5
+    </div>
+</a><a href="/questions/185606/rationale-behind-sites-categories" class="question-hyperlink">Rationale behind sites&#39; categories</a>
+</div>
+<div class="spacer">
+<a href="/q/195048" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/195048/reasons-behind-deleting-this-question" class="question-hyperlink">Reasons behind deleting this question</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/30" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/30/ivc/dd29');});
+</script>
+<noscript>
+    <div><img src="/posts/30/ivc/dd29" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                    <a href="http://blog.stackoverflow.com?blb=1">blog</a>
+                        <a href="http://chat.meta.stackoverflow.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://engine.adzerk.net/r?e=eyJhdiI6NDE0LCJhdCI6MjAsImNtIjo5NTQsImNoIjoxMTc4LCJjciI6Mjc3NiwiZG0iOjQsImZjIjoyODYyLCJmbCI6Mjc1MSwibnciOjIyLCJydiI6MCwicHIiOjExNSwic3QiOjAsInVyIjoiaHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL2Fib3V0L2NvbnRhY3QiLCJyZSI6MX0&amp;s=hRods5B22XvRBwWIwtIMekcyNF8">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/30/behind-the-curtain")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.stackoverflow.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.19.1661
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Meta Stack Overflow works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-4']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|discussion|design|development|optimization||']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

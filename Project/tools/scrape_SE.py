@@ -11,8 +11,11 @@ from bs4 import BeautifulSoup
 # link name to txt file, saves html for Q&A sites, and saves all edit sites html. Data is saved in...
 
 
+# file containing the StackExchange sub-site
 file_list = open('../data/site_list.txt', 'r')
 site_list = file_list.readlines()
+
+# list of already visited links
 master_file = open('../data/master_list.txt', 'r+')
 master_list = master_file.readlines()
 
@@ -23,6 +26,9 @@ while stop == 0:
     # opens site_list.txt and reads list of links    
     # processes each link to topic page to find one question page
     for website in site_list[0:10]:
+
+        # TODO FIND LARGEST QUESTION NUMBER for this sub-site
+
         numb = random.randrange(0,1000)
         full_link = website.strip() + '/questions/' + str(numb)
         print 'processing link...' + '' + full_link
