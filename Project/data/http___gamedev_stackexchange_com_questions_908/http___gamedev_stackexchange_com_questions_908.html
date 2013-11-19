@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>architecture - How can I set up a flexible framework for handling achievements? - Game Development Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/gamedev/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/gamedev/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Game Development Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackGameDev" />
+    <meta name="twitter:domain" content="gamedev.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/gamedev/img/apple-touch-icon@2.png?v=9bca23db2259"/>
+    <meta name="og:title" content="How can I set up a flexible framework for handling achievements?" />
+    <meta name="og:description" content="Specifically, what is the best way to implement an achievement system flexible enough to handle going beyond simple statistics-driven achievements such as &quot;kill x enemies.&quot;
+" />
+    <meta name="og:url" content="http://gamedev.stackexchange.com/questions/908/how-can-i-set-up-a-flexible-framework-for-handling-achievements"/>
+    <link rel="canonical" href="http://gamedev.stackexchange.com/questions/908/how-can-i-set-up-a-flexible-framework-for-handling-achievements" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/gamedev/all.css?v=6aaaa8468356">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;How can I set up a flexible framework for handling achievements?&#39;" href="/feeds/question/908">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:1,shownCommentCount:1,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:908});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('53', '908');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('53');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1384886667,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Game Development Stack Exchange","description":"Q&A for professional and independent game developers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"3d65de723d3f8abb507e4211c800fd21","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"dbb1260a453e","js/full.en.js":"7bd83af491d6","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f908%2fhow-can-i-set-up-a-flexible-framework-for-handling-achievements">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f908%2fhow-can-i-set-up-a-flexible-framework-for-handling-achievements">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Game Development
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/gamedev/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Game Development Stack Exchange is a question and answer site for professional and independent game developers. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/908/how-can-i-set-up-a-flexible-framework-for-handling-achievements" class="question-hyperlink">How can I set up a flexible framework for handling achievements?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="908"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="908">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">38</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>27</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>Specifically, what is the best way to implement an achievement system flexible enough to handle going beyond simple statistics-driven achievements such as "kill <em>x</em> enemies."</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/architecture" class="post-tag" title="show questions tagged &#39;architecture&#39;" rel="tag">architecture</a> <a href="/questions/tagged/achievements" class="post-tag" title="show questions tagged &#39;achievements&#39;" rel="tag">achievements</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/908" title="short permalink to this question" class="short-link" id="link-post-908">share</a><span class="lsep">|</span><a href="/posts/908/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/908/revisions" title="show all edits to this post">edited <span title="2011-10-22 00:03:25Z" class="relativetime">Oct 22 '11 at 0:03</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/51/tetrad"><div><img src="https://www.gravatar.com/avatar/80d284e717d5720063a38d8e49739c87?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/51/tetrad">Tetrad</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score 26045" dir="ltr">26k</span><span title="8 gold badges"><span class="badge1"></span><span class="badgecount">8</span></span><span title="66 silver badges"><span class="badge2"></span><span class="badgecount">66</span></span><span title="123 bronze badges"><span class="badge3"></span><span class="badgecount">123</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2010-07-21 19:49:02Z" class="relativetime">Jul 21 '10 at 19:49</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/402/lti"><div><img src="https://www.gravatar.com/avatar/9dac9aa8bf086983896ed3813898b916?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/402/lti">lti</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">403</span><span title="5 silver badges"><span class="badge2"></span><span class="badgecount">5</span></span><span title="8 bronze badges"><span class="badge3"></span><span class="badgecount">8</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-908" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-767" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">To reiterate, I&#39;m looking for something more robust than a statistics based system and something more organized and maintainable than &quot;hardcode  them all as conditions.&quot;  Some examples that are impossible or unwieldy in a statistics based system: &quot;Slice a watermelon after a strawberry&quot;, &quot;Go down a pipe while invincible&quot;, etc.</span>
+	&ndash;&nbsp;
+		<a href="/users/402/lti" 
+		   title="403 reputation" 
+		   class="comment-user owner">lti</a>
+	<span class="comment-date" dir="ltr"><span title="2010-07-22 06:26:03Z" class="relativetime-clean">Jul 22 '10 at 6:26</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-908" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								7 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/908/how-can-i-set-up-a-flexible-framework-for-handling-achievements?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/908/how-can-i-set-up-a-flexible-framework-for-handling-achievements?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/908/how-can-i-set-up-a-flexible-framework-for-handling-achievements?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="5643"></a>
+<div id="answer-5643" class="answer accepted-answer" data-answerid="5643" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="5643">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">26</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>I think a kind of robust solution would be to go the object oriented way.</p>
+
+<p>Depending on what kind of achievement you want to support, you need a way to query the current state of your game and/or the history of actions/events the game objects (like the player) have made.</p>
+
+<p>Let's say you have a base Achievement class such as:</p>
+
+<pre><code>class AbstractAchievement
+{
+    GameState&amp; gameState;
+    virtual bool IsEarned() = 0;
+    virtual string GetName() = 0;
+};
+</code></pre>
+
+<p><code>AbstractAchievement</code> holds a reference to the state of the game. It's used to query the things that are happening.</p>
+
+<p>Then you make concrete implementations. Let's use your examples:</p>
+
+<pre><code>class MasterSlicerAchievement : public AbstractAchievement
+{
+    string GetName() { return "Master Slicer"; }
+    bool IsEarned()
+    {
+        Action lastAction = gameState.GetPlayerActionHistory().GetAction(0);
+        Action previousAction = gameState.GetPlayerActionHistory().GetAction(1);
+        if (lastAction.GetType() == ActionType::Slice &amp;&amp;
+            previousAction.GetType() == ActionType::Slice &amp;&amp;
+            lastAction.GetObjectType() == ObjectType::Watermelon &amp;&amp;
+            previousAction.GetObjectType() == ObjectType::Strawberry)
+            return true;
+        return false;
+    }
+};
+class InvinciblePipeRiderAchievement : public AbstractAchievement
+{
+    string GetName() { return "Invincible Pipe Rider"; }
+    bool IsEarned()
+    {
+        if (gameState.GetLocationType(gameState.GetPlayerPosition()) == LocationType::OVER_PIPE &amp;&amp;
+            gameState.GetPlayerState() == EntityState::INVINCIBLE)
+            return true;
+        return false;
+    }
+};
+</code></pre>
+
+<p>Then it's up to you to decide when to check using the <code>IsEarned()</code> method. You could check at each game update.</p>
+
+<p>A more efficient way would be, for instance, to have some kind of event manager. And then register events (such as <code>PlayerHasSlicedSomethingEvent</code> or <code>PlayerGotInvicibleEvent</code> or simply <code>PlayerStateChanged</code>) to a method that would take the achievement in parameter. Example:</p>
+
+<pre><code>class Game
+{
+    void Initialize()
+    {
+        eventManager.RegisterAchievementCheckByActionType(ActionType::Slice, masterSlicerAchievement);
+        // Each time an action of type Slice happens,
+        // the CheckAchievement() method is invoked with masterSlicerAchievement as parameter.
+        eventManager.RegisterAchievementCheckByPlayerState(EntityState::INVINCIBLE, invinciblePiperAchievement);
+        // Each time the player gets the INVINCIBLE state,
+        // the CheckAchievement() method is invoked with invinciblePipeRiderAchievement as parameter.
+    }
+    void CheckAchievement(const AbstractAchievement&amp; achievement)
+    {
+        if (!HasAchievement(player, achievement) &amp;&amp; achievement.IsEarned())
+        {
+            AddAchievement(player, achievement);
+        }
+    }
+};
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/5643" title="short permalink to this answer" class="short-link" id="link-post-5643">share</a><span class="lsep">|</span><a href="/posts/5643/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2010-11-16 16:42:14Z" class="relativetime">Nov 16 '10 at 16:42</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1859/splo"><div><img src="https://www.gravatar.com/avatar/0c9d556d507937b4ad4cc4b79fc8a70c?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1859/splo">Splo</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">536</span><span title="4 silver badges"><span class="badge2"></span><span class="badgecount">4</span></span><span title="10 bronze badges"><span class="badge3"></span><span class="badgecount">10</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-5643" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-19554" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="warm">12</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">style nitpick:  <code>if(...) return true; else return false;</code> is the same as <code>return (...)</code></span>
+	&ndash;&nbsp;
+		<a href="/users/2061/blueraja-danny-pflughoeft" 
+		   title="4389 reputation" 
+		   class="comment-user">BlueRaja - Danny Pflughoeft</a>
+	<span class="comment-date" dir="ltr"><span title="2011-06-17 18:04:59Z" class="relativetime-clean">Jun 17 '11 at 18:04</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-21321" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">That is a very good template for implementing an achievement system. Moreover, it still demonstrates the idea that you have to have a way to track game-states. I find that probably the most complicated idea.</span>
+	&ndash;&nbsp;
+		<a href="/users/2910/bryan-harrington" 
+		   title="492 reputation" 
+		   class="comment-user">Bryan Harrington</a>
+	<span class="comment-date" dir="ltr"><span title="2011-07-07 13:53:50Z" class="relativetime-clean">Jul 7 '11 at 13:53</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-112144" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Spio you are a master men...! :D Simple and elegant solution. Congrat.</span>
+	&ndash;&nbsp;
+		<a href="/users/35731/diego-palomar" 
+		   title="101 reputation" 
+		   class="comment-user">Diego Palomar</a>
+	<span class="comment-date" dir="ltr"><span title="2013-10-03 17:04:51Z" class="relativetime-clean">Oct 3 at 17:04</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-5643" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="920"></a>
+<div id="answer-920" class="answer" data-answerid="920" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="920">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">13</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Well, in short, achievements are unlocked when a certain condition is met.  So you need to be able to produce if statements to check the condition you want.</p>
+
+<p>For example, if you want to know that a level was completed or a boss was defeated, you'd need to have boolean flag turn true when these events happen.</p>
+
+<p>Then:</p>
+
+<pre><code>if(GlobalFlags.MasterBossDefeated == true &amp;&amp; AchievementClass.MasterBossDefeatedAchievement == false)
+{
+    AchievementClass.MasterBossDefeatedAchievement = true;
+    showModalPopUp("You defeated the Master Boss!  30 gamerscore");
+}
+</code></pre>
+
+<p>You can make this as complex or simplistic as needed to match the condition that you're wanting.</p>
+
+<p>Some info on Xbox 360 achievements can be found <a href="http://www.xbox.com/en-US/Live/EngineeringBlog/071510-AchievementsUnlocked" rel="nofollow">here</a>.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/920" title="short permalink to this answer" class="short-link" id="link-post-920">share</a><span class="lsep">|</span><a href="/posts/920/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/920/revisions" title="show all edits to this post">edited <span title="2011-06-17 16:32:40Z" class="relativetime">Jun 17 '11 at 16:32</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/8096/mente"><div><img src="https://www.gravatar.com/avatar/03996efe5445c299c9ca8e9fdfcf8d06?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/8096/mente">mente</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">103</span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2010-07-21 19:59:35Z" class="relativetime">Jul 21 '10 at 19:59</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/47/bryan-denny"><div><img src="https://www.gravatar.com/avatar/3497d52dba17d86666a7bc82a2243c07?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/47/bryan-denny">Bryan Denny</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">3,516</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="24 silver badges"><span class="badge2"></span><span class="badgecount">24</span></span><span title="45 bronze badges"><span class="badge3"></span><span class="badgecount">45</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-920" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-656" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">+1 Great article, and essentially what I was going to suggest. Although I would make the Modal get its text from the achievement itself... just to avoid text hunting if you want to change something.</span>
+	&ndash;&nbsp;
+		<a href="/users/14/noctrine" 
+		   title="2620 reputation" 
+		   class="comment-user">Noctrine<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2010-07-21 20:16:28Z" class="relativetime-clean">Jul 21 '10 at 20:16</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-661" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Noctrine - don&#39;t forget any code posted here should be treated as pseudo code - it&#39;s often necessary to use simplified code to get the point across.</span>
+	&ndash;&nbsp;
+		<a href="/users/382/chrisf" 
+		   title="650 reputation" 
+		   class="comment-user">ChrisF</a>
+	<span class="comment-date" dir="ltr"><span title="2010-07-21 20:21:22Z" class="relativetime-clean">Jul 21 '10 at 20:21</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-9052" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Xbox 360 achievements link is dead.</span>
+	&ndash;&nbsp;
+		<a href="/users/4154/hangy" 
+		   title="101 reputation" 
+		   class="comment-user">hangy</a>
+	<span class="comment-date" dir="ltr"><span title="2011-01-08 14:48:05Z" class="relativetime-clean">Jan 8 '11 at 14:48</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-47067" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Cache here: <a href="http://web.archive.org/web/20101030214905/http://www.xbox.com/en-US/Live/EngineeringBlog/071510-AchievementsUnlocked" rel="nofollow">web.archive.org/web/20101030214905/http://www.xbox.com/en-US/&hellip;</a></span>
+	&ndash;&nbsp;
+		<a href="/users/15256/matsemann" 
+		   title="556 reputation" 
+		   class="comment-user">Matsemann</a>
+	<span class="comment-date" dir="ltr"><span title="2012-04-30 16:50:31Z" class="relativetime-clean">Apr 30 '12 at 16:50</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-920" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="1122"></a>
+<div id="answer-1122" class="answer" data-answerid="1122" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="1122">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">7</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>What if you every action the player takes posts a message to the <code>AchievementManager</code>? Then the manager can check internally whether certain conditions have been met. First objects post messages:</p>
+
+<pre><code>AchievementManager::PostMessage("Jump", "162");
+
+AchievementManager::PostMessage("Slice", "Strawberry");
+AchievementManager::PostMessage("Slice", "Watermelon");
+
+AchievementManager::PostMessage("Kill", "Goomba");
+</code></pre>
+
+<p>And then the <code>AchievementManager</code> checks if it needs to do anything:</p>
+
+<pre><code>if (!strcmp(m_Message.name, "Slice") &amp;&amp; !strcmp(m_LastMessage.name, "Slice"))
+{
+    if (!strcmp(m_Message.value, "Watermelon") &amp;&amp; !strcmp(m_LastMessage.value, "Strawberry"))
+    {
+        // achievement unlocked!
+    }
+}
+</code></pre>
+
+<p>You'll probably want to do this with enumerations instead of strings though. ;) </p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/1122" title="short permalink to this answer" class="short-link" id="link-post-1122">share</a><span class="lsep">|</span><a href="/posts/1122/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2010-07-22 07:15:49Z" class="relativetime">Jul 22 '10 at 7:15</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/662/knight666"><div><img src="https://www.gravatar.com/avatar/3d4b2d5fcbaec78b11b16977ed865ce4?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/662/knight666">knight666</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">4,342</span><span title="10 silver badges"><span class="badge2"></span><span class="badgecount">10</span></span><span title="23 bronze badges"><span class="badge3"></span><span class="badgecount">23</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1122" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-857" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">This is along the lines of what I was thinking, but it still relies on a bunch of stuff being hardcoded in one function.  Maintainability aside, at the very least <i>every</i> achievement has to  be checked for eligibility every time through the function.</span>
+	&ndash;&nbsp;
+		<a href="/users/402/lti" 
+		   title="403 reputation" 
+		   class="comment-user owner">lti</a>
+	<span class="comment-date" dir="ltr"><span title="2010-07-22 17:29:57Z" class="relativetime-clean">Jul 22 '10 at 17:29</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-879" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Does it? You can put the conditionals in an external script, as long as you have some way of tracking what happened in the game.</span>
+	&ndash;&nbsp;
+		<a href="/users/662/knight666" 
+		   title="4342 reputation" 
+		   class="comment-user">knight666</a>
+	<span class="comment-date" dir="ltr"><span title="2010-07-22 19:06:07Z" class="relativetime-clean">Jul 22 '10 at 19:06</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-19556" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">4</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">-1 this reeks of bad design.  If you&#39;re going to call the AchivementManager directly, just make each of those &quot;messages&quot; a separate function.  If you&#39;re going to use messages, make a message-manager so that other classes can use the messages as well (I&#39;m sure the Goomba would be interested in knowing he&#39;s been killed), and to remove that coupling to the <code>AchievementManager</code> in every class (which is what OP was asking how to avoid in the first place).  And use an enum or separate classes for your messages, not string-literals - using string literals to pass around state is <i>always</i> a bad idea.</span>
+	&ndash;&nbsp;
+		<a href="/users/2061/blueraja-danny-pflughoeft" 
+		   title="4389 reputation" 
+		   class="comment-user">BlueRaja - Danny Pflughoeft</a>
+	<span class="comment-date" dir="ltr"><span title="2011-06-17 18:16:15Z" class="relativetime-clean">Jun 17 '11 at 18:16</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-1122" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="964"></a>
+<div id="answer-964" class="answer" data-answerid="964" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="964">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>The last design I used was based around having a set of per-user persistent counters and then have achievements key off a certain counter hitting a certain value. Most were a single achievement/counter pair where the counter would only ever be 0 or 1 (and the achievement triggered on >=1), but you can use this for "killed X dudes" or "found X chests" too. It also means you can setup counters for something that has no achievements, and it will still be tracked for future use.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/964" title="short permalink to this answer" class="short-link" id="link-post-964">share</a><span class="lsep">|</span><a href="/posts/964/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2010-07-21 21:10:29Z" class="relativetime">Jul 21 '10 at 21:10</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/395/coderanger"><div><img src="https://www.gravatar.com/avatar/cf611565f0b79abd0b3dc200ad867661?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/395/coderanger">coderanger</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">5,311</span><span title="21 silver badges"><span class="badge2"></span><span class="badgecount">21</span></span><span title="30 bronze badges"><span class="badge3"></span><span class="badgecount">30</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-964" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-964" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="1112"></a>
+<div id="answer-1112" class="answer" data-answerid="1112" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="1112">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>When I implemented achievements in my last game, I made it all statistic based. Achievements are unlocked when our statistics reach a certain value. Consider Modern Warfare 2: the game is tracking tons of stats! How many shots have you taken with the SCAR-H? How many miles have you sprinted while using the Lightweight perk?</p>
+
+<p>So in my implementation, I simply created a statistics engine, then created an achievement manager that runs really simple queries to check the status of achievements throughout gameplay.</p>
+
+<p>While my implementation is pretty simplistic, it gets the job done. I wrote about it and shared my queries <a href="http://www.reedolsen.com/how-to-develop-achievements-for-iphone-games/" rel="nofollow">here</a>.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/1112" title="short permalink to this answer" class="short-link" id="link-post-1112">share</a><span class="lsep">|</span><a href="/posts/1112/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2010-07-22 06:10:32Z" class="relativetime">Jul 22 '10 at 6:10</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/645/reed-olsen"><div><img src="https://www.gravatar.com/avatar/cbc075e3241f844f4f1fa8c9ff6c4b1a?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/645/reed-olsen">Reed Olsen</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">131</span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1112" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-1112" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="14431"></a>
+<div id="answer-14431" class="answer" data-answerid="14431" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="14431">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Use <a href="http://en.wikipedia.org/wiki/Event_calculus" rel="nofollow">Event Calculus</a>. Then make some preconditions and actions which are applied after preconditions are met:</p>
+
+<ul>
+<li>preconditions: you killed 1000 enemies, you have 2 legs</li>
+<li>actions: give me lollypop, give me super-duper-shotgun-13</li>
+<li>first-time-actions: say "you are so awesome!"</li>
+</ul>
+
+<p>Use it like (non-optimized for speed!):</p>
+
+<ul>
+<li>Store all statistics.</li>
+<li>Query statistics for preconditions.</li>
+<li>Apply actions.</li>
+<li>Apply one-time actions once.</li>
+</ul>
+
+<p>If You want to make it fast:</p>
+
+<ul>
+<li>Cache whatever You want, store parts of it in some trees, hashes ...</li>
+<li>Make changes incremental so You dont apply all the actions all the time but these which are new ...)</li>
+</ul>
+
+<p><strong>Note</strong></p>
+
+<p>It is hard to give <strong>best</strong> advice since all things have pros and cons. </p>
+
+<ul>
+<li>"What is best datastructure?" implies "What operations You want to do with it most? Searching, removing, adding ..."</li>
+<li>You basically think in these properties: ease of coding, speed, clarity, size ...</li>
+</ul>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/14431" title="short permalink to this answer" class="short-link" id="link-post-14431">share</a><span class="lsep">|</span><a href="/posts/14431/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-07-03 15:29:23Z" class="relativetime">Jul 3 '11 at 15:29</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/7981/user712092"><div><img src="https://www.gravatar.com/avatar/5995de24b1e7d0510ce00923ee189c67?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/7981/user712092">user712092</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">631</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="13 bronze badges"><span class="badge3"></span><span class="badgecount">13</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-14431" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-14431" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="1098"></a>
+<div id="answer-1098" class="answer" data-answerid="1098" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="1098">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>What's wrong with an <strong>IF</strong> checks after the achievement event occurs?</p>
+
+<pre><code>if (Cinimatics.done)
+   Achievement.get(CINIMATICS_SEEN);
+
+if (EnemiesKiled &gt; 200)
+   Achievement.get(KILLER);
+
+if (Damage &gt; 2000 &amp;&amp; TimeSinceFirstDamage &lt; 2000)
+   Achievement.get(MEAT_SHIELD);
+
+InvitationAccepted = Invite.send(BestFriend);
+if (InvitationAccepted)
+   Achievement.get(A_FRIEND_IN_NEED);
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/1098" title="short permalink to this answer" class="short-link" id="link-post-1098">share</a><span class="lsep">|</span><a href="/posts/1098/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2010-07-22 05:07:01Z" class="relativetime">Jul 22 '10 at 5:07</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/614/mrvaldez"><div><img src="https://www.gravatar.com/avatar/faae170796c15e302c7f3d17b9945f66?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/614/mrvaldez">MrValdez</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">549</span><span title="6 silver badges"><span class="badge2"></span><span class="badgecount">6</span></span><span title="13 bronze badges"><span class="badge3"></span><span class="badgecount">13</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1098" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-6801" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">&#39;I&#39;m looking for something more organized and maintainable than &quot;hardcode them all as conditions.&quot; &#39;. Though this is definitely a good K.I.S.S. method for a small game.</span>
+	&ndash;&nbsp;
+		<a href="/users/1156/the-communist-duck" 
+		   title="7657 reputation" 
+		   class="comment-user">The Communist Duck</a>
+	<span class="comment-date" dir="ltr"><span title="2010-11-16 16:49:33Z" class="relativetime-clean">Nov 16 '10 at 16:49</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-1098" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/908/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="908" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="3d65de723d3f8abb507e4211c800fd21">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f908%2fhow-can-i-set-up-a-flexible-framework-for-handling-achievements%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f908%2fhow-can-i-set-up-a-flexible-framework-for-handling-achievements%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/architecture" class="post-tag" title="show questions tagged &#39;architecture&#39;" rel="tag">architecture</a> <a href="/questions/tagged/achievements" class="post-tag" title="show questions tagged &#39;achievements&#39;" rel="tag">achievements</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/architecture" class="post-tag" title="show questions tagged &#39;architecture&#39;" rel="tag">architecture</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">589</span></span><br>
+<a href="/questions/tagged/achievements" class="post-tag" title="show questions tagged &#39;achievements&#39;" rel="tag">achievements</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">13</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2010-07-21 19:49:02Z"><b>3 years ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>2649 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2011-10-22 00:03:25Z">2 years ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-gamedev.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/gamedev/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=gamedev.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/51689" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">6</div>
+	</a>
+	<a href="/questions/51689/how-can-i-handle-a-bunch-of-achievements-in-a-game" class="question-hyperlink">How can I handle a bunch of achievements in a game?</a>
+</div><div class="spacer">
+	<a href="/q/21502" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">13</div>
+	</a>
+	<a href="/questions/21502/how-should-i-check-if-a-player-has-completed-an-achievement" class="question-hyperlink">How should I check if a player has completed an achievement?</a>
+</div><div class="spacer">
+	<a href="/q/27409" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">2</div>
+	</a>
+	<a href="/questions/27409/writing-a-dynamic-achievement-system-without-hardcoding-rules-into-the-applicati" class="question-hyperlink">Writing a dynamic achievement system without hardcoding rules into the application</a>
+</div><div class="spacer">
+	<a href="/q/51773" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">1</div>
+	</a>
+	<a href="/questions/51773/checking-game-objective-status-in-efficient-way-on-each-update-call" class="question-hyperlink">Checking game objective status in efficient way on each update call</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/6360" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">11
+    </div>
+</a><a href="/questions/6360/can-achievement-systems-be-implemented-later-in-development" class="question-hyperlink">Can Achievement systems be implemented later in development?</a>
+</div>
+<div class="spacer">
+<a href="/q/10672" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">12
+    </div>
+</a><a href="/questions/10672/why-not-show-progress-towards-achievements-badges" class="question-hyperlink">Why not show progress towards achievements/badges?</a>
+</div>
+<div class="spacer">
+<a href="/q/16732" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/16732/handling-errors-in-a-framework" class="question-hyperlink">handling errors in a framework</a>
+</div>
+<div class="spacer">
+<a href="/q/20079" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">13
+    </div>
+</a><a href="/questions/20079/how-many-achievements-should-i-include-and-of-what-challenge" class="question-hyperlink">How many achievements should I include, and of what challenge?</a>
+</div>
+<div class="spacer">
+<a href="/q/21502" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">13
+    </div>
+</a><a href="/questions/21502/how-should-i-check-if-a-player-has-completed-an-achievement" class="question-hyperlink">How should I check if a player has completed an achievement?</a>
+</div>
+<div class="spacer">
+<a href="/q/23336" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/23336/is-my-statisticmanager-idea-overkill" class="question-hyperlink">Is my StatisticManager idea overkill?</a>
+</div>
+<div class="spacer">
+<a href="/q/31381" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/31381/how-to-keep-balance-unlock-items-achievement-rules" class="question-hyperlink">How to keep balance / Unlock items / achievement rules</a>
+</div>
+<div class="spacer">
+<a href="/q/32379" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">5
+    </div>
+</a><a href="/questions/32379/best-way-to-implement-achievement-system" class="question-hyperlink">Best way to implement achievement system?</a>
+</div>
+<div class="spacer">
+<a href="/q/43291" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">10
+    </div>
+</a><a href="/questions/43291/how-can-i-cleanly-and-elegantly-handle-data-and-dependancies-between-classes" class="question-hyperlink">How can I cleanly and elegantly handle data and dependancies between classes</a>
+</div>
+<div class="spacer">
+<a href="/q/51689" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">6
+    </div>
+</a><a href="/questions/51689/how-can-i-handle-a-bunch-of-achievements-in-a-game" class="question-hyperlink">How can I handle a bunch of achievements in a game?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/908" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/908/ivc/4ee8');});
+</script>
+<noscript>
+    <div><img src="/posts/908/ivc/4ee8" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">default</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/908/how-can-i-set-up-a-flexible-framework-for-handling-achievements")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.gamedev.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.19.1161
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Game Development Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|architecture|achievements|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>
