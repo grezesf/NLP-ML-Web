@@ -25,13 +25,38 @@ while stop == 0:
     
     # opens site_list.txt and reads list of links    
     # processes each link to topic page to find one question page
-    for website in site_list[0:10]:
+    for website in site_list:
+        print website
+        
 
-        # TODO FIND LARGEST QUESTION NUMBER for this sub-site
+        # Finds link to the latest question in the site
+        try:
+            html_main = urllib.urlopen(website).read()
+            soup_main = BeautifulSoup(html_main)
+            quest_list = []
+            # default is set to 5000, just in case max question number cant be found
+            end_numb = 5000
+            for link in soup_main.find_all('a'):
+                str_link = str(link.get('href'))
+                if 'questions' in str_link:
+                    quest_list.append(str_link)
+    
+            # Finds the number id associated with the latest question and assigns that as the max value for the range
+            for item in quest_list[:3]: 
+                for part in item.split('/'):
+                    if part.isdigit() == True:
+                        end_numb = int(part)
+                        break        
+        except:
+            print 'Can not determine number of quests, default set..'
+      
+        
 
-        numb = random.randrange(0,1000)
+        numb = random.randrange(0,end_numb)
         full_link = website.strip() + '/questions/' + str(numb)
         print 'processing link...' + '' + full_link
+        
+        # checks to see if the site has already been
         if full_link not in master_list:
             print 'Not in master list... then continue'
         
