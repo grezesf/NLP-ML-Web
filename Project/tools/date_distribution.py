@@ -31,25 +31,30 @@ for (path, dirs, files) in os.walk(data_path):
             f.close()
 
 
-            # find score
-            # its the first of the vote-count-post
-            score = soup.find_all("span", {"class":"vote-count-post "})[0].getText()
-            # print score
+            try:
+                # find score
+                # its the first of the vote-count-post
+                score = soup.find_all("span", {"class":"vote-count-post "})[0].getText()
 
-            # find date
-            # look at appropriate tags
-            for e in soup.find_all("div", {"class" : "user-action-time"}):
-                if 'asked' in e.getText():
-                    # this is SO ugly, but it works
-                    date = datetime.strptime(BeautifulSoup(str(e)).find("span").get("title"), "%Y-%m-%d %XZ")
-                    
-            # print type(date)
+                # print score
 
-            today = date.today()
+                # find date
+                # look at appropriate tags
+                for e in soup.find_all("div", {"class" : "user-action-time"}):
+                    if 'asked' in e.getText():
+                        # this is SO ugly, but it works
+                        date = datetime.strptime(BeautifulSoup(str(e)).find("span").get("title"), "%Y-%m-%d %XZ")
+                        
+                # print type(date)
 
-            # calculate the age of the post, in days
-            delta = today-date
-            age = delta.days
-            # print today, date, age
-        
-            print age, score
+                today = date.today()
+
+                # calculate the age of the post, in days
+                delta = today-date
+                age = delta.days
+                # print today, date, age
+            
+                print age, score
+
+            except:
+                print file
