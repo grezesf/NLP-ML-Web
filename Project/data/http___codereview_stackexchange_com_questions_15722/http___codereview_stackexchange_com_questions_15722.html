@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>haskell - How to shorten this terrible code? - Code Review Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codereview/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Code Review Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeReview" />
+    <meta name="twitter:domain" content="codereview.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codereview/img/apple-touch-icon.png?v=bb26b8631f86"/>
+    <meta name="og:title" content="How to shorten this terrible code?" />
+    <meta name="og:description" content="I am trying to read a line ending in \r\n from a Handle. This is an HTTP header.
+
+I’m fairly new to functional programming, so I tend to use a lot of case expressions and stuff. This makes the code..." />
+    <meta name="og:url" content="http://codereview.stackexchange.com/questions/15722/how-to-shorten-this-terrible-code"/>
+    <link rel="canonical" href="http://codereview.stackexchange.com/questions/15722/how-to-shorten-this-terrible-code" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codereview/all.css?v=11cb5fcbff23">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;How to shorten this terrible code?&#39;" href="/feeds/question/15722">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:6,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:15722});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('196', '15722');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('196');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1384967991,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Code Review Stack Exchange","description":"Q&A for peer programmer code reviews","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"805fe628e9f90c08ad81e6794818367b","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"0bae9e603b5a","js/full.en.js":"4e67ead1b5c6","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f15722%2fhow-to-shorten-this-terrible-code">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f15722%2fhow-to-shorten-this-terrible-code">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Code Review
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Code Review Stack Exchange is a question and answer site for peer programmer code reviews. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/15722/how-to-shorten-this-terrible-code" class="question-hyperlink">How to shorten this terrible code?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="15722"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="15722">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">12</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I am trying to read a line ending in <code>\r\n</code> from a <code>Handle</code>. This is an HTTP header.</p>
+
+<p>I’m fairly new to functional programming, so I tend to use a lot of case expressions and stuff. This makes the code very long and ugly.</p>
+
+<pre><code>handleRequest :: HostName -&gt; Handle -&gt; IO ()
+handleRequest host handle = do
+    requestLine &lt;- readHeaderLine
+    putStrLn $ requestLine ++ "\n-------------------"
+    -- FIXME: This code is bad, and its author should feel bad.
+    where
+        readHeaderLine = do
+            readHeaderLine' ""
+            where
+                readHeaderLine' s = do
+                    chr &lt;- hGetChar handle
+                    case chr of
+                        '\r' -&gt; do
+                            nextChr &lt;- hGetChar handle
+                            case nextChr of
+                                '\n' -&gt; return s
+                                _    -&gt; readHeaderLine' $ s ++ [chr, nextChr]
+                        _    -&gt; readHeaderLine' $ s ++ [chr]
+</code></pre>
+
+<p>How can I reduce the amount of case expressions in this code? I thought of using Parsec, but that seemed overkill to me for something this trivial, and I don’t know how well it works with <code>Handle</code>s.</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/haskell" class="post-tag" title="show questions tagged &#39;haskell&#39;" rel="tag">haskell</a> <a href="/questions/tagged/functional-programming" class="post-tag" title="show questions tagged &#39;functional-programming&#39;" rel="tag">functional-programming</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/15722" title="short permalink to this question" class="short-link" id="link-post-15722">share</a><span class="lsep">|</span><a href="/posts/15722/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2012-09-19 08:16:39Z" class="relativetime">Sep 19 '12 at 8:16</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/12275/daknok"><div><img src="https://www.gravatar.com/avatar/b71b9298721ea22670bcee33a9ae262e?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/12275/daknok">dakn&#248;k</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">248</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="11 bronze badges"><span class="badge3"></span><span class="badgecount">11</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-15722" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="1" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-25580" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">The answer depends on your goal. If you want high performance or an elegant HTTP parser, you should choose different algorithm and libraries.
+
+If you just want to see how your current code can be cleaned up with only structural changes without changing the algoritm, it&#39;s a different story. Please specify.</span>
+	&ndash;&nbsp;
+		<a href="/users/16287/nponeccop" 
+		   title="733 reputation" 
+		   class="comment-user">nponeccop</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-19 09:20:06Z" class="relativetime-clean">Sep 19 '12 at 9:20</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-25584" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@nponeccop performance isn’t really an issue. The point is making the code more concise.</span>
+	&ndash;&nbsp;
+		<a href="/users/12275/daknok" 
+		   title="248 reputation" 
+		   class="comment-user owner">dakn&#248;k</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-19 10:17:54Z" class="relativetime-clean">Sep 19 '12 at 10:17</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-25587" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Can&#39;t you just use <code>hGetLine</code>? There are many alternatives to your code. For example, you can just use <code>hGetContent</code> and parse the resulting list.</span>
+	&ndash;&nbsp;
+		<a href="/users/16287/nponeccop" 
+		   title="733 reputation" 
+		   class="comment-user">nponeccop</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-19 10:54:50Z" class="relativetime-clean">Sep 19 '12 at 10:54</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-25588" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@nponeccop <code>hGetContent</code> won’t work, since the length of the data isn’t known before the headers are parsed. <code>hGetLine</code> won’t work if the headers contain a newline.</span>
+	&ndash;&nbsp;
+		<a href="/users/12275/daknok" 
+		   title="248 reputation" 
+		   class="comment-user owner">dakn&#248;k</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-19 11:40:44Z" class="relativetime-clean">Sep 19 '12 at 11:40</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-25589" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy"><code>hGetContent</code> doesn&#39;t require length to be known in advance.</span>
+	&ndash;&nbsp;
+		<a href="/users/16287/nponeccop" 
+		   title="733 reputation" 
+		   class="comment-user">nponeccop</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-19 12:38:27Z" class="relativetime-clean">Sep 19 '12 at 12:38</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-15722" 
+			   class="comments-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">show <b>1</b> more comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								4 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/15722/how-to-shorten-this-terrible-code?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/15722/how-to-shorten-this-terrible-code?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/15722/how-to-shorten-this-terrible-code?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="15753"></a>
+<div id="answer-15753" class="answer accepted-answer" data-answerid="15753" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="15753">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">5</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>You can use <code>hGetContents</code> to read lazily from a handle, and the <a href="http://hackage.haskell.org/package/split">split</a> package (which will hopefully be bundled into the next Haskell Platform release) provides some nice ways of dealing with lists.</p>
+
+<pre><code>import Data.List.Split (splitOn)
+import System.IO (hGetContents)
+
+... do
+  ...
+  contentLines &lt;- splitOn "\r\n" &lt;$&gt; hGetContents handle
+</code></pre>
+
+<p><code>contentLines</code> will contain a lazy list of the "entire contents" of that handle, split into chunks that were originally separated by <code>\r\n</code>.</p>
+
+<p>Another approach is to use something like the <a href="http://hackage.haskell.org/package/conduit">conduit</a> package. See, for example, <code>Data.Conduit.Binary.lines</code>. Keep an eye on conduit &amp; friends; I get the feeling that within the next year or so the Haskell community will start to agree on the "best" implementation of this sort of abstraction, and then some good tutorials will inevitably follow.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/15753" title="short permalink to this answer" class="short-link" id="link-post-15753">share</a><span class="lsep">|</span><a href="/posts/15753/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-09-20 01:27:02Z" class="relativetime">Sep 20 '12 at 1:27</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/4495/dan-burton"><div><img src="https://www.gravatar.com/avatar/8d59503078761ba50620cbee4348882e?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/4495/dan-burton">Dan Burton</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">518</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="7 bronze badges"><span class="badge3"></span><span class="badgecount">7</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-15753" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-25650" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">+1 I think this is the most beautiful solution; it&#39;s not only effective, it also shows <i>what</i> is being done instead of <i>how</i> it&#39;s done.</span>
+	&ndash;&nbsp;
+		<a href="/users/3608/frerich-raabe" 
+		   title="371 reputation" 
+		   class="comment-user">Frerich Raabe</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-20 13:47:51Z" class="relativetime-clean">Sep 20 '12 at 13:47</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-25726" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I accepted this answer because it is the most readable one, in my opinion. Performance comes later.</span>
+	&ndash;&nbsp;
+		<a href="/users/12275/daknok" 
+		   title="248 reputation" 
+		   class="comment-user owner">dakn&#248;k</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-21 14:11:18Z" class="relativetime-clean">Sep 21 '12 at 14:11</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-25733" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@RadekSlupik: I think it&#39;s not only concise, it&#39;s also more efficient than e.g. the <code>hGetChar</code>-based approach given in my answer. I think you did well by accepting this one.</span>
+	&ndash;&nbsp;
+		<a href="/users/3608/frerich-raabe" 
+		   title="371 reputation" 
+		   class="comment-user">Frerich Raabe</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-21 15:07:25Z" class="relativetime-clean">Sep 21 '12 at 15:07</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-15753" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="15723"></a>
+<div id="answer-15723" class="answer" data-answerid="15723" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="15723">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">14</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Here I assume you just want to see how your current code can be improved without changing the algoritm.</p>
+
+<p>First of all, give HLint tool a chance to suggest you obvious improvements. In your case the only improvement was that <code>do</code> in <code>do readHeaderLine' ""</code> was redundant, so not much.</p>
+
+<p>Second, in my opinion many small top-level definitions are better than few large ones. You can still control namespace pollution by not exporting definitions local to the module:</p>
+
+<pre><code>import System.IO
+
+type HostName = String
+
+handleRequest :: HostName -&gt; Handle -&gt; IO ()
+handleRequest host handle = do
+    requestLine &lt;- readHeaderLine handle
+    putStrLn $ requestLine ++ "\n-------------------"
+
+-- FIXME: This code is bad, and its author should feel bad.
+readHeaderLine handle = readHeaderLine' "" where
+    readHeaderLine' s = do
+        chr &lt;- hGetChar handle
+        case chr of
+            '\r' -&gt; do
+                nextChr &lt;- hGetChar handle
+                case nextChr of
+                    '\n' -&gt; return s
+                    _    -&gt; readHeaderLine' $ s ++ [chr, nextChr]
+            _    -&gt; readHeaderLine' $ s ++ [chr]
+</code></pre>
+
+<p>Next, your <code>nextChr &lt;- hGetChar handle ; case nextChr of</code> limes appear twice, so you can extract a function and reduce code duplication.</p>
+
+<p>Thanks to purity, you can do pretty mechanically:</p>
+
+<pre><code>foo handle quux bar baz = do
+    chr &lt;- hGetChar handle
+    if chr == quux then bar else baz
+</code></pre>
+
+<p>Now replace the two fragments with calls to <code>foo</code>. Let's start with inner one:</p>
+
+<pre><code>readHeaderLine handle = readHeaderLine' "" where
+    readHeaderLine' s = do
+        chr &lt;- hGetChar handle
+        case chr of
+            '\r' -&gt; do
+                foo handle '\n' (return s) (readHeaderLine' $ s ++ [chr, nextChr])
+            _    -&gt; readHeaderLine' $ s ++ [chr]
+</code></pre>
+
+<p>Heh, it didn't work because <code>nextChr</code> is only known inside <code>foo</code>. No problem, pass it as parameter to <code>baz</code> branch and use lambda to catch it:</p>
+
+<pre><code>readHeaderLine handle = readHeaderLine' "" where
+    readHeaderLine' s = do
+        chr &lt;- hGetChar handle
+        case chr of
+            '\r' -&gt; do
+                foo handle '\n' (return s) (\nextChr -&gt; readHeaderLine' $ s ++ [chr, nextChr])
+            _    -&gt; readHeaderLine' $ s ++ [chr] 
+
+foo handle quux bar baz = do
+    chr &lt;- hGetChar handle
+    if chr == quux then bar else baz chr
+</code></pre>
+
+<p>So now you can do the outer one.</p>
+
+<pre><code>readHeaderLine handle = readHeaderLine' "" where
+    readHeaderLine' s = do
+    foo handle '\r' (foo handle '\n' (return s) (\nextChr -&gt; readHeaderLine' $ s ++ [chr, nextChr])) (\chr -&gt; readHeaderLine' $ s ++ [chr])
+</code></pre>
+
+<p>No luck again as first <code>chr</code> is nowhere to get from. Fortunately we know it's always '\r', so </p>
+
+<pre><code>readHeaderLine handle = readHeaderLine' "" where
+    readHeaderLine' s = do
+    foo handle '\r' (foo handle '\n' (return s) (\nextChr -&gt; readHeaderLine' $ s ++ ['\r', nextChr])) (\chr -&gt; readHeaderLine' $ s ++ [chr])
+</code></pre>
+
+<p>As line got too long, we can split it, removing another redundant <code>do</code>:</p>
+
+<pre><code>readHeaderLine handle = readHeaderLine' "" where
+    readHeaderLine' s = foo handle '\r' haveCR noCR where
+        haveCR = foo handle '\n' (return s) haveCRnoLF
+        noCR chr = readHeaderLine' $ s ++ [chr]
+        haveCRnoLF nextChr = readHeaderLine' $ s ++ ['\r', nextChr]
+</code></pre>
+
+<p>Now there are more repeated patterns to eliminate: <code>foo handle</code> and <code>readHeaderLine' $ s ++</code>. To remove <code>foo handle</code> we move <code>foo</code> back in and remove its <code>handle</code> parameter both from applications and definition as it's now accessible from closure:</p>
+
+<pre><code>readHeaderLine handle = readHeaderLine' "" where
+    readHeaderLine' s = foo '\r' haveCR noCR where
+        haveCR = foo '\n' (return s) haveCRnoLF
+        noCR chr = readHeaderLine' $ s ++ [chr]
+        haveCRnoLF nextChr = readHeaderLine' $ s ++ ['\r', nextChr]
+        foo quux bar baz = do
+            chr &lt;- hGetChar handle
+            if chr == quux then bar else baz chr
+</code></pre>
+
+<p>To eliminate <code>readHeaderline'</code> repeated patterns we extract them into <code>recurse</code> local function:</p>
+
+<pre><code>readHeaderLine handle = readHeaderLine' "" where
+    readHeaderLine' s = foo '\r' haveCR noCR where
+        haveCR = foo '\n' (return s) haveCRnoLF
+        noCR chr = recurse [chr]
+        haveCRnoLF nextChr = recurse ['\r', nextChr]
+        recurse x = readHeaderLine' $ s ++ x
+        foo quux bar baz = do
+            chr &lt;- hGetChar handle
+            if chr == quux then bar else baz chr
+</code></pre>
+
+<p>This is how far you can get with mechanical code deduplication. Now it's time for heavier weapons. You can still:</p>
+
+<ul>
+<li>separate recursive code from non-recursive code</li>
+<li>separate monadic code from non-monadic code</li>
+</ul>
+
+<p>The initial <code>redHeaderLine'</code> call can be implemented using <code>recurse</code> with an extra parameter:</p>
+
+<pre><code>readHeaderLine handle = recurse [] [] where
+    recurse s x = readHeaderLine' $ s ++ x 
+    readHeaderLine' s = foo '\r' haveCR noCR where
+        haveCR = foo '\n' (return s) haveCRnoLF
+        noCR chr = recurse s [chr]
+        haveCRnoLF nextChr = recurse s ['\r', nextChr]
+        foo quux bar baz = do
+            chr &lt;- hGetChar handle
+            if chr == quux then bar else baz chr
+</code></pre>
+
+<p>Now we can inline <code>readHeaderLine'</code> as it is only applied once:</p>
+
+<pre><code>readHeaderLine handle = recurse [] [] where
+    recurse s1 x = foo '\r' haveCR noCR where
+        s = s1 ++ x
+        haveCR = foo '\n' (return s) haveCRnoLF
+        noCR chr = recurse s [chr]
+        haveCRnoLF nextChr = recurse s ['\r', nextChr]
+        foo quux bar baz = do
+            chr &lt;- hGetChar handle
+            if chr == quux then bar else baz chr
+</code></pre>
+
+<p>And we can remove duplication of <code>recurse s</code>:</p>
+
+<pre><code>readHeaderLine handle = recurse [] [] where
+    recurse s1 x = foo '\r' haveCR noCR where
+        s = s1 ++ x
+        rf = recurse s
+        haveCR = foo '\n' (return s) haveCRnoLF
+        noCR chr = rf [chr]
+        haveCRnoLF nextChr = rf ['\r', nextChr]
+        foo quux bar baz = do
+            chr &lt;- hGetChar handle
+            if chr == quux then bar else baz chr
+</code></pre>
+
+<p>Now let's put return value of <code>recurse</code> into a local declaration <code>g</code>:</p>
+
+<pre><code>readHeaderLine handle = recurse [] [] where
+    recurse s1 x = g where
+        s = s1 ++ x
+        rf = recurse s
+
+        g = foo '\r' haveCR noCR
+        haveCR = foo '\n' (return s) haveCRnoLF
+        noCR chr = rf [chr]
+        haveCRnoLF nextChr = rf ['\r', nextChr]
+        foo quux bar baz = do
+            chr &lt;- hGetChar handle
+            if chr == quux then bar else baz chr
+</code></pre>
+
+<p>Our goal is to divorse <code>g</code> from <code>recurse</code>. You can do it by adding parameters to both <code>recurse</code> and <code>g</code> and localizing identifiers used only in <code>recurse</code> and used only in <code>g</code>:</p>
+
+<p>readHeaderLine handle = recurse g [] [] where
+    recurse g s1 x = g rf s where
+        s = s1 ++ x
+        rf = recurse g s</p>
+
+<pre><code>g rf s = foo '\r' haveCR noCR where
+    haveCR = foo '\n' (return s) haveCRnoLF
+    noCR chr = rf [chr]
+    haveCRnoLF nextChr = rf ['\r', nextChr]
+    foo quux bar baz = do
+        chr &lt;- hGetChar handle
+        if chr == quux then bar else baz chr
+</code></pre>
+
+<p>Now <code>recurse</code> is completely self-contained:</p>
+
+<p>readHeaderLine handle = recurse g [] [] where
+    g rf s = foo '\r' haveCR noCR where
+        haveCR = foo '\n' (return s) haveCRnoLF
+        noCR chr = rf [chr]
+        haveCRnoLF nextChr = rf ['\r', nextChr]
+        foo quux bar baz = do
+            chr &lt;- hGetChar handle
+            if chr == quux then bar else baz chr</p>
+
+<p>recurse g s1 x = g rf s where
+    s = s1 ++ x
+    rf = recurse g s</p>
+
+<p>But <code>g</code> is still recursive: it has a nasty <code>rf</code> parameter which is an indirect recursive application. We need to move <code>rf</code> into <code>recurse</code> too. So here comes a trick: convert a function call into a constructor.</p>
+
+<p><code>g</code> can have only 3 return values: <code>return s</code>, rf [chr] and <code>rf ['\r', nextChr]</code>. We can represent them with a data type and return it instead of calling <code>return</code> or <code>rf</code>:</p>
+
+<pre><code>data Outcomes a b c = RF1 a | RF2 b | Return c
+
+readHeaderLine handle = recurse g [] [] where
+    g rf s = foo '\r' haveCR noCR where
+        haveCR = foo '\n' (return $ Return s) haveCRnoLF
+        noCR chr = return $ RF1 [chr]
+        haveCRnoLF nextChr = return $ RF2 ['\r', nextChr]
+        foo quux bar baz = do
+            chr &lt;- hGetChar handle
+            if chr == quux then bar else baz chr
+
+recurse g s1 x = analyzeOutcomes $ g rf s where
+    s = s1 ++ x
+    rf = recurse g s
+    analyzeOutcomes outcomeM = do
+        outcome &lt;- outcomeM
+        case outcome of
+            RF1 a -&gt; rf a
+            RF2 a -&gt; rf a
+            Return a -&gt; return a
+</code></pre>
+
+<p>Now <code>rf</code> parameter is unused, so we can clean the definitions of <code>g</code> and <code>recurse</code>:</p>
+
+<p>data Outcomes a b c = RF1 a | RF2 b | Return c</p>
+
+<pre><code>readHeaderLine handle = recurse g [] [] where
+    g s = foo '\r' haveCR noCR where
+        haveCR = foo '\n' (return $ Return s) haveCRnoLF
+        noCR chr = return $ RF1 [chr]
+        haveCRnoLF nextChr = return $ RF2 ['\r', nextChr]
+        foo quux bar baz = do
+            chr &lt;- hGetChar handle
+            if chr == quux then bar else baz chr
+
+recurse g s1 x = analyzeOutcomes $ g s where
+    s = s1 ++ x
+    rf = recurse g s
+    analyzeOutcomes outcomeM = do
+        outcome &lt;- outcomeM
+        case outcome of
+            RF1 a -&gt; rf a
+            RF2 a -&gt; rf a
+            Return a -&gt; return a
+</code></pre>
+
+<p>Now two more improvements: a) <code>RF1</code> and <code>RF2</code> outcomes can be joined into one outcome as they are handled uniformly and have the same types; b) the only reason we pass <code>s</code> is to return it in <code>Return</code> outcome, so we can eliminate <code>s</code> argument of <code>g</code> too.</p>
+
+<pre><code>data Outcomes a = RF a | Return
+
+readHeaderLine handle = recurse g [] [] where
+    g = foo '\r' haveCR noCR where
+        haveCR = foo '\n' (return Return) haveCRnoLF
+        noCR chr = return $ RF [chr]
+        haveCRnoLF nextChr = return $ RF ['\r', nextChr]
+        foo quux bar baz = do
+            chr &lt;- hGetChar handle
+            if chr == quux then bar else baz chr
+
+recurse g s1 x = analyzeOutcomes g where
+    s = s1 ++ x
+    rf = recurse g s
+    analyzeOutcomes outcomeM = do
+        outcome &lt;- outcomeM
+        case outcome of
+            RF a -&gt; rf a
+            Return -&gt; return s
+</code></pre>
+
+<p>Now <code>rf</code> and <code>analyzeOutcomes</code> are used only once and <code>Outcomes</code> type became the same as <code>Maybe</code>. So:</p>
+
+<pre><code>readHeaderLine handle = recurse g [] [] where
+    g = foo '\r' haveCR noCR where
+        haveCR = foo '\n' (return Nothing) haveCRnoLF
+        noCR chr = return $ Just [chr]
+        haveCRnoLF nextChr = return $ Just ['\r', nextChr]
+        foo quux bar baz = do
+            chr &lt;- hGetChar handle
+            if chr == quux then bar else baz chr
+
+recurse outcomeM s1 x = do
+    outcome &lt;- outcomeM
+    let s = s1 ++ x in case outcome of
+        Just a -&gt; recurse outcomeM s a
+        Nothing -&gt; return s
+</code></pre>
+
+<p>Now <code>s1</code> and <code>x</code> are only used in <code>recurse</code> to construct <code>s</code>. We can then construct <code>s</code> outside of <code>recurse</code> and pass it. Also, <code>g</code> now can be inlined.</p>
+
+<pre><code>readHeaderLine handle = recurse (foo '\r' haveCR noCR) [] where
+    haveCR = foo '\n' (return Nothing) haveCRnoLF
+    noCR chr = return $ Just [chr]
+    haveCRnoLF nextChr = return $ Just ['\r', nextChr]
+    foo quux bar baz = do
+        chr &lt;- hGetChar handle
+        if chr == quux then bar else baz chr
+
+recurse outcomeM s = do
+    outcome &lt;- outcomeM
+    case outcome of
+        Just a -&gt; recurse outcomeM (s ++ a)
+        Nothing -&gt; return s
+</code></pre>
+
+<p>Now note that <code>outcomeM</code> is just a constant and it is not changed across recursive calls. So we can proceed further with our splitting of recursive and non-recursive code:</p>
+
+<pre><code>recurse outcomeM s = f s where
+    f s = do
+        outcome &lt;- outcomeM
+        case outcome of
+            Just a -&gt; f (s ++ a)
+            Nothing -&gt; return s
+</code></pre>
+
+<p>And duplicate <code>return $ Just</code> can be moved inside <code>foo</code>:</p>
+
+<pre><code>readHeaderLine handle = recurse (foo '\r' haveCR noCR) [] where
+    haveCR = foo '\n' (return Nothing) haveCRnoLF
+    noCR chr = [chr]
+    haveCRnoLF nextChr = ['\r', nextChr]
+    foo quux bar baz = do
+        chr &lt;- hGetChar handle
+        if chr == quux then bar else return (Just $ baz chr)
+</code></pre>
+
+<p>After renaming of nonsense identifiers in definition of <code>foo</code> we get:</p>
+
+<pre><code>readHeaderLine handle = recurse (match '\r' haveCR noCR) [] where
+    haveCR = match '\n' (return Nothing) haveCRnoLF
+    noCR chr = [chr]
+    haveCRnoLF nextChr = ['\r', nextChr]
+    match expectedChar onSuccess onFailure = do
+        actualChar &lt;- hGetChar handle
+        if actualChar == expectedChar
+            then onSuccess 
+            else return (Just $ onFailure actualChar)
+
+recurse outcomeM s = f s where
+    f s = do
+        outcome &lt;- outcomeM
+        case outcome of
+            Just a -&gt; f (s ++ a)
+            Nothing -&gt; return s
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/15723" title="short permalink to this answer" class="short-link" id="link-post-15723">share</a><span class="lsep">|</span><a href="/posts/15723/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/15723/revisions" title="show all edits to this post">edited <span title="2012-09-19 15:13:03Z" class="relativetime">Sep 19 '12 at 15:13</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-09-19 09:35:24Z" class="relativetime">Sep 19 '12 at 9:35</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/16287/nponeccop"><div><img src="https://www.gravatar.com/avatar/eabce8cd59f72d8f9e7db06a0343bdb1?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/16287/nponeccop">nponeccop</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">733</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-15723" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-25611" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Perhaps replace the expression <code>recurse (match &#39;\r&#39; haveCR noCR) &#91;&#93;</code> with <code>unfoldM (match &#39;\r&#39; haveCR noCR)</code>, where <a href="http://hackage.haskell.org/packages/archive/monad-loops/latest/doc/html/Control-Monad-Loops.html#v:unfoldM" rel="nofollow"><code>unfoldM</code></a> is in the <a href="http://hackage.haskell.org/package/monad-loops" rel="nofollow">monad-loops</a> package.</span>
+	&ndash;&nbsp;
+		<a href="/users/8648/dave4420" 
+		   title="261 reputation" 
+		   class="comment-user">dave4420</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-19 17:28:13Z" class="relativetime-clean">Sep 19 '12 at 17:28</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-15723" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="15739"></a>
+<div id="answer-15739" class="answer" data-answerid="15739" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="15739">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">10</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>You're trying to read from <code>stdin</code> until "\r\n" is encountered? You could just recursively call <code>hGetChar</code> until you find the right sequence (the buffer is maintained in reverse order and reversed at the end for efficiency reasons and to allow nice pattern-matching):</p>
+
+<pre><code>readHeaderLine :: Handle -&gt; IO String
+readHeaderLine h = reverse &lt;$&gt; go ""
+    where go :: String -&gt; IO String
+          go ('\n':'\r':s) = return s
+          go xs = do
+            ch &lt;- hGetChar h
+            go (ch:xs)
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/15739" title="short permalink to this answer" class="short-link" id="link-post-15739">share</a><span class="lsep">|</span><a href="/posts/15739/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/15739/revisions" title="show all edits to this post">edited <span title="2012-09-19 16:13:23Z" class="relativetime">Sep 19 '12 at 16:13</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-09-19 16:00:29Z" class="relativetime">Sep 19 '12 at 16:00</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3608/frerich-raabe"><div><img src="https://www.gravatar.com/avatar/afaf752cb41c3968dbd570c6f6fa0dc3?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3608/frerich-raabe">Frerich Raabe</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">371</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-15739" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-25603" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I changed <code>go s@(&#39;\n&#39;:&#39;\r&#39;:_) = return s</code> into <code>go s@(&#39;\n&#39;:&#39;\r&#39;:s&#39;) = return s&#39;</code> so that it wouldn’t include the <code>\r\n</code> in the result.</span>
+	&ndash;&nbsp;
+		<a href="/users/12275/daknok" 
+		   title="248 reputation" 
+		   class="comment-user owner">dakn&#248;k</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-19 16:11:19Z" class="relativetime-clean">Sep 19 '12 at 16:11</span></span>
+		<span class="edited-yes" title="this comment was edited 2 times"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-25604" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@RadekSlupik: Ah, good point - I overlooked that the EOL marker is not included in the output. I&#39;ll adjust my answer accordingly (you don&#39;t need the <code>s@</code> part anymore in that case).</span>
+	&ndash;&nbsp;
+		<a href="/users/3608/frerich-raabe" 
+		   title="371 reputation" 
+		   class="comment-user">Frerich Raabe</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-19 16:12:57Z" class="relativetime-clean">Sep 19 '12 at 16:12</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-15739" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="15748"></a>
+<div id="answer-15748" class="answer" data-answerid="15748" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="15748">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Note as Frerich mentioned that one serious antipattern in that code is the use of ++ to build up a list element by element.  That's bad because each time you add an element, ++ traverses the whole list so far, which means building an n-element list takes O(n**2) operations.  It's better to use the ByteString snoc function, or use a difference list, or build up the return string in reverse order and then reverse it. </p>
+
+<p>As for recognizing the \r\n, it's pretty easy to code a straightforward state machine, using a datatype to remember what's been seen so far.  In the code below I build up the reversed output and then reverse it, and introduce a newtype for reversed lists to keep track of when a list hasn't been reversed yet.  "snoc" inserts a new element at the front of a reversed list, which means it will be at the end of the unreversed list.  "snoc" is "cons" spelled backwards and "cons" is the traditional name (from Lisp) for putting a new element at the front of a linked list.</p>
+
+<pre><code>import System.IO
+-- Seen is the datatype for the current state
+-- we don't call it State because that's a commonly used
+-- library module
+data Seen = SeenNothing | SeenCR
+type HostName = String
+
+handleRequest :: HostName -&gt; Handle -&gt; IO ()
+handleRequest host handle = do
+    requestLine &lt;- readHeaderLine handle
+    putStrLn $ requestLine ++ "\n-------------------"
+
+-- below is a datatype we'll use for reversed lists
+newtype Reversed a = Reversed a
+snoc :: Reversed [a] -&gt; a -&gt; Reversed [a]
+snoc (Reversed xs) x = Reversed (x:xs)
+
+-- turn a reversed list back to a normal one
+unreverse :: Reversed [a] -&gt; [a]
+unreverse (Reversed xs) = reverse xs
+
+readHeaderLine h = do
+  r &lt;- f h SeenNothing (Reversed "")
+  return $ unreverse r
+
+-- this helper function does the work of building the reversed string
+f :: Handle -&gt; Seen -&gt; Reversed String -&gt; IO (Reversed String)
+f h state result = do
+  c &lt;- hGetChar h
+  let r = snoc result c
+      go :: Seen -&gt; IO (Reversed String)
+      go state = f h state r
+  case (state,c) of
+    (SeenCR,'\n') -&gt; return r
+    (_, '\r') -&gt; go SeenCR
+    otherwise -&gt; go SeenNothing
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/15748" title="short permalink to this answer" class="short-link" id="link-post-15748">share</a><span class="lsep">|</span><a href="/posts/15748/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-09-19 20:54:02Z" class="relativetime">Sep 19 '12 at 20:54</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/16678/solrize"><div><img src="https://www.gravatar.com/avatar/702c4be9c8064d58a60eee113a7398d6?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/16678/solrize">solrize</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">11</span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-15748" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-15748" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/15722/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="15722" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="805fe628e9f90c08ad81e6794818367b">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f15722%2fhow-to-shorten-this-terrible-code%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f15722%2fhow-to-shorten-this-terrible-code%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/haskell" class="post-tag" title="show questions tagged &#39;haskell&#39;" rel="tag">haskell</a> <a href="/questions/tagged/functional-programming" class="post-tag" title="show questions tagged &#39;functional-programming&#39;" rel="tag">functional-programming</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/haskell" class="post-tag" title="show questions tagged &#39;haskell&#39;" rel="tag">haskell</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">161</span></span><br>
+<a href="/questions/tagged/functional-programming" class="post-tag" title="show questions tagged &#39;functional-programming&#39;" rel="tag">functional-programming</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">113</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2012-09-19 08:16:39Z"><b>1 year ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>1527 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2012-09-20 17:44:15Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-codereview.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/1176" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">12
+    </div>
+</a><a href="/questions/1176/converting-simple-markup-to-html" class="question-hyperlink">Converting simple markup to HTML</a>
+</div>
+<div class="spacer">
+<a href="/q/3310" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/3310/how-might-i-improve-the-structure-of-this-io-based-haskell-source" class="question-hyperlink">How might I improve the structure of this IO based Haskell source?</a>
+</div>
+<div class="spacer">
+<a href="/q/8018" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/8018/can-i-make-this-code-more-haskelly" class="question-hyperlink">Can I make this code more Haskelly?</a>
+</div>
+<div class="spacer">
+<a href="/q/9177" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/9177/simple-haskell-key-value-file-store" class="question-hyperlink">Simple Haskell key value file store</a>
+</div>
+<div class="spacer">
+<a href="/q/12359" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/12359/naive-bayes-classifier" class="question-hyperlink">Naive Bayes classifier</a>
+</div>
+<div class="spacer">
+<a href="/q/15250" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/15250/writing-an-infinitely-running-whiletrue-user-input-function-in-haskell" class="question-hyperlink">Writing an infinitely running( while(true) { } ) user input function in haskell</a>
+</div>
+<div class="spacer">
+<a href="/q/18017" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/18017/google-code-jam-alien-language" class="question-hyperlink">Google Code Jam - Alien Language</a>
+</div>
+<div class="spacer">
+<a href="/q/19456" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/19456/this-is-a-try-at-implementing-integers-in-idris-any-advice-or-comments-are-most" class="question-hyperlink">This is a try at implementing integers in Idris. Any advice or comments are most welcome.</a>
+</div>
+<div class="spacer">
+<a href="/q/26107" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/26107/how-to-improve-readability-and-memory-footprint-of-this-haskell-script" class="question-hyperlink">How to improve readability and memory footprint of this haskell script?</a>
+</div>
+<div class="spacer">
+<a href="/q/29050" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/29050/haskell-bencoded-dictionary-parser" class="question-hyperlink">Haskell Bencoded Dictionary Parser</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/15722" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/15722/ivc/2cfc');});
+</script>
+<noscript>
+    <div><img src="/posts/15722/ivc/2cfc" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-hs</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/15722/how-to-shorten-this-terrible-code")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codereview.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.19.1164
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Code Review Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|haskell|functional-programming|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>
