@@ -70,15 +70,17 @@ while stop == 0:
                 # if it is, it creates a folder for the question page, and creates 2 files (a file with the link and a file with the html)
                 # it also creates html files for all the edit pages within the question site
 
-                # if 'Page Not Found' or 'Bad Request' in soup.title.string:
-                if 'Bad Request' in soup.title.string or 'Page Not Found' in soup.title.string:
-                    print soup.title.string, 'NOT VALID PAGE\n'
-                
-                # if the site blocks requests, it breaks
-                elif 'Too Many Requests' in soup.title.string:
+                # if the site blocks requests, we stop the loop
+                if 'Too Many Requests' in soup.title.string:
                     print 'TOO MANY REQUESTS!'
                     stop += 1
                     break
+                # if 'Page Not Found' or 'Bad Request' in soup.title.string:
+                if 'Bad Request' in soup.title.string or 'Page Not Found' in soup.title.string:
+                    print soup.title.string, 'NOT VALID PAGE\n'
+                # if no vote count are found, it's not a question page
+                elif len(soup.find_all("span", {"class":"vote-count-post "}))==0:
+                    print soup.title.string, 'NOT VALID PAGE\n'
                 
                 # continues if page is valid
                 else:
