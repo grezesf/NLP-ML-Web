@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>penetration test - Google hacking - why &quot;numrange&quot; is so dangerous? - Information Security Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/security/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/security/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Information Security Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackSecurity" />
+    <meta name="twitter:domain" content="security.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/security/img/apple-touch-icon@2.png?v=497726d850f9"/>
+    <meta name="og:title" content="Google hacking - why &quot;numrange&quot; is so dangerous?" />
+    <meta name="og:description" content="I&#39;m reading Google Hacking for Penetration Testers and in book it&#39;s said several times operator &quot;numrange&quot; is especially powerful and dangerous. However, they don&#39;t give example of using this opera..." />
+    <meta name="og:url" content="http://security.stackexchange.com/questions/6467/google-hacking-why-numrange-is-so-dangerous"/>
+    <link rel="canonical" href="http://security.stackexchange.com/questions/6467/google-hacking-why-numrange-is-so-dangerous" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/security/all.css?v=576d7a07edc8">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Google hacking - why &quot;numrange&quot; is so dangerous?&#39;" href="/feeds/question/6467">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:1,shownCommentCount:1,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:6467});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('162', '6467');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('162');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385154455,"enableUserHovercards":true,"site":{"name":"Information Security Stack Exchange","description":"Q&A for Information security professionals","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"595e453a90deb79876026b8ee52ee2b4","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f6467%2fgoogle-hacking-why-numrange-is-so-dangerous">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f6467%2fgoogle-hacking-why-numrange-is-so-dangerous">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Information Security
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/security/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Information Security Stack Exchange is a question and answer site for Information security professionals. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/6467/google-hacking-why-numrange-is-so-dangerous" class="question-hyperlink">Google hacking - why &ldquo;numrange&rdquo; is so dangerous?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="6467"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6467">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">18</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>1</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I'm reading <a href="http://rads.stackoverflow.com/amzn/click/B001UFP658">Google Hacking for Penetration Testers</a> and in book it's said several times operator "numrange" is especially powerful and dangerous. However, they don't give example of using this operator. I found similar claims over the net, however, again, without any example at all how one can use it.</p>
+
+<p>I'm little bit in dark here - I know this operator is dangerous weapon in the hands of a malicious social engineer, but I don't know how one can use this weapon and how to mount self-defence.</p>
+
+<p>I know this operator is used to search for a range of numbers on web. I guess you could use it to track down social numbers (however, I'm not sure how you could pin down a person using the range around social number and not +"insert social number"), phones (let say I know range of phone numbers which is used by targetted organization) and to research an address (to get informations about neighbours). Still, I don't see why this is such an "evil" operator...</p>
+
+<p>So, what is so special about the numrange operator and how can it be used in pen-testing? How can you defend yourself against numrange (not against google hacking as a whole)?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/penetration-test" class="post-tag" title="show questions tagged &#39;penetration-test&#39;" rel="tag">penetration-test</a> <a href="/questions/tagged/social-engineering" class="post-tag" title="show questions tagged &#39;social-engineering&#39;" rel="tag">social-engineering</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/6467" title="short permalink to this question" class="short-link" id="link-post-6467">share</a><span class="lsep">|</span><a href="/posts/6467/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/6467/revisions" title="show all edits to this post">edited <span title="2011-09-05 21:08:14Z" class="relativetime">Sep 5 '11 at 21:08</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/33/avid"><div><img src="https://www.gravatar.com/avatar/a88248f632c039340efa02505be355e5?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/33/avid">AviD</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score 24065" dir="ltr">24.1k</span><span title="8 gold badges"><span class="badge1"></span><span class="badgecount">8</span></span><span title="53 silver badges"><span class="badge2"></span><span class="badgecount">53</span></span><span title="128 bronze badges"><span class="badge3"></span><span class="badgecount">128</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2011-08-21 19:15:42Z" class="relativetime">Aug 21 '11 at 19:15</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1351/stupidone"><div><img src="https://www.gravatar.com/avatar/52e2697ba3a09999bc7b7559efd6754d?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1351/stupidone">StupidOne</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,727</span><span title="7 silver badges"><span class="badge2"></span><span class="badgecount">7</span></span><span title="26 bronze badges"><span class="badge3"></span><span class="badgecount">26</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6467" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-10859" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">There&#39;s a brief mention of the command with some examples here <a href="http://www.google.com/press/pressrel/enhancements.html" rel="nofollow">google.com/press/pressrel/enhancements.html</a></span>
+	&ndash;&nbsp;
+		<a href="/users/2092/john" 
+		   title="7119 reputation" 
+		   class="comment-user">john</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-21 20:05:39Z" class="relativetime-clean">Aug 21 '11 at 20:05</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6467" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								3 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/6467/google-hacking-why-numrange-is-so-dangerous?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/6467/google-hacking-why-numrange-is-so-dangerous?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/6467/google-hacking-why-numrange-is-so-dangerous?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="6481"></a>
+<div id="answer-6481" class="answer accepted-answer" data-answerid="6481" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6481">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">10</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>I did little more digging by myself and I was playing with Google for a couple of hours...</p>
+
+<p>The numrange operator was much more problematic when it was introduced by Google than it is now. A couple of years ago you could harvest CC#s, but then Google limited the range of numbers in a query to 5 digits. If you use 6 digits in a query then you get this:</p>
+
+<p><img src="http://i.stack.imgur.com/BmE9I.jpg" alt="enter image description here"></p>
+
+<p>However, it is still possible to harvest SSNs. The trick is to break a number (SSN) into smaller pieces.  In the USA, the first three digits of an SSN represent the state. The second group of numbers (2) represents the group number and the last group of digits (4) indicates the serial number.</p>
+
+<p>The query itself could like like:</p>
+
+<ul>
+<li>+ssn "486..500-01..99-0001..9999"</li>
+</ul>
+
+<p>This would return all SSN from Missouri.</p>
+
+<hr>
+
+<p>The Numrange operator has legitimate uses (unrelated to social-engineering) such as searching for addresses, price ranges, page numbers, years (e.g. Aston Martin 1950..1960) and so on.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/6481" title="short permalink to this answer" class="short-link" id="link-post-6481">share</a><span class="lsep">|</span><a href="/posts/6481/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/6481/revisions" title="show all edits to this post">edited <span title="2012-04-17 19:28:06Z" class="relativetime">Apr 17 '12 at 19:28</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/227/mike-samuel"><div><img src="https://www.gravatar.com/avatar/8a662b85e473c0c03c90a3a0ca42dff8?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/227/mike-samuel">Mike Samuel</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,619</span><span title="4 silver badges"><span class="badge2"></span><span class="badgecount">4</span></span><span title="14 bronze badges"><span class="badge3"></span><span class="badgecount">14</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature owner">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-08-22 15:46:01Z" class="relativetime">Aug 22 '11 at 15:46</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1351/stupidone"><div><img src="https://www.gravatar.com/avatar/52e2697ba3a09999bc7b7559efd6754d?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1351/stupidone">StupidOne</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,727</span><span title="7 silver badges"><span class="badge2"></span><span class="badgecount">7</span></span><span title="26 bronze badges"><span class="badge3"></span><span class="badgecount">26</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6481" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6481" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="6469"></a>
+<div id="answer-6469" class="answer" data-answerid="6469" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6469">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">9</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Numrange has been criticized for potentially aiding harvesters -- bots that collect large numbers of CC#s, SSNs, emails, etc.  Someone who wants to harvest CC#s might only have to write a crawler for google search results instead of crawling a large chunk of the web themselves.  Obviously, unless Google takes countermeasures, crawling one website (or using APIs) is easier than crawling the whole web, so the bar for harvesters is lowered.</p>
+
+<p>Since the threat is harvesting, you might want to make sure that CC#s and SSNs do not appear on your site.  Doing your own numrange searching through databases, logs, etc. might alert you to threats.  For example, if you provide a website that keeps archives of selected user-support conversations to help people diagnose their own problems, it might be a good idea to write your own numrange harvester so you are alerted first if your users' personal information ends up in archives.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/6469" title="short permalink to this answer" class="short-link" id="link-post-6469">share</a><span class="lsep">|</span><a href="/posts/6469/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-08-22 01:43:52Z" class="relativetime">Aug 22 '11 at 1:43</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/227/mike-samuel"><div><img src="https://www.gravatar.com/avatar/8a662b85e473c0c03c90a3a0ca42dff8?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/227/mike-samuel">Mike Samuel</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,619</span><span title="4 silver badges"><span class="badge2"></span><span class="badgecount">4</span></span><span title="14 bronze badges"><span class="badge3"></span><span class="badgecount">14</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6469" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-10860" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">4</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I don&#39;t disagree with your answer, but wouldn&#39;t making card numbers and SSN&#39;s publically available be a bad thing in any case? ;)</span>
+	&ndash;&nbsp;
+		<a href="/users/28/steves" 
+		   title="7659 reputation" 
+		   class="comment-user">SteveS</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-22 02:32:12Z" class="relativetime-clean">Aug 22 '11 at 2:32</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10874" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">It is, but it&#39;s happening anyways :)</span>
+	&ndash;&nbsp;
+		<a href="/users/3682/chris" 
+		   title="2392 reputation" 
+		   class="comment-user">chris</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-22 11:28:15Z" class="relativetime-clean">Aug 22 '11 at 11:28</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-21662" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Rule 1: usernames should always be SSNs.
+Rule 2: passwords must always be the last four digits in an SSN.</span>
+	&ndash;&nbsp;
+		<a href="/users/2769/k-to-the-z" 
+		   title="461 reputation" 
+		   class="comment-user">k to the z</a>
+	<span class="comment-date" dir="ltr"><span title="2012-04-17 15:40:36Z" class="relativetime-clean">Apr 17 '12 at 15:40</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6469" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="23320"></a>
+<div id="answer-23320" class="answer" data-answerid="23320" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="23320">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>While <a href="http://security.stackexchange.com/questions/6467/google-hacking-why-numrange-is-so-dangerous/6481#6481v">Google has introduced a maximum number of digits in a query</a>, this still works:</p>
+
+<p><a href="http://www.google.com/#q=10e7..10e8+%22sql+dump+version%22" rel="nofollow">http://www.google.com/#q=10e7..10e8+%22sql+dump+version%22</a></p>
+
+<p>Apparently Google will do the math for you, and it's not filtered. That works with 9 digits, change to -2 -1 of x digits accordingly.  I wouldn't say it's an 'evil' operator, but it must be used responsibly.  I don't know how long what I did will stick around now that I've posted it, though...</p>
+
+<p><a href="http://seclists.org/fulldisclosure/2012/Oct/159" rel="nofollow">http://seclists.org/fulldisclosure/2012/Oct/159</a></p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/23320" title="short permalink to this answer" class="short-link" id="link-post-23320">share</a><span class="lsep">|</span><a href="/posts/23320/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/23320/revisions" title="show all edits to this post">edited <span title="2012-10-29 09:23:51Z" class="relativetime">Oct 29 '12 at 9:23</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/414/gilles"><div><img src="https://www.gravatar.com/avatar/a717291747c76567bb0f086e15ae6e43?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/414/gilles">Gilles</a><br>
+        <span class="reputation-score" title="reputation score 13566" dir="ltr">13.6k</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="25 silver badges"><span class="badge2"></span><span class="badgecount">25</span></span><span title="70 bronze badges"><span class="badge3"></span><span class="badgecount">70</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-10-29 06:31:27Z" class="relativetime">Oct 29 '12 at 6:31</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/15479/marshall"><div><img src="https://www.gravatar.com/avatar/5d895688e40033e84241f562835359a2?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/15479/marshall">Marshall</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">41</span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-23320" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-37648" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Good references; it would help the answer to stand alone if you would add to the citation a brief summary of what works and why.   (in case we don&#39;t want to click through to the example)</span>
+	&ndash;&nbsp;
+		<a href="/users/13909/mark-c-wallace" 
+		   title="1737 reputation" 
+		   class="comment-user">Mark C. Wallace</a>
+	<span class="comment-date" dir="ltr"><span title="2012-10-29 10:26:17Z" class="relativetime-clean">Oct 29 '12 at 10:26</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-23320" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/6467/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="6467" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+noCode: true,            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="595e453a90deb79876026b8ee52ee2b4">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f6467%2fgoogle-hacking-why-numrange-is-so-dangerous%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f6467%2fgoogle-hacking-why-numrange-is-so-dangerous%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/penetration-test" class="post-tag" title="show questions tagged &#39;penetration-test&#39;" rel="tag">penetration-test</a> <a href="/questions/tagged/social-engineering" class="post-tag" title="show questions tagged &#39;social-engineering&#39;" rel="tag">social-engineering</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/penetration-test" class="post-tag" title="show questions tagged &#39;penetration-test&#39;" rel="tag">penetration-test</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">311</span></span><br>
+<a href="/questions/tagged/social-engineering" class="post-tag" title="show questions tagged &#39;social-engineering&#39;" rel="tag">social-engineering</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">49</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2011-08-21 19:15:42Z"><b>2 years ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>2625 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2012-10-29 09:23:51Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/security/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=security.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/6355" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">14
+    </div>
+</a><a href="/questions/6355/at-what-point-does-hacking-become-illegal" class="question-hyperlink">At what point does &ldquo;hacking&rdquo; become illegal?</a>
+</div>
+<div class="spacer">
+<a href="/q/7431" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/7431/what-are-some-good-resources-for-learning-how-to-hack-my-website" class="question-hyperlink">What are some good resources for learning how to hack my website?</a>
+</div>
+<div class="spacer">
+<a href="/q/8295" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/8295/it-security-and-ethical-hacking" class="question-hyperlink">IT Security and Ethical Hacking</a>
+</div>
+<div class="spacer">
+<a href="/q/8417" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/8417/decent-programmer-looking-to-learn-to-hack" class="question-hyperlink">Decent programmer looking to learn to Hack</a>
+</div>
+<div class="spacer">
+<a href="/q/13339" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/13339/are-facebook-yahoo-google-etc-hackable" class="question-hyperlink">Are Facebook, Yahoo, Google, etc. hackable?</a>
+</div>
+<div class="spacer">
+<a href="/q/13406" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">6
+    </div>
+</a><a href="/questions/13406/what-security-measures-to-have-before-openly-allowing-security-researchers-to-ha" class="question-hyperlink">What security measures to have before openly allowing security researchers to hack your site</a>
+</div>
+<div class="spacer">
+<a href="/q/13849" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/13849/doxing-users-on-social-media" class="question-hyperlink">&ldquo;Doxing&rdquo; users on Social Media</a>
+</div>
+<div class="spacer">
+<a href="/q/15934" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/15934/how-do-online-accounts-get-hacked" class="question-hyperlink">How do online accounts get hacked?</a>
+</div>
+<div class="spacer">
+<a href="/q/18755" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/18755/how-to-educate-users-about-the-dangers-of-social-engineering" class="question-hyperlink">How to educate users about the dangers of social engineering?</a>
+</div>
+<div class="spacer">
+<a href="/q/30546" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/30546/does-not-having-https-moot-this-entire-site" class="question-hyperlink">Does not having https moot this entire site?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/6467" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/6467/ivc/1f9d');});
+</script>
+<noscript>
+    <div><img src="/posts/6467/ivc/1f9d" class="dno" alt="" width="0" height="0"></div>
+</noscript></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://security.blogoverflow.com/?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/6467/google-hacking-why-numrange-is-so-dangerous")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.security.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.22.1174
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Information Security Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|penetration-test|social-engineering|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

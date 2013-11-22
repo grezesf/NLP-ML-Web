@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>distributions - Estimating the parameters of a sum of a Gaussian and an $\alpha$-stable random variable - Cross Validated</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/stats/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/stats/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Cross Validated" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackStats" />
+    <meta name="twitter:domain" content="stats.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/stats/img/apple-touch-icon@2.png?v=344f57aa10cc"/>
+    <meta name="og:title" content="Estimating the parameters of a sum of a Gaussian and an $\alpha$-stable random variable" />
+    <meta name="og:description" content="Let&#39;s assume I have a set of samples of a random variable
+
+$$
+X = Y + Z \&amp;gt;,
+$$
+
+where $Y$ is Gaussian (with a mean of zero and variance $\sigma^2$) and $Z$ has a symmetric $\alpha$-stable distri..." />
+    <meta name="og:url" content="http://stats.stackexchange.com/questions/30743/estimating-the-parameters-of-a-sum-of-a-gaussian-and-an-alpha-stable-random-v"/>
+    <link rel="canonical" href="http://stats.stackexchange.com/questions/30743/estimating-the-parameters-of-a-sum-of-a-gaussian-and-an-alpha-stable-random-v" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/stats/all.css?v=a6290077f2ad">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Estimating the parameters of a sum of a Gaussian and an $\alpha$-stable random variable&#39;" href="/feeds/question/30743">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:0,shownCommentCount:0,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:30743});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('65', '30743');
+            
+                    });
+    </script>
+
+                <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+                                        tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+                                        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+                                        messageStyle: "none"
+                });
+                </script>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>                
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('65');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385156443,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Cross Validated","description":"Q&A for statisticians, data analysts, data miners and data visualization experts","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"595e453a90deb79876026b8ee52ee2b4","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091","js/mathjax-editing.en.js":"a09844f7b738"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f30743%2festimating-the-parameters-of-a-sum-of-a-gaussian-and-an-alpha-stable-random-v">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f30743%2festimating-the-parameters-of-a-sum-of-a-gaussian-and-an-alpha-stable-random-v">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Cross Validated
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/stats/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Cross Validated is a question and answer site for statisticians, data analysts, data miners and data visualization experts. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/30743/estimating-the-parameters-of-a-sum-of-a-gaussian-and-an-alpha-stable-random-v" class="question-hyperlink">Estimating the parameters of a sum of a Gaussian and an $\alpha$-stable random variable</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="30743"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="30743">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">6</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>Let's assume I have a set of samples of a random variable</p>
+
+<p>$$
+X = Y + Z \&gt;,
+$$</p>
+
+<p>where $Y$ is Gaussian (with a mean of zero and variance $\sigma^2$) and $Z$ has a symmetric $\alpha$-stable distribution with index of stability $\alpha$ and scale parameter $c$. I know $\alpha$, but I don't know $\sigma$ and $c$. How do I go about estimating them?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/distributions" class="post-tag" title="show questions tagged &#39;distributions&#39;" rel="tag">distributions</a> <a href="/questions/tagged/normal-distribution" class="post-tag" title="show questions tagged &#39;normal-distribution&#39;" rel="tag">normal-distribution</a> <a href="/questions/tagged/estimation" class="post-tag" title="show questions tagged &#39;estimation&#39;" rel="tag">estimation</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/30743" title="short permalink to this question" class="short-link" id="link-post-30743">share</a><span class="lsep">|</span><a href="/posts/30743/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/30743/revisions" title="show all edits to this post">edited <span title="2012-06-20 06:40:18Z" class="relativetime">Jun 20 '12 at 6:40</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2012-06-19 14:16:30Z" class="relativetime">Jun 19 '12 at 14:16</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/6827/quant-dev"><div><img src="https://www.gravatar.com/avatar/e838d146abd68f2038fc56b808d82ffd?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/6827/quant-dev">quant_dev</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">180</span><span title="4 bronze badges"><span class="badge3"></span><span class="badgecount">4</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-30743" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-30743" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								2 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/30743/estimating-the-parameters-of-a-sum-of-a-gaussian-and-an-alpha-stable-random-v?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/30743/estimating-the-parameters-of-a-sum-of-a-gaussian-and-an-alpha-stable-random-v?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/30743/estimating-the-parameters-of-a-sum-of-a-gaussian-and-an-alpha-stable-random-v?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="30761"></a>
+<div id="answer-30761" class="answer accepted-answer" data-answerid="30761" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="30761">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">8</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>I am going to assume that you have observations from $Y$ because you are specifying distributional assumptions on $X$ and $Z$. Then $Y=Z-X$.</p>
+
+<p>Given that $Y=Z-X$, we have that the density of $Y$ can be written as the convolution:</p>
+
+<p>$$f_Y(y)=\int_{-\infty}^{\infty}\dfrac{1}{c}f_Z\left(\dfrac{y+x}{c}\right)\dfrac{1}{\sigma}f_X\left(\dfrac{x}{\sigma}\right)dx,$$</p>
+
+<p>where $f_Z$ is the standard $\alpha -$stable density and $f_X$ represents the standard normal density. Note that, using a change of variable, we can rewrite this density as follows</p>
+
+<p>$$f_Y(y)=\int_{-\infty}^{\infty}\dfrac{1}{c}f_Z\left(\dfrac{y+u\sigma}{c}\right)f_X\left(u\right)du = \int_{-\infty}^{\infty}\dfrac{1}{\sigma}f_X\left(\dfrac{cu-y}{\sigma}\right)f_Z\left(u\right)du,$$</p>
+
+<p>It might be difficult (if feasible) to obtain this density in closed form but it can be approximated by simulating $(x_1,...,x_N)$ from a standard normal distribution and calculating the average</p>
+
+<p>$$f_Y(y;c,\sigma)\approx \dfrac{1}{N}\sum_{j=1}^N \dfrac{1}{c}f_Z\left(\dfrac{y+x_j \sigma}{c}\right),$$</p>
+
+<p>or by simulating from a standard $\alpha-$stable distribution $(z_1,...,z_N)$ and calculating the average</p>
+
+<p>$$f_Y(y;c,\sigma)\approx \dfrac{1}{N}\sum_{j=1}^N \dfrac{1}{\sigma}f_X\left(\dfrac{c z_j -y}{\sigma}\right),$$</p>
+
+<p>Note that the first approximation implies an easy simulation but a difficult evaluation of the density $f_Z$. The second approximation implies a difficult simulation but an easy evaluation of $f_X$. I also guess that the number of needed simulations for a good approximation is less in the first approximation. Either way, this might imply the use of intensive computation.</p>
+
+<p>Now, if you have a sample $(y_1,...,y_n)$, then you can write the likelihood of $(c,\sigma)$ as</p>
+
+<p>$${\mathcal L}(c,\sigma)\propto \prod_{j=1}^n f_Y(y_j;c,\sigma).$$</p>
+
+<p>Using this, you can approximate the Maximum Likelihood Estimators (MLE) of $(c,\sigma)$ by maximising the corresponding likelihood using the approximations I described above.</p>
+
+<p><strong>Toy example in R</strong></p>
+
+<p>In this example, consider $(c,\sigma)=(0.5,1)$, $n=100$ and $N=1000$.</p>
+
+<pre><code>rm(list=ls())
+library(stabledist)
+
+# Values of the theoretical parameters
+alpha0 = 1.75
+sigma0 = 1
+c0 = 0.5
+set.seed(2)
+
+ # Simulated sample
+ y0 = rnorm(100) - rstable(n=100, alpha=alpha0 , beta=0, gamma = c0, delta = 0, pm = 0)
+
+# A histogram of the sample
+hist(y0)
+
+# Second approximation of the density of Y
+fy = function(y,c,sigma,ns){
+z = rstable(n=ns, alpha=alpha0 , beta=0, gamma = 1, delta = 0, pm = 0)
+return( mean(dnorm(c*z-y),mean=0,std=sigma ))
+}
+
+# -log likelihood
+ll = function(par){
+temp = rep(0,length(y0))
+if(par[1]&gt;0&amp;par[2]&gt;0){
+for(j in 1:length(y0)) temp[j]=fy(y0[j],par[1],par[2],1000)
+return(-sum(log(temp)))
+}
+else return(Inf)
+}
+
+# optimisation 
+optim(c(0.5,1),ll,control = list(maxit=500))
+</code></pre>
+
+<p>The estimators I got are $(\hat c,\hat\sigma)=(0.657,0.942)$, sort of close to the theoretical values. </p>
+
+<p>You can easily play with this code to obtain the corresponding estimators for your sample.</p>
+
+<p>I hope this helps.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/30761" title="short permalink to this answer" class="short-link" id="link-post-30761">share</a><span class="lsep">|</span><a href="/posts/30761/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/30761/revisions" title="show all edits to this post">edited <span title="2012-06-20 19:19:31Z" class="relativetime">Jun 20 '12 at 19:19</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/7555/jbowman"><div><img src="https://www.gravatar.com/avatar/8b35c56d0e6f8752840efaab075fdda4?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/7555/jbowman">jbowman</a><br>
+        <span class="reputation-score" title="reputation score 10292" dir="ltr">10.3k</span><span title="15 silver badges"><span class="badge2"></span><span class="badgecount">15</span></span><span title="38 bronze badges"><span class="badge3"></span><span class="badgecount">38</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-06-19 20:04:32Z" class="relativetime">Jun 19 '12 at 20:04</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <span class="anonymous-gravatar"></span>
+    </div>
+    <div class="user-details">
+        user10525<br>
+        
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-30761" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-59460" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I&#39;m sorry - I specify assumptions about $Y$ and $Z$, and have observations of $X$. I think it does not derail your answer, though.</span>
+	&ndash;&nbsp;
+		<a href="/users/6827/quant-dev" 
+		   title="180 reputation" 
+		   class="comment-user owner">quant_dev</a>
+	<span class="comment-date" dir="ltr"><span title="2012-06-20 06:40:52Z" class="relativetime-clean">Jun 20 '12 at 6:40</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-30761" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="30831"></a>
+<div id="answer-30831" class="answer" data-answerid="30831" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="30831">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>A much slower (at least in my implementation) alternative to Procrastinator's answer is the brute-force method: form the likelihood as the convolution of a Gaussian and $\alpha$-stable distribution, calculated by numerical integration, then maximize it.</p>
+
+<pre><code>library(stabledist)
+library(MASS)
+library(stats4)
+
+# True parameter values
+alpha0 &lt;- 1.75
+sigma0 &lt;- 1
+c0 &lt;- 0.5
+set.seed(2)
+
+# Simulated sample
+Z &lt;- rnorm(100) + rstable(n=100, alpha=alpha0 , beta=0, gamma = c0)
+
+# -log likelihood 
+#   (uses log of scale parameters as input, so range is (-Inf,Inf))
+ll = function(lsigma, lsc) {
+    fconv &lt;- function(x, zi, sigma, sc) {
+        dnorm(x, 0, sigma)*dstable(zi-x, alpha=alpha0, beta=0, gamma=sc)
+    }
+
+    sigma &lt;- exp(lsigma)
+    sc &lt;- exp(lsc)
+    f &lt;- 0
+    for (zi in Z) {
+        f &lt;- f + log(integrate(fconv, lower=-5*sigma, upper=5*sigma, zi=zi, sigma=sigma, sc=sc)$value)
+    }
+    -f
+}
+
+
+# optimisation 
+# Note: reltol should probably be set larger than the accuracy of integrate 
+#    or you may have convergence problems
+foo &lt;- mle(ll, start=list(lsigma=0, lsc=log(0.5)), 
+   control=list(reltol=4*(.Machine$double.eps^0.25)))
+summary(foo)
+
+... blah blah blah ...
+
+Coefficients:
+         Estimate Std. Error
+lsigma  0.1703237  0.9844097
+lsc    -0.6680191  2.0703820
+
+-2 log L: 361.0518 
+&gt; exp(foo@coef)
+   lsigma       lsc 
+1.1856886 0.5127232 
+</code></pre>
+
+<p>Runtime, however, is an issue; on my reasonably fast computer, this took about 25 minutes to run.  Larger samples, or starting well away from the MLE, would no doubt take longer.  You clearly wouldn't want to form confidence intervals by bootstrapping the procedure...</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/30831" title="short permalink to this answer" class="short-link" id="link-post-30831">share</a><span class="lsep">|</span><a href="/posts/30831/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-06-20 21:36:22Z" class="relativetime">Jun 20 '12 at 21:36</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/7555/jbowman"><div><img src="https://www.gravatar.com/avatar/8b35c56d0e6f8752840efaab075fdda4?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/7555/jbowman">jbowman</a><br>
+        <span class="reputation-score" title="reputation score 10292" dir="ltr">10.3k</span><span title="15 silver badges"><span class="badge2"></span><span class="badgecount">15</span></span><span title="38 bronze badges"><span class="badge3"></span><span class="badgecount">38</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-30831" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-59548" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">+1 For the implementation of the direct method. I think my implementation would be slower if $N$ is increased but I did not check how slower.</span>
+	&ndash;&nbsp;
+		<span title="0 reputation" 
+		      class="comment-user">user10525</span>
+	<span class="comment-date" dir="ltr"><span title="2012-06-20 22:29:00Z" class="relativetime-clean">Jun 20 '12 at 22:29</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-59549" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Procrastinator - thanks.  At this point, though, I think my answer is more of a curiosity than anything useful!  Maybe there&#39;s some way to make it run 100x faster, but I&#39;m not well versed in the &quot;fast R&quot; stuff.</span>
+	&ndash;&nbsp;
+		<a href="/users/7555/jbowman" 
+		   title="10292 reputation" 
+		   class="comment-user">jbowman</a>
+	<span class="comment-date" dir="ltr"><span title="2012-06-20 22:31:54Z" class="relativetime-clean">Jun 20 '12 at 22:31</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-30831" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/30743/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="30743" />
+							<h2 class="space">Your Answer</h2>
+
+
+        <script type="text/javascript">
+            StackExchange.ifUsing("editor", function () {
+                return StackExchange.using("mathjaxEditing", function () {
+                    StackExchange.MarkdownEditor.creationCallbacks.add(function (editor, postfix) {
+                        StackExchange.mathjaxEditing.prepareWmdForMathJax(editor, postfix, [["$", "$"], ["\\\\(","\\\\)"]]);
+                    });
+                });
+            }, "mathjax-editing");
+        </script>
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="595e453a90deb79876026b8ee52ee2b4">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f30743%2festimating-the-parameters-of-a-sum-of-a-gaussian-and-an-alpha-stable-random-v%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f30743%2festimating-the-parameters-of-a-sum-of-a-gaussian-and-an-alpha-stable-random-v%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/distributions" class="post-tag" title="show questions tagged &#39;distributions&#39;" rel="tag">distributions</a> <a href="/questions/tagged/normal-distribution" class="post-tag" title="show questions tagged &#39;normal-distribution&#39;" rel="tag">normal-distribution</a> <a href="/questions/tagged/estimation" class="post-tag" title="show questions tagged &#39;estimation&#39;" rel="tag">estimation</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/distributions" class="post-tag" title="show questions tagged &#39;distributions&#39;" rel="tag">distributions</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">1208</span></span><br>
+<a href="/questions/tagged/normal-distribution" class="post-tag" title="show questions tagged &#39;normal-distribution&#39;" rel="tag">normal-distribution</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">743</span></span><br>
+<a href="/questions/tagged/estimation" class="post-tag" title="show questions tagged &#39;estimation&#39;" rel="tag">estimation</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">609</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2012-06-19 14:16:30Z"><b>1 year ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>206 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2012-06-20 21:36:22Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-stats.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/31333" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">2</div>
+	</a>
+	<a href="/questions/31333/parameter-estimation-for-the-sum-of-two-independent-not-necessarily-i-d-gamma" class="question-hyperlink">Parameter estimation for the sum of two Independent (not necessarily i.d.) Gamma RVs</a>
+</div><div class="spacer">
+	<a href="/q/43523" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">1</div>
+	</a>
+	<a href="/questions/43523/how-do-i-apply-the-method-of-moments-for-estimating-parameters-in-a-sum-relation" class="question-hyperlink">How do I apply the method of moments for estimating parameters in a sum-relationship?</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/2214" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">7
+    </div>
+</a><a href="/questions/2214/estimating-parameters-of-sum-stable-rv-via-l-estimators" class="question-hyperlink">Estimating parameters of sum-stable RV via L-estimators</a>
+</div>
+<div class="spacer">
+<a href="/q/9299" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">11
+    </div>
+</a><a href="/questions/9299/estimating-parameters-for-a-spatial-process" class="question-hyperlink">Estimating parameters for a spatial process</a>
+</div>
+<div class="spacer">
+<a href="/q/17919" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/17919/estimation-of-x-in-gaussian-noise" class="question-hyperlink">Estimation of X in Gaussian noise</a>
+</div>
+<div class="spacer">
+<a href="/q/26185" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/26185/estimation-of-white-noise-parameters-in-gaussian-random-walk-model" class="question-hyperlink">Estimation of white noise parameters in Gaussian random walk model</a>
+</div>
+<div class="spacer">
+<a href="/q/27908" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/27908/sum-of-exponential-random-variables-follows-gamma-confused-by-the-parameters" class="question-hyperlink">Sum of exponential random variables follows Gamma, confused by the parameters</a>
+</div>
+<div class="spacer">
+<a href="/q/47339" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/47339/how-to-estimate-the-parameters-of-a-gaussian-distribution-sample-with-outliers" class="question-hyperlink">How to estimate the parameters of a Gaussian distribution sample with outliers?</a>
+</div>
+<div class="spacer">
+<a href="/q/60278" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/60278/finding-the-normal-divisor-of-a-random-variable" class="question-hyperlink">Finding the normal divisor of a random variable</a>
+</div>
+<div class="spacer">
+<a href="/q/65346" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/65346/estimating-parameters-of-inifinite-scale-mixture-from-data" class="question-hyperlink">Estimating parameters of inifinite scale mixture from data</a>
+</div>
+<div class="spacer">
+<a href="/q/69427" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/69427/bernoulli-random-variable-parameter-estimation" class="question-hyperlink">Bernoulli random variable parameter estimation</a>
+</div>
+<div class="spacer">
+<a href="/q/73992" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/73992/how-to-estimate-a-pdf-of-x-under-the-model-of-y-xn-when-the-pdf-of-y-and-the" class="question-hyperlink">How to estimate a pdf of x under the model of y = x+n, when the pdf of y and the pdf of n are given</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/30743" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/30743/ivc/de1c');});
+</script>
+<noscript>
+    <div><img src="/posts/30743/ivc/de1c" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://stats.blogoverflow.com/?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/30743/estimating-the-parameters-of-a-sum-of-a-gaussian-and-an-alpha-stable-random-v")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.stats.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.22.1174
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Cross Validated works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|distributions|normal-distribution|estimation|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

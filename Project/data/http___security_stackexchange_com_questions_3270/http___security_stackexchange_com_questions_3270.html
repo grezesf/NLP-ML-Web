@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>hash - Brute force vs other methods of recovering passwords from shadow file - Information Security Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/security/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/security/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Information Security Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackSecurity" />
+    <meta name="twitter:domain" content="security.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/security/img/apple-touch-icon@2.png?v=497726d850f9"/>
+    <meta name="og:title" content="Brute force vs other methods of recovering passwords from shadow file" />
+    <meta name="og:description" content="Do you know any good approach for de-hashing/actually bruteforcing hashed passwords in the shadow file?  
+
+On various operating systems, any good solutions/methods/programs.
+
+Or is it better to upl..." />
+    <meta name="og:url" content="http://security.stackexchange.com/questions/3270/brute-force-vs-other-methods-of-recovering-passwords-from-shadow-file"/>
+    <link rel="canonical" href="http://security.stackexchange.com/questions/3270/brute-force-vs-other-methods-of-recovering-passwords-from-shadow-file" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/security/all.css?v=576d7a07edc8">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Brute force vs other methods of recovering passwords from shadow file&#39;" href="/feeds/question/3270">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:0,shownCommentCount:0,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:3270});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('162', '3270');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('162');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385146999,"enableUserHovercards":true,"site":{"name":"Information Security Stack Exchange","description":"Q&A for Information security professionals","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"595e453a90deb79876026b8ee52ee2b4","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f3270%2fbrute-force-vs-other-methods-of-recovering-passwords-from-shadow-file">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f3270%2fbrute-force-vs-other-methods-of-recovering-passwords-from-shadow-file">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Information Security
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/security/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Information Security Stack Exchange is a question and answer site for Information security professionals. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/3270/brute-force-vs-other-methods-of-recovering-passwords-from-shadow-file" class="question-hyperlink">Brute force vs other methods of recovering passwords from shadow file</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="3270"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="3270">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">5</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>1</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>Do you know any good approach for de-hashing/actually bruteforcing hashed passwords in the shadow file?  </p>
+
+<p>On various operating systems, any good solutions/methods/programs.</p>
+
+<p>Or is it better to upload a hash to somewhere? A paying-or free site?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/passwords" class="post-tag" title="show questions tagged &#39;passwords&#39;" rel="tag">passwords</a> <a href="/questions/tagged/hash" class="post-tag" title="show questions tagged &#39;hash&#39;" rel="tag">hash</a> <a href="/questions/tagged/cryptanalysis" class="post-tag" title="show questions tagged &#39;cryptanalysis&#39;" rel="tag">cryptanalysis</a> <a href="/questions/tagged/brute-force" class="post-tag" title="show questions tagged &#39;brute-force&#39;" rel="tag">brute-force</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/3270" title="short permalink to this question" class="short-link" id="link-post-3270">share</a><span class="lsep">|</span><a href="/posts/3270/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/3270/revisions" title="show all edits to this post">edited <span title="2011-07-23 17:25:57Z" class="relativetime">Jul 23 '11 at 17:25</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/618/scott-pack"><div><img src="https://www.gravatar.com/avatar/481707331ea4d07ae2490bb88ddfd7ca?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/618/scott-pack">Scott Pack</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">9,161</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="32 silver badges"><span class="badge2"></span><span class="badgecount">32</span></span><span title="68 bronze badges"><span class="badge3"></span><span class="badgecount">68</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2011-04-22 07:39:50Z" class="relativetime">Apr 22 '11 at 7:39</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/2179/peter567"><div><img src="https://www.gravatar.com/avatar/a2b77377707d72c1482dc2af463d71e3?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/2179/peter567">peter567</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">26</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-3270" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-3270" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								4 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/3270/brute-force-vs-other-methods-of-recovering-passwords-from-shadow-file?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/3270/brute-force-vs-other-methods-of-recovering-passwords-from-shadow-file?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/3270/brute-force-vs-other-methods-of-recovering-passwords-from-shadow-file?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="3281"></a>
+<div id="answer-3281" class="answer" data-answerid="3281" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="3281">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">7</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>If you like speed, you can employ commercial tools supporting large-scale clustering, like:  <a href="http://www.elcomsoft.com/edpr.html" rel="nofollow">http://www.elcomsoft.com/edpr.html</a> (starts at $599)</p>
+
+<p>Also, check out:<br>
+<a href="http://www.insidepro.com/eng/passwordspro.shtml" rel="nofollow">http://www.insidepro.com/eng/passwordspro.shtml</a><br>
+<a href="http://hashcat.net/" rel="nofollow">http://hashcat.net/</a><br>
+<a href="http://www.openwall.com/john/" rel="nofollow">http://www.openwall.com/john/</a> (jtr, mentioned already in other posts)<br>
+<a href="http://www.l0phtcrack.com/" rel="nofollow">http://www.l0phtcrack.com/</a></p>
+
+<p>Here is a short blog entry from Nov. 2010 discussing the use of Amazon’s EC2 Cluster GPU instances to accelerate password cracking.<br>
+<a href="http://stacksmashing.net/2010/11/15/cracking-in-the-cloud-amazons-new-ec2-gpu-instances/" rel="nofollow">http://stacksmashing.net/2010/11/15/cracking-in-the-cloud-amazons-new-ec2-gpu-instances/</a></p>
+
+<p>Good write-up from the “Crack Me If You Can” contest at DEFCON 2010:    <a href="http://contest.korelogic.com/team_john-users.html" rel="nofollow">http://contest.korelogic.com/team_john-users.html</a><br>
+ (description of contest: <a href="http://contest.korelogic.com/intro.html" rel="nofollow">http://contest.korelogic.com/intro.html</a>)</p>
+
+<p>I think the best password dictionary site at this time is from SkullSecurity:  <a href="http://www.skullsecurity.org/wiki/index.php/Passwords" rel="nofollow">http://www.skullsecurity.org/wiki/index.php/Passwords</a> </p>
+
+<p>Another good set of password dictionaries: <a href="http://www.insidepro.com/eng/download.shtml" rel="nofollow">http://www.insidepro.com/eng/download.shtml</a></p>
+
+<p>Read this PDF titled “Cracking Passwords Version 1.1” 
+<em>This document is for people who want to learn to the how and why of password cracking.</em> <a href="http://tools.question-defense.com/Cracking_Passwords_Guide.pdf" rel="nofollow">http://tools.question-defense.com/Cracking_Passwords_Guide.pdf</a> </p>
+
+<p>Good luck.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/3281" title="short permalink to this answer" class="short-link" id="link-post-3281">share</a><span class="lsep">|</span><a href="/posts/3281/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-04-22 16:06:21Z" class="relativetime">Apr 22 '11 at 16:06</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/22/tate-hansen"><div><img src="https://www.gravatar.com/avatar/87d7e9ca1aa1d693438fcd35b1599ed8?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/22/tate-hansen">Tate Hansen</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">9,288</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="20 silver badges"><span class="badge2"></span><span class="badgecount">20</span></span><span title="56 bronze badges"><span class="badge3"></span><span class="badgecount">56</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-3281" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-3281" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="3275"></a>
+<div id="answer-3275" class="answer" data-answerid="3275" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="3275">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">5</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>John the Ripper (JtR) with some few well picked dictionaries and rulesets can be amazingly fast and efficient.  Depending on the type and amount of hashes you got, you want to adjust how much you throw at it.  Anything salted is going to be difficult, same goes for multiple rounds (FreeBSD-MD5), or just computationally expensive hashes (SHA-512).  </p>
+
+<p>My heuristic for order is to go for the cheap and easy stuff first: LM/NTLM.  Then look at what you found, if you can observe any patterns (lots of passwords with alpha-nums only), then that's the rules you want to use.  Also, once you find passwords for one type of hash, use it as a dictionary for other types of hashes.</p>
+
+<p>I've tried using rainbow tables, because I thought they would give me a much greater coverage for the cheap stuff.  Turns out there's like 6 different formats for the tables, and each software uses slightly different one, so I ended up spending two weeks just to get all the different utilities, downloading enough rainbow tables, and then doing internal format conversions.  In the end, the rainbow tables turned out to be not that effective either.  So I'd use rainbow tables only if you're dealing mostly with windows passwords, and you're gonna be doing it multiple times, because the prep time &amp; effort for it is significant.</p>
+
+<p>In the same two weeks time, and old quad core with 4 instances of JtR with 4 combinations of wordlists/rulesets cracked like 65% of passwords I needed to crack.  That took me like 30 minutes to script.  So be aware that the amount of time you want to invest in this stuff can vary greatly.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/3275" title="short permalink to this answer" class="short-link" id="link-post-3275">share</a><span class="lsep">|</span><a href="/posts/3275/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/3275/revisions" title="show all edits to this post">edited <span title="2011-04-23 04:09:47Z" class="relativetime">Apr 23 '11 at 4:09</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/453/nealmcb"><div><img src="https://www.gravatar.com/avatar/75330946da121a9e1d905dd3f54042f6?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/453/nealmcb">nealmcb</a><br>
+        <span class="reputation-score" title="reputation score 10937" dir="ltr">10.9k</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="29 silver badges"><span class="badge2"></span><span class="badgecount">29</span></span><span title="77 bronze badges"><span class="badge3"></span><span class="badgecount">77</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-04-22 13:37:48Z" class="relativetime">Apr 22 '11 at 13:37</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/193/marcin"><div><img src="https://www.gravatar.com/avatar/0c2f52ce1edc35f686d3240bf7043264?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/193/marcin">Marcin</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,256</span><span title="4 silver badges"><span class="badge2"></span><span class="badgecount">4</span></span><span title="11 bronze badges"><span class="badge3"></span><span class="badgecount">11</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-3275" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-4475" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="warm">5</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Just for nitpicking, SHA-512 is not that slow. For short input strings (up to 111 bytes), a basic 2.4 GHz Core2 PC can hash about 1.5 millions strings per second and per core. That&#39;s slower than MD5, but by a factor of about 4, whereas multiple rounds are usually meant to slow down password hashing by a factor of 1000 or more.</span>
+	&ndash;&nbsp;
+		<a href="/users/655/thomas-pornin" 
+		   title="106493 reputation" 
+		   class="comment-user">Thomas Pornin</a>
+	<span class="comment-date" dir="ltr"><span title="2011-04-22 14:38:25Z" class="relativetime-clean">Apr 22 '11 at 14:38</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-4476" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">on 2.8GHz i7
+openssl speed sha512:  
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes
+sha512           27220.15k   109613.23k   161113.90k   222900.83k   250718.89k
+openssl speed md5:
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes
+md5              52097.29k   154246.04k   350380.86k   511105.11k   591303.49k
+damn you&#39;re right, it&#39;s not that much slower!  Then why wasn&#39;t I able to crack much of sha hashes, vs md5, hmm.... Thank you for pointing it out.</span>
+	&ndash;&nbsp;
+		<a href="/users/193/marcin" 
+		   title="1256 reputation" 
+		   class="comment-user">Marcin</a>
+	<span class="comment-date" dir="ltr"><span title="2011-04-22 14:56:05Z" class="relativetime-clean">Apr 22 '11 at 14:56</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-4477" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">just to complete OpenSSL benchmarks: MD5 and SHA-512 process data by blocks, so there is an &quot;elementary cost&quot; of one block. SHA-512 blocks are 128-byte whereas MD5 uses 64-byte blocks, which boosts MD5 by an additional x2 factor when hashing short strings. As for resilience of sha hashes, I would say that whoever uses SHA-512 is more likely to have thought about multiple iterations than users of MD5.</span>
+	&ndash;&nbsp;
+		<a href="/users/655/thomas-pornin" 
+		   title="106493 reputation" 
+		   class="comment-user">Thomas Pornin</a>
+	<span class="comment-date" dir="ltr"><span title="2011-04-22 15:01:38Z" class="relativetime-clean">Apr 22 '11 at 15:01</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-4481" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I just found that the hashes I was trying to crack use by default 5000 rounds for SHA512.  That would slow it down, wouldn&#39;t it?</span>
+	&ndash;&nbsp;
+		<a href="/users/193/marcin" 
+		   title="1256 reputation" 
+		   class="comment-user">Marcin</a>
+	<span class="comment-date" dir="ltr"><span title="2011-04-22 15:28:17Z" class="relativetime-clean">Apr 22 '11 at 15:28</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-3275" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="3286"></a>
+<div id="answer-3286" class="answer" data-answerid="3286" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="3286">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Before using brute-force approaches (as covered well by others here), check whether there are direct preimage cryptanalysis attacks on the password hash algorithm used for the hashes you have - whether it has been "broken" for password hashing purposes.  If it has been broken, that may be a much faster way to recover good passwords, though brute-force may still be faster for weaker passwords.</p>
+
+<p>For example, the original 16-hex-byte MySQL hashes are based on a terrible custom hash function which has been broken twice, such that 8-character printable ASCII passwords can be broken on a laptop in a few minutes, as documented at <a href="http://security.stackexchange.com/questions/3133/mysql-old-password-cryptanalysis">MySQL OLD_PASSWORD cryptanalysis?</a> (<em>note updated speed - not as fast/comprehensive as I thought before</em>)</p>
+
+<p>Worse than that is the "<em>Collisions-R-Us</em>" VxWorks <a href="http://blog.metasploit.com/2010/08/vxworks-vulnerabilities.html" rel="nofollow">vxencrypt password hash algorithm</a> tracked as <a href="http://www.kb.cert.org/vuls/id/840249" rel="nofollow">VU#840249</a> and publicized last year.  It has so few actual possible hash outputs that it can typically be brute-forced in 30 minutes <em>over the network</em>....  And once again it seems that bad advice was given, this time in the CERT response, to just use SHA-512 one time.  No mention of either salts or iterations....</p>
+
+<p>Another example is <a href="http://en.wikipedia.org/wiki/LM_hash" rel="nofollow">LM hash</a>.  Although the underlying hash primitive they used was DES (which doesn't have any practical breaks), the way they used it destroyed the overall strength of the hash.</p>
+
+<p>Note that MD5 has been broken for collision attacks, but not for preimage attacks.  So for now we know of no direct attack on MD5-based password hashes and must do brute-force or rainbow.  Nevertheless people are now very suspicious of MD5 and it should not be used for password hashing.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/3286" title="short permalink to this answer" class="short-link" id="link-post-3286">share</a><span class="lsep">|</span><a href="/posts/3286/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/3286/revisions" title="show all edits to this post">edited <span title="2011-04-26 17:45:10Z" class="relativetime">Apr 26 '11 at 17:45</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-04-23 04:37:28Z" class="relativetime">Apr 23 '11 at 4:37</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/453/nealmcb"><div><img src="https://www.gravatar.com/avatar/75330946da121a9e1d905dd3f54042f6?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/453/nealmcb">nealmcb</a><br>
+        <span class="reputation-score" title="reputation score 10937" dir="ltr">10.9k</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="29 silver badges"><span class="badge2"></span><span class="badgecount">29</span></span><span title="77 bronze badges"><span class="badge3"></span><span class="badgecount">77</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-3286" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-3286" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="3274"></a>
+<div id="answer-3274" class="answer" data-answerid="3274" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="3274">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>As always, it depends what your aim is.</p>
+
+<p>My usual go-to tool just for pure speed is John the Ripper - which will brute force, dictionary attack, and blends. This is also ideal for password strength audits, as you can report on how many passwords lasted 1 hour, 2 hours etc.</p>
+
+<p>Rainbow tables are an excellent tool where the password length is within the rainbow table spec., where the result will come back incredibly quickly (seconds) if the hash is in the table. Not so useful for an audit, but useful for a targeted test on a particular account.</p>
+
+<p>Uploading hashes can work - however you then have provided the owner of that site with a password on your system.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/3274" title="short permalink to this answer" class="short-link" id="link-post-3274">share</a><span class="lsep">|</span><a href="/posts/3274/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-04-22 12:45:23Z" class="relativetime">Apr 22 '11 at 12:45</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/485/rory-alsop"><div><img src="https://www.gravatar.com/avatar/af1ed0816ed5a2164a4e343ad09309ad?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/485/rory-alsop">Rory Alsop</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score 35659" dir="ltr">35.7k</span><span title="5 gold badges"><span class="badge1"></span><span class="badgecount">5</span></span><span title="35 silver badges"><span class="badge2"></span><span class="badgecount">35</span></span><span title="186 bronze badges"><span class="badge3"></span><span class="badgecount">186</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-3274" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-3274" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/3270/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="3270" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+noCode: true,            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="595e453a90deb79876026b8ee52ee2b4">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f3270%2fbrute-force-vs-other-methods-of-recovering-passwords-from-shadow-file%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f3270%2fbrute-force-vs-other-methods-of-recovering-passwords-from-shadow-file%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/passwords" class="post-tag" title="show questions tagged &#39;passwords&#39;" rel="tag">passwords</a> <a href="/questions/tagged/hash" class="post-tag" title="show questions tagged &#39;hash&#39;" rel="tag">hash</a> <a href="/questions/tagged/cryptanalysis" class="post-tag" title="show questions tagged &#39;cryptanalysis&#39;" rel="tag">cryptanalysis</a> <a href="/questions/tagged/brute-force" class="post-tag" title="show questions tagged &#39;brute-force&#39;" rel="tag">brute-force</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/passwords" class="post-tag" title="show questions tagged &#39;passwords&#39;" rel="tag">passwords</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">862</span></span><br>
+<a href="/questions/tagged/hash" class="post-tag" title="show questions tagged &#39;hash&#39;" rel="tag">hash</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">460</span></span><br>
+<a href="/questions/tagged/brute-force" class="post-tag" title="show questions tagged &#39;brute-force&#39;" rel="tag">brute-force</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">153</span></span><br>
+<a href="/questions/tagged/cryptanalysis" class="post-tag" title="show questions tagged &#39;cryptanalysis&#39;" rel="tag">cryptanalysis</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">61</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2011-04-22 07:39:50Z"><b>2 years ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>3244 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2011-07-23 17:25:57Z">2 years ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <div class="ad-container">    
+        <div class="ad">    
+        <a href="http://meta.security.stackexchange.com/ads/ct/1092?url=http%3a%2f%2fwww.owasp.org%2f" rel="nofollow" target="_blank"><img src="http://i.stack.imgur.com/tybAr.png" alt="OWASP - Application Security Is Not Just for Developers" title="OWASP - Application Security Is Not Just for Developers" width="220" height="250"></a>
+        </div>
+        <div class="footer-container">
+            <div class="footer">
+                22 votes · <a href="http://meta.security.stackexchange.com/questions/1085#1092" title="click to comment on this ad" target="_blank">comment</a> · <a href="http://meta.security.stackexchange.com/ads/display/1085" target="_blank">stats</a>
+            </div>
+        </div>
+    </div>
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/security/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=security.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/211" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted large">158</div>
+	</a>
+	<a href="/questions/211/how-to-securely-hash-passwords" class="question-hyperlink">How to securely hash passwords?</a>
+</div><div class="spacer">
+	<a href="/q/3133" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">17</div>
+	</a>
+	<a href="/questions/3133/mysql-old-password-cryptanalysis" class="question-hyperlink">MySQL OLD_PASSWORD cryptanalysis?</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/3494" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">8
+    </div>
+</a><a href="/questions/3494/time-to-crack-file-encryption-password-more-than-just-iteration" class="question-hyperlink">time to crack file-encryption password - more than just iteration</a>
+</div>
+<div class="spacer">
+<a href="/q/6693" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/6693/brute-force-heuristics-used-in-password-cracking" class="question-hyperlink">Brute-force heuristics used in password cracking</a>
+</div>
+<div class="spacer">
+<a href="/q/12885" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/12885/how-does-a-brute-force-attack-actually-determine-it-has-succeeded" class="question-hyperlink">How does a brute force attack actually determine it has succeeded?</a>
+</div>
+<div class="spacer">
+<a href="/q/14243" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/14243/can-key-files-be-brute-forced-like-passwords" class="question-hyperlink">Can key files be brute-forced like passwords?</a>
+</div>
+<div class="spacer">
+<a href="/q/14297" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/14297/stripping-appending-characters-from-user-password-before-hashing-to-conceal-it" class="question-hyperlink">Stripping / appending characters from user password before hashing to conceal it forever?</a>
+</div>
+<div class="spacer">
+<a href="/q/14926" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/14926/recover-word-file-password" class="question-hyperlink">Recover Word file password</a>
+</div>
+<div class="spacer">
+<a href="/q/17197" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/17197/differences-between-brute-forcing-access-versus-decrypting-password-files-or-dat" class="question-hyperlink">Differences between brute forcing access versus decrypting password files or databases</a>
+</div>
+<div class="spacer">
+<a href="/q/29527" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/29527/can-an-attacker-guess-my-password-length-from-a-hash" class="question-hyperlink">Can an attacker guess my password length from a hash?</a>
+</div>
+<div class="spacer">
+<a href="/q/33554" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/33554/use-brute-force-to-mitigate-brute-force" class="question-hyperlink">Use brute force to mitigate brute force</a>
+</div>
+<div class="spacer">
+<a href="/q/38134" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/38134/what-are-realistic-rates-for-brute-force-hashing" class="question-hyperlink">What are realistic rates for brute force hashing?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/3270" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/3270/ivc/4e1d');});
+</script>
+<noscript>
+    <div><img src="/posts/3270/ivc/4e1d" class="dno" alt="" width="0" height="0"></div>
+</noscript></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://security.blogoverflow.com/?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/3270/brute-force-vs-other-methods-of-recovering-passwords-from-shadow-file")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.security.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.22.1174
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Information Security Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|passwords|hash|cryptanalysis|brute-force|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

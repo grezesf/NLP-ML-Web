@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>cryptography - Pre-hash password before applying bcrypt to avoid restricting password length - Information Security Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/security/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/security/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Information Security Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackSecurity" />
+    <meta name="twitter:domain" content="security.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/security/img/apple-touch-icon@2.png?v=497726d850f9"/>
+    <meta name="og:title" content="Pre-hash password before applying bcrypt to avoid restricting password length" />
+    <meta name="og:description" content="Good practice is not to unnecessarily restrict password length, so that appropriately-long passphrases (perhaps 35-45 chars for 6/7 dicewords) can be used. (See e.g. Should I have a maximum password " />
+    <meta name="og:url" content="http://security.stackexchange.com/questions/6623/pre-hash-password-before-applying-bcrypt-to-avoid-restricting-password-length"/>
+    <link rel="canonical" href="http://security.stackexchange.com/questions/6623/pre-hash-password-before-applying-bcrypt-to-avoid-restricting-password-length" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/security/all.css?v=576d7a07edc8">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Pre-hash password before applying bcrypt to avoid restricting password length&#39;" href="/feeds/question/6623">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:3,shownCommentCount:3,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:6623});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('162', '6623');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('162');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385154256,"enableUserHovercards":true,"site":{"name":"Information Security Stack Exchange","description":"Q&A for Information security professionals","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"595e453a90deb79876026b8ee52ee2b4","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f6623%2fpre-hash-password-before-applying-bcrypt-to-avoid-restricting-password-length">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f6623%2fpre-hash-password-before-applying-bcrypt-to-avoid-restricting-password-length">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Information Security
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/security/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Information Security Stack Exchange is a question and answer site for Information security professionals. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/6623/pre-hash-password-before-applying-bcrypt-to-avoid-restricting-password-length" class="question-hyperlink">Pre-hash password before applying bcrypt to avoid restricting password length</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="6623"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6623">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">29</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>12</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>Good practice is not to unnecessarily restrict password length, so that appropriately-long passphrases (perhaps 35-45 chars for 6/7 dicewords) can be used. (See e.g. <a href="http://security.stackexchange.com/questions/6287/should-i-have-a-maximum-password-length">Should I have a maximum password length?</a> where a maximum of 1K is suggested, to protect against DoS without restricting users' ability to set long passwords.)</p>
+
+<p>bcrypt is also commonly recommended (see e.g. <a href="http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage">Do any security experts recommend bcrypt for password storage?</a>, <a href="http://chargen.matasano.com/chargen/2007/9/7/enough-with-the-rainbow-tables-what-you-need-to-know-about-s.html">http://chargen.matasano.com/chargen/2007/9/7/enough-with-the-rainbow-tables-what-you-need-to-know-about-s.html</a>)</p>
+
+<p>It is also recommended to use a salt (random, and stored with the password hash) -- I believe 32-bits (4 characters) is often recommended. (I understand the salt-size rationale to be "enough that the number of combinations is much bigger than the number of user records AND is enough to make rainbow tables infeasibly large" -- 16 bits is enough for the second part but may not be enough for the first.)</p>
+
+<p>But AIUI bcrypt only hashes 55 bytes -- with 4 chars for the salt that leaves 51 for the password.</p>
+
+<p>I'm guessing that we shouldn't just bcrypt(left(password,51)) and ignore the last characters.</p>
+
+<p>Should we just limit users to 50 characters in their password (enough for nearly everyone, but not <em>definitely</em> enough)?</p>
+
+<p>Should we use something like bcrypt(sha256(salt+password)) instead, and allow up to 1K characters? Or does the addition of the sha256 (or sha512?) step reduce the overall security somehow?</p>
+
+<p>Do scrypt or PBKDF2 have similar length restrictions?</p>
+
+<p>(The last question is just for interest, really -- I realise that the space-hardness/FPGA-resistance, and relative newness of scrypt, and the GPGPU-resistance of bcrypt compared with PBKDF2 are far more important considerations in deciding which hash to use.)</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/cryptography" class="post-tag" title="show questions tagged &#39;cryptography&#39;" rel="tag">cryptography</a> <a href="/questions/tagged/passwords" class="post-tag" title="show questions tagged &#39;passwords&#39;" rel="tag">passwords</a> <a href="/questions/tagged/hash" class="post-tag" title="show questions tagged &#39;hash&#39;" rel="tag">hash</a> <a href="/questions/tagged/passphrase" class="post-tag" title="show questions tagged &#39;passphrase&#39;" rel="tag">passphrase</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/6623" title="short permalink to this question" class="short-link" id="link-post-6623">share</a><span class="lsep">|</span><a href="/posts/6623/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/6623/revisions" title="show all edits to this post">edited <span title="2011-10-05 15:11:02Z" class="relativetime">Oct 5 '11 at 15:11</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/655/thomas-pornin"><div><img src="https://www.gravatar.com/avatar/07ccc97c05f3fb80560ebc618a7de8bc?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/655/thomas-pornin">Thomas Pornin</a><br>
+        <span class="reputation-score" title="reputation score 106493" dir="ltr">106k</span><span title="19 gold badges"><span class="badge1"></span><span class="badgecount">19</span></span><span title="194 silver badges"><span class="badge2"></span><span class="badgecount">194</span></span><span title="377 bronze badges"><span class="badge3"></span><span class="badgecount">377</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2011-08-25 22:35:37Z" class="relativetime">Aug 25 '11 at 22:35</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/4449/misha"><div><img src="https://www.gravatar.com/avatar/cc8c782e6da23c721b9217c7814030b0?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/4449/misha">Misha</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,304</span><span title="5 silver badges"><span class="badge2"></span><span class="badgecount">5</span></span><span title="16 bronze badges"><span class="badge3"></span><span class="badgecount">16</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6623" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-11155" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I think you were talking about SHA-1 (which has a 160 digest output), you must discard this algorithm and use one in the SHA-2 family due to flaws in version 1. See the table here : <a href="http://en.wikipedia.org/wiki/SHA-1#Comparison_of_SHA_functions" rel="nofollow">en.wikipedia.org/wiki/SHA-1#Comparison_of_SHA_functions</a>)</span>
+	&ndash;&nbsp;
+		<a href="/users/1310/shadok" 
+		   title="334 reputation" 
+		   class="comment-user">Shadok</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-26 14:54:55Z" class="relativetime-clean">Aug 26 '11 at 14:54</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-11245" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Thanks, now fixed</span>
+	&ndash;&nbsp;
+		<a href="/users/4449/misha" 
+		   title="1304 reputation" 
+		   class="comment-user owner">Misha</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-29 08:29:38Z" class="relativetime-clean">Aug 29 '11 at 8:29</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-26412" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">32 bits is a bit low for a salt. To ensure statistical uniqueness, you should have a salt that can hold the user number squared. 64 bit salts are reasonable IMO.</span>
+	&ndash;&nbsp;
+		<a href="/users/3826/codesinchaos" 
+		   title="5296 reputation" 
+		   class="comment-user">CodesInChaos</a>
+	<span class="comment-date" dir="ltr"><span title="2012-06-29 11:02:33Z" class="relativetime-clean">Jun 29 '12 at 11:02</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6623" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								2 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/6623/pre-hash-password-before-applying-bcrypt-to-avoid-restricting-password-length?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/6623/pre-hash-password-before-applying-bcrypt-to-avoid-restricting-password-length?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/6623/pre-hash-password-before-applying-bcrypt-to-avoid-restricting-password-length?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="6627"></a>
+<div id="answer-6627" class="answer accepted-answer" data-answerid="6627" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6627">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">20</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>(There is no SHA-128.)</p>
+
+<p>Using a secure hash function to preprocess the password is secure; it can be shown that if bcrypt(SHA-256(password)) is broken, then either the password was guessed, or some security characteristic of SHA-256 has been proven false. There is no need to fiddle with the salt at that level; just hash the password, then use bcrypt on the result (with the salt, as bcrypt mandates). SHA-256 is considered to be a secure hash function.</p>
+
+<p>The point of a salt is to be unique -- as unique as possible, so that no two hashed passwords use the same salt value. 32 bits are a bit low for that; you should use a longer salt. If you have <em>n</em> bits of salt, then you will encounter collisions (two hashed passwords using the same salt) as soon as you have more than about <em>2<sup>n/2</sup></em> hashed passwords -- that's about 65000 with <em>n = 32</em>, a not too high value. You'd better use 64 bits or more of salt (use 128 bits and you can cease to worry about it).</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/6627" title="short permalink to this answer" class="short-link" id="link-post-6627">share</a><span class="lsep">|</span><a href="/posts/6627/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-08-26 02:18:33Z" class="relativetime">Aug 26 '11 at 2:18</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/655/thomas-pornin"><div><img src="https://www.gravatar.com/avatar/07ccc97c05f3fb80560ebc618a7de8bc?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/655/thomas-pornin">Thomas Pornin</a><br>
+        <span class="reputation-score" title="reputation score 106493" dir="ltr">106k</span><span title="19 gold badges"><span class="badge1"></span><span class="badgecount">19</span></span><span title="194 silver badges"><span class="badge2"></span><span class="badgecount">194</span></span><span title="377 bronze badges"><span class="badge3"></span><span class="badgecount">377</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6627" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-11246" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">... and luckily (or by design?) 64 or 128 bits (8 or 16 characters) of random salt with the 256 bits (32 characters) sha256(password) output does fit within the 55 char bcrypt() limit. Thanks.</span>
+	&ndash;&nbsp;
+		<a href="/users/4449/misha" 
+		   title="1304 reputation" 
+		   class="comment-user owner">Misha</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-29 08:34:53Z" class="relativetime-clean">Aug 29 '11 at 8:34</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-35300" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Would the use of SHA384 improve anything over SHA256?</span>
+	&ndash;&nbsp;
+		<a href="/users/2113/jacco" 
+		   title="1347 reputation" 
+		   class="comment-user">Jacco</a>
+	<span class="comment-date" dir="ltr"><span title="2012-10-12 12:10:48Z" class="relativetime-clean">Oct 12 '12 at 12:10</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-35302" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Jacco: not really, no. SHA-384 is also considered secure, but not &quot;more secure&quot; than SHA-256, because both are in the realm of &quot;cannot break it&quot; and there&#39;s no security level beyond that one.</span>
+	&ndash;&nbsp;
+		<a href="/users/655/thomas-pornin" 
+		   title="106493 reputation" 
+		   class="comment-user">Thomas Pornin</a>
+	<span class="comment-date" dir="ltr"><span title="2012-10-12 12:45:13Z" class="relativetime-clean">Oct 12 '12 at 12:45</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-35304" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">So, if I understand correctly, the increased digest length does not have any real value in this use case?</span>
+	&ndash;&nbsp;
+		<a href="/users/2113/jacco" 
+		   title="1347 reputation" 
+		   class="comment-user">Jacco</a>
+	<span class="comment-date" dir="ltr"><span title="2012-10-12 13:10:34Z" class="relativetime-clean">Oct 12 '12 at 13:10</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-35326" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Jacco: indeed. Actually, the increased digest length has little value in general; SHA-384 and SHA-512 are there mostly to match the same overkill as what resulted in AES key sizes 192 and 256 bits (which are quite useless since AES-128 is already quite far in the &quot;cannot break it&quot; category -- the larger key sizes are now justified by invoking the distant threat of quantum computers, if they ever come into existence).</span>
+	&ndash;&nbsp;
+		<a href="/users/655/thomas-pornin" 
+		   title="106493 reputation" 
+		   class="comment-user">Thomas Pornin</a>
+	<span class="comment-date" dir="ltr"><span title="2012-10-12 15:51:49Z" class="relativetime-clean">Oct 12 '12 at 15:51</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6627" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="16566"></a>
+<div id="answer-16566" class="answer" data-answerid="16566" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="16566">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">7</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Bcrypt uses a 128-bit salt AND a 55 character (max) password. You do not need to add any other salt values; bcrypt handles that.</p>
+
+<p>The designers of bcrypt felt that the 55 character limit on the password wasn't an issue since the hash has a 128-bit output.  If your password is greater than 55 characters, the designers assumed that you are already providing more than 128-bits of entropy so this isn't a problem.  On the contrary, the NIST guidelines would count this as only 77 bits of entropy.  The NIST guidelines are based on the fact that pass phrases have less entropy per character than random passwords and on the assumption that users will use pass phrases for longer passwords.  To better ensure that you get a full 128-bits of entropy, you could allow longer passwords and hash them using SHA-256 or SHA-384 to compress them to an acceptable length.  You could also just simplify things by using scrypt or PBKDF2 which do not have length limitations.  Scrypt is designed to be "memory hard" in addition to being computationally time-consuming; that would be my choice of algorithms.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/16566" title="short permalink to this answer" class="short-link" id="link-post-16566">share</a><span class="lsep">|</span><a href="/posts/16566/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-06-28 06:17:15Z" class="relativetime">Jun 28 '12 at 6:17</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/10865/steven-alexander"><div><img src="https://www.gravatar.com/avatar/338614f39edea12176bf49fce8cd3df0?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/10865/steven-alexander">Steven Alexander</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">81</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-16566" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-73574" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Do you know of an authoritative citation for your claim about the 55 character password limit? I haven&#39;t been able to find anything myself (beyond this answer).</span>
+	&ndash;&nbsp;
+		<a href="/users/8464/kenny-evitt" 
+		   title="101 reputation" 
+		   class="comment-user">Kenny Evitt</a>
+	<span class="comment-date" dir="ltr"><span title="2013-11-10 16:18:06Z" class="relativetime-clean">Nov 10 at 16:18</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-16566" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/6623/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="6623" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+noCode: true,            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="595e453a90deb79876026b8ee52ee2b4">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f6623%2fpre-hash-password-before-applying-bcrypt-to-avoid-restricting-password-length%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f6623%2fpre-hash-password-before-applying-bcrypt-to-avoid-restricting-password-length%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/cryptography" class="post-tag" title="show questions tagged &#39;cryptography&#39;" rel="tag">cryptography</a> <a href="/questions/tagged/passwords" class="post-tag" title="show questions tagged &#39;passwords&#39;" rel="tag">passwords</a> <a href="/questions/tagged/hash" class="post-tag" title="show questions tagged &#39;hash&#39;" rel="tag">hash</a> <a href="/questions/tagged/passphrase" class="post-tag" title="show questions tagged &#39;passphrase&#39;" rel="tag">passphrase</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/passwords" class="post-tag" title="show questions tagged &#39;passwords&#39;" rel="tag">passwords</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">862</span></span><br>
+<a href="/questions/tagged/cryptography" class="post-tag" title="show questions tagged &#39;cryptography&#39;" rel="tag">cryptography</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">791</span></span><br>
+<a href="/questions/tagged/hash" class="post-tag" title="show questions tagged &#39;hash&#39;" rel="tag">hash</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">460</span></span><br>
+<a href="/questions/tagged/passphrase" class="post-tag" title="show questions tagged &#39;passphrase&#39;" rel="tag">passphrase</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">21</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2011-08-25 22:35:37Z"><b>2 years ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>2678 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2012-06-28 06:17:15Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <div class="ad-container">    
+        <div class="ad">    
+        <a href="http://meta.security.stackexchange.com/ads/ct/1091?url=http%3a%2f%2fsecurity.blogoverflow.com%2f" rel="nofollow" target="_blank"><img src="http://i.stack.imgur.com/NPfNE.png" alt="Security News" title="Security News" width="220" height="250"></a>
+        </div>
+        <div class="footer-container">
+            <div class="footer">
+                15 votes · <a href="http://meta.security.stackexchange.com/questions/1085#1091" title="click to comment on this ad" target="_blank">comment</a> · <a href="http://meta.security.stackexchange.com/ads/display/1085" target="_blank">stats</a>
+            </div>
+        </div>
+    </div>
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/211" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted large">158</div>
+	</a>
+	<a href="/questions/211/how-to-securely-hash-passwords" class="question-hyperlink">How to securely hash passwords?</a>
+</div><div class="spacer">
+	<a href="/q/4781" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted large">206</div>
+	</a>
+	<a href="/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage" class="question-hyperlink">Do any security experts recommend bcrypt for password storage?</a>
+</div><div class="spacer">
+	<a href="/q/6287" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">17</div>
+	</a>
+	<a href="/questions/6287/should-i-have-a-maximum-password-length" class="question-hyperlink">Should I have a maximum password length?</a>
+</div><div class="spacer">
+	<a href="/q/14752" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">4</div>
+	</a>
+	<a href="/questions/14752/is-bcrypt-enough-when-saving-a-password-into-a-database" class="question-hyperlink">Is BCrypt enough when saving a password into a database?</a>
+</div><div class="spacer">
+	<a href="/q/35232" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">5</div>
+	</a>
+	<a href="/questions/35232/is-the-execution-time-for-bcrypt-independent-of-the-length-of-the-input-string" class="question-hyperlink">Is the execution time for bcrypt independent of the length of the input string?</a>
+</div><div class="spacer">
+	<a href="/q/23500" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">3</div>
+	</a>
+	<a href="/questions/23500/is-there-a-better-way-to-take-advantage-of-current-approved-proven-and-mem" class="question-hyperlink">Is there a better way to take advantage of current &#39;approved&#39;, &#39;proven&#39;, and memory/cpu-expensive algorithms while using salts and peppers?</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/2051" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">11
+    </div>
+</a><a href="/questions/2051/is-pbkdf2-based-system-cryptology-rfc2898derivebytes-better-for-unicode-pass" class="question-hyperlink">Is PBKDF2-based System.Cryptology.RFC2898DeriveBytes() &ldquo;better&rdquo; for Unicode Password hashing than traditional methods?</a>
+</div>
+<div class="spacer">
+<a href="/q/3272" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">41
+    </div>
+</a><a href="/questions/3272/password-hashing-add-salt-pepper-or-is-salt-enough" class="question-hyperlink">Password Hashing add salt + pepper or is salt enough?</a>
+</div>
+<div class="spacer">
+<a href="/q/3323" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/3323/should-i-obfuscate-passwords-before-hashing-should-i-pre-hash-them-on-the-clie" class="question-hyperlink">Should I obfuscate passwords before hashing?  Should I pre-hash them on the client?  What about salts?</a>
+</div>
+<div class="spacer">
+<a href="/q/4781" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted large">206
+    </div>
+</a><a href="/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage" class="question-hyperlink">Do any security experts recommend bcrypt for password storage?</a>
+</div>
+<div class="spacer">
+<a href="/q/14297" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/14297/stripping-appending-characters-from-user-password-before-hashing-to-conceal-it" class="question-hyperlink">Stripping / appending characters from user password before hashing to conceal it forever?</a>
+</div>
+<div class="spacer">
+<a href="/q/15093" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">8
+    </div>
+</a><a href="/questions/15093/hmac-based-request-signing-storing-the-salt" class="question-hyperlink">HMAC Based Request Signing - Storing the Salt</a>
+</div>
+<div class="spacer">
+<a href="/q/17625" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/17625/trying-to-understand-password-hashing" class="question-hyperlink">Trying to understand password hashing</a>
+</div>
+<div class="spacer">
+<a href="/q/18021" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">8
+    </div>
+</a><a href="/questions/18021/is-there-more-to-password-hashing" class="question-hyperlink">Is there more to password hashing?</a>
+</div>
+<div class="spacer">
+<a href="/q/21263" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">11
+    </div>
+</a><a href="/questions/21263/how-to-apply-a-pepper-correctly-to-bcrypt" class="question-hyperlink">How to apply a pepper correctly to bcrypt?</a>
+</div>
+<div class="spacer">
+<a href="/q/43746" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/43746/comparing-password-hashing-algorithms-poc-ideas" class="question-hyperlink">comparing password hashing algorithms - PoC ideas?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/6623" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/6623/ivc/1f9d');});
+</script>
+<noscript>
+    <div><img src="/posts/6623/ivc/1f9d" class="dno" alt="" width="0" height="0"></div>
+</noscript></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://security.blogoverflow.com/?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/6623/pre-hash-password-before-applying-bcrypt-to-avoid-restricting-password-length")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.security.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.22.1174
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Information Security Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|cryptography|passwords|hash|passphrase|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>c++ - Is there any way to improve this simple encryption algorithm? - Code Review Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codereview/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Code Review Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeReview" />
+    <meta name="twitter:domain" content="codereview.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codereview/img/apple-touch-icon.png?v=bb26b8631f86"/>
+    <meta name="og:title" content="Is there any way to improve this simple encryption algorithm?" />
+    <meta name="og:description" content="I originally made this as a way to use character strings as a base-256 number, but then realized that I could turn it into a method for encryption instead. The only thing is that since I&#39;m using a ..." />
+    <meta name="og:url" content="http://codereview.stackexchange.com/questions/12233/is-there-any-way-to-improve-this-simple-encryption-algorithm"/>
+    <link rel="canonical" href="http://codereview.stackexchange.com/questions/12233/is-there-any-way-to-improve-this-simple-encryption-algorithm" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codereview/all.css?v=4c2f7b84c965">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Is there any way to improve this simple encryption algorithm?&#39;" href="/feeds/question/12233">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:0,shownCommentCount:0,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:12233});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('196', '12233');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('196');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385150185,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Code Review Stack Exchange","description":"Q&A for peer programmer code reviews","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"595e453a90deb79876026b8ee52ee2b4","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f12233%2fis-there-any-way-to-improve-this-simple-encryption-algorithm">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f12233%2fis-there-any-way-to-improve-this-simple-encryption-algorithm">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Code Review
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Code Review Stack Exchange is a question and answer site for peer programmer code reviews. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/12233/is-there-any-way-to-improve-this-simple-encryption-algorithm" class="question-hyperlink">Is there any way to improve this simple encryption algorithm?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="12233"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="12233">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>1</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I originally made this as a way to use character strings as a base-256 number, but then realized that I could turn it into a method for encryption instead. The only thing is that since I'm using a basic addition algorithm for the encryption process, I'm iterating through a string by one character at a time (which seems kind of slow). Are there any other ways to improve the performance of this process or am I pretty much stuck with simple iteration?</p>
+
+<p>Here's the encryption code:</p>
+
+<pre><code>void encodeStr(string encryptKey, string&amp; inputToEncrypt) {
+    assert(minVal &lt; maxVal);
+    if (inputToEncrypt.length() == 0) return;
+
+    //preliminary remainder check initialization
+    int remainder = minVal; //zero value
+    int keyNumCount = 0;
+    int keyCount = 0;
+
+    //variables used to determine when to stop counting numbers
+    size_t keyPos = 0;
+    size_t count = 0;
+    size_t countEnd = inputToEncrypt.length();
+
+    //begin numerical addition. stop once the end of both strings is reached
+    while (count &lt; countEnd) {
+        //convert current characters to unsigned chars
+        keyNumCount = encryptKey[keyPos];
+        if (keyNumCount &lt; minVal) keyNumCount += minVal;
+
+        keyCount = (count &lt; inputToEncrypt.length()) ? inputToEncrypt[count] : 0;
+        if (keyCount &lt; minVal) keyCount += minVal;
+
+        //take advantage of signed-char overflow to calculate current value
+        remainder += keyNumCount + keyCount;
+        inputToEncrypt[count] = remainder;
+
+        //check if there is a remainder to be tabulated
+        remainder = (remainder &gt; maxVal) ? 1 : 0;
+        ++count;
+        ++keyPos;
+        if (keyPos == encryptKey.size()) keyPos = 0;
+
+        //add 1 to the count if there is a remainder at the end of keyNum
+        if (count == countEnd &amp;&amp; remainder != 0) {
+            inputToEncrypt.push_back('\0');
+            ++countEnd; //variables used to avoid integer overflow
+        }
+    }
+}
+</code></pre>
+
+<p>And the decryption function:</p>
+
+<pre><code>void decodeStr(string decryptKey, string&amp; inputToDecrypt) {
+    assert(minVal &lt; maxVal);
+    if (inputToDecrypt.length() == 0) return;
+
+    //preliminary remainder check initialization
+    int remainder = minVal;
+    int keyNumCount = 0;
+    int keyCount = 0;
+
+    //variables used to determine when to stop counting numbers
+    size_t keyPos = 0;
+    size_t count = 0;
+    size_t countEnd = inputToDecrypt.length();
+
+    //make sure the program exits before the number necomes negative
+    while (count &lt; countEnd) {
+        //convert current characters to unsigned chars
+        keyNumCount = decryptKey[keyPos];
+        if (keyNumCount &lt; minVal) keyNumCount += minVal;
+
+        keyCount = inputToDecrypt[count];
+        if (keyCount &lt; minVal) keyCount += minVal;
+
+        //take advantage of signed-char overflow to calculate current value
+        remainder += keyCount - keyNumCount;
+        inputToDecrypt[count] = remainder;
+
+        //check if there is a remainder to be tabulated
+        remainder = (remainder &gt; maxVal) ? 1 : 0;
+        ++count;
+        ++keyPos;
+        if (keyPos == decryptKey.size()) keyPos = 0;
+    }
+}
+</code></pre>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/c%2b%2b" class="post-tag" title="show questions tagged &#39;c++&#39;" rel="tag">c++</a> <a href="/questions/tagged/optimization" class="post-tag" title="show questions tagged &#39;optimization&#39;" rel="tag">optimization</a> <a href="/questions/tagged/refactoring" class="post-tag" title="show questions tagged &#39;refactoring&#39;" rel="tag">refactoring</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/12233" title="short permalink to this question" class="short-link" id="link-post-12233">share</a><span class="lsep">|</span><a href="/posts/12233/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2012-06-02 19:04:57Z" class="relativetime">Jun 2 '12 at 19:04</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/13834/icdae"><div><img src="https://www.gravatar.com/avatar/8fc9dd6bc4eccf13c7e2da73e00e7d3d?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/13834/icdae">icdae</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">31</span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-12233" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-12233" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								2 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/12233/is-there-any-way-to-improve-this-simple-encryption-algorithm?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/12233/is-there-any-way-to-improve-this-simple-encryption-algorithm?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/12233/is-there-any-way-to-improve-this-simple-encryption-algorithm?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="12236"></a>
+<div id="answer-12236" class="answer" data-answerid="12236" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="12236">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Since you key is const it would be nice to mark it as such (and avoid accidents of changing your key)</p>
+
+<pre><code>void encodeStr(string const&amp; encryptKey, string&amp; inputToEncrypt) {
+//                    ^^^^^
+</code></pre>
+
+<p>To save the cost of the copy I would also make it a reference.</p>
+
+<p>No idea what these are:</p>
+
+<pre><code>assert(minVal &lt; maxVal);
+</code></pre>
+
+<p>The extra set of variables seems like a good idea but actually makes the code harder to read as you need to understand what the variable represents:</p>
+
+<pre><code>size_t countEnd = inputToEncrypt.length();
+while (count &lt; countEnd) {
+
+// Simpler to
+
+while (count &lt; inputToEncrypt.length()) {
+</code></pre>
+
+<p>When is this condition every going to fail and give you 0?</p>
+
+<pre><code>keyCount = (count &lt; inputToEncrypt.length()) ? inputToEncrypt[count] : 0;
+</code></pre>
+
+<p>If it was going to fail then you should have the same precautions on this:</p>
+
+<pre><code>inputToEncrypt[count] = remainder;
+</code></pre>
+
+<p>This is also bound to result in truncation of reminder. As inputToEncrypt as a string and thus each position is a <code>char</code> while remainder is the sum of 2 integers both greater than minval.</p>
+
+<p>inputToEncrypt[count] = remainder;</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/12236" title="short permalink to this answer" class="short-link" id="link-post-12236">share</a><span class="lsep">|</span><a href="/posts/12236/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-06-03 03:59:57Z" class="relativetime">Jun 3 '12 at 3:59</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/507/loki-astari"><div><img src="https://www.gravatar.com/avatar/6cd8373fb8a3efe36369a0351726e7d7?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/507/loki-astari">Loki Astari</a><br>
+        <span class="reputation-score" title="reputation score 16932" dir="ltr">16.9k</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="13 silver badges"><span class="badge2"></span><span class="badgecount">13</span></span><span title="35 bronze badges"><span class="badge3"></span><span class="badgecount">35</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-12236" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-19643" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Thanks for the help. The first two things you pointed out were remnants of when I was debugging. The &quot;keycount&quot; variable is used to determine what character in the encryption key should be used to do the encrypting. If the thing you want to encrypt is longer than the encryption key, then the encryption key becomes repeated.</span>
+	&ndash;&nbsp;
+		<a href="/users/13834/icdae" 
+		   title="31 reputation" 
+		   class="comment-user owner">icdae</a>
+	<span class="comment-date" dir="ltr"><span title="2012-06-03 18:20:30Z" class="relativetime-clean">Jun 3 '12 at 18:20</span></span>
+		<span class="edited-yes" title="this comment was edited 4 times"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-12236" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="12257"></a>
+<div id="answer-12257" class="answer" data-answerid="12257" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="12257">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>If you're only interested in implementing this <em>specific</em> form of encryption, then what I'm going to post is almost certainly overkill. On the other hand, if you want to play around with different forms of encryption, it may be interesting. This attempts to factor the the job into a few distinct pieces. I'm not sure it entirely succeeds at doing that, but perhaps the attempt will be interesting anyway.</p>
+
+<p>First, a little tool that's probably useful for a fair number of algorithms like this: a cyclic_iterator that provides an imitation of an infinite-length input by cycling through a finite-length input as often as needed. Right now, this is quite (excessively?) minimal -- for example, it doesn't even attempt to deal with post-increment, only pre-increment.</p>
+
+<pre><code>#ifndef CYCLIC_ITERATOR_H_INC_
+#define CYCLIC_ITERATOR_H_INC_
+#include &lt;iterator&gt;
+
+template &lt;class FwdIt&gt;
+class cyclic_iterator_t : public std::iterator&lt;std::input_iterator_tag, typename FwdIt::value_type&gt; {
+    FwdIt begin;
+    FwdIt end;
+    FwdIt current;
+public:
+    cyclic_iterator_t(FwdIt begin, FwdIt end) : begin(begin), end(end), current(begin) {}
+
+    cyclic_iterator_t operator++() { 
+        if (++current == end) 
+            current = begin; 
+        return *this; 
+    }
+    typename FwdIt::value_type operator *() const { return *current; }
+};
+
+template &lt;class Container&gt;
+cyclic_iterator_t&lt;typename Container::iterator&gt; cyclic_iterator(Container &amp;c) { 
+    return cyclic_iterator_t&lt;typename Container::iterator&gt;(c.begin(), c.end());
+}
+
+#endif
+</code></pre>
+
+<p>Then a little program to implement something that's at least similar to your algorithm (I couldn't regression test, because you didn't specify you <code>minVal</code>, among other things). It currently makes no attempt at dealing sensibly with negative inputs either. </p>
+
+<pre><code>#include &lt;limits.h&gt;
+#include &lt;vector&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+
+#include "cyclic_iterator.h"
+
+// first a class to encrypt one character at a time:
+// 
+class encrypt { 
+    bool carry;
+public:
+    encrypt() : carry(0) {}
+    char operator()(char ina, char inb) { 
+        int ret = ina + inb + static_cast&lt;int&gt;(carry);
+        carry = ret &gt; CHAR_MAX;
+        return ret % CHAR_MAX;
+    }
+    operator bool() { return carry; }
+};
+
+// Then a little algorithm to apply that encryptor to an entire string of input:
+//    
+template&lt;class InIt1, class InIt2, class OutIt&gt;
+void encode_string(InIt1 begin1, InIt1 end1, InIt2 begin2, OutIt result) { 
+    encrypt e;
+    // The main loop is almost like two-input std::transform:
+    while (begin1 != end1) {
+        *result = e(*begin1, *begin2);
+        ++result;
+        ++begin1;
+        ++begin2;
+    }
+    // but then we handle the "carry" bit (if any):
+    if (e)
+        *result++ = '\0';
+}
+
+// finally a simple main to test out the preceding:    
+int main() {
+    std::string input("This is some text");
+    std::string key("TheKey");
+    std::string result;
+
+    encode_string(input.begin(), input.end(), cyclic_iterator(key), std::back_inserter(result));
+    std::cout &lt;&lt; result;
+    return 0;
+}
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/12257" title="short permalink to this answer" class="short-link" id="link-post-12257">share</a><span class="lsep">|</span><a href="/posts/12257/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-06-04 05:45:32Z" class="relativetime">Jun 4 '12 at 5:45</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/489/jerry-coffin"><div><img src="https://www.gravatar.com/avatar/d8962238339d771f0348967be6f97b1b?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/489/jerry-coffin">Jerry Coffin</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,748</span><span title="4 silver badges"><span class="badge2"></span><span class="badgecount">4</span></span><span title="17 bronze badges"><span class="badge3"></span><span class="badgecount">17</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-12257" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-12257" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/12233/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="12233" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="595e453a90deb79876026b8ee52ee2b4">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f12233%2fis-there-any-way-to-improve-this-simple-encryption-algorithm%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f12233%2fis-there-any-way-to-improve-this-simple-encryption-algorithm%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/c%2b%2b" class="post-tag" title="show questions tagged &#39;c++&#39;" rel="tag">c++</a> <a href="/questions/tagged/optimization" class="post-tag" title="show questions tagged &#39;optimization&#39;" rel="tag">optimization</a> <a href="/questions/tagged/refactoring" class="post-tag" title="show questions tagged &#39;refactoring&#39;" rel="tag">refactoring</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/c%2b%2b" class="post-tag" title="show questions tagged &#39;c++&#39;" rel="tag">c++</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">961</span></span><br>
+<a href="/questions/tagged/optimization" class="post-tag" title="show questions tagged &#39;optimization&#39;" rel="tag">optimization</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">786</span></span><br>
+<a href="/questions/tagged/refactoring" class="post-tag" title="show questions tagged &#39;refactoring&#39;" rel="tag">refactoring</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">371</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2012-06-02 19:04:57Z"><b>1 year ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>541 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2012-06-04 05:45:32Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/beta/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=codereview.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/2398" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">5
+    </div>
+</a><a href="/questions/2398/any-feedback-on-my-home-made-stopwatch-h-source-code" class="question-hyperlink">Any feedback on my home-made Stopwatch.h source code?</a>
+</div>
+<div class="spacer">
+<a href="/q/2623" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/2623/better-way-to-decode-binary-coded-decimal-bcd-value" class="question-hyperlink">Better way to decode binary coded decimal (BCD) value</a>
+</div>
+<div class="spacer">
+<a href="/q/5314" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/5314/any-tips-on-how-to-improve-this-simple-recursion-program" class="question-hyperlink">Any tips on how to improve this simple recursion program?</a>
+</div>
+<div class="spacer">
+<a href="/q/6780" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">6
+    </div>
+</a><a href="/questions/6780/c-homework-looking-for-comments-feedback-critic-of-my-algorithm" class="question-hyperlink">C++ Homework: Looking for comments/feedback/critic of my algorithm</a>
+</div>
+<div class="spacer">
+<a href="/q/7576" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/7576/bigint-binary-division-algorithm-optimization" class="question-hyperlink">BigInt binary division algorithm optimization</a>
+</div>
+<div class="spacer">
+<a href="/q/9336" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/9336/is-there-any-way-to-make-this-program-run-faster" class="question-hyperlink">Is there any way to make this program run faster?</a>
+</div>
+<div class="spacer">
+<a href="/q/12460" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/12460/how-can-i-make-a-simple-number-guessing-game-more-efficient" class="question-hyperlink">How can I make a simple number guessing game more efficient?</a>
+</div>
+<div class="spacer">
+<a href="/q/13424" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/13424/improving-a-custom-integer-class-2-0" class="question-hyperlink">Improving a custom integer class 2.0</a>
+</div>
+<div class="spacer">
+<a href="/q/28986" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/28986/more-efficient-way-to-retrieve-data-from-json" class="question-hyperlink">More efficient way to retrieve data from JSON</a>
+</div>
+<div class="spacer">
+<a href="/q/31813" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/31813/a-simple-c-console-application-for-math" class="question-hyperlink">A Simple C++ Console Application for math</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/12233" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/12233/ivc/4ddd');});
+</script>
+<noscript>
+    <div><img src="/posts/12233/ivc/4ddd" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-cpp</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/12233/is-there-any-way-to-improve-this-simple-encryption-algorithm")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codereview.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.22.1174
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Code Review Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|c++|optimization|refactoring|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

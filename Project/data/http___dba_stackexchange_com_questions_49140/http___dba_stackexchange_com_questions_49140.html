@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Are there any problems with deploying an SQL Server database to a production server by taking a backup? - Database Administrators Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/dba/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/dba/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Database Administrators Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackDBAs" />
+    <meta name="twitter:domain" content="dba.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/dba/img/apple-touch-icon@2.png?v=246e2cb2439c"/>
+    <meta name="og:title" content="Are there any problems with deploying an SQL Server database to a production server by taking a backup?" />
+    <meta name="og:description" content="This is a slightly loaded question in that I have already assumed that the described scenario is wrong.
+
+A DBA is deploying an application I have written that includes an MS SQL Server 2008 databas..." />
+    <meta name="og:url" content="http://dba.stackexchange.com/questions/49140/are-there-any-problems-with-deploying-an-sql-server-database-to-a-production-ser"/>
+    <link rel="canonical" href="http://dba.stackexchange.com/questions/49140/are-there-any-problems-with-deploying-an-sql-server-database-to-a-production-ser" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/dba/all.css?v=9de8a29ebe20">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Are there any problems with deploying an SQL Server database to a production server by taking a backup?&#39;" href="/feeds/question/49140">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:7,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:49140});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('182', '49140');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('182');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385149182,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Database Administrators Stack Exchange","description":"Q&A for database professionals who wish to improve their database skills and learn from others in the community","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"595e453a90deb79876026b8ee52ee2b4","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f49140%2fare-there-any-problems-with-deploying-an-sql-server-database-to-a-production-ser">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f49140%2fare-there-any-problems-with-deploying-an-sql-server-database-to-a-production-ser">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Database Administrators
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/dba/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Database Administrators Stack Exchange is a question and answer site for database professionals who wish to improve their database skills and learn from others in the community. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/49140/are-there-any-problems-with-deploying-an-sql-server-database-to-a-production-ser" class="question-hyperlink">Are there any problems with deploying an SQL Server database to a production server by taking a backup?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="49140"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="49140">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">7</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>This is a slightly loaded question in that I have already assumed that the described scenario is wrong.</p>
+
+<p>A DBA is deploying an application I have written that includes an MS SQL Server 2008 database. He has asked me to take a database backup from my development machine so he can restore it to the production server, thus deploying it. This is a greenfield deployment so there is no existing data to be migrated. I was expecting to provide a DDL script, which I have diligently tested and ensured that it contains everything required. If I execute it in SSMS, the database is created in one click.</p>
+
+<p>To me, using the backup facility for deployment does not seem right, but without being an expert in SQL server I can't think of a solid reason not to do it. I would have thought, for example, that there would be some 'contamination' of the database from the development machine - perhaps the computer name, directory structure or user names stored in there somewhere. Is this the case, or is backup and restore a valid deployment technique? </p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/sql-server" class="post-tag" title="show questions tagged &#39;sql-server&#39;" rel="tag">sql-server</a> <a href="/questions/tagged/sql-server-2008-r2" class="post-tag" title="show questions tagged &#39;sql-server-2008-r2&#39;" rel="tag">sql-server-2008-r2</a> <a href="/questions/tagged/deployment" class="post-tag" title="show questions tagged &#39;deployment&#39;" rel="tag">deployment</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/49140" title="short permalink to this question" class="short-link" id="link-post-49140">share</a><span class="lsep">|</span><a href="/posts/49140/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/49140/revisions" title="show all edits to this post">edited <span title="2013-09-03 03:35:44Z" class="relativetime">Sep 3 at 3:35</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-09-03 03:12:50Z" class="relativetime">Sep 3 at 3:12</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/16010/stephen-hewlett"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/Rw83i.jpg?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/16010/stephen-hewlett">Stephen Hewlett</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">138</span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-49140" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="2" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-87198" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Why not ask the question like &quot;Is it okay to...&quot; instead of stating the question as if there is something wrong with it?</span>
+	&ndash;&nbsp;
+		<a href="/users/1186/aaron-bertrand" 
+		   title="45708 reputation" 
+		   class="comment-user">Aaron Bertrand<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 03:23:53Z" class="relativetime-clean">Sep 3 at 3:23</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-87199" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">...because I am more interested in discovering unknown disadvantages of the approach than finding advantages that the DBA is already aware of</span>
+	&ndash;&nbsp;
+		<a href="/users/16010/stephen-hewlett" 
+		   title="138 reputation" 
+		   class="comment-user owner">Stephen Hewlett</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 03:28:28Z" class="relativetime-clean">Sep 3 at 3:28</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-87200" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">But your question is still stated like &quot;I know this is bad, but tell me why!&quot; Why not ask &quot;are there any unknown disadvantages...?&quot; if that&#39;s the question you&#39;re really trying to ask?</span>
+	&ndash;&nbsp;
+		<a href="/users/1186/aaron-bertrand" 
+		   title="45708 reputation" 
+		   class="comment-user">Aaron Bertrand<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 03:33:25Z" class="relativetime-clean">Sep 3 at 3:33</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-87234" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">And are you talking about a one-time, initial deployment, or deployment of changes, too? To me, those are very different questions.</span>
+	&ndash;&nbsp;
+		<a href="/users/1186/aaron-bertrand" 
+		   title="45708 reputation" 
+		   class="comment-user">Aaron Bertrand<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 13:30:17Z" class="relativetime-clean">Sep 3 at 13:30</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-87462" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">FYI about &quot;the metadata that SQL server stores behind the scenes&quot;: yes, there is some, it is preserved across backup/restore and you <i>can</i> be hit by the problem. Read <a href="http://stackoverflow.com/q/2723061/105929">stackoverflow.com/q/2723061/105929</a>, <a href="http://dba.stackexchange.com/q/39500/708">dba.stackexchange.com/q/39500/708</a></span>
+	&ndash;&nbsp;
+		<a href="/users/708/remus-rusanu" 
+		   title="25040 reputation" 
+		   class="comment-user">Remus Rusanu</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-05 11:36:46Z" class="relativetime-clean">Sep 5 at 11:36</span></span>
+		<span class="edited-yes" title="this comment was edited 2 times"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-49140" 
+			   class="comments-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">show <b>2</b> more comments</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								4 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/49140/are-there-any-problems-with-deploying-an-sql-server-database-to-a-production-ser?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/49140/are-there-any-problems-with-deploying-an-sql-server-database-to-a-production-ser?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/49140/are-there-any-problems-with-deploying-an-sql-server-database-to-a-production-ser?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="49147"></a>
+<div id="answer-49147" class="answer accepted-answer" data-answerid="49147" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="49147">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">8</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Everything is wrong with using backup files as deployment. But the burden is not on the DBA to provide the DDL, is on development. Your design and development artifacts should had been database installation and upgrade scripts. Never change anything in the database manually, everything should be modified using your app. Rails gets this in spades with he whole <a href="http://guides.rubyonrails.org/migrations.html">migrations</a> infrastructure and you should try to adopt it too. I have for long advocated using similar techniques, see <a href="http://rusanu.com/2009/05/15/version-control-and-your-database/">Version Control and your Database</a>.</p>
+
+<p>First let me make the case why source code based deployment/upgrade is superior to binary based deployment (.bak, or diff tools):</p>
+
+<ul>
+<li>source code can be checked in into source control. This alone should settle the whole argument. Source control gives yo history, a future you can look back and read the check in notes, understand the reasoning behind current state. </li>
+<li>source code can be quickly inspected at a glance. You look at it and read it. binary databases require to be attached and require extensive knowledge of the metadata catalogs to read even the basic properties</li>
+<li>source code is clean. You see <code>CREATE TABLE Foo (...)</code>, which clearly conveys the intent. Binary distribution, if you want to extract the object, showers you in a plethora of default properties. You loose the original intent.</li>
+<li>source code can be peer reviewed at check in.</li>
+<li>source code integrates in contiguous deployment </li>
+</ul>
+
+<p>And I also have arguments why deploying by backup is bad (very bad):</p>
+
+<ul>
+<li>you only postponed the issue. The very first update of the app will face the issue of deploying an update without loosing the data. This can occur the next day after deployment, when an issue is noticed in production, and you will be left facing the void: how to modify the production DB to match the dev DB?</li>
+<li>Databases are not self contained. Deployment invokes objects outside DB (logins, SQL Agent jobs, maintenance plan etc) none of which can be deployed with a backup.</li>
+<li>You never know what you deployed. Forgotten tables left over during dev? Test data? Is very difficult to cleanup a database, but keeping your source code up to date and correct is natural.</li>
+</ul>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/49147" title="short permalink to this answer" class="short-link" id="link-post-49147">share</a><span class="lsep">|</span><a href="/posts/49147/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-09-03 06:53:30Z" class="relativetime">Sep 3 at 6:53</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/708/remus-rusanu"><div><img src="https://www.gravatar.com/avatar/414213a8181616151fe73334532746ab?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/708/remus-rusanu">Remus Rusanu</a><br>
+        <span class="reputation-score" title="reputation score 25040" dir="ltr">25k</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="27 silver badges"><span class="badge2"></span><span class="badgecount">27</span></span><span title="72 bronze badges"><span class="badge3"></span><span class="badgecount">72</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-49147" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-87232" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I thought that the question focused on initial deployment, not periodic deployment. At least that&#39;s the context I used to answer.</span>
+	&ndash;&nbsp;
+		<a href="/users/1186/aaron-bertrand" 
+		   title="45708 reputation" 
+		   class="comment-user">Aaron Bertrand<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 13:28:24Z" class="relativetime-clean">Sep 3 at 13:28</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-87262" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@AaronBertrand Sometimes answering a question means pointing out answers to unasked or un-thought-of (word?) questions.</span>
+	&ndash;&nbsp;
+		<a href="/users/653/wernercd" 
+		   title="238 reputation" 
+		   class="comment-user">WernerCD</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 17:10:38Z" class="relativetime-clean">Sep 3 at 17:10</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-87271" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@WernerCD yes, thanks, I&#39;m familiar with the concept. Remus&#39; answer, however, reads like a point-by-point dissertation on why you shouldn&#39;t use backup/restore for dot-release deployments, and seems to ignore the actual use case (initial deployment).</span>
+	&ndash;&nbsp;
+		<a href="/users/1186/aaron-bertrand" 
+		   title="45708 reputation" 
+		   class="comment-user">Aaron Bertrand<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 18:07:08Z" class="relativetime-clean">Sep 3 at 18:07</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-49147" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="49141"></a>
+<div id="answer-49141" class="answer" data-answerid="49141" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="49141">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">6</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>No, there is nothing wrong with using a backup for <strong><em>initial</em></strong> deployment, in fact I would say that this is often the safest way to do it. There isn't really any "contamination" that can happen unless you have hard-coded things like server names or database names that are different in production than in the test environment. </p>
+
+<p>Though a backup / restore (much like your own DDL script restricted to the database) won't bring along things like server-level logins, linked servers, SQL Agent jobs, etc. </p>
+
+<p>There are some other side benefits that you get with a backup that you don't necessarily get with a DDL script, for example if you created your original table like this:</p>
+
+<pre><code>CREATE TABLE dbo.foo
+(
+  bar INT PRIMARY KEY,
+  mort INT FOREIGN KEY REFERENCES dbo.mort(MortID),
+  x TINYINT CHECK (x IN (1,2)),
+  y INT NOT NULL DEFAULT 1
+);
+</code></pre>
+
+<p>All of these constraints have system-generated names, like <code>PK__foo__DE90ECFFA28BBAB8</code>. When you run this same script in production, the name will be different, unless you scripted that exact table definition from the test environment. This can cause problems later if you generate drop/create/alter scripts from test and need to run them in production.</p>
+
+<p>You will also get all of the data in lookup tables etc. when you take a backup, which you'll manually have to script in order to get that data onto production. (Though you have to be sure to clear out any test data that you <em>don't</em> want in production, too.)</p>
+
+<p>And a weakness of scripting this out yourself is that you have to ensure all of the objects are created in the correct dependency order. You may have dependencies in place in test that are missing in production because the objects weren't generated in the correct order.</p>
+
+<p>When it comes down to it, a backup is just cleaner. And you should be testing the database when it is deployed, so you should find any "contaminations" quite quickly, and correct them in both environments.</p>
+
+<p>Once the database is initially deployed, obviously the only way to deploy changes at a later date is to script them. I've had great luck generating compare / deploy scripts using Red-Gate's SQL Compare. While Remus is absolutely right, that source control is the best solution to this, in reality source control is usually going to store a <code>CREATE TABLE</code> script, which doesn't get you very far when you've added a column and changed another column's data type - you still need to build some kind of diff script that will apply only the changes to production, not drop and re-create the table.</p>
+
+<p>If you have things like local lookup tables that are in other databases or could be in different servers, then instead of hard-coding those names in your code, you should use synonyms. Then you only have to ensure the synonyms are correct in each environment, rather than finding all the three/four part names in all of your modules and updating them upon deployment. And if you have local file paths that differ between environments, use a central properties table instead of hard-coding those paths into your procedures etc.</p>
+
+<p>In theory you could use a backup and restore methodology later but that does not work well if the production database is already in use - it gets kind of tricky to restore a database from test and not lose any of the data that has been collected in production.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/49141" title="short permalink to this answer" class="short-link" id="link-post-49141">share</a><span class="lsep">|</span><a href="/posts/49141/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/49141/revisions" title="show all edits to this post">edited <span title="2013-09-03 15:46:05Z" class="relativetime">Sep 3 at 15:46</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-09-03 03:23:17Z" class="relativetime">Sep 3 at 3:23</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1186/aaron-bertrand"><div><img src="https://www.gravatar.com/avatar/3881a283f3dff68791acf089f6a69f4f?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1186/aaron-bertrand">Aaron Bertrand</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score 45708" dir="ltr">45.7k</span><span title="5 gold badges"><span class="badge1"></span><span class="badgecount">5</span></span><span title="56 silver badges"><span class="badge2"></span><span class="badgecount">56</span></span><span title="119 bronze badges"><span class="badge3"></span><span class="badgecount">119</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-49141" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-87250" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I think it&#39;s better to avoid contamination than go with it and try to find it in testing, although my notion of &#39;contamination&#39; is currently quite abstract and could be ungrounded.</span>
+	&ndash;&nbsp;
+		<a href="/users/16010/stephen-hewlett" 
+		   title="138 reputation" 
+		   class="comment-user owner">Stephen Hewlett</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 15:27:04Z" class="relativetime-clean">Sep 3 at 15:27</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-87251" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@StephenHewlett well we can&#39;t predict what we don&#39;t know about your environment. The best way to avoid contamination is to not write things that hard-code local server and database names, file paths etc. that could be different if the database is moved to another server. If you build a script you could miss those the same you miss it by taking a database backup.</span>
+	&ndash;&nbsp;
+		<a href="/users/1186/aaron-bertrand" 
+		   title="45708 reputation" 
+		   class="comment-user">Aaron Bertrand<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 15:41:15Z" class="relativetime-clean">Sep 3 at 15:41</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-87255" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I created the database from the script rather than the other way round, so I know there is nothing hard coded in &#39;my&#39; data. It&#39;s more the metadata that SQL server stores behind the scenes - or potential lack thereof - that I was thinking about.</span>
+	&ndash;&nbsp;
+		<a href="/users/16010/stephen-hewlett" 
+		   title="138 reputation" 
+		   class="comment-user owner">Stephen Hewlett</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 16:04:15Z" class="relativetime-clean">Sep 3 at 16:04</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-49141" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="49153"></a>
+<div id="answer-49153" class="answer" data-answerid="49153" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="49153">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>I say don't do it.  Use an SQL script made from as standard as possible statements as you can make, taking note of what SQL server versions that version of the script worked for.</p>
+
+<p>I've had problems with software that was distributed via a backup when I've needed to do a re-install of the software at a much later date.</p>
+
+<p>Due to the age of the original backup image used for deployment and no newer one available, I had to use an old version of SQL server, as the newer versions of SQL Server did not support the old format backup.  Then in the process of applying nearly all of the application updates in sequence I had to apply an SQL server upgrade over the top of the old SQL server version due to the application update requiring a newer SQL server version than was originally required by the old version "deployment backup" image.</p>
+
+<p>As a DBA I found this VERY frustrating to figure out and then actually perform the required steps.  As an extra bonus I was doing this during a disaster recovery situation so I could restore the current production database from backup, as it required the latest version of the software which would not install without it installing the original "deployment backup".</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/49153" title="short permalink to this answer" class="short-link" id="link-post-49153">share</a><span class="lsep">|</span><a href="/posts/49153/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-09-03 08:45:50Z" class="relativetime">Sep 3 at 8:45</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/27770/beowulfnode42"><div><img src="https://www.gravatar.com/avatar/9d4bc60f3ef48f00e3354b7acab85fe1?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/27770/beowulfnode42">BeowulfNode42</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">129</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-49153" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-49153" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="49152"></a>
+<div id="answer-49152" class="answer" data-answerid="49152" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="49152">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>I think the answer to this in both yes and no. You said:</p>
+
+<blockquote>
+  <p>This is a greenfield deployment so there is no existing data to be
+  migrated.</p>
+</blockquote>
+
+<p>If this is an initial deployment then I see no issue with taking a backup of a development database to use in production. Saying that, you (or hopefully your DBA) would obviously have to cleanse the database and remove any security users and other gubbins that might have been restored with the database backup. </p>
+
+<p><strong>However:</strong></p>
+
+<p>As a long term solution, no, this is not a good deployment technique as once a client has started using the database, they will have their data in there so you cannot restore your database over theirs.</p>
+
+<p>So going back to the initial deploy, it's fine to restore a backup of an empty database, but this is the point at which you would start to use version control to manage updates and future deployment, thus maintaining a clean deployable version of the database.</p>
+
+<p><strong>Steps:</strong></p>
+
+<ol>
+<li>Create your clean database (restored from a backup if needs be)</li>
+<li>Version control it at this point</li>
+<li>Script any updates to the database and version control them</li>
+<li>When a new version/release is ready to deploy, execute any new scripts against clean database to get it from version X to version Y and then update the version you have in source control.</li>
+<li>Finally, you would execute the scripts against the client database to update it.</li>
+</ol>
+
+<p>Any updates you make to the database would be tested locally before deployment and updating a client database would simply be a case of running the scripts that gets them from one version to another. Source control would give you the history between clean versions of the database along with the scripts that were applied.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/49152" title="short permalink to this answer" class="short-link" id="link-post-49152">share</a><span class="lsep">|</span><a href="/posts/49152/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/49152/revisions" title="show all edits to this post">edited <span title="2013-09-03 09:26:33Z" class="relativetime">Sep 3 at 9:26</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-09-03 08:43:09Z" class="relativetime">Sep 3 at 8:43</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/18834/tanner"><div><img src="https://www.gravatar.com/avatar/e7c1e8d5d2fb2cb2a59b0cee25bac0e7?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/18834/tanner">Tanner</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">163</span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-49152" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="1" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-87209" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">don&#39;t forget that occasionally they will need to re-install from scratch (software-wise) and restore their own data from backup, and what sequence they&#39;ll need to go through with that.</span>
+	&ndash;&nbsp;
+		<a href="/users/27770/beowulfnode42" 
+		   title="129 reputation" 
+		   class="comment-user">BeowulfNode42</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 08:48:40Z" class="relativetime-clean">Sep 3 at 8:48</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-87210" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">reinstall the DBMS or the application that sits on top of it?</span>
+	&ndash;&nbsp;
+		<a href="/users/18834/tanner" 
+		   title="163 reputation" 
+		   class="comment-user">Tanner</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 08:51:15Z" class="relativetime-clean">Sep 3 at 8:51</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-87328" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">all 3 of DMBS, application, and their own data, as I am talking about a full disaster recovery situation, where they do not have a full system image.</span>
+	&ndash;&nbsp;
+		<a href="/users/27770/beowulfnode42" 
+		   title="129 reputation" 
+		   class="comment-user">BeowulfNode42</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 22:52:59Z" class="relativetime-clean">Sep 3 at 22:52</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-87349" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I don&#39;t think rebuilding a server of installing it&#39;s software in a disaster recovery situation is relevant to this question? With regards to the deployment of a database, in a disaster recovery situation the dba would simply restore a backup from the previous night to get the latest database online, assuming that it is done nightly.</span>
+	&ndash;&nbsp;
+		<a href="/users/18834/tanner" 
+		   title="163 reputation" 
+		   class="comment-user">Tanner</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-04 07:59:05Z" class="relativetime-clean">Sep 4 at 7:59</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-87366" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">That would be fine if the server itself survived the disaster.  However some disasters require that a server be totally rebuilt with fresh hardware and with fresh installs of everything including DBMS, and the application, and only then can the database backup be restored.  It is the fresh install or deployment of a system ready to receive the current database backup that I am talking about.  This is likely to be happening years and multiple major versions after the initial original deployment.</span>
+	&ndash;&nbsp;
+		<a href="/users/27770/beowulfnode42" 
+		   title="129 reputation" 
+		   class="comment-user">BeowulfNode42</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-04 10:29:08Z" class="relativetime-clean">Sep 4 at 10:29</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-49152" 
+			   class="comments-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">show <b>1</b> more comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/49140/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="49140" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="595e453a90deb79876026b8ee52ee2b4">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f49140%2fare-there-any-problems-with-deploying-an-sql-server-database-to-a-production-ser%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f49140%2fare-there-any-problems-with-deploying-an-sql-server-database-to-a-production-ser%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/sql-server" class="post-tag" title="show questions tagged &#39;sql-server&#39;" rel="tag">sql-server</a> <a href="/questions/tagged/sql-server-2008-r2" class="post-tag" title="show questions tagged &#39;sql-server-2008-r2&#39;" rel="tag">sql-server-2008-r2</a> <a href="/questions/tagged/deployment" class="post-tag" title="show questions tagged &#39;deployment&#39;" rel="tag">deployment</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/sql-server" class="post-tag" title="show questions tagged &#39;sql-server&#39;" rel="tag">sql-server</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">5389</span></span><br>
+<a href="/questions/tagged/sql-server-2008-r2" class="post-tag" title="show questions tagged &#39;sql-server-2008-r2&#39;" rel="tag">sql-server-2008-r2</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">1159</span></span><br>
+<a href="/questions/tagged/deployment" class="post-tag" title="show questions tagged &#39;deployment&#39;" rel="tag">deployment</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">20</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-09-03 03:12:50Z"><b>2 months ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>338 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-09-03 15:46:05Z">2 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-dba.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/dba/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=dba.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/39500" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">0</div>
+	</a>
+	<a href="/questions/39500/why-is-cdc-capture-failing-due-to-a-missing-dbo-principal" class="question-hyperlink">Why is CDC capture failing due to a missing dbo principal</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/14518" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/14518/rolling-changes-to-production-databases" class="question-hyperlink">Rolling changes to production databases</a>
+</div>
+<div class="spacer">
+<a href="/q/16396" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/16396/microsoft-sql-server-2008-encryption-over-multiple-db-versions" class="question-hyperlink">Microsoft SQL Server 2008 encryption over multiple DB versions</a>
+</div>
+<div class="spacer">
+<a href="/q/17103" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/17103/automatically-execute-stored-procedure-after-any-restore-database-event" class="question-hyperlink">Automatically Execute Stored Procedure After Any RESTORE DATABASE Event</a>
+</div>
+<div class="spacer">
+<a href="/q/19752" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/19752/problem-restoring-a-database-in-sql-server" class="question-hyperlink">Problem restoring a database in SQL Server</a>
+</div>
+<div class="spacer">
+<a href="/q/22759" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/22759/sql-server-job-deployment" class="question-hyperlink">SQL server job deployment</a>
+</div>
+<div class="spacer">
+<a href="/q/23911" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/23911/error-restoring-backup-in-sql-server-old-server-version" class="question-hyperlink">Error restoring backup in sql server. Old server version</a>
+</div>
+<div class="spacer">
+<a href="/q/25627" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">9
+    </div>
+</a><a href="/questions/25627/sql-server-database-synchronization" class="question-hyperlink">SQL Server database synchronization</a>
+</div>
+<div class="spacer">
+<a href="/q/25755" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/25755/taking-a-backup-of-a-single-table-in-the-sql-server" class="question-hyperlink">Taking a backup of a single table in the SQL Server</a>
+</div>
+<div class="spacer">
+<a href="/q/43489" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/43489/how-to-setup-sql-active-active-cluster-to-achieve-blue-green-instance-switchin" class="question-hyperlink">How to setup SQL active/active cluster to achieve Blue / Green instance switching?</a>
+</div>
+<div class="spacer">
+<a href="/q/48378" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/48378/schema-change-update-script-for-database-deploy" class="question-hyperlink">Schema Change/Update script for Database deploy</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/49140" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/49140/ivc/4c9d');});
+</script>
+<noscript>
+    <div><img src="/posts/49140/ivc/4c9d" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-sql</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://dba.blogoverflow.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/49140/are-there-any-problems-with-deploying-an-sql-server-database-to-a-production-ser")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.dba.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.22.1174
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Database Administrators Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|sql-server|sql-server-2008-r2|deployment|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>design - Integrating with a payment provider; Proper and robust OOP approach - Programmers Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/programmers/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/programmers/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Programmers Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackProgrammer" />
+    <meta name="twitter:domain" content="programmers.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/programmers/img/apple-touch-icon@2.png?v=8a6d048f3c78"/>
+    <meta name="og:title" content="Integrating with a payment provider; Proper and robust OOP approach" />
+    <meta name="og:description" content="History
+
+We are currently using a so called redirect model for our online payments (where you send the payer to a payment gateway, where he inputs his payment details - the gateway will then return..." />
+    <meta name="og:url" content="http://programmers.stackexchange.com/questions/164909/integrating-with-a-payment-provider-proper-and-robust-oop-approach"/>
+    <link rel="canonical" href="http://programmers.stackexchange.com/questions/164909/integrating-with-a-payment-provider-proper-and-robust-oop-approach" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/programmers/all.css?v=a937ba87a7fe">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Integrating with a payment provider; Proper and robust OOP approach&#39;" href="/feeds/question/164909">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:4,shownCommentCount:4,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:164909});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('131', '164909');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('131');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385133656,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Programmers Stack Exchange","description":"Q&A for professional programmers interested in conceptual questions about software development","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f164909%2fintegrating-with-a-payment-provider-proper-and-robust-oop-approach">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f164909%2fintegrating-with-a-payment-provider-proper-and-robust-oop-approach">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Programmers
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/programmers/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Programmers Stack Exchange is a question and answer site for professional programmers interested in conceptual questions about software development. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/164909/integrating-with-a-payment-provider-proper-and-robust-oop-approach" class="question-hyperlink">Integrating with a payment provider; Proper and robust OOP approach</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="164909"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="164909">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">7</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>5</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <h3>History</h3>
+
+<p>We are currently using a so called redirect model for our online payments (where you send the payer to a payment gateway, where he inputs his payment details - the gateway will then return him to a success/failure callback page). That's easy and straight-forward, but unfortunately quite inconvenient and at times confusing for our customers (leaving the site, changing their credit card details with an additional login on another site etc).</p>
+
+<h3>Intention &amp; Problem description</h3>
+
+<p>We are now intending to switch to an integrated approach using an exchange of XML requests and responses. My problem is on how to cater with all (or rather most) of the things that may happen during processing - bearing in mind that normally simplicity is robust whereas complexity is fragile. </p>
+
+<h3>Examples</h3>
+
+<ul>
+<li>User abort: The user inputs Credit Card details and hits submit. An XML message to the provider's gateway is sent and waiting for response. The user hits "stop" in his browser or closes the window.
+<ul>
+<li>ignore_user_abort() in PHP may be an option - but is that reliable?</li>
+<li>might it be better to redirect the user to a "please wait"-page, that in turn opens an AJAX or other request to the actual processor that does not rely on the connection? </li>
+</ul></li>
+<li>Database goes away
+<ul>
+<li>sounds over-complicated, but with e.g. a webserver in the States and a DB in the UK, it has happened and will happen again: User clicks together his order, payment request has been sent to the provider but the response cannot be stored in the database. What approach could I use, using PHP to sort of start an SQL like "Transaction" that only at the very end gets committed or rolled back, depending on the individual steps? Should then neither commit or roll back have happened, I could sort of "lock" the user to prevent him from paying again or to improperly account for payments - but how?</li>
+</ul></li>
+<li>And what else do I need to consider technically? None of the integration examples of e.g. Worldpay, Realex or SagePay offer any insight, and either my search engine or my search terms weren't good enough to find somebody else's thoughts on this.</li>
+</ul>
+
+<p>Thank you very much for any insight on how you would approach this!</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/design" class="post-tag" title="show questions tagged &#39;design&#39;" rel="tag">design</a> <a href="/questions/tagged/php" class="post-tag" title="show questions tagged &#39;php&#39;" rel="tag">php</a> <a href="/questions/tagged/payment" class="post-tag" title="show questions tagged &#39;payment&#39;" rel="tag">payment</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/164909" title="short permalink to this question" class="short-link" id="link-post-164909">share</a><span class="lsep">|</span><a href="/posts/164909/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/164909/revisions" title="show all edits to this post">edited <span title="2012-09-17 08:07:26Z" class="relativetime">Sep 17 '12 at 8:07</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2012-09-14 15:49:05Z" class="relativetime">Sep 14 '12 at 15:49</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/64252/externaluse"><div><img src="https://www.gravatar.com/avatar/8ce051c0c10ccf440d318d36f2b25ea5?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/64252/externaluse">ExternalUse</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">135</span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-164909" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-316066" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Just use Stripe. Avoid headaches.</span>
+	&ndash;&nbsp;
+		<a href="/users/61820/serg" 
+		   title="1604 reputation" 
+		   class="comment-user">Serg</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-14 19:37:48Z" class="relativetime-clean">Sep 14 '12 at 19:37</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-316074" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I&#39;ve had a look at Stripe - they are charging 2.39% plus 30 cents per transaction! That would cost me about 12 Grand a year - I&#39;m paying 0 percent and 9 pence a transaction...</span>
+	&ndash;&nbsp;
+		<a href="/users/64252/externaluse" 
+		   title="135 reputation" 
+		   class="comment-user owner">ExternalUse</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-14 20:15:36Z" class="relativetime-clean">Sep 14 '12 at 20:15</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-317325" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Please, read [this] it will give you some insight in various payment gateways including XML-based.[1]  
+  [1]: <a href="http://www.vpasp.com/virtprog/vpasp_epsystems.htm" rel="nofollow">vpasp.com/virtprog/vpasp_epsystems.htm</a></span>
+	&ndash;&nbsp;
+		<a href="/users/58553/badar" 
+		   title="325 reputation" 
+		   class="comment-user">Badar</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-16 14:55:19Z" class="relativetime-clean">Sep 16 '12 at 14:55</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-317439" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Hi Badar, unfortunately, that does not answer my question. I know how payment gateways work, and my choice for an XML integration is fixed. I am looking for best-practice and tipps on how to make it robust - maybe my question isn&#39;t specific enough?</span>
+	&ndash;&nbsp;
+		<a href="/users/64252/externaluse" 
+		   title="135 reputation" 
+		   class="comment-user owner">ExternalUse</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-17 08:06:43Z" class="relativetime-clean">Sep 17 '12 at 8:06</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-164909" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								3 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/164909/integrating-with-a-payment-provider-proper-and-robust-oop-approach?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/164909/integrating-with-a-payment-provider-proper-and-robust-oop-approach?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/164909/integrating-with-a-payment-provider-proper-and-robust-oop-approach?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="165153"></a>
+<div id="answer-165153" class="answer" data-answerid="165153" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="165153">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">5</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>As a developer working almost exclusively with payments I perhaps can give you some pointers about where the possible pitfalls are. I'm working for a site with high traffic, ~40 active payment service providers (PSPs) and dealing with tens of thousands transactions per day. And trust me, the sh*t will always hit the fan and all you can do is prepare as much as possible for dealing with the situation from that point.</p>
+
+<h3>Log, log and log some more...</h3>
+
+<p>This is the most important part in your payment process, make sure you have a record of <strong>everything</strong>. Ask yourself the questions "could this piece of information help me once in a million transactions?". If the answer is yes, log it!</p>
+
+<p>Our setup is that the main point of logging is the database. Every initiated, failed, settled, redirected, etc transaction is stored per PSP in tables. If the PSP uses an API, all API-calls are logged (both requests sent and responses). All callbacks are logged in tables as well. And so forth..</p>
+
+<p>When we encounter an unexpected event or exception we log it to the PHP log file with a certain format to make it searchable and easily found based on transaction ID, user ID, etc.</p>
+
+<p>You will be grateful that you have all the data if you get sued for example.</p>
+
+<h3>Monitoring and alerts</h3>
+
+<p>Build in monitoring logic with some simple tests that will alert you through email when something goes wrong. For example, if 3 callbacks in a row fails for a PSP. All of these small things that can make you work on resolving issues quickly instead of reacting to them after your customers have made you aware of them (which doesn't always happen) is very important.</p>
+
+<h3>Database transactions</h3>
+
+<p>If you have the luxury of setting up or changing your database structure to support database transactions, for example use InnoDB on MySQL. Take a look at <a href="http://stackoverflow.com/a/2708247/772791">this answer</a> on how to handle it in the code. You should make sure that every step of a transaction is completed or none is, having partially completed transactions is just a burden on you and your system. For example: 1) User completes transaction, 2) User gets rewarded somehow. If not both step 1 and 2 are met here, the transaction should not be set as complete in step 1.</p>
+
+<h3>Technical people to contact</h3>
+
+<p>When you have a technical issue, make sure you have someone technical to contact immediately. Having an account manager is pretty useless, especially if that person decides to mediate between you and their technician. </p>
+
+<p>Live world example that happened to me: one PSP all of the sudden stops working, nothing in our code had changed and they say they haven't changed anything as well. After sending debug information back and forth with them (through their account manager), one of their technicians catches that the WSDL-schema fetches seems off. Then they realize they updated their WSDL-schema and after some debugging I realize that PHP cached the old WSDL-schema. This could've been caught sooner as resolved if I just had a technical person on Skype to contact directly. Or if they just admitted to changing their WSDL-schema, but it's often hard to get a confession out of the PSPs when something goes wrong..</p>
+
+<h3>Final words...</h3>
+
+<p>Prepare all you can and assume that <strong>ANYTHING</strong> can happen :)</p>
+
+<p>Not sure this was exactly the kind of answer you were after, but I'm trying to provide a real world example of payments and how you can prevent the biggest traps and pitfalls. Let me know if there's something you would like me to elaborate on or if you're interested in another topic.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/165153" title="short permalink to this answer" class="short-link" id="link-post-165153">share</a><span class="lsep">|</span><a href="/posts/165153/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-09-17 14:01:57Z" class="relativetime">Sep 17 '12 at 14:01</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/65455/niklas-modess"><div><img src="https://www.gravatar.com/avatar/e308353d68158f1741677735b0548233?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/65455/niklas-modess">Niklas Modess</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">151</span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-165153" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-317543" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">+1 I forgot about mentioning how important distributed transactions are.  Having to maintain a legacy system that integrates with a PP and doesn&#39;t utilize transactions showed me the nightmare scenario firsthand.</span>
+	&ndash;&nbsp;
+		<a href="/users/25476/maple-shaft" 
+		   title="19433 reputation" 
+		   class="comment-user">maple_shaft<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-17 14:42:37Z" class="relativetime-clean">Sep 17 '12 at 14:42</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-317544" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Hi nerdklers, thanks for that - you get a +1 for &quot;log, log and log some more&quot;! I was now considering this approach on &quot;submit&quot;: Lock user session. Insert a payment into the DB as pending. Send the request with no &quot;autosettle&quot; (delayed transaction). Update payment record as &quot;transmitted&quot; if successful. Send &quot;settle&quot; command to PSP. Update payment record as &quot;completed&quot;, and unlock user session. (Locking means writing a flag to the user&#39;s record; should he login whilst transactions are pending he would get a &quot;please call&quot; page.). I&#39;m running out of chars, so I&#39;ll put that as answer for comments.</span>
+	&ndash;&nbsp;
+		<a href="/users/64252/externaluse" 
+		   title="135 reputation" 
+		   class="comment-user owner">ExternalUse</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-17 14:45:31Z" class="relativetime-clean">Sep 17 '12 at 14:45</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-165153" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="165131"></a>
+<div id="answer-165131" class="answer" data-answerid="165131" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="165131">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>In my honest opinion, the best way to to manage transactions through a Payment Gateway is through web services.  A number of different payment gateways offer these kinds of services for competitive flat percentage rates per transaction + the typical credit card commission that the customers credit card will take as well (Eg. <a href="http://www.cybersource.com/" rel="nofollow">Cybersource</a>).  With much everything in life, you get what you pay for, a 9 cent/transaction doesn't exist with a reputable payment processor that doesn't force you to redirect users.</p>
+
+<h2>Tokenization and secure data</h2>
+
+<p>Storing credit card details on your system is just asking for trouble, and depending on where you live there may even be legal requirements and possible criminal laws against how this data is being managed.  Unless you are Amazon, you shouldn't have to worry about all that technical and legal complexity.  The payment processor takes this risk and complexity away from you by having SSL encrypted web services where credit card details can be passed through your site to your server, and from your server to the payment processor web services to submit a payment through your account with the processor.  In return, the web service will give you back an authorization code, or a token that uniquely signifies the transaction on their system, and gives you a reference number for quickly searching through your account for specific transactions.  You can retain the token in your database and it is of no real consequence to the users if the tokens are compromised on your system.  Further by not storing credit card details at all on your system, users bank accounts are safe even if your system has been compromised.</p>
+
+<h2>Retention of payment records</h2>
+
+<p>This approach to integrating with a payment processor has the added benefit of being able to maintain your own payment and purchase records that are seperate from that of your payment processor, yet linked through the token.  This allows you to run revenue reports through your system, analytical queries and users can view their purchases without actually having to query the payment processor for information.</p>
+
+<h2>PCI Compliance</h2>
+
+<p>Any reputable payment processor will have all of their systems and data hosted in PCI Compliant servers and facilities.  For more information on the details of PCI Compliance itself, and why it is important, <a href="https://www.pcisecuritystandards.org/" rel="nofollow">see this site</a>.</p>
+
+<p>There are certain requirements that they must adhere to, their data center must be secured physically as well as technically.  They cannot have any unencrypted WAP's on their network, etc...  None of this will really concern you however there are a number of requirements expected of merchant systems for them to claim PCI Compliance as well.  Some of these requirements include but are not limited to:</p>
+
+<ul>
+<li><p>Using SSL encryption on any payment request through your site.</p></li>
+<li><p>Under no circumstances should there be credit card numbers stored anywhere in any of your systems, including log files and even serialized objects.</p></li>
+<li><p>Application servers communicating with the payment processor must be behind a well configured firewall that only allows the minimum number of open ports required.</p></li>
+<li><p>Only appropriate technical personnel should be allowed physical or remote access to these application servers on your network.</p></li>
+<li><p>Others...</p></li>
+</ul>
+
+<p>Typically most payment processors will provide an online tool that can run on your network and identify possible issues with becoming PCI Compliant.  It is still not a NECESSARY or REQUIRED thing to have to work with a payment processor, but the payment processor reserves the right to charge you additional fees if you utilize their services and do not meet PCI Compliance standards.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/165131" title="short permalink to this answer" class="short-link" id="link-post-165131">share</a><span class="lsep">|</span><a href="/posts/165131/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-09-17 11:38:42Z" class="relativetime">Sep 17 '12 at 11:38</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/25476/maple-shaft"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/6agoK.gif?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/25476/maple-shaft">maple_shaft</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score 19433" dir="ltr">19.4k</span><span title="4 gold badges"><span class="badge1"></span><span class="badgecount">4</span></span><span title="35 silver badges"><span class="badge2"></span><span class="badgecount">35</span></span><span title="91 bronze badges"><span class="badge3"></span><span class="badgecount">91</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-165131" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-317483" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Sorry, but again this does not answer or apply to my question. We do have a reputable Payment processor in (at the moment) both WorldPay and Realex Payments. We have permanent Audits on PCI compliance and are compliant to store partial Credit Card data inhouse, however we use RealVault and FuturePay for recurring storage. My question related to best practices for what I mentioned in my question.</span>
+	&ndash;&nbsp;
+		<a href="/users/64252/externaluse" 
+		   title="135 reputation" 
+		   class="comment-user owner">ExternalUse</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-17 12:14:51Z" class="relativetime-clean">Sep 17 '12 at 12:14</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-317495" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@ExternalUse I felt that I did a pretty good job of explaining what the best practices would be for properly integrating with your payment provider.  Use SSL, do no redirect the user, make secure web service calls to the PP from server side, do not store CC details, maintain separate payment records with your token, and consider PCI Compliance in your design.  If you do not feel I did a good job then perhaps someone else can give a more accurate answer that you are looking for.</span>
+	&ndash;&nbsp;
+		<a href="/users/25476/maple-shaft" 
+		   title="19433 reputation" 
+		   class="comment-user">maple_shaft<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-17 12:55:37Z" class="relativetime-clean">Sep 17 '12 at 12:55</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-165131" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="165159"></a>
+<div id="answer-165159" class="answer" data-answerid="165159" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="165159">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Thanks to ideas from previous answers, I'd like to propose the solution I have now though of; I hope this may invite one or two comments from the cyclopedical knowledge present here and help me to improve it.
+Just for clarification: Although important issues, my question was not dealing with how to choose a Payment Service Provider (PSP), PCI DSS requirements or legal implications of anything, but just technical pitfalls one might stumble across when implementing a "direct" instead of a "redirect" model with any PSP.</p>
+
+<h2>Prerequisites</h2>
+
+<p>The customer is at the stage where he inputs credit card details into your form. I know what he owes and what amount and currency I want to charge to the credit card he submits.</p>
+
+<h2>Solution (?)</h2>
+
+<ol>
+<li>On submit of the form containing the Credit Card details, I will use Javascript to stop the default action on the submit button (which, if JS or AJAX weren't available, could go to an error page telling the user to get a more recent browser...)</li>
+<li>The (repeated by a timer) AJAX request would call a status update script, that in itself triggers the actual processing in a seperate file; using "ignore_user_abort() should the client close the browser or something</li>
+<li>so AJAX calls e.g. the method ->StatusUpdate() - if called for the first time, it would start the process and return "pleasewait", on subsequent calls it would evaluate a session variable or something to update the status</li>
+<li>I would update the user's record in the database to set a "lockSession" flag to "locked" - should something happen before unlock, the user would be told on subsequent logins to contact the office to sort out any mess that may have happend...</li>
+<li>insert a payment record into the DB with a "prepared" status</li>
+<li>Submit the request to the PSP, using the order id of the prepared payment record. Depending on the PSP, the request can be submitted as a delayed transaction (meaning it won't be settled automatically)</li>
+<li>update the prepared record with it's new status (if declined, unlock session and go back to the payment page; if successful, update with status "transmitted")</li>
+<li>If it was successful, we would not have the auth reference and other important details from the PSP - so send "settle" request to the PSP for the obtained auth reference.</li>
+<li>If successful, update the payment record to completed (or in my case, move and update it from PendingTransactions to PaymentTransactions)</li>
+<li>Remove the "lock" flag from the user's record</li>
+</ol>
+
+<h2>Other considerations</h2>
+
+<p>Please understand the above as an invitation to share your knowledge and ideas - they're only ideas so far! </p>
+
+<h3>Logging</h3>
+
+<p>I would very much agree with nerdklers on the logging - I'm currently considering to use some form of file-based logging for every stage of the above process (and to keep logs for a few days even if complete and verified - who knows...)</p>
+
+<h3>Database transactions</h3>
+
+<p>I'm not sure I would agree with using database transactions. We're using MS SQL, and with default settings, any transaction would be rolled back on loss of connection. And when setting the transaction to not auto-commit or auto-rollback, one might end up with a few open DB transactions and some implications on record/table locking etc.
+I think I'll prefer multiple updates in the process; should any of those fail (and the process consequently be terminated) the user would still be prevented from re-submitting a possibly completed (but not yet recorded) transaction until it has been resolved manually.</p>
+
+<h3>AJAX,  political</h3>
+
+<p>I'm not entirely certain whether we still need to consider browsers that won't support AJAX. I guess that's a "political" topic anyway. I think we could afford to take liberties in our business, others may possibly not.</p>
+
+<h3>AJAX, technical</h3>
+
+<p>I'm not so sure about my approach with calling a "StatusUpdate" method asynchronously yet, that will on first call attempt to trigger the actual process. But I shall make this a seperate question should I not find good examples - which I guess I might well find. Anyhow, if you know a best-practice please do let me (and others) know in your comment.</p>
+
+<h3>Final thoughts</h3>
+
+<p>It'd be nice if I had a thought even remotely approaching the term "final" - this if work in progress for me and I am much obliged for any feedback and further hints on how this could be improved.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/165159" title="short permalink to this answer" class="short-link" id="link-post-165159">share</a><span class="lsep">|</span><a href="/posts/165159/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature owner">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-09-17 15:30:48Z" class="relativetime">Sep 17 '12 at 15:30</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/64252/externaluse"><div><img src="https://www.gravatar.com/avatar/8ce051c0c10ccf440d318d36f2b25ea5?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/64252/externaluse">ExternalUse</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">135</span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-165159" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-317550" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Your solution seems sound, but I question the need for that level of effort when in reality a distributed transaction with optimistic record locking on necessary rows can achieve the same thing.  I am not sure about MSSQL, but I am sure it is capable of this if I can do this in InnoDB MySQL.  I am not sure I follow your argument against the use of transactions.</span>
+	&ndash;&nbsp;
+		<a href="/users/25476/maple-shaft" 
+		   title="19433 reputation" 
+		   class="comment-user">maple_shaft<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-17 15:48:53Z" class="relativetime-clean">Sep 17 '12 at 15:48</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-317552" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I am (wrongly?) concerned about what happens should the script terminate whilst processing, or should the database go away (for whichever reason). What happens to the started transaction? Is it committed, rolled back, or left open? And that question may be answered with a, b or c depending on setup and database, I guess. I was considering sharing my development as open-source set of classes should it work as I want it to - after all I get knowledge from the community, so it ought to go back to it.</span>
+	&ndash;&nbsp;
+		<a href="/users/64252/externaluse" 
+		   title="135 reputation" 
+		   class="comment-user owner">ExternalUse</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-17 16:02:58Z" class="relativetime-clean">Sep 17 '12 at 16:02</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-317600" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I would say you&#39;re overthinking this a bit. As long as you keep a record of what is happening, you&#39;ll learn as you go.. I just want to comment this: &quot;(and to keep logs for a few days even if complete and verified - who knows...)&quot;, and say no, no, no :) Keep the logs forever, split them up by day for example, <code>trx_120917.log</code> for example. Logs are very small and disk space is very cheap. Anyhow, good luck with your project!</span>
+	&ndash;&nbsp;
+		<a href="/users/65455/niklas-modess" 
+		   title="151 reputation" 
+		   class="comment-user">Niklas Modess</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-17 21:00:32Z" class="relativetime-clean">Sep 17 '12 at 21:00</span></span>
+		<span class="edited-yes" title="this comment was edited 2 times"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-165159" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/164909/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="164909" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f164909%2fintegrating-with-a-payment-provider-proper-and-robust-oop-approach%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f164909%2fintegrating-with-a-payment-provider-proper-and-robust-oop-approach%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/design" class="post-tag" title="show questions tagged &#39;design&#39;" rel="tag">design</a> <a href="/questions/tagged/php" class="post-tag" title="show questions tagged &#39;php&#39;" rel="tag">php</a> <a href="/questions/tagged/payment" class="post-tag" title="show questions tagged &#39;payment&#39;" rel="tag">payment</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/design" class="post-tag" title="show questions tagged &#39;design&#39;" rel="tag">design</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">1327</span></span><br>
+<a href="/questions/tagged/php" class="post-tag" title="show questions tagged &#39;php&#39;" rel="tag">php</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">1073</span></span><br>
+<a href="/questions/tagged/payment" class="post-tag" title="show questions tagged &#39;payment&#39;" rel="tag">payment</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">17</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2012-09-14 15:49:05Z"><b>1 year ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>356 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2012-09-17 15:30:48Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/programmers/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=programmers.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+</div>
+
+    </div>
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/89355" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">7
+    </div>
+</a><a href="/questions/89355/how-do-you-approach-class-design-in-oops" class="question-hyperlink">How do you approach class design in OOPs?</a>
+</div>
+<div class="spacer">
+<a href="/q/128150" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/128150/is-this-the-correct-approach-to-an-oop-design-structure-in-php" class="question-hyperlink">Is this the correct approach to an OOP design structure in php?</a>
+</div>
+<div class="spacer">
+<a href="/q/140826" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">16
+    </div>
+</a><a href="/questions/140826/do-orms-enable-the-creation-of-rich-domain-models" class="question-hyperlink">Do ORMs enable the creation of rich domain models?</a>
+</div>
+<div class="spacer">
+<a href="/q/163079" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/163079/basic-web-architecture-perl-php" class="question-hyperlink">Basic web architecture : Perl -&gt; PHP</a>
+</div>
+<div class="spacer">
+<a href="/q/189347" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/189347/which-of-these-oop-examples-demonstrate-proper-oop-concepts" class="question-hyperlink">Which of these OOP examples demonstrate proper OOP concepts?</a>
+</div>
+<div class="spacer">
+<a href="/q/190643" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">5
+    </div>
+</a><a href="/questions/190643/which-of-these-oop-examples-demonstrate-proper-oop-concepts" class="question-hyperlink">Which of these OOP examples demonstrate proper OOP concepts?</a>
+</div>
+<div class="spacer">
+<a href="/q/201152" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/201152/oop-design-possible-wrong-approach-makes-it-impossible-to-implement-it-in-code" class="question-hyperlink">OOP Design - Possible wrong approach makes it impossible to implement it in code</a>
+</div>
+<div class="spacer">
+<a href="/q/215367" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/215367/functional-nonfunctional-requirements-vs-design-ideas" class="question-hyperlink">Functional/nonfunctional requirements VS design ideas</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/164909" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/164909/ivc/7f5f');});
+</script>
+<noscript>
+    <div><img src="/posts/164909/ivc/7f5f" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-php</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://programmers.blogoverflow.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/164909/integrating-with-a-payment-provider-proper-and-robust-oop-approach")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.programmers.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.22.1174
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Programmers Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|design|php|payment|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>2d - Moving ships between two planets along a bezier, missing some equations for acceleration - Game Development Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/gamedev/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/gamedev/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Game Development Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackGameDev" />
+    <meta name="twitter:domain" content="gamedev.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/gamedev/img/apple-touch-icon@2.png?v=9bca23db2259"/>
+    <meta name="og:title" content="Moving ships between two planets along a bezier, missing some equations for acceleration" />
+    <meta name="og:description" content="OK, I already posted this over at math.stackechange.com but didn&#39;t get any answers :(
+
+First of here&#39;s a picture of my problem, the description follows afterwards:  
+
+
+
+So I got all the points and ..." />
+    <meta name="og:url" content="http://gamedev.stackexchange.com/questions/5373/moving-ships-between-two-planets-along-a-bezier-missing-some-equations-for-acce"/>
+    <link rel="canonical" href="http://gamedev.stackexchange.com/questions/5373/moving-ships-between-two-planets-along-a-bezier-missing-some-equations-for-acce" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/gamedev/all.css?v=d1ebf56acc72">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Moving ships between two planets along a bezier, missing some equations for acceleration&#39;" href="/feeds/question/5373">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:1,shownCommentCount:1,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:5373});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('53', '5373');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('53');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385157243,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Game Development Stack Exchange","description":"Q&A for professional and independent game developers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"595e453a90deb79876026b8ee52ee2b4","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f5373%2fmoving-ships-between-two-planets-along-a-bezier-missing-some-equations-for-acce">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f5373%2fmoving-ships-between-two-planets-along-a-bezier-missing-some-equations-for-acce">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Game Development
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/gamedev/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Game Development Stack Exchange is a question and answer site for professional and independent game developers. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/5373/moving-ships-between-two-planets-along-a-bezier-missing-some-equations-for-acce" class="question-hyperlink">Moving ships between two planets along a bezier, missing some equations for acceleration</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="5373"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="5373">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">26</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>16</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>OK, I already posted this over at math.stackechange.com but didn't get any answers :(</p>
+
+<p>First of here's a picture of my problem, the description follows afterwards:  </p>
+
+<p><img src="http://i.stack.imgur.com/hXQea.png" alt="alt text"></p>
+
+<p>So I got all the points and values set up.</p>
+
+<p>The ship starts out moving around the left planet <code>P1</code> with <code>S=0.27 Degrees</code> per gametick, when it reaches <code>Point A</code> it starts following the bezier curve till it reaches <code>Point D</code>, then it travels around the right planet <code>P2</code> with <code>S=0.42 Degrees</code> per game tick. The difference in <code>S</code> is so that the travel with the same movement speed around the planets.</p>
+
+<p>So far so good, I got that up and running, now my problem.</p>
+
+<p>When <code>S P1</code> and <code>S P2</code> differ to much, the ship jumps between the two speeds when it reaches it's destination, which looks pretty bad. So I need to accelerate the ship between <code>Point A</code> and <code>Point D</code> from <code>S P1</code> to <code>S P2</code>.</p>
+
+<p>The thing I'm missing are in purple, those are:  </p>
+
+<ul>
+<li><p>A way to calculate the ticks it takes the ship to move along the bezier considering the acceleration.</p></li>
+<li><p>And a way to find a position on the bezier curve based on T, again considering the acceleration.</p></li>
+</ul>
+
+<p>ATM I calculate the length of the bezier by calculating the distance between <code>N</code> of its points. So what I <em>think</em> I need, is a way to scale the <code>T</code> I need to put into my bezier calculation accordingly to the acceleration.</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/2d" class="post-tag" title="show questions tagged &#39;2d&#39;" rel="tag">2d</a> <a href="/questions/tagged/math" class="post-tag" title="show questions tagged &#39;math&#39;" rel="tag">math</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/5373" title="short permalink to this question" class="short-link" id="link-post-5373">share</a><span class="lsep">|</span><a href="/posts/5373/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/5373/revisions" title="show all edits to this post">edited <span title="2010-11-11 00:21:05Z" class="relativetime">Nov 11 '10 at 0:21</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2010-11-09 16:52:48Z" class="relativetime">Nov 9 '10 at 16:52</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1713/ivo-wetzel"><div><img src="https://www.gravatar.com/avatar/b04d74db65a7a2dc6e554e50dd4708b2?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1713/ivo-wetzel">Ivo Wetzel</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">947</span><span title="6 silver badges"><span class="badge2"></span><span class="badgecount">6</span></span><span title="14 bronze badges"><span class="badge3"></span><span class="badgecount">14</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-5373" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-6525" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Good work on figuring that out. I suggest that you post your findings as an answer to your question.</span>
+	&ndash;&nbsp;
+		<a href="/users/20/bummzack" 
+		   title="18161 reputation" 
+		   class="comment-user">bummzack</a>
+	<span class="comment-date" dir="ltr"><span title="2010-11-10 07:40:21Z" class="relativetime-clean">Nov 10 '10 at 7:40</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-5373" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								5 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/5373/moving-ships-between-two-planets-along-a-bezier-missing-some-equations-for-acce?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/5373/moving-ships-between-two-planets-along-a-bezier-missing-some-equations-for-acce?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/5373/moving-ships-between-two-planets-along-a-bezier-missing-some-equations-for-acce?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="5427"></a>
+<div id="answer-5427" class="answer accepted-answer" data-answerid="5427" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="5427">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">38</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>OK, I've got everything working, it took forever, so I'm going to post my detailed solution here.<br>
+<em>Note: All code samples are in JavaScript.</em></p>
+
+<p><strong>So let's break down the problem into the basic parts:</strong>  </p>
+
+<ol>
+<li><p>You need to compute the length of, as well as points between <code>0..1</code> on the bezier curve</p></li>
+<li><p>You now need to adjust the scaling of your <code>T</code> to accelerate the ship from one speed to another</p></li>
+</ol>
+
+<h2><strong>Getting the Bezier right</strong></h2>
+
+<p>Finding some code for drawing a Bezier curve is easy, there are a number of different approaches though, one of them is the <a href="http://www.cubic.org/docs/bezier.htm">DeCasteljau Algorithm</a>, but you can also just use the <a href="http://www.efg2.com/Lab/Graphics/Jean-YvesQueinecBezierCurves.htm">equation</a> for cubic Bézier curves:  </p>
+
+<pre><code>// Part of a class, a, b, c, d are the four control points of the curve
+x: function (t) {
+    return ((1 - t) * (1 - t) * (1 - t)) * this.a.x
+           + 3 * ((1 - t) * (1 - t)) * t * this.b.x
+           + 3 * (1 - t) * (t * t) * this.c.x
+           + (t * t * t) * this.d.x;
+},
+
+y: function (t) {
+    return ((1 - t) * (1 - t) * (1 - t)) * this.a.y
+           + 3 * ((1 - t) * (1 - t)) * t * this.b.y
+           + 3 * (1 - t) * (t * t) * this.c.y
+           + (t * t * t) * this.d.y;
+}
+</code></pre>
+
+<p>With this, one can now draw a bezier curve by calling <code>x</code> and <code>y</code> with <code>t</code> which ranges from <code>0 to 1</code>, let's take a look:  </p>
+
+<p><img src="http://i.stack.imgur.com/TljZY.png" alt="alt text"></p>
+
+<p>Uh... that's not really an even distribution of the points, is it?<br>
+Due to the nature of the Bézier curve, the points on <code>0...1</code> have different <code>arc lenghts</code>, so segments near the beginning and the end, are longer than the ones which are near to the middle of the curve.</p>
+
+<h2><strong>Mapping T evenly on the curve AKA arc-length parameterization</strong></h2>
+
+<p>So what to do? Well in simple terms we need a function to map our <code>T</code> onto the <code>t</code> of the curve, so that our <code>T 0.25</code> results in the <code>t</code> that's at <code>25%</code> of the length of the curve.</p>
+
+<p>How do we do that? Well, we Google... but it turns out that the term isn't that <em>googleable</em>, and at some point you'll hit this <a href="http://www.geometrictools.com/Documentation/MovingAlongCurveSpecifiedSpeed.pdf">PDF</a>. Which sure is a great read, but in the case that you've already forgotten all the math stuff you learned back in school(or you just don't like those mathematical symbols) it's pretty useless.</p>
+
+<p>What now? Well go and Google some more(read: 6 hours), and you finally find a <strong>great</strong> article on the topic(including nice pictures! ^_^"):<br>
+<a href="http://www.planetclegg.com/projects/WarpingTextToSplines.html">http://www.planetclegg.com/projects/WarpingTextToSplines.html</a></p>
+
+<h2><strong>Doing the actual code</strong></h2>
+
+<p>In case you just couldn't resist downloading that PDF's <em>although</em> you'd already lost your mathematical knowledge a long, long, time ago(and you managed to skip the <em>great</em> article link), you might now think: "God, this will take hundreds of lines of code and tons of CPU"</p>
+
+<p>No, it will not. Because we do what all programmers do, when it comes to math stuff:<br>
+<strong>We simply cheat.</strong></p>
+
+<h2><strong>Arc-length parameterization, the lazy way</strong></h2>
+
+<p>Let's face it, we don't need endless precision in our game, do we? So unless you're working at Nasa and planning on sending people the the Mars, you won't need a <code>0.000001 pixel</code> perfect solution.</p>
+
+<p>So how do we map <code>T</code> onto <code>t</code>? It's simple and only consists of 3 steps:  </p>
+
+<ol>
+<li><p>Calculate <code>N</code> points on the curve using <code>t</code> and store the <code>arc-length</code>(aka the length of the curve) at that position into an array</p></li>
+<li><p>To map <code>T</code> onto <code>t</code>, first multiply <code>T</code> by the total length of the curve to get <code>u</code> and then search the array of lengths for the index of the largest value that's smaller than <code>u</code></p></li>
+<li><p>If we had an exact hit, return the array value at that index divided by <code>N</code>, if not interpolate a bit between the point we found and the next one, divide the thing once again by <code>N</code> and return.</p></li>
+</ol>
+
+<p>That's all! So now let's take a look at the complete code:  </p>
+
+<pre><code>function Bezier(a, b, c, d) {
+    this.a = a;
+    this.b = b;
+    this.c = c;
+    this.d = d;
+
+    this.len = 100;
+    this.arcLengths = new Array(this.len + 1);
+    this.arcLengths[0] = 0;
+
+    var ox = this.x(0), oy = this.y(0), clen = 0;
+    for(var i = 1; i &lt;= this.len; i += 1) {
+        var x = this.x(i * 0.05), y = this.y(i * 0.05);
+        var dx = ox - x, dy = oy - y;        
+        clen += Math.sqrt(dx * dx + dy * dy);
+        this.arcLengths[i] = clen;
+        ox = x, oy = y;
+    }
+    this.length = clen;    
+}
+</code></pre>
+
+<p>This initializes our new curve and computes the <code>arg-lenghts</code>, it also stores the last of the lengths as the <code>total length</code> of the curve, key factor here is <code>this.len</code> which is our <code>N</code>. The higher, the more precise the mapping will be, for a curve of the size in the picture above <code>100 points</code> seem to be enough, if you just need a good length estimate, something like <code>25</code> will already do the job with being only 1 pixel off in our example, but then you will have a less precise mapping which will result in not so even distribution of <code>T</code> when mapped to <code>t</code>.</p>
+
+<pre><code>Bezier.prototype = {
+    map: function(u) {
+        var targetLength = u * this.arcLengths[this.len];
+        var low = 0, high = this.len, index = 0;
+        while (low &lt; high) {
+            index = low + (((high - low) / 2) | 0);
+            if (this.arcLengths[index] &lt; targetLength) {
+                low = index + 1;
+
+            } else {
+                high = index;
+            }
+        }
+        if (this.arcLengths[index] &gt; targetLength) {
+            index--;
+        }
+
+        var lengthBefore = this.arcLengths[index];
+        if (lengthBefore === targetLength) {
+            return index / this.len;
+
+        } else {
+            return (index + (targetLength - lengthBefore) / (this.arcLengths[index + 1] - lengthBefore)) / this.len;
+        }
+    },
+
+    mx: function (u) {
+        return this.x(this.map(u));
+    },
+
+    my: function (u) {
+        return this.y(this.map(u));
+    },
+</code></pre>
+
+<p>The actual mapping code, first we do a simple <code>binary search</code> on our stored lengths to find the largest length that's smaller then <code>targetLength</code>, then we just return or do the interpolation and return.</p>
+
+<pre><code>    x: function (t) {
+        return ((1 - t) * (1 - t) * (1 - t)) * this.a.x
+               + 3 * ((1 - t) * (1 - t)) * t * this.b.x
+               + 3 * (1 - t) * (t * t) * this.c.x
+               + (t * t * t) * this.d.x;
+    },
+
+    y: function (t) {
+        return ((1 - t) * (1 - t) * (1 - t)) * this.a.y
+               + 3 * ((1 - t) * (1 - t)) * t * this.b.y
+               + 3 * (1 - t) * (t * t) * this.c.y
+               + (t * t * t) * this.d.y;
+    }
+};
+</code></pre>
+
+<p>Again this computes <code>t</code> on the curve.</p>
+
+<h2><strong>Time for results</strong></h2>
+
+<p><img src="http://i.stack.imgur.com/CfhLZ.png" alt="alt text"></p>
+
+<p>By now using <code>mx</code> and <code>my</code> you get an evenly distributed <code>T</code> on the curve :)</p>
+
+<p>Wasn't that hard, was it? Once again, it turns out that a simple(although not perfect solution) will be enough for a game.</p>
+
+<p>In case you want to see the complete code, there's a Gist available:<br>
+<a href="https://gist.github.com/670236">https://gist.github.com/670236</a></p>
+
+<h2><strong>Finally, accelerating the ships</strong></h2>
+
+<p>So all that's left now is to accelerate the ships along their path, by mapping the position onto <code>T</code> which we then use to find the <code>t</code> on our curve.</p>
+
+<p>First we need two of the <a href="http://en.wikipedia.org/wiki/Equations_of_motion">equations of motion</a>, namely <code>ut + 1/2at²</code> and <code>(v - u) / t</code></p>
+
+<p>In actual code that would look like this:  </p>
+
+<pre><code>startSpeed = getStartingSpeedInPixels() // Note: pixels
+endSpeed = getFinalSpeedInPixels() // Note: pixels
+acceleration = (endSpeed - startSpeed) // since we scale to 0...1 we can leave out the division by 1 here
+position = 0.5 * acceleration * t * t + startSpeed * t;
+</code></pre>
+
+<p>Then we scale that down to <code>0...1</code> by doing:  </p>
+
+<pre><code>maxPosition = 0.5 * acceleration + startSpeed;
+newT = 1 / maxPosition * position;
+</code></pre>
+
+<p>And there you go, the ships are now moving smoothly along the path.</p>
+
+<h2><strong>In case it doesn't work...</strong></h2>
+
+<p>When you're reading this, everything works fine and dandy, but I initially had some problems with the acceleration part, when explaining the problem to someone in the gamedev chatroom I found the final error in my thinking.</p>
+
+<p>In case you haven't forgotten already about the picture in the original question, I mention <code>s</code> there, turns out that <code>s</code> is speed in <strong><em>degrees</em></strong>, but the ships move along the path in <strong><em>pixels</em></strong> and I had forgotten about that fact. So what I needed to do in this case was to convert the displacement in degrees into a displacement in pixels, turns out that this is rather easy:  </p>
+
+<pre><code>function rotationToMovement(planetSize, rotationSpeed) {
+    var r = shipAngle * Math.PI / 180;
+    var rr = (shipAngle + rotationSpeed) * Math.PI / 180;
+    var orbit = planetSize + shipOrbit;
+    var dx = Math.cos(r) * orbit - Math.cos(rr) * orbit;
+    var dy = Math.sin(r) * orbit - Math.sin(rr) * orbit;
+    return Math.sqrt(dx * dx + dy * dy);
+};
+</code></pre>
+
+<p>So and that's all! Thanks for reading ;)</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/5427" title="short permalink to this answer" class="short-link" id="link-post-5427">share</a><span class="lsep">|</span><a href="/posts/5427/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/5427/revisions" title="show all edits to this post">edited <span title="2010-11-11 16:46:23Z" class="relativetime">Nov 11 '10 at 16:46</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature owner">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2010-11-11 00:20:36Z" class="relativetime">Nov 11 '10 at 0:20</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1713/ivo-wetzel"><div><img src="https://www.gravatar.com/avatar/b04d74db65a7a2dc6e554e50dd4708b2?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1713/ivo-wetzel">Ivo Wetzel</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">947</span><span title="6 silver badges"><span class="badge2"></span><span class="badgecount">6</span></span><span title="14 bronze badges"><span class="badge3"></span><span class="badgecount">14</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-5427" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-6584" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">4</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">This is going to take a while to digest. But wow, amazing answer to your own question.</span>
+	&ndash;&nbsp;
+		<a href="/users/962/attackinghobo" 
+		   title="5539 reputation" 
+		   class="comment-user">AttackingHobo</a>
+	<span class="comment-date" dir="ltr"><span title="2010-11-11 17:59:32Z" class="relativetime-clean">Nov 11 '10 at 17:59</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10011" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I made an account just to upvote this answer</span>
+	&ndash;&nbsp;
+		<a href="/users/4936/rmx" 
+		   title="101 reputation" 
+		   class="comment-user">rmx</a>
+	<span class="comment-date" dir="ltr"><span title="2011-01-26 12:09:31Z" class="relativetime-clean">Jan 26 '11 at 12:09</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-5427" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="5438"></a>
+<div id="answer-5438" class="answer" data-answerid="5438" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="5438">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>The issue is that a ship would not take that trajectory naturally. So even with it working perfectly it still won't look right.</p>
+
+<p>If you want to simulate the smooth transition between planets I would suggest actually modeling it. The equations are very simple as you only have two significant forces: gravity, and thrust.</p>
+
+<p>You just need to set your constants: Mass of P1, P2, ship</p>
+
+<p>With each game-tick (time: t) you are doing 3 things</p>
+
+<ol>
+<li><p>Calculate the gravity of p1 on ship and p2 on ship, add the resultant vectors to the thrust vector.</p></li>
+<li><p>Calculate your new velocity based on your new acceleration from step 1</p></li>
+<li><p>Move the ship according to your new velocity</p></li>
+</ol>
+
+<p>Might seem like a lot of work but it can be done in a dozen lines of code and will look very natural.</p>
+
+<p>If you need help with the physics let me know.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/5438" title="short permalink to this answer" class="short-link" id="link-post-5438">share</a><span class="lsep">|</span><a href="/posts/5438/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2010-11-11 15:49:57Z" class="relativetime">Nov 11 '10 at 15:49</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/2992/aaronfarr"><div><img src="https://www.gravatar.com/avatar/f2ec77a1299bebf14f4fd66c72ed6b55?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/2992/aaronfarr">aaronfarr</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">313</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="7 bronze badges"><span class="badge3"></span><span class="badgecount">7</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-5438" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-6578" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I might consider testing that if you can provide a way of doing this within a function that takes <code>t</code> :)</span>
+	&ndash;&nbsp;
+		<a href="/users/1713/ivo-wetzel" 
+		   title="947 reputation" 
+		   class="comment-user owner">Ivo Wetzel</a>
+	<span class="comment-date" dir="ltr"><span title="2010-11-11 16:37:54Z" class="relativetime-clean">Nov 11 '10 at 16:37</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-6672" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">-but in game programming you don&#39;t use t as a variable. You&#39;re already basically in a parametric situation, because you&#39;re simply calculating the new dx and dy for the ship.  Here&#39;s an example of orbiting two planets (in Flash)  <a href="http://www.aharrisbooks.net/flash/fg2r12/twoPlanets.html" rel="nofollow">aharrisbooks.net/flash/fg2r12/twoPlanets.html</a> - and here&#39;s the same thing in Python: <a href="http://aharrisbooks.net/pythonGame/ch09/twoPlanets.py" rel="nofollow">aharrisbooks.net/pythonGame/ch09/twoPlanets.py</a></span>
+	&ndash;&nbsp;
+		<a href="/users/2634/two-pi" 
+		   title="733 reputation" 
+		   class="comment-user">Two pi</a>
+	<span class="comment-date" dir="ltr"><span title="2010-11-13 03:09:25Z" class="relativetime-clean">Nov 13 '10 at 3:09</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-5438" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="5378"></a>
+<div id="answer-5378" class="answer" data-answerid="5378" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="5378">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>That kind of modeling is strange, and can produce weird illogical results. Especially if the starting planets speed is really slow.</p>
+
+<p>Model the ships with a thrust power.</p>
+
+<p>When the ships are on their last orbit on the starting planet, accelerate with full thrust.</p>
+
+<p>When the ship gets within a certain distance use reverse thrust to slow the ship down to the target planet's orbit speed.</p>
+
+<p><strong>Edit: Do the entire simulation at once when a node is about to leave the orbit. either send all the data, or send just a few of movement vectors at intervals, and interpolate between them.</strong></p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/5378" title="short permalink to this answer" class="short-link" id="link-post-5378">share</a><span class="lsep">|</span><a href="/posts/5378/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/5378/revisions" title="show all edits to this post">edited <span title="2010-11-09 21:00:27Z" class="relativetime">Nov 9 '10 at 21:00</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2010-11-09 18:45:03Z" class="relativetime">Nov 9 '10 at 18:45</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/962/attackinghobo"><div><img src="https://www.gravatar.com/avatar/0f47d8d088dfa4f8040680fd8f2112fe?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/962/attackinghobo">AttackingHobo</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">5,539</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="20 silver badges"><span class="badge2"></span><span class="badgecount">20</span></span><span title="44 bronze badges"><span class="badge3"></span><span class="badgecount">44</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-5378" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-6508" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Problem is, this is all tick based, there&#39;s no intermediate position. It&#39;s a networking multiplayer game and sending all the positions of 600+ ships in a full game will kill all networking. There are only events which transmit a tickOffset, the rest is calculated based on the current world tick and the offset.</span>
+	&ndash;&nbsp;
+		<a href="/users/1713/ivo-wetzel" 
+		   title="947 reputation" 
+		   class="comment-user owner">Ivo Wetzel</a>
+	<span class="comment-date" dir="ltr"><span title="2010-11-09 20:30:05Z" class="relativetime-clean">Nov 9 '10 at 20:30</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-6509" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I edited my response.</span>
+	&ndash;&nbsp;
+		<a href="/users/962/attackinghobo" 
+		   title="5539 reputation" 
+		   class="comment-user">AttackingHobo</a>
+	<span class="comment-date" dir="ltr"><span title="2010-11-09 21:14:39Z" class="relativetime-clean">Nov 9 '10 at 21:14</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-5378" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="5382"></a>
+<div id="answer-5382" class="answer" data-answerid="5382" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="5382">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>If I understand it correctly, your problem is over-constrained.</p>
+
+<p>I believe that you want the spaceship to travel along a specified path between orbits in some time <em>t</em>, and you also want it to accelerate from speed <em>s1</em> to speed <em>s2</em> in the same time <em>t</em>. Unfortunately, you can't (in general) find an acceleration that satisfies both of these constraints simultaneously.</p>
+
+<p>You're going to have to relax your problem a bit to make it solvable.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/5382" title="short permalink to this answer" class="short-link" id="link-post-5382">share</a><span class="lsep">|</span><a href="/posts/5382/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2010-11-09 21:44:13Z" class="relativetime">Nov 9 '10 at 21:44</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3162/gareth-rees"><div><img src="https://www.gravatar.com/avatar/093d6dc5c8295d32bcb8e76c7c66455a?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3162/gareth-rees">Gareth Rees</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,071</span><span title="4 silver badges"><span class="badge2"></span><span class="badgecount">4</span></span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-5382" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-6511" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Then how to relax it? What I could imagine is modifying the T that I plug into the bezier path stuff. I would need to scale it somehow to first grow slower to 0.5 and then faster to 1. So the ship decelerates from it&#39;s original speed to a fixed one at the middle of the curve and then accelerates again from this speed to the speed at the end of the curve?</span>
+	&ndash;&nbsp;
+		<a href="/users/1713/ivo-wetzel" 
+		   title="947 reputation" 
+		   class="comment-user owner">Ivo Wetzel</a>
+	<span class="comment-date" dir="ltr"><span title="2010-11-09 22:22:54Z" class="relativetime-clean">Nov 9 '10 at 22:22</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-6512" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I think it will look more realistic if the spaceship accelerates from its original speed to somewhere around the midpoint of the transfer and then decelerates to the new orbit.</span>
+	&ndash;&nbsp;
+		<a href="/users/3162/gareth-rees" 
+		   title="1071 reputation" 
+		   class="comment-user">Gareth Rees</a>
+	<span class="comment-date" dir="ltr"><span title="2010-11-09 22:32:17Z" class="relativetime-clean">Nov 9 '10 at 22:32</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-6513" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Still I&#39;m stuck on how to plug the acceleration into the whole thing, I need to modify the T somehow :/</span>
+	&ndash;&nbsp;
+		<a href="/users/1713/ivo-wetzel" 
+		   title="947 reputation" 
+		   class="comment-user owner">Ivo Wetzel</a>
+	<span class="comment-date" dir="ltr"><span title="2010-11-09 23:40:18Z" class="relativetime-clean">Nov 9 '10 at 23:40</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-5382" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="5742"></a>
+<div id="answer-5742" class="answer" data-answerid="5742" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="5742">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Thanks for your excellent page describing how you solved this problem. I did something somewhat different than you in one detail, as I was deeply memory constrained: I don't build an array, or have to search it for the right 'segment' with a binary search. This is because I always know I am moving from one end of my Bezier curve to another: Therefore, I simply remember the 'current' segment, and if I see that I am going to go out of bounds of that segment to compute my next position, I compute the next (or previous) segment (based on direction of travel.) This works quite well for my application. The only glitch I had to work out was that, in some curves, the size of the segments were so small that my next plot to point was - at rare times - more than one segment ahead of the current one, so instead of just going to the 'next' or 'previous' segment (based on direction), I had to compute segments forward (or back) until I found the one that my next point was 'in'.</p>
+
+<p>Don't know if this quite makes sense, but this certainly helped me.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/5742" title="short permalink to this answer" class="short-link" id="link-post-5742">share</a><span class="lsep">|</span><a href="/posts/5742/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2010-11-18 19:12:38Z" class="relativetime">Nov 18 '10 at 19:12</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <span class="anonymous-gravatar"></span>
+    </div>
+    <div class="user-details">
+        Joel<br>
+        
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-5742" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-5742" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/5373/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="5373" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="595e453a90deb79876026b8ee52ee2b4">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f5373%2fmoving-ships-between-two-planets-along-a-bezier-missing-some-equations-for-acce%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f5373%2fmoving-ships-between-two-planets-along-a-bezier-missing-some-equations-for-acce%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/2d" class="post-tag" title="show questions tagged &#39;2d&#39;" rel="tag">2d</a> <a href="/questions/tagged/math" class="post-tag" title="show questions tagged &#39;math&#39;" rel="tag">math</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/2d" class="post-tag" title="show questions tagged &#39;2d&#39;" rel="tag">2d</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">1140</span></span><br>
+<a href="/questions/tagged/math" class="post-tag" title="show questions tagged &#39;math&#39;" rel="tag">math</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">641</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2010-11-09 16:52:48Z"><b>3 years ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>3341 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2010-11-18 19:12:38Z">3 years ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <div class="ad-container">    
+        <div class="ad">    
+        <a href="http://meta.gamedev.stackexchange.com/ads/ct/984?url=http%3a%2f%2ftwitter.com%2fstackgamedev" rel="nofollow" target="_blank"><img src="http://i.stack.imgur.com/2hrB8.png" alt="Tagline to show on mouseover" title="Tagline to show on mouseover" width="220" height="250"></a>
+        </div>
+        <div class="footer-container">
+            <div class="footer">
+                10 votes · <a href="http://meta.gamedev.stackexchange.com/questions/983#984" title="click to comment on this ad" target="_blank">comment</a> · <a href="http://meta.gamedev.stackexchange.com/ads/display/983" target="_blank">stats</a>
+            </div>
+        </div>
+    </div>
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/gamedev/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=gamedev.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/6009" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">11</div>
+	</a>
+	<a href="/questions/6009/arc-length-of-bezier-curves" class="question-hyperlink">Arc Length of Bezier Curves</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/2472" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">9
+    </div>
+</a><a href="/questions/2472/how-to-calculate-the-rotation-resulting-from-ball-bounce" class="question-hyperlink">How to calculate the rotation resulting from ball bounce</a>
+</div>
+<div class="spacer">
+<a href="/q/4673" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">8
+    </div>
+</a><a href="/questions/4673/not-sure-how-to-handle-deceleration" class="question-hyperlink">Not sure how to handle &ldquo;deceleration&rdquo;</a>
+</div>
+<div class="spacer">
+<a href="/q/5150" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/5150/generating-background-tiles-for-a-side-scroller-with-variable-player-speed" class="question-hyperlink">Generating background tiles for a side-scroller with variable player speed</a>
+</div>
+<div class="spacer">
+<a href="/q/6009" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">11
+    </div>
+</a><a href="/questions/6009/arc-length-of-bezier-curves" class="question-hyperlink">Arc Length of Bezier Curves</a>
+</div>
+<div class="spacer">
+<a href="/q/22392" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/22392/what-is-a-good-way-to-determine-if-a-vector-is-between-two-other-vectors" class="question-hyperlink">What is a good way to determine if a vector is between two other vectors?</a>
+</div>
+<div class="spacer">
+<a href="/q/29504" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/29504/missing-z-axis-rotation-for-transforming-between-two-vectors" class="question-hyperlink">Missing z-axis rotation for transforming between two vectors</a>
+</div>
+<div class="spacer">
+<a href="/q/31063" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/31063/estimate-angle-to-launch-missile-maths-question" class="question-hyperlink">Estimate angle to launch missile, maths question</a>
+</div>
+<div class="spacer">
+<a href="/q/33588" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/33588/detect-mouse-click-on-a-bezier-curves-neighborhood" class="question-hyperlink">Detect mouse click on a bezier curve&#39;s neighborhood</a>
+</div>
+<div class="spacer">
+<a href="/q/40300" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/40300/initial-direction-of-intersection-between-two-moving-vehicles" class="question-hyperlink">Initial direction of intersection between two moving vehicles?</a>
+</div>
+<div class="spacer">
+<a href="/q/57740" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/57740/how-do-i-fire-a-projectile-at-where-an-object-will-be-located-in-the-future" class="question-hyperlink">How do I fire a projectile at where an object will be located in the future?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/5373" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/5373/ivc/1c5d');});
+</script>
+<noscript>
+    <div><img src="/posts/5373/ivc/1c5d" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">default</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/5373/moving-ships-between-two-planets-along-a-bezier-missing-some-equations-for-acce")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.gamedev.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.22.1174
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Game Development Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|2d|math|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

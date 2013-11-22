@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>php - Is my script secure to prevent email injection? - Code Review Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codereview/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Code Review Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeReview" />
+    <meta name="twitter:domain" content="codereview.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codereview/img/apple-touch-icon.png?v=bb26b8631f86"/>
+    <meta name="og:title" content="Is my script secure to prevent email injection?" />
+    <meta name="og:description" content="I have an email contact form that is PHP and very basic. I am concerned, however, that injections might be possible through it. So I was wondering if anyone with far superior PHP skills than myself..." />
+    <meta name="og:url" content="http://codereview.stackexchange.com/questions/27408/is-my-script-secure-to-prevent-email-injection"/>
+    <link rel="canonical" href="http://codereview.stackexchange.com/questions/27408/is-my-script-secure-to-prevent-email-injection" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codereview/all.css?v=4c2f7b84c965">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Is my script secure to prevent email injection?&#39;" href="/feeds/question/27408">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:2,shownCommentCount:2,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:27408});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('196', '27408');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('196');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385156251,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Code Review Stack Exchange","description":"Q&A for peer programmer code reviews","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"595e453a90deb79876026b8ee52ee2b4","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f27408%2fis-my-script-secure-to-prevent-email-injection">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f27408%2fis-my-script-secure-to-prevent-email-injection">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Code Review
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Code Review Stack Exchange is a question and answer site for peer programmer code reviews. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/27408/is-my-script-secure-to-prevent-email-injection" class="question-hyperlink">Is my script secure to prevent email injection?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="27408"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="27408">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I have an email contact form that is PHP and very basic. I am concerned, however, that injections might be possible through it. So I was wondering if anyone with far superior PHP skills than myself would be willing to take a look and see if I have any gaps or vulnerabilities in my code that could be exploited. I very much appreciate any help with this.</p>
+
+<p>PHP</p>
+
+<pre><code>&lt;?php
+
+$field_name = isset( $_POST['cf_name'] ) ? preg_replace( "/[^\.\-\' a-zA-Z0-9]/", "", $_POST['cf_name'] ) : "";
+$field_email = isset( $_POST['cf_email'] ) ? preg_replace(  "/[^\.\-\_\@a-zA-Z0-9]/" , "", $_POST['cf_email'] ) : "";
+$field_message = isset( $_POST['cf_message'] ) ? preg_replace( "/(From:|To:|BCC:|CC:|Subject:|Content-Type:)/", "", $_POST['cf_message'] ) : "";
+
+$mail_to = 'admin@mywebsite.com';
+$subject = 'New Contact for My Website from '.$field_name;
+
+$body_message = 'From: '.$field_name."\n";
+$body_message .= 'E-mail: '.$field_email."\n";
+$body_message .= 'Message: '.$field_message;
+
+$headers = 'From: '.$field_email."\r\n";
+$headers .= 'Reply-To: '.$field_email."\r\n";
+
+$mail_status = mail($mail_to, $subject, $body_message, $headers);
+
+?&gt;
+</code></pre>
+
+<p>For the brief moment I had this on Stack Overflow (before I was told that it should be here) the comment was made that I shouldn't be stripping characters out of emails. So... what should I do then? Is there a simple method to achieve the goal that I am missing? I am very new to this and just want to be as secure as possible. </p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/php" class="post-tag" title="show questions tagged &#39;php&#39;" rel="tag">php</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/27408" title="short permalink to this question" class="short-link" id="link-post-27408">share</a><span class="lsep">|</span><a href="/posts/27408/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/27408/revisions" title="show all edits to this post">edited <span title="2013-09-19 19:52:30Z" class="relativetime">Sep 19 at 19:52</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/18427/malachi"><div><img src="https://www.gravatar.com/avatar/5710f7b645f52fec6a2958bd55455d47?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/18427/malachi">Malachi</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,387</span><span title="4 silver badges"><span class="badge2"></span><span class="badgecount">4</span></span><span title="28 bronze badges"><span class="badge3"></span><span class="badgecount">28</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-06-14 18:10:42Z" class="relativetime">Jun 14 at 18:10</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/26195/rodeojones"><div><img src="https://www.gravatar.com/avatar/f9f36d85b052763d5c8fd21ddbbcd7b6?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/26195/rodeojones">rodeojones</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">8</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-27408" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-42630" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Sanitizing input isn&#39;t really what you need (to some extent), what is more important is to properly escape your output. Take a look at the answers here: <a href="http://stackoverflow.com/questions/17103318/correct-way-to-sanitize-input-in-mysql-using-pdo/17103381#17103381" title="correct way to sanitize input in mysql using pdo">stackoverflow.com/questions/17103318/&hellip;</a></span>
+	&ndash;&nbsp;
+		<a href="/users/19565/michael-zedeler" 
+		   title="318 reputation" 
+		   class="comment-user">Michael Zedeler</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-14 19:17:39Z" class="relativetime-clean">Jun 14 at 19:17</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-42657" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Michael, thank you so much for the link. I think I understand what is happening with the htmlspecialchars and how it is protecting my contact form. However, I am a little unsure as to where I would put it in my code. Would I want to eliminate the sanitizing script and just use htmlspecialchars or do I want to sanitize and then cancel the output? Thank you so much for your direction so far! I am new to the php side of things and especially to the security part (one of the most important parts) Thanks again!</span>
+	&ndash;&nbsp;
+		<a href="/users/26195/rodeojones" 
+		   title="8 reputation" 
+		   class="comment-user owner">rodeojones</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-15 13:54:58Z" class="relativetime-clean">Jun 15 at 13:54</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-27408" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								1 Answer
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/27408/is-my-script-secure-to-prevent-email-injection?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/27408/is-my-script-secure-to-prevent-email-injection?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/27408/is-my-script-secure-to-prevent-email-injection?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="27442"></a>
+<div id="answer-27442" class="answer accepted-answer" data-answerid="27442" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="27442">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h2>Validate, but don't change user input</h2>
+
+<p>Don't change the value of a user input. Either accept or reject it, but don't try to guess what might be ment. Some examples:</p>
+
+<p>The name could be <code>Søren Kierkegård</code>, which in many evironments will become <code>Sren Kierkegrd</code> due to your 'sanitation'.</p>
+
+<p>An email address can be much more complicated than your test suggests. How about parenthesis, exclamation or question marks? <a href="http://www.regular-expressions.info/email.html" rel="nofollow">Read this for other thoughts about email validation with regular expressions</a>.</p>
+
+<p>The message still could contain 'Bcc:' or 'Cc:'. Making the expression case insensitive will lead to the next problem: The sequence "People I met in Toronto: A, B, and C." would become "People I met in Toron A, B, and C." </p>
+
+<h2>Escape your output instead</h2>
+
+<p>Header fields are restricted to a single line (each). So is the name of a person. In these cases, all whitespaces are equivalent (at least for non-malicious input), so replacing newlines and tabs with spaces does not alter the (meaning of the) content.</p>
+
+<pre><code>$name    = isset($_POST['cf_name']) ? $_POST['cf_name'] : '';
+$email   = isset($_POST['cf_email']) ? $_POST['cf_email'] : '';
+$message = isset($_POST['cf_message']) ? $_POST['cf_message'] : '';
+
+$mail_status = sendMail($name, $email, $message);
+
+function sendMail($name, $email, $message)
+{
+    // Whitespace pattern, icluding different masking methods
+    $whitespace = '~(&lt;CR&gt;|&lt;LF&gt;|0x0A|%0A|0x0D|%0D|\\n|\\r|\s)+~i';
+
+    $name = trim(preg_replace($whitespace, '', $name);
+    if (empty($name)) {
+        return false;
+    }
+
+    $email = trim(preg_replace($whitespace, ' ', $email));
+    if (empty($email)) {
+        return false;
+    }
+
+    $mail_to = 'admin@mywebsite.com';
+    $subject = 'New Contact for My Website from ' . $name;
+
+    $body =  "From: $name\n";
+    $body .= "E-mail: $email\n";
+    $body .= "Message: $message";
+
+    $headers =  "From: $email\r\n";
+    $headers .= "Reply-To: '$email\r\n";
+
+    return mail($mail_to, $subject, $body, $headers);
+}
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/27442" title="short permalink to this answer" class="short-link" id="link-post-27442">share</a><span class="lsep">|</span><a href="/posts/27442/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-06-15 23:06:42Z" class="relativetime">Jun 15 at 23:06</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/24635/nibra"><div><img src="https://www.gravatar.com/avatar/6df6b94097c21564b7521425990fe162?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/24635/nibra">nibra</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">445</span><span title="8 bronze badges"><span class="badge3"></span><span class="badgecount">8</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-27442" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="4" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-42825" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">nibra, thank you so much for the response and what you are explaining makes sense. Far too much potential to strip content that you don&#39;t necessarily want to strip. On the basis of what you have written here, it appears that you are just taking any malicious content and replacing it with whitespace, which in turn, escapes the output. So if I use this script (making the appropriate edits to the email and subject header) it should work correct? At least it appears that it should...</span>
+	&ndash;&nbsp;
+		<a href="/users/26195/rodeojones" 
+		   title="8 reputation" 
+		   class="comment-user owner">rodeojones</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-18 13:19:24Z" class="relativetime-clean">Jun 18 at 13:19</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-42849" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I think so, and I&#39;d also use it without fear. But you never know for sure.</span>
+	&ndash;&nbsp;
+		<a href="/users/24635/nibra" 
+		   title="445 reputation" 
+		   class="comment-user">nibra</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-18 16:51:05Z" class="relativetime-clean">Jun 18 at 16:51</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-42920" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">nibra, thanks again for your help. I implemented the script and I am not getting the messages delivered to the address that is entered. Let me give you the code that I have posting the information entered to the php.</span>
+	&ndash;&nbsp;
+		<a href="/users/26195/rodeojones" 
+		   title="8 reputation" 
+		   class="comment-user owner">rodeojones</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-19 14:01:00Z" class="relativetime-clean">Jun 19 at 14:01</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-42921" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy"><code>&lt;form id=&quot;myForm&quot; action=&quot;send_form_email.php&quot; method=&quot;post&quot;&gt;
+      NAME&lt;span&gt;*&lt;&#47;span&gt;&lt;br&gt;
+      &lt;input name=&quot;cf_name&quot; type=&quot;text&quot; size=&quot;32&quot;&gt;&lt;br&gt;
+      EMAIL&lt;span&gt;*&lt;&#47;span&gt;&lt;br&gt;
+      &lt;input name=&quot;cf_email&quot; type=&quot;text&quot; size=&quot;32&quot;&gt;&lt;br&gt;
+      MESSAGE&lt;span&gt;*&lt;&#47;span&gt;&lt;br&gt;
+      &lt;textarea name=&quot;cf_message&quot; maxlength=&quot;1000&quot; cols=&quot;30&quot; rows=&quot;6&quot; style=&quot;resize:none;&quot;&gt;&lt;&#47;textarea&gt;&lt;br&gt;
+      &lt;input type=&quot;submit&quot; value=&quot;Send&quot;&gt;
+      &lt;input type=&quot;reset&quot; value=&quot;Clear&quot;&gt;
+&lt;&#47;form&gt;</code></span>
+	&ndash;&nbsp;
+		<a href="/users/26195/rodeojones" 
+		   title="8 reputation" 
+		   class="comment-user owner">rodeojones</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-19 14:03:09Z" class="relativetime-clean">Jun 19 at 14:03</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-42922" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Also to note, I have a jQuery script that is validating the information to ensure that the fields are completed properly, but I don&#39;t think that should be interfering with the script since it isn&#39;t posting any data, but checking the data and popping up an alert.</span>
+	&ndash;&nbsp;
+		<a href="/users/26195/rodeojones" 
+		   title="8 reputation" 
+		   class="comment-user owner">rodeojones</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-19 14:05:38Z" class="relativetime-clean">Jun 19 at 14:05</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-27442" 
+			   class="comments-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">show <b>4</b> more comments</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/27408/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="27408" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="595e453a90deb79876026b8ee52ee2b4">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f27408%2fis-my-script-secure-to-prevent-email-injection%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f27408%2fis-my-script-secure-to-prevent-email-injection%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/php" class="post-tag" title="show questions tagged &#39;php&#39;" rel="tag">php</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/php" class="post-tag" title="show questions tagged &#39;php&#39;" rel="tag">php</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">1149</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-06-14 18:10:42Z"><b>5 months ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>113 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-09-19 19:52:30Z">2 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/9827" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/9827/creating-a-basic-secure-php-mailer" class="question-hyperlink">Creating a basic secure php mailer</a>
+</div>
+<div class="spacer">
+<a href="/q/11466" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/11466/verify-post-script-will-work-correctly" class="question-hyperlink">Verify $_POST script will work correctly</a>
+</div>
+<div class="spacer">
+<a href="/q/12561" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/12561/need-help-optimizing-improving-this-php-form-script" class="question-hyperlink">Need help optimizing &amp; improving this php form script</a>
+</div>
+<div class="spacer">
+<a href="/q/16246" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/16246/user-register-script-php" class="question-hyperlink">User register script PHP</a>
+</div>
+<div class="spacer">
+<a href="/q/19365" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/19365/is-this-a-secure-and-best-practice-php-mail-function" class="question-hyperlink">Is this a secure and best-practice PHP mail() function?</a>
+</div>
+<div class="spacer">
+<a href="/q/23792" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/23792/review-my-php-login-and-register-script-and-profile-page-and-how-to-improve-th" class="question-hyperlink">Review my PHP login and register script, and profile page, and how to improve them</a>
+</div>
+<div class="spacer">
+<a href="/q/25416" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/25416/wordpress-php-contact-form-security-flaws" class="question-hyperlink">Wordpress php Contact Form - Security flaws</a>
+</div>
+<div class="spacer">
+<a href="/q/26317" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/26317/is-this-php-email-form-secure-from-injections-or-other-abuses" class="question-hyperlink">Is this PHP Email Form Secure from injections or other abuses?</a>
+</div>
+<div class="spacer">
+<a href="/q/28205" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/28205/phpmailer-question" class="question-hyperlink">phpMailer question</a>
+</div>
+<div class="spacer">
+<a href="/q/32874" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/32874/email-script-security" class="question-hyperlink">Email script security</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/27408" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/27408/ivc/de1c');});
+</script>
+<noscript>
+    <div><img src="/posts/27408/ivc/de1c" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-php</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/27408/is-my-script-secure-to-prevent-email-injection")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codereview.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.22.1174
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Code Review Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|php|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>
