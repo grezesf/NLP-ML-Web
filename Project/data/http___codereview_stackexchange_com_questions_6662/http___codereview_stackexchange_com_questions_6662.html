@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>c# - Help to improve these methods and remove code duplication - Code Review Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codereview/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Code Review Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeReview" />
+    <meta name="twitter:domain" content="codereview.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codereview/img/apple-touch-icon.png?v=bb26b8631f86"/>
+    <meta name="og:title" content="Help to improve these methods and remove code duplication" />
+    <meta name="og:description" content="I&#39;m a noob and I&#39;m trying to work with some encryption/decryption of data. It was some hard work for me to get it working with some buffers and what not. 
+
+This is the code I came up with:
+
+public ..." />
+    <meta name="og:url" content="http://codereview.stackexchange.com/questions/6662/help-to-improve-these-methods-and-remove-code-duplication"/>
+    <link rel="canonical" href="http://codereview.stackexchange.com/questions/6662/help-to-improve-these-methods-and-remove-code-duplication" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codereview/all.css?v=11cb5fcbff23">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Help to improve these methods and remove code duplication&#39;" href="/feeds/question/6662">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:1,shownCommentCount:1,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:6662});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('196', '6662');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('196');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385095785,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Code Review Stack Exchange","description":"Q&A for peer programmer code reviews","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f6662%2fhelp-to-improve-these-methods-and-remove-code-duplication">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f6662%2fhelp-to-improve-these-methods-and-remove-code-duplication">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Code Review
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Code Review Stack Exchange is a question and answer site for peer programmer code reviews. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/6662/help-to-improve-these-methods-and-remove-code-duplication" class="question-hyperlink">Help to improve these methods and remove code duplication</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="6662"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6662">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I'm a noob and I'm trying to work with some encryption/decryption of data. It was some hard work for me to get it working with some buffers and what not. </p>
+
+<p>This is the code I came up with:</p>
+
+<pre><code>public static string Encrypt(string dataToEncrypt, byte[] publicKeyInfo)
+    {
+        //// Our bytearray to hold all of our data after the encryption
+        byte[] encryptedBytes = new byte[0];
+        using (var rsa = new RSACryptoServiceProvider())
+        {
+            try
+            {
+                var encoder = new UTF8Encoding();
+
+                byte[] encryptThis = encoder.GetBytes(dataToEncrypt);
+
+                //// Importing the public key
+                rsa.ImportCspBlob(publicKeyInfo);
+
+                int blockSize = (rsa.KeySize / 8) - 32;
+
+                //// buffer to write byte sequence of the given block_size
+                byte[] buffer = new byte[blockSize];
+
+                byte[] encryptedBuffer = new byte[blockSize];
+
+                //// Initializing our encryptedBytes array to a suitable size, depending on the size of data to be encrypted
+                encryptedBytes = new byte[encryptThis.Length + blockSize - (encryptThis.Length % blockSize) + 32];
+
+                for (int i = 0; i &lt; encryptThis.Length; i += blockSize)
+                {
+                    //// If there is extra info to be parsed, but not enough to fill out a complete bytearray, fit array for last bit of data
+                    if (2 * i &gt; encryptThis.Length &amp;&amp; ((encryptThis.Length - i) % blockSize != 0))
+                    {
+                        buffer = new byte[encryptThis.Length - i];
+                        blockSize = encryptThis.Length - i;
+                    }
+
+                    //// If the amount of bytes we need to decrypt isn't enough to fill out a block, only decrypt part of it
+                    if (encryptThis.Length &lt; blockSize)
+                    {
+                        buffer = new byte[encryptThis.Length];
+                        blockSize = encryptThis.Length;
+                    }
+
+                    //// encrypt the specified size of data, then add to final array.
+                    Buffer.BlockCopy(encryptThis, i, buffer, 0, blockSize);
+                    encryptedBuffer = rsa.Encrypt(buffer, false);
+                    encryptedBuffer.CopyTo(encryptedBytes, i);
+                }
+            }
+            catch (CryptographicException e)
+            {
+                Console.Write(e);
+            }
+            finally
+            {
+                //// Clear the RSA key container, deleting generated keys.
+                rsa.PersistKeyInCsp = false;
+            }
+        }
+        //// Convert the byteArray using Base64 and returns as an encrypted string
+        return Convert.ToBase64String(encryptedBytes);
+    }
+
+
+
+
+    public static string Decrypt(string dataToDecrypt, byte[] privateKeyInfo)
+    {
+        //// The bytearray to hold all of our data after decryption
+        byte[] decryptedBytes;
+
+        //Create a new instance of RSACryptoServiceProvider.
+        using (var rsa = new RSACryptoServiceProvider())
+        {
+            try
+            {
+                byte[] bytesToDecrypt = Convert.FromBase64String(dataToDecrypt);
+
+                //// Import the private key info
+                rsa.ImportCspBlob(privateKeyInfo);
+
+                //// No need to subtract padding size when decrypting
+                int blockSize = rsa.KeySize / 8;
+
+                //// buffer to write byte sequence of the given block_size
+                byte[] buffer = new byte[blockSize];
+
+                //// buffer containing decrypted information
+                byte[] decryptedBuffer = new byte[blockSize];
+
+                //// Initializes our array to make sure it can hold at least the amount needed to decrypt.
+                decryptedBytes = new byte[dataToDecrypt.Length];
+
+                for (int i = 0; i &lt; bytesToDecrypt.Length; i += blockSize)
+                {
+                    if (2 * i &gt; bytesToDecrypt.Length &amp;&amp; ((bytesToDecrypt.Length - i) % blockSize != 0))
+                    {
+                        buffer = new byte[bytesToDecrypt.Length - i];
+                        blockSize = bytesToDecrypt.Length - i;
+                    }
+
+                    //// If the amount of bytes we need to decrypt isn't enough to fill out a block, only decrypt part of it
+                    if (bytesToDecrypt.Length &lt; blockSize)
+                    {
+                        buffer = new byte[bytesToDecrypt.Length];
+                        blockSize = bytesToDecrypt.Length;
+                    }
+
+                    Buffer.BlockCopy(bytesToDecrypt, i, buffer, 0, blockSize);
+                    decryptedBuffer = rsa.Decrypt(buffer, false);
+                    decryptedBuffer.CopyTo(decryptedBytes, i);
+                }
+            }
+            finally
+            {
+                //// Clear the RSA key container, deleting generated keys.
+                rsa.PersistKeyInCsp = false;
+            }
+        }
+
+        //// We encode each byte with UTF8 and then write to a string while trimming off the extra empty data created by the overhead.
+        var encoder = new UTF8Encoding();
+        return encoder.GetString(decryptedBytes).TrimEnd(new[] { '\0' });
+
+    }
+</code></pre>
+
+<p>I tried to see if I could split it up, but in my effort to do so, I came up with what I believed would be a more complex method (higher cyclomatic complexity) since I had a lot of if statements all of the sudden, having to take care of the encryption mode but also handling the encoding from UTF8 or BASE64.</p>
+
+<p>Any help will be greatly appreciated, thank you very much in advance.</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/c%23" class="post-tag" title="show questions tagged &#39;c#&#39;" rel="tag">c#</a> <a href="/questions/tagged/refactoring" class="post-tag" title="show questions tagged &#39;refactoring&#39;" rel="tag">refactoring</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/6662" title="short permalink to this question" class="short-link" id="link-post-6662">share</a><span class="lsep">|</span><a href="/posts/6662/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2011-12-09 18:42:40Z" class="relativetime">Dec 9 '11 at 18:42</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/9003/simonlanghoff"><div><img src="https://www.gravatar.com/avatar/5b43c56d3637e913777e782d8899abb8?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/9003/simonlanghoff">SimonLanghoff</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">18</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6662" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-10423" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Please make sure you accept an answer if you have found it answer your question, and vote up any answers you found useful.</span>
+	&ndash;&nbsp;
+		<a href="/users/5790/samuel-slade" 
+		   title="330 reputation" 
+		   class="comment-user">Samuel Slade</a>
+	<span class="comment-date" dir="ltr"><span title="2011-12-10 12:17:38Z" class="relativetime-clean">Dec 10 '11 at 12:17</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6662" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								2 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/6662/help-to-improve-these-methods-and-remove-code-duplication?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/6662/help-to-improve-these-methods-and-remove-code-duplication?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/6662/help-to-improve-these-methods-and-remove-code-duplication?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="6676"></a>
+<div id="answer-6676" class="answer accepted-answer" data-answerid="6676" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6676">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>I don't have any comments on the cryptography side of it, but I have a few general programming points:</p>
+
+<ul>
+<li>It is not necessary to have four forward slash characters for inline comments, you only need two.</li>
+<li>There is no need to initialize your <code>encryptedBytes</code> array as an empty array since you re-initialize it later.</li>
+<li>You should use <code>System.Text.Encoding.UTF8</code> instead of instantiating <code>UTF8Encoding</code> manually.</li>
+<li>It might be worth splitting the inline calculations inside your conditional and array building for ease of reading (lines 24, when initializing the <code>encryptedBytes</code> array, and line 29, when checking for 'extra info to be parsed').</li>
+<li>While I encourage the use of well places comments to explain the algorithm or program steps (particularly when it's a complicated algorithm), I think you might have gone a little overkill in some places. As such, it might be an idea to remove the more obvious comments, such as "Our bytearray to hold all of our data after the encryption" - the name of the variable indicates this already. It's not a major point, but it will help with the length of your method.</li>
+<li>With regards to your exception handling, I would suggest ending code execution when you reach your <code>catch</code> clause as you wouldn't really want the program to continue with this algorithm if it has failed. Also, I would suggest breaking down the code inside the <code>try</code> clause a little more so you only have <code>try-catch</code> blocks surrounding the exact lines that may cause a <code>CryptographicException</code>. It's not of major importance, but it helps another reader to easily identify the line(s) that could the issue.</li>
+</ul>
+
+<p>Other than the above points, the code itself looks to be fairly well structured and logical.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/6676" title="short permalink to this answer" class="short-link" id="link-post-6676">share</a><span class="lsep">|</span><a href="/posts/6676/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/6676/revisions" title="show all edits to this post">edited <span title="2011-12-10 10:59:24Z" class="relativetime">Dec 10 '11 at 10:59</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-12-10 10:44:46Z" class="relativetime">Dec 10 '11 at 10:44</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/5790/samuel-slade"><div><img src="https://www.gravatar.com/avatar/94851475ba23fb39a1dd2d20957f94b4?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/5790/samuel-slade">Samuel Slade</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">330</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="7 bronze badges"><span class="badge3"></span><span class="badgecount">7</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6676" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-10415" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Hi, thank you for your suggestions, The reason I have four slashes is because of stylecop complaining about it otherwise, but thanks. 
+Also, I did not want to initialize the encryptedBytes array, but if I don&#39;t it won&#39;t compile since the return it not sure if the array has been initialized.
+
+Also, sorry if this is a stupid question, but how do you mean, split my inline calculations?</span>
+	&ndash;&nbsp;
+		<a href="/users/9003/simonlanghoff" 
+		   title="18 reputation" 
+		   class="comment-user owner">SimonLanghoff</a>
+	<span class="comment-date" dir="ltr"><span title="2011-12-10 10:48:45Z" class="relativetime-clean">Dec 10 '11 at 10:48</span></span>
+		<span class="edited-yes" title="this comment was edited 2 times"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10417" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I think the compilation issue would be due to the fact an <code>Exception</code> can be thrown before initializing <code>encryptedBytes</code> and you continue execution after it occurs. Instead of allowing that, it might be worth either re-throwing the <code>Exception</code> in the <code>catch</code> clause of your <code>try-catch-finally</code> statement, or returning a null or empty string. That way, you should be able to omit the unnecessary initialization of <code>encryptedBytes</code> and better control the method execution. I have edited my answer to reflect this point.</span>
+	&ndash;&nbsp;
+		<a href="/users/5790/samuel-slade" 
+		   title="330 reputation" 
+		   class="comment-user">Samuel Slade</a>
+	<span class="comment-date" dir="ltr"><span title="2011-12-10 10:55:49Z" class="relativetime-clean">Dec 10 '11 at 10:55</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10420" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I see, yes, thank you, I moved the lines outside the try/catch and that removed the error message.   You say I should stop code execution in the catch clause, how would you say is the best way to do this?</span>
+	&ndash;&nbsp;
+		<a href="/users/9003/simonlanghoff" 
+		   title="18 reputation" 
+		   class="comment-user owner">SimonLanghoff</a>
+	<span class="comment-date" dir="ltr"><span title="2011-12-10 11:10:19Z" class="relativetime-clean">Dec 10 '11 at 11:10</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10422" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">It depends on how your going to use the algorithm. You could let the <code>CryptograpicException</code> bubble up out of the method (but keeping the <code>try-finally</code> statement). Or, you could wrap the exception in your own exception that has a more explicit meaning (though this is probably better in larger systems and not here). Alternately, if you are wanting to prevent exceptions from being thrown from this method, I&#39;d be tempted to return some result from the method. For example, return <code>true</code> or <code>false</code> to denote success and get the encrypted string as an <code>out</code> parameter.</span>
+	&ndash;&nbsp;
+		<a href="/users/5790/samuel-slade" 
+		   title="330 reputation" 
+		   class="comment-user">Samuel Slade</a>
+	<span class="comment-date" dir="ltr"><span title="2011-12-10 11:47:46Z" class="relativetime-clean">Dec 10 '11 at 11:47</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10426" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Okay thanks a lot, as you can see, I&#39;m not that experienced with coding and I&#39;m really not at all that familiar with the out parameter, but hanks a lot. I&#39;ll look into it, thank you for your suggestions</span>
+	&ndash;&nbsp;
+		<a href="/users/9003/simonlanghoff" 
+		   title="18 reputation" 
+		   class="comment-user owner">SimonLanghoff</a>
+	<span class="comment-date" dir="ltr"><span title="2011-12-10 14:04:38Z" class="relativetime-clean">Dec 10 '11 at 14:04</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6676" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="6667"></a>
+<div id="answer-6667" class="answer" data-answerid="6667" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6667">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>You're using RSA as a block cipher in ECB mode. That's not how it's usually used. Unless you have a very good reason to do otherwise, you should just do one RSA encryption, of a secure random key for a block cipher (i.e. AES), and then use that key to encrypt your message.</p>
+
+<p>Since you're converting <code>string</code> to <code>string</code>, it's apparent that neither memory nor latency is an issue, so you could avoid a lot of messing around with <code>byte[]</code>s by using <code>MemoryStream</code> and <code>CryptoStream</code>. You can also use <code>Encoding.UTF8</code> to simplify the en/decoding step slightly.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/6667" title="short permalink to this answer" class="short-link" id="link-post-6667">share</a><span class="lsep">|</span><a href="/posts/6667/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-12-09 21:28:31Z" class="relativetime">Dec 9 '11 at 21:28</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1402/peter-taylor"><div><img src="https://www.gravatar.com/avatar/fd977ec3fe1f515ad6f496a17eed88de?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1402/peter-taylor">Peter Taylor</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,177</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="7 bronze badges"><span class="badge3"></span><span class="badgecount">7</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6667" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-10418" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I was in fact not a favour of this approach, as everytime I read about doing it this way, I was told that RSA is usually used to encrypt a symmetric key.   I&#39;m doing this for a project in school and we pretty much specified that we wanted to use public/Private key encryption only. 
+
+I might look into doing it with the RijndaelManaged class later on if I get the time, I&#39;m just afraid it will be too much to change at the moment and I Don&#39;t want to break the build :)   
+But I actually did not realize that I&#39;m basically doing the insecure ECB mode which I now feel really bad about.</span>
+	&ndash;&nbsp;
+		<a href="/users/9003/simonlanghoff" 
+		   title="18 reputation" 
+		   class="comment-user owner">SimonLanghoff</a>
+	<span class="comment-date" dir="ltr"><span title="2011-12-10 10:56:03Z" class="relativetime-clean">Dec 10 '11 at 10:56</span></span>
+		<span class="edited-yes" title="this comment was edited 3 times"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6667" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/6662/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="6662" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f6662%2fhelp-to-improve-these-methods-and-remove-code-duplication%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f6662%2fhelp-to-improve-these-methods-and-remove-code-duplication%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/c%23" class="post-tag" title="show questions tagged &#39;c#&#39;" rel="tag">c#</a> <a href="/questions/tagged/refactoring" class="post-tag" title="show questions tagged &#39;refactoring&#39;" rel="tag">refactoring</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/c%23" class="post-tag" title="show questions tagged &#39;c#&#39;" rel="tag">c#</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">1742</span></span><br>
+<a href="/questions/tagged/refactoring" class="post-tag" title="show questions tagged &#39;refactoring&#39;" rel="tag">refactoring</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">369</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2011-12-09 18:42:40Z"><b>1 year ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>311 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2011-12-10 10:59:24Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/5778" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/5778/please-help-me-review-and-improve-my-c-tcp-ip-code" class="question-hyperlink">Please help me review and improve my c# tcp/ip code</a>
+</div>
+<div class="spacer">
+<a href="/q/6982" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/6982/help-me-remove-the-duplication-of-code" class="question-hyperlink">Help me remove the duplication of code</a>
+</div>
+<div class="spacer">
+<a href="/q/8198" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/8198/refactoring-different-type-of-param-to-reduce-duplicate-code" class="question-hyperlink">Refactoring different type of param to reduce duplicate code</a>
+</div>
+<div class="spacer">
+<a href="/q/8737" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/8737/too-many-parameters-too-few-methods" class="question-hyperlink">Too many parameters, too few methods?</a>
+</div>
+<div class="spacer">
+<a href="/q/9885" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/9885/remove-duplicate-code-by-refactoring-but-how" class="question-hyperlink">Remove duplicate code by refactoring, but how?</a>
+</div>
+<div class="spacer">
+<a href="/q/9900" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/9900/c-avoid-duplicate-code-in-similar-methods" class="question-hyperlink">C++ avoid duplicate code in similar methods</a>
+</div>
+<div class="spacer">
+<a href="/q/10611" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/10611/my-code-is-ugly" class="question-hyperlink">my code is ugly</a>
+</div>
+<div class="spacer">
+<a href="/q/10659" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">5
+    </div>
+</a><a href="/questions/10659/extension-methods-for-translation-engine" class="question-hyperlink">Extension methods for translation engine</a>
+</div>
+<div class="spacer">
+<a href="/q/20608" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/20608/is-this-rijndael-secure-enough-for-use-in-production-systems" class="question-hyperlink">Is this Rijndael secure enough for use in production systems?</a>
+</div>
+<div class="spacer">
+<a href="/q/32161" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/32161/code-duplication-where-impliment-extension-method-for-ienumerable-and-iqueryable" class="question-hyperlink">Code duplication where impliment extension method for IEnumerable and IQueryable on entity set</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/6662" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/6662/ivc/de89');});
+</script>
+<noscript>
+    <div><img src="/posts/6662/ivc/de89" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-cs</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/6662/help-to-improve-these-methods-and-remove-code-duplication")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codereview.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.21.1172
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Code Review Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|c#|refactoring|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

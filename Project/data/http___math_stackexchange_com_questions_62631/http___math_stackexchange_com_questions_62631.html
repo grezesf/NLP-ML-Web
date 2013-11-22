@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>regression - Chi-square test for checking if values are close to zero? - Cross Validated</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/stats/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/stats/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Cross Validated" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackStats" />
+    <meta name="twitter:domain" content="stats.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/stats/img/apple-touch-icon@2.png?v=344f57aa10cc"/>
+    <meta name="og:title" content="Chi-square test for checking if values are close to zero?" />
+    <meta name="og:description" content="I have a number of set of data points. For each set I have done linear regression to find the lines of best fit for the data.
+
+I hypothesise that the gradients of all the lines of best fit should be " />
+    <meta name="og:url" content="http://stats.stackexchange.com/questions/15296/chi-square-test-for-checking-if-values-are-close-to-zero"/>
+    <link rel="canonical" href="http://stats.stackexchange.com/questions/15296/chi-square-test-for-checking-if-values-are-close-to-zero" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/stats/all.css?v=a6290077f2ad">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Chi-square test for checking if values are close to zero?&#39;" href="/feeds/question/15296">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:4,shownCommentCount:4,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:15296});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('65', '15296');
+            
+                    });
+    </script>
+
+                <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+                                        tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+                                        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+                                        messageStyle: "none"
+                });
+                </script>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>                
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('65');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385125553,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Cross Validated","description":"Q&A for statisticians, data analysts, data miners and data visualization experts","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091","js/mathjax-editing.en.js":"a09844f7b738"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f15296%2fchi-square-test-for-checking-if-values-are-close-to-zero">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f15296%2fchi-square-test-for-checking-if-values-are-close-to-zero">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Cross Validated
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/stats/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Cross Validated is a question and answer site for statisticians, data analysts, data miners and data visualization experts. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/15296/chi-square-test-for-checking-if-values-are-close-to-zero" class="question-hyperlink">Chi-square test for checking if values are close to zero?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="15296"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="15296">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I have a number of set of data points. For each set I have done linear regression to find the lines of best fit for the data.</p>
+
+<p>I hypothesise that the gradients of all the lines of best fit should be zero.</p>
+
+<p>I took the average and standard deviation of all the gradients and these are the values I calculated:</p>
+
+<p>mean = $5.72 \times 10^{-5}$, standard deviation = $5.02 \times 10^{-4}$</p>
+
+<p>To me, a layman, I would say that this shows that the gradients should be zero given the very small mean value and the tight standard distribution.</p>
+
+<p>However I've been told that I need to be a bit more rigorous - apparently I should do a chi-squared test to prove my hypothesis.</p>
+
+<p>Could someone please give me a set of steps detailing how I would go about this?</p>
+
+<p>Thanks.</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/regression" class="post-tag" title="show questions tagged &#39;regression&#39;" rel="tag">regression</a> <a href="/questions/tagged/average" class="post-tag" title="show questions tagged &#39;average&#39;" rel="tag">average</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/15296" title="short permalink to this question" class="short-link" id="link-post-15296">share</a><span class="lsep">|</span><a href="/posts/15296/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2011-09-07 18:15:45Z" class="relativetime">Sep 7 '11 at 18:15</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <span class="anonymous-gravatar"></span>
+    </div>
+    <div class="user-details">
+        Griffin<br>
+        
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-15296" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-27510" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I think you&#39;re supposed to do a $t$-test, not a $\chi^2$-test. See <a href="http://www.weibull.com/DOEWeb/hypothesis_tests_in_simple_linear_regression.htm" rel="nofollow">this</a>.</span>
+	&ndash;&nbsp;
+		<a href="/users/830/" 
+		   title="820 reputation" 
+		   class="comment-user">Ｊ. Ｍ.</a>
+	<span class="comment-date" dir="ltr"><span title="2011-09-07 18:24:55Z" class="relativetime-clean">Sep 7 '11 at 18:24</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-27511" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@J.M. I believe that the t-test assumes a normal distribution. For my data nothing is assumed about the distribution.</span>
+	&ndash;&nbsp;
+		<span title="0 reputation" 
+		      class="comment-user">Griffin</span>
+	<span class="comment-date" dir="ltr"><span title="2011-09-07 18:38:50Z" class="relativetime-clean">Sep 7 '11 at 18:38</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-27512" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Yes it does. Which means more work for you to do, i.e. a test for normality. Otherwise, I&#39;m no longer up to date with what they use when the errors are non-normal.</span>
+	&ndash;&nbsp;
+		<a href="/users/830/" 
+		   title="820 reputation" 
+		   class="comment-user">Ｊ. Ｍ.</a>
+	<span class="comment-date" dir="ltr"><span title="2011-09-07 18:40:55Z" class="relativetime-clean">Sep 7 '11 at 18:40</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-27515" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Rigor definitely is needed, but a conventional chi-squared test probably won&#39;t achieve that, either.  The sampling distributions of the slopes differ from one regression to another due to differences in the x coordinates, differences in the amount of data, and differences in the mean square error.</span>
+	&ndash;&nbsp;
+		<a href="/users/919/whuber" 
+		   title="68931 reputation" 
+		   class="comment-user">whuber<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2011-09-07 20:02:38Z" class="relativetime-clean">Sep 7 '11 at 20:02</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-15296" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+    <div class="question-status">
+        <h2>                <b>migrated</b> from <a href="http://math.stackexchange.com/questions/62631/chi-square-test-for-checking-if-values-are-close-to-zero?noredirect=1" title="chi square test for checking if values are close to zero">math.stackexchange.com</a> <span title="2011-09-07 19:22:50Z" class="relativetime">Sep 7 '11 at 19:22</span>
+</h2>
+        <p>This question came from our site for people studying math at any level and professionals in related fields.</p>
+    </div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								3 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/15296/chi-square-test-for-checking-if-values-are-close-to-zero?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/15296/chi-square-test-for-checking-if-values-are-close-to-zero?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/15296/chi-square-test-for-checking-if-values-are-close-to-zero?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="15412"></a>
+<div id="answer-15412" class="answer" data-answerid="15412" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="15412">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>This problem could be complex but it has a simple solution.  </p>
+
+<p>Let me start by explaining why <strong>the mean and SD of the estimated slopes are not relevant for testing whether all the true slopes are zero.</strong>  Consider several illustrative hypothetical alternatives:</p>
+
+<ol>
+<li><p>The true slopes are all zero, so that any nonzero estimates are the result of chance variation in the errors.</p></li>
+<li><p>The true slopes <em>all</em> differ from zero, their estimation errors are small enough to show that <em>every</em> estimated slope significantly differs from zero, but the <em>average</em> slope is close to zero.</p></li>
+<li><p>Some of the true slopes are zero but at least one is not, and for that one the estimated slope is significantly different from zero.</p></li>
+</ol>
+
+<p>Note, in passing, that changing the units of measurement of the dependent variable will simultaneously change all estimated slopes and the SD of those slopes by the same amount, so that only the ratio mean(slope):SD(slope) is meaningful.  In this case that ratio is approximately 1:10.  Although this indicates there is a wide variation in estimated slopes, <em>it cannot distinguish among any of these alternatives.</em>  That is why these two statistics are useless.</p>
+
+<p><strong>One problem</strong> is that these regressions are not necessarily related.  They could involve different values of the independent variables.  More importantly, the variation of the dependent variables could differ.  Imagine (again hypothetically) a series of experiments in which a crude (but fast and cheap) measurement is made of the dependent variable, and then later is followed up by other experiments in which the measurement is made in a more precise way.  We couldn't just dump the combined data into one regression model, due to the possibly large differences in distributions of the errors.</p>
+
+<p><strong>Another problem</strong> is that the residuals might not have Normal distributions.  When each regression includes enough data (typically 30 points is "enough," but as always it depends), the <em>sampling distribution</em> of the estimated slope is still approximately normal, so the t-testing apparatus applies.  With small amounts of data, or when some data have high leverage, the t-tests are suspect.  However, that's a common problem having many cures, including using generalized linear models, re-expressing (transforming) the independent variables and/or the dependent variable, and other more specialized approaches.  So let's assume that the regressions have been appropriately done.  This means that <em>we can trust the p-values for the slope tests.</em></p>
+
+<p>Now we're off and running.  The p-value for a <em>single</em> regression, under the null hypothesis that the slope is zero, will have a <em>uniform</em> distribution.  Therefore the p-values obtained from each regression should behave like a set of independent draws from a uniform distribution.  Small p-values suggest significant differences, so we are interested in whether there are more small p-values than would be expected by chance.  (We should also be interested in whether the set of p-values really does look uniform: significant deviations from uniformity would suggest problems with the regressions or subtle violations of the null hypothesis.)  <strong>A useful statistic, then, is the <em>minimum p-value.</em></strong></p>
+
+<p>The axioms of probability immediately imply the minimum $p$ of $n$ independent draws from a uniform distribution has a CDF of $\Pr{[p \le t]} = 1-\Pr{[p \gt t]} = 1-(1-t)^n$.  To test the null hypothesis that all slopes are zero at the $\alpha$ level (say $\alpha=0.05$, corresponding to $1-0.05 = 95\%$ confidence), we therefore follow this simple procedure:</p>
+
+<p>(a) Let $p_0$ be the smallest p-value of all the $n$ regressions.</p>
+
+<p>(b) Compare $1-(1-p_0)^n$ to $\alpha$.  If it is smaller, conclude that at least one slope is nonzero.  If it is not smaller, do not reject the hypothesis that all slopes are zero.</p>
+
+<p>Note that this is algebraically the same as checking whether $p_0$ is smaller than $1-(1-\alpha)^{1/n}$.  For small $\alpha$ this is close to $\alpha/n$.  (The relative error made by this <a href="http://en.wikipedia.org/wiki/Bonferroni_correction" rel="nofollow">Bonferroni approximation</a> is always less than $-\log(1-\alpha)/\alpha$, which is about $1+\alpha/2$.  For $\alpha=0.05$ that's a relative error of about $1.025$, which for most purposes is negligible.)  These considerations lead to a simple procedure indeed:</p>
+
+<p><strong>Reject the hypothesis that all slopes are zero only when the smallest p-value of the regressions is less than $\alpha/n$.</strong></p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/15412" title="short permalink to this answer" class="short-link" id="link-post-15412">share</a><span class="lsep">|</span><a href="/posts/15412/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-09-10 15:32:45Z" class="relativetime">Sep 10 '11 at 15:32</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/919/whuber"><div><img src="https://www.gravatar.com/avatar/66c15ca582c60477dc4b535d8b39558b?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/919/whuber">whuber</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score 68931" dir="ltr">68.9k</span><span title="6 gold badges"><span class="badge1"></span><span class="badgecount">6</span></span><span title="109 silver badges"><span class="badge2"></span><span class="badgecount">109</span></span><span title="237 bronze badges"><span class="badge3"></span><span class="badgecount">237</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-15412" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-15412" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="15300"></a>
+<div id="answer-15300" class="answer" data-answerid="15300" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="15300">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><blockquote>
+  <p>"To me, a layman, I would say that this shows that the gradients should be zero given the very small mean value and the tight standard distribution."</p>
+</blockquote>
+
+<p>One can infer from the numbers you provided (using, e.g., Chebyshev's inequality) that the observed gradients, not only their mean and SD, were small.   To the extent that the gradients derived from the data sets are independent observations (from similar distributions) of one underlying "true" gradient this is evidence that the parameter itself is small.</p>
+
+<p>That the SD is ten times larger than the mean is consistent with the idea that the observed gradients are random errors around a true value of zero.  It is also consistent with the mean being small (but nonzero) for systematic reasons, maybe similar to whatever reasons led to the suspicion that the mean is exactly zero, and observational noise larger than the true size of the mean.  </p>
+
+<p>To say more, additional information is needed about the number, size and nature of the data sets used to determine the gradients.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/15300" title="short permalink to this answer" class="short-link" id="link-post-15300">share</a><span class="lsep">|</span><a href="/posts/15300/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-09-07 21:32:36Z" class="relativetime">Sep 7 '11 at 21:32</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/5641/zyx"><div><img src="https://www.gravatar.com/avatar/484953aefcffb833e3de78cc63a13c77?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/5641/zyx">zyx</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">226</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-15300" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="3" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-27530" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Much of this reply assumes that $10^{-4}$ is &quot;small,&quot; but @John rightly points out this is a matter of units of measurement (and therefore is meaningless).  The large SD (compared to the mean) shows that there is <i>considerable variation</i> of the individual slopes compared to their average.  This might or might not be consistent with the true mean being zero.  Finally, we cannot assume these slopes have a common sampling distribution; in fact, that&#39;s unlikely.  Thus the SD actually tells us little about what&#39;s really going on.  We need more information to say <i>anything</i> here.</span>
+	&ndash;&nbsp;
+		<a href="/users/919/whuber" 
+		   title="68931 reputation" 
+		   class="comment-user">whuber<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2011-09-07 21:43:34Z" class="relativetime-clean">Sep 7 '11 at 21:43</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-27532" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">The OP called 1/10000 &quot;small&quot; and knows what units and meaning it has in his problem.  Here the mean and SD have the same units and their ratio is dimensionless.  It is not necessary to assume a single common sampling distribution, only similar variances (and if that is not the case, a small ratio of mean to SD still imposes strong constraints). More information is needed but as e.g. the Chebyshev calculation indicates one can say something, just a lot less than with full information.</span>
+	&ndash;&nbsp;
+		<a href="/users/5641/zyx" 
+		   title="226 reputation" 
+		   class="comment-user">zyx</a>
+	<span class="comment-date" dir="ltr"><span title="2011-09-07 21:59:09Z" class="relativetime-clean">Sep 7 '11 at 21:59</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-27535" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@whuber: re &quot;that might <i>or might not</i> be consistent with the true mean being zero&quot; -- how could it be <i>inconsistent</i> with the mean being zero?  It is consistent with the mean being zero, and also consistent with the mean being nonzero but the observations of the mean having SD higher than the value of the mean.  As was pointed out in the answer.  Are you saying there are relevant classes of models where a small observed ratio (mean/SD) <i>disfavors</i> the hypothesis that the true mean is zero?</span>
+	&ndash;&nbsp;
+		<a href="/users/5641/zyx" 
+		   title="226 reputation" 
+		   class="comment-user">zyx</a>
+	<span class="comment-date" dir="ltr"><span title="2011-09-07 22:10:08Z" class="relativetime-clean">Sep 7 '11 at 22:10</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-27536" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I agree a process with zero slope could produce these statistics.  But suppose, hypothetically, that one of two regressions has a slope of $0.0005 \pm 0.000001$ and another has a slope of $-0.00045 \pm 1$.  Their mean is $0.00005$ and SD is $0.0005$, as in the question, but there is extremely strong evidence that one of the slopes is nonzero.  That&#39;s why you cannot deduce <i>anything</i> about whether all slopes are zero from these statistics alone.  Chebyshev doesn&#39;t tell you anything of relevance.</span>
+	&ndash;&nbsp;
+		<a href="/users/919/whuber" 
+		   title="68931 reputation" 
+		   class="comment-user">whuber<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2011-09-07 22:11:13Z" class="relativetime-clean">Sep 7 '11 at 22:11</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-27591" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">As I have tried to explain, assumptions are needed to justify most of your conclusions, whether or not you were aware of them.  So, yes, you &quot;made no such assumptions,&quot; <i>but you needed to.</i>  Also, perhaps because my example was communicated in a telegraphic manner, I think you may have misunderstood it.  The value of 22000 (wherever it comes from) is not relevant.  The $\pm$ values express standard errors of estimation, nothing more.  If only a single slope has a low SD compared to its estimate, we should conclude that not all slopes are zero.</span>
+	&ndash;&nbsp;
+		<a href="/users/919/whuber" 
+		   title="68931 reputation" 
+		   class="comment-user">whuber<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2011-09-08 13:29:32Z" class="relativetime-clean">Sep 8 '11 at 13:29</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-15300" 
+			   class="comments-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">show <b>3</b> more comments</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="15298"></a>
+<div id="answer-15298" class="answer" data-answerid="15298" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="15298">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>The answer to your question would depend greatly upon a number of things you didn't mention, but what you're attempting is called a random coefficients analysis (RCA) and you'd want a t-test here against 0.  It might be better to just generate a confidence interval around your coeffcient.</p>
+
+<p>One might say that your standard deviation isn't small, it's rather large.  It's 10x larger than the slope.  Then again, I can't tell if any of the values are large or small because you haven't given a reasonable range of values that it could possibly be.  Let's say the predictor in your regression is some very wide ranging value, perhaps mass of ships in grams.  If your predicted value was something with a relatively small but meaningful range, like length of time for the hull to rust through in years, then your coefficient would be a very small number but still be a very large effect.  So you need to give a lot more information before you can get a good answer.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/15298" title="short permalink to this answer" class="short-link" id="link-post-15298">share</a><span class="lsep">|</span><a href="/posts/15298/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-09-07 20:33:30Z" class="relativetime">Sep 7 '11 at 20:33</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/601/john"><div><img src="https://www.gravatar.com/avatar/fd3079dd056e89f516bda6d8de136ca0?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/601/john">John</a><br>
+        <span class="reputation-score" title="reputation score 11585" dir="ltr">11.6k</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="8 silver badges"><span class="badge2"></span><span class="badgecount">8</span></span><span title="43 bronze badges"><span class="badge3"></span><span class="badgecount">43</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-15298" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-27525" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">&quot;RCA&quot; is so obscure I can&#39;t figure out exactly what it is from Web-accessible documents, but it seems to assume much more than given in the question.  In particular, separate independent regressions need not even have comparable error variances (or even error distributions).  So that&#39;s one more piece of information needed here: what, if anything, do all these regressions have in common?</span>
+	&ndash;&nbsp;
+		<a href="/users/919/whuber" 
+		   title="68931 reputation" 
+		   class="comment-user">whuber<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2011-09-07 21:33:56Z" class="relativetime-clean">Sep 7 '11 at 21:33</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-27641" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Yes, you are correct, I did sort of assume they had something in common, like came from similar power plants in different location, or something like that.  RCA is sort of a replacement for repeated measures.  It is possible that the regressions are unrelated.  It was used extensively in early FMRI research because the amount of data made analysis using something like mixed effects intractable.  It has been shown to be pretty good given a minimal amount of standard assumptions.</span>
+	&ndash;&nbsp;
+		<a href="/users/601/john" 
+		   title="11585 reputation" 
+		   class="comment-user">John</a>
+	<span class="comment-date" dir="ltr"><span title="2011-09-09 01:06:55Z" class="relativetime-clean">Sep 9 '11 at 1:06</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-27642" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I should say that there are still lots of ERP or FMRI researchers who use what could only be called RCA analysis.</span>
+	&ndash;&nbsp;
+		<a href="/users/601/john" 
+		   title="11585 reputation" 
+		   class="comment-user">John</a>
+	<span class="comment-date" dir="ltr"><span title="2011-09-09 01:07:34Z" class="relativetime-clean">Sep 9 '11 at 1:07</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-27643" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Oh, and I did a quick web search and found loads on random coefficients analysis.  RCA has too many alternatives.</span>
+	&ndash;&nbsp;
+		<a href="/users/601/john" 
+		   title="11585 reputation" 
+		   class="comment-user">John</a>
+	<span class="comment-date" dir="ltr"><span title="2011-09-09 01:13:13Z" class="relativetime-clean">Sep 9 '11 at 1:13</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-15298" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/15296/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="15296" />
+							<h2 class="space">Your Answer</h2>
+
+
+        <script type="text/javascript">
+            StackExchange.ifUsing("editor", function () {
+                return StackExchange.using("mathjaxEditing", function () {
+                    StackExchange.MarkdownEditor.creationCallbacks.add(function (editor, postfix) {
+                        StackExchange.mathjaxEditing.prepareWmdForMathJax(editor, postfix, [["$", "$"], ["\\\\(","\\\\)"]]);
+                    });
+                });
+            }, "mathjax-editing");
+        </script>
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f15296%2fchi-square-test-for-checking-if-values-are-close-to-zero%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f15296%2fchi-square-test-for-checking-if-values-are-close-to-zero%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/regression" class="post-tag" title="show questions tagged &#39;regression&#39;" rel="tag">regression</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">3484</span></span><br>
+<a href="/questions/tagged/average" class="post-tag" title="show questions tagged &#39;average&#39;" rel="tag">average</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">94</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2011-09-07 18:15:45Z"><b>2 years ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>479 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2011-09-10 15:32:45Z">2 years ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/13974" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/13974/how-can-i-calculate-an-average-speed-rate-that-ignores-occasional-anomalies" class="question-hyperlink">How can I calculate an average speed rate that ignores occasional anomalies?</a>
+</div>
+<div class="spacer">
+<a href="/q/15391" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/15391/how-should-i-characterize-the-typical-variance-of-a-large-collection-of-variab" class="question-hyperlink">How should I characterize the &ldquo;typical&rdquo; variance of a large collection of variables?</a>
+</div>
+<div class="spacer">
+<a href="/q/16207" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/16207/correcting-for-outliers-in-a-running-average" class="question-hyperlink">Correcting for outliers in a running average</a>
+</div>
+<div class="spacer">
+<a href="/q/36327" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/36327/what-does-a-chi-square-test-mean-when-no-p-value-is-returned" class="question-hyperlink">What does a chi-square test mean when no p-value is returned?</a>
+</div>
+<div class="spacer">
+<a href="/q/37628" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/37628/harmonic-mean-with-zero-value" class="question-hyperlink">Harmonic mean with zero value</a>
+</div>
+<div class="spacer">
+<a href="/q/45253" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/45253/study-design-involving-4-variables-measured-every-month-for-5-years" class="question-hyperlink">Study design involving 4 variables measured every month for 5 years</a>
+</div>
+<div class="spacer">
+<a href="/q/55073" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/55073/taking-average-of-linear-regression-results" class="question-hyperlink">Taking average of linear regression results</a>
+</div>
+<div class="spacer">
+<a href="/q/66611" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/66611/weighted-average-of-percentage-increase" class="question-hyperlink">Weighted average of percentage increase</a>
+</div>
+<div class="spacer">
+<a href="/q/68861" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/68861/explaining-the-difference-between-baseline-data-and-subsequent-experiment-data-i" class="question-hyperlink">Explaining the difference between baseline data and subsequent experiment data if 1.00 is baseline</a>
+</div>
+<div class="spacer">
+<a href="/q/72375" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/72375/how-is-adjusted-coefficient-of-determination-r2-linked-to-the-f-values-of-a" class="question-hyperlink">How is adjusted coefficient of determination ($R^2$) linked to the F-values of a test against zero when adding a new variable?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/15296" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/15296/ivc/2edf');});
+</script>
+<noscript>
+    <div><img src="/posts/15296/ivc/2edf" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://stats.blogoverflow.com/?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/15296/chi-square-test-for-checking-if-values-are-close-to-zero")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.stats.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.22.1174
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Cross Validated works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|regression|average|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

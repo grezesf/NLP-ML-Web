@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>javascript - jQuery Carousel finished and would like advice on best practice / neatening up my code - Code Review Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codereview/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Code Review Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeReview" />
+    <meta name="twitter:domain" content="codereview.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codereview/img/apple-touch-icon.png?v=bb26b8631f86"/>
+    <meta name="og:title" content="jQuery Carousel finished and would like advice on best practice / neatening up my code" />
+    <meta name="og:description" content="I have been building my own carousel over the past few days.
+
+My jQuery code is based on tutorials on the web and also from help and advice from SO.
+
+I am not a jQuery guru, just an enthusiast, and I " />
+    <meta name="og:url" content="http://codereview.stackexchange.com/questions/8634/jquery-carousel-finished-and-would-like-advice-on-best-practice-neatening-up-m"/>
+    <link rel="canonical" href="http://codereview.stackexchange.com/questions/8634/jquery-carousel-finished-and-would-like-advice-on-best-practice-neatening-up-m" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codereview/all.css?v=4c2f7b84c965">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;jQuery Carousel finished and would like advice on best practice / neatening up my code&#39;" href="/feeds/question/8634">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:1,shownCommentCount:1,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:8634});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('196', '8634');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('196');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385121819,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Code Review Stack Exchange","description":"Q&A for peer programmer code reviews","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f8634%2fjquery-carousel-finished-and-would-like-advice-on-best-practice-neatening-up-m">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f8634%2fjquery-carousel-finished-and-would-like-advice-on-best-practice-neatening-up-m">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Code Review
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Code Review Stack Exchange is a question and answer site for peer programmer code reviews. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/8634/jquery-carousel-finished-and-would-like-advice-on-best-practice-neatening-up-m" class="question-hyperlink">jQuery Carousel finished and would like advice on best practice / neatening up my code</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="8634"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="8634">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>1</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I have been building my own carousel over the past few days.</p>
+
+<p>My jQuery code is based on tutorials on the web and also from help and advice from SO.</p>
+
+<p>I am not a jQuery guru, just an enthusiast, and I think my code is a little sloppy, hence the post.</p>
+
+<p>Here is a link to the working code: <a href="http://jsfiddle.net/JHqBA/2/" rel="nofollow">http://jsfiddle.net/JHqBA/2/</a> <strong>(updated link)</strong></p>
+
+<p>Basically what happens is:</p>
+
+<ul>
+<li>if someone hits the page with a # values in the url it will show the appropriate slide and example would be www.hello.com#two, this would slide to slide two</li>
+<li>if someone clicks the numbers it will show the appropriate slide</li>
+<li>next and prev also slide through the slides.</li>
+</ul>
+
+<p>The question is: Is there anything I could have written better as I know there is a lot of duplicate code.</p>
+
+<p>I understand its a big ask but it would help me learn a little more (i think my code is a little old school)</p>
+
+<p>If anyone has any questions please feel free to ask and I'll clarify what it does or is supposed to do.</p>
+
+<p>Sluap</p>
+
+<p><em><strong>--- Edit ----</em></strong></p>
+
+<p>I have made only one animation function now which has gotten rid of a lot of duplicate code.</p>
+
+<p>I have yet to look into <strong>on function</strong> but will do soon.</p>
+
+<p>I would like to know more about the <strong>create a new function, outside of the jQuery ready block</strong> as i cant get this working or quite understand how i can get it to work sorry </p>
+
+<p>Any more tips would be great; I'll carry on working on this project until I am happy with it.</p>
+
+<p>Also, is there a better way to write:</p>
+
+<pre><code>if ($slideNumber == 1) {
+    $('#prev').attr("class", "not_active")
+    $('#next').attr("class", "active")
+}
+else if ($slideNumber == divSum) {
+    $('#next').attr("class", "not_active");
+    $('#prev').attr("class", "active");
+}
+else {
+    $('#prev').attr("class", "active")
+    $('#next').attr("class", "active")
+};
+</code></pre>
+
+<p>jQuery full:</p>
+
+<pre><code>$(document).ready(function () {
+
+    ////////////////////////////  INITAL SET UP  /////////////////////////////////////////////
+
+    //Get size of images, how many there are, then determin the size of the image reel.
+    var divWidth = $(".window").width();
+    var divSum = $(".slide").size();
+    var divReelWidth = divWidth * divSum;
+
+    //Adjust the image reel to its new size
+    $(".image_reel").css({ 'width': divReelWidth });
+
+    //set the initial not active state
+    $('#prev').attr("class", "not_active");
+
+    ////////////////////////////  SLIDER  /////////////////////////////////////////////
+
+    //Paging + Slider Function
+    rotate = function () {
+        var triggerID = $slideNumber - 1; //Get number of times to slide
+        var image_reelPosition = triggerID * divWidth; //Determines the distance the image reel needs to slide
+        //sets the active on the next and prev
+        if ($slideNumber == 1) {
+            $('#prev').attr("class", "not_active")
+            $('#next').attr("class", "active")
+        }
+        else if ($slideNumber == divSum) {
+            $('#next').attr("class", "not_active");
+            $('#prev').attr("class", "active");
+        }
+        else {
+            $('#prev').attr("class", "active")
+            $('#next').attr("class", "active")
+        };
+        //Slider Animation
+        $(".image_reel").animate({
+            left: -image_reelPosition
+        }, 500);
+    };
+
+    ////////////////////////////  SLIDER CALLS  /////////////////////////////////////////////
+
+    //click on numbers
+    $(".paging a").click(function () {
+        $active = $(this); //Activate the clicked paging
+        $slideNumber = $active.attr("rel");
+        rotate(); //Trigger rotation immediately
+        return false; //Prevent browser jump to link anchor
+    });
+
+
+    //click on next button
+    $('#next').click(function () {
+        if (!$(".image_reel").is(':animated')) { //prevent clicking if animating
+            var left_indent = parseInt($('.image_reel').css('left')) - divWidth;
+            var slideNumberOn = (left_indent / divWidth);
+            var slideNumber = ((slideNumberOn * -1) + 1);
+            $slideNumber = slideNumber;
+            if ($slideNumber &lt;= divSum) { //do not animate if on last slide
+                rotate(); //Trigger rotation immediately
+            };
+            return false; //Prevent browser jump to link anchor
+        }
+    });
+
+    //click on prev button
+    $('#prev').click(function () {
+        if (!$(".image_reel").is(':animated')) { //prevent clicking if animating
+            var left_indent = parseInt($('.image_reel').css('left')) - divWidth;
+            var slideNumberOn = (left_indent / divWidth);
+            var slideNumber = ((slideNumberOn * -1) - 1);
+            $slideNumber = slideNumber;
+            if ($slideNumber &gt;= 1) { //do not animate if on first slide
+                rotate(); //Trigger rotation immediately
+            };
+        }
+        return false; //Prevent browser jump to link anchor
+    });
+
+    //URL eg:www.hello.com#one                  
+    var hash = window.location.hash;
+    var map = {
+        one: 1,
+        two: 2,
+        three: 3,
+        four: 4
+    };
+    var hashValue = map[hash.substring(1)];
+    //animate if hashValue is not null
+    if (hashValue != null) {
+        $slideNumber = hashValue;
+        rotate(); //Trigger rotation immediately
+        return false; //Prevent browser jump to link anchor
+    };
+});
+</code></pre>
+
+<p>html:</p>
+
+<pre><code>&lt;div class="window"&gt;    
+
+            &lt;div class="image_reel"&gt;
+                &lt;div class="slide one"&gt;slide 1&lt;/div&gt;
+                &lt;div class="slide two"&gt;slide 2&lt;/div&gt;
+                &lt;div class="slide three"&gt;slide 3&lt;/div&gt;
+                &lt;div class="slide four"&gt;slide 4&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="paging"&gt;
+            &lt;a href="#" rel="1"&gt;one&lt;/a&gt;
+            &lt;a href="#" rel="2"&gt;two&lt;/a&gt;
+            &lt;a href="#" rel="3"&gt;three&lt;/a&gt;
+            &lt;a href="#" rel="4"&gt;for&lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;div class="nav"&gt;
+            &lt;a id="prev" class="active" href="#"&gt;prev&lt;/a&gt;
+            &lt;a id="next" class="active" href="#"&gt;next&lt;/a&gt;
+        &lt;/div&gt;
+</code></pre>
+
+<p>css:</p>
+
+<pre><code>.window {
+    height:200px;    width: 200px;
+    overflow: hidden; /*--Hides anything outside of the set width/height--*/
+    position: relative;
+}
+.image_reel {
+    position: absolute;
+    top: 0; left: 0;
+}
+.slide {float:left; width:200px; height:200px}
+
+.one {background: #03C}
+.two {background:#0F6}
+.three {background: #39C}
+.four {background:#FC3}
+
+.hide {display:none}
+
+.not_active {background:#F00}
+.active {background:#0F0}
+</code></pre>
+
+<p>EDIT - 7th feb</p>
+
+<p>thank you again for your help i have:</p>
+
+<ol>
+<li>added on function</li>
+<li>added arrow key left and right now comtrol it</li>
+<li>added the function out of the block</li>
+<li>changed the active state functionality code</li>
+</ol>
+
+<p>CODE:</p>
+
+<pre><code>function setImageReelWidth() {
+    divWidth = $(".window").width();
+    slideTotal = $(".slide").size();
+    divReelWidth = divWidth * slideTotal;
+    //Adjust the image reel to its new size
+    $(".image_reel").css({ 'width': divReelWidth });
+}
+
+$(document).ready(function () {
+    ////////////////////////////  INITAL SET UP  /////////////////////////////////////////////
+
+    //Get size of images, how many there are, then determin the size of the image reel.
+    //var divWidth = $(".window").width();
+    //var slideTotal = $(".slide").size();
+    //var divReelWidth = divWidth * slideTotal;
+
+    //Adjust the image reel to its new size
+    //$(".image_reel").css({ 'width': divReelWidth });
+
+    //set the initial not active state
+    $('#prev').attr("class", "not_active");
+
+    ////////////////////////////  SLIDER  /////////////////////////////////////////////
+
+    //Paging + Slider Function
+    rotate = function () {
+        setImageReelWidth();
+        var triggerID = $slideNumber - 1; //Get number of times to slide
+        var image_reelPosition = triggerID * divWidth; //Determines the distance the image reel needs to slide
+        //sets the active on the next and prev
+
+
+        $('#prev').attr("class", "not_active");
+        $('#next').attr("class", "not_active");
+
+        if ($slideNumber &gt; 1) {
+            $('#prev').attr("class", "active");
+        };
+        if ($slideNumber &lt; slideTotal) {
+            $('#next').attr("class", "active");
+        };
+
+        //Slider Animation
+        $(".image_reel").animate({
+            left: -image_reelPosition
+        }, 500);
+    };
+
+    ////////////////////////////  SLIDER CALLS  /////////////////////////////////////////////
+
+    //click on numbers
+    $(".paging a").on("click", function (event) {
+        setImageReelWidth();
+        $active = $(this); //Activate the clicked paging
+        $slideNumber = $active.attr("rel");
+        rotate(); //Trigger rotation immediately
+        return false; //Prevent browser jump to link anchor
+    });
+
+    //left keypress move prev
+    $(document).keypress(function (e) {
+        if (e.keyCode == 37) {
+            if (!$(".image_reel").is(':animated')) { //prevent clicking if animating
+                setImageReelWidth();
+                var left_indent = parseInt($('.image_reel').css('left')) - divWidth;
+                var slideNumberOn = (left_indent / divWidth);
+                var slideNumber = ((slideNumberOn * -1) - 1);
+                $slideNumber = slideNumber;
+                if ($slideNumber &gt;= 1) { //do not animate if on first slide
+                    rotate(); //Trigger rotation immediately
+                };
+            }
+        }
+    });
+
+    //right keypress move next
+    $(document).keypress(function (e) {
+        if (e.keyCode == 39) {
+            if (!$(".image_reel").is(':animated')) { //prevent clicking if animating
+                setImageReelWidth();
+                var left_indent = parseInt($('.image_reel').css('left')) - divWidth;
+                var slideNumberOn = (left_indent / divWidth);
+                var slideNumber = ((slideNumberOn * -1) + 1);
+                $slideNumber = slideNumber;
+                if ($slideNumber &lt;= slideTotal) { //do not animate if on last slide
+                    rotate(); //Trigger rotation immediately
+                };
+            }
+        }
+    });
+
+
+    //click on next button
+    $("#next").on("click", function (event) {
+        if (!$(".image_reel").is(':animated')) { //prevent clicking if animating
+            setImageReelWidth();
+            var left_indent = parseInt($('.image_reel').css('left')) - divWidth;
+            var slideNumberOn = (left_indent / divWidth);
+            var slideNumber = ((slideNumberOn * -1) + 1);
+            $slideNumber = slideNumber;
+            if ($slideNumber &lt;= slideTotal) { //do not animate if on last slide
+                rotate(); //Trigger rotation immediately
+            };
+            return false; //Prevent browser jump to link anchor
+        }
+    });
+
+    //click on prev button
+    $("#prev").on("click", function (event) {
+        if (!$(".image_reel").is(':animated')) { //prevent clicking if animating
+            setImageReelWidth();
+            var left_indent = parseInt($('.image_reel').css('left')) - divWidth;
+            var slideNumberOn = (left_indent / divWidth);
+            var slideNumber = ((slideNumberOn * -1) - 1);
+            $slideNumber = slideNumber;
+            if ($slideNumber &gt;= 1) { //do not animate if on first slide
+                rotate(); //Trigger rotation immediately
+            };
+        }
+        return false; //Prevent browser jump to link anchor
+    });
+
+    //URL eg:www.hello.com#one                  
+    var hash = window.location.hash;
+    var map = {
+        one: 1,
+        two: 2,
+        three: 3,
+        four: 4
+    };
+    var hashValue = map[hash.substring(1)];
+    //animate if hashValue is not null
+    if (hashValue != null) {
+        $slideNumber = hashValue;
+        rotate(); //Trigger rotation immediately
+        return false; //Prevent browser jump to link anchor
+    };
+});
+</code></pre>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/javascript" class="post-tag" title="show questions tagged &#39;javascript&#39;" rel="tag">javascript</a> <a href="/questions/tagged/jquery" class="post-tag" title="show questions tagged &#39;jquery&#39;" rel="tag">jquery</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/8634" title="short permalink to this question" class="short-link" id="link-post-8634">share</a><span class="lsep">|</span><a href="/posts/8634/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/8634/revisions" title="show all edits to this post">edited <span title="2012-02-07 16:28:12Z" class="relativetime">Feb 7 '12 at 16:28</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2012-02-03 19:59:14Z" class="relativetime">Feb 3 '12 at 19:59</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/10718/odd"><div><img src="https://www.gravatar.com/avatar/af39aad5ca9e0cd41236e88904f52179?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/10718/odd">odd</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">15</span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-8634" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-13487" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Meant to edit my answer, not the question. Please ignore edit on the question.</span>
+	&ndash;&nbsp;
+		<a href="/users/10719/jacques-bosch" 
+		   title="136 reputation" 
+		   class="comment-user">Jacques Bosch</a>
+	<span class="comment-date" dir="ltr"><span title="2012-02-03 20:45:06Z" class="relativetime-clean">Feb 3 '12 at 20:45</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-8634" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								1 Answer
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/8634/jquery-carousel-finished-and-would-like-advice-on-best-practice-neatening-up-m?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/8634/jquery-carousel-finished-and-would-like-advice-on-best-practice-neatening-up-m?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/8634/jquery-carousel-finished-and-would-like-advice-on-best-practice-neatening-up-m?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="8635"></a>
+<div id="answer-8635" class="answer accepted-answer" data-answerid="8635" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="8635">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p><strong>1) Separation of Concerns</strong></p>
+
+<p>Start by refactorring your code in to more granular functions.
+You can read more about SoF at <a href="http://en.wikipedia.org/wiki/Separation_of_concerns" rel="nofollow">http://en.wikipedia.org/wiki/Separation_of_concerns</a></p>
+
+<p>Update:
+E.g. Instead of having your reel resizing code inline, put it in it's own function, like this: </p>
+
+<pre><code>function setImageReelWidth () {
+    //Get size of images, how many there are, then determin the size of the image reel.
+    var divWidth = $(".window").width();
+    var divSum = $(".slide").size();
+    var divReelWidth = divWidth * divSum;
+
+    //Adjust the image reel to its new size
+    $(".image_reel").css({ 'width': divReelWidth });                            
+}
+</code></pre>
+
+<p>This achieves 2 things:</p>
+
+<p>a. First, it groups a block of code that is logically cohesive, removing it from the main code which results in a much cleaner code habitat.
+ b. It effectively gives a label to the code block via the function name that is descriptive of what it does, and therefore makes understanding of the code much simpler.</p>
+
+<p>Later, you can also encapsulate the whole thing in it's own "class" (function) and you can move it into it's own js file.</p>
+
+<p><strong>2) The jQuery "on" function</strong></p>
+
+<p>Use the "on" function to attach your click events, rather than the "click" function.
+<a href="http://api.jquery.com/on/" rel="nofollow">http://api.jquery.com/on/</a>
+This has the added advantage of also binding it to future elements matching your selector, even though they do not exist yet.</p>
+
+<p><strong>3) The ready function</strong></p>
+
+<pre><code>// I like the more succinct:
+$(handler)
+// Instead of:
+$(document).ready(handler)
+</code></pre>
+
+<p>But you might like the more obvious syntax.</p>
+
+<p>Those are just a few things to start with.</p>
+
+<p>-- Update 1 --</p>
+
+<p>I think you should keep your original code block in your question, so that future readers can see where it started and how it systematically improved.</p>
+
+<blockquote>
+  <p>I would like to know more about the create a new function, outside of
+  the jQuery ready block as i cant get this working or quite understand
+  how i can get it to work sorry</p>
+</blockquote>
+
+<p>I am not familiar with jsfiddle.net, but it looks cool and helpful, but might also be a bit confusing if you don't know what is going on. I am not sure I do :), but I think that script editor window results in a .js file that is automatically referenced by the html file.</p>
+
+<p>So here is an example of a function defined outside of the ready block, but referenced from within.</p>
+
+<pre><code>function testFunction () {
+    alert ('it works');
+}
+$(document).ready(function () {
+    testFunction();
+
+    // ... other code
+});
+</code></pre>
+
+<p>This should pop up an alert box that says, "it works" when the page is loaded.
+You can try it for yourself.
+Then, once you got that working, you can refactor other logically cohesive blocks of code into their own functions. Later you can wrap them all up into their own javascript 'class'. But we'll get to that.</p>
+
+<blockquote>
+  <p>also is there a better way to write:</p>
+</blockquote>
+
+<pre><code>if ($slideNumber == 1) {
+    $('#prev').attr("class", "not_active")
+    $('#next').attr("class", "active")
+}
+else if ($slideNumber == divSum) {
+    $('#next').attr("class", "not_active");
+    $('#prev').attr("class", "active");
+}
+else {
+    $('#prev').attr("class", "active")
+    $('#next').attr("class", "active")
+};
+</code></pre>
+
+<p>One option is to write it like this:</p>
+
+<pre><code>$('#prev').attr("class", "not_active")
+$('#next').attr("class", "not_active")
+if ($slideNumber &gt; 1)
+    $('#prev').attr("class", "active")
+if ($slideNumber &lt; divSum )
+    $('#next').attr("class", "active")
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/8635" title="short permalink to this answer" class="short-link" id="link-post-8635">share</a><span class="lsep">|</span><a href="/posts/8635/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/8635/revisions" title="show all edits to this post">edited <span title="2012-02-03 20:41:11Z" class="relativetime">Feb 3 '12 at 20:41</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-02-03 20:13:14Z" class="relativetime">Feb 3 '12 at 20:13</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/10719/jacques-bosch"><div><img src="https://www.gravatar.com/avatar/38ca0caa48b4cb5c19c4f96e2a7da36b?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/10719/jacques-bosch">Jacques Bosch</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">136</span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-8635" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-13513" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">perfect thank you for your help on this i will have a good read and update my code asap. when i get chance ill include the old code so you can see whats different, also ill include the html/css. Sluap</span>
+	&ndash;&nbsp;
+		<a href="/users/10718/odd" 
+		   title="15 reputation" 
+		   class="comment-user owner">odd</a>
+	<span class="comment-date" dir="ltr"><span title="2012-02-04 08:09:43Z" class="relativetime-clean">Feb 4 '12 at 8:09</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-13616" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">added a question re having the function outside the doc ready</span>
+	&ndash;&nbsp;
+		<a href="/users/10718/odd" 
+		   title="15 reputation" 
+		   class="comment-user owner">odd</a>
+	<span class="comment-date" dir="ltr"><span title="2012-02-06 13:35:10Z" class="relativetime-clean">Feb 6 '12 at 13:35</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-13633" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Put another alert at the end of the realImage function and see if that one also fires. Install firebug for FireFox, then you will be able to easily get info about where there are script errors. Also remember that you are now declaring the divSum variable in the realImage function, but you are also using it later on in the ready block to set the prev and next, where it will be out of scope. You can let the realImage function return divSum so that you have it available. Also, perhaps you can find a better name for divSum because it is not a div at all, just a number.</span>
+	&ndash;&nbsp;
+		<a href="/users/10719/jacques-bosch" 
+		   title="136 reputation" 
+		   class="comment-user">Jacques Bosch</a>
+	<span class="comment-date" dir="ltr"><span title="2012-02-06 17:41:11Z" class="relativetime-clean">Feb 6 '12 at 17:41</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-13692" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">thank you again, i have taken in all your comments and sorted out the code, this is now added to the bottom of the original post. any other tips would br great. Sluap</span>
+	&ndash;&nbsp;
+		<a href="/users/10718/odd" 
+		   title="15 reputation" 
+		   class="comment-user owner">odd</a>
+	<span class="comment-date" dir="ltr"><span title="2012-02-07 16:30:36Z" class="relativetime-clean">Feb 7 '12 at 16:30</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-13730" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Just keep looking for common code you can refactor out into functions. Look into using jQuery&#39;s addClass and removeClass rather than attr(&quot;class&quot;...). Also you can now wrap the whole component into your own class, and instantiate it from the ready block. <a href="http://www.phpied.com/3-ways-to-define-a-javascript-class/" rel="nofollow">phpied.com/3-ways-to-define-a-javascript-class</a></span>
+	&ndash;&nbsp;
+		<a href="/users/10719/jacques-bosch" 
+		   title="136 reputation" 
+		   class="comment-user">Jacques Bosch</a>
+	<span class="comment-date" dir="ltr"><span title="2012-02-08 10:11:25Z" class="relativetime-clean">Feb 8 '12 at 10:11</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-8635" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/8634/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="8634" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f8634%2fjquery-carousel-finished-and-would-like-advice-on-best-practice-neatening-up-m%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f8634%2fjquery-carousel-finished-and-would-like-advice-on-best-practice-neatening-up-m%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/javascript" class="post-tag" title="show questions tagged &#39;javascript&#39;" rel="tag">javascript</a> <a href="/questions/tagged/jquery" class="post-tag" title="show questions tagged &#39;jquery&#39;" rel="tag">jquery</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/javascript" class="post-tag" title="show questions tagged &#39;javascript&#39;" rel="tag">javascript</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">1367</span></span><br>
+<a href="/questions/tagged/jquery" class="post-tag" title="show questions tagged &#39;jquery&#39;" rel="tag">jquery</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">807</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2012-02-03 19:59:14Z"><b>1 year ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>431 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2012-02-07 16:28:12Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/7756" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/7756/how-can-i-simplify-improve-this-jquery-code-comply-with-best-practices" class="question-hyperlink">How can I simplify/improve this jQuery code &amp; comply with best practices</a>
+</div>
+<div class="spacer">
+<a href="/q/8959" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/8959/looking-for-suggestions-to-improve-my-jquery-code" class="question-hyperlink">Looking for suggestions to improve my jQuery code</a>
+</div>
+<div class="spacer">
+<a href="/q/13698" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/13698/review-code-for-correct-approach-to-create-a-basic-jquery-slider" class="question-hyperlink">Review code for correct approach to create a basic jQuery slider?</a>
+</div>
+<div class="spacer">
+<a href="/q/17907" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/17907/optimise-jquery-code" class="question-hyperlink">optimise jquery code</a>
+</div>
+<div class="spacer">
+<a href="/q/21323" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/21323/js-jquery-newbie-here-can-i-please-get-some-advice-on-improving-my-code" class="question-hyperlink">JS/Jquery newbie here&hellip; Can I please get some advice on improving my code?</a>
+</div>
+<div class="spacer">
+<a href="/q/26424" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/26424/how-to-improve-this-jquery-code-for-tabs" class="question-hyperlink">How to improve this jQuery code for tabs</a>
+</div>
+<div class="spacer">
+<a href="/q/27735" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/27735/first-jquery-plugin-would-like-a-code-review" class="question-hyperlink">First jQuery Plugin, Would like a code review</a>
+</div>
+<div class="spacer">
+<a href="/q/28176" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/28176/best-practice-for-checkbox-processes-in-jquery" class="question-hyperlink">best practice for checkbox processes in jquery</a>
+</div>
+<div class="spacer">
+<a href="/q/29982" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/29982/jquery-carousel-plugin-first-plugin-advice-for-improvement-and-removal-of-err" class="question-hyperlink">jQuery carousel plugin - first plugin, advice for improvement and removal of errors</a>
+</div>
+<div class="spacer">
+<a href="/q/30161" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/30161/i-would-like-to-condense-this-jquery-code" class="question-hyperlink">I would like to condense this jQuery code</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/8634" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/8634/ivc/d95f');});
+</script>
+<noscript>
+    <div><img src="/posts/8634/ivc/d95f" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">default</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/8634/jquery-carousel-finished-and-would-like-advice-on-best-practice-neatening-up-m")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codereview.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.22.1173
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Code Review Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|javascript|jquery|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

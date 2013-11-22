@@ -51,3 +51,8 @@ Features to extract
     * Sub-task 1.1: Data exploration: Normalized score
         How does the score (vote-count-post) depend on how old the question/answers is?
         re-score by average? median? threshold?
+    Result:
+        the score seems to slightly increase with age
+        a simple linear fit gives
+        scores ~= 0.00986813 * ages_in_days + 3.1622
+        possible score normalization: score - 0.00986813*age

@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>c++ - C++11 Templates and Rvalues Breaking Code? - Code Review Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codereview/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Code Review Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeReview" />
+    <meta name="twitter:domain" content="codereview.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codereview/img/apple-touch-icon.png?v=bb26b8631f86"/>
+    <meta name="og:title" content="C++11 Templates and Rvalues Breaking Code?" />
+    <meta name="og:description" content="Trying to do a one liner to convert two vector&amp;lt;T&amp;gt; into a vector&amp;lt; pair&amp;lt;T, T&amp;gt; &amp;gt;.  I decided to use transform with make_pair as the binary operator.  I thought this was awesome, but ..." />
+    <meta name="og:url" content="http://codereview.stackexchange.com/questions/10205/c11-templates-and-rvalues-breaking-code"/>
+    <link rel="canonical" href="http://codereview.stackexchange.com/questions/10205/c11-templates-and-rvalues-breaking-code" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codereview/all.css?v=4c2f7b84c965">
+    
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:2,shownCommentCount:2,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:10205});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('196', '10205');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('196');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385122994,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Code Review Stack Exchange","description":"Q&A for peer programmer code reviews","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f10205%2fc11-templates-and-rvalues-breaking-code">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f10205%2fc11-templates-and-rvalues-breaking-code">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Code Review
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Code Review Stack Exchange is a question and answer site for peer programmer code reviews. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/10205/c11-templates-and-rvalues-breaking-code" class="question-hyperlink">C++11 Templates and Rvalues Breaking Code? [closed]</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="10205"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="10205">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>1</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>Trying to do a one liner to convert two <code>vector&lt;T&gt;</code> into a <code>vector&lt; pair&lt;T, T&gt; &gt;</code>.  I decided to use <code>transform</code> with <code>make_pair</code> as the binary operator.  I thought this was awesome, but to my surprise, slight changes in the binary operator function change broken code to/from working code.</p>
+
+<p>When compiling with gcc 4.5.3 using c++11 I encounter this error message in my code:</p>
+
+<pre><code>gnu/4.5.1/../../../../include/c++/4.5.1/bits/stl_algo.h:4726:2: 
+error: invalid initialization of reference of type 'Point_&lt;float&gt;&amp;&amp;' 
+  from expression of type 'Point_&lt;float&gt;'
+</code></pre>
+
+<p>But, compiling the same code WITHOUT using the c++11 standard works fine.  Could someone explain what's going on here?</p>
+
+<p>As a fix for c++11 compiling, by replacing </p>
+
+<p><code>make_pair&lt;Vector2f, Vector2f&gt;</code> </p>
+
+<p>with</p>
+
+<p><code>make_pair&lt;Vector2f&amp;, Vector2f&amp;&gt;</code> </p>
+
+<p>the code compiles in std=c++0x; and I was told it has to do with c++11 rvalues and handling template parameters.  Again, I don't understand at all, and I would appreciate a detailed and thorough explanation.  Also, is there something wrong my with my usage scenario here?  I thought it would be nice to directly use <code>make_pair</code> rather than make my own functor that wraps it. </p>
+
+<pre><code>#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+template&lt;typename _Tp&gt; class Point_
+{
+public:
+    typedef _Tp value_type;
+
+    // various constructors
+    Point_();
+    Point_(_Tp _x, _Tp _y);
+    Point_(const Point_&amp; pt);
+
+    //Point_&amp; operator = (const Point_&amp; pt);
+    //! conversion to another data type
+    //template&lt;typename _Tp2&gt; operator Point_&lt;_Tp2&gt;() const;
+
+
+    _Tp x, y; //&lt; the point coordinates
+};
+
+typedef Point_&lt;float&gt; Point2f;
+
+std::pair&lt;Point2f, Point2f&gt;
+my_make_pair(Point2f a, Point2f b)
+{
+  return std::make_pair(a, b);
+}
+
+int main(int argc, char *argv[])
+{
+
+  std::vector&lt;Point2f&gt; in1;
+  std::vector&lt;Point2f&gt; in2;
+  std::vector&lt; std::pair&lt;Point2f, Point2f&gt; &gt; paired_out;
+
+  std::transform(in1.begin(), in1.end(), in2.begin(),
+         std::back_inserter(paired_out),
+         std::make_pair&lt;Point2f, Point2f&gt;);
+
+             // alternate binary op that WORKS in c++11 std compile
+             //my_make_pair);
+
+             //also this version works/compiles
+             //std::make_pair&lt;Point2f&amp;, Point2f&amp;&gt;);
+  return 0;
+}
+</code></pre>
+
+<p>Thanks!</p>
+
+<p>P.S. I have no idea what I should title this Q to adequately describe the problem.</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/c%2b%2b" class="post-tag" title="show questions tagged &#39;c++&#39;" rel="tag">c++</a> <a href="/questions/tagged/c%2b%2b11" class="post-tag" title="show questions tagged &#39;c++11&#39;" rel="tag">c++11</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/10205" title="short permalink to this question" class="short-link" id="link-post-10205">share</a><span class="lsep">|</span><a href="/posts/10205/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2012-03-21 07:05:03Z" class="relativetime">Mar 21 '12 at 7:05</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/11444/assem"><div><img src="https://www.gravatar.com/avatar/973bb8d5e2772a1ecdb904b55ca81c0d?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/11444/assem">assem</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">125</span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-10205" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-16263" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">There are more people on SO that would be able to answer that question. Try asking there</span>
+	&ndash;&nbsp;
+		<a href="/users/507/loki-astari" 
+		   title="16917 reputation" 
+		   class="comment-user">Loki Astari</a>
+	<span class="comment-date" dir="ltr"><span title="2012-03-21 16:20:02Z" class="relativetime-clean">Mar 21 '12 at 16:20</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-16533" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">This site is for reviews of working code. It&#39;s not for &quot;Why doesn&#39;t this code work?&quot;-type questions. As Loki Astari pointed out, questions like this are a better fit on Stack Overflow.</span>
+	&ndash;&nbsp;
+		<a href="/users/128/sepp2k" 
+		   title="6491 reputation" 
+		   class="comment-user">sepp2k<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2012-03-27 13:44:10Z" class="relativetime-clean">Mar 27 '12 at 13:44</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-10205" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+    <div class="question-status">
+        <h2>                    <b>closed</b> as off topic by <a href="/users/128/sepp2k">sepp2k</a><span class="mod-flair" title="moderator">&#9830;</span> <span title="2012-03-27 13:44:19Z" class="relativetime">Mar 27 '12 at 13:44</span>
+</h2>
+        <p>Questions on Code Review Stack Exchange are expected to relate to code review request within the scope <a href="http://codereview.stackexchange.com/help/on-topic">defined by the community</a>. 
+Consider editing the question or leaving comments for improvement if you believe the question can be reworded to fit within the scope. 
+Read more about <a href="http://codereview.stackexchange.com/help/reopen-questions">reopening questions</a> here.<span class="close-status-suffix">If this question can be reworded to fit the rules in the 
+<a href="/help/closed-questions">help center</a>, please <a href="/posts/10205/edit">edit the question</a>.</span></p>
+    </div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								1 Answer
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/10205/c11-templates-and-rvalues-breaking-code?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/10205/c11-templates-and-rvalues-breaking-code?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/10205/c11-templates-and-rvalues-breaking-code?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="10241"></a>
+<div id="answer-10241" class="answer accepted-answer" data-answerid="10241" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="10241">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>That's an interesting problem!</p>
+
+<p>First of all, let me simplify things a bit. You don't really need std::transform, nor your class has to be a template class to reproduce the behavior. I've boiled it down to:</p>
+
+<pre><code>#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+struct Point2f
+{
+    float x, y;
+};
+
+int main()
+{
+    std::vector&lt;Point2f&gt; in1(1);
+    std::vector&lt;Point2f&gt; in2(1);
+    std::make_pair&lt;Point2f, Point2f&gt;(in1[0], in2[0]); //(*)
+}
+</code></pre>
+
+<p>Which indeed results in an error in (*) line. One may start yelling "make_pair is broken", but that's not true. On the contrary, it is very well thought!</p>
+
+<p>First of all, let's try to fix this example by changing the (*) line to:</p>
+
+<pre><code>std::make_pair(in1[0], in2[0]);
+</code></pre>
+
+<p>Apparently, template argument deduction does its job as the program is well-formed now. So how does it work?</p>
+
+<p>make_pair template declaration is <code>template &lt;class T1, class T2&gt; pair&lt;V1, V2&gt; make_pair(T1&amp;&amp; x, T2&amp;&amp; y) noexcept</code>, which means that explicit specifying <code>T1=Point2f, T2=Point2f</code>, as in the original case, leads to <code>make_pair(Point2f&amp;&amp; x, Point2f&amp;&amp;)</code> declaration.</p>
+
+<p>At the same time, both vector's subscript operator (in boiled down example) and iterator dereference (as in the guts of <code>std::transform</code> in your original example) return an lvalue reference to its value type: <code>Point2f&amp;</code>. lvalue cannot be bound to rvalue reference, what makes the program ill-formed.</p>
+
+<p>In the fixed case, the automatic deduction follows the rule from C++ Standard 14.8.2.1/3: "If (function template parameter type) is an rvalue reference to a cv-unqualiﬁed template parameter [check: T1&amp;&amp;] and the argument is an lvalue [check: operator[] result], the type “lvalue reference to A” is used in place of A for type deduction".
+In short, that means nothing else than <code>T1=Point2f&amp;, T2=Point2f&amp;</code>, which you have found to be working. :)</p>
+
+<p>One last thing to discuss is what really happens in the explicit specialization w.r.t. rvalue reference to lvalue reference. The mechanical substitution of template parameters would result in <code>make_pair((Point2f&amp;)&amp;&amp; x, (Point2f&amp;)&amp;&amp; y)</code> (parentheses added for clarity). The stalemate is broken by yet another Standard rule 8.3.2/6: "If a type template-parameter denotes a type TR
+that is a reference to a type T, an attempt to create the type “rvalue reference to cv TR” creates the type TR.". In plain English: (Point2f&amp;)&amp;&amp; -> Point2f&amp;.</p>
+
+<p>Long story short, what you want is:</p>
+
+<pre><code>std::transform(in1.begin(), in1.end(), in2.begin(),
+    std::back_inserter(paired_out),
+    std::make_pair&lt;Point2f&amp;, Point2f&amp;&gt;);
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/10241" title="short permalink to this answer" class="short-link" id="link-post-10241">share</a><span class="lsep">|</span><a href="/posts/10241/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/10241/revisions" title="show all edits to this post">edited <span title="2012-03-22 06:58:30Z" class="relativetime">Mar 22 '12 at 6:58</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-03-22 06:51:59Z" class="relativetime">Mar 22 '12 at 6:51</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/12055/lmendakiewicz"><div><img src="https://www.gravatar.com/avatar/f4e30507db3e1563510c33e26c9551ec?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/12055/lmendakiewicz">lmendakiewicz</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">36</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-10241" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-16309" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">thanks for the answer; i&#39;ve almost got it. could you clarify the &quot;fixed case?&quot; why is the operator[] result a lvalue when earlier you said it was a lvalue reference? and..  a lvalue ref can bind to a rvalue, but a lvalue cannot?</span>
+	&ndash;&nbsp;
+		<a href="/users/11444/assem" 
+		   title="125 reputation" 
+		   class="comment-user owner">assem</a>
+	<span class="comment-date" dir="ltr"><span title="2012-03-22 13:52:42Z" class="relativetime-clean">Mar 22 '12 at 13:52</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-16340" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">lvalue reference is a lvalue so that&#39;s enough to satisfy the rule requirement. And if the second question is about the last paragraph - lvalue reference cannot bind to rvalue, this is about what happens for <code>template &lt;typename T&gt; f(T&amp;&amp;)</code> for explicit specialization <code>&lt;X&amp;&gt;</code> as rvalue reference to lvalue reference make little sense, and the answer is <code>f&lt;X&amp;&gt;(X&amp;)</code> (compare to: <code>f&lt;X&gt;(X&amp;&amp;)</code> and <code>f&lt;X&amp;&amp;&gt;(X&amp;&amp;)</code>).</span>
+	&ndash;&nbsp;
+		<a href="/users/12055/lmendakiewicz" 
+		   title="36 reputation" 
+		   class="comment-user">lmendakiewicz</a>
+	<span class="comment-date" dir="ltr"><span title="2012-03-23 03:47:53Z" class="relativetime-clean">Mar 23 '12 at 3:47</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-10241" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+				
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/c%2b%2b" class="post-tag" title="show questions tagged &#39;c++&#39;" rel="tag">c++</a> <a href="/questions/tagged/c%2b%2b11" class="post-tag" title="show questions tagged &#39;c++11&#39;" rel="tag">c++11</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/c%2b%2b" class="post-tag" title="show questions tagged &#39;c++&#39;" rel="tag">c++</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">959</span></span><br>
+<a href="/questions/tagged/c%2b%2b11" class="post-tag" title="show questions tagged &#39;c++11&#39;" rel="tag">c++11</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">109</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2012-03-21 07:05:03Z"><b>1 year ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>403 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2012-03-22 06:58:30Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/3770" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">5
+    </div>
+</a><a href="/questions/3770/review-my-code-to-write-bittorrent-peer-protocol-messages" class="question-hyperlink">Review my code to write BitTorrent peer protocol messages</a>
+</div>
+<div class="spacer">
+<a href="/q/4806" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/4806/an-lru-cache-template" class="question-hyperlink">An LRU cache template</a>
+</div>
+<div class="spacer">
+<a href="/q/13140" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">7
+    </div>
+</a><a href="/questions/13140/avoid-duplicated-operator-code" class="question-hyperlink">Avoid duplicated += -= operator code</a>
+</div>
+<div class="spacer">
+<a href="/q/13176" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">16
+    </div>
+</a><a href="/questions/13176/infix-iterator-code" class="question-hyperlink">infix_iterator code</a>
+</div>
+<div class="spacer">
+<a href="/q/14730" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">22
+    </div>
+</a><a href="/questions/14730/impossibly-fast-delegate-in-c11" class="question-hyperlink">impossibly fast delegate in C++11</a>
+</div>
+<div class="spacer">
+<a href="/q/15269" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/15269/boostany-replacement" class="question-hyperlink">boost::any replacement</a>
+</div>
+<div class="spacer">
+<a href="/q/24548" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/24548/am-i-using-c11-features-like-stl-and-move-semantics-correctly" class="question-hyperlink">Am I using C++11 features like STL and move semantics correctly?</a>
+</div>
+<div class="spacer">
+<a href="/q/29935" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">7
+    </div>
+</a><a href="/questions/29935/a-small-printf-like-function-using-variadic-templates" class="question-hyperlink">A small printf-like function using variadic templates</a>
+</div>
+<div class="spacer">
+<a href="/q/33037" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/33037/event-handler-using-variadic-templates" class="question-hyperlink">Event handler using variadic templates</a>
+</div>
+<div class="spacer">
+<a href="/q/33506" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/33506/improving-run-time-and-max-digits-of-digit-summing-code" class="question-hyperlink">Improving run-time and max-digits of digit summing code</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+		<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/10205/ivc/199e');});
+</script>
+<noscript>
+    <div><img src="/posts/10205/ivc/199e" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-cpp</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/10205/c11-templates-and-rvalues-breaking-code")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codereview.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.22.1173
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Code Review Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|c++|c++11|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

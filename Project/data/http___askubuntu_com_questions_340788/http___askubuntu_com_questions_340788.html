@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Using if an AWK command - Ask Ubuntu</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/askubuntu/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/askubuntu/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Ask Ubuntu" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@AskUbuntu" />
+    <meta name="twitter:domain" content="askubuntu.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/askubuntu/img/apple-touch-icon@2.png?v=c492c9229955"/>
+    <meta name="og:title" content="Using if an AWK command" />
+    <meta name="og:description" content="I have a file which contains many sub-sections each starting with [begin] and ending with [end]sample of which is shown below:
+
+[begin li1_1378184738754_91]
+" />
+    <meta name="og:url" content="http://askubuntu.com/questions/340788/using-if-an-awk-command"/>
+    <link rel="canonical" href="http://askubuntu.com/questions/340788/using-if-an-awk-command" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/askubuntu/all.css?v=a3ba119e3df0">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Using if an AWK command&#39;" href="/feeds/question/340788">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:7,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:340788});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('89', '340788');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('89');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385086462,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Ask Ubuntu","description":"Q&A for Ubuntu users and developers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"><div class="nav-global"><div class="nav-global-wrapper"><ul><li><a href="http://www.ubuntu.com">Ubuntu</a></li><li><a href="http://community.ubuntu.com/">Community</a></li><li><a href="http://askubuntu.com" class="active">Ask!</a></li><li><a href="http://developer.ubuntu.com">Developer</a></li><li><a href="http://design.ubuntu.com">Design</a></li><li><a href="http://www.ubuntu.com/certification">Hardware</a></li><li><a href="http://shop.ubuntu.com">Shop</a></li><li class="more"><a href="#">More <span>›</span></a><ul><li><a href="http://apps.ubuntu.com">Apps</a></li><li><a href="https://help.ubuntu.com">Help</a></li><li><a href="http://ubuntuforums.org">Forum</a></li><li><a href="http://one.ubuntu.com">Ubuntu One</a></li><li><a href="http://www.launchpad.net">Launchpad</a></li><li><a href="http://juju.ubuntu.com">Juju</a></li><li><a href="http://maas.ubuntu.com">MAAS</a></li><li><a href="http://www.canonical.com">Canonical</a></li></ul></li></ul></div></div>
+<script>
+$(function() {
+  $(".nav-global .more > a").click(function(e){ $(this).closest(".more").toggleClass("open"); return false; });
+  $(document).click(function(){ $(".nav-global .more.open").removeClass("open"); });
+});
+</script></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f340788%2fusing-if-an-awk-command">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f340788%2fusing-if-an-awk-command">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Ask Ubuntu
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/askubuntu/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Ask Ubuntu is a question and answer site for Ubuntu users and developers. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/340788/using-if-an-awk-command" class="question-hyperlink">Using if an AWK command</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="340788"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="340788">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I have a file which contains many sub-sections each starting with [begin] and ending with [end]sample of which is shown below:</p>
+
+<pre><code>[begin li1_1378184738754_91]
+header=7075|lime|0|0|109582|0|1|2700073||0|0|0|[355]|1|0|ssb-li1-1378184738754-90||0||LIME |0|saved=true|0.002406508312038836|0|[ser=zu1:mtu=model_other_20120806calibex.csv:mu=model_other_20120806calibex.csv:scorerClassUsed=LinearPersonalizedProductSearchScorer][ser=uzu6:mtu=model_other_20120806calibex.csv:mu=model_other_20120806calibex.csv:scorerClassUsed=LinearPersonalizedProductSearchScorer][ser=xzs5:mtu=model_other_20120806calibex.csv:mu=model_other_20120806calibex.csv:scorerClassUsed=LinearPersonalizedProductSearchScorer][ser=sv-stda-zu3:mtu=model_other_20120806calibex.csv:mu=model_other_20120806calibex.csv:scorerClassUsed=LinearPersonalizedProductSearchScorer][ser=hzu8:mtu=model_other_20120806calibex.csv:mu=model_other_20120806calibex.csv:scorerClassUsed=LinearPersonalizedProductSearchScorer][ser=lzu3:mtu=model_other_20120806calibex.csv:mu=model_other_20120806calibex.csv:scorerClassUsed=LinearPersonalizedProductSearchScorer][ser=yzu2:mtu=model_other_20120806calibex.csv:mu=model_other_20120806calibex.csv:scorerClassUsed=LinearPersonalizedProductSearchScorer][ser=xzu7:mtu=model_other_20120806calibex.csv:mu=model_other_20120806calibex.csv:scorerClassUsed=LinearPersonalizedProductSearchScorer]|0|null|false|40||false|
+attrs=0|0|0||0|
+ptitle=690751404|1|1|1|Rest:1998636||||||2700401|175619|900.5636134725806|0.985486|39.166666666666664|$9.99|100.0|1|||
+seller=1998636|1|9.99|1|-1||0|||||true||4.7937584|10412|false|
+ptitle=5543369186|2|1|1|Rest:1533891||||||2700211|19615|886.8211044369053|0.776121|34.0|$119.99|100.0|1|||
+seller=1533891|1|119.99|3|-1|1.0:text,In+size+6.0%2C7.0%2C8.0%2C8.5%2C9.0%2C9.5%2C10.0%2C...,0.0,,,,0,0,|2|||||true||2.95|20|true|
+ptitle=622529158|3|1|1|||||||2700408|67402|796.5289827432475|0.893899|63.0|$5.27|100.0|1|||
+seller=4281413|1|5.27|1|-1||0|||||true||4.695052|1769|true|
+ptitle=5507199621|4|1|1|||||||2700220|56412|706.9031281251306|0.791171|45.0|$99.99|100.0|1|||
+seller=4806107|1|-1.0|1|-1|1.0:sale,$,30.000000000000014,0.0,,,,0,0,:text,In+size+6.0%2C6.5%2C7.0%2C7.5%2C8.0%2C8.5%2C9.0%2C9...,0.0,,,,0,0,|2||||$130 $30.00 off|false||5.0|1|false|
+ptitle=5502728013|5|1|1|||||||900000|0|698.7772340643119|0.836740|75.0|$40.95|100.0|1|||
+seller=955448|1|40.95|1|-1||0|||||false||4.142857|7|false|
+ptitle=840662011|6|1|1|Rest:265238||||||300233|62718|683.2927820751431|0.995513|52.0|$22.95|100.0|1|||
+seller=265238|1|22.95|1|-1||0|||||false||4.478261|23|false|
+ptitle=848084980|8|1|1|||||||2700073|145653|670.4809846773688|0.880587|60.0|$24.99|100.0|1|||
+seller=5267046|1|24.99|1|-1||0|||||true||0.0|0|false|
+ptitle=891200492|9|1|1|Rest:1030132||||||2701003|17215|668.8437575254773|0.825491|32.0|$519.99|100.0|1|||
+seller=1030132|1|519.99|1|-1||0|||||false||4.7391305|23|false|
+ptitle=641974054|10|1|1|||||||900000|69433|667.6678790058678|0.752129|57.0|$4.19|100.0|1|||
+seller=3365158|1|4.19|1|-1||0|||||true||4.70907|4410|true|
+ptitle=517591869|12|1|1|Rest:4802895||||||2700408|127644|643.0972570735605|0.893899|17.25|$23.95|100.0|1|||
+seller=4318776|1|-1.0|3|-1||0|||||false||0.0|0|false|
+ptitle=541549480|13|1|1|Rest:1180414||||||2702000|105832|597.4904572011968|0.752129|24.666666666666664|$8.27|100.0|1|||
+seller=4636561|1|8.27|1|-1||0|||||false||4.8283377|734|true|
+ptitle=1020561900|14|1|1|||||||2700063|159813|594.4717491579845|0.934869|75.0|$5.39|100.0|1|||
+seller=4722645|1|5.39|1|-1|1.0:sale,$,0.6000000000000005,0.0,,,,0,0,:text,Free+Shipping+on+All+Orders%21,0.0,201301010000/,,,0,0,|2||||$5.99 $0.60 off|true||4.3942246|1593|true|
+ptitle=507792308|15|1|1|Rest:4683455||||||2702000|105832|591.7739184402442|0.768311|22.5|$9.48|100.0|1|||
+seller=4910651|1|-1.0|2|-1||0|||||false||5.0|1|false|
+ptitle=1090571346|16|1|1|Rest:4452919||||||2700211|20824|776.4814913363535|0.776121|35.0|$59.99|100.0|1|||
+seller=1533891|1|59.99|1|-1|1.0:sale,$,49.99999999999999,0.0,,,,0,0,:text,In+size+7.5%2C8.0%2C8.5%2C9.0%2C9.5%2C10.0%2C10.5...,0.0,,,,0,0,|2||||$110 $50.00 off|true||2.95|20|true|
+ptitle=573017390|17|1|1|||||||2700073|91937|679.695660577044|0.880587|33.5|$14.85|100.0|1|||
+seller=4281413|1|14.85|1|-1||0|||||true||4.695052|1769|true|
+ptitle=5502723300|18|1|1|||||||900000|0|639.3095640940136|0.836740|75.0|$50.95|100.0|1|||
+seller=955448|1|50.95|1|-1||0|||||false||4.142857|7|false|
+ptitle=940022974|20|1|1|||||||2700600|58701|569.9503499778303|0.875839|59.0|$14.40|100.0|1|||
+seller=4825227|1|14.4|1|12||0|||||true||4.0289855|276|true|
+ptitle=5513277553|21|1|1|||||||2700220|56412|565.2712749001105|0.776121|44.33333333333333|$129.95|100.0|1|||
+seller=4825252|1|129.95|1|23||0|||||true||4.0289855|276|true|
+ptitle=890329961|22|1|1|||||||2700408|133796|564.7642425785796|0.837916|34.75|$61.95|100.0|1|||
+seller=4825235|1|61.95|4|19||0|||||true||4.0289855|276|true|
+ptitle=753852910|24|1|1|||||||2700073|146738|557.7419123688652|0.934869|47.69230769230769|$26.99|100.0|1|||
+seller=4722645|1|26.99|10|-1|1.0:sale,$,3.0,0.0,,,,0,0,:text,Free+Shipping+on+All+Orders%21,0.0,201301010000/,,,0,0,|2||||$29.99 $3.00 off|true||4.3942246|1593|true|
+ptitle=654738989|26|1|1|||||||900000|84012|554.7756559595525|0.752129|57.0|$3.19|100.0|1|||
+seller=3365158|1|3.19|1|-1||0|||||true||4.70907|4410|true|
+ptitle=707747307|27|1|1|Rest:4736009||||||2700063|76249|552.234395428327|0.889614|19.857142857142854|$6.39|100.0|1|||
+seller=4736009|1|6.39|1|-1||0|||||false||4.8071113|15356|true|
+ptitle=63531001|28|1|1|||||||2700408|82712|625.0421885589608|0.893899|47.166666666666664|$7.69|100.0|1|||
+seller=4281413|1|7.69|3|-1||0|||||true||4.695052|1769|true|
+ptitle=5502728016|29|1|1|||||||900000|0|605.9895507237038|0.836740|75.0|$503.00|100.0|1|||
+seller=955448|1|503.0|1|-1||0|||||false||4.142857|7|false|
+ptitle=507792308|31|1|1|Rest:4683455||||||2702000|105832|559.6902659046442|0.752129|22.5|$8.99|100.0|1|||
+seller=5105812|1|-1.0|1|-1||0|||||false||0.0|0|false|
+ptitle=753852910|32|1|1|||||||2700073|146738|545.9987095658629|0.870929|47.69230769230769|$22.49|100.0|1|||
+seller=4143386|1|22.49|6|-1|1.0:sale,$,7.5,0.0,,,,0,0,:text,Free+Shipping+on+Orders+Over+%24100,0.0,201109010000/201409302359,,,0,0,|2||||$29.99 $7.50 off|false||4.7316346|2355|true|
+ptitle=5513277553|33|1|1|Rest:1533891||||||2700220|56412|653.3133907916089|0.825491|44.33333333333333|$149.99|100.0|1|||
+seller=1533891|1|149.99|3|-1|1.0:text,In+size+5.0%2C5.5%2C6.0%2C6.5%2C7.0%2C7.5%2C8.0%2C8...,0.0,,,,0,0,|2|||||true||2.95|20|true|
+ptitle=63531001|34|1|1|||||||2700408|82712|541.8233547780552|0.893899|47.166666666666664|$7.72|100.0|1|||
+seller=2370155|1|7.72|4|-1||0|||||false||4.85|40|false|
+ptitle=1018957017|35|1|1|||||||2700073|145653|540.6093714604533|0.860614|56.0|$25.95|100.0|1|||
+seller=5036683|1|25.95|1|-1||0|||||false||4.8405056|366|false|
+ptitle=743682867|36|1|1|||||||2700073|63437|539.5985846455641|0.870929|58.0|$46.99|100.0|1|||
+seller=193176|1|46.99|1|-1||0|||||true||4.8511987|1418|true|
+ptitle=679858288|37|1|1|||||||2700063|188669|535.1360632897284|0.902031|30.0|$12.41|100.0|1|||
+seller=4143386|1|12.41|2|-1|1.0:sale,$,1.379999999999999,0.0,,,,0,0,:text,Free+Shipping+on+Orders+Over+%24100,0.0,201109010000/201409302359,,,0,0,|2||||$13.79 $1.38 off|false||4.7316346|2355|true|
+ptitle=994328713|38|1|1|||||||2700073|71463|534.7715925279717|0.870929|58.0|$1.29|100.0|1|||
+seller=1787388|1|1.29|1|-1||0|||||false||4.680464|3624|false|
+ptitle=886915818|40|1|1|||||||2700444|201835|529.7519801432289|0.934869|65.5|$44.99|100.0|1|||
+seller=4561883|1|44.99|2|-1||0|||||true||4.7913384|508|false|
+seller_hidden=227502|990765963|1147436601|-1
+seller_hidden=5310958|622529158|5645627277|-1
+seller_hidden=4825254|5543369186|5651114316|23
+seller_hidden=5289138|5548930281|5653769481|-1
+[end li1_1378184738754_91]
+</code></pre>
+
+<p>I am trying to run the command <code>cat /home/nextag/logs/OutpdirImpressions.log.2013-09-02 | awk -F "$begin" '{print $0}' | awk '$0 ~ "header=7075" {print $0}'</code>
+As per this command i want to split the entire file into sub-sections beginning with the word 'begin'. Now in that i want those sub-sections which contains 'header=7075'</p>
+
+<p>Expected output is that it will print the entire sub-section(those which contain that string), but i am getting only this portion as output:</p>
+
+<blockquote>
+  <p>header=7075|lime|0|0|109582|0|1|2700073||0|0|0|[355]|1|0|ssb-li1-1378184738754-90||0||LIME
+  |0|saved=true|0.002406508312038836|0|[ser=zu1:mtu=model_other_20120806calibex.csv:mu=model_other_20120806calibex.csv:scorerClassUsed=LinearPersonalizedProductSearchScorer][ser=uzu6:mtu=model_other_20120806calibex.csv:mu=model_other_20120806calibex.csv:scorerClassUsed=LinearPersonalizedProductSearchScorer][ser=xzs5:mtu=model_other_20120806calibex.csv:mu=model_other_20120806calibex.csv:scorerClassUsed=LinearPersonalizedProductSearchScorer][ser=sv-stda-zu3:mtu=model_other_20120806calibex.csv:mu=model_other_20120806calibex.csv:scorerClassUsed=LinearPersonalizedProductSearchScorer][ser=hzu8:mtu=model_other_20120806calibex.csv:mu=model_other_20120806calibex.csv:scorerClassUsed=LinearPersonalizedProductSearchScorer][ser=lzu3:mtu=model_other_20120806calibex.csv:mu=model_other_20120806calibex.csv:scorerClassUsed=LinearPersonalizedProductSearchScorer][ser=yzu2:mtu=model_other_20120806calibex.csv:mu=model_other_20120806calibex.csv:scorerClassUsed=LinearPersonalizedProductSearchScorer][ser=xzu7:mtu=model_other_20120806calibex.csv:mu=model_other_20120806calibex.csv:scorerClassUsed=LinearPersonalizedProductSearchScorer]|0|null|false|40||false|</p>
+</blockquote>
+
+<p>I have tried using if in various ways, but it doesn't works. Can somebody please help me. 
+I tried <code>awk -F "$begin" '{if($0 ~ "header=7075") {print $0}}' /home/nextag/logs/OutpdirImpressions.log.2013-09-02</code>. It gave the same result</p>
+
+<p>Can somebody please suggest that how do i get the complete sub-section in the result</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/command-line" class="post-tag" title="show questions tagged &#39;command-line&#39;" rel="tag">command-line</a> <a href="/questions/tagged/awk" class="post-tag" title="show questions tagged &#39;awk&#39;" rel="tag">awk</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/340788" title="short permalink to this question" class="short-link" id="link-post-340788">share</a><span class="lsep">|</span><a href="/posts/340788/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/340788/revisions" title="show all edits to this post">edited <span title="2013-09-03 10:26:02Z" class="relativetime">Sep 3 at 10:26</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-09-03 09:42:32Z" class="relativetime">Sep 3 at 9:42</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/86687/vipin8169"><div><img src="https://www.gravatar.com/avatar/ef1b30794ac9d3125669df468262616f?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/86687/vipin8169">vipin8169</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">609</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="8 silver badges"><span class="badge2"></span><span class="badgecount">8</span></span><span title="29 bronze badges"><span class="badge3"></span><span class="badgecount">29</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-340788" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="2" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-435220" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">If you have more to add, please do it by editing your question, not leaving dozens of comments.</span>
+	&ndash;&nbsp;
+		<a href="/users/449/oli" 
+		   title="77945 reputation" 
+		   class="comment-user">Oli<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 09:56:58Z" class="relativetime-clean">Sep 3 at 9:56</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-435222" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">sorry about that, but you could have let me add there before deleting them :(</span>
+	&ndash;&nbsp;
+		<a href="/users/86687/vipin8169" 
+		   title="609 reputation" 
+		   class="comment-user owner">vipin8169</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 09:58:00Z" class="relativetime-clean">Sep 3 at 9:58</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-435238" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Can you explain more clear what output do you expect?</span>
+	&ndash;&nbsp;
+		<a href="/users/147044/radu-rdeanu" 
+		   title="25266 reputation" 
+		   class="comment-user">Radu Rădeanu</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 10:17:32Z" class="relativetime-clean">Sep 3 at 10:17</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-435243" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I want the whole sub-section as output, the file contains many such sub-sections each starting with [begin] and ending with [end]</span>
+	&ndash;&nbsp;
+		<a href="/users/86687/vipin8169" 
+		   title="609 reputation" 
+		   class="comment-user owner">vipin8169</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 10:22:35Z" class="relativetime-clean">Sep 3 at 10:22</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-435257" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">actually i want to split the whole file into sub-sections beginning with [begin and ending with [end. And in those sub-sections i want to filter out the sub-sections that contain &#39;header=7075&#39;.</span>
+	&ndash;&nbsp;
+		<a href="/users/86687/vipin8169" 
+		   title="609 reputation" 
+		   class="comment-user owner">vipin8169</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 10:37:32Z" class="relativetime-clean">Sep 3 at 10:37</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-340788" 
+			   class="comments-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">show <b>2</b> more comments</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								4 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/340788/using-if-an-awk-command?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/340788/using-if-an-awk-command?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/340788/using-if-an-awk-command?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="340876"></a>
+<div id="answer-340876" class="answer" data-answerid="340876" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="340876">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h2>Awk script - section delimiters not passed + comments</h2>
+
+<p>This variant does not pass the <code>[begin ...]</code> and <code>[end ...]</code> delimiters.
+</p>
+
+<pre><code>#!/usr/bin/awk -f
+
+BEGIN   {
+    insect=0    # we are out of a section
+    }
+
+/^\[begin [a-z0-9_]+\]/ {
+    insect=1    # section opening
+    next
+    }
+
+insect == 1 {
+    if($0 ~ /^header=7075\|/)   {
+        insect=2    # we are inside the right section
+        }
+    else    {
+        insect=0    # we are in a different section
+        next
+        }
+    }
+
+/^\[end [a-z0-9_]+\]/ &amp;&amp; (insect == 2 || insect == 1)   {
+    exit 0      # end of the right section -&gt; stop processing
+    }
+
+insect == 2 {
+    print       # we are inside the right section -&gt; pass all lines
+    }
+</code></pre>
+
+<h2>Awk script - section delimiters passed + contracted code</h2>
+
+<pre class="lang-awk prettyprint-override"><code>#!/usr/bin/awk -f
+BEGIN {ins=0}
+/^\[begin [a-z0-9_]+\]/ {beg=$0; getline; if($0 ~ /^header=7075\|/) {print beg; ins=1}}
+/^\[end [a-z0-9_]+\]/ &amp;&amp; ins {print; exit 0}
+ins
+</code></pre>
+
+<p><strong>as one-liner :)</strong>
+I do not understand the demand for one-liners but here it is:
+</p>
+
+<pre><code>awk 'BEGIN {ins=0} /^\[begin [a-z0-9_]+\]/ {beg=$0; getline; if($0 ~ /^header=7075\|/) {print beg; ins=1}} /^\[end [a-z0-9_]+\]/ &amp;&amp; ins {print; exit 0} ins'
+</code></pre>
+
+<p>The advantage of the programs in this answer is that they process the input line-by-line as is usual in Unix utilities. This makes the program to be able to process very log sections without extreme memory demands and allows the program to run in parallel (on multi-core CPUs) with other programs in a pipe.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/340876" title="short permalink to this answer" class="short-link" id="link-post-340876">share</a><span class="lsep">|</span><a href="/posts/340876/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/340876/revisions" title="show all edits to this post">edited <span title="2013-09-03 17:46:54Z" class="relativetime">Sep 3 at 17:46</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-09-03 14:12:04Z" class="relativetime">Sep 3 at 14:12</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/67132/pabouk"><div><img src="https://www.gravatar.com/avatar/1c7f6576a99b9165460020b9d8562e2b?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/67132/pabouk">pabouk</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">268</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-340876" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-435427" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">This doesn&#39;t print the <code>begin</code> and <code>end</code> lines, is this intended?</span>
+	&ndash;&nbsp;
+		<a href="/users/115287/moon-musick" 
+		   title="910 reputation" 
+		   class="comment-user">moon.musick</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 15:48:48Z" class="relativetime-clean">Sep 3 at 15:48</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-435474" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@moon.musick: Yes, that is intentional. I understood the question that only content of a section should be passed. This code is processing the input line by line and is able to process extremely long sections without high memory requirements. It is also piping-friendly - allows parallel processing with other components in a pipe thanks to the line-by-line passing. :)</span>
+	&ndash;&nbsp;
+		<a href="/users/67132/pabouk" 
+		   title="268 reputation" 
+		   class="comment-user">pabouk</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 16:52:31Z" class="relativetime-clean">Sep 3 at 16:52</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-435495" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I see ;) I have to get to know awk better, I know it can handle very complex text processing tasks.</span>
+	&ndash;&nbsp;
+		<a href="/users/115287/moon-musick" 
+		   title="910 reputation" 
+		   class="comment-user">moon.musick</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 17:37:16Z" class="relativetime-clean">Sep 3 at 17:37</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-340876" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="340850"></a>
+<div id="answer-340850" class="answer" data-answerid="340850" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="340850">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h3>Bash script</h3>
+
+<pre><code>#!/bin/bash
+
+section=""
+insect=0
+while read line
+    do if [ "$insect" -eq "1" ] || [ "x$(echo -e $line | grep '\[begin')" != "x" ]; then
+        insect=1
+        section="${section}${line}\n"
+    else
+        continue
+    fi
+    if [ "x$(echo -e $line | grep '\[end')" != "x" ]; then
+        if [ "x$(echo -e $section | grep 'header=7075')" != "x" ]; then
+            echo -e "$section"
+        fi
+        section=""
+        insect=0
+    fi
+done &lt; OutpdirImpressions.log
+</code></pre>
+
+<h3>Python script</h3>
+
+<p>(better performance than bash)</p>
+
+<pre><code>#!/usr/bin/env python
+
+section = ''
+insect = False
+with open('OutpdirImpressions.log', 'r') as f:
+    while True:
+        line = f.readline()
+        if line == '':
+            break
+        if insect or line.startswith('[begin'):
+            insect = True
+            section += line
+        else:
+            continue
+        if line.startswith('[end'):
+            if 'header=7075' in section:
+                print(section)
+            section = ''
+            insect = False
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/340850" title="short permalink to this answer" class="short-link" id="link-post-340850">share</a><span class="lsep">|</span><a href="/posts/340850/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/340850/revisions" title="show all edits to this post">edited <span title="2013-09-03 18:45:47Z" class="relativetime">Sep 3 at 18:45</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-09-03 13:06:22Z" class="relativetime">Sep 3 at 13:06</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/37580/germar"><div><img src="https://www.gravatar.com/avatar/49568e4503d1bbbce80482c56b4eae6c?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/37580/germar">Germar</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">620</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="10 bronze badges"><span class="badge3"></span><span class="badgecount">10</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-340850" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-435515" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Both your programs pass a text before the <code>&#91;begin ...&#93;</code> section delimiter.</span>
+	&ndash;&nbsp;
+		<a href="/users/67132/pabouk" 
+		   title="268 reputation" 
+		   class="comment-user">pabouk</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 18:05:16Z" class="relativetime-clean">Sep 3 at 18:05</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-435536" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">You&#39;re right. I thought this wouldn&#39;t be an issue because vipin8169 didn&#39;t avoid that either in his examples. I fixed this but anyways your awk script is more elegant.</span>
+	&ndash;&nbsp;
+		<a href="/users/37580/germar" 
+		   title="620 reputation" 
+		   class="comment-user">Germar</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 18:44:40Z" class="relativetime-clean">Sep 3 at 18:44</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-340850" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="340918"></a>
+<div id="answer-340918" class="answer" data-answerid="340918" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="340918">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>I am not sure if this answers your question at all, i.e. whether you are interested in 'whatever works' or much rather in <code>awk</code>-specific answer, but it seemed to me you want a oneliner (not that these examples are very wieldy):</p>
+
+<pre><code>python3 -c "import re; print(*[rec for rec in re.findall('(?ms)\[begin.*?(?=\[begin|\Z)', open('OutpdirImpressions.log.2013-09-02').read()) if 'header=7075' in rec])"
+</code></pre>
+
+<p>and for Python 2.6 or 2.7 (no 'star' unpacking for all I remember):</p>
+
+<pre><code>python -c "import re; print([rec for rec in re.findall('(?ms)\[begin.*?(?=\[begin|\Z)', open('OutpdirImpressions.log.2013-09-02').read()) if 'header=7075' in rec][0])"
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/340918" title="short permalink to this answer" class="short-link" id="link-post-340918">share</a><span class="lsep">|</span><a href="/posts/340918/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/340918/revisions" title="show all edits to this post">edited <span title="2013-09-03 18:27:22Z" class="relativetime">Sep 3 at 18:27</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-09-03 15:56:39Z" class="relativetime">Sep 3 at 15:56</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/115287/moon-musick"><div><img src="https://www.gravatar.com/avatar/bfb297df08beac6c3eb203c9e8e84ed4?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/115287/moon-musick">moon.musick</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">910</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="3 silver badges"><span class="badge2"></span><span class="badgecount">3</span></span><span title="16 bronze badges"><span class="badge3"></span><span class="badgecount">16</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-340918" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-435504" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">As I know very little about python and this code is not understandable for me I tested it. Unfortunately I discovered some problems: The python3 code is passing text after the <code>&#91;end ...&#93;</code> delimiter. The python 2.x code shows syntax error in python 2.7.3 on <code>*</code> after <code>print(</code>.</span>
+	&ndash;&nbsp;
+		<a href="/users/67132/pabouk" 
+		   title="268 reputation" 
+		   class="comment-user">pabouk</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 17:55:17Z" class="relativetime-clean">Sep 3 at 17:55</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-435533" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@pabouk fixed the typo, there definitely should be no <code>*</code>. Perhaps we&#39;re working on different sample files - I copied the &#39;section&#39; provided by the OP to a file several times, modifying the <code>header=xxxx</code> part - the command prints only the correct &#39;section&#39;, so I assumed it works ok enough. The code is a bit convoluted, as I wanted to make a oneliner - basically it divides the file into sections using regex with lookahead and then makes a list of the sections, but filtering out &#39;incorrect&#39; sections. Python doesn&#39;t let you squeeze much logic into one line (and does it on purpose).</span>
+	&ndash;&nbsp;
+		<a href="/users/115287/moon-musick" 
+		   title="910 reputation" 
+		   class="comment-user">moon.musick</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-03 18:40:55Z" class="relativetime-clean">Sep 3 at 18:40</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-435941" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">The sample file from the question is not a good representation of what is described in the question. It does not contain text before and after the only section in it. I copied and pasted some lines before and after the section to be able to test the begin and end conditions in my script.</span>
+	&ndash;&nbsp;
+		<a href="/users/67132/pabouk" 
+		   title="268 reputation" 
+		   class="comment-user">pabouk</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-04 10:16:59Z" class="relativetime-clean">Sep 4 at 10:16</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-435943" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@pabouk The lookahead in the regex I used expects either another <code>&#91;begin</code> or end of file (<code>\Z</code>) as the end of section. If I had more data about text before and after &#39;sections&#39; part, I could add it to the alternative in the lookahead.</span>
+	&ndash;&nbsp;
+		<a href="/users/115287/moon-musick" 
+		   title="910 reputation" 
+		   class="comment-user">moon.musick</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-04 10:25:24Z" class="relativetime-clean">Sep 4 at 10:25</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-340918" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="341164"></a>
+<div id="answer-341164" class="answer accepted-answer" data-answerid="341164" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="341164">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>found the one liner solution for the same:-</p>
+
+<pre><code>awk '$1=="[end"{p=0}/^header=7075/{p=1}p' file
+</code></pre>
+
+<p>or <code>sed '/^\[end/G' input.txt | awk -vRS='' '/header=7075/'</code></p>
+
+<p>both servers the purpose</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/341164" title="short permalink to this answer" class="short-link" id="link-post-341164">share</a><span class="lsep">|</span><a href="/posts/341164/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature owner">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-09-04 07:54:02Z" class="relativetime">Sep 4 at 7:54</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/86687/vipin8169"><div><img src="https://www.gravatar.com/avatar/ef1b30794ac9d3125669df468262616f?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/86687/vipin8169">vipin8169</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">609</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="8 silver badges"><span class="badge2"></span><span class="badgecount">8</span></span><span title="29 bronze badges"><span class="badge3"></span><span class="badgecount">29</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-341164" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-341164" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/340788/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="340788" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f340788%2fusing-if-an-awk-command%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f340788%2fusing-if-an-awk-command%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/command-line" class="post-tag" title="show questions tagged &#39;command-line&#39;" rel="tag">command-line</a> <a href="/questions/tagged/awk" class="post-tag" title="show questions tagged &#39;awk&#39;" rel="tag">awk</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/command-line" class="post-tag" title="show questions tagged &#39;command-line&#39;" rel="tag">command-line</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">4170</span></span><br>
+<a href="/questions/tagged/awk" class="post-tag" title="show questions tagged &#39;awk&#39;" rel="tag">awk</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">20</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-09-03 09:42:32Z"><b>2 months ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>119 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-09-04 07:54:02Z">2 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/askubuntu/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=askubuntu.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-askubuntu.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/173568" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/173568/using-awk-or-similar-to-find-the-next-word-in-the-output-of-another-command" class="question-hyperlink">Using awk or similar to find the next word in the output of another command</a>
+</div>
+<div class="spacer">
+<a href="/q/231995" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/231995/how-to-get-separate-with-space-or-tab-in-the-awk-example" class="question-hyperlink">How to get separate with space or tab in the awk example</a>
+</div>
+<div class="spacer">
+<a href="/q/274096" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/274096/awk-quoting-program-text" class="question-hyperlink">awk quoting program text</a>
+</div>
+<div class="spacer">
+<a href="/q/276863" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/276863/need-help-in-sed-and-awk" class="question-hyperlink">Need help in SED and AWK</a>
+</div>
+<div class="spacer">
+<a href="/q/279960" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/279960/help-using-awk-to-change-a-file" class="question-hyperlink">Help using Awk to change a file</a>
+</div>
+<div class="spacer">
+<a href="/q/291445" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/291445/why-doesnt-this-command-work-as-an-alias" class="question-hyperlink">Why doesn&#39;t this command work as an alias?</a>
+</div>
+<div class="spacer">
+<a href="/q/312816" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/312816/awk-programming-changing-a-field-value-conditionally" class="question-hyperlink">awk programming - Changing a field value conditionally</a>
+</div>
+<div class="spacer">
+<a href="/q/324371" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/324371/skip-records-containing-no-field-separator-in-awk" class="question-hyperlink">Skip records containing no field separator in awk</a>
+</div>
+<div class="spacer">
+<a href="/q/340583" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/340583/how-to-write-an-awk-script-that-catch-pings-time" class="question-hyperlink">How to write an awk script that catch ping&#39;s time</a>
+</div>
+<div class="spacer">
+<a href="/q/342842" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">9
+    </div>
+</a><a href="/questions/342842/what-does-this-command-mean-awk-f-print-4" class="question-hyperlink">What does this command mean: awk -F: &#39;{print $4}&#39;?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/340788" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/340788/ivc/8e49');});
+</script>
+<noscript>
+    <div><img src="/posts/340788/ivc/8e49" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/340788/using-if-an-awk-command")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.askubuntu.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.21.1172
+            </div>
+                <div id="additional-notices">
+                    Ubuntu and Canonical are registered trademarks of Canonical Ltd.
+                </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Ask Ubuntu works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-29']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|command-line|awk|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

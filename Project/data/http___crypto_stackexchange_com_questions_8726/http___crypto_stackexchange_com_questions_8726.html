@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>hmac - Recommended authenticated stream cipher for minimum overhead? - Cryptography Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/crypto/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/crypto/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Cryptography Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCrypto" />
+    <meta name="twitter:domain" content="crypto.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/crypto/img/apple-touch-icon.png?v=4eff82ce3a8b"/>
+    <meta name="og:title" content="Recommended authenticated stream cipher for minimum overhead?" />
+    <meta name="og:description" content="I&#39;m running my TCP/IP protocol secured by encrypting each packet with AES128/CBC, bundling a SHA256 HMAC over that packet.
+
+This causes quite a bit of space overhead for small packets, so at first ..." />
+    <meta name="og:url" content="http://crypto.stackexchange.com/questions/8726/recommended-authenticated-stream-cipher-for-minimum-overhead"/>
+    <link rel="canonical" href="http://crypto.stackexchange.com/questions/8726/recommended-authenticated-stream-cipher-for-minimum-overhead" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/crypto/all.css?v=4c2f7b84c965">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Recommended authenticated stream cipher for minimum overhead?&#39;" href="/feeds/question/8726">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:15,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:8726});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('281', '8726');
+            
+                    });
+    </script>
+
+                <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+                                        tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+                                        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+                                        messageStyle: "none"
+                });
+                </script>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>                
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('281');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385123024,"enableUserHovercards":true,"site":{"name":"Cryptography Stack Exchange","description":"Q&A for software developers, mathematicians and others interested in cryptography","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091","js/mathjax-editing.en.js":"a09844f7b738"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f8726%2frecommended-authenticated-stream-cipher-for-minimum-overhead">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f8726%2frecommended-authenticated-stream-cipher-for-minimum-overhead">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Cryptography
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/crypto/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Cryptography Stack Exchange is a question and answer site for software developers, mathematicians and others interested in cryptography. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/8726/recommended-authenticated-stream-cipher-for-minimum-overhead" class="question-hyperlink">Recommended authenticated stream cipher for minimum overhead?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="8726"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="8726">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I'm running my TCP/IP protocol secured by encrypting each packet with AES128/CBC, bundling a SHA256 HMAC over that packet.</p>
+
+<p>This causes quite a bit of space overhead for small packets, so at first I was thinking of running AES in CTR-mode and still use the HMAC, but it would be much better to run some sort of stream cipher with integrated authentication.</p>
+
+<p>What are my best options?</p>
+
+<p>Edit:</p>
+
+<p>I should mention that failing an integrity check will always disconnect a connection. </p>
+
+<p>This means re-negotiating the encryption keys, which gives each new connection a new encryption and signing key.</p>
+
+<p>In other words, make a wrong guess and the keys are reset. Even with a small integrity checksum, guessing right to sustain an exchange appears to be a hard problem.</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/stream-cipher" class="post-tag" title="show questions tagged &#39;stream-cipher&#39;" rel="tag">stream-cipher</a> <a href="/questions/tagged/hmac" class="post-tag" title="show questions tagged &#39;hmac&#39;" rel="tag">hmac</a> <a href="/questions/tagged/authenticated-encryption" class="post-tag" title="show questions tagged &#39;authenticated-encryption&#39;" rel="tag">authenticated-encryption</a> <a href="/questions/tagged/ctr" class="post-tag" title="show questions tagged &#39;ctr&#39;" rel="tag">ctr</a> <a href="/questions/tagged/integrity" class="post-tag" title="show questions tagged &#39;integrity&#39;" rel="tag">integrity</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/8726" title="short permalink to this question" class="short-link" id="link-post-8726">share</a><span class="lsep">|</span><a href="/posts/8726/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/8726/revisions" title="show all edits to this post">edited <span title="2013-06-14 22:06:03Z" class="relativetime">Jun 14 at 22:06</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-06-14 09:43:13Z" class="relativetime">Jun 14 at 9:43</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/4640/nuoji"><div><img src="https://www.gravatar.com/avatar/a3883ced75dbc92d6622b016ea6a6ef8?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/4640/nuoji">Nuoji</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">228</span><span title="10 bronze badges"><span class="badge3"></span><span class="badgecount">10</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-8726" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="10" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-16152" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">You will still have the same overhead with an authenticated stream cipher. They still have a message fingerprint, the strength of authenticated modes of encryption is in safely coupling encryption and authentication. AES-CTR <i>is</i> a stream cipher, by the way. If your packets are so small, are you sure you need to authenticate them all as they are received? Perhaps you could batch the authentication step if the packets are sent at a high rate, to alleviate the space overhead issue?</span>
+	&ndash;&nbsp;
+		<a href="/users/1487/thomas" 
+		   title="3006 reputation" 
+		   class="comment-user">Thomas</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-14 10:12:48Z" class="relativetime-clean">Jun 14 at 10:12</span></span>
+		<span class="edited-yes" title="this comment was edited 2 times"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-16153" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Thomas yes, of course AES-CTR is a stream cipher. In order to avoid trivial bit-flipping of the packets, some integrity checking is necessary. As I understand it there are several ways to put that on top a stream cipher without having a separate HMAC or similar as checksum.</span>
+	&ndash;&nbsp;
+		<a href="/users/4640/nuoji" 
+		   title="228 reputation" 
+		   class="comment-user owner">Nuoji</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-14 10:55:03Z" class="relativetime-clean">Jun 14 at 10:55</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-16154" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Yes, of course. But, no, a MAC always requires extra information. Think about it - if you have X bits of plaintext to encrypt and authenticate, and Y bits of output, at the very least X = Y to ensure correct decryption (pigeonhole principle) which leaves nothing for authentication. So Y &gt; X. So, no, any authentication mechanism will always add a few bytes of overhead to store the fingerprint. So your options are in making the fingerprint smaller (not ideal for obvious reasons) or authenticating more data per fingerprint.</span>
+	&ndash;&nbsp;
+		<a href="/users/1487/thomas" 
+		   title="3006 reputation" 
+		   class="comment-user">Thomas</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-14 11:03:28Z" class="relativetime-clean">Jun 14 at 11:03</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-16155" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">If it were possible to have zero authentication overhead, authenticated encryption schemes would already be doing it. You won&#39;t find your solution at this low a level, you need to go up a notch and design your system around minimizing overhead.</span>
+	&ndash;&nbsp;
+		<a href="/users/1487/thomas" 
+		   title="3006 reputation" 
+		   class="comment-user">Thomas</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-14 11:04:59Z" class="relativetime-clean">Jun 14 at 11:04</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-16164" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">That&#39;s a bad idea. Using only parts of the HMAC is a loss of integrity. Assuming the attacker knows the message is only 1 byte long. He still can not test these $2^8$ possibilities and find a correct HMAC , because he does not know $k$. If you use only part of the HMAC, his chance of random guessing went up to non-neglectible probability.</span>
+	&ndash;&nbsp;
+		<a href="/users/4082/tylo" 
+		   title="1073 reputation" 
+		   class="comment-user">tylo</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-14 16:04:44Z" class="relativetime-clean">Jun 14 at 16:04</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-8726" 
+			   class="comments-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">show <b>10</b> more comments</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								2 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/8726/recommended-authenticated-stream-cipher-for-minimum-overhead?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/8726/recommended-authenticated-stream-cipher-for-minimum-overhead?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/8726/recommended-authenticated-stream-cipher-for-minimum-overhead?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="8750"></a>
+<div id="answer-8750" class="answer accepted-answer" data-answerid="8750" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="8750">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>You asked <a href="http://security.stackexchange.com/q/37490/971">the same question</a> over on the IT Security site.
+Please don't cross-post.  It is frowned upon, under the rules these sites operate.</p>
+
+<p>Here is what you should be doing:</p>
+
+<ul>
+<li><p>Truncate the MAC tag to an acceptable length.  You will need to choose a length that provides a suitable tradeoff between packet size vs. security against forgery.  I suggest you use an authenticated encryption scheme.  See <a href="http://security.stackexchange.com/a/37578/971">my answer on the other site</a> for details.</p></li>
+<li><p>For additional robustness, you could include in the MAC a running hash of all prior packets.  This way, if anyone tampers with a single packet, then it will invalidate all subsequent MAC tags.  This may or may not add security, depending upon the application.  However, it can't hurt: it doesn't increase the length of the packet at all, so it is free, and in some cases it might help stop some attacks (if they require forging a packet in the middle of a stream).</p>
+
+<p>For example, suppose you use a 16-bit MAC tag.  This is too short to prevent an attacker from forging a packet by sheer blind luck: if the attacker sends a forged packet with a random 16-bit tag, then it will be accepted with probability $1/2^{16}$.  Therefore, an attacker can get a single forged packet accepted, by trying $2^{16}$ times until they succeed.  In some applications, that's bad enough that the application is irrecoverably broken.  But in others, forging a single packet is not devastating in itself.  In the latter case, we can proceed to ask: after the attacker successfully forged a single packet, what happens next?  If you don't add a running hash, then the attacker can allow the rest of the packets to flow unimpeded, and the connection will continue.  In particular, it's possible that neither endpoint will notice anything has gone awry.  But if you use a running hash, then there's no way the attacker can allow the conversation to continue.  If the attacker forges one packet then allows all subsequent packets to flow unimpeded, the recipient will reject all subsequent packets, as they don't have a matching running hash.  There's no way for the attacker to recover and repair the connection so it can continue at length -- so a successful forgery inevitably leads to denial of service shortly thereafter.  This increases the chances that a successful attack will be noticed, and makes it harder to carry out attacks that require multiple successful forgeries.  So, in some applications, it may make some attacks harder (no guarantees, but it might just help). </p></li>
+</ul>
+
+<p>And again, you probably really ought to be looking much more seriously at TLS or DTLS.  Writing your own packet format is a recipe for trouble.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/8750" title="short permalink to this answer" class="short-link" id="link-post-8750">share</a><span class="lsep">|</span><a href="/posts/8750/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/8750/revisions" title="show all edits to this post">edited <span title="2013-06-20 00:15:15Z" class="relativetime">Jun 20 at 0:15</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-06-17 05:14:56Z" class="relativetime">Jun 17 at 5:14</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/351/d-w"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/mYIzP.png?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/351/d-w">D.W.</a><br>
+        <span class="reputation-score" title="reputation score 13999" dir="ltr">14k</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="15 silver badges"><span class="badge2"></span><span class="badgecount">15</span></span><span title="53 bronze badges"><span class="badge3"></span><span class="badgecount">53</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-8750" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-16204" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I know I shouldn&#39;t cross-post, but the type of answers differ widely, so I couldn&#39;t resist it. As for the running MAC, I already bundle a counter with the packet (in the encrypted data) to avoid replay attacks. I&#39;m guessing that either: a) putting the counter in the encrypted data or b) adding the counter to the HMAC of c) keep a running hash would be fairly equivalent, or?</span>
+	&ndash;&nbsp;
+		<a href="/users/4640/nuoji" 
+		   title="228 reputation" 
+		   class="comment-user owner">Nuoji</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-17 07:25:10Z" class="relativetime-clean">Jun 17 at 7:25</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-16282" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">But a counter would be unnecessary if I instead run in a streaming mode like CTR, right?</span>
+	&ndash;&nbsp;
+		<a href="/users/4640/nuoji" 
+		   title="228 reputation" 
+		   class="comment-user owner">Nuoji</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-20 08:11:46Z" class="relativetime-clean">Jun 20 at 8:11</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-16307" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">[@Nuoji, Oops, I just realized my last comment had a massive typo.  I&#39;ll re-print it, but this time with a correction.  See also my edited answer.]  No, a counter is not equivalent to a running hash. I&#39;m suggesting a running hash as a hardening measure, so that it&#39;s hard to forge a single packet and then allow the other packets through unchanged. A counter doesn&#39;t provide that same benefit.</span>
+	&ndash;&nbsp;
+		<a href="/users/351/d-w" 
+		   title="13999 reputation" 
+		   class="comment-user">D.W.</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-20 23:28:36Z" class="relativetime-clean">Jun 20 at 23:28</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-8750" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="8740"></a>
+<div id="answer-8740" class="answer" data-answerid="8740" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="8740">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>There aren't any known attacks on the <a href="http://en.wikipedia.org/wiki/Pseudorandom_function" rel="nofollow">PRFness</a> of HMAC-SHA256 better than brute force.
+<br>
+(So you can truncate that MAC to length L where $\:\:\frac1{2^L}+\epsilon\:\:$ is an acceptable risk of forgery.)
+<br><br><br>
+To reduce the impact of a forgery without making the ciphertext any longer, one should use a
+<br><a href="http://en.wikipedia.org/wiki/Format-Preserving_Encryption" rel="nofollow">format-preserving encryption</a> (FPE) scheme that is secure against one query to the encryption
+<br>
+oracle and one query to the decryption oracle, which are not necessarily made in that order. $\;\;\;$ 
+<br>
+Choose either $\; [b_{client} = 0 \: \text{ and } \: b_{server} = 1] \:$ or $ \: [b_{client} = 1 \: \text{ and } \: b_{server} = 0] \;$.
+<br>
+Let $\;\; \operatorname{pL} \: : \: \{0,\hspace{-0.03 in}1,\hspace{-0.03 in}2,\hspace{-0.03 in}3,...\} \: \to \: \{0,\hspace{-0.03 in}1,\hspace{-0.03 in}2,\hspace{-0.03 in}3,...\} \;\;$ be an injective function that can be inverted
+<br>
+efficiently enough. $\;\;\;\;$ For the sentence two after this one to be possible, you will also need that
+<br>
+for all $m$, $\: m\leq \operatorname{pL}(m) \:\:$. $\;\;\;\;$ Let $\;\; \operatorname{rL} \: : \: \{0,\hspace{-0.03 in}1,\hspace{-0.03 in}2,\hspace{-0.03 in}3,...\} \: \to \: \{0,\hspace{-0.03 in}1,\hspace{-0.03 in}2,\hspace{-0.03 in}3,...\} \;\;$ be a function that
+<br>
+can be computed efficiently enough. $\;\;\;\;$ Let $\;\; \operatorname{pad}_{\hspace{.01 in}m}\hspace{-0.01 in} \: : \: \{0,\hspace{-0.03 in}1\}^m \hspace{-0.01 in} \times \{0,\hspace{-0.03 in}1\}^{\operatorname{rL}(m)} \: \to \: \{0,\hspace{-0.03 in}1\}^{\operatorname{pL}(m)}$
+<br>
+be a sequence of injective functions that can be computed efficiently enough and satisfies
+<br>
+$[message$ can be efficiently computed from $\:\operatorname{pad}_{\operatorname{length}(message)}\hspace{-0.02 in}(message,\hspace{-0.02 in}randomness)]$.</p>
+
+<p>$\operatorname{unpad}_{\operatorname{length}(message)}\hspace{-0.02 in}(\operatorname{pad}(message,\hspace{-0.02 in}randomness)) \: = \: message$
+<br>
+For all other values of $x$, $\;\; \operatorname{unpad}(x) \: = \hspace{.08 in} \perp \;\;\;$.</p>
+
+<p>$\operatorname{Enc}(key,party,packetnumber,plaintext,randomness)$
+<br>$=$<br>
+$\operatorname{FPEencrypt}(\operatorname{HMAC}(key,b_{party}||\hspace{.02 in}packetnumber),\operatorname{pad}(plaintext,randomness))$</p>
+
+<p>$\operatorname{Dec}(key,party,packetnumber,ciphertext)$
+<br>$=$<br>
+$\operatorname{unpad}(\operatorname{FPEdecrypt}(\operatorname{HMAC}(key,(1-b_{party})||\hspace{.02 in}packetnumber),ciphertext))$</p>
+
+<p>As long as each party only encrypts and decrypts once each for each $packetnumber$, a feasible adversary will have probability $\:\: \frac1{2^{\operatorname{pL}(m)-(m+\operatorname{rL}(m))}}+\epsilon\:\:$ of violating integrity for each submitted ciphertext
+<br>
+of length $\operatorname{pL}(m) \:$ (and a ciphertext whose length is not in $\:\operatorname{range}(\operatorname{pL})\;$ will always decrypt to $\perp$).</p>
+
+<blockquote>
+  <p>Furthermore, if the parameters are such that that probability is noticeable, then the decryptions
+  <br>
+  of ciphertexts with length $\operatorname{pL}(m)$ that violate integrity will be computationally indistinguishable
+  <br>
+  from independent samples from the following distributions for each such ciphertext:
+  <br><br>
+  if the indicated $party$ did <em>not</em> output a ciphertext for that $packetnumber$, then uniform on $\{0,\hspace{-0.03 in}1\}^m$
+  <br>
+  else, the plaintext used by $party$ for that $packetnum$ with probability $\frac{2^{\operatorname{rL}(m)}-1}{2^{m+\operatorname{rL}(m)}-1}$,
+  <br>
+  and each other member of $\{0,\hspace{-0.03 in}1\}^m$ with probability $\; \frac{2^{\operatorname{rL}(m)}}{2^{m+\operatorname{rL}(m)}-1} \:\:$.</p>
+</blockquote>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/8740" title="short permalink to this answer" class="short-link" id="link-post-8740">share</a><span class="lsep">|</span><a href="/posts/8740/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/8740/revisions" title="show all edits to this post">edited <span title="2013-06-15 01:37:19Z" class="relativetime">Jun 15 at 1:37</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-06-14 22:33:04Z" class="relativetime">Jun 14 at 22:33</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/991/ricky-demer"><div><img src="https://www.gravatar.com/avatar/5f69b5bcaf0f454fb9eeb5ceaa8b464d?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/991/ricky-demer">Ricky Demer</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,075</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="3 silver badges"><span class="badge2"></span><span class="badgecount">3</span></span><span title="17 bronze badges"><span class="badge3"></span><span class="badgecount">17</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-8740" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-16183" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">What way would that be?</span>
+	&ndash;&nbsp;
+		<a href="/users/4640/nuoji" 
+		   title="228 reputation" 
+		   class="comment-user owner">Nuoji</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-14 22:52:41Z" class="relativetime-clean">Jun 14 at 22:52</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-16274" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Ergh. No offense, but I find multi-character variables to be incredibly ugly. Isn&#39;t $\operatorname{length}(message)$ so much less appealing than $\ell(m)$? Also, $\{0,1,2,3,\dots\}$ could be specified as $\mathbb{N}_0$.</span>
+	&ndash;&nbsp;
+		<a href="/users/2454/reid" 
+		   title="2475 reputation" 
+		   class="comment-user">Reid</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-20 01:10:08Z" class="relativetime-clean">Jun 20 at 1:10</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-8740" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/8726/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="8726" />
+							<h2 class="space">Your Answer</h2>
+
+
+        <script type="text/javascript">
+            StackExchange.ifUsing("editor", function () {
+                return StackExchange.using("mathjaxEditing", function () {
+                    StackExchange.MarkdownEditor.creationCallbacks.add(function (editor, postfix) {
+                        StackExchange.mathjaxEditing.prepareWmdForMathJax(editor, postfix, [["$", "$"], ["\\\\(","\\\\)"]]);
+                    });
+                });
+            }, "mathjax-editing");
+        </script>
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+noCode: true,            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f8726%2frecommended-authenticated-stream-cipher-for-minimum-overhead%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f8726%2frecommended-authenticated-stream-cipher-for-minimum-overhead%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/stream-cipher" class="post-tag" title="show questions tagged &#39;stream-cipher&#39;" rel="tag">stream-cipher</a> <a href="/questions/tagged/hmac" class="post-tag" title="show questions tagged &#39;hmac&#39;" rel="tag">hmac</a> <a href="/questions/tagged/authenticated-encryption" class="post-tag" title="show questions tagged &#39;authenticated-encryption&#39;" rel="tag">authenticated-encryption</a> <a href="/questions/tagged/ctr" class="post-tag" title="show questions tagged &#39;ctr&#39;" rel="tag">ctr</a> <a href="/questions/tagged/integrity" class="post-tag" title="show questions tagged &#39;integrity&#39;" rel="tag">integrity</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/stream-cipher" class="post-tag" title="show questions tagged &#39;stream-cipher&#39;" rel="tag">stream-cipher</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">77</span></span><br>
+<a href="/questions/tagged/hmac" class="post-tag" title="show questions tagged &#39;hmac&#39;" rel="tag">hmac</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">66</span></span><br>
+<a href="/questions/tagged/authenticated-encryption" class="post-tag" title="show questions tagged &#39;authenticated-encryption&#39;" rel="tag">authenticated-encryption</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">54</span></span><br>
+<a href="/questions/tagged/ctr" class="post-tag" title="show questions tagged &#39;ctr&#39;" rel="tag">ctr</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">24</span></span><br>
+<a href="/questions/tagged/integrity" class="post-tag" title="show questions tagged &#39;integrity&#39;" rel="tag">integrity</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">14</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-06-14 09:43:13Z"><b>5 months ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>161 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-06-20 00:15:15Z">5 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/3876" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/3876/stream-cipher-never-use-stream-cipher-key-more-than-once" class="question-hyperlink">Stream Cipher : Never use stream cipher key more than once</a>
+</div>
+<div class="spacer">
+<a href="/q/5333" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/5333/difference-between-stream-cipher-and-block-cipher" class="question-hyperlink">Difference between stream cipher and block cipher</a>
+</div>
+<div class="spacer">
+<a href="/q/5574" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/5574/does-rsa-oeap-have-integrity-and-authenticity-properties" class="question-hyperlink">Does RSA-OEAP have integrity and authenticity properties?</a>
+</div>
+<div class="spacer">
+<a href="/q/6008" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/6008/streaming-api-to-authenticated-encryption" class="question-hyperlink">Streaming API to authenticated encryption</a>
+</div>
+<div class="spacer">
+<a href="/q/6130" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/6130/theoretical-pi-based-stream-cipher" class="question-hyperlink">Theoretical pi-based stream cipher</a>
+</div>
+<div class="spacer">
+<a href="/q/6462" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/6462/nonce-role-on-stream-ciphers" class="question-hyperlink">Nonce role on stream ciphers</a>
+</div>
+<div class="spacer">
+<a href="/q/7892" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/7892/rsa-digital-signature-vs-authenticated-cipher" class="question-hyperlink">RSA digital signature vs authenticated cipher</a>
+</div>
+<div class="spacer">
+<a href="/q/7951" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/7951/aesctrhmac-encryption-and-authentication-on-an-arduino" class="question-hyperlink">AES+CTR+HMAC Encryption and Authentication on an Arduino</a>
+</div>
+<div class="spacer">
+<a href="/q/9348" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/9348/is-this-an-acceptable-authenticated-encryption" class="question-hyperlink">Is this an acceptable authenticated encryption?</a>
+</div>
+<div class="spacer">
+<a href="/q/9539" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/9539/authenticated-encryption-mode-for-stream-cipher" class="question-hyperlink">Authenticated encryption mode for stream cipher?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/8726" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/8726/ivc/199e');});
+</script>
+<noscript>
+    <div><img src="/posts/8726/ivc/199e" class="dno" alt="" width="0" height="0"></div>
+</noscript></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/8726/recommended-authenticated-stream-cipher-for-minimum-overhead")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.crypto.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.22.1173
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Cryptography Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|stream-cipher|hmac|authenticated-encryption|ctr|integrity|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>multivariate analysis - What is the intuition behind conditional Gaussian distributions? - Cross Validated</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/stats/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/stats/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Cross Validated" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackStats" />
+    <meta name="twitter:domain" content="stats.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/stats/img/apple-touch-icon@2.png?v=344f57aa10cc"/>
+    <meta name="og:title" content="What is the intuition behind conditional Gaussian distributions?" />
+    <meta name="og:description" content="Suppose that $\mathbf{X} \sim N_{2}(\mathbf{\mu}, \mathbf{\Sigma})$. Then the conditional distribution of $X_1$ given that $X_2 = x_2$ is multivariate normally distributed with mean: $$ \text{mean} = " />
+    <meta name="og:url" content="http://stats.stackexchange.com/questions/71260/what-is-the-intuition-behind-conditional-gaussian-distributions"/>
+    <link rel="canonical" href="http://stats.stackexchange.com/questions/71260/what-is-the-intuition-behind-conditional-gaussian-distributions" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/stats/all.css?v=a6290077f2ad">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;What is the intuition behind conditional Gaussian distributions?&#39;" href="/feeds/question/71260">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:5,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:71260});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('65', '71260');
+            
+                    });
+    </script>
+
+                <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+                                        tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+                                        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+                                        messageStyle: "none"
+                });
+                </script>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>                
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('65');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385125314,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Cross Validated","description":"Q&A for statisticians, data analysts, data miners and data visualization experts","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091","js/mathjax-editing.en.js":"a09844f7b738"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f71260%2fwhat-is-the-intuition-behind-conditional-gaussian-distributions">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f71260%2fwhat-is-the-intuition-behind-conditional-gaussian-distributions">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Cross Validated
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/stats/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Cross Validated is a question and answer site for statisticians, data analysts, data miners and data visualization experts. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/71260/what-is-the-intuition-behind-conditional-gaussian-distributions" class="question-hyperlink">What is the intuition behind conditional Gaussian distributions?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="71260"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="71260">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">9</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>3</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>Suppose that $\mathbf{X} \sim N_{2}(\mathbf{\mu}, \mathbf{\Sigma})$. Then the conditional distribution of $X_1$ given that $X_2 = x_2$ is multivariate normally distributed with mean: $$ \text{mean} = \mu_1+\frac{\sigma_{12}}{\sigma_{22}}(x_2-\mu_2)$$</p>
+
+<p>and variance: $$\text{variance} = \sigma_{11}-\frac{\sigma_{12}^{2}}{\sigma_{22}}$$</p>
+
+<p>It makes sense that the variance would decrease since we have more information. But what is the intuition behind the mean formula? How does the covariance between $X_1$ and $X_2$ factor into the conditional mean?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/normal-distribution" class="post-tag" title="show questions tagged &#39;normal-distribution&#39;" rel="tag">normal-distribution</a> <a href="/questions/tagged/multivariate-analysis" class="post-tag" title="show questions tagged &#39;multivariate-analysis&#39;" rel="tag">multivariate-analysis</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/71260" title="short permalink to this question" class="short-link" id="link-post-71260">share</a><span class="lsep">|</span><a href="/posts/71260/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/71260/revisions" title="show all edits to this post">edited <span title="2013-10-08 04:56:24Z" class="relativetime">Oct 8 at 4:56</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/4862/david-j-harris"><div><img src="https://www.gravatar.com/avatar/35184d4a84e89a6a010a82cb8c4dea93?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/4862/david-j-harris">David J. Harris</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,742</span><span title="8 silver badges"><span class="badge2"></span><span class="badgecount">8</span></span><span title="14 bronze badges"><span class="badge3"></span><span class="badgecount">14</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-09-27 14:37:22Z" class="relativetime">Sep 27 at 14:37</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/30792/eroeijr"><div><img src="https://www.gravatar.com/avatar/0ecae768315679b519eab6f967be5933?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/30792/eroeijr">eroeijr</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">46</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-71260" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-138142" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Is your question simply &#39;why isn&#39;t the mean of the conditional distribution = $\mu_1$&#39;?</span>
+	&ndash;&nbsp;
+		<a href="/users/7290/gung" 
+		   title="23331 reputation" 
+		   class="comment-user">gung</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-27 14:40:07Z" class="relativetime-clean">Sep 27 at 14:40</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-138144" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@gung: This is true if $x_2 = \mu_2$. But why are $\sigma_{11}$ and $\sigma_{22}$ involved?</span>
+	&ndash;&nbsp;
+		<a href="/users/30792/eroeijr" 
+		   title="46 reputation" 
+		   class="comment-user owner">eroeijr</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-27 14:41:36Z" class="relativetime-clean">Sep 27 at 14:41</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-138149" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">In natural (&quot;standardized&quot;) units we write $X_i=\mu_1+\sigma_iZ_i$ where $\sigma_i=\sqrt{\sigma_{ii}}$. In these terms the conditional distribution is Normal with $\mathbb{E}(Z_1|Z_2)=\rho Z_2$ and $\rho=\sigma_{12}/(\sigma_1\sigma_2).$ The fact that $|\rho|\le 1$ is called &quot;mean reversion&quot; or <a href="http://en.wikipedia.org/wiki/Regression_toward_the_mean" rel="nofollow">&quot;regression to the mean&quot;</a>: there is an extensive technical and popular literature on this going back 130 years.</span>
+	&ndash;&nbsp;
+		<a href="/users/919/whuber" 
+		   title="68931 reputation" 
+		   class="comment-user">whuber<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-27 15:06:51Z" class="relativetime-clean">Sep 27 at 15:06</span></span>
+		<span class="edited-yes" title="this comment was edited 7 times"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-138251" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Say, eroeijr, is <a href="http://stats.stackexchange.com/questions/51718/assessing-approximate-distribution-of-data-based-on-a-histogram">this post</a> yours? (Aside from the &#39;guest&#39; at the start there&#39;s a distinct similarity in the names.) If it is yours you should ask to merge the two accounts and take that big bonus in points you&#39;d have.</span>
+	&ndash;&nbsp;
+		<a href="/users/805/glen-b" 
+		   title="26254 reputation" 
+		   class="comment-user">Glen_b</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-28 00:26:16Z" class="relativetime-clean">Sep 28 at 0:26</span></span>
+		<span class="edited-yes" title="this comment was edited 2 times"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-138280" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">As @Glen_b suggested, if you have multiple (unregistered) accounts, please complete the form at <a href="http://stats.stackexchange.com/contact">stats.stackexchange.com/contact</a> and request that they be merged.</span>
+	&ndash;&nbsp;
+		<a href="/users/930/chl" 
+		   title="29080 reputation" 
+		   class="comment-user">chl<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-28 08:21:21Z" class="relativetime-clean">Sep 28 at 8:21</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-71260" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								3 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/71260/what-is-the-intuition-behind-conditional-gaussian-distributions?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/71260/what-is-the-intuition-behind-conditional-gaussian-distributions?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/71260/what-is-the-intuition-behind-conditional-gaussian-distributions?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="71303"></a>
+<div id="answer-71303" class="answer" data-answerid="71303" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="71303">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">9</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h3>Synopsis</h3>
+
+<p><strong>Every statement in the question can be understood as a property of ellipses.</strong>  The <em>only</em> property particular to the bivariate Normal distribution that is needed is the fact that in a <em>standard</em> bivariate Normal distribution of $X,Y$--for which $X$ and $Y$ are uncorrelated--the conditional variance of $Y$ does not depend on $X$. (This in turn is an immediate consequence of the fact that lack of correlation implies independence for jointly Normal variables.)</p>
+
+<p>The following analysis shows precisely what property of ellipses is involved and derives all the equations of the question using elementary ideas and the simplest possible arithmetic, in a way intended to be easily remembered.</p>
+
+<hr>
+
+<h3>Circularly symmetric distributions</h3>
+
+<p>The distribution of the question is a member of the family of bivariate Normal distributions.  They are all derived from a basic member, the <em>standard</em> bivariate Normal, which describes two uncorrelated standard Normal distributions (forming its two coordinates).</p>
+
+<p><img src="http://i.stack.imgur.com/9SIxb.png" alt="Figure 1: the standard bivariate normal distribution"></p>
+
+<p><em>The left side is a relief plot of the standard bivariate normal density.  The right side shows the same in pseudo-3D, with the front part sliced away.</em></p>
+
+<p><strong>This is an example of a <em>circularly symmetric</em> distribution:</strong> the density varies with distance from a central point but not with the direction away from that point.  Thus, the contours of its graph (at the right) are <em>circles.</em></p>
+
+<p>Most other bivariate Normal distributions are not circularly symmetric, however: their cross-sections are ellipses.  These ellipses model the characteristic shape of many bivariate point clouds.</p>
+
+<p><img src="http://i.stack.imgur.com/lKfL8.png" alt="Figure 2: another bivariate normal distribution, plotted"></p>
+
+<p><em>These are portraits of the bivariate Normal distribution with covariance matrix $\Sigma = \left(\begin{array}{cc} 1 &amp; -\frac{2}{3} \\ -\frac{2}{3} &amp; 1 \\\end{array}\right).$  It is a model for data with correlation coefficient $-2/3$.</em></p>
+
+<hr>
+
+<h3>How to Create Ellipses</h3>
+
+<p>An ellipse--according to its oldest definition--is a conic section, which is a circle distorted by a projection onto another plane.  By considering the nature of projection, just as visual artists do, we may decompose it into a sequence of distortions that are easy to understand and calculate with.</p>
+
+<p>First, stretch (or, if necessary, squeeze) the circle along what will become the long axis of the ellipse until it is the correct length:</p>
+
+<p><img src="http://i.stack.imgur.com/eHfId.png" alt="Step 1: stretch"></p>
+
+<p>Next, squeeze (or stretch) this ellipse along its minor axis:</p>
+
+<p><img src="http://i.stack.imgur.com/sJsVp.png" alt="Step 2: squeeze"></p>
+
+<p>Third, rotate it around its center into its final orientation:</p>
+
+<p><img src="http://i.stack.imgur.com/15uTl.png" alt="Step 3: rotate"></p>
+
+<p>Finally, shift it to the desired location:</p>
+
+<p><img src="http://i.stack.imgur.com/NSU8T.png" alt="Step 4: shift"></p>
+
+<p>These are all <em>affine transformations.</em>  (In fact, the first three are <em>linear transformations</em>; the final shift makes it affine.)  Because a composition of affine transformations is (by definition) still affine, the net distortion from the circle to the final ellipse is an affine transformation.  But it can be somewhat complicated:</p>
+
+<p><img src="http://i.stack.imgur.com/Pl8kB.png" alt="Composite transformation"></p>
+
+<p><strong>Notice what happened to the ellipse's (natural) axes:</strong> after they were created by the shift and squeeze, they (of course) rotated and shifted along with the axis itself.  We easily <em>see</em> these axes even when they are not drawn, because they are axes of symmetry of the ellipse itself.</p>
+
+<p>We would like to apply our understanding of ellipses to understanding distorted circularly symmetric distributions, like the bivariate Normal family.  Unfortunately, <strong>there is a problem with these distortions</strong>: they do not respect the distinction between the $x$ and $y$ axes.  The rotation at step 3 ruins that.  Look at the faint coordinate grids in the backgrounds: these show what happens to a grid (of mesh $1/2$ in both directions) when it is distorted.  In the first image the spacing between the original vertical lines (shown solid) is doubled.  In the second image the spacing between the original horizontal lines (shown dashed) is shrunk by a third.  In the third image the grid spacings are not changed, but all the lines are rotated.  They shift up and to the right in the fourth image.  The final image, showing the net result, displays this stretched, squeezed, rotated, shifted grid.  <em>The original solid lines of constant $x$ coordinate no longer are vertical.</em></p>
+
+<p><strong>The key idea</strong>--one might venture to say it is <em>the</em> crux of regression--is that there is a way in which the circle can be distorted into an ellipse <em>without rotating the vertical lines</em>.  Because the rotation was the culprit, let's cut to the chase and show how to <em>created a rotated ellipse without actually appearing to rotate anything</em>!</p>
+
+<p><img src="http://i.stack.imgur.com/IxCRu.png" alt="Skewed ellipse"></p>
+
+<p>This is a <em>skew transformation.</em>  It actually does two things at once:</p>
+
+<ul>
+<li><p>It squeezes in the $y$ direction (by an amount $\lambda$, say).  This leaves the $x$-axis alone.</p></li>
+<li><p>It lifts any resulting point $(x,y)$ by an amount directly proportional to $x$.  Writing that constant of proportionality as $\rho$, this sends $(x,y)$ to $(x, y+\rho x)$.</p></li>
+</ul>
+
+<p>The second step lifts the $x$-axis into the line $y=\rho x$, shown in the previous figure.  As shown in that figure, I want to work with a special skew transformation, one that effectively rotates the ellipse by 45 degrees and inscribes it into the unit square. 
+The major axis of this ellipse is the line $y=x$.  It is visually evident that $|\rho| \le 1$.  (Negative values of $\rho$ tilt the ellipse down to the right rather than up to the right.)  <strong>This is the geometric explanation of "regression to the mean."</strong></p>
+
+<p>Choosing an angle of 45 degrees makes the ellipse symmetric around the square's diagonal (part of the line $y=x$).  To figure out the parameters of this skew transformation, observe:</p>
+
+<ul>
+<li><p>The lifting by $\rho x$ moves the point $(1,0)$ to $(1,\rho)$.</p></li>
+<li><p>The symmetry around the main diagonal then implies the point $(\rho, 1)$ also lies on the ellipse.</p></li>
+</ul>
+
+<p><em>Where did this point start out?</em></p>
+
+<ul>
+<li><p>The original (upper) point on the unit circle (having implicit equation $x^2+y^2=1$) with $x$ coordinate $\rho$ was $(\rho, \sqrt{1-\rho^2})$.</p></li>
+<li><p>Any point of the form $(\rho, y)$ first got squeezed to $(\rho, \lambda y)$ and then lifted to $(\rho, \lambda y + \rho\times\rho)$.</p></li>
+</ul>
+
+<p>The unique solution to the equation $(\rho, \lambda \sqrt{1-\rho^2} + \rho^2) = (\rho, 1)$ is $\lambda = \sqrt{1-\rho^2}$.  <strong>That is the amount by which all distances in the vertical direction must be squeezed in order to create an ellipse at a 45 degree angle when it is skewed vertically by $\rho$.</strong></p>
+
+<p><strong>To firm up these ideas,</strong> here is a tableau showing how a circularly symmetric distribution is distorted into distributions with elliptical contours by means of these skew transformations.  The panels show values of $\rho$ equal to $0,$ $3/10,$ $6/10,$ and $9/10,$ from left to right.</p>
+
+<p><img src="http://i.stack.imgur.com/A5bGG.png" alt="Tableau"></p>
+
+<p><em>The leftmost figure shows a set of starting points around one of the circular contours as well as part of the horizontal axis.  Subsequent figures use arrows to show how those points are moved.  The image of the horizontal axis appears as a slanted line segment (with slope $\rho$).  (The colors represent different amounts of density in the different figures.)</em></p>
+
+<hr>
+
+<h3>Application</h3>
+
+<p><strong>We are ready to do regression.</strong>  A standard, elegant (yet simple) method to perform regression is first to express the original variables in new units of measurement: we center them at their means and use their standard deviations as the units.  This moves the center of the distribution to the origin and makes all its elliptical contours slant 45 degrees (up or down).</p>
+
+<p>When these <em>standardized</em> data form a circular point cloud, the regression is easy: the means conditional on $x$ are all $0$, forming a line passing through the origin.  (Circular symmetry implies symmetry with respect to the $x$ axis, showing that all conditional distributions are symmetric, whence they have $0$ means.)  As we have seen, we may view the standardized distribution as arising from this basic simple situation in two steps: first, all the (standardized) $y$ values are multiplied by $\sqrt{1-\rho^2}$ for some value of $\rho$; next, all values with $x$-coordinates are vertically skewed by $\rho x$.  What did these distortions do to the regression line (which plots the conditional means against $x$)?</p>
+
+<ul>
+<li><p>The shrinking of $y$ coordinates multiplied all vertical deviations by a constant.  This merely changed the vertical scale and left all conditional means unaltered at $0$.</p></li>
+<li><p>The vertical skew transformation added $\rho x$ to all conditional values at $x$, thereby adding $\rho x$ to their conditional mean: the curve $y=\rho x$ is the regression curve, which turns out to be a line.</p></li>
+</ul>
+
+<p>Similarly, we may verify that because the $x$-axis is the least squares fit to the circularly symmetric distribution, the least squares fit to the transformed distribution also is the line $y=\rho x$: the least-squares line coincides with the regression line.</p>
+
+<p>These beautiful results are a consequence of the fact that the vertical skew transformation <em>does not change any $x$ coordinates.</em></p>
+
+<p>We can easily say more:</p>
+
+<ul>
+<li><p>The first bullet (about shrinking) shows that when $(X,Y)$ has <em>any</em> circularly symmetric distribution, the conditional variance of $Y|X$ was multiplied by $\left(\sqrt{1-\rho^2}\right)^2 = 1 - \rho^2$.</p></li>
+<li><p>More generally: the vertical skew transformation rescales each conditional distribution by $\sqrt{1-\rho^2}$ and then recenters it by $\rho x$.</p></li>
+</ul>
+
+<p>For the standard bivariate Normal distribution, the conditional variance is a constant (equal to $1$), independent of $x$.  We immediately conclude that after applying this skew transformation, the conditional variance of the <em>vertical deviations</em> is still a constant and equals $1-\rho^2$.  Because the conditional distributions of a bivariate Normal are themselves Normal, now that we know their means and variances, we have full information about them.</p>
+
+<p><strong>Finally, we need to relate $\rho$ to the original covariance matrix $\Sigma$.</strong>  For this, recall that the (nicest) definition of the correlation coefficient between two <em>standardized</em> variables $X$ and $Y$ is the expectation of their product $XY$.  (The correlation of $X$ and $Y$ is simply declared to be the correlation of their standardized versions.)  Therefore, when $(X,Y)$ follows <em>any</em> circularly symmetric distribution and we apply the skew transformation to the variables, we may write</p>
+
+<p>$$\varepsilon = Y - \rho X$$</p>
+
+<p>for the vertical deviations from the regression line and notice that $\varepsilon$ must have a symmetric distribution around $0$.  Why?  Because <em>before</em> the skew transformation was applied, $Y$ had a symmetric distribution around $0$ and then we (a) squeezed it and (b) lifted it by $\rho X$.  The former did not change its symmetry while the latter recentered it at $\rho X$, QED.  The next figure illustrates this.</p>
+
+<p><img src="http://i.stack.imgur.com/wOFRD.png" alt="3D plot showing conditional distributions and the least-squares line"></p>
+
+<p><em>The black lines trace out heights proportional to the conditional densities at various regularly-spaced values of $x$.  The thick white line is the regression line, which passes through the center of symmetry of each conditional curve.  This plot shows the case $\rho = -1/2$ in standardized coordinates.</em></p>
+
+<p>Consequently </p>
+
+<p>$$\mathbb{E}(XY) = \mathbb{E}\left(X(\rho X + \varepsilon)\right) = \rho\mathbb{E}(X^2) + \mathbb{E}(X\varepsilon) = \rho(1) + 0=\rho.$$</p>
+
+<p>The final equality is due to two facts: (1) because $X$ has been standardized, the expectation of its square is its standardized variance, equal to $1$ by construction; and (2) the expectation of $X\varepsilon$ equals the expectation of $X(-\varepsilon)$ by virtue of the symmetry of $\varepsilon$. Because the latter is the negative of the former, both must equal $0$: this term drops out.</p>
+
+<p><strong>We have identified the parameter of the skew transformation, $\rho$, as being the correlation coefficient of $X$ and $Y$.</strong></p>
+
+<hr>
+
+<h3>Conclusions</h3>
+
+<p>By observing that any ellipse may be produced by distorting a circle with a vertical skew transformation that preserves the $x$ coordinate, we have arrived at an understanding of the contours of any distribution of random variables $(X,Y)$ that is obtained from a circularly symmetric one by means of stretches, squeezes, rotations, and shifts (that is, any affine transformation).  By re-expressing the results in terms of the <em>original</em> units of $x$ and $y$--which amount to adding back their means, $\mu_x$ and $\mu_y$, after multiplying by their standard deviations $\sigma_x$ and $\sigma_y$--we find that:</p>
+
+<ul>
+<li><p>The least-squares line and the regression curve both pass through the origin of the standardized variables, which corresponds to the "point of averages" $(\mu_x,\mu_y)$ in original coordinates.</p></li>
+<li><p>The regression curve, which is defined to be  the locus of conditional means, $\{(x, \rho x)\},$  coincides with the least-squares line.</p></li>
+<li><p>The slope of the regression line in standardized coordinates is the correlation coefficient $\rho$; in the original units it therefore equals $\sigma_y \rho / \sigma_x$.</p></li>
+</ul>
+
+<p>Consequently the equation of the regression line is</p>
+
+<p>$$y = \frac{\sigma_y\rho}{\sigma_x}\left(x - \mu_x\right) + \mu_y.$$</p>
+
+<ul>
+<li>The conditional variance of $Y|X$ is $\sigma_y^2(1-\rho^2)$ times the conditional variance of $Y'|X'$ where $(X',Y')$ has a standard distribution (circularly symmetric with unit variances in both coordinates), $X'=(X-\mu_X)/\sigma_x$, and $Y'=(Y-\mu_Y)/\sigma_Y$.</li>
+</ul>
+
+<p><em>None</em> of these results is a particular property of bivariate Normal distributions!    For the bivariate Normal family, the conditional variance of $Y'|X'$ is constant (and equal to $1$): this fact makes that family particularly simple to work with.  In particular:</p>
+
+<ul>
+<li>Because in the covariance matrix $\Sigma$ the coefficients are $\sigma_{11}=\sigma_x^2,$ $\sigma_{12}=\sigma_{21}=\rho\sigma_x\sigma_y,$ and $\sigma_{22}=\sigma_y^2,$ the conditional variance of $Y|X$ for a bivariate Normal distribution is</li>
+</ul>
+
+<p>$$\sigma_y^2(1-\rho^2)=\sigma_{22}\left(1-\left(\frac{\sigma_{12}}{\sqrt{\sigma_{11}\sigma_{22}}}\right)^2\right)=\sigma_{22} - \frac{\sigma_{12}^2}{\sigma_{11}}.$$</p>
+
+<hr>
+
+<h3>Technical Notes</h3>
+
+<p>The key idea can be stated in terms of matrices describing the linear transformations.  It comes down to finding a suitable "square root" of the correlation matrix for which $y$ is an eigenvector.  Thus:</p>
+
+<p>$$\left(\begin{array}{cc} 1 &amp; \rho \\ \rho  &amp; 1 \\\end{array}\right) = \mathbb{A}\mathbb{A}'$$</p>
+
+<p>where</p>
+
+<p>$$\mathbb{A} = \left(\begin{array}{cc} 1 &amp; 0 \\ \rho &amp; \sqrt{1-\rho^2} \\\end{array}\right).$$</p>
+
+<p>A much better known square root is the one initially described (involving a rotation instead of a skew transformation); it is the one produced by a singular value decomposition and it plays a prominent role in principal components analysis (PCA):</p>
+
+<p>$$\left(\begin{array}{cc} 1 &amp; \rho \\ \rho  &amp; 1 \\\end{array}\right) = \mathbb{B}\mathbb{B}';$$</p>
+
+<p>$$\mathbb{B} = \mathbb{Q} \left(
+\begin{array}{cc}
+ \sqrt{\rho +1} &amp; 0 \\
+ 0 &amp; \sqrt{1-\rho } \\
+\end{array}
+\right)\mathbb{Q}'$$</p>
+
+<p>where $\mathbb{Q} = \left(
+\begin{array}{cc}
+ \frac{1}{\sqrt{2}} &amp; -\frac{1}{\sqrt{2}} \\
+ \frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}} \\
+\end{array}
+\right)$ is the rotation matrix for a $45$ degree rotation.</p>
+
+<p>Thus, the distinction between PCA and regression comes down to the difference between two special square roots of the correlation matrix.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/71303" title="short permalink to this answer" class="short-link" id="link-post-71303">share</a><span class="lsep">|</span><a href="/posts/71303/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/71303/revisions" title="show all edits to this post">edited <span title="2013-10-08 03:04:59Z" class="relativetime">Oct 8 at 3:04</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-09-27 22:58:08Z" class="relativetime">Sep 27 at 22:58</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/919/whuber"><div><img src="https://www.gravatar.com/avatar/66c15ca582c60477dc4b535d8b39558b?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/919/whuber">whuber</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score 68931" dir="ltr">68.9k</span><span title="6 gold badges"><span class="badge1"></span><span class="badgecount">6</span></span><span title="109 silver badges"><span class="badge2"></span><span class="badgecount">109</span></span><span title="237 bronze badges"><span class="badge3"></span><span class="badgecount">237</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-71303" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-140233" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Beautiful pictures and great descriptions. There were a few sentences in the update that were left incomplete (like you knew basically what you were going to say, but hadn&#39;t settled on the final wording).</span>
+	&ndash;&nbsp;
+		<a href="/users/2970/cardinal" 
+		   title="11765 reputation" 
+		   class="comment-user">cardinal<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-10-08 14:37:24Z" class="relativetime-clean">Oct 8 at 14:37</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-140236" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Cardinal Thanks. I will be re-reading this and looking for such things, as well as for the inevitable typos. You are too kind to point out other things which you surely noticed, such as some gaps in the exposition. The biggest is that I did not actually show that these ellipses are at 45 degree angles (equivalently, inscribed in the unit square); I simply assumed that. I am still looking for a simple demonstration. The other is that one might worry the skew transformation could produce a <i>different</i> distribution than the original stretch-squeeze-rotate-shift--but it&#39;s easy to show it doesn&#39;t.</span>
+	&ndash;&nbsp;
+		<a href="/users/919/whuber" 
+		   title="68931 reputation" 
+		   class="comment-user">whuber<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-10-08 14:40:34Z" class="relativetime-clean">Oct 8 at 14:40</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-140449" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">That&#39;s really interesting.  Thanks for taking the time to write it up.</span>
+	&ndash;&nbsp;
+		<a href="/users/25212/bill" 
+		   title="1348 reputation" 
+		   class="comment-user">Bill</a>
+	<span class="comment-date" dir="ltr"><span title="2013-10-09 13:42:15Z" class="relativetime-clean">Oct 9 at 13:42</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-71303" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="71262"></a>
+<div id="answer-71262" class="answer" data-answerid="71262" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="71262">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">7</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>This is essentially linear (OLS) regression.  In that case, you are finding the conditional distribution of $Y$ given that $X=x_i$.  (Strictly speaking, OLS regression does not make assumptions about the distribution of $X$, whereas your example is a multivariate normal, but we will ignore these things.)  Now, if the covariance between $X_1$ and $X_2$ is not $0$, then the mean of the <em>conditional</em> distribution of $X_2$ has to shift as you change the value of $x_1$ where you are 'slicing through' the multivariate distribution.  Consider the figure below:  </p>
+
+<p><img src="http://i.stack.imgur.com/icmYN.png" alt="enter image description here"></p>
+
+<p>Here we see that the marginal distributions are both normal, with a positive correlation between $X_1$ and $X_2$.  If you look at the conditional distribution of $X_2$ at any point on $X_1$, the distribution is a univariate normal.  However, because of the positive correlation (i.e., the non-zero covariance), the <em>mean</em> of those conditional distributions shifts up as you move from left to right.  For example, the figure shows that $\mu_{X_2|X_1=25}\ne\mu_{X_2|X_1=45}$.  </p>
+
+<p>(<em>For any future readers who might be confused by the symbols, I want to state that, e.g., $\sigma_{22}$ is an element of the covariance matrix $\Sigma$.  Thus, it is the variance of $X_2$, even though people will typically think of a variance as $\sigma^2$, and $\sigma$ as a standard deviation.</em>)  </p>
+
+<p>Your equation for the mean is directly connected to the equation for estimating the slope in OLS regression (and remember that in regression $\hat y_i$ is the conditional mean):<br>
+$$
+\hat\beta_1=\frac{\text{Cov}(x,y)}{\text{Var}(x)}
+$$
+In your equation, $^{\sigma_{12}}/_{\sigma_{22}}$ is the covariance over the variance; that is, it is the <em>slope</em>, just as above.  Thus, your equation for the mean is just sliding your conditional mean, $\mu_{X_2|X_1=x_i}$, up or down from its unconditional mean, $\mu_{X_2}$, based on how far away from $\mu_{X_2}$ $x_{2i}$ is and the slope of the relationship between $X_1$ and $X_2$.  </p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/71262" title="short permalink to this answer" class="short-link" id="link-post-71262">share</a><span class="lsep">|</span><a href="/posts/71262/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/71262/revisions" title="show all edits to this post">edited <span title="2013-09-27 15:27:45Z" class="relativetime">Sep 27 at 15:27</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-09-27 14:57:12Z" class="relativetime">Sep 27 at 14:57</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/7290/gung"><div><img src="https://www.gravatar.com/avatar/96ebcc67fba4e8626c011fdf66c96259?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/7290/gung">gung</a><br>
+        <span class="reputation-score" title="reputation score 23331" dir="ltr">23.3k</span><span title="7 gold badges"><span class="badge1"></span><span class="badgecount">7</span></span><span title="59 silver badges"><span class="badge2"></span><span class="badgecount">59</span></span><span title="105 bronze badges"><span class="badge3"></span><span class="badgecount">105</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-71262" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="1" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-138151" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">What happens if you condition on more variables? You would just add and subtract extra terms from the mean and variance?</span>
+	&ndash;&nbsp;
+		<a href="/users/30793/kerkejnrke" 
+		   title="1 reputation" 
+		   class="comment-user">kerkejnrke</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-27 15:05:24Z" class="relativetime-clean">Sep 27 at 15:05</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-138162" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@kerkejnrke, if you model the distribution of $Y$ conditional on some specific level of a set of variables $\bf X$, you are doing <i>multiple regression</i>. This is a little more complicated, but ultimately the same thing. The mean would be: $\hat y_i=\bf X_i \boldsymbol{\hat\beta}$, where $\boldsymbol{\hat\beta}=(\bf X^TX)^{-1}X^TY$.</span>
+	&ndash;&nbsp;
+		<a href="/users/7290/gung" 
+		   title="23331 reputation" 
+		   class="comment-user">gung</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-27 15:31:15Z" class="relativetime-clean">Sep 27 at 15:31</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-140125" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">What did you use to produce the graph? Mathematica?</span>
+	&ndash;&nbsp;
+		<a href="/users/2116/mpiktas" 
+		   title="15409 reputation" 
+		   class="comment-user">mpiktas</a>
+	<span class="comment-date" dir="ltr"><span title="2013-10-08 03:30:44Z" class="relativetime-clean">Oct 8 at 3:30</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-140129" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@mpiktas, my graph or whuber&#39;s? I believe his are Mathematica, but I made the one above w/ R. (Ugly code though...)</span>
+	&ndash;&nbsp;
+		<a href="/users/7290/gung" 
+		   title="23331 reputation" 
+		   class="comment-user">gung</a>
+	<span class="comment-date" dir="ltr"><span title="2013-10-08 03:52:41Z" class="relativetime-clean">Oct 8 at 3:52</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-140150" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Yes I was asking about yours. If this is R, then yeah the code might look ugly, but should be awesome. I suspect the normal curves are rotated viewports? Or did you draw them &quot;by hand&quot;?</span>
+	&ndash;&nbsp;
+		<a href="/users/2116/mpiktas" 
+		   title="15409 reputation" 
+		   class="comment-user">mpiktas</a>
+	<span class="comment-date" dir="ltr"><span title="2013-10-08 07:37:34Z" class="relativetime-clean">Oct 8 at 7:37</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-71262" 
+			   class="comments-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">show <b>1</b> more comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="71284"></a>
+<div id="answer-71284" class="answer" data-answerid="71284" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="71284">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Gung's answer is good (+1).  There is another way of looking at it, though.  Imagine that the covariance between $X_1$ and $X_2$ were to be positive.  What does it mean for $\sigma_{1,2}&gt;0$?  Well, it means that when $X_2$ is above $X_2$'s mean, $X_1$ tends to be above $X_1$'s mean, and <em>vice versa</em>.</p>
+
+<p>Now suppose I told you that $X_2=\mathit{x}_2&gt;\mu_2$.  That is, suppose I told you that $X_2$ is above its mean.  Wouldn't you conclude that $X_1$ is likely above its mean (since you know $\sigma_{1,2}&gt;0$ and you know what covariance means)?  So, now, if you take the mean of $X_1$, knowing that $X_2$ is above $X_2$'s mean, you are going to get a number above $X_1$'s mean.  That is what the formula says:
+\begin{equation}
+E\{X_1 | X_2=\mathit{x}_2\} = \mu_1 + \frac{\sigma_{1,2}}{\sigma_{2,2}}\left( \mathit{x}_2-\mu_2\right)
+\end{equation}
+If the covariance is positive and $X_2$ is above its mean, then $E\{X_1 | X_2=\mathit{x}_2\} &gt; \mu_1$.  </p>
+
+<p>The conditional expectation takes the form above for the normal distribution, not for all distributions.  This seems a little strange given that the reasoning in the paragraph above seems pretty compelling.  However, (almost) no matter what the distributions of $X_1$ and $X_2$ this formula is right:
+\begin{equation}
+BLP\{X_1 | X_2=\mathit{x}_2\} = \mu_1 + \frac{\sigma_{1,2}}{\sigma_{2,2}}\left( \mathit{x}_2-\mu_2\right)
+\end{equation}
+Where $BLP$ means best linear predictor.  The normal distribution is special in that conditional expectation and best linear predictor are the same thing.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/71284" title="short permalink to this answer" class="short-link" id="link-post-71284">share</a><span class="lsep">|</span><a href="/posts/71284/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-09-27 19:11:38Z" class="relativetime">Sep 27 at 19:11</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/25212/bill"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/9COOF.jpg?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/25212/bill">Bill</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,348</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="8 bronze badges"><span class="badge3"></span><span class="badgecount">8</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-71284" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="2" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-138213" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">There does not seem to be any element of this argument which actually shows the coefficient of $x_2-\mu_2$ should equal the ratio of the covariances $\sigma_{12}/\sigma_{22}$. Why not the cube of that ratio? Or its sine? Or some other measure of association, such as the KL divergence (which has little to do with covariance)? Such formulas would qualitatively reproduce the behavior you describe. Given such vagueness in the reasoning, it should be no surprise that your formula applies only to a particular form of bivariate distribution and not to just any distribution.</span>
+	&ndash;&nbsp;
+		<a href="/users/919/whuber" 
+		   title="68931 reputation" 
+		   class="comment-user">whuber<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-27 19:53:26Z" class="relativetime-clean">Sep 27 at 19:53</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-138221" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@whuber  Yeah, and it&#39;s even worse than that.  It&#39;s not particularly hard to cook up an example with non-normal distributions where, for some value of $\mathit{x}_2&gt;\mu_2$, $E(X_1|X_2=\mathit{x}_2)&lt;\mu_1$ even though $\sigma_{1,2}&gt;0$.  The &quot;tends to be&quot; and &quot;likely to be&quot; parts of my discussion are slushy.  Perhaps one could lead with the BLP formula (maybe deriving it?), but the question asked for intuition rather than proof.</span>
+	&ndash;&nbsp;
+		<a href="/users/25212/bill" 
+		   title="1348 reputation" 
+		   class="comment-user">Bill</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-27 20:36:31Z" class="relativetime-clean">Sep 27 at 20:36</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-138246" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">&quot;Intuitive&quot; does not imply &quot;non-quantitative&quot;: the two can go together.  It is often difficult to find an intuitive argument that gives quantitative results, but frequently it can be done and the process of finding such an argument is always illuminating.</span>
+	&ndash;&nbsp;
+		<a href="/users/919/whuber" 
+		   title="68931 reputation" 
+		   class="comment-user">whuber<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-27 22:59:26Z" class="relativetime-clean">Sep 27 at 22:59</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-140118" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Re the last paragraph: I have found out that the normal distribution is not so special: families created by affine transformations of <i>circularly symmetric</i> distributions are the special ones (of which there are very many).</span>
+	&ndash;&nbsp;
+		<a href="/users/919/whuber" 
+		   title="68931 reputation" 
+		   class="comment-user">whuber<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-10-08 03:22:35Z" class="relativetime-clean">Oct 8 at 3:22</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-140212" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@whuber  That&#39;s pretty interesting.  Do you have a link or cite?</span>
+	&ndash;&nbsp;
+		<a href="/users/25212/bill" 
+		   title="1348 reputation" 
+		   class="comment-user">Bill</a>
+	<span class="comment-date" dir="ltr"><span title="2013-10-08 13:35:33Z" class="relativetime-clean">Oct 8 at 13:35</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-71284" 
+			   class="comments-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">show <b>2</b> more comments</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/71260/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="71260" />
+							<h2 class="space">Your Answer</h2>
+
+
+        <script type="text/javascript">
+            StackExchange.ifUsing("editor", function () {
+                return StackExchange.using("mathjaxEditing", function () {
+                    StackExchange.MarkdownEditor.creationCallbacks.add(function (editor, postfix) {
+                        StackExchange.mathjaxEditing.prepareWmdForMathJax(editor, postfix, [["$", "$"], ["\\\\(","\\\\)"]]);
+                    });
+                });
+            }, "mathjax-editing");
+        </script>
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f71260%2fwhat-is-the-intuition-behind-conditional-gaussian-distributions%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f71260%2fwhat-is-the-intuition-behind-conditional-gaussian-distributions%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/normal-distribution" class="post-tag" title="show questions tagged &#39;normal-distribution&#39;" rel="tag">normal-distribution</a> <a href="/questions/tagged/multivariate-analysis" class="post-tag" title="show questions tagged &#39;multivariate-analysis&#39;" rel="tag">multivariate-analysis</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/normal-distribution" class="post-tag" title="show questions tagged &#39;normal-distribution&#39;" rel="tag">normal-distribution</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">743</span></span><br>
+<a href="/questions/tagged/multivariate-analysis" class="post-tag" title="show questions tagged &#39;multivariate-analysis&#39;" rel="tag">multivariate-analysis</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">471</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-09-27 14:37:22Z"><b>1 month ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>198 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-10-08 04:56:24Z">1 month ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/stats/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=stats.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/51718" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">34</div>
+	</a>
+	<a href="/questions/51718/assessing-approximate-distribution-of-data-based-on-a-histogram" class="question-hyperlink">Assessing approximate distribution of data based on a histogram</a>
+</div><div class="spacer">
+	<a href="/q/60011" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">1</div>
+	</a>
+	<a href="/questions/60011/how-to-find-the-level-curves-of-a-multivariate-normal" class="question-hyperlink">How to find the level curves of a multivariate normal?</a>
+</div><div class="spacer">
+	<a href="/q/73067" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">2</div>
+	</a>
+	<a href="/questions/73067/bonferonni-correction-interaction" class="question-hyperlink">Bonferonni Correction interaction</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/4138" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/4138/what-is-the-probability-that-random-variable-x-1-is-maximum-of-random-vector" class="question-hyperlink">What is the probability that random variable $x_1$ is maximum of random vector $X=(x_i)$ from a multivariate normal distribution?</a>
+</div>
+<div class="spacer">
+<a href="/q/9879" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/9879/addition-of-multivariate-gaussians" class="question-hyperlink">Addition of multivariate gaussians</a>
+</div>
+<div class="spacer">
+<a href="/q/16233" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/16233/higher-order-generalization-of-the-multivariate-normal-distribution" class="question-hyperlink">Higher order generalization of the multivariate normal distribution</a>
+</div>
+<div class="spacer">
+<a href="/q/30588" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">12
+    </div>
+</a><a href="/questions/30588/deriving-the-conditional-distributions-of-a-multivariate-normal-distribution" class="question-hyperlink">Deriving the conditional distributions of a multivariate normal distribution</a>
+</div>
+<div class="spacer">
+<a href="/q/52907" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/52907/draw-conditioned-beta-distributed-random-variables" class="question-hyperlink">Draw conditioned beta distributed random variables</a>
+</div>
+<div class="spacer">
+<a href="/q/60404" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/60404/confusion-related-to-conditional-gaussian-distribution" class="question-hyperlink">Confusion related to conditional Gaussian distribution</a>
+</div>
+<div class="spacer">
+<a href="/q/60750" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/60750/multivariate-gaussian-with-3-partitions" class="question-hyperlink">Multivariate Gaussian with 3 Partitions</a>
+</div>
+<div class="spacer">
+<a href="/q/71394" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/71394/independence-of-multivariate-normal-distribution" class="question-hyperlink">Independence of multivariate normal distribution</a>
+</div>
+<div class="spacer">
+<a href="/q/72472" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/72472/estimating-multivariate-normal-distribution-by-observing-variance-in-different-d" class="question-hyperlink">Estimating multivariate normal distribution by observing variance in different directions</a>
+</div>
+<div class="spacer">
+<a href="/q/73225" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/73225/joint-distribution-of-two-multivariate-normal-distributions" class="question-hyperlink">Joint distribution of two multivariate normal distributions</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/71260" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/71260/ivc/2edf');});
+</script>
+<noscript>
+    <div><img src="/posts/71260/ivc/2edf" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://stats.blogoverflow.com/?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/71260/what-is-the-intuition-behind-conditional-gaussian-distributions")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.stats.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.22.1174
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Cross Validated works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|normal-distribution|multivariate-analysis|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

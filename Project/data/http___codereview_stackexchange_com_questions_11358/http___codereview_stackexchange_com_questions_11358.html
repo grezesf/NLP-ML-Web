@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>c++ - Memory allocation for a variant-typed token - Code Review Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codereview/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Code Review Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeReview" />
+    <meta name="twitter:domain" content="codereview.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codereview/img/apple-touch-icon.png?v=bb26b8631f86"/>
+    <meta name="og:title" content="Memory allocation for a variant-typed token" />
+    <meta name="og:description" content="I am making an interpreter for a custom programming language (concatenative, soft-typed) and for that purpose I have a central datatype Token. A Token can be of one of the many different types, eit..." />
+    <meta name="og:url" content="http://codereview.stackexchange.com/questions/11358/memory-allocation-for-a-variant-typed-token"/>
+    <link rel="canonical" href="http://codereview.stackexchange.com/questions/11358/memory-allocation-for-a-variant-typed-token" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codereview/all.css?v=11cb5fcbff23">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Memory allocation for a variant-typed token&#39;" href="/feeds/question/11358">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:0,shownCommentCount:0,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:11358});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('196', '11358');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('196');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385083919,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Code Review Stack Exchange","description":"Q&A for peer programmer code reviews","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f11358%2fmemory-allocation-for-a-variant-typed-token">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f11358%2fmemory-allocation-for-a-variant-typed-token">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Code Review
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Code Review Stack Exchange is a question and answer site for peer programmer code reviews. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/11358/memory-allocation-for-a-variant-typed-token" class="question-hyperlink">Memory allocation for a variant-typed token</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="11358"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="11358">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I am making an interpreter for a custom programming language (concatenative, soft-typed) and for that purpose I have a central datatype <code>Token</code>. A Token can be of one of the many different types, either of scalar ones or vector ones. To minimize the amount of memory, I used a <code>union</code> first but then I could only use plain-old data structures in the union, so I resorted to a <code>struct</code> with all the fields (<code>long asInteger;</code>, <code>boost::shared_ptr&lt;std::string&gt; asString</code>, ...). That was of course a bad idea from a memory consumption viewpoint but it got the job done.</p>
+
+<p>The project has grown quite a bit since the original formulation and is now nearing 5000 lines altogether (mainly consisting of various functions that are built in the interpreter). Since the <code>Token</code> datatype was almost 100 bytes long (making an array of  1,000,000 integers almost 100 megabytes for example), the original formulation showed massively inadequate. Today I revamped the implementation to dynamically allocate the memory needed for each element with copy semantics so that I got something similar to the <code>union</code> if I could use it with classes.</p>
+
+<p>This is the new class definition:</p>
+
+<pre><code>typedef struct _st_VariableData {
+  char name[32];
+  Context *context;
+  vector&lt;long&gt; index;
+} VariableData;
+
+typedef struct _st_FuncCallData {
+  char asFunctionName[32];
+} FuncCallData;
+
+// Opaque pointer type
+typedef struct _st_HandleData {
+  void * ptr;
+  long size;
+} HandleData;
+
+class Token {
+protected:
+    TokenType tokenType_;
+
+    template&lt;class T&gt;
+    inline void copyToken(void * src, void * dst)
+    {
+      *static_cast&lt;T*&gt;(dst) = 
+          *static_cast&lt;T*&gt;(src);
+    };
+
+    template&lt;class T&gt;
+    inline void deleteValue()
+    {
+      delete static_cast&lt;T*&gt;(data);
+    };
+
+    void deleteData()
+    {
+        switch (tokenType_)
+        {
+            case T_OPERATOR:  deleteValue&lt;OperatorType&gt;(); break; 
+            case T_FUNCCALL:  deleteValue&lt;FuncCallData&gt;(); break; 
+            case T_VARIABLE:  deleteValue&lt;VariableData&gt;(); break; 
+            case T_INTEGER:   deleteValue&lt;long&gt;(); break; 
+            case T_BOOL:      deleteValue&lt;bool&gt;(); break; 
+            case T_FLOAT:     deleteValue&lt;double&gt;(); break;
+            case T_STRING:    deleteValue&lt;boost::shared_ptr&lt;std::string&gt;&gt;(); break; 
+            case T_CODEBLOCK:  
+            case T_ARRAY:     deleteValue&lt;boost::shared_ptr&lt;std::vector&lt;Token&gt;&gt;&gt;(); break;
+            case T_HANDLE:    deleteValue&lt;HandleData&gt;(); break;
+            default: ;
+        }
+    }
+
+    void allocate(const TokenType tokenType)
+    {       
+        switch (tokenType)
+        {
+            case T_OPERATOR:  data = new OperatorType; break; 
+            case T_FUNCCALL:  data = new FuncCallData; break; 
+            case T_VARIABLE:  data = new VariableData; break; 
+            case T_INTEGER:   data = new long; break; 
+            case T_BOOL:      data = new bool;  break; 
+            case T_FLOAT:     data = new double; break;
+            case T_STRING:    data = new boost::shared_ptr&lt;std::string&gt;; break; 
+            case T_CODEBLOCK:  
+            case T_ARRAY:     data = new boost::shared_ptr&lt;std::vector&lt;Token&gt;&gt;; break;
+            case T_HANDLE:    data = new HandleData; break;
+            default: data = NULL;
+        }     
+    };
+
+    void * data;
+
+public:
+    char * fileName;
+    int lineNum;
+
+    const TokenType type()
+    {       
+        return tokenType_;
+    };
+
+    const TokenType type() const
+    {       
+        return tokenType_;
+    };
+
+    void set_type(const TokenType tokenType)
+    {
+        deleteData();
+        tokenType_ = tokenType;
+        allocate(tokenType);
+    };
+
+    Token() : tokenType_ (T_EMPTY) { data = NULL; }; 
+
+    Token(const TokenType tokenType) : tokenType_ (tokenType)  
+    {
+        allocate(tokenType);
+    };
+
+    Token(const Token&amp; old_token)  
+    {
+        fileName = old_token.fileName;
+        lineNum  = old_token.lineNum;
+        tokenType_ = old_token.tokenType_;
+        allocate(old_token.tokenType_);
+        switch (old_token.tokenType_)
+        {
+            case T_OPERATOR:  copyToken&lt;OperatorType&gt;(old_token.data, data); break; 
+            case T_FUNCCALL:  copyToken&lt;FuncCallData&gt;(old_token.data, data); break; 
+            case T_VARIABLE:  copyToken&lt;VariableData&gt;(old_token.data, data); break; 
+            case T_INTEGER:   copyToken&lt;long&gt;(old_token.data, data); break; 
+            case T_BOOL:      copyToken&lt;bool&gt;(old_token.data, data); break; 
+            case T_FLOAT:     copyToken&lt;double&gt;(old_token.data, data); break;
+            case T_STRING:    copyToken&lt;boost::shared_ptr&lt;std::string&gt;&gt;(old_token.data, data); break; 
+            case T_CODEBLOCK:  
+            case T_ARRAY:     copyToken&lt;boost::shared_ptr&lt;std::vector&lt;Token&gt;&gt;&gt;(old_token.data, data); break;
+            case T_HANDLE:    copyToken&lt;HandleData&gt;(old_token.data, data); break;
+            default: ;
+        }       
+    };
+
+    template&lt;class T&gt;
+    T&amp; retreive()
+    {
+        return *static_cast&lt;T*&gt;(data);
+    };
+
+    template&lt;class T&gt;
+    const T&amp; retreive() const
+    {
+        return *static_cast&lt;T*&gt;(data);
+    };
+
+    void operator=(const Token &amp;rhs) 
+    {
+        fileName = rhs.fileName;
+        lineNum  = rhs.lineNum;
+        set_type(rhs.tokenType_);
+        switch (rhs.tokenType_)
+        {
+            case T_OPERATOR:  copyToken&lt;OperatorType&gt;(rhs.data, data); break; 
+            case T_FUNCCALL:  copyToken&lt;FuncCallData&gt;(rhs.data, data); break; 
+            case T_VARIABLE:  copyToken&lt;VariableData&gt;(rhs.data, data); break; 
+            case T_INTEGER:   copyToken&lt;long&gt;(rhs.data, data); break; 
+            case T_BOOL:      copyToken&lt;bool&gt;(rhs.data, data); break; 
+            case T_FLOAT:     copyToken&lt;double&gt;(rhs.data, data); break;
+            case T_STRING:    copyToken&lt;boost::shared_ptr&lt;std::string&gt;&gt;(rhs.data, data); break; 
+            case T_CODEBLOCK:  
+            case T_ARRAY:     copyToken&lt;boost::shared_ptr&lt;std::vector&lt;Token&gt;&gt;&gt;(rhs.data, data); break;
+            case T_HANDLE:    copyToken&lt;HandleData&gt;(rhs.data, data); break;
+            default: ;
+        }       
+    };
+
+    ~Token()
+    {
+       deleteData();
+    };
+};
+</code></pre>
+
+<p>Now the above code <strong>works</strong>, but is terribly slow (200% slower than the previous implementation). A profiler shows that almost half of the execution time is spent on <code>new</code> and <code>free()</code>. I have tried using placement new syntax with a <code>char data[50]</code> and that speeds it up a lot but still not as fast as original (about 20% slower).</p>
+
+<p>I am quite new to C++ (this is my first large project) so please excuse me if I have made some blatant mistakes arising from misconceptions. Generally I would like to minimize the memory allocation cost while also minimizing the required memory.</p>
+
+<p>If this is usually done a whole different way, please advise me how to do it. The entire 
+source code (bleeding-edge without build automation) is available <a href="http://www.ojdip.net/stutsk/stutsk-current/stutsk-current.tar.gz" rel="nofollow">here</a>.</p>
+
+<p>Thank you for help!</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/c%2b%2b" class="post-tag" title="show questions tagged &#39;c++&#39;" rel="tag">c++</a> <a href="/questions/tagged/performance" class="post-tag" title="show questions tagged &#39;performance&#39;" rel="tag">performance</a> <a href="/questions/tagged/data-structures" class="post-tag" title="show questions tagged &#39;data-structures&#39;" rel="tag">data-structures</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/11358" title="short permalink to this question" class="short-link" id="link-post-11358">share</a><span class="lsep">|</span><a href="/posts/11358/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/11358/revisions" title="show all edits to this post">edited <span title="2012-04-30 21:57:32Z" class="relativetime">Apr 30 '12 at 21:57</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2012-04-30 21:46:09Z" class="relativetime">Apr 30 '12 at 21:46</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/13049/tibor"><div><img src="https://www.gravatar.com/avatar/305d9133df5da79b49bac4ebb42e6de3?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/13049/tibor">Tibor</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">23</span><span title="7 bronze badges"><span class="badge3"></span><span class="badgecount">7</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-11358" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-11358" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								1 Answer
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/11358/memory-allocation-for-a-variant-typed-token?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/11358/memory-allocation-for-a-variant-typed-token?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/11358/memory-allocation-for-a-variant-typed-token?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="11566"></a>
+<div id="answer-11566" class="answer accepted-answer" data-answerid="11566" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="11566">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+<div class="bounty-award-container"><span class="bounty-award" title="This answer has been awarded bounties worth 100 reputation by Tibor">+100</span></div></div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>This problem is solved very elegantly by <a href="http://www.boost.org/doc/libs/1_49_0/doc/html/variant.html" rel="nofollow">Boost.Variant</a>.</p>
+
+<p>Not only is it easier and more efficient, it’s also completely type safe (meaning, you cannot accidentally retrieve a wrong type) when using the <code>boost::apply_visitor</code> template function to access data.</p>
+
+<p>Furthermore, I’d separate an object and its token representation. Objects can be the result of a computation (1 + 1, say) but this has no representation in the source file, right? This way, you can save storing he line number for tokens which aren’t in a file. I’d also refrain from storing the filename for each token – wouldn’t it be enough to store that once?</p>
+
+<p>With that in mind, a token can be represented by the following variant:</p>
+
+<pre><code>struct token_array;
+
+typedef boost::variant&lt;
+    OperatorType,
+    FuncCallData,
+    VariableData,
+    long,
+    …,
+    boost::recursive_wrapper&lt;token_array&gt;
+&gt; token;
+
+struct token_array {
+    std::vector&lt;token&gt; tokens;
+};
+</code></pre>
+
+<p>Note that you no longer need to take care of (de)allocation and copying yourself.</p>
+
+<hr>
+
+<p>Apart from that, your code features a few peculiarities from C:</p>
+
+<pre><code>typedef struct _st_FuncCallData {
+  char asFunctionName[32];
+} FuncCallData;
+</code></pre>
+
+<p>First of all, there is no need to do <code>typedef struct … { } …;</code> in C++. Second of all, the struct name is invalid: in the global namespace, names starting with an underscore are reserved to the implementation in C++.</p>
+
+<p>The following is completely equivalent:</p>
+
+<pre><code>struct FuncCallData {
+    char asFunctionName[32];
+};
+</code></pre>
+
+<p>I’d also question the usefulness of using a fixed-size char array here instead of just a <code>std::string</code> but oh well.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/11566" title="short permalink to this answer" class="short-link" id="link-post-11566">share</a><span class="lsep">|</span><a href="/posts/11566/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-05-07 16:25:10Z" class="relativetime">May 7 '12 at 16:25</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/308/konrad-rudolph"><div><img src="https://www.gravatar.com/avatar/fdd630f72eef3790bfb4ef38d08c7f85?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/308/konrad-rudolph">Konrad Rudolph</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">3,477</span><span title="5 silver badges"><span class="badge2"></span><span class="badgecount">5</span></span><span title="17 bronze badges"><span class="badge3"></span><span class="badgecount">17</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-11566" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-18539" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Thank you! I&#39;ve since tried with Boost Variant, but the code ended up being slower than before, the profiler showed that a very large amount of time was spent in some <code>boost::variant</code> function. I did not use <code>boost::recursive_wrapper</code>, so maybe this has something to do with it?</span>
+	&ndash;&nbsp;
+		<a href="/users/13049/tibor" 
+		   title="23 reputation" 
+		   class="comment-user owner">Tibor</a>
+	<span class="comment-date" dir="ltr"><span title="2012-05-07 16:30:16Z" class="relativetime-clean">May 7 '12 at 16:30</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-18541" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Tibor Which function was the time spent in? Anyway, if Boost.Variant turns out to be too slow I would nonetheless look at its implementation for inspiration. Having the multiple <code>switch</code>es that you have is a definite no-go.</span>
+	&ndash;&nbsp;
+		<a href="/users/308/konrad-rudolph" 
+		   title="3477 reputation" 
+		   class="comment-user">Konrad Rudolph</a>
+	<span class="comment-date" dir="ltr"><span title="2012-05-07 16:35:44Z" class="relativetime-clean">May 7 '12 at 16:35</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-18542" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">That would be the um... boost::detail::variant::visitation_impl&lt;boost::mpl::int_&lt;0&gt;,boost::detail::varia&zwnj;&#8203;nt::visitation_impl_step&lt;boost::mpl::l_iter&lt;boost::mpl::l_item&lt;boost::mpl::long_&lt;&zwnj;&#8203;9&gt;,enum _en_OperatorType,boost::mpl::l_item&lt;boost::mpl::long_&lt;8&gt;,_st_FuncCallData,boost:&zwnj;&#8203;:mpl::l_item&lt;boost::mpl::long_&lt;7&gt;,_st_VariableData,boost::mpl::l_item&lt;boost::mpl:&zwnj;&#8203;:long_&lt;6&gt;,boost::shared_ptr&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::al&zwnj;&#8203;locator&lt;char&gt; &gt;</span>
+	&ndash;&nbsp;
+		<a href="/users/13049/tibor" 
+		   title="23 reputation" 
+		   class="comment-user owner">Tibor</a>
+	<span class="comment-date" dir="ltr"><span title="2012-05-07 16:44:16Z" class="relativetime-clean">May 7 '12 at 16:44</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-11566" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/11358/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="11358" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f11358%2fmemory-allocation-for-a-variant-typed-token%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f11358%2fmemory-allocation-for-a-variant-typed-token%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/c%2b%2b" class="post-tag" title="show questions tagged &#39;c++&#39;" rel="tag">c++</a> <a href="/questions/tagged/performance" class="post-tag" title="show questions tagged &#39;performance&#39;" rel="tag">performance</a> <a href="/questions/tagged/data-structures" class="post-tag" title="show questions tagged &#39;data-structures&#39;" rel="tag">data-structures</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/c%2b%2b" class="post-tag" title="show questions tagged &#39;c++&#39;" rel="tag">c++</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">961</span></span><br>
+<a href="/questions/tagged/performance" class="post-tag" title="show questions tagged &#39;performance&#39;" rel="tag">performance</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">389</span></span><br>
+<a href="/questions/tagged/data-structures" class="post-tag" title="show questions tagged &#39;data-structures&#39;" rel="tag">data-structures</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">170</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2012-04-30 21:46:09Z"><b>1 year ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>188 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2012-05-07 16:25:10Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/beta/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=codereview.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+</div>
+
+    </div>
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/3112" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/3112/provide-both-use-of-external-memory-or-a-custom-allocator" class="question-hyperlink">Provide both: Use of external memory or a custom allocator.</a>
+</div>
+<div class="spacer">
+<a href="/q/4638" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">-2
+    </div>
+</a><a href="/questions/4638/allocatingdeallocating-memory-for-matrixoptimise-critique-suggestion-how" class="question-hyperlink">Allocating(deallocating) memory for matrix(optimise &amp; critique) (suggestion how to &ldquo;convert&rdquo; all for loop to function from algorithm)</a>
+</div>
+<div class="spacer">
+<a href="/q/7727" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">6
+    </div>
+</a><a href="/questions/7727/is-this-a-good-algorithm-for-2d-collision-or-will-it-allocate-too-much-memory" class="question-hyperlink">Is this a good algorithm for 2D collision, or will it allocate too much memory?</a>
+</div>
+<div class="spacer">
+<a href="/q/10034" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/10034/variable-sized-type-allocation" class="question-hyperlink">Variable sized type allocation</a>
+</div>
+<div class="spacer">
+<a href="/q/15316" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/15316/type-to-instance-map" class="question-hyperlink">Type to instance map</a>
+</div>
+<div class="spacer">
+<a href="/q/15431" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/15431/take-two-on-type-to-instance-map" class="question-hyperlink">Take two on type to instance map</a>
+</div>
+<div class="spacer">
+<a href="/q/20104" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/20104/a-shortest-path-algorithm-optimization-request" class="question-hyperlink">A* shortest path algorithm optimization request</a>
+</div>
+<div class="spacer">
+<a href="/q/29350" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/29350/heap-memory-preallocation-intended-for-games" class="question-hyperlink">Heap memory preallocation (intended for games)</a>
+</div>
+<div class="spacer">
+<a href="/q/31528" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/31528/a-working-stack-allocator" class="question-hyperlink">a working stack allocator</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/11358" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/11358/ivc/8f09');});
+</script>
+<noscript>
+    <div><img src="/posts/11358/ivc/8f09" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-cpp</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/11358/memory-allocation-for-a-variant-typed-token")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codereview.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.21.1172
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Code Review Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|c++|performance|data-structures|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

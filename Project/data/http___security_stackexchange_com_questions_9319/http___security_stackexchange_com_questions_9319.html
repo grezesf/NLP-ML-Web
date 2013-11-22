@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>virtualization - How secure are virtual machines really? False sense of security? - Information Security Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/security/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/security/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Information Security Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackSecurity" />
+    <meta name="twitter:domain" content="security.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/security/img/apple-touch-icon@2.png?v=497726d850f9"/>
+    <meta name="og:title" content="How secure are virtual machines really? False sense of security?" />
+    <meta name="og:description" content="I was reading this CompTIA Security+ SYO-201 book, and the author David Prowse claims that:
+
+
+  Whichever VM you select, the VM cannot cross the software boundaries set in
+  place. For example, a v..." />
+    <meta name="og:url" content="http://security.stackexchange.com/questions/3056/how-secure-are-virtual-machines-really-false-sense-of-security"/>
+    <link rel="canonical" href="http://security.stackexchange.com/questions/3056/how-secure-are-virtual-machines-really-false-sense-of-security" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/security/all.css?v=d77df3b4e875">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;How secure are virtual machines really? False sense of security?&#39;" href="/feeds/question/3056">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:2,shownCommentCount:2,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:3056});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('162', '3056');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('162');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385093481,"enableUserHovercards":true,"site":{"name":"Information Security Stack Exchange","description":"Q&A for Information security professionals","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f3056%2fhow-secure-are-virtual-machines-really-false-sense-of-security">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f3056%2fhow-secure-are-virtual-machines-really-false-sense-of-security">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Information Security
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/security/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Information Security Stack Exchange is a question and answer site for Information security professionals. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/3056/how-secure-are-virtual-machines-really-false-sense-of-security" class="question-hyperlink">How secure are virtual machines really? False sense of security?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="3056"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="3056">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">41</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>25</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I was reading this <a href="http://rads.stackoverflow.com/amzn/click/0789747138" rel="nofollow">CompTIA Security+ SYO-201 book</a>, and the author David Prowse claims that:</p>
+
+<blockquote>
+  <p>Whichever VM you select, the VM cannot cross the software boundaries set in
+  place. For example, a virus might infect a computer when executed and spread to
+  other files in the OS. However, a virus executed in a VM will spread through the
+  VM but not affect the underlying actual OS.</p>
+</blockquote>
+
+<p>So if I'm running VMWare player and execute some malware on my virtual machine's OS, I don't have to worry about my host system being compromised, at <em>all</em>? </p>
+
+<p>What if the virtual machine shares the network with the host machine, and shared folders are enabled? </p>
+
+<p>Isn't it still possible for a worm to copy itself to the host machine that way? Isn't the user still vulnerable to AutoRun if the OS is Windows and they insert a USB storage device?</p>
+
+<p>How secure are virtual machines, really? How much do they protect the host machine from malware and attacks?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/virtualization" class="post-tag" title="show questions tagged &#39;virtualization&#39;" rel="tag">virtualization</a> <a href="/questions/tagged/malware" class="post-tag" title="show questions tagged &#39;malware&#39;" rel="tag">malware</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/3056" title="short permalink to this question" class="short-link" id="link-post-3056">share</a><span class="lsep">|</span><a href="/posts/3056/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/3056/revisions" title="show all edits to this post">edited <span title="2013-11-02 16:15:43Z" class="relativetime">Nov 2 at 16:15</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/31854/kalina"><div><img src="https://www.gravatar.com/avatar/f6a9158d4c824fab99a08fd488496278?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/31854/kalina">kalina</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">205</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="10 bronze badges"><span class="badge3"></span><span class="badgecount">10</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2011-04-12 23:48:32Z" class="relativetime">Apr 12 '11 at 23:48</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/2053/mathstudent"><div><img src="https://www.gravatar.com/avatar/c637581e3ac1604e93c492bb8dc5b312?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/2053/mathstudent">mathStudent</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">496</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="5 silver badges"><span class="badge2"></span><span class="badgecount">5</span></span><span title="11 bronze badges"><span class="badge3"></span><span class="badgecount">11</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-3056" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-4101" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Possible duplicate of <a href="http://security.stackexchange.com/questions/2816/are-there-ways-to-protect-the-guest-kernels-at-the-hypervisor-level" title="are there ways to protect the guest kernels at the hypervisor level">security.stackexchange.com/questions/2816/&hellip;</a> ?</span>
+	&ndash;&nbsp;
+		<a href="/users/33/avid" 
+		   title="24040 reputation" 
+		   class="comment-user">AviD<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2011-04-13 07:08:57Z" class="relativetime-clean">Apr 13 '11 at 7:08</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-25869" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">3</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">If I were the editor, I would interject a &quot;hopefully&quot; and &quot;theoretically&quot; in a few choice locations in that quote. As is, it&#39;s definitely a false statement.</span>
+	&ndash;&nbsp;
+		<a href="/users/2264/tylerl" 
+		   title="19078 reputation" 
+		   class="comment-user">tylerl</a>
+	<span class="comment-date" dir="ltr"><span title="2012-06-23 06:42:33Z" class="relativetime-clean">Jun 23 '12 at 6:42</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-3056" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+    <div class="question-status">
+        <h2>                <b>migrated</b> from <a href="http://serverfault.com/questions/259027/how-secure-are-virtual-machines-really-false-sense-of-security?noredirect=1" title="how secure are virtual machines really false sense of security">serverfault.com</a> <span title="2011-04-13 00:02:29Z" class="relativetime">Apr 13 '11 at 0:02</span>
+</h2>
+        <p>This question came from our site for professional system and network administrators.</p>
+    </div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								6 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/3056/how-secure-are-virtual-machines-really-false-sense-of-security?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/3056/how-secure-are-virtual-machines-really-false-sense-of-security?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/3056/how-secure-are-virtual-machines-really-false-sense-of-security?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="3058"></a>
+<div id="answer-3058" class="answer accepted-answer" data-answerid="3058" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="3058">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">23</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>VM's can definitely cross over.  Usually you have them networked, so any malware with a network component (i.e. worms) will propagate to wherever their addressing/routing allows them to.  Regular viruses tend to only operate in usermode, so while they couldn't communicate overtly, they could still set up a covert channel.  If you are sharing CPU's, a busy process on one VM can effectively communicate state to another VM (that's your prototypical timing covert channel).  Storage covert channel would be a bit harder as the virtual disks tend to have a hard limit on them, so unless you have a system that can over-commit disk space, it should not be an issue.</p>
+
+<p>The most interesting approach to securing VM's is called the <a href="http://en.wikipedia.org/wiki/Separation_kernel">Separation Kernel</a>.  It's a result of John Rushby's <a href="http://www.csl.sri.com/users/rushby/papers/sosp81.pdf">1981 paper</a> which basically states that in order to have VM's isolated in a manner that could be equivalent to physical separation, the computer must export its resources to specific VM's in a way where at no point any resource that can store state is shared between VM's.  This has deep consequences, as it requires the underlying computer architecture to be designed in a way in which this can be carried out in a non-bypassable manner.  </p>
+
+<p>30yrs after this paper, we finally have few products that claim to do it.  x86 isn't the greatest platform for it, as there are many instructions that cannot be virtualized, to fully support the 'no sharing' idea.  It is also not very practical for common systems, as to have four VM's, you'd need four harddrives hanging off four disk controllers, four video cards, four USB controllers with four mice, etc..</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/3058" title="short permalink to this answer" class="short-link" id="link-post-3058">share</a><span class="lsep">|</span><a href="/posts/3058/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-04-13 00:38:58Z" class="relativetime">Apr 13 '11 at 0:38</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/193/marcin"><div><img src="https://www.gravatar.com/avatar/0c2f52ce1edc35f686d3240bf7043264?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/193/marcin">Marcin</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,256</span><span title="4 silver badges"><span class="badge2"></span><span class="badgecount">4</span></span><span title="11 bronze badges"><span class="badge3"></span><span class="badgecount">11</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-3058" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-3058" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="3060"></a>
+<div id="answer-3060" class="answer" data-answerid="3060" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="3060">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">18</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>There have been some white-papers published over the years describing ways that researchers have managed to infest a host OS from a VM. These are usually seen, rightly so, as security vulnerabilities by the VM vendors and treated as such. Since I first saw those papers, Intel has made some significant processor instruction-set improvements in allowing separation of VM and hypervisor. </p>
+
+<p>The few vulnerabilities I see these days are based more in the 'vmtools' portion. This is the software you install to make the guest OS run more efficiently (for VMWare this is what allows on the fly cursor capture, and sharing between guest and host without a network). This is a special software pathway for infection; don't install the tools, don't have the vulnerability.</p>
+
+<p>Some malware has show the ability to <em>detect</em> that they're being executed inside a VM and thus change their behavior, much to the aggravation of malware researchers attempting to use VMs as a way to test malware. I don't know how prevalent it is these days, though.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/3060" title="short permalink to this answer" class="short-link" id="link-post-3060">share</a><span class="lsep">|</span><a href="/posts/3060/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-04-13 01:22:57Z" class="relativetime">Apr 13 '11 at 1:22</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1051/sysadmin1138"><div><img src="https://www.gravatar.com/avatar/1fb33c0507faeb381309536779716850?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1051/sysadmin1138">sysadmin1138</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,188</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="14 bronze badges"><span class="badge3"></span><span class="badgecount">14</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-3060" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-3060" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="3250"></a>
+<div id="answer-3250" class="answer" data-answerid="3250" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="3250">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">7</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>An example of guest-to-host code execution can be found in the Cloudburst exploit. There is a video <a href="http://vimeo.com/moogaloop.swf?clip_id=6595148&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1">demonstrating</a> it and a paper from Immunity <a href="http://www.blackhat.com/presentations/bh-usa-09/KORTCHINSKY/BHUSA09-Kortchinsky-Cloudburst-PAPER.pdf">detailing</a> their success on VMware Workstation 6.5.0 build­118166 on a Windows Vista SP1, VMware Workstation 6.5.1 build­126130 on a Windows Vista SP1, and (even more scary) VMware ESX Server 4.0.0 build­133495. </p>
+
+<p>This probably provides little comfort, but I've never heard of this being used in the wild and the exploit is from 2009. That book was published in 2010 so the author should clean that statement up. </p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/3250" title="short permalink to this answer" class="short-link" id="link-post-3250">share</a><span class="lsep">|</span><a href="/posts/3250/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/3250/revisions" title="show all edits to this post">edited <span title="2011-04-21 17:01:09Z" class="relativetime">Apr 21 '11 at 17:01</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-04-21 16:55:01Z" class="relativetime">Apr 21 '11 at 16:55</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/2173/harley"><div><img src="https://www.gravatar.com/avatar/dd7016bfeba5bc8c917cebb73dc81c5d?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/2173/harley">harley</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">91</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-3250" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-3250" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="3075"></a>
+<div id="answer-3075" class="answer" data-answerid="3075" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="3075">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">6</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>A virtual machine is exactly that, a logically separate machine, so it must have the same security layers placed on it as you would a bare-metal system.  Using a virtual machine will not stop a vul if it uses normal channels to get to the host machine.</p>
+
+<p>The real beauty in virtualization is the ability to roll back VMs to a state where they were not effected, as well as the ability to better manage available resources.</p>
+
+<p>If the proper steps are taken to protect the host machine, virtualization can be extremely secure.  Practices like keeping ESX/VM server management on a different logical network and not using VM-host interfacing tools will keep attackers mostly oblivious to the fact that a machine is virtual, let alone how to get to the host.</p>
+
+<p>Also, there are known exploits that effects VM hosts (I've played with them in VMWare and Hyper-V).  I'm only currently aware of host DoS exploits when it comes to hyper-v (see <a href="http://support.microsoft.com/kb/2345316" rel="nofollow">this</a>), but I'm sure there are other finds in the horizon.  VMWare has some in it's history too (i.e. <a href="http://www.exploit-db.com/exploits/15717/" rel="nofollow">this</a>, it's VMWare tools based, but it still applies).</p>
+
+<p>Depending on what you're doing, there are some online tools that may be able to take away your need to do the analysis on your own machine. Here are a few sites to take a look at:<br>
+ - <a href="http://Threatexpert.com" rel="nofollow">Threatexpert.com</a> <br>
+ - <a href="http://anubis.iseclab.org" rel="nofollow">anubis.iseclab.org</a> <br>
+ - <a href="http://virustotal.com" rel="nofollow">virustotal.com</a> <br></p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/3075" title="short permalink to this answer" class="short-link" id="link-post-3075">share</a><span class="lsep">|</span><a href="/posts/3075/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/3075/revisions" title="show all edits to this post">edited <span title="2012-01-05 19:59:06Z" class="relativetime">Jan 5 '12 at 19:59</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/-1/community"><div><img src="https://www.gravatar.com/avatar/a007be5a61f6aa8f3e85ae2fc18dd66e?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/-1/community">Community</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1</span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-04-13 18:32:18Z" class="relativetime">Apr 13 '11 at 18:32</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1979/ormis"><div><img src="https://www.gravatar.com/avatar/50b55e9dc96b34888111215e1d884576?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1979/ormis">Ormis</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,392</span><span title="3 silver badges"><span class="badge2"></span><span class="badgecount">3</span></span><span title="11 bronze badges"><span class="badge3"></span><span class="badgecount">11</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-3075" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-4119" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">P.S. check out malwaredomainlist.com if you want to test out your sandbox environment... but be cautioned, only use this if you want to be infected with some new, fun, malware :-)</span>
+	&ndash;&nbsp;
+		<a href="/users/1979/ormis" 
+		   title="1392 reputation" 
+		   class="comment-user">Ormis</a>
+	<span class="comment-date" dir="ltr"><span title="2011-04-13 18:41:13Z" class="relativetime-clean">Apr 13 '11 at 18:41</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-4120" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">+1, but the recognized leader in these field, Joanna Rutkowska, can be found at <a href="http://theinvisiblethings.blogspot.com/" rel="nofollow">theinvisiblethings.blogspot.com</a></span>
+	&ndash;&nbsp;
+		<a href="/users/33/avid" 
+		   title="24040 reputation" 
+		   class="comment-user">AviD<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2011-04-13 18:55:35Z" class="relativetime-clean">Apr 13 '11 at 18:55</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-4147" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">4</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">A VM on x86 is NOT an exact logically separate machine.  Read <a href="http://en.wikipedia.org/wiki/Popek_and_Goldberg_virtualization_requirements" rel="nofollow">en.wikipedia.org/wiki/&hellip;</a> and <a href="http://www.usenix.org/events/sec2000/robin.html" rel="nofollow">usenix.org/events/sec2000/robin.html</a> and you&#39;ll find out there are 17 instructions that cannot be virtualized.</span>
+	&ndash;&nbsp;
+		<a href="/users/193/marcin" 
+		   title="1256 reputation" 
+		   class="comment-user">Marcin</a>
+	<span class="comment-date" dir="ltr"><span title="2011-04-14 13:40:30Z" class="relativetime-clean">Apr 14 '11 at 13:40</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-4412" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Logically separate does not mean technically separate. Even if all instructions cannot be virtualized, the application of the machine is still a different logical entity. Those who deploy them need to keep this mindset, don&#39;t assume security because of abstraction. Also, remember to do the basics... for VMWare, try to use a different host OS than Guest OS that you&#39;re testing, look over the isolation options, and make sure the networks are properly constructed. So, @Marcin i understand what you&#39;re trying to say, but i believe my comments are still valid (simply that virtualization != security).</span>
+	&ndash;&nbsp;
+		<a href="/users/1979/ormis" 
+		   title="1392 reputation" 
+		   class="comment-user">Ormis</a>
+	<span class="comment-date" dir="ltr"><span title="2011-04-21 18:01:53Z" class="relativetime-clean">Apr 21 '11 at 18:01</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-3075" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="3059"></a>
+<div id="answer-3059" class="answer" data-answerid="3059" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="3059">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>What is meant by the Security+ material is that thus far malware hasn't been able to escape the sandbox of the VM via exploiting the fact that it's a VM and somehow hitting the hypervisor. Other mechanisms, such as spreading across a shared network, are the same as if these were different physical boxes. </p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/3059" title="short permalink to this answer" class="short-link" id="link-post-3059">share</a><span class="lsep">|</span><a href="/posts/3059/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-04-13 00:40:35Z" class="relativetime">Apr 13 '11 at 0:40</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/2050/k-brian-kelley"><div><img src="https://www.gravatar.com/avatar/70351e44f031f245f8e822897ea2fadd?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/2050/k-brian-kelley">K. Brian Kelley</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">139</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-3059" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-3059" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="8318"></a>
+<div id="answer-8318" class="answer" data-answerid="8318" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="8318">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">-1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>I agree with Ormis above - it's a "machine" that needs to be accounted for on your network. They aren't any more secure than a standard host machine.  There are a few companies that sell softare to check the specific issues that software like VMware brings; not only the standard OS flaws, but also the virtual server or app config issues that attackers could use to attack. </p>
+
+<p>I suggest looking at something like Retina Community from eEye - it's a <a href="http://go.eeye.com/LP=68" rel="nofollow">free security tool</a> for physical and virtual systems - it scans them for missing patches and config issues. The product comes with an add on to scan virtual apps deployed via ThinApp as well, which is pretty unique in the industry.   </p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/8318" title="short permalink to this answer" class="short-link" id="link-post-8318">share</a><span class="lsep">|</span><a href="/posts/8318/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-10-23 03:10:35Z" class="relativetime">Oct 23 '11 at 3:10</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3790/mateo-ferreira"><div><img src="https://www.gravatar.com/avatar/900bf049b6da551204b013c9869ad9a2?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3790/mateo-ferreira">Mateo Ferreira</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">127</span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-8318" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-8318" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/3056/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="3056" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+noCode: true,            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f3056%2fhow-secure-are-virtual-machines-really-false-sense-of-security%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f3056%2fhow-secure-are-virtual-machines-really-false-sense-of-security%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/virtualization" class="post-tag" title="show questions tagged &#39;virtualization&#39;" rel="tag">virtualization</a> <a href="/questions/tagged/malware" class="post-tag" title="show questions tagged &#39;malware&#39;" rel="tag">malware</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/malware" class="post-tag" title="show questions tagged &#39;malware&#39;" rel="tag">malware</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">329</span></span><br>
+<a href="/questions/tagged/virtualization" class="post-tag" title="show questions tagged &#39;virtualization&#39;" rel="tag">virtualization</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">97</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2011-04-12 23:48:32Z"><b>2 years ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>18267 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-11-02 16:15:43Z">19 days ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/security/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=security.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <div class="ad-container">    
+        <div class="ad">    
+        <a href="http://meta.security.stackexchange.com/ads/ct/1365?url=http%3a%2f%2fcrypto.stackexchange.com%2f" rel="nofollow" target="_blank"><img src="http://i.stack.imgur.com/rEGd0.png" alt="Crypto Stackexchange" title="Crypto Stackexchange" width="220" height="250"></a>
+        </div>
+        <div class="footer-container">
+            <div class="footer">
+                13 votes · <a href="http://meta.security.stackexchange.com/questions/1085#1365" title="click to comment on this ad" target="_blank">comment</a> · <a href="http://meta.security.stackexchange.com/ads/display/1085" target="_blank">stats</a>
+            </div>
+        </div>
+    </div>
+
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/4097" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">2</div>
+	</a>
+	<a href="/questions/4097/how-to-ensure-that-virtualbox-guests-cant-break-out-of-the-vm-to-get-access-to" class="question-hyperlink">How to ensure that VirtualBox guests can&#39;t break out of the vm to get access to the host machine?</a>
+</div><div class="spacer">
+	<a href="/q/14898" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">0</div>
+	</a>
+	<a href="/questions/14898/will-virus-downloaded-to-guest-os-affect-host-os" class="question-hyperlink">Will virus downloaded to guest OS affect Host OS?</a>
+</div><div class="spacer">
+	<a href="/q/16381" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">1</div>
+	</a>
+	<a href="/questions/16381/can-a-tcp-connection-with-a-vm-be-escaped-from-to-reach-the-host" class="question-hyperlink">Can a TCP connection with a VM be &ldquo;escaped from&rdquo; to reach the host?</a>
+</div><div class="spacer">
+	<a href="/q/21362" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">2</div>
+	</a>
+	<a href="/questions/21362/can-a-malware-jump-from-a-virtual-to-the-physical-machine" class="question-hyperlink">Can a malware jump from a virtual to the physical machine?</a>
+</div><div class="spacer">
+	<a href="/q/45289" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="/questions/45289/virtual-box-security" class="question-hyperlink">Virtual Box security</a>
+</div><div class="spacer">
+	<a href="/q/44093" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="/questions/44093/securing-your-virtual-machine" class="question-hyperlink">Securing your virtual machine</a>
+</div><div class="spacer">
+	<a href="/q/12546" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">36</div>
+	</a>
+	<a href="/questions/12546/is-it-safe-to-install-malware-in-a-vm" class="question-hyperlink">Is it safe to install malware in a VM</a>
+</div><div class="spacer">
+	<a href="/q/9011" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">18</div>
+	</a>
+	<a href="/questions/9011/does-a-virtual-machine-stop-malware-from-doing-harm" class="question-hyperlink">Does a Virtual Machine stop malware from doing harm?</a>
+</div><div class="spacer">
+	<a href="/q/23452" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">6</div>
+	</a>
+	<a href="/questions/23452/is-it-safe-to-use-virtual-machines-when-examining-malware" class="question-hyperlink">Is it safe to use virtual machines when examining malware?</a>
+</div><div class="spacer">
+	<a href="/q/2816" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">13</div>
+	</a>
+	<a href="/questions/2816/are-there-ways-to-protect-the-guest-kernels-at-the-hypervisor-level" class="question-hyperlink">Are there ways to protect the guest kernels at the hypervisor level?</a>
+</div>					<div class="spacer more">
+				<a href="http://security.stackexchange.com/questions/linked/3056">see more linked questions…</a>
+			</div>
+	</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/9011" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">18
+    </div>
+</a><a href="/questions/9011/does-a-virtual-machine-stop-malware-from-doing-harm" class="question-hyperlink">Does a Virtual Machine stop malware from doing harm?</a>
+</div>
+<div class="spacer">
+<a href="/q/12521" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">9
+    </div>
+</a><a href="/questions/12521/protection-of-keys-passwords-on-virtual-hardware-xen-kvm-vmware-etc" class="question-hyperlink">Protection of Keys/Passwords on Virtual Hardware (XEN, KVM, VMWare, etc.)</a>
+</div>
+<div class="spacer">
+<a href="/q/16615" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/16615/is-dual-booting-an-os-more-or-less-secure-than-running-a-virtual-machine" class="question-hyperlink">Is dual-booting an OS more or less secure than running a virtual machine?</a>
+</div>
+<div class="spacer">
+<a href="/q/16958" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">6
+    </div>
+</a><a href="/questions/16958/would-running-vms-inside-of-vms-be-a-more-secure-way-to-study-viruses-etc" class="question-hyperlink">Would running VMs inside of VMs be a more secure way to study viruses, etc?</a>
+</div>
+<div class="spacer">
+<a href="/q/21362" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/21362/can-a-malware-jump-from-a-virtual-to-the-physical-machine" class="question-hyperlink">Can a malware jump from a virtual to the physical machine?</a>
+</div>
+<div class="spacer">
+<a href="/q/23674" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/23674/how-will-microvirtualisation-change-the-security-field-if-at-all" class="question-hyperlink">How will microvirtualisation change the security field, if at all?</a>
+</div>
+<div class="spacer">
+<a href="/q/25949" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">7
+    </div>
+</a><a href="/questions/25949/how-isolated-are-files-on-a-virtualbox-virtual-machine-from-the-host-filesystem" class="question-hyperlink">How isolated are files on a VirtualBox virtual machine from the host filesystem?</a>
+</div>
+<div class="spacer">
+<a href="/q/34261" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">8
+    </div>
+</a><a href="/questions/34261/what-is-virtual-machine-introspection" class="question-hyperlink">What is Virtual Machine Introspection?</a>
+</div>
+<div class="spacer">
+<a href="/q/42916" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/42916/using-a-virtual-machine-as-a-buffer-between-usb-media-and-os" class="question-hyperlink">Using a virtual machine as a buffer between USB media and OS</a>
+</div>
+<div class="spacer">
+<a href="/q/43703" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/43703/vm-security-how-to-access-main-os" class="question-hyperlink">VM security, how to access main OS</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/3056" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/3056/ivc/1f08');});
+</script>
+<noscript>
+    <div><img src="/posts/3056/ivc/1f08" class="dno" alt="" width="0" height="0"></div>
+</noscript></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://security.blogoverflow.com/?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/3056/how-secure-are-virtual-machines-really-false-sense-of-security")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.security.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.21.1172
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Information Security Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|virtualization|malware|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

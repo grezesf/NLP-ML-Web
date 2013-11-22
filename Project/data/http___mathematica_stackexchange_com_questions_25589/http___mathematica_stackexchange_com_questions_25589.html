@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>image processing - How can I detect an ellipse in a photo? - Mathematica Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/mathematica/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/mathematica/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Mathematica Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackMma" />
+    <meta name="twitter:domain" content="mathematica.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/mathematica/img/apple-touch-icon@2.png?v=1b98edea1597"/>
+    <meta name="og:title" content="How can I detect an ellipse in a photo?" />
+    <meta name="og:description" content="I tried to detect the rim of the following cup as an ellipse.
+
+
+
+I&#39;ve tried the solutions given in How to find circular objects in an image? to detect the ellipse, but the detection result was not ..." />
+    <meta name="og:url" content="http://mathematica.stackexchange.com/questions/25589/how-can-i-detect-an-ellipse-in-a-photo"/>
+    <link rel="canonical" href="http://mathematica.stackexchange.com/questions/25589/how-can-i-detect-an-ellipse-in-a-photo" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/mathematica/all.css?v=8a4c27c405f3">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;How can I detect an ellipse in a photo?&#39;" href="/feeds/question/25589">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:7,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:25589});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('387', '25589');
+            
+                    });
+    </script>
+
+                <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+                                        tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+                                        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+                                        messageStyle: "none"
+                });
+                </script>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>                
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('387');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385091561,"styleCode":true,"styleCodeAdditionalLang":"lang-mma.js?v=1","enableUserHovercards":true,"site":{"name":"Mathematica Stack Exchange","description":"Q&A for users of Mathematica","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091","js/mathjax-editing.en.js":"a09844f7b738"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f25589%2fhow-can-i-detect-an-ellipse-in-a-photo">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f25589%2fhow-can-i-detect-an-ellipse-in-a-photo">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Mathematica
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/mathematica/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Mathematica Stack Exchange is a question and answer site for users of Mathematica. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/25589/how-can-i-detect-an-ellipse-in-a-photo" class="question-hyperlink">How can I detect an ellipse in a photo?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="25589"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="25589">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">20</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>8</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I tried to detect the rim of the following cup as an ellipse.</p>
+
+<p><img src="http://i.stack.imgur.com/H63BK.jpg" alt="some cup"></p>
+
+<p>I've tried the solutions given in <a href="http://mathematica.stackexchange.com/questions/11725/">How to find circular objects in an image?</a> to detect the ellipse, but the detection result was not quite what I wanted. The reason might be that <code>ChanVeseBinarize</code> function can't separate the rim from the body. Therefore <code>SelectComponents</code> will view the whole cup as one component and consequently detect nothing. </p>
+
+<p>Then I tried to use edge detection. After manipulating the parameters, I can detect the edge of the rim like this:</p>
+
+<p><img src="http://i.stack.imgur.com/SPiTW.png" alt="edge detection attempt"></p>
+
+<p>But I can't find an algorithm that detect the line of an ellipse. How might I do that?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/image-processing" class="post-tag" title="show questions tagged &#39;image-processing&#39;" rel="tag">image-processing</a> <a href="/questions/tagged/image" class="post-tag" title="show questions tagged &#39;image&#39;" rel="tag">image</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/25589" title="short permalink to this question" class="short-link" id="link-post-25589">share</a><span class="lsep">|</span><a href="/posts/25589/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/25589/revisions" title="show all edits to this post">edited <span title="2013-05-21 13:41:17Z" class="relativetime">May 21 at 13:41</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3066/m-goldberg"><div><img src="https://www.gravatar.com/avatar/f3b02532d4cb4855881935c002389213?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3066/m-goldberg">m_goldberg</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">9,759</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="13 silver badges"><span class="badge2"></span><span class="badgecount">13</span></span><span title="45 bronze badges"><span class="badge3"></span><span class="badgecount">45</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-05-21 12:55:56Z" class="relativetime">May 21 at 12:55</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/7557/albertk"><div><img src="https://www.gravatar.com/avatar/b42b067d401ad35c937bad3441acd7a1?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/7557/albertk">AlbertK</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">130</span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-25589" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="2" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-79390" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">What I can think of right now: try to isolate the ellipse e.g. through <code>Image&#91;
+ ImageData@EdgeDetect&#91;pic&#93; - 
+  ImageData@EdgeDetect&#91;pic, &quot;StraightEdges&quot; -&gt; 0.2&#93;&#93;</code> and then apply <code>MorphologicalComponents</code> and then on each component (one will be the ellipse, you may be able to delete the other somehow) use <code>ComponentMeasurements</code>. Look in the documentation for the properties that it can give you, that you may want, e.g. best fit ellipse semiaxes and so on.</span>
+	&ndash;&nbsp;
+		<a href="/users/731/anon" 
+		   title="4925 reputation" 
+		   class="comment-user">Anon</a>
+	<span class="comment-date" dir="ltr"><span title="2013-05-21 13:34:29Z" class="relativetime-clean">May 21 at 13:34</span></span>
+		<span class="edited-yes" title="this comment was edited 2 times"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-79395" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@RodLm It would be easier If he did that himself when editting his question. Now it&#39;s been 5 times editted. Wouldn&#39;t like to make it a community-wiki question.</span>
+	&ndash;&nbsp;
+		<a href="/users/184/artes" 
+		   title="26144 reputation" 
+		   class="comment-user">Artes</a>
+	<span class="comment-date" dir="ltr"><span title="2013-05-21 13:46:30Z" class="relativetime-clean">May 21 at 13:46</span></span>
+		<span class="edited-yes" title="this comment was edited 2 times"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-79398" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Well you will need to use a fuzzy ellipse. The basic idea is to generate a number of ellipses until one of them is such that most of its points are within a certain distance of a white point of your edge detection output. Now the question is reduced to how to effectively generate ellipses.</span>
+	&ndash;&nbsp;
+		<a href="/users/6001/smeznaric" 
+		   title="101 reputation" 
+		   class="comment-user">SMeznaric</a>
+	<span class="comment-date" dir="ltr"><span title="2013-05-21 14:05:31Z" class="relativetime-clean">May 21 at 14:05</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-79412" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Substantial progress towards a solution can be found by reviewing <a href="http://mathematica.stackexchange.com/search?q=circle+image+detect">these related posts</a>. A Hough transform looks attractive.</span>
+	&ndash;&nbsp;
+		<a href="/users/91/whuber" 
+		   title="14501 reputation" 
+		   class="comment-user">whuber</a>
+	<span class="comment-date" dir="ltr"><span title="2013-05-21 15:03:03Z" class="relativetime-clean">May 21 at 15:03</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-79425" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">3</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I&#39;m not sure about the hough transform: an ellipse has 5 degrees of freedom, that&#39;s a huge parameter space to update for each point.</span>
+	&ndash;&nbsp;
+		<a href="/users/242/nikie" 
+		   title="7958 reputation" 
+		   class="comment-user">nikie</a>
+	<span class="comment-date" dir="ltr"><span title="2013-05-21 17:01:59Z" class="relativetime-clean">May 21 at 17:01</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-25589" 
+			   class="comments-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">show <b>2</b> more comments</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								4 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/25589/how-can-i-detect-an-ellipse-in-a-photo?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/25589/how-can-i-detect-an-ellipse-in-a-photo?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/25589/how-can-i-detect-an-ellipse-in-a-photo?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="25620"></a>
+<div id="answer-25620" class="answer accepted-answer" data-answerid="25620" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="25620">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">29</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Basically, you want to fit a shape to a set of points with outliers. One common algorithm to do this is RANSAC (random sample consensus). The basic outline of this algorithm is:</p>
+
+<ol>
+<li>Select N points at random (where N is the minimum number of points required for fitting the shape, i.e. 2 for a line, 3 for a circle and so on)</li>
+<li>Fit the shape to these points</li>
+<li>Repeat 1&amp;2, pick the "best" shape (where "best" usually means closest to a randomly sampled test point - I'll use a simpler criterion below.)</li>
+<li>Select the points close to that shape and fit an improved estimate to those points</li>
+</ol>
+
+<p>Let's try this. (Or a slight modification of it, anyway.)</p>
+
+<p>First, I perform standard edge extraction:</p>
+
+<pre><code>img = Import["http://i.stack.imgur.com/H63BK.jpg"];
+edges = DeleteBorderComponents[EdgeDetect[img,5]];
+edgePos = N[PixelValuePositions[edges, 1]];
+</code></pre>
+
+<p>Next, I define the shape I want to fit - in this case, a conic:</p>
+
+<pre><code>conic[{x_, y_}] :=  a[1] + a[2]*x + a[3]*y + a[4]*x*y + (1 + a[5])*x^2 + (1 - a[5])*y^2
+conicNormal[{x_, y_}] = D[conic[{x, y}], {{x, y}}]
+isValidEllipse[solution_] := Abs[a[4] /. solution[[2]]] &lt; 0.1
+</code></pre>
+
+<p><code>isValidEllipse</code> is a simple ad-hoc criterion to filter out completely deformed conics.</p>
+
+<p>Normally, we'd need 5 points to fit a conic. The image contains about 50% outliers, so the chance to randomly select 5 points on the ellipse we're looking for is about $0.5^5$, which is not good. We'd need a lot of samples to be reasonably sure that at least one 5-tuple of points contains only non-outlier points.</p>
+
+<p>But fortunately, the location of the edge is not the only information we have: We also know the local orientation at each pixel, which should be perpendicular to the conic's normal vector.</p>
+
+<pre><code>orientation = GradientOrientationFilter[img, 3];
+</code></pre>
+
+<p>Now 3 points and their orientations give us 6 equations, so we have an overdetermined equation system:</p>
+
+<pre><code>fitEllipse[samplePoints_] := Quiet[FindMinimum[
+   Total[
+    Flatten[
+     {
+      (conic /@ samplePoints)^2,
+      With[{\[Alpha] = PixelValue[orientation, #]},
+          (conicNormal[#].{Cos[\[Alpha]], Sin[\[Alpha]]})^2] &amp; /@ samplePoints
+      }]], Array[a, 5]]]
+</code></pre>
+
+<p>This function returns not only the best-fit conic's coefficients, but also the residual error, which is a cheap way to compare between different fitted conics. The assumption is: If randomly sampled 3 points are all parts of the ellipse, the residual error will be low. If the points don't belong to one conic, the residual error will be much higher.</p>
+
+<pre><code>potentialSolutions = 
+  SortBy[Select[Table[fitEllipse[RandomSample[edgePos, 3]], {n, 100}],
+     isValidEllipse], First];
+
+result = potentialSolutions[[1]];
+</code></pre>
+
+<p>(There is room for improvement here: the ellipse you're looking for might not be contained in these 100 samples, or it might not be the one with the lowest residual error. A smarter algorithm would take e.g. 50 samples, take the best one or two of these and count the number of nearby points. If enough points are close to it, keep that ellipse, otherwise, take 50 new samples. But that's just a straightforward programming exercise left to the reader ;-) .)</p>
+
+<p>Next step: Find points nearest to the conic. I've tried to calculate the geometric distance exactly (using <code>FindMinimumValue</code>) but that's very slow. A simple, fast approximation is to find N points on the ellipse and simply use <code>Nearest</code> to estimate the distance:</p>
+
+<pre><code>ellipsePts = 
+  Select[Flatten[
+    Table[{i, y} /. 
+      Solve[conic[{x, y}] == 0 /. result[[2]] /. x -&gt; i, y], {i, 0, w,
+       10}], 1], Total[Abs[Im[#]]] == 0 &amp;];
+nf = Nearest[ellipsePts];
+</code></pre>
+
+<p>Now, we can calculate the distance of every edge pixel to this conic and pick the ones that are closer than some threshold:</p>
+
+<pre><code>distances = Norm[nf[#][[1]] - #] &amp; /@ edgePos;
+closestPoints = Pick[edgePos, # &lt; 10 &amp; /@ distances];
+</code></pre>
+
+<p>...and improve the ellipse estimate based on these points:</p>
+
+<pre><code>result = fitEllipse[closestPoints];
+</code></pre>
+
+<p>Repeat the last steps until convergence. (Possible improvements: You could try to reduce the distance threshold in each iteration. Or you could add a "weight" to the curve fitting and give points closer to the current estimate a higher weight when calculating the next estimate.)</p>
+
+<p>The result (after 5 iterations) looks like this:</p>
+
+<pre><code>Show[
+ img,
+ ContourPlot[
+  Evaluate[conic[{x, y}] == 0 /. result[[2]]], {x, 0, w}, {y, 0, h}, 
+  ContourStyle -&gt; {Red, Thick}],
+ ListPlot[closestPoints]]
+</code></pre>
+
+<p><img src="http://i.stack.imgur.com/LMiAk.jpg" alt="enter image description here"></p>
+
+<p>Disclaimer: The result will not always look like this, as the algorithm is randomized and the algorithm can get stuck in local minima. </p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/25620" title="short permalink to this answer" class="short-link" id="link-post-25620">share</a><span class="lsep">|</span><a href="/posts/25620/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-05-21 21:06:01Z" class="relativetime">May 21 at 21:06</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/242/nikie"><div><img src="https://www.gravatar.com/avatar/2af772ff83d2ceb020c10d68bcd75481?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/242/nikie">nikie</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">7,958</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="16 silver badges"><span class="badge2"></span><span class="badgecount">16</span></span><span title="43 bronze badges"><span class="badge3"></span><span class="badgecount">43</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-25620" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-79489" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">3</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">+1 That&#39;s a real <i>tour de force,</i> beautifully described.  Impressive.</span>
+	&ndash;&nbsp;
+		<a href="/users/91/whuber" 
+		   title="14501 reputation" 
+		   class="comment-user">whuber</a>
+	<span class="comment-date" dir="ltr"><span title="2013-05-21 22:27:21Z" class="relativetime-clean">May 21 at 22:27</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-79543" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Code is great, and descriptions we can learn from even greater!</span>
+	&ndash;&nbsp;
+		<a href="/users/61/cormullion" 
+		   title="14508 reputation" 
+		   class="comment-user">cormullion</a>
+	<span class="comment-date" dir="ltr"><span title="2013-05-22 07:25:42Z" class="relativetime-clean">May 22 at 7:25</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-80646" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">A great detailed tutorial.</span>
+	&ndash;&nbsp;
+		<a href="/users/7520/ali" 
+		   title="215 reputation" 
+		   class="comment-user">Ali</a>
+	<span class="comment-date" dir="ltr"><span title="2013-05-27 17:42:35Z" class="relativetime-clean">May 27 at 17:42</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-25620" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="25635"></a>
+<div id="answer-25635" class="answer" data-answerid="25635" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="25635">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">13</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Too late and not so general as @Nikie but I will still like to answer in order to highlight a method involving generalized Eigen values! Lets take the image.</p>
+
+<pre><code>img = Import["http://i.stack.imgur.com/H63BK.jpg"];
+(* Detecting ellipsoidal edges and removing the straight line component *)
+i = ImageSubtract @@ {EdgeDetect[img, 10],EdgeDetect[img, 10, "StraightEdges" -&gt; .2]};
+{wid, hig} = ImageDimensions[i];
+(* Taking control of the two straight line segments *)
+lines = ImageLines[EdgeDetect[img, 10, 0.025], .15,"Segmented" -&gt; True];
+(* Find the mid point of longest line and its hight *)
+clip = Ceiling@Abs@Mean[Last@Flatten@Differences@
+          First@Sort[#,(EuclideanDistance @@@ #1 &gt;EuclideanDistance @@@ #2)&amp;]&amp;/@lines];
+(*Trim the bottom content using above clip and extract the points*)
+padim = ImagePad[ImageTake[i, clip], {{0, 0}, {hig - clip, 0}}, Black];
+list = Position[Transpose@ImageData[padim, "Bit", DataReversed -&gt; True], 1];
+</code></pre>
+
+<p>Lets see the above steps of image processing results clockwise starting from top left.</p>
+
+<pre><code>image = Show[img, Graphics[{Thick, Blue, Line /@ lines}],ImageSize -&gt; 300];
+GraphicsGrid[{{img, ColorNegate@i}, {image, ColorNegate@padim}},ImageSize -&gt; 800,
+Frame -&gt; All, Spacings -&gt; 0]
+</code></pre>
+
+<p><img src="http://i.stack.imgur.com/KYuGf.png" alt="enter image description here"></p>
+
+<p>At this point we can use <code>EigenSystem</code> efficiently as very simplistically discussed in <a href="http://research.microsoft.com/pubs/67845/ellipse-pami.pdf">here</a>!</p>
+
+<pre><code>{X, Y} = Transpose[list];
+(* design matrix *)
+d = Transpose@{X^2, X Y, Y^2, X , Y, ConstantArray[1, Length@X]};
+s = Transpose@d . d;
+(* constraints *)
+c = ConstantArray[0, {6, 6}];
+c[[1, 3]] = -2;
+c[[2, 2]] = 1;
+c[[3, 1]] = -2;
+{val, vec} = Eigensystem[{N[s, 200], c}];
+(* parameter for a general conic*)
+{a, b, c, d, e, f} = vec // Last;
+</code></pre>
+
+<p>Now we are ready to check out the fitting.</p>
+
+<pre><code>(* Visualize fit *)
+ptEig = Show[img, 
+ContourPlot[
+a x^2 + b x y + c y^2 + d x + e y + f == 0, {x, 0, 1385}, {y, 0,1023},
+ContourStyle -&gt; {Thickness[0.004], Blue}, 
+PlotPoints -&gt; 200, MaxRecursion -&gt; 4, PlotRange -&gt; All, 
+Frame -&gt; None, Background -&gt; None], 
+Graphics[{PointSize[0.001], Red, Point[#] &amp; /@ list}], 
+ImageSize -&gt; 400]
+</code></pre>
+
+<p><img src="http://i.stack.imgur.com/P426b.png" alt="enter image description here"></p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/25635" title="short permalink to this answer" class="short-link" id="link-post-25635">share</a><span class="lsep">|</span><a href="/posts/25635/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/25635/revisions" title="show all edits to this post">edited <span title="2013-05-22 10:07:04Z" class="relativetime">May 22 at 10:07</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-05-22 04:46:11Z" class="relativetime">May 22 at 4:46</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/240/platomaniac"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/yZ1lx.png?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/240/platomaniac">PlatoManiac</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">6,923</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="8 silver badges"><span class="badge2"></span><span class="badgecount">8</span></span><span title="35 bronze badges"><span class="badge3"></span><span class="badgecount">35</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-25635" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-25635" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="25613"></a>
+<div id="answer-25613" class="answer" data-answerid="25613" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="25613">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">8</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>This didn't work as well as I'd hoped, but it's quite interesting to see what went wrong.</p>
+
+<pre><code>i = Import["http://dailycoffeenews.com/wp-content/uploads/2011/09/disposable-coffee-cup.jpeg"];
+
+j = ColorConvert[i, "GrayScale"];
+k = Thinning[
+      DeleteBorderComponents[
+       DeleteSmallComponents[
+         Opening[
+           Dilation[
+             EdgeDetect[j], 1], 1]]]
+</code></pre>
+
+<p>which gives us a trace of the cup:</p>
+
+<p><img src="http://i.stack.imgur.com/Qx7oG.png" alt="trace"></p>
+
+<p>(Aargh, I've lost the rim. Pressing on anyway:)</p>
+
+<pre><code>pts = PixelValuePositions[k, "Max"];
+
+left = First@Sort[pts, #1[[1]] &lt; #2[[1]] &amp;];
+right = Last@Sort[pts, #1[[1]] &lt; #2[[1]] &amp;];
+top = First@Sort[pts, #1[[2]] &gt; #2[[2]] &amp;];
+centre = Mean[{left, right}];
+rim = Disk[centre, {First[centre - left], Last[top - centre]}];
+
+Show[
+ i,
+ Graphics[{Opacity[0.5], Brown, rim}]]
+</code></pre>
+
+<p><img src="http://i.stack.imgur.com/MXugz.png" alt="final">    </p>
+
+<p>It's close, but not close enough. And now I can see where I went wrong - I've assumed the cup is aligned with the camera and geometrically accurate, but I don't think it is. (And what exactly is the rim anyway?) I wonder whether this method would work <em>if</em> the cup was aligned. </p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/25613" title="short permalink to this answer" class="short-link" id="link-post-25613">share</a><span class="lsep">|</span><a href="/posts/25613/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-05-21 19:15:24Z" class="relativetime">May 21 at 19:15</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/61/cormullion"><div><img src="https://www.gravatar.com/avatar/145586de2f69e4b887749da370090dc3?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/61/cormullion">cormullion</a><br>
+        <span class="reputation-score" title="reputation score 14508" dir="ltr">14.5k</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="20 silver badges"><span class="badge2"></span><span class="badgecount">20</span></span><span title="75 bronze badges"><span class="badge3"></span><span class="badgecount">75</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-25613" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-25613" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="25659"></a>
+<div id="answer-25659" class="answer" data-answerid="25659" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="25659">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">7</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Here's another approach that uses some of the built-in morphological (image processing) functions. Begin by reading in the figure, detecting the edges, and then making them thick:</p>
+
+<pre><code>i = Import["http://dailycoffeenews.com/wp-content/uploads/2011/09/disposable-coffee-cup.jpeg"];
+fat = Dilation[EdgeDetect[i], 20]
+</code></pre>
+
+<p><img src="http://i.stack.imgur.com/7jhvI.png" alt="enter image description here"></p>
+
+<p>Get just the outline of the cup:</p>
+
+<pre><code>thin = Dilation[Thinning[fat], 1]
+</code></pre>
+
+<p><img src="http://i.stack.imgur.com/7k3fb.png" alt="enter image description here"></p>
+
+<p>(it's actually connected when looking at it full size). Now use <code>MorphologicalComponents</code> to get the different pieces of the image</p>
+
+<pre><code>components = MorphologicalComponents[ColorNegate[thin]]; 
+components // Colorize
+</code></pre>
+
+<p><img src="http://i.stack.imgur.com/GrgA5.png" alt="enter image description here"></p>
+
+<p>And finally ask for some relevant properties of the two regions. The centroids of the two regions are:</p>
+
+<pre><code>ComponentMeasurements[components, "Centroid", BorderComponents -&gt; False]
+
+{2 -&gt; {701.478, 783.066}, 3 -&gt; {696.272, 454.265}}
+</code></pre>
+
+<p>So region number 2 is the purplish cup rim and region 3 is the greenish side of the cup. A variety of other measurements can be easily extracted:</p>
+
+<pre><code>ComponentMeasurements[components, {"Length", "Width", "SemiAxes", 
+      "Orientation", "Elongation", "Eccentricity"}, BorderComponents -&gt; False]
+
+{2 -&gt; {619.841, 179.126, {309.921, 89.5632}, -3.14045, 0.711013, 0.957333}, 
+ 3 -&gt; {619.414, 556.459, {309.707, 278.229}, -1.39043, 0.101637, 0.439253}}
+</code></pre>
+
+<p>The best ellipsoidal fit for the rim has the given length, width, semiaxes, orientation, elongation, and eccentricity. The other is the best ellipsoidal fit for the cup sides (which is not a good fit at all).</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/25659" title="short permalink to this answer" class="short-link" id="link-post-25659">share</a><span class="lsep">|</span><a href="/posts/25659/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/25659/revisions" title="show all edits to this post">edited <span title="2013-05-22 14:12:08Z" class="relativetime">May 22 at 14:12</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-05-22 12:25:22Z" class="relativetime">May 22 at 12:25</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1783/bill-s"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/sFwvb.png?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1783/bill-s">bill s</a><br>
+        <span class="reputation-score" title="reputation score 15584" dir="ltr">15.6k</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="16 silver badges"><span class="badge2"></span><span class="badgecount">16</span></span><span title="43 bronze badges"><span class="badge3"></span><span class="badgecount">43</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-25659" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-25659" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/25589/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="25589" />
+							<h2 class="space">Your Answer</h2>
+
+
+        <script type="text/javascript">
+            StackExchange.ifUsing("editor", function () {
+                return StackExchange.using("mathjaxEditing", function () {
+                    StackExchange.MarkdownEditor.creationCallbacks.add(function (editor, postfix) {
+                        StackExchange.mathjaxEditing.prepareWmdForMathJax(editor, postfix, [["$", "$"], ["\\\\(","\\\\)"]]);
+                    });
+                });
+            }, "mathjax-editing");
+        </script>
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f25589%2fhow-can-i-detect-an-ellipse-in-a-photo%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f25589%2fhow-can-i-detect-an-ellipse-in-a-photo%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/image-processing" class="post-tag" title="show questions tagged &#39;image-processing&#39;" rel="tag">image-processing</a> <a href="/questions/tagged/image" class="post-tag" title="show questions tagged &#39;image&#39;" rel="tag">image</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/image-processing" class="post-tag" title="show questions tagged &#39;image-processing&#39;" rel="tag">image-processing</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">250</span></span><br>
+<a href="/questions/tagged/image" class="post-tag" title="show questions tagged &#39;image&#39;" rel="tag">image</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">121</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-05-21 12:55:56Z"><b>6 months ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>1091 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-05-22 14:12:08Z">6 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/mathematica/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=mathematica.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-mathematica.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/11725" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">21</div>
+	</a>
+	<a href="/questions/11725/how-to-find-circular-objects-in-an-image" class="question-hyperlink">How to find circular objects in an image?</a>
+</div><div class="spacer">
+	<a href="/q/33487" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">10</div>
+	</a>
+	<a href="/questions/33487/ellipse-counting-from-image" class="question-hyperlink">Ellipse counting from image</a>
+</div><div class="spacer">
+	<a href="/q/30533" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">5</div>
+	</a>
+	<a href="/questions/30533/transforming-noisy-multivariate-data" class="question-hyperlink">Transforming noisy multivariate data</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/9470" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">14
+    </div>
+</a><a href="/questions/9470/how-can-i-create-a-glass-distortion-effect-in-an-image" class="question-hyperlink">How can I create a glass distortion effect in an image?</a>
+</div>
+<div class="spacer">
+<a href="/q/11725" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">21
+    </div>
+</a><a href="/questions/11725/how-to-find-circular-objects-in-an-image" class="question-hyperlink">How to find circular objects in an image?</a>
+</div>
+<div class="spacer">
+<a href="/q/13538" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/13538/how-to-make-3d-solid-volume-from-set-of-images" class="question-hyperlink">How to make 3d solid volume from set of images</a>
+</div>
+<div class="spacer">
+<a href="/q/16477" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/16477/how-can-i-superimpose-points-or-disks-on-an-image-at-specified-coordinates" class="question-hyperlink">How can I superimpose points or disks on an image at specified coordinates?</a>
+</div>
+<div class="spacer">
+<a href="/q/21059" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">13
+    </div>
+</a><a href="/questions/21059/how-can-i-detect-a-rectangular-region-of-interest-in-a-picture" class="question-hyperlink">How can I detect a rectangular region of interest in a picture?</a>
+</div>
+<div class="spacer">
+<a href="/q/24833" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">5
+    </div>
+</a><a href="/questions/24833/how-can-i-return-the-color-at-a-coordinate-in-an-image" class="question-hyperlink">How can I return the color at a coordinate in an image?</a>
+</div>
+<div class="spacer">
+<a href="/q/24890" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/24890/detection-of-horizontal-lines-in-an-image" class="question-hyperlink">Detection of horizontal lines in an image</a>
+</div>
+<div class="spacer">
+<a href="/q/29483" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/29483/how-can-i-transform-a-colored-image-into-pre-defined-matrix" class="question-hyperlink">How Can I Transform a Colored Image into Pre-defined Matrix?</a>
+</div>
+<div class="spacer">
+<a href="/q/30702" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/30702/metric-parameters-such-as-pratt-figure-of-merit-pratt-fom-for-edge-detection" class="question-hyperlink">Metric Parameters such as Pratt Figure of Merit (Pratt-FOM) for Edge Detection</a>
+</div>
+<div class="spacer">
+<a href="/q/33533" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/33533/how-to-read-image-files-in-analyze-7-5-format" class="question-hyperlink">How to read image files in Analyze 7.5 format?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/25589" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/25589/ivc/4908');});
+</script>
+<noscript>
+    <div><img src="/posts/25589/ivc/4908" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-mma</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://mathematica.blogoverflow.com/?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/25589/how-can-i-detect-an-ellipse-in-a-photo")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.mathematica.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.21.1172
+            </div>
+                <div id="additional-notices">
+                    Mathematica is a registered trademark of Wolfram Research, Inc.  While the mark is used herein with the limited permission of Wolfram Research, Stack Exchange and this site disclaim all affiliation therewith.
+                </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Mathematica Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|image-processing|image|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>
