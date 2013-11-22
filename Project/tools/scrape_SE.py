@@ -4,6 +4,7 @@ import sys
 import random
 import urllib
 from bs4 import BeautifulSoup
+import time
 
 ### README
 # takes 2 text files of lists (site_list and master_list). Processes site_list and randomly walks
@@ -18,6 +19,12 @@ site_list = file_list.readlines()
 # list of already visited links
 master_file = open('../data/master_list.txt', 'r+')
 master_list = master_file.readlines()
+
+try: 
+    print sys.argv[1]
+    continuous = (sys.argv[1] == "continuous")
+except:
+    continuous = False
 
 # while loop runs until the site blocks program for making too many requests from the same IP address
 stop = 0
@@ -73,7 +80,12 @@ while stop == 0:
                 # if the site blocks requests, we stop the loop
                 if 'Too Many Requests' in soup.title.string:
                     print 'TOO MANY REQUESTS!'
-                    stop += 1
+                    if continuous:
+                        # sleep for 10 minutes
+                        print "Pausing ... ..."
+                        time.sleep(600)
+                    else:
+                        stop += 1
                     break
                 # if 'Page Not Found' or 'Bad Request' in soup.title.string:
                 if 'Bad Request' in soup.title.string or 'Page Not Found' in soup.title.string:
