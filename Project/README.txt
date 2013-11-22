@@ -45,8 +45,6 @@ Features to extract
         Rank (answers only)
         vote-accepted-on (if the question owner accepted this answer) (answers only)
 
-    Possible features:
-        text
 
     * Sub-task 1.1: Data exploration: Normalized score
         How does the score (vote-count-post) depend on how old the question/answers is?
@@ -56,3 +54,11 @@ Features to extract
         a simple linear fit gives
         scores ~= 0.00986813 * ages_in_days + 3.1622
         possible score normalization: score - 0.00986813*age
+
+    Features:
+        - text & properties of the text, linguistic or other
+        - attached media (code snippets, pictures, links videos)
+        - tags
+        - title
+        - nature (question, answer)
+        - combinations of the aboves

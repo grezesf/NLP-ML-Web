@@ -41,8 +41,6 @@ while stop == 0:
             html_main = urllib.urlopen(website).read()
             soup_main = BeautifulSoup(html_main)
             quest_list = []
-            # default is set to 5000, just in case max question number cant be found
-            end_numb = 5000
             for link in soup_main.find_all('a'):
                 str_link = str(link.get('href'))
                 if 'questions' in str_link:
@@ -55,6 +53,8 @@ while stop == 0:
                         end_numb = int(part)
                         break        
         except:
+            # default is set to 5000, just in case max question number cant be found
+            end_numb = 5000
             print 'Can not determine number of quests, default set..'
       
         
@@ -81,9 +81,9 @@ while stop == 0:
                 if 'Too Many Requests' in soup.title.string:
                     print 'TOO MANY REQUESTS!'
                     if continuous:
-                        # sleep for 10 minutes
+                        # sleep for 3 minutes
                         print "Pausing ... ..."
-                        time.sleep(600)
+                        time.sleep(180)
                     else:
                         stop += 1
                     break
