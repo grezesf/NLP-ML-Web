@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>java - Project Euler Problem #3 - Improve algorithm performance - Code Review Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codereview/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Code Review Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeReview" />
+    <meta name="twitter:domain" content="codereview.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codereview/img/apple-touch-icon.png?v=bb26b8631f86"/>
+    <meta name="og:title" content="Project Euler Problem #3 - Improve algorithm performance" />
+    <meta name="og:description" content="I have began doing the problems found on Project Euler and have just solved problem 3. However, I feel as if my code is very long and too brute-force. I was hoping somebody could give it a look and..." />
+    <meta name="og:url" content="http://codereview.stackexchange.com/questions/24178/project-euler-problem-3-improve-algorithm-performance"/>
+    <link rel="canonical" href="http://codereview.stackexchange.com/questions/24178/project-euler-problem-3-improve-algorithm-performance" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codereview/all.css?v=4c2f7b84c965">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Project Euler Problem #3 - Improve algorithm performance&#39;" href="/feeds/question/24178">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:1,shownCommentCount:1,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:24178});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('196', '24178');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('196');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385127400,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Code Review Stack Exchange","description":"Q&A for peer programmer code reviews","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f24178%2fproject-euler-problem-3-improve-algorithm-performance">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f24178%2fproject-euler-problem-3-improve-algorithm-performance">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Code Review
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Code Review Stack Exchange is a question and answer site for peer programmer code reviews. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/24178/project-euler-problem-3-improve-algorithm-performance" class="question-hyperlink">Project Euler Problem #3 - Improve algorithm performance</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="24178"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="24178">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I have began doing the problems found on Project Euler and have just solved problem 3. However, I feel as if my code is very long and too brute-force. I was hoping somebody could give it a look and give me some guidelines for this problem and future programming in general that would help me with cleaning it up or even just better ways of solving this.</p>
+
+<p>Problem 3 states The prime factors of 13195 are 5, 7, 13 and 29.</p>
+
+<p>What is the largest prime factor of the number 600851475143 ?</p>
+
+<pre><code>int primeFactor = 0;
+int pfCounter = 0;
+int[] pf = new int [1229];
+int[] numbers = new int[10000];
+long number = 600851475143L;
+int p = 0;
+
+//initialize the array numbers to include all numbers
+//from 1 to 1000 for determining prime numbers
+for(int i = 0; i &lt; numbers.length; i++)
+{
+    numbers[i] = i+1;
+}
+
+//determining which numbers are prime numbers
+for(int i = 0; i &lt;numbers.length; i++)
+{           
+    //divide each number by every number below it
+    //to see if the pfCounter = 1 which would mean
+    //it is only divisible by itself and 1
+    for(int j = i; j &gt; 0; j--)
+    {
+        if(numbers[i] % j == 0)
+        {
+            pfCounter++;
+        }
+    }
+
+    //if the number only has 1 in it's pfCounter
+    //insert the number from the numbers array into the 
+    //pf array and restart the counter to 0 else restart 
+    //the counter to 0 and try again
+    if(pfCounter == 1)
+    {
+        pf[p] = numbers[i];
+        pfCounter = 0;
+        p++;
+    }
+    else
+    {
+        pfCounter = 0;
+    }
+
+}
+
+/*
+for(p = 0; p &lt; pf.length; p++)
+{
+    System.out.println(pf[p]);
+}*/
+
+
+for(int i = 0; i &lt; pf.length; i++)
+{
+    if(number % pf[i] == 0)
+    {
+        primeFactor = pf[i];
+    }
+}
+
+System.out.println(primeFactor);
+</code></pre>
+
+<p>}</p>
+
+<p>}</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/java" class="post-tag" title="show questions tagged &#39;java&#39;" rel="tag">java</a> <a href="/questions/tagged/project-euler" class="post-tag" title="show questions tagged &#39;project-euler&#39;" rel="tag">project-euler</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/24178" title="short permalink to this question" class="short-link" id="link-post-24178">share</a><span class="lsep">|</span><a href="/posts/24178/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-03-20 23:06:20Z" class="relativetime">Mar 20 at 23:06</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/23376/aelsedoudi"><div><img src="https://www.gravatar.com/avatar/5dadd3d812002c46202fc5ec8ab0a297?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/23376/aelsedoudi">aelsedoudi</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">13</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-24178" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-37511" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">If you are trying to find all primes in a given range, take a look at the sieve of Eratosthenes. It is the easiest and probably fastest way for integer/long. Rest is already answered. An other approach to the given problem could be to try to divide by all smaller numbers until the current sqrt. The last number is the result.</span>
+	&ndash;&nbsp;
+		<a href="/users/18837/tb" 
+		   title="1708 reputation" 
+		   class="comment-user">tb-</a>
+	<span class="comment-date" dir="ltr"><span title="2013-03-25 01:08:51Z" class="relativetime-clean">Mar 25 at 1:08</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-24178" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								2 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/24178/project-euler-problem-3-improve-algorithm-performance?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/24178/project-euler-problem-3-improve-algorithm-performance?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/24178/project-euler-problem-3-improve-algorithm-performance?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="24183"></a>
+<div id="answer-24183" class="answer accepted-answer" data-answerid="24183" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="24183">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>If a number <em>x</em> (with <em>x</em> > 2) is not a prime number, there exists a prime <em>p</em> so that <em>x</em> is divisible by <em>p</em> and <em>p</em> &lt; <em>x</em>.</p>
+
+<p>This means to determine if a number is a prime number, you only have to test it against smaller primes (which you already know). We need one prime (2) to start this process, so we will begin to search for primes from 3 onward.</p>
+
+<p>This technique is known as memoization, which you will find quite useful for many PE problems.</p>
+
+<p>This would lead to the following code (incorporating the points of GameDroids):</p>
+
+<pre><code>int[] primes = new int[somethingSufficientlyLarge];
+primes[0] = 2;
+primeCounter = 1; // a "pointer" to the next prime
+
+for (int n = 3; n &lt; 10000; n += 2) { // only odd numbers can be primes (except 2)
+  bool isAPrime = true;
+  for (int i = 0; i &lt; primeCounter; i++) {
+    if (n % primes[primeCounter] == 0) {
+      isAPrime = false;
+      break;
+    }
+  }
+  if (isAPrime) {
+    primes[primeCounter] = n;
+    primeCounter++
+  }
+}
+</code></pre>
+
+<p>Note that using a (Linked) List will make hardcoding the length of the prime array unneccessary. However, there may or may not be performance implications.</p>
+
+<p>But you do not know that the largest prime factor is in fact smaller than 10000. It could be ⌊600851475143/2⌋ for all we know. This would be the proper bound of your search space.</p>
+
+<p>Maybe we can reduce that bound: Every time we find a prime in our sieve loop, we test if <code>number</code> is divisible by that prime. We then do so until the number isn't divisible by that factor. If the result is 1, we can break the loop, as the largest prime factor was found.
+The loop runs from 2 to <code>bound</code>, where <code>bound</code> initially is <code>floor(number/2)</code>, but once the first factor is found, the <code>bound</code> is the number divided by every factor. If no factor was found, then the number itself is the largest factor.</p>
+
+<p>Example 1:</p>
+
+<ol>
+<li>Factorization of the number 15. Bound is floor(15/2) = 7.</li>
+<li>First prime is 2. Not a factor.</li>
+<li>Next candidate 3 is prime, is a factor. New bound is 5.</li>
+<li>Next candidate 5 is prime, is a factor. Bound drops to 1 → break.</li>
+<li>Largest prime factor is 5.</li>
+</ol>
+
+<p>Example 2:</p>
+
+<ol>
+<li>Factorization of the number 13. Bound is floor(13/2) = 6.</li>
+<li>First prime is 2. Not a factor.</li>
+<li>Next candidate 3 is prime, not a factor.</li>
+<li>Next candidate 5 is prime, not a factor.</li>
+<li>Loop exits without factor found. 13 itself must be a prime, and its largest prime factor.</li>
+</ol>
+
+<p>General hints:</p>
+
+<ul>
+<li>In your original code you tested for factors in the range <code>(0, n]</code> where n is the number you wanted to factorize. But as no factor can be larger than n/2, you could have reduced the range to <code>(0, ⌊n/2⌋]</code>. This would have reduced substantial overhead. Try to find such cases that can never occur (factors in the range <code>[⌈n/2⌉, n]</code>) and optimize.</li>
+<li><p>In your fist factorization loop you started with the largest factor first. This is bad, as ½ of numbers are divisible by 2, ⅓ by 3, ⅕ by 5 and so on. I.e. you can weed out many non-primes by testing a very small set of numbers. Try to find common cases, and test for them befoe testing for uncommon cases. Also, try to “fail early” (which is wisdom not only applicable to programming).</p>
+
+<p>However, when factorizing your large <code>number</code>, you should have started with the largest possible prime first, count downwards, and stop once you found a factor, instead of looping through <em>all</em> primes</p></li>
+</ul>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/24183" title="short permalink to this answer" class="short-link" id="link-post-24183">share</a><span class="lsep">|</span><a href="/posts/24183/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-03-21 03:22:26Z" class="relativetime">Mar 21 at 3:22</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/21609/amon"><div><img src="https://www.gravatar.com/avatar/50e0668c7f9849096170fabca259dc8c?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/21609/amon">amon</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,633</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="11 bronze badges"><span class="badge3"></span><span class="badgecount">11</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-24183" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-37327" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Awesome! This is exactly the kind of information I was looking for. I&#39;m still an amateur programmer so I&#39;m trying to find ways to better my overall coding and I appreciate the help!</span>
+	&ndash;&nbsp;
+		<a href="/users/23376/aelsedoudi" 
+		   title="13 reputation" 
+		   class="comment-user owner">aelsedoudi</a>
+	<span class="comment-date" dir="ltr"><span title="2013-03-21 14:16:53Z" class="relativetime-clean">Mar 21 at 14:16</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-37398" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@aelsedoudi If you are just trying to learn programming (and not neccessarily learn Java), switching the language could be beneficial: Java has some painful restrictions. C# is very Java-like but more convenient. Languages like Perl, Python, Ruby are very powerful and don&#39;t require a seperate compilation step. More arcane languages like Ocaml, Scheme, Go or even Haskell are extremely fascinating, but require a different mindset. “Object orientation”, the thing Java requires, is hard to get right. Especially <a href="http://www.learnpython.org/" rel="nofollow">Python</a> might be a good choice to learn programming.</span>
+	&ndash;&nbsp;
+		<a href="/users/21609/amon" 
+		   title="1633 reputation" 
+		   class="comment-user">amon</a>
+	<span class="comment-date" dir="ltr"><span title="2013-03-22 12:55:03Z" class="relativetime-clean">Mar 22 at 12:55</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-24183" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="24179"></a>
+<div id="answer-24179" class="answer" data-answerid="24179" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="24179">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>If I may give you one <strong>tip</strong> right away: try to write out the variable names and don't use abbreviations. If <code>primeFactorCounter</code> seems too long to you, just say <code>counter</code>. Right now your code is short and you know what <code>pfCounter</code>means, but it is just hard to read for someone else or for you when you read it again in 2 Weeks. </p>
+
+<p>By the way nicely documented, it was really easy to understand your code that way :)</p>
+
+<p>Anyway, back to your question. </p>
+
+<ul>
+<li><p>the first for loop fills an array with the natural numbers. This is not necessary. the numbers won't change, so instead of looping through the array every time to get the number, just use the loop's index <code>for(int i=1; i&lt;=n; i++)</code> where <code>n</code>would be the <code>10000</code> instead of the array's length. </p></li>
+<li><p>another little tweak to speed things up could be to stop the loop when you find out that you have no use for the number. But you would have to change the loops conditions a little bit. You only need to test the numbers that are smaller than the one you are investigating and bigger than 1 (because every number can be divided by one or itself):</p></li>
+</ul>
+
+<p>so instead of: </p>
+
+<pre><code>for (int j = i; j &gt; 0; j--) {
+  if (numbers[i] % j == 0) {
+     pfCounter++;
+  }
+}
+</code></pre>
+
+<p>try</p>
+
+<pre><code>for (int j = i-1; j &gt; 1; j--) {
+  if (numbers[i] % j == 0) {
+     break;   // this breaks out of the loop
+  }
+}
+</code></pre>
+
+<p>Now you don't have to test if your <code>pfCounter</code> is bigger than 1. (PS: I didn't replace the <code>numbers[i]</code> by <code>i</code> just start the "i-loop" with <code>i=1</code>and you'll be fine!</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/24179" title="short permalink to this answer" class="short-link" id="link-post-24179">share</a><span class="lsep">|</span><a href="/posts/24179/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/24179/revisions" title="show all edits to this post">edited <span title="2013-03-21 00:41:25Z" class="relativetime">Mar 21 at 0:41</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/2041/svick"><div><img src="https://www.gravatar.com/avatar/0ec0f5be7749c8cc8ccda4a809103f36?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/2041/svick">svick</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">8,955</span><span title="16 silver badges"><span class="badge2"></span><span class="badgecount">16</span></span><span title="34 bronze badges"><span class="badge3"></span><span class="badgecount">34</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-03-20 23:40:20Z" class="relativetime">Mar 20 at 23:40</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/23377/gamedroids"><div><img src="https://www.gravatar.com/avatar/3c86cc757c0cf19c1cc865e9313a01a9?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/23377/gamedroids">GameDroids</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">121</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-24179" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-37328" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Great! These were the little things I was looking for! Thank you!</span>
+	&ndash;&nbsp;
+		<a href="/users/23376/aelsedoudi" 
+		   title="13 reputation" 
+		   class="comment-user owner">aelsedoudi</a>
+	<span class="comment-date" dir="ltr"><span title="2013-03-21 14:17:25Z" class="relativetime-clean">Mar 21 at 14:17</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-24179" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/24178/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="24178" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f24178%2fproject-euler-problem-3-improve-algorithm-performance%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f24178%2fproject-euler-problem-3-improve-algorithm-performance%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/java" class="post-tag" title="show questions tagged &#39;java&#39;" rel="tag">java</a> <a href="/questions/tagged/project-euler" class="post-tag" title="show questions tagged &#39;project-euler&#39;" rel="tag">project-euler</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/java" class="post-tag" title="show questions tagged &#39;java&#39;" rel="tag">java</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">1398</span></span><br>
+<a href="/questions/tagged/project-euler" class="post-tag" title="show questions tagged &#39;project-euler&#39;" rel="tag">project-euler</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">70</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-03-20 23:06:20Z"><b>8 months ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>118 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-03-21 03:22:26Z">8 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/2" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">23
+    </div>
+</a><a href="/questions/2/project-euler-problem-1-in-python" class="question-hyperlink">Project Euler problem 1 in python</a>
+</div>
+<div class="spacer">
+<a href="/q/5024" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">8
+    </div>
+</a><a href="/questions/5024/project-euler-problem-1-in-factor" class="question-hyperlink">Project Euler problem 1 in Factor</a>
+</div>
+<div class="spacer">
+<a href="/q/13086" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">10
+    </div>
+</a><a href="/questions/13086/problem-5-on-project-euler" class="question-hyperlink">Problem 5 on Project Euler</a>
+</div>
+<div class="spacer">
+<a href="/q/18967" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">5
+    </div>
+</a><a href="/questions/18967/golang-solution-to-project-euler-81-min-path-through-a-matrix" class="question-hyperlink">Golang solution to Project Euler #81 (min path through a matrix)</a>
+</div>
+<div class="spacer">
+<a href="/q/20389" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/20389/need-a-faster-way-to-determine-prime-numbers-than-my-algorithm" class="question-hyperlink">Need a faster way to determine prime numbers than my algorithm</a>
+</div>
+<div class="spacer">
+<a href="/q/21367" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">5
+    </div>
+</a><a href="/questions/21367/any-better-way-to-solve-project-euler-problem-5" class="question-hyperlink">Any better way to solve Project Euler Problem #5?</a>
+</div>
+<div class="spacer">
+<a href="/q/25388" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">7
+    </div>
+</a><a href="/questions/25388/speed-up-solution-to-project-euler-problem-75" class="question-hyperlink">Speed up solution to Project Euler problem 75</a>
+</div>
+<div class="spacer">
+<a href="/q/25419" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/25419/can-this-solution-to-project-euler-15-be-improved" class="question-hyperlink">Can this solution to Project Euler #15 be improved?</a>
+</div>
+<div class="spacer">
+<a href="/q/25780" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/25780/project-euler-problem-37-truncatable-primes" class="question-hyperlink">Project Euler problem 37: truncatable primes</a>
+</div>
+<div class="spacer">
+<a href="/q/32619" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/32619/project-euler-problem-7-find-10001st-prime-number" class="question-hyperlink">Project Euler Problem 7: Find 10001st prime number</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/24178" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/24178/ivc/2c5f');});
+</script>
+<noscript>
+    <div><img src="/posts/24178/ivc/2c5f" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-java</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/24178/project-euler-problem-3-improve-algorithm-performance")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codereview.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.22.1174
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Code Review Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|java|project-euler|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

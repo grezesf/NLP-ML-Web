@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>microcontroller - Watchdog enables itself after reset - Electrical Engineering Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/electronics/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/electronics/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Electrical Engineering Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackElectronix" />
+    <meta name="twitter:domain" content="electronics.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/electronics/img/apple-touch-icon@2.png?v=9f23bff8b9e4"/>
+    <meta name="og:title" content="Watchdog enables itself after reset" />
+    <meta name="og:description" content="I am using TWR-S08DC-PT60 board which has a MC9S08PT60 microcontroller.
+
+I am trying to disable the watchdog timer in my application, just for ease of development. After configuring it in the softw..." />
+    <meta name="og:url" content="http://electronics.stackexchange.com/questions/73609/watchdog-enables-itself-after-reset"/>
+    <link rel="canonical" href="http://electronics.stackexchange.com/questions/73609/watchdog-enables-itself-after-reset" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/electronics/all.css?v=9bf758b49a9b">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Watchdog enables itself after reset&#39;" href="/feeds/question/73609">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:4,shownCommentCount:4,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:73609});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('135', '73609');
+            
+                    });
+    </script>
+
+                <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+                                        tex2jax: { inlineMath: [ ["\\$", "\\$"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+                                        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+                                        messageStyle: "none"
+                });
+                </script>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>                
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('135');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385127495,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Electrical Engineering Stack Exchange","description":"Q&A for electronics and electrical engineering professionals, students, and enthusiasts","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"2435f0d168c4","js/full.en.js":"e4b72ebdc18f","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091","js/mathjax-editing.en.js":"a09844f7b738","js/external-editor.en.js":"b3abe8227765"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f73609%2fwatchdog-enables-itself-after-reset">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f73609%2fwatchdog-enables-itself-after-reset">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Electrical Engineering
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/electronics/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Electrical Engineering Stack Exchange is a question and answer site for electronics and electrical engineering professionals, students, and enthusiasts. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/73609/watchdog-enables-itself-after-reset" class="question-hyperlink">Watchdog enables itself after reset</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="73609"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="73609">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I am using <a href="http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=TWR-S08DC-PT60&amp;tid=vanTWR-S08DC-PT60" rel="nofollow">TWR-S08DC-PT60</a> board which has a MC9S08PT60 microcontroller.</p>
+
+<p>I am trying to disable the watchdog timer in my application, just for ease of development. After configuring it in the software, it is disabled in the first run after programming, as wanted. However, after a reset occurs, either by reset button or power down, it is automatically enabled by itself. This happens when I debug, run or flash using CodeWarrior 10.4.</p>
+
+<p>Here is how I disable it:</p>
+
+<pre><code>  _WDOG_CS1.Bits.UPDATE = 1; // Enable changes to WDOG.
+  WDOG_CNT = 0xC520; // write the 1st unlock word
+  WDOG_CNT = 0xD928; // write the 2nd unlock word
+
+  _WDOG_CS1.Bits.EN = 0; // Kill the dog.
+  _WDOG_CS1.Bits.INT = 1; // Enable WDOG interrupt.
+</code></pre>
+
+<p>From the <a href="http://cache.freescale.com/files/microcontrollers/doc/ref_manual/MC9S08PT60RM.pdf" rel="nofollow">reference manual</a>:</p>
+
+<blockquote>
+  <p>23.3.2.1 Reconfiguring the Watchdog</p>
+  
+  <p>In some cases (such as when supporting a bootloader function), users may want to reconfigure or
+  disable the watchdog without forcing a reset first. By setting the
+  WDOG_CS1[UPDATE] bit to a 1 on the initial configuration of the
+  watchdog after a reset, users can reconfigure the watchdog at any time
+  by executing an unlock sequence. (Conversely, if the WDOG_CS1[UPDATE]
+  remains 0, the only way to reconfigure the watchdog is by initiating a
+  reset.) The unlock sequence is similar to the refresh sequence but
+  uses different values.</p>
+</blockquote>
+
+<p>When I debug the application, I can see that UPDATE bit is set and the watchdog timer is disabled, also, it behaves as desired when I reset using the debugger. However, in case of a reset by the reset button or power down, watchdog timer is enabled again and reset the MCU, since I do not feed it in the main loop.</p>
+
+<p>Also, it doesn't create an interrupt before resetting the MCU, although its interrupt is enabled. I can see, by the help of SYS_SRS (system reset source) register that the MCU is last reset by watchdog timer.</p>
+
+<p>Commenting out 2nd and 3rd line (WDOG_CNT=...) does not help.</p>
+
+<p>Here is my full code:</p>
+
+<ul>
+<li><a href="http://pastebin.com/37169VuV" rel="nofollow">main.c</a></li>
+<li><a href="http://pastebin.com/BwMedHff" rel="nofollow">init.h</a></li>
+<li><a href="http://pastebin.com/gPzCcq91" rel="nofollow">init.c</a></li>
+</ul>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/microcontroller" class="post-tag" title="show questions tagged &#39;microcontroller&#39;" rel="tag">microcontroller</a> <a href="/questions/tagged/freescale" class="post-tag" title="show questions tagged &#39;freescale&#39;" rel="tag">freescale</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/73609" title="short permalink to this question" class="short-link" id="link-post-73609">share</a><span class="lsep">|</span><a href="/posts/73609/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/73609/revisions" title="show all edits to this post">edited <span title="2013-06-23 10:05:40Z" class="relativetime">Jun 23 at 10:05</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-06-21 13:36:52Z" class="relativetime">Jun 21 at 13:36</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/5035/abdullah-kahraman"><div><img src="https://www.gravatar.com/avatar/32e28002cff0ade0a90aa858e864f15b?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/5035/abdullah-kahraman">abdullah kahraman</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,922</span><span title="9 silver badges"><span class="badge2"></span><span class="badgecount">9</span></span><span title="54 bronze badges"><span class="badge3"></span><span class="badgecount">54</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-73609" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-141995" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">The <a href="http://cache.freescale.com/files/microcontrollers/doc/ref_manual/MC9S08PT60RM.pdf" rel="nofollow">reference manual (PDF)</a> states in section 23.2 (p606) that the reset value of the watchdog control &amp; status register (WDOG_CS1) is 80h, ie the enable bit is set on reset.</span>
+	&ndash;&nbsp;
+		<a href="/users/2234/mikej-uk" 
+		   title="4441 reputation" 
+		   class="comment-user">MikeJ-UK</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-21 14:08:28Z" class="relativetime-clean">Jun 21 at 14:08</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-142002" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@MikeJ-UK I have checked that; before the microcontroller resets, the code above is executed. Please check <code>main.c</code>. After <code>initialize_CPU()</code> function, which includes above code, executed, an LED is lit, then it is turned OFF. Then, <code>SYS_SRS</code> register is shown by the LEDs on the board.</span>
+	&ndash;&nbsp;
+		<a href="/users/5035/abdullah-kahraman" 
+		   title="2922 reputation" 
+		   class="comment-user owner">abdullah kahraman</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-21 14:18:15Z" class="relativetime-clean">Jun 21 at 14:18</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-142013" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I&#39;m not familiar with the architecture, but it&#39;s behaving as if WDOG_CS1 is in it&#39;s reset condition (EN=1, INT=0). The unlock sequence <i>shouldn&#39;t</i> be required, but I see you&#39;ve tried removing that. Either <code>initialize_CPU</code> is not being called or it&#39;s not changing the CSR bits. What happens if you put a breakpoint after <code>initialize_CPU</code>, press reset, and check WDOG_CS1?</span>
+	&ndash;&nbsp;
+		<a href="/users/2234/mikej-uk" 
+		   title="4441 reputation" 
+		   class="comment-user">MikeJ-UK</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-21 14:52:31Z" class="relativetime-clean">Jun 21 at 14:52</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-142020" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@MikeJ-UK As I said so, with the debugger in control, code always runs. I have done what you suggested and <code>EN</code> bit of <code>WDOG_CS1</code> seems to be cleared.</span>
+	&ndash;&nbsp;
+		<a href="/users/5035/abdullah-kahraman" 
+		   title="2922 reputation" 
+		   class="comment-user owner">abdullah kahraman</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-21 15:15:09Z" class="relativetime-clean">Jun 21 at 15:15</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-73609" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								2 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/73609/watchdog-enables-itself-after-reset?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/73609/watchdog-enables-itself-after-reset?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/73609/watchdog-enables-itself-after-reset?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="73808"></a>
+<div id="answer-73808" class="answer accepted-answer" data-answerid="73808" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="73808">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Following is stated in page 615 of the <a href="http://cache.freescale.com/files/microcontrollers/doc/ref_manual/MC9S08PT60RM.pdf" rel="nofollow">reference manual</a>, under section 23.3.2:</p>
+
+<blockquote>
+  <p>The new configuration takes effect only after all registers except
+  WDOG_CNTH:L are written once after reset. Otherwise, the WDOG uses the
+  reset values by default. If window mode is not used (WDOG_CS2[WIN] is
+  0), writing to WDOG_WINH:L is not required to make the new
+  configuration take effect.</p>
+</blockquote>
+
+<p>Adding these lines in <code>initialize_CPU()</code> function under file <code>init.c</code>, I can configure the watchdog timer, and disable it:</p>
+
+<pre><code>WDOG_CS1 = 0x60;
+WDOG_CS2 = 1;
+WDOG_TOVAL = 0x04;
+</code></pre>
+
+<p>Also, it is good to note that watchdog timer registers are write-once only. So, individual bit changes are not going to have an effect after first write to the same watchdog timer register.</p>
+
+<p>If user wants to configure any of the watchdog timer registers later on, updates should be enabled in the first configuration. After that following is used to configure watchdog timer the second time. For more information, please have a look at the <a href="http://cache.freescale.com/files/microcontrollers/doc/ref_manual/MC9S08PT60RM.pdf" rel="nofollow">reference manual</a>.</p>
+
+<pre><code>/* Initialize watchdog with ~1-kHz clock source, ~1s time-out */
+DisableInterrupts; // disable global interrupt
+WDOG_CNT = 0xC520; // write the 1st unlock word
+WDOG_CNT = 0xD928; // write the 2nd unlock word
+WDOG_TOVAL = 1000; // setting timeout value
+WDOG_CS2 = WDOG_CS2_CLK_MASK; // setting 1-kHz clock source
+WDOG_CS1 = WDOG_CS1_EN_MASK; // enable counter running
+EnableInterrupts; // enable global interrupt
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/73808" title="short permalink to this answer" class="short-link" id="link-post-73808">share</a><span class="lsep">|</span><a href="/posts/73808/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature owner">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-06-23 10:14:25Z" class="relativetime">Jun 23 at 10:14</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/5035/abdullah-kahraman"><div><img src="https://www.gravatar.com/avatar/32e28002cff0ade0a90aa858e864f15b?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/5035/abdullah-kahraman">abdullah kahraman</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,922</span><span title="9 silver badges"><span class="badge2"></span><span class="badgecount">9</span></span><span title="54 bronze badges"><span class="badge3"></span><span class="badgecount">54</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-73808" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-73808" 
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="73620"></a>
+<div id="answer-73620" class="answer" data-answerid="73620" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="73620">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Virtually all MCUs that I have worked with enable the WDT on the reset. If you want it disabled the thing to do is put the code to disable it as the first code executed out of reset. That may even mean having to modify the C-startup module to make this happen right out of the starting gate. Some tool sets deliver the startup code with conditionals already in place to enable this behavior.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/73620" title="short permalink to this answer" class="short-link" id="link-post-73620">share</a><span class="lsep">|</span><a href="/posts/73620/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-06-21 14:51:58Z" class="relativetime">Jun 21 at 14:51</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/12135/michael-karas"><div><img src="https://www.gravatar.com/avatar/1e58df9577f3cb3bc51f378690a16fcb?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/12135/michael-karas">Michael Karas</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">8,971</span><span title="9 silver badges"><span class="badge2"></span><span class="badgecount">9</span></span><span title="20 bronze badges"><span class="badge3"></span><span class="badgecount">20</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-73620" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="3" 
+			           data-addlink-html="" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-142021" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">My toolset, CodeWarrior 10.4, shows the startup code, and possibly allows modification. But I don&#39;t get why I should do this in the startup code?</span>
+	&ndash;&nbsp;
+		<a href="/users/5035/abdullah-kahraman" 
+		   title="2922 reputation" 
+		   class="comment-user owner">abdullah kahraman</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-21 15:16:57Z" class="relativetime-clean">Jun 21 at 15:16</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-142030" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@abdullahkahraman: If the watchdog could be disabled at any time, then errant code might disable the watchdog as it&#39;s wandering through the weeds.  If I were designing a 32-bit processor chip, I would have a 32-bit register which would default to a &quot;watchdog enabled&quot; value; the CPU would reset any time the register contained a value other than a &quot;watchdog enabled&quot; value or one exact &quot;watchdog disabled&quot; value. Note that I&#39;d implement the register as 32 latches, so that a glitch which disrupted any latch would be unlike to disrupt a valid combination.</span>
+	&ndash;&nbsp;
+		<a href="/users/3123/supercat" 
+		   title="17258 reputation" 
+		   class="comment-user">supercat</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-21 15:55:03Z" class="relativetime-clean">Jun 21 at 15:55</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-142031" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@abdullahkahraman: If the value that would be necessary to disable the watchdog, did not appear anywhere in the code, it would be unlike that such a value could ever get written to the register. Further, if it was necessary for the application to disable and later re-enable the watchdog, the code which disabled it could be immediately followed by code which ensured that was the right thing to do (so if execution erroneously jumped there, code could detect that condition and force a resetart).</span>
+	&ndash;&nbsp;
+		<a href="/users/3123/supercat" 
+		   title="17258 reputation" 
+		   class="comment-user">supercat</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-21 15:56:43Z" class="relativetime-clean">Jun 21 at 15:56</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-142051" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">The reason for doing it in the C-Startup code is to satisfy the needs of some MCUs that I&#39;ve worked with that require any possible WDT disable to be done within a specific number of clock cycles after the reset release. For those MCUs if you wait till main() to do it you may very well burn through the finite number of clock cycles before ever getting to main(). This can easily happen in cases where there are initialized global variables in RAM and part of the startup code runs loops to copy the RAM values from the ROM/FLASH code space. Note also that startup code has the job of (continued)</span>
+	&ndash;&nbsp;
+		<a href="/users/12135/michael-karas" 
+		   title="8971 reputation" 
+		   class="comment-user">Michael Karas</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-21 17:51:08Z" class="relativetime-clean">Jun 21 at 17:51</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-142716" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@abdullahkahraman: If something causes a processor to start running errant code (e.g. stack-pointer corruption), just about anything can happen; one should basically figure the processor might start running &quot;random code&quot;.  Part of the purpose of a watchdog is to reset the processor in such situations.  If there were any significant likelihood that random program execution could by chance perform the operations necessary to disable the watchdog, that would be very bad.</span>
+	&ndash;&nbsp;
+		<a href="/users/3123/supercat" 
+		   title="17258 reputation" 
+		   class="comment-user">supercat</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-24 18:46:35Z" class="relativetime-clean">Jun 24 at 18:46</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-73620" 
+			   class="comments-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">show <b>3</b> more comments</a>
+    </td>
+</tr>
+    </table>
+</div>
+				    <div class="question-status">
+        <h2>                    <b>protected</b> by <a href="/users/638/w5vo">W5VO</a><span class="mod-flair" title="moderator">&#9830;</span> <span title="2013-06-21 14:04:07Z" class="relativetime">Jun 21 at 14:04</span>
+</h2>
+        <p>This question is protected to prevent &quot;thanks!&quot;, &quot;me too!&quot;, or spam answers by new users. 
+To answer it, you must have earned at least 10 <a href="/help/whats-reputation">reputation</a> on this site.</p>
+    </div>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/microcontroller" class="post-tag" title="show questions tagged &#39;microcontroller&#39;" rel="tag">microcontroller</a> <a href="/questions/tagged/freescale" class="post-tag" title="show questions tagged &#39;freescale&#39;" rel="tag">freescale</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/microcontroller" class="post-tag" title="show questions tagged &#39;microcontroller&#39;" rel="tag">microcontroller</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">1611</span></span><br>
+<a href="/questions/tagged/freescale" class="post-tag" title="show questions tagged &#39;freescale&#39;" rel="tag">freescale</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">20</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-06-21 13:36:52Z"><b>5 months ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>131 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-06-23 10:14:25Z">5 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-electronics.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/6915" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/6915/timer2-period-match-interrupt-on-dspic33f-not-working" class="question-hyperlink">Timer2 period match interrupt on dsPIC33F not working</a>
+</div>
+<div class="spacer">
+<a href="/q/14710" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/14710/microcontrollers-watchdog" class="question-hyperlink">Microcontroller&#39;s watchdog</a>
+</div>
+<div class="spacer">
+<a href="/q/35350" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/35350/how-to-make-mclre-in-config3-word-work-in-pic18f-using-mplabx-xc8" class="question-hyperlink">How to make MCLRE in CONFIG3 word work in PIC18F using MPLABX XC8</a>
+</div>
+<div class="spacer">
+<a href="/q/43509" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">6
+    </div>
+</a><a href="/questions/43509/which-of-these-approaches-for-a-watchdog-timer" class="question-hyperlink">Which of these approaches for a watchdog timer?</a>
+</div>
+<div class="spacer">
+<a href="/q/45626" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/45626/avr-program-behavior-incorrect-after-disabling-reset-fuse" class="question-hyperlink">AVR program behavior incorrect after disabling reset fuse</a>
+</div>
+<div class="spacer">
+<a href="/q/58782" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/58782/reading-analog-input-pic18" class="question-hyperlink">Reading analog input pic18</a>
+</div>
+<div class="spacer">
+<a href="/q/72483" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">-1
+    </div>
+</a><a href="/questions/72483/ili9163c-lcd-showing-garbage-after-initialization" class="question-hyperlink">ILI9163C : LCD showing garbage after initialization</a>
+</div>
+<div class="spacer">
+<a href="/q/79182" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/79182/why-does-dspic33f-restarts-when-timer-interrupt-flag-is-addressed" class="question-hyperlink">Why does DSPIC33F restarts when timer interrupt flag is addressed?</a>
+</div>
+<div class="spacer">
+<a href="/q/81688" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">6
+    </div>
+</a><a href="/questions/81688/still-getting-link-error-after-switching-to-banked-memory-for-freescale-hcs08" class="question-hyperlink">Still getting link error after switching to banked memory for Freescale HCS08</a>
+</div>
+<div class="spacer">
+<a href="/q/82289" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/82289/uart-give-garbage-values-after-waking-up-from-sleeparduino" class="question-hyperlink">UART give garbage values after waking up from sleep(arduino)</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/73609" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/73609/ivc/2c5f');});
+</script>
+<noscript>
+    <div><img src="/posts/73609/ivc/2c5f" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/73609/watchdog-enables-itself-after-reset")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.electronics.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.22.1174
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Electrical Engineering Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|microcontroller|freescale|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>
