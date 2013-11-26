@@ -1,0 +1,2224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>c# - how to improve readability of my code for a medium size program - Code Review Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codereview/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Code Review Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeReview" />
+    <meta name="twitter:domain" content="codereview.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codereview/img/apple-touch-icon.png?v=bb26b8631f86"/>
+    <meta name="og:title" content="how to improve readability of my code for a medium size program" />
+    <meta name="og:description" content="I am writing a program for my trading application.  Over the months the program has been growing steadily, and what is used to be a small program now i would call a medium size program (about 1000-..." />
+    <meta name="og:url" content="http://codereview.stackexchange.com/questions/14054/how-to-improve-readability-of-my-code-for-a-medium-size-program"/>
+    <link rel="canonical" href="http://codereview.stackexchange.com/questions/14054/how-to-improve-readability-of-my-code-for-a-medium-size-program" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codereview/all.css?v=886a92d67293">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;how to improve readability of my code for a medium size program&#39;" href="/feeds/question/14054">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:2,shownCommentCount:2,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:14054});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('196', '14054');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('196');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385401776,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Code Review Stack Exchange","description":"Q&A for peer programmer code reviews","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"c2fcdba836c9d13e2116463b4c52ed93","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"fe5cdf2fdb00","js/full.en.js":"f103476d11b6","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f14054%2fhow-to-improve-readability-of-my-code-for-a-medium-size-program">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f14054%2fhow-to-improve-readability-of-my-code-for-a-medium-size-program">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Code Review
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Code Review Stack Exchange is a question and answer site for peer programmer code reviews. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/14054/how-to-improve-readability-of-my-code-for-a-medium-size-program" class="question-hyperlink">how to improve readability of my code for a medium size program</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="14054"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="14054">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I am writing a program for my trading application.  Over the months the program has been growing steadily, and what is used to be a small program now i would call a medium size program (about 1000-2000 lines in total), and it will keep growing as i add more features to it. It has grown to a point where it start to get difficult to read my code. </p>
+
+<p>Below is a small part of the code from my over program. it is particularly nasty because i have a lot of calculations involved. what i think the following code is especially hard to read is because there is many similarities in blocks but differ from a plus(+) or minus(-) sign, so i cannot easily chunk it to new methods (refactoring), or should i just group the code into like 20-30 lines or so together and declare a new method? Then i will have many small methods which it is only be called in one place, which i think it defeat the purpose of a new method. </p>
+
+<p>I have been reading extension method or so but i don't know if it is easy to apply to my program. </p>
+
+<pre><code>public class CVB
+{
+    public Bar bar = new Bar();
+
+    public class Bar
+    {
+        public DateTime startTime;
+        public DateTime endTime;
+        public double open;
+        public double high;
+        public double low;
+        public double close;
+        public double bestBid;
+        public double bestAsk;
+        public int volume;
+        public int delta;
+        public int accVolume;
+
+        public DateTime lastPrintTime;
+        public DateTime lastMarcoTime;
+
+        public string writeLine = null;
+        public List&lt;string&gt; outputString = new List&lt;string&gt;();
+        public Boolean validBarWrite = false;
+    }
+
+    public Info info = new Info();
+
+    public class Info
+    {
+        public string symbol = null;
+        public string exchange = null;
+        public string finalSymbol = null;
+        public int CVBSize = 200;
+        public double tickSize;
+        public int largeSizeLimit = 50;
+        public Boolean realtimeChart = false;
+        public int realtimeChartTimer = 2000;        
+    }
+
+          // more variables not included here....
+
+    public Boolean initialise = false;
+
+    public List&lt;Level2&gt; ask = new List&lt;Level2&gt;();
+    public List&lt;Level2&gt; bid = new List&lt;Level2&gt;();
+    public List&lt;Level2&gt; largeSize = new List&lt;Level2&gt;();
+
+    public class Level2
+    {
+        public double price { get; set; }
+        public int size { get; set; }
+
+        public Level2(double price, int size)
+        {
+            this.price = price;
+            this.size = size;
+        }
+    }
+
+    class SortAscending : IComparer&lt;Level2&gt;
+    {
+        public int Compare(Level2 x, Level2 y)
+        {
+            if (x.price &gt; y.price) return 1;
+            else if (x.price &lt; y.price) return -1;
+            else return 0;
+        }
+    }
+
+    class SortDecending : IComparer&lt;Level2&gt;
+    {
+        public int Compare(Level2 x, Level2 y)
+        {
+            if (x.price &lt; y.price) return 1;
+            else if (x.price &gt; y.price) return -1;
+            else return 0;
+        }
+    }
+
+    public static void processLine(ref Output output, ref CVB[] cvb, int c)
+    {
+        double bidDistance;
+        double askDistance;
+        int oldProcessVolume;      // use to hold the previous volume, use to calculate the overflow when the CVB limit is reached
+        int temp;
+
+        double outputPrice = output.price;
+
+        cvb[c].bar.writeLine = null;
+
+        //////////convert the tick file into constant volume
+
+        if (cvb[c].initialise == false)        //dont worry about the first bar, it is bugged, the number can be comeing from anywhere, not just trade
+        {
+            cvb[c].bar.startTime = output.time;
+            cvb[c].bar.open = output.price;
+            cvb[c].bar.high = output.price;
+            cvb[c].bar.low = output.price;
+            cvb[c].initialise = true;
+        }
+
+        if (output.price &gt; 0 || output.type == "Volume")
+        {
+            switch (output.type)
+            {
+                case "Trade":
+                Beginning:
+
+                oldProcessVolume = cvb[c].bar.volume;
+                cvb[c].bar.volume = cvb[c].bar.volume + output.volume;
+
+                if (output.price &gt; cvb[c].bar.high)
+                    cvb[c].bar.high = output.price;
+
+                if (output.price &lt; cvb[c].bar.low)
+                    cvb[c].bar.low = output.price;
+
+                cvb[c].bar.close = output.price;
+
+                if (cvb[c].bar.bestAsk != 0 || cvb[c].bar.bestBid != 0)       //not at the start of the program
+                {
+                    bidDistance = output.price - cvb[c].bar.bestBid;
+                    askDistance = cvb[c].bar.bestAsk - output.price;
+
+                    if (bidDistance - askDistance &gt; 0.00000001)            //trade closer to ask
+                    {
+                        cvb[c].bar.delta = cvb[c].bar.delta + output.volume;
+
+                        if (output.volume &gt; cvb[c].info.largeSizeLimit)
+                        {
+                            temp = cvb[c].largeSize.Where(x =&gt; Math.Abs(x.price - outputPrice) &lt; 0.00000001).Sum(y =&gt; y.size); //extract the last volume
+
+                            cvb[c].largeSize.RemoveAll(x =&gt; Math.Abs(x.price - outputPrice) &lt; 0.00000001);
+
+                            cvb[c].largeSize.Add(new Level2(output.price, temp + output.volume));
+                        }
+
+                        if (cvb[c].bar.volume &gt;= cvb[c].info.CVBSize)     // volume is filled
+                        {
+                            output.volume = cvb[c].bar.volume - cvb[c].info.CVBSize;   // cap the volume of the bar to the size of CVB, any overflow is put into the next bar
+                            cvb[c].bar.delta = cvb[c].bar.delta - output.volume;
+
+                            temp = cvb[c].ask.Where(x =&gt; Math.Abs(x.price - outputPrice) &lt; 0.0000001).Sum(yield =&gt; yield.size);    //extract the last size on the ask, because we want accurate bid size and ask size when the bar is finish
+                            cvb[c].ask.RemoveAll(x =&gt; Math.Abs(x.price - outputPrice) &lt; 0.00000001);
+                            temp = temp - (cvb[c].info.CVBSize - oldProcessVolume);
+                            cvb[c].bar.accVolume = cvb[c].bar.accVolume + (cvb[c].info.CVBSize - oldProcessVolume);
+
+                            if (temp &gt; 0)
+                                cvb[c].ask.Add(new Level2(output.price, temp));
+
+                            cvb[c].bar.validBarWrite = true;
+                            writeToString(ref output, ref cvb, c);
+
+                            goto Beginning;
+                        }
+                    }
+                    if (askDistance - bidDistance &gt; 0.00000001)             //trade closer to bid
+                    {
+                        cvb[c].bar.delta = cvb[c].bar.delta - output.volume;
+
+                        if (output.volume &gt; cvb[c].info.largeSizeLimit)
+                        {
+                            temp = cvb[c].largeSize.Where(x =&gt; Math.Abs(x.price - outputPrice) &lt; 0.00000001).Sum(y =&gt; y.size);
+
+                            cvb[c].largeSize.RemoveAll(x =&gt; Math.Abs(x.price - outputPrice) &lt; 0.00000001);
+
+                            cvb[c].largeSize.Add(new Level2(output.price, temp - output.volume));
+                        }
+
+                        if (cvb[c].bar.volume &gt;= cvb[c].info.CVBSize)     // volume is filled
+                        {
+                            output.volume = cvb[c].bar.volume - cvb[c].info.CVBSize;
+                            cvb[c].bar.delta = cvb[c].bar.delta + output.volume;
+
+                            temp = cvb[c].bid.Where(x =&gt; Math.Abs(x.price - outputPrice) &lt; 0.0000001).Sum(yield =&gt; yield.size);    //extract the last size on the ask
+                            cvb[c].bid.RemoveAll(x =&gt; Math.Abs(x.price - outputPrice) &lt; 0.00000001);
+                            temp = temp - (cvb[c].info.CVBSize - oldProcessVolume);
+                            cvb[c].bar.accVolume = cvb[c].bar.accVolume + (cvb[c].info.CVBSize - oldProcessVolume);
+
+                            if (temp &gt; 0)
+                                cvb[c].bid.Add(new Level2(output.price, temp));
+
+                            cvb[c].bar.validBarWrite = true;
+                            writeToString(ref output, ref cvb, c);
+
+                            goto Beginning;
+                        }
+                    }
+                    if (Math.Abs(bidDistance - askDistance) &lt; 0.00000001)
+                    {
+                        if (cvb[c].bar.volume &gt;= cvb[c].info.CVBSize)     // volume is filled
+                        {
+                            output.volume = cvb[c].bar.volume - cvb[c].info.CVBSize;
+                            cvb[c].bar.accVolume = cvb[c].bar.accVolume + (cvb[c].info.CVBSize - oldProcessVolume);
+
+                            cvb[c].bar.validBarWrite = true;
+                            writeToString(ref output, ref cvb, c);
+
+                            goto Beginning;
+                        }
+                    }
+                }    //end if (output.price != 0)
+                break;
+
+                case "Ask":
+
+                cvb[c].ask.RemoveAll(x =&gt; Math.Abs(x.price - outputPrice) &lt; 0.00000001);
+                cvb[c].bid.RemoveAll(x =&gt; x.price &gt;= outputPrice - 0.00000001);
+
+                if (output.volume &gt; 0)
+                    cvb[c].ask.Add(new Level2(output.price, output.volume));
+                break;
+
+                case "BestAsk":
+
+                cvb[c].bar.bestAsk = output.price;
+                cvb[c].ask.RemoveAll(x =&gt; x.price &lt;= outputPrice + 0.000000001);
+                cvb[c].bid.RemoveAll(x =&gt; x.price &gt;= outputPrice - 0.00000001);
+
+                if (output.volume &gt; 0)
+                    cvb[c].ask.Add(new Level2(output.price, output.volume));
+                break;
+
+                case "Bid":
+
+                cvb[c].bid.RemoveAll(x =&gt; Math.Abs(x.price - outputPrice) &lt; 0.00000001);
+                cvb[c].ask.RemoveAll(x =&gt; x.price &lt;= outputPrice + 0.000000001);           //eliminate the chance the bid is higher than the old ask size
+
+                if (output.volume &gt; 0)
+                    cvb[c].bid.Add(new Level2(output.price, output.volume));
+                break;
+
+                case "BestBid":
+
+                cvb[c].bar.bestBid = output.price;
+                cvb[c].bid.RemoveAll(x =&gt; x.price &gt;= outputPrice - 0.00000001);
+                cvb[c].ask.RemoveAll(x =&gt; x.price &lt;= outputPrice + 0.000000001);           //eliminate the chance the bid is higher than the old ask size
+
+                if (output.volume &gt; 0)
+                    cvb[c].bid.Add(new Level2(output.price, output.volume));
+                break;
+
+                case "Volume":
+
+                cvb[c].bar.accVolume = output.volume;
+                break;
+
+            }   //switch (output.type)
+        }
+
+        if (cvb[c].info.realtimeChart == true &amp;&amp; output.time &gt; cvb[c].bar.lastPrintTime.AddMilliseconds(cvb[c].info.realtimeChartTimer))      //update the string for the last bar
+        {
+            cvb[c].bar.validBarWrite = false;
+            writeToString(ref output, ref cvb, c);
+        }
+
+        cvb[c].bar.lastPrintTime = output.time;
+    }
+
+
+           // more methods below
+ }
+</code></pre>
+
+<p>one other thing is nearly every variable i have is start with <code>cvb[c].something....</code> it is hurting my readability for the code, i came from a VB background which i have <code>with / end with</code> to improves my readability. there is nothing in c# that is similar to VB <code>with / end with</code>. i read about other threads where they use </p>
+
+<pre><code> var p = this.StatusProgressBar;
+ p.IsIndeterminate = false;
+ p.Visibility = Visibility.Visible;
+ ...
+</code></pre>
+
+<p>but you can’t limit the scope of <code>p</code> within a certain place in the function, which i dont like. </p>
+
+<p>any suggestion to improve the readability of my code? </p>
+
+<p>EDIT: should i add heaps more comment in my code? because it looks like a complete mess for anyone who don't know the function of the code. i have read somewhere that you should not need to add comments on the code if your code is structure well, just a header. My code is definitely not structure well but i don't know where to start improve it. Now i understand my code, but 6 months from now it will be a complete mess for me to look at the code again.  </p>
+
+<p>EDIT2: the code for write to string </p>
+
+<pre><code>    public static void writeToString(ref Output output, ref CVB[] cvb, int c)
+    {
+        string bidString = null;
+        string askString = null;
+        string largeSizeString = null;
+        double bestAsk = 0;
+        double bestBid = 0;
+
+        double processTickSize = cvb[c].info.tickSize;
+
+        string timeFmt = "yyyy/MM/dd HH:mm:ss.fff";
+
+        int currentBarBidAskSize = cvb[c].minimumWallSize;
+        cvb[c].wallPrice[0] = 0;
+
+        cvb[c].bar.endTime = output.time;
+
+        //output all the info into the text file
+
+        SortDecending sortDecending = new SortDecending();
+        cvb[c].bid.Sort(sortDecending);
+
+        SortAscending sortAscending = new SortAscending();
+        cvb[c].ask.Sort(sortAscending);
+        cvb[c].largeSize.Sort(sortAscending);
+
+        for (int i = 0; i &lt; 10; i++)
+        {
+            if (i &lt; cvb[c].ask.Count &amp;&amp; cvb[c].ask[i].price &lt; cvb[c].ask[0].price + (20 * cvb[c].info.tickSize))
+            {
+                askString = askString + "," + cvb[c].ask[i].price.ToString() + "," + cvb[c].ask[i].size.ToString();
+            }
+            else
+            {
+                askString = askString + ",0,0";      //pad it until 10 size is shown
+            }
+        }
+
+        for (int i = 0; i &lt; 10; i++)
+        {
+            if (i &lt; cvb[c].bid.Count &amp;&amp; cvb[c].bid[i].price &gt; cvb[c].bid[0].price - (20 * cvb[c].info.tickSize))
+            {
+                bidString = bidString + "," + cvb[c].bid[i].price.ToString() + "," + cvb[c].bid[i].size.ToString();
+            }
+            else
+            {
+                bidString = bidString + ",0,0";     //pad it until 10 size is shown
+            }
+        }
+
+        for (int i = 0; i &lt; cvb[c].largeSize.Count; i++)
+        {
+            largeSizeString = largeSizeString + "," + cvb[c].largeSize[i].price.ToString() + "," + cvb[c].largeSize[i].size.ToString();
+        }
+
+        cvb[c].largeSize.Clear();
+
+        if (cvb[c].ask.Count &gt; 0)
+            bestAsk = cvb[c].ask[0].price;
+
+        if (cvb[c].bid.Count &gt; 0)
+            bestBid = cvb[c].bid[0].price;
+
+        int askSum5 = cvb[c].ask.Where(x =&gt; x.price &gt;= bestAsk &amp;&amp; x.price &lt; bestAsk + (5 * processTickSize)).Sum(y =&gt; y.size);
+        int bidSum5 = cvb[c].bid.Where(x =&gt; x.price &lt;= bestBid &amp;&amp; x.price &gt; bestBid - (5 * processTickSize)).Sum(y =&gt; y.size);
+
+        int askSum10 = cvb[c].ask.Where(x =&gt; x.price &gt;= bestAsk &amp;&amp; x.price &lt; bestAsk + (10 * processTickSize)).Sum(y =&gt; y.size);
+        int bidSum10 = cvb[c].bid.Where(x =&gt; x.price &lt;= bestBid &amp;&amp; x.price &gt; bestBid - (10 * processTickSize)).Sum(y =&gt; y.size);
+
+
+        cvb[c].bar.writeLine = string.Format("`{0},{1},{2},{3},{4},{5},ASK:{6},BID:{7},{8:0.##},{9:0.##},{10:0.##},{11:0.##},largeSize:{12}",
+                            cvb[c].bar.endTime.ToString(timeFmt),
+                            cvb[c].bar.open,
+                            cvb[c].bar.high,
+                            cvb[c].bar.low,
+                            cvb[c].bar.close,
+                            cvb[c].bar.accVolume,
+                            askString,
+                            bidString,
+                            (double)cvb[c].bar.delta / cvb[c].info.CVBSize,                                                                         //delta ratio
+                            (double)Math.Log10(Math.Abs((cvb[c].bar.endTime.AddMilliseconds(10) - cvb[c].bar.startTime).TotalSeconds)),     //bar duration in seconds, TAKE LOG, when the HH:mm time has fixed, then no need to get the abs value
+                            (double)Math.Sign(askSum5 - bidSum5) * (Math.Max(askSum5, bidSum5) / (Math.Min(askSum5, bidSum5) + 0.0001)) - (Math.Sign(askSum5 - bidSum5)),          //size ratio price5
+                            (double)Math.Sign(askSum10 - bidSum10) * (Math.Max(askSum10, bidSum10) / (Math.Min(askSum10, bidSum10) + 0.0001)) - (Math.Sign(askSum10 - bidSum10)),
+                            largeSizeString);
+
+        if (cvb[c].info.realtimeChart == false || cvb[c].bar.validBarWrite == true)
+        {
+            cvb[c].bar.open = cvb[c].bar.close;
+            cvb[c].bar.high = cvb[c].bar.open;
+            cvb[c].bar.low = cvb[c].bar.open;
+            cvb[c].bar.volume = 0;
+            cvb[c].bar.delta = 0;
+            cvb[c].bar.startTime = cvb[c].bar.endTime;
+        }
+    }
+</code></pre>
+
+<p>edit 3: someone migrate my code from stackoverflow, how can i comment on an answer?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/c%23" class="post-tag" title="show questions tagged &#39;c#&#39;" rel="tag">c#</a> <a href="/questions/tagged/readability" class="post-tag" title="show questions tagged &#39;readability&#39;" rel="tag">readability</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/14054" title="short permalink to this question" class="short-link" id="link-post-14054">share</a><span class="lsep">|</span><a href="/posts/14054/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/14054/revisions" title="show all edits to this post">edited <span title="2012-07-26 23:30:29Z" class="relativetime">Jul 26 '12 at 23:30</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/-1/community"><div><img src="https://www.gravatar.com/avatar/a007be5a61f6aa8f3e85ae2fc18dd66e?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/-1/community">Community</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1</span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2012-07-26 18:39:57Z" class="relativetime">Jul 26 '12 at 18:39</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <span class="anonymous-gravatar"></span>
+    </div>
+    <div class="user-details">
+        Clayton Leung<br>
+        
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-14054" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-22740" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Would you please add code for <code>writeToString</code>?</span>
+	&ndash;&nbsp;
+		<span title="0 reputation" 
+		      class="comment-user">Serg Rogovtsev</span>
+	<span class="comment-date" dir="ltr"><span title="2012-07-26 19:10:18Z" class="relativetime-clean">Jul 26 '12 at 19:10</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-22746" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">If you want to comment, you need to create an account on this site using the same credentials as the ones you used on SO.</span>
+	&ndash;&nbsp;
+		<a href="/users/2041/svick" 
+		   title="9061 reputation" 
+		   class="comment-user">svick</a>
+	<span class="comment-date" dir="ltr"><span title="2012-07-26 23:29:55Z" class="relativetime-clean">Jul 26 '12 at 23:29</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-14054" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+    <div class="question-status">
+        <h2>                <b>migrated</b> from <a href="http://stackoverflow.com/questions/11675900/how-to-improve-readability-of-my-code-for-a-medium-size-program?noredirect=1" title="how to improve readability of my code for a medium size program">stackoverflow.com</a> <span title="2012-07-26 23:02:20Z" class="relativetime">Jul 26 '12 at 23:02</span>
+</h2>
+        <p>This question came from our site for professional and enthusiast programmers.</p>
+    </div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								5 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/14054/how-to-improve-readability-of-my-code-for-a-medium-size-program?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/14054/how-to-improve-readability-of-my-code-for-a-medium-size-program?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/14054/how-to-improve-readability-of-my-code-for-a-medium-size-program?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="14059"></a>
+<div id="answer-14059" class="answer accepted-answer" data-answerid="14059" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="14059">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">5</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>You obviously don't do enough encapsulation. I see at least three classes with no behaviour (<code>Bar</code>, <code>Level2</code> and <code>Info</code>), your "main" class (<code>CVB</code>) contains only static method... it does not seem like good OOP for me (and when we are talking C# we should mostly talk OOP).</p>
+
+<p>Let's try to fix it, one thing at a time.</p>
+
+<pre><code>public static void processLine(ref Output output, ref CVB[] cvb, int c)
+</code></pre>
+
+<p>Why are <code>output</code> and <code>cvb</code> <code>ref</code>, if it's not assigned anywhere in code? It should not be. Only things that implies assignment is <em>call</em> to <code>writeToString(ref output, ref cvb, c);</code>, which should not modify anything, because it's only writing. You have not included your code, but let's assume that it's not doing any assignments inside too. So we get rid of those <code>ref</code>s.</p>
+
+<p>Next thing in here: you're passing in an array of <code>CVB</code>s and some <code>c</code>, most likely an index. But everywhere in method (with exception to calls to <code>writeString</code>) you're using <code>cvb[c]</code>. So we can safely extract it into temporary variable. Let's call it <code>cvbEl</code>, for the lack of best option.</p>
+
+<pre><code>var cvbEl = cvb[c];
+</code></pre>
+
+<p>Another "safe" extraction is to put your <code>0.00000001</code> into a (class-level) constant, which we will name <code>Tolerance</code>, because as far as I can see, it is a floating-point comparison tolerance.</p>
+
+<pre><code>const double Tolerance = 0.00000001;
+</code></pre>
+
+<p>Now I'll do some strange thing: I'll extract your call to <code>writeString</code> to variable. I do this only because it is the only thing that operates with <code>cvb</code> and <code>c</code> and I can not make any decision about it without seeing it first. So I'll just save entire call for later.</p>
+
+<pre><code>Action writeToStringCall = () =&gt; writeToString(ref output, ref cvb, c);
+</code></pre>
+
+<p>And now, thanks to this, all our code operates on <code>cvbEl</code>. So we can safely move it to <code>CVB</code> instance method, because all this processing is coupled to single instance of <code>CVB</code>. Let's call this method <code>Process</code> (of course, all the code inside it does not use <code>cvbEl</code>, but uses implicit <code>this</code>. Now, all that's left of yours <code>processLine</code> is:</p>
+
+<pre><code>public static void processLine(Output output, CVB[] cvb, int c)
+{
+    var cvbEl = cvb[c];
+    Action writeToStringCall = () =&gt; writeToString(ref output, ref cvb, c);
+    cvbEl.Process(output, writeToStringCall);
+}
+</code></pre>
+
+<p>In fact, it could be an one-liner if inlined all the variables, but I leave them as is for the sake of readability.</p>
+
+<p>Next thing: you should extract every case in your switch as a separate method. Look at it now:</p>
+
+<pre><code>switch (output.type)
+{
+    case "Trade":
+        Trade(output, writeToStringCall);
+        break;
+    case "Ask":
+        Ask(output);
+        break;
+    case "BestAsk":
+        BestAsk(output);
+        break;
+    case "Bid":
+        Bid(output);
+        break;
+    case "BestBid":
+        BestBid(output);
+        break;
+    case "Volume":
+        Volume(output);
+        break;
+}
+</code></pre>
+
+<p>In fact, repeating pattern (for every type of <code>Output</code> call a method passing <code>output</code> inside) clearly calls for some inheritance on <code>Output</code> side: you should have several different <code>Output</code> classes, subtyped after your <code>Output.Type</code>, with method <code>ProcessSmth(CVB)</code>, which should have processing related to that type of output. Having that you would replace this whole switch with <code>output.ProcessSmth(this)</code>. But I won't do that now, and instead concentrate of contents of there methods (although they are already pretty small and readable, with exception of <code>Trade</code>).</p>
+
+<pre><code>private void Volume(Output output)
+{
+    bar.accVolume = output.volume;
+}
+</code></pre>
+
+<p>Already nothing to do here.</p>
+
+<pre><code>ask.RemoveAll(x =&gt; x.price &lt;= outputPrice + 0.000000001)
+</code></pre>
+
+<p>This line is repeated three times (although I suppose that third one is a mistake), so we extract it into method, also giving it meaningful name (<code>RemoveAllAsksLessThan</code>). We repeat same operation for remaining <code>RemoveAll</code>s. Let's look what's left of these:</p>
+
+<pre><code>private void BestBid(Output output)
+{
+    bar.bestBid = output.price;
+    RemoveAllBidsGreaterThan(output.price);
+    RemoveAllAsksLessThan(output.price);
+
+    if (output.volume &gt; 0)
+        bid.Add(new Level2(output.price, output.volume));
+}
+
+private void Bid(Output output)
+{
+    RemoveAllBidsEqualTo(output.price);
+    RemoveAllAsksLessThan(output.price);
+
+    if (output.volume &gt; 0)
+        bid.Add(new Level2(output.price, output.volume));
+}
+
+private void BestAsk(Output output)
+{
+    bar.bestAsk = output.price;
+    RemoveAllBidsGreaterThan(output.price);
+    RemoveAllAsksLessThan(output.price);
+
+    if (output.volume &gt; 0)
+        ask.Add(new Level2(output.price, output.volume));
+}
+
+private void Ask(Output output)
+{
+    RemoveAllAsksEqualTo(output.price);
+    RemoveAllBidsGreaterThan(output.price);
+
+    if (output.volume &gt; 0)
+        ask.Add(new Level2(output.price, output.volume));
+}
+</code></pre>
+
+<p>All that's left is <code>Trade</code>. Most of it happens only when <code>bar.bestAsk != 0 || bar.bestBid != 0</code>. Let's invert that <code>if</code> so we don't have to think what happens if both bests are 0 (because we simply return at that, don't leave us hanging!).</p>
+
+<pre><code>if (bar.bestAsk == 0 &amp;&amp; bar.bestBid == 0)
+    return;
+</code></pre>
+
+<p>(BTW, you forgot your tolerance check)</p>
+
+<pre><code>if (output.price &gt; bar.high)
+    bar.high = output.price;
+</code></pre>
+
+<p>You do that for every run you got thru your <code>Beginning:</code> label, but in fact it won't change: neither <code>output.price</code> nor <code>bar.high</code> are changed elsewhere in this method. So we can safely move this operation <em>above</em> <code>Beginning:</code>. Same goes for <code>bar.low</code>, <code>bar.close</code>, <code>bidDistance</code> and <code>askDistance</code>.</p>
+
+<p>Then we convert your <code>goto</code> into common-knowledge <code>while(true)</code>. To do that we simply replace <code>Beginning</code> with <code>while(true)</code>, enclose all code below in loop, add <code>return</code> in the end, and <code>continue</code> instead of every <code>goto</code>.</p>
+
+<p>Inside loop we have three <code>if</code>s. If we look closely, we'll see that they are mutually exclusive. We will mark it explicitly, so we don't have to guess. If we follow this line of thought, we'll see that every time we don't hit <code>continue</code> inside our <code>if</code> we can safely return from call. So let's invert those conditions too.</p>
+
+<p>What we've now come to?</p>
+
+<pre><code>public static void processLine(Output output, CVB[] cvb, int c)
+{
+    var cvbEl = cvb[c];
+    Action writeToStringCall = () =&gt; writeToString(ref output, ref cvb, c);
+    cvbEl.Process(output, writeToStringCall);
+}
+
+public void Process(Output output, Action writeToStringCall)
+{
+    bar.writeLine = null;
+
+    //////////convert the tick file into constant volume
+
+    if (initialise == false)        //dont worry about the first bar, it is bugged, the number can be comeing from anywhere, not just trade
+    {
+        bar.startTime = output.time;
+        bar.open = output.price;
+        bar.high = output.price;
+        bar.low = output.price;
+        initialise = true;
+    }
+
+    if (output.price &gt; 0 || output.type == "Volume")
+    {
+        switch (output.type)
+        {
+            case "Trade":
+                Trade(output, writeToStringCall);
+                break;
+            case "Ask":
+                Ask(output);
+                break;
+            case "BestAsk":
+                BestAsk(output);
+                break;
+            case "Bid":
+                Bid(output);
+                break;
+            case "BestBid":
+                BestBid(output);
+                break;
+            case "Volume":
+                Volume(output);
+                break;
+        }
+    }
+
+    if (info.realtimeChart &amp;&amp; output.time &gt; bar.lastPrintTime.AddMilliseconds(info.realtimeChartTimer))      //update the string for the last bar
+    {
+        bar.validBarWrite = false;
+        writeToStringCall();
+    }
+
+    bar.lastPrintTime = output.time;
+}
+
+private void Volume(Output output)
+{
+    bar.accVolume = output.volume;
+}
+
+private void BestBid(Output output)
+{
+    bar.bestBid = output.price;
+    RemoveAllBidsGreaterThan(output.price);
+    RemoveAllAsksLessThan(output.price);
+
+    if (output.volume &gt; 0)
+        bid.Add(new Level2(output.price, output.volume));
+}
+
+private void Bid(Output output)
+{
+    RemoveAllBidsEqualTo(output.price);
+    RemoveAllAsksLessThan(output.price);
+
+    if (output.volume &gt; 0)
+        bid.Add(new Level2(output.price, output.volume));
+}
+
+private void BestAsk(Output output)
+{
+    bar.bestAsk = output.price;
+    RemoveAllBidsGreaterThan(output.price);
+    RemoveAllAsksLessThan(output.price);
+
+    if (output.volume &gt; 0)
+        ask.Add(new Level2(output.price, output.volume));
+}
+
+private void Ask(Output output)
+{
+    RemoveAllAsksEqualTo(output.price);
+    RemoveAllBidsGreaterThan(output.price);
+
+    if (output.volume &gt; 0)
+        ask.Add(new Level2(output.price, output.volume));
+}
+
+private void Trade(Output output, Action writeToStringCall)
+{
+    var oldProcessVolume = bar.volume;      // use to hold the previous volume, use to calculate the overflow when the CVB limit is reached
+    if (output.price &gt; bar.high)
+        bar.high = output.price;
+    if (output.price &lt; bar.low)
+        bar.low = output.price;
+    bar.close = output.price;
+
+    var bidDistance = output.price - bar.bestBid;
+    var askDistance = bar.bestAsk - output.price;
+
+    while(true)
+    {
+        bar.volume = bar.volume + output.volume;
+
+        if (bar.bestAsk == 0 &amp;&amp; bar.bestBid == 0)
+            return;
+
+        int temp;
+        if (bidDistance - askDistance &gt; Tolerance) //trade closer to ask
+        {
+            bar.delta = bar.delta + output.volume;
+
+            if (output.volume &gt; info.largeSizeLimit)
+            {
+                temp = largeSize.Where(x =&gt; ToleratedEquals(x.price, output.price)).Sum(y =&gt; y.size);
+                largeSize.RemoveAll(x =&gt; ToleratedEquals(x.price, output.price));
+                largeSize.Add(new Level2(output.price, temp + output.volume));
+            }
+
+            if (bar.volume &lt; info.CVBSize)
+                return;
+
+            output.volume = bar.volume - info.CVBSize;
+            bar.delta = bar.delta - output.volume;
+
+            temp = ask.Where(x =&gt; ToleratedEquals(x.price, output.price)).Sum(yield =&gt; yield.size);
+            RemoveAllAsksEqualTo(output.price);
+            temp = temp - (info.CVBSize - oldProcessVolume);
+            bar.accVolume = bar.accVolume + (info.CVBSize - oldProcessVolume);
+
+            if (temp &gt; 0)
+                ask.Add(new Level2(output.price, temp));
+
+            bar.validBarWrite = true;
+            writeToStringCall();
+
+            continue;
+        }
+
+        if (askDistance - bidDistance &gt; Tolerance) //trade closer to bid
+        {
+            bar.delta = bar.delta - output.volume;
+
+            if (output.volume &gt; info.largeSizeLimit)
+            {
+                temp = largeSize.Where(x =&gt; ToleratedEquals(x.price, output.price)).Sum(y =&gt; y.size);
+                largeSize.RemoveAll(x =&gt; ToleratedEquals(x.price, output.price));
+                largeSize.Add(new Level2(output.price, temp - output.volume));
+            }
+
+            if (bar.volume &lt; info.CVBSize)
+                return;
+
+            output.volume = bar.volume - info.CVBSize;
+            bar.delta = bar.delta + output.volume;
+
+            temp = bid.Where(x =&gt; ToleratedEquals(x.price, output.price)).Sum(yield =&gt; yield.size);
+            RemoveAllBidsEqualTo(output.price);
+            temp = temp - (info.CVBSize - oldProcessVolume);
+            bar.accVolume = bar.accVolume + (info.CVBSize - oldProcessVolume);
+
+            if (temp &gt; 0)
+                bid.Add(new Level2(output.price, temp));
+
+            bar.validBarWrite = true;
+            writeToStringCall();
+
+            continue;
+        }
+
+        if (ToleratedEquals(bidDistance, askDistance))
+        {
+            if (bar.volume &lt; info.CVBSize)
+                return;
+
+            output.volume = bar.volume - info.CVBSize;
+            bar.accVolume = bar.accVolume + (info.CVBSize - oldProcessVolume);
+
+            bar.validBarWrite = true;
+            writeToStringCall();
+
+            continue;
+        }
+        return;
+    }
+}
+
+private static bool ToleratedEquals(double x, double y)
+{
+    return Math.Abs(x - y) &lt; Tolerance;
+}
+
+private void RemoveAllAsksEqualTo(double outputPrice)
+{
+    ask.RemoveAll(x =&gt; ToleratedEquals(x.price, outputPrice));
+}
+
+private void RemoveAllAsksLessThan(double outputPrice)
+{
+    ask.RemoveAll(x =&gt; x.price &lt;= outputPrice + Tolerance);
+}
+
+private void RemoveAllBidsGreaterThan(double outputPrice)
+{
+    bid.RemoveAll(x =&gt; x.price &gt;= outputPrice - Tolerance);
+}
+
+private void RemoveAllBidsEqualTo(double outputPrice)
+{
+    bid.RemoveAll(x =&gt; Math.Abs(x.price - outputPrice) &lt; Tolerance);
+}
+</code></pre>
+
+<p>With exception of <code>Trade</code> that still need improvement, and where you can apply same process, it seems to me that we've done pretty good work here.</p>
+
+<p>But I must repeat: with exception of one operation (moving <code>process</code> inside <code>CVB</code> instance) all we've done here is a function-based refactoring. As it's already said here, we might be as well programming in C or JS. I would highly recommend you to rethink your approach into more object-oriented one.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/14059" title="short permalink to this answer" class="short-link" id="link-post-14059">share</a><span class="lsep">|</span><a href="/posts/14059/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-07-26 20:34:18Z" class="relativetime">Jul 26 '12 at 20:34</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/15248/serg-rogovtsev"><div><img src="https://www.gravatar.com/avatar/26f98c0bfb1bd3ed8196c7279bfe470a?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/15248/serg-rogovtsev">Serg Rogovtsev</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">201</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-14059" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-22745" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">thank you very much, i like to comment on your answer but your answer is too long (a good thing) and not sectioned, maybe i do a follow up thread with your recommendations. i give you the tick for the best answer. thank you</span>
+	&ndash;&nbsp;
+		<span title="0 reputation" 
+		      class="comment-user">Clayton Leung</span>
+	<span class="comment-date" dir="ltr"><span title="2012-07-26 22:59:25Z" class="relativetime-clean">Jul 26 '12 at 22:59</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-14059" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="14057"></a>
+<div id="answer-14057" class="answer" data-answerid="14057" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="14057">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>There are a few things you can do here.</p>
+
+<ol>
+<li>Put each class in its own file. You don't really want to have to look through all of the class definitions to get to the code you care about. Typically every public class should have its own .cs file.</li>
+<li>Definitely split code out into smaller methods. Each method you write should have exactly <strong>one</strong> purpose. Take for example your processLine method - processing an entire line of text is made up of several different operations. You can split out an Initialize method, and each logical operation should go into its own method.</li>
+<li>Creating methods that are only called from one place is still a good thing. If you name your methods appropriately, it means you can look at the code and just read the name of the method to know what it's doing. As it is now, we can look at your code, but we have no idea why you're adding or subtracting any two numbers. We don't know what overall operation each block of code is computing or what it is really trying to calculate - simple methods can fix that.</li>
+<li>Rename your variables. The parameter 'c' is meaningless - what is 'c'? Looking through the method, you can't tell what it is or what it's used for. cvb is the same - you should give that array a meaningful name</li>
+<li>If you're going to be using the same array item over and over (cvb[c] for example) it can be more readable to extract it to its own variable. Save cvb[c] in a variable with a meaningful name so you don't have to look at the bracket syntax all over.</li>
+<li>Create a constant for 0.00000001 and give the const a name to describe what that number is being used for. Why are you comparing to that number? The name of your constant should answer that question.</li>
+</ol>
+
+<p>There are probably a few other things that you could dig into, but these are where I would start.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/14057" title="short permalink to this answer" class="short-link" id="link-post-14057">share</a><span class="lsep">|</span><a href="/posts/14057/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-07-26 18:50:42Z" class="relativetime">Jul 26 '12 at 18:50</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/17099/tim-copenhaver"><div><img src="https://www.gravatar.com/avatar/9aca139009aafcb5edf6897203cb2633?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/17099/tim-copenhaver">Tim Copenhaver</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">141</span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-14057" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-22743" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">thank you for your comment, i try to answer your comment             1. in my main program, i have about 10 cs file already, this is just one of the cs file. should i really try break up into smaller pieces? then i would like upwards of 40-50 cs file and then the number of cs files inself becomes a mess.           2 &amp; 3. will do so, thanks</span>
+	&ndash;&nbsp;
+		<span title="0 reputation" 
+		      class="comment-user">Clayton Leung</span>
+	<span class="comment-date" dir="ltr"><span title="2012-07-26 22:31:12Z" class="relativetime-clean">Jul 26 '12 at 22:31</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-22744" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">4. i actually have a reason for it. CVB stands for constantVolumeBar and c is short ofr contract number. if i have the whole thing, that would mean constantVolumebar[contactNumber].whatever, each variable will be like 20-30 character long, and it just goes really bad.         5. this is similar to 4. if i get a good meaningful name, it will be like 10-20 characters long, if i just use a single letter &#39;p&#39; for example, i am only saving 3-4 letters, please comment on it. 6. will do so, maybe i should create a method around it.</span>
+	&ndash;&nbsp;
+		<span title="0 reputation" 
+		      class="comment-user">Clayton Leung</span>
+	<span class="comment-date" dir="ltr"><span title="2012-07-26 22:38:41Z" class="relativetime-clean">Jul 26 '12 at 22:38</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-14057" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="14055"></a>
+<div id="answer-14055" class="answer" data-answerid="14055" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="14055">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Ideas:</p>
+
+<p><em>Do</em> create methods and call them. That does <em>not</em> defeat... And it's easy - just select that code and click: Refactor -> Extractmethod.</p>
+
+<p>Create <em>classes</em> and so, your variables will not pollute other classes with their names.</p>
+
+<p>You <em>can</em> create one method for the two parts you mentioned, which differ by +/-. Just have an extra argument for the method: an <code>int</code> that will either be 1 or -1...</p>
+
+<p>When creating new classes - you can put them in new files, and even in new folders (just right-click the project in solution explorer...) But beware - when creating new items in those folders - the namespace will be different. (But you can change it.)</p>
+
+<p>And, when everything else fails - use    <code>#region</code> - <code>#endregion</code></p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/14055" title="short permalink to this answer" class="short-link" id="link-post-14055">share</a><span class="lsep">|</span><a href="/posts/14055/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-07-26 18:44:14Z" class="relativetime">Jul 26 '12 at 18:44</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <span class="anonymous-gravatar"></span>
+    </div>
+    <div class="user-details">
+        ispiro<br>
+        
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-14055" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-14055" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="14056"></a>
+<div id="answer-14056" class="answer" data-answerid="14056" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="14056">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>You have a lot of classes nested under another class. Why not pull these out into their own files? It will greatly simplify the parent class.</p>
+
+<p>Also, a perfect example of where you should be creating other methods comes in your very large conditional block. Why not pull out the long if..else statement into a separate method? That will make the switch block much easier to read.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/14056" title="short permalink to this answer" class="short-link" id="link-post-14056">share</a><span class="lsep">|</span><a href="/posts/14056/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-07-26 18:49:17Z" class="relativetime">Jul 26 '12 at 18:49</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/15267/bort"><div><img src="https://www.gravatar.com/avatar/be3cd4da9fe291962de3be0eecb6c9f2?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/15267/bort">Bort</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">141</span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-14056" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-22741" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">This is a common practice in Java to make &quot;subclasses&quot; which is a concept that C# does not have.  A lot of Java gone C#.NET guys do this often not realizing it doesn&#39;t do anything different once compiled if it were in a stand alone file.</span>
+	&ndash;&nbsp;
+		<span title="0 reputation" 
+		      class="comment-user">VulgarBinary</span>
+	<span class="comment-date" dir="ltr"><span title="2012-07-26 19:14:34Z" class="relativetime-clean">Jul 26 '12 at 19:14</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-22742" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@ bort, i have deliberately nest the class together, as i feel like they should somehow group together. Before hand, i have only one &#39;CVB&#39; class with 50 variables in it, i have create subclasses so i can group them meaningfully. If i break the subclass into separate class, i will need to pass like 10 variables for each method, and since i pass the same variables all the time, i feel like group them together is better, please comment on it, as i have develop my own style all myself. i like to know how other people are doing it. thanks</span>
+	&ndash;&nbsp;
+		<span title="0 reputation" 
+		      class="comment-user">Clayton Leung</span>
+	<span class="comment-date" dir="ltr"><span title="2012-07-26 22:45:33Z" class="relativetime-clean">Jul 26 '12 at 22:45</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-22777" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@clayton you have to understand that classes are not there to &quot;group variables meaningfully&quot;, they&#39;re there to help you extract and define (and then divide and conquer) some functionality.</span>
+	&ndash;&nbsp;
+		<a href="/users/15248/serg-rogovtsev" 
+		   title="201 reputation" 
+		   class="comment-user">Serg Rogovtsev</a>
+	<span class="comment-date" dir="ltr"><span title="2012-07-27 18:12:49Z" class="relativetime-clean">Jul 27 '12 at 18:12</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-14056" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="14058"></a>
+<div id="answer-14058" class="answer" data-answerid="14058" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="14058">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><ol>
+<li><p><em>Please</em> refactor out the GOTOs into normal loops with conditions! :) PS: there is a 'goto case' that should have been used here instead of adding a label under the case, but I <em>still</em> would not recommend using it if you are going for readability and maintainability.</p></li>
+<li><p>Consider refactoring out each actionable block into a separate method, and have the method names reflect it's action (i.e. 'FindLargestTrade', 'GetPreviousOverflowVolume', 'GetTradeCap' etc..)</p></li>
+<li><p>Prefer using member variables in your classes to passing variables to each method (if all your class methods can be declared static, you might as well be writing in C)</p></li>
+</ol>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/14058" title="short permalink to this answer" class="short-link" id="link-post-14058">share</a><span class="lsep">|</span><a href="/posts/14058/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-07-26 19:04:35Z" class="relativetime">Jul 26 '12 at 19:04</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <span class="anonymous-gravatar"></span>
+    </div>
+    <div class="user-details">
+        Jared G<br>
+        
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-14058" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-14058" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/14054/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="14054" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="c2fcdba836c9d13e2116463b4c52ed93">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f14054%2fhow-to-improve-readability-of-my-code-for-a-medium-size-program%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f14054%2fhow-to-improve-readability-of-my-code-for-a-medium-size-program%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/c%23" class="post-tag" title="show questions tagged &#39;c#&#39;" rel="tag">c#</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">1744</span></span><br>
+<a href="/questions/tagged/readability" class="post-tag" title="show questions tagged &#39;readability&#39;" rel="tag">readability</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">203</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2012-07-26 18:39:57Z"><b>1 year ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>181 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2012-07-26 23:30:29Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-codereview.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/3810" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/3810/concise-null-checking-vs-readability" class="question-hyperlink">Concise null checking vs readability</a>
+</div>
+<div class="spacer">
+<a href="/q/7318" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/7318/best-way-to-make-parser-code-more-readable-and-efficient" class="question-hyperlink">Best way to make parser code more readable and efficient?</a>
+</div>
+<div class="spacer">
+<a href="/q/16211" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">5
+    </div>
+</a><a href="/questions/16211/how-can-i-make-this-fast-and-more-readable" class="question-hyperlink">How can I make this fast and more readable?</a>
+</div>
+<div class="spacer">
+<a href="/q/20740" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/20740/can-i-improve-this-code-for-readability-and-or-performance" class="question-hyperlink">Can I improve this code for readability and/or performance?</a>
+</div>
+<div class="spacer">
+<a href="/q/26107" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/26107/how-to-improve-readability-and-memory-footprint-of-this-haskell-script" class="question-hyperlink">How to improve readability and memory footprint of this haskell script?</a>
+</div>
+<div class="spacer">
+<a href="/q/26415" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/26415/is-there-a-safer-more-readable-way-of-using-this-code" class="question-hyperlink">Is there a safer/ more readable way of using this code?</a>
+</div>
+<div class="spacer">
+<a href="/q/29421" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/29421/calculus-program-code-review-and-suggestions" class="question-hyperlink">Calculus program &mdash; Code review and suggestions</a>
+</div>
+<div class="spacer">
+<a href="/q/30606" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/30606/how-can-i-improve-my-a-pathfinding-code-again" class="question-hyperlink">How can I improve my A* Pathfinding code? (again!)</a>
+</div>
+<div class="spacer">
+<a href="/q/31431" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/31431/which-of-these-two-is-better-in-terms-of-readability-and-function" class="question-hyperlink">Which of these two is better in terms of readability and function?</a>
+</div>
+<div class="spacer">
+<a href="/q/33038" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/33038/improving-readability-of-boolean-adder-generator" class="question-hyperlink">Improving readability of Boolean adder generator?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/14054" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/14054/ivc/da39');});
+</script>
+<noscript>
+    <div><img src="/posts/14054/ivc/da39" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-cs</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/14054/how-to-improve-readability-of-my-code-for-a-medium-size-program")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codereview.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.25.1176
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Code Review Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|c#|readability|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

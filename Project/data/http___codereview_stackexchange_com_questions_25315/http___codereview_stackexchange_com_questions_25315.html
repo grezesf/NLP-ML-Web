@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>c++ - All integer sequences given amount of integers and length of sequence - Code Review Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codereview/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Code Review Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeReview" />
+    <meta name="twitter:domain" content="codereview.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codereview/img/apple-touch-icon.png?v=bb26b8631f86"/>
+    <meta name="og:title" content="All integer sequences given amount of integers and length of sequence" />
+    <meta name="og:description" content="Given two integers, X and Y, you must create all possible integer sequences of length Y using the numbers from 1 to X.
+
+For certain reasons, the function must return a deque&amp;lt;deque&amp;lt;int&amp;gt; &amp;gt; " />
+    <meta name="og:url" content="http://codereview.stackexchange.com/questions/25315/all-integer-sequences-given-amount-of-integers-and-length-of-sequence"/>
+    <link rel="canonical" href="http://codereview.stackexchange.com/questions/25315/all-integer-sequences-given-amount-of-integers-and-length-of-sequence" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codereview/all.css?v=67e9087155b1">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;All integer sequences given amount of integers and length of sequence&#39;" href="/feeds/question/25315">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:0,shownCommentCount:0,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:25315});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('196', '25315');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('196');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385428459,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Code Review Stack Exchange","description":"Q&A for peer programmer code reviews","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f25315%2fall-integer-sequences-given-amount-of-integers-and-length-of-sequence">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f25315%2fall-integer-sequences-given-amount-of-integers-and-length-of-sequence">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Code Review
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Code Review Stack Exchange is a question and answer site for peer programmer code reviews. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/25315/all-integer-sequences-given-amount-of-integers-and-length-of-sequence" class="question-hyperlink">All integer sequences given amount of integers and length of sequence</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="25315"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="25315">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">5</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>Given two integers, <code>X</code> and <code>Y</code>, you must create all possible integer sequences of length <code>Y</code> using the numbers from 1 to <code>X</code>.</p>
+
+<p>For certain reasons, the function must return a <code>deque&lt;deque&lt;int&gt; &gt;</code> representing such (the primary <code>deque</code> holds all my sequences - each of then is a <code>deque</code> of <code>int</code>s).</p>
+
+<p>This is not a permutation generator.</p>
+
+<h1>Example Input</h1>
+
+<pre><code>X = 3, Y = 3
+</code></pre>
+
+<p>This means that I require sequences of length <code>3</code> each one. To compose the sequences, I use the integers <code>1</code>, <code>2</code>, and <code>3</code>.</p>
+
+<h1>Example Output</h1>
+
+<p>The previous input should produce:</p>
+
+<pre><code>1 1 1 
+1 1 2 
+1 1 3 
+1 2 1 
+1 2 2 
+1 2 3 
+1 3 1 
+1 3 2 
+1 3 3 
+2 1 1 
+2 1 2 
+2 1 3 
+2 2 1 
+2 2 2 
+2 2 3 
+2 3 1 
+2 3 2 
+2 3 3 
+3 1 1 
+3 1 2 
+3 1 3 
+3 2 1 
+3 2 2 
+3 2 3 
+3 3 1 
+3 3 2 
+3 3 3 
+</code></pre>
+
+<h1>My Idea</h1>
+
+<p>I'm not very good with this stuff. My approach is:</p>
+
+<ul>
+<li>Create a start and end integer
+<ul>
+<li>Start is <code>1</code> repeated <code>Y</code> times. So in the previous example it is <code>111</code></li>
+<li>End is <code>X</code> repeated <code>Y</code> times. So in the previous example it is <code>333</code></li>
+</ul></li>
+<li>I count <code>i</code> from <code>start</code> to <code>end</code>.
+<ul>
+<li>If <code>i</code> contains an invalid digit (like <code>4</code>, <code>5</code>,...), abort this sequence.</li>
+<li>If <code>i</code> is valid, then this sequence is valid, thus add it to my resulting <code>deque</code>.</li>
+<li>When a sequence is valid, due to my needs, I split the integer and make a <code>deque</code> of each of its digits.</li>
+</ul></li>
+</ul>
+
+<h1>Why I need a review</h1>
+
+<p>I think it is pretty clear that this method doesn't sound very efficient. So many wasted iterations! Can you help me improve this code, and, perhaps, shorten it?</p>
+
+<h1>My Attempt</h1>
+
+<p><em>Note, you may notice that instead of "sequences" I call then "procedures".</em></p>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;sstream&gt;
+#include &lt;deque&gt;
+
+using namespace std;
+
+// Converts a value to any type
+template &lt;typename T,typename S&gt;
+T convert(S original) {
+    stringstream ss; ss &lt;&lt; original;
+    T result; ss &gt;&gt; result;
+    return result;
+}
+
+// The actual function
+deque&lt;deque&lt;int&gt; &gt; allPossibleProcedures(int values, int depth) {
+    deque&lt;deque&lt;int&gt; &gt; result;
+    // I create a start point and an end point for my counting
+    string minString; for (int d = 0; d &lt; depth; ++d) { minString.append("1"); }
+    string limitString; for (int d = 0; d &lt; depth; ++d) { limitString.append(convert&lt;string&gt;(values)); }
+    int start = convert&lt;int&gt;(minString);
+    int limit = convert&lt;int&gt;(limitString);
+    // I begin counting
+    for (int i = start; i &lt;= limit; ++i) {
+        deque&lt;int&gt; procedure;
+        string text = convert&lt;string&gt;(i);
+        bool ok = true;
+        for (int c = 0; c &lt; text.length() &amp;&amp; ok; ++c) {
+            int x = convert&lt;int&gt;(text.at(c));
+            if (x &lt;= values &amp;&amp; x &gt; 0) {
+                // This is a valid character. Add to procedure.
+                procedure.push_back(x);
+            }else{
+                // Not a valid character. Abort this procedure.
+                ok = false;
+                break;
+            }
+        }
+        if (ok) {
+            result.push_back(procedure);
+        }
+    }
+    return result;
+}
+
+int main(int argc, const char * argv[]) {
+    deque&lt;deque&lt;int&gt; &gt;procedures = allPossibleProcedures(3,3);
+    for (int i = 0; i &lt; procedures.size(); ++i) {
+        for (int j = 0; j &lt; procedures[i].size(); ++j) {
+            cout &lt;&lt; procedures[i][j] &lt;&lt; " ";
+        }
+        cout &lt;&lt; endl;
+    }
+    return 0;
+}
+</code></pre>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/c%2b%2b" class="post-tag" title="show questions tagged &#39;c++&#39;" rel="tag">c++</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/25315" title="short permalink to this question" class="short-link" id="link-post-25315">share</a><span class="lsep">|</span><a href="/posts/25315/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-04-21 23:43:58Z" class="relativetime">Apr 21 at 23:43</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3089/omega"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/zJG3x.jpg?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3089/omega">Omega</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">192</span><span title="4 bronze badges"><span class="badge3"></span><span class="badgecount">4</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-25315" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-25315" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								3 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/25315/all-integer-sequences-given-amount-of-integers-and-length-of-sequence?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/25315/all-integer-sequences-given-amount-of-integers-and-length-of-sequence?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/25315/all-integer-sequences-given-amount-of-integers-and-length-of-sequence?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="25320"></a>
+<div id="answer-25320" class="answer accepted-answer" data-answerid="25320" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="25320">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>I don't have time to do a style review at the moment, so until I can expand on this later, I'll just suggest a different algorithm.</p>
+
+<hr>
+
+<p>Rather than depending on string manipulation and generating more items than you need, just take an arithmetic approach.</p>
+
+<p>In particular, you can take a deque of ints and add 1 to it until it is equal to the max value.</p>
+
+<pre><code>std::deque&lt; std::deque&lt;int&gt; &gt; results;
+std::deque&lt;int&gt; min(Y, 1);
+std::deque&lt;int&gt; max(Y, X);
+for (; min != max; min = increment(min, Y)) {
+    results.push_back(min);
+}
+results.push_back(max);
+</code></pre>
+
+<p>As a bit more explanation, a <code>std::deque&lt;unsigned int&gt;</code> is frequently used as a make-shift arbitrary precision integer. The way this is done is to have a sign flag, and then to see each element of the deque as part of a <code>radix = std::numeric_limits&lt;unsigned int&gt;::max()</code> number.</p>
+
+<p>As a concrete example, a <code>std::deque&lt;unsigned char&gt; d = {95, 14, 230}</code> would represent <code>95 * 255^2 + 14 * 255^1 + 230 * 255^0</code> in the same way common base ten <code>134 = 1 * 10^2 + 3 * 10^2 + 4 * 10^0</code>.</p>
+
+<p>Anyway, I'm getting carried away with this. </p>
+
+<p>What you're in need of is a much more specific case of this. Rather than making a generic adder, all you have to do is just add 1, and if that causes the lowest digit to overflow, push it back down to a 1 and carry the add up the chain.</p>
+
+<pre><code>std::deque&lt;int&gt; increment(std::deque&lt;int&gt; d, int Y)
+{
+    bool carry = true;
+    for (std::deque&lt;int&gt;::reverse_iterator it = d.rbegin(), end = d.rend(); it != end; ++it) {
+        *it += 1;
+        if (*it &gt; Y) {
+            *it = 1;
+        } else {
+            carry = false;
+        }
+    }
+    if (carry) {
+        d.push_front(1);
+    }
+    return d;
+}   
+</code></pre>
+
+<p>The above code is untested and unoptimized. It can probably be written more compactly, but it's been a long time since I've done anything like this, and I'm just trying to illustrate how it can be done arithmetically. </p>
+
+<p>Also, if you're concerned about performance, you might want to have <code>increment</code> mutate <code>d</code> rather than return a modified copy.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/25320" title="short permalink to this answer" class="short-link" id="link-post-25320">share</a><span class="lsep">|</span><a href="/posts/25320/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/25320/revisions" title="show all edits to this post">edited <span title="2013-04-23 15:31:57Z" class="relativetime">Apr 23 at 15:31</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-04-22 02:28:33Z" class="relativetime">Apr 22 at 2:28</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/7308/corbin"><div><img src="https://www.gravatar.com/avatar/11af8601946773463c77715ca0144f30?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/7308/corbin">Corbin</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">3,393</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="6 silver badges"><span class="badge2"></span><span class="badgecount">6</span></span><span title="21 bronze badges"><span class="badge3"></span><span class="badgecount">21</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-25320" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-39307" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Hello Corbin. I tested your code, but (3,3) gave me <a href="http://pastebin.com/neUny5N8" rel="nofollow">pastebin.com/neUny5N8</a> - I don&#39;t fully understand why.</span>
+	&ndash;&nbsp;
+		<a href="/users/3089/omega" 
+		   title="192 reputation" 
+		   class="comment-user owner">Omega</a>
+	<span class="comment-date" dir="ltr"><span title="2013-04-23 02:00:21Z" class="relativetime-clean">Apr 23 at 2:00</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-39310" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Omega Whoops, will edit my answer in a bit, but for now, change the ` min &lt;= max` to <code>min != max</code> and then after the loop add <code>results.push_back(max)</code>. Got overzealous and forgot that lexicographical ordering will not work here since 1111 is considered lexicographically less than 333.</span>
+	&ndash;&nbsp;
+		<a href="/users/7308/corbin" 
+		   title="3393 reputation" 
+		   class="comment-user">Corbin</a>
+	<span class="comment-date" dir="ltr"><span title="2013-04-23 03:12:07Z" class="relativetime-clean">Apr 23 at 3:12</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-39311" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I believe that now I get 111, 222, and 333. Hmm.</span>
+	&ndash;&nbsp;
+		<a href="/users/3089/omega" 
+		   title="192 reputation" 
+		   class="comment-user owner">Omega</a>
+	<span class="comment-date" dir="ltr"><span title="2013-04-23 03:19:53Z" class="relativetime-clean">Apr 23 at 3:19</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-39316" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Ok, I&#39;m not sure what the problem was, but I based myself on your code and got this working: <a href="http://pastebin.com/DAyc3Bhv" rel="nofollow">pastebin.com/DAyc3Bhv</a> - it looks nice, thanks a lot! Now I got to see how to make it faster.</span>
+	&ndash;&nbsp;
+		<a href="/users/3089/omega" 
+		   title="192 reputation" 
+		   class="comment-user owner">Omega</a>
+	<span class="comment-date" dir="ltr"><span title="2013-04-23 03:59:26Z" class="relativetime-clean">Apr 23 at 3:59</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-25320" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="25323"></a>
+<div id="answer-25323" class="answer" data-answerid="25323" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="25323">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>A question like this is basically crying out for recursion - we know we'll (effectively) need to loop <code>y</code> times from <code>1</code> to <code>x</code>. We can encode the loop number in the recursion:</p>
+
+<pre><code>void recurse(std::deque&lt;std::deque&lt;int&gt;&gt;&amp; deq, std::deque&lt;int&gt;&amp; d, 
+             int x, int y, int ymax)
+{
+    if(y == ymax) return;
+    for(int i = 1; i &lt;= x; ++i) {
+        d[y] = i;
+        deq.push_back(d);
+        recurse(deq, d, x, y + 1, ymax);   
+    }
+}
+</code></pre>
+
+<p>This is relatively safe, because we only recurse to a depth of <code>y</code>. Since the number of elements grows at a rate of <code>y^x</code>, any practical computable value will require <code>y</code> and <code>x</code> to be relatively small.</p>
+
+<p>Unfortunately the above generates some duplicate elements (it could be modified so that it did not). Some sorting and filtering out only unique values will give you what you want, however:</p>
+
+<pre><code>std::deque&lt;std::deque&lt;int&gt;&gt; all_sequences(int x, int y)
+{
+    std::deque&lt;std::deque&lt;int&gt;&gt; deq;
+    std::deque&lt;int&gt; d(y, x);
+    recurse(deq, d, x, 0, y);
+    std::sort(deq.begin(), deq.end(), [](const std::deque&lt;int&gt;&amp; d1, 
+                                         const std::deque&lt;int&gt;&amp; d2) 
+                                         { return d1 &lt; d2; });
+    auto it = std::unique(deq.begin(), deq.end());
+    deq.resize(std::distance(deq.begin(), it));
+    return deq;
+}
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/25323" title="short permalink to this answer" class="short-link" id="link-post-25323">share</a><span class="lsep">|</span><a href="/posts/25323/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-04-22 05:10:46Z" class="relativetime">Apr 22 at 5:10</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/20360/yuushi"><div><img src="https://www.gravatar.com/avatar/efd8b9bd74a53c42ef8af347ea9b45c2?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/20360/yuushi">Yuushi</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,363</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="24 bronze badges"><span class="badge3"></span><span class="badgecount">24</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-25323" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-39245" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Perhaps our brains just latched onto this in different ways, but I don&#39;t think this cries out for recursion at all. Your explanation of the recursion is practically explaining a loop transformed into recursion. To each his own, though, I suppose :).</span>
+	&ndash;&nbsp;
+		<a href="/users/7308/corbin" 
+		   title="3393 reputation" 
+		   class="comment-user">Corbin</a>
+	<span class="comment-date" dir="ltr"><span title="2013-04-22 07:24:42Z" class="relativetime-clean">Apr 22 at 7:24</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-39250" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Corbin Yeah, it&#39;s more of a &quot;to my mind ...&quot;. When I see a problem like this I immediately start looking for a recursive solution, but that may just be me.</span>
+	&ndash;&nbsp;
+		<a href="/users/20360/yuushi" 
+		   title="2363 reputation" 
+		   class="comment-user">Yuushi</a>
+	<span class="comment-date" dir="ltr"><span title="2013-04-22 08:00:06Z" class="relativetime-clean">Apr 22 at 8:00</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-25323" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="25322"></a>
+<div id="answer-25322" class="answer" data-answerid="25322" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="25322">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Say X = 3 and Y = 3, then the combination is:</p>
+
+<p>So basically, you have a:</p>
+
+<p>min number which is 111</p>
+
+<p>max number which is 333 </p>
+
+<p>so: </p>
+
+<ul>
+<li><p>calculate min number which is = the number 1 repeated Y times.</p></li>
+<li><p>calculate max number which is = the number X repeated Y times. </p></li>
+<li><p>you start with min number</p></li>
+<li><p>if last digit is &lt; X, add 1</p></li>
+<li>if last digit is = X, add (11 - X)</li>
+<li>if second from last digit is = X, add 100 to min</li>
+<li>repeat last three steps until the number you have is equal to max.</li>
+</ul>
+
+<p>This is the basic idea, you might need to tweak it a bit as the numbers get higher.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/25322" title="short permalink to this answer" class="short-link" id="link-post-25322">share</a><span class="lsep">|</span><a href="/posts/25322/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/25322/revisions" title="show all edits to this post">edited <span title="2013-04-22 06:04:55Z" class="relativetime">Apr 22 at 6:04</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-04-22 04:20:17Z" class="relativetime">Apr 22 at 4:20</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/9619/w-k-s"><div><img src="https://www.gravatar.com/avatar/fa6fca5f613944238a91d2daeba67b9d?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/9619/w-k-s">W.K.S</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">120</span><span title="7 bronze badges"><span class="badge3"></span><span class="badgecount">7</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-25322" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-25322" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/25315/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="25315" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f25315%2fall-integer-sequences-given-amount-of-integers-and-length-of-sequence%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f25315%2fall-integer-sequences-given-amount-of-integers-and-length-of-sequence%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/c%2b%2b" class="post-tag" title="show questions tagged &#39;c++&#39;" rel="tag">c++</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/c%2b%2b" class="post-tag" title="show questions tagged &#39;c++&#39;" rel="tag">c++</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">964</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-04-21 23:43:58Z"><b>7 months ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>175 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-04-23 15:31:57Z">7 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/3212" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/3212/improving-a-custom-integer-class" class="question-hyperlink">Improving a custom integer class</a>
+</div>
+<div class="spacer">
+<a href="/q/9915" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/9915/looking-for-some-pointers-to-improve-my-c-code" class="question-hyperlink">looking for some pointers to improve my C++ code</a>
+</div>
+<div class="spacer">
+<a href="/q/10848" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/10848/looking-for-better-implementation-of-algorithm-product-of-all-ints-in-array-b" class="question-hyperlink">Looking for better implementation of algorithm &mdash; Product of all ints in array besides that a index i</a>
+</div>
+<div class="spacer">
+<a href="/q/13424" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/13424/improving-a-custom-integer-class-2-0" class="question-hyperlink">Improving a custom integer class 2.0</a>
+</div>
+<div class="spacer">
+<a href="/q/17909" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/17909/print-all-interleavings-of-given-two-strings" class="question-hyperlink">Print all interleavings of given two strings</a>
+</div>
+<div class="spacer">
+<a href="/q/25197" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/25197/largest-sequence-found-in-all-strings" class="question-hyperlink">Largest sequence found in all strings</a>
+</div>
+<div class="spacer">
+<a href="/q/25212" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/25212/input-reading-two-values-separated-by-whitespace-per-line" class="question-hyperlink">Input reading: two values (separated by whitespace) per line</a>
+</div>
+<div class="spacer">
+<a href="/q/26222" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/26222/random-generation-from-sequences" class="question-hyperlink">Random Generation From Sequences</a>
+</div>
+<div class="spacer">
+<a href="/q/31842" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/31842/the-longest-alternating-sequence-in-c" class="question-hyperlink">The longest alternating sequence in C++</a>
+</div>
+<div class="spacer">
+<a href="/q/32593" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/32593/day-elapsed-since-today-from-a-given-date" class="question-hyperlink">Day elapsed since today from a given date</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/25315" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/25315/ivc/d12e');});
+</script>
+<noscript>
+    <div><img src="/posts/25315/ivc/d12e" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-cpp</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/25315/all-integer-sequences-given-amount-of-integers-and-length-of-sequence")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codereview.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.25.1177
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Code Review Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|c++|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

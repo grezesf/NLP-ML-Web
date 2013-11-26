@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>texas hold em - Complex split pot semantics for multiple All-In winners with differing amounts - Poker Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/poker/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/poker/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Poker Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackPoker" />
+    <meta name="twitter:domain" content="poker.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/poker/img/apple-touch-icon.png?v=95217ea3e096"/>
+    <meta name="og:title" content="Complex split pot semantics for multiple All-In winners with differing amounts" />
+    <meta name="og:description" content="I&#39;m writing a Poker Server piece of software and well, I want it to be accurate...
+
+Basically I want to know what the correct way to deal with this following situation is:
+
+[ second round of betting. " />
+    <meta name="og:url" content="http://poker.stackexchange.com/questions/554/complex-split-pot-semantics-for-multiple-all-in-winners-with-differing-amounts"/>
+    <link rel="canonical" href="http://poker.stackexchange.com/questions/554/complex-split-pot-semantics-for-multiple-all-in-winners-with-differing-amounts" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/poker/all.css?v=67e9087155b1">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Complex split pot semantics for multiple All-In winners with differing amounts&#39;" href="/feeds/question/554">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:2,shownCommentCount:2,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:554});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('379', '554');
+            
+                    });
+    </script>
+
+            <script type="text/javascript" src="http://sstatic.net/js/poker.js"></script>
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('379');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385427127,"enableUserHovercards":true,"site":{"name":"Poker Stack Exchange","description":"Q&A for serious players and enthusiasts of poker","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f554%2fcomplex-split-pot-semantics-for-multiple-all-in-winners-with-differing-amounts">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f554%2fcomplex-split-pot-semantics-for-multiple-all-in-winners-with-differing-amounts">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Poker
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/poker/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Poker Stack Exchange is a question and answer site for serious players and enthusiasts of poker. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/554/complex-split-pot-semantics-for-multiple-all-in-winners-with-differing-amounts" class="question-hyperlink">Complex split pot semantics for multiple All-In winners with differing amounts</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="554"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="554">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>1</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I'm writing a Poker Server piece of software and well, I want it to be accurate...</p>
+
+<p>Basically I want to know what the correct way to deal with this following situation is:</p>
+
+<pre><code>[ second round of betting. everyone has already contributed 5 units to the pot ]
+Player 1 raises the minimum bet to amount X (say 5 units)
+Player 2 calls amount X (calls 5 units)
+Player 3 has only a fraction of X. He calls All-in at this point and pays his remaining 3 units.
+Player 4 has only a fraction of X. He also calls All-in at this point and pays his remaining 1 unit.
+Player 5 folds.
+</code></pre>
+
+<p>The pot at this point contains <code>5 * 5</code> from the first round of betting plus <code>5 + 5 + 3 + 1</code> units making a total potential winnings of <code>39</code> units.</p>
+
+<pre><code>Player 4 goes on to win.
+Player 3 comes second.
+Player 1 and 2 comes third, with their best five cards all coming from the table.
+</code></pre>
+
+<p>How do I calculate how much money is spread out and who gets it? Is the following assertion correct or is this inaccurate and how?</p>
+
+<p><strong>Step 1</strong>:
+We rank the players by their cards if they are still in. So we get:</p>
+
+<pre><code>Player 4 (winner)
+Player 3 (winner of remaining money)
+Player 1 (split of remaining)
+Player 2 (split of remaining)
+</code></pre>
+
+<p><strong>Step 2</strong>:
+We scan that list in order to find the biggest contributions and create a ratio.</p>
+
+<pre><code>Player 4 (6 units total)
+Player 3 (8 units total)
+Player 1 (10 units total)
+Player 2 (10 units total)
+-- Pot contains 39 units
+-- Winners have contributed 34 units
+</code></pre>
+
+<p><strong>Step 3: Question. Is the ratio against the total pot... or the other winners?</strong>
+Is this correct?
+    <em>Get a ratio compared to others?</em></p>
+
+<pre><code>Player 4 gets contributed 6 units of 34 by other winners = eligible 17.647% of pot
+Player 3 gets contributed 8 units of 34 by other winners = eligible 23.529% of pot
+Player 1 gets contributed 10 units of 34 by other winners = eligible 29.412% of pot
+Player 2 gets contributed 10 units of 34 by other winners = eligible 29.412% of pot
+[ total adds up to 100% ]
+</code></pre>
+
+<p>If we do it based on the total pot... not on total contributions by winners we get:</p>
+
+<pre><code>Player 4 gets contributed 6 units of 39 of total pot = eligible 15.385% of pot
+Player 3 gets contributed 8 units of 39 of total pot = eligible 20.513% of pot
+Player 1 gets contributed 10 units of 39 of total pot = eligible 25.641% of pot
+Player 2 gets contributed 10 units of 39 of total pot = eligible 25.641% of pot
+[ total adds up to 87.18% ... so this is the wrong answer right? ]
+</code></pre>
+
+<p>So to continue with the first method... of calculating a ratio only between other winners can someone confirm the correct payout of the 39 units would be:</p>
+
+<pre><code>Player 4 gets 6.88 units back `((39 units * 17.647) / 100)` ?
+Player 3 gets 9.17 units back `((39 units * 23.529) / 100)`
+Player 1 gets 11.47 units back `((39 units * 29.412) / 100)`
+Player 2 gets 11.47 units back `((39 units * 29.412) / 100)`
+[ total pay out of 39 units = 39 units ]
+</code></pre>
+
+<p><strong>So my question is, Is this split pot formula accurate?</strong></p>
+
+<p>*<strong>EDIT ------------------------------ *</strong></p>
+
+<p>Ok this is clearly wrong. Everyone is getting an equal payout even though 3 of them lost. All they are getting out is what they bet put a tiny bit extra from the folded player. I now think the algorithm should do the following:</p>
+
+<pre><code>Player 4 wins. Paid 6 units. Takes upto 6 units from every player (including folded players)
+Player 3 wins. Takes remaining 1 unit from all players including folded players
+Player 1 and 2 split the rest..
+</code></pre>
+
+<p>This gives a result of:</p>
+
+<pre><code>Player 4 gets own Player 1's first 6, Player 2's first 6 ... All of Player 5's 5...
+Total winnings for Player 4 is 29 units.
+
+Player 3 gets to take winnings next. He contributed 2 units more than Player 3. So he takes 2 unit from everyone who has a unit still left in their pot.
+Total winnings for Player 3 is 6 units.
+
+Player 1 and Player 2 equally share the remainder giving them 2 units back each.
+</code></pre>
+
+<p>Is this correct?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/texas-hold-em" class="post-tag" title="show questions tagged &#39;texas-hold-em&#39;" rel="tag">texas-hold-em</a> <a href="/questions/tagged/poker-theory" class="post-tag" title="show questions tagged &#39;poker-theory&#39;" rel="tag">poker-theory</a> <a href="/questions/tagged/side-pots" class="post-tag" title="show questions tagged &#39;side-pots&#39;" rel="tag">side-pots</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/554" title="short permalink to this question" class="short-link" id="link-post-554">share</a><span class="lsep">|</span><a href="/posts/554/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/554/revisions" title="show all edits to this post">edited <span title="2012-03-25 19:13:37Z" class="relativetime">Mar 25 '12 at 19:13</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2012-03-25 18:30:02Z" class="relativetime">Mar 25 '12 at 18:30</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/364/philluminati"><div><img src="https://www.gravatar.com/avatar/1a579fbeaaf07ff7eb743eff940820b4?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/364/philluminati">Philluminati</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">118</span><span title="4 bronze badges"><span class="badge3"></span><span class="badgecount">4</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-554" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-642" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">It&#39;s worth me commenting that to win against a 39 unit pot, having gone all in with 6 units to win back less than 7 is a bit questionable.. which is why I post my understanding of the logic here.</span>
+	&ndash;&nbsp;
+		<a href="/users/364/philluminati" 
+		   title="118 reputation" 
+		   class="comment-user owner">Philluminati</a>
+	<span class="comment-date" dir="ltr"><span title="2012-03-25 18:31:34Z" class="relativetime-clean">Mar 25 '12 at 18:31</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-892" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Your method is error-prone and difficult to maintain. Check my answer :).</span>
+	&ndash;&nbsp;
+		<a href="/users/513/loc-nguyen" 
+		   title="483 reputation" 
+		   class="comment-user">Loc Nguyen</a>
+	<span class="comment-date" dir="ltr"><span title="2012-07-16 09:49:34Z" class="relativetime-clean">Jul 16 '12 at 9:49</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-554" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								2 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/554/complex-split-pot-semantics-for-multiple-all-in-winners-with-differing-amounts?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/554/complex-split-pot-semantics-for-multiple-all-in-winners-with-differing-amounts?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/554/complex-split-pot-semantics-for-multiple-all-in-winners-with-differing-amounts?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="555"></a>
+<div id="answer-555" class="answer accepted-answer" data-answerid="555" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="555">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">8</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>There have been several posts already here explaining how to compute side-pots (note that the subject of penalty blinds has not been dealt with but that is another topic).</p>
+
+<p>Here's one such topic:</p>
+
+<p><a href="http://poker.stackexchange.com/questions/462/how-are-side-pots-built">How are side pots built?</a></p>
+
+<blockquote>
+  <p>Question. Is the ratio against the total pot... or the other winners?
+  Is this correct? Get a ratio compared to others?</p>
+</blockquote>
+
+<p>The question doesn't make much sense because you're not expressing side-pots as a "ratio" of the total pot.  That is not how pots, pots winnings, pots rake and "pots-splitting" are computed.  You're never expressing winning as a ratio of the total pot.</p>
+
+<p>What you do is you compute exactly how many pots and side-pots there are and see which players are eligible for which pot.</p>
+
+<p>In your example, there are exactly three pots:</p>
+
+<ul>
+<li><p>pot 1: 29  (pot one could also be called the "main pot")</p></li>
+<li><p>pot 2: 6 (pot two could also be called "side-pot 1")</p></li>
+<li><p>pot 3: 4 (pot three could also be called "side-pot 2")</p></li>
+</ul>
+
+<p>The sum of all these pots gives the total pot (39).</p>
+
+<p>Pot 1 has 29 because player 4 is eligible for up to "6".  How many players did put up "up to 6"?  Five players.  Four of which who did put 6 in and one of them  (player 5) who did put 5 in.  This gives 6 * 4 + 5 * 1.</p>
+
+<blockquote>
+  <p>having gone all in with 6 units to win back less than 7 is a bit
+  questionable</p>
+</blockquote>
+
+<p>That would indeed be questionable.  Thankfully this is not at all how it works.  Player four wins back 29, so he's making a net win of 23 (29 - 6).  You can also get that 23 by computing: 3 players matching up to 6 (18) + one player matching up to 5 (18 + 5, gives the net win of 23).</p>
+
+<p>Pot 2 has 6 units because it's 2 * 3.  You can verify this by checking how many players can match up to 8 (there are only three players who can do that), and then remove what already went into pot 1.  Three players did put more than 6 in, so you have 3 * 2.</p>
+
+<p>Pot 3 has 4 units.  There are two players who can match up to 10.  Once you remove from their stack what already went into the two other pots, this leaves 4 unit in the last pot.</p>
+
+<p>Player 4 has the best hand and wins 29 (+23 net)</p>
+
+<p>Player 3 has the second best hand and wins back pot 2, which only has 6.  So although player 3 is a "winner", he's making a net of -2  (he did put 8 in but only got 6 back).  This is normal because he's "winnning", but he's still beat by player 4.</p>
+
+<p>Players 1 and 2 do split the remainder (pot 3), which has only 4 units.  So they each get back 2 out of their 10 (net loss: -8).</p>
+
+<p>Player 5 did lose its 5.  Net loss: -5</p>
+
+<p>Which gives:</p>
+
+<pre><code>+23
+ -2
+ -8
+ -8
+ -5
+---
+  0
+</code></pre>
+
+<p>Which adds up to zero and which is normal since in the absence of rake poker is (chip-wise) a zero-sum game.</p>
+
+<p>As a final note, I'd advice to use as few decimal computation as possible when implementing an online poker client: the last thing you want are approximation errors.</p>
+
+<p>The only tricky case is when players are splitting a pot.  In some cases there are no issue (like above, where two players share an even pot), but in other cases you may have problems.... For example if three players are sharing a pot that has 8 cents (can happen at micro-limits).  In that case two players must get 3 cents back and one of them must get 2 cents back (giving 2 / 2 / 4 would be a mistake).  There's simply no way around that and as far as I know the player who gets only 2 (while the two other gets 3) is randomly chosen.</p>
+
+<p>But, once again, trying to express each pot as a % of the total pot is a recipe for approximation errors so don't do that.</p>
+
+<p>Moreover, in every single case, no matter how many pots there are, the exact amount of every single pot can be precisely computed, down to the cent.</p>
+
+<p>Note that there may be edgy cases, like what you should do when a player posts a "penalty blind"...  Basically it's chips you did put in, but contrarily to any other chips you did put in, it does not really count towards determining the various pot sizes (besides the fact that the penalty blind is added to one of the pot).</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/555" title="short permalink to this answer" class="short-link" id="link-post-555">share</a><span class="lsep">|</span><a href="/posts/555/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/555/revisions" title="show all edits to this post">edited <span title="2012-03-25 23:51:58Z" class="relativetime">Mar 25 '12 at 23:51</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-03-25 23:44:17Z" class="relativetime">Mar 25 '12 at 23:44</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/30/tacticalcoder"><div><img src="https://www.gravatar.com/avatar/c89f021eb00606531b47ac046ebd810a?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/30/tacticalcoder">TacticalCoder</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">819</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-555" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-643" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">great answer!!!!</span>
+	&ndash;&nbsp;
+		<a href="/users/215/amigal" 
+		   title="944 reputation" 
+		   class="comment-user">amigal</a>
+	<span class="comment-date" dir="ltr"><span title="2012-03-26 09:40:12Z" class="relativetime-clean">Mar 26 '12 at 9:40</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-645" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@amigal: ah ah, thanks... But I&#39;ve got no merit: I&#39;ve been forced to deal with all this for a poker software I&#39;m developing (a tracker &amp; HUD)  ; )    In some case it&#39;s tricky because some sites do not write out the side pots details (only the total pot amount is shown) and it&#39;s kinda tricky to determine the pot sizes (which is important, for example, if you want to compute the all-in expected value, etc.).   : )</span>
+	&ndash;&nbsp;
+		<a href="/users/30/tacticalcoder" 
+		   title="819 reputation" 
+		   class="comment-user">TacticalCoder</a>
+	<span class="comment-date" dir="ltr"><span title="2012-03-26 11:31:36Z" class="relativetime-clean">Mar 26 '12 at 11:31</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-649" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">This is a brilliant answer @TacticalCoder. I always figured that because you could work out a ratio in hindsight, you could work it out upfront but now I can see that you can&#39;t. Thank you.</span>
+	&ndash;&nbsp;
+		<a href="/users/364/philluminati" 
+		   title="118 reputation" 
+		   class="comment-user owner">Philluminati</a>
+	<span class="comment-date" dir="ltr"><span title="2012-03-26 22:16:33Z" class="relativetime-clean">Mar 26 '12 at 22:16</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-555" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="754"></a>
+<div id="answer-754" class="answer" data-answerid="754" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="754">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Coding sidepot management from "sidepot rules" is not very easy. Having done this myself, I'll give a general algorithm in two phases. This approach doesn't care about pot sizes, so any overlay to the pot, such as penalty blinds, is irrelevant. You will also be able to rake sidepots in proper sequence if you need to.</p>
+
+<p><strong>Manage Sidepots</strong></p>
+
+<ol>
+<li>Manage the sidepots at the end of each street/round. The number of new sidepots is simply one less than the number of different player bet totals, <em>after</em> returning any uncalled bets to the last aggressor.</li>
+<li>Keep a list of the last sidepot each player is eligible to win.</li>
+</ol>
+
+<p><strong>Award Sidepots</strong></p>
+
+<ol>
+<li>Evaluate hands, building a list of hand ranks. If the game is High/Low Split (e.g. 8 or Better), do all Low awarding before any High.</li>
+<li>Going through your sidepots, build a list of winners of a particular sidepot (the list will consist of a single player unless there are ties). These winners should fit the eligibility built in the managed phase. Be careful not to award ineligible players shares of pots for which they tie by hand rank (an easy mistake that will depend on your hand evaluator).</li>
+<li>Award each winner his down-rounded share of each sidepot, half of that if this is a Low award, taking the award amount out of that sidepot (so that when you run High after Low, you don't have to deal with the logic of splitting).</li>
+<li>Distribute the remainder by share. You may want to start from the small blind or there will be a bias for the zeroith seat. If you do steps 3 and 4 right, there should be no round-off errors.</li>
+</ol>
+
+<p>Calculating sidepots at any point in the hand based on player chip contribution is another way and probably the intuitive way. However, you have to remember to (a) keep a side count of miscellaneous dead money and (b) include contributions from players that have folded earlier in the hand (the biggest downside of the contribution method, in my opinion).</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/754" title="short permalink to this answer" class="short-link" id="link-post-754">share</a><span class="lsep">|</span><a href="/posts/754/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/754/revisions" title="show all edits to this post">edited <span title="2012-07-19 12:40:01Z" class="relativetime">Jul 19 '12 at 12:40</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-07-16 09:27:46Z" class="relativetime">Jul 16 '12 at 9:27</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/513/loc-nguyen"><div><img src="https://www.gravatar.com/avatar/f49e7769117d6e6849513b2815a4de63?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/513/loc-nguyen">Loc Nguyen</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">483</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-754" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-754" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/554/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="554" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+noCode: true,            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f554%2fcomplex-split-pot-semantics-for-multiple-all-in-winners-with-differing-amounts%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f554%2fcomplex-split-pot-semantics-for-multiple-all-in-winners-with-differing-amounts%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/texas-hold-em" class="post-tag" title="show questions tagged &#39;texas-hold-em&#39;" rel="tag">texas-hold-em</a> <a href="/questions/tagged/poker-theory" class="post-tag" title="show questions tagged &#39;poker-theory&#39;" rel="tag">poker-theory</a> <a href="/questions/tagged/side-pots" class="post-tag" title="show questions tagged &#39;side-pots&#39;" rel="tag">side-pots</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/texas-hold-em" class="post-tag" title="show questions tagged &#39;texas-hold-em&#39;" rel="tag">texas-hold-em</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">114</span></span><br>
+<a href="/questions/tagged/poker-theory" class="post-tag" title="show questions tagged &#39;poker-theory&#39;" rel="tag">poker-theory</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">46</span></span><br>
+<a href="/questions/tagged/side-pots" class="post-tag" title="show questions tagged &#39;side-pots&#39;" rel="tag">side-pots</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">4</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2012-03-25 18:30:02Z"><b>1 year ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>976 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2012-07-19 12:40:01Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-poker.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/462" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">7</div>
+	</a>
+	<a href="/questions/462/how-are-side-pots-built" class="question-hyperlink">How are side pots built?</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/6" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/6/texas-holdem-rules" class="question-hyperlink">Texas Hold&#39;em Rules</a>
+</div>
+<div class="spacer">
+<a href="/q/91" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/91/do-i-call-a-turn-all-in-with-kk-with-against-a-possible-flush" class="question-hyperlink">Do I call a turn all-in with KK with against a possible flush?</a>
+</div>
+<div class="spacer">
+<a href="/q/220" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">5
+    </div>
+</a><a href="/questions/220/call-river-all-in-after-missing-flush-draw-but-hitting-ak" class="question-hyperlink">Call river all-in after missing flush-draw but hitting AK?</a>
+</div>
+<div class="spacer">
+<a href="/q/390" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/390/ante-bb-all-in-what-can-the-bb-win" class="question-hyperlink">Ante + BB all-in, what can the BB win?</a>
+</div>
+<div class="spacer">
+<a href="/q/402" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/402/what-is-thetop-five-cards-rule-and-how-does-it-apply-to-splitting-pots" class="question-hyperlink">What is the&ldquo;Top Five Cards&rdquo; rule and how does it apply to splitting pots?</a>
+</div>
+<div class="spacer">
+<a href="/q/462" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/462/how-are-side-pots-built" class="question-hyperlink">How are side pots built?</a>
+</div>
+<div class="spacer">
+<a href="/q/1033" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">6
+    </div>
+</a><a href="/questions/1033/do-previous-bets-count-towards-all-in-raises" class="question-hyperlink">Do previous bets count towards All-In raises?</a>
+</div>
+<div class="spacer">
+<a href="/q/1326" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/1326/1-2-nl-call-this-villains-all-in-with-top-pair-ace-kicker" class="question-hyperlink">1/2 NL: Call this villain&#39;s all-in with top pair, ace kicker?</a>
+</div>
+<div class="spacer">
+<a href="/q/1417" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">5
+    </div>
+</a><a href="/questions/1417/what-i-did-was-right" class="question-hyperlink">What I did was right?</a>
+</div>
+<div class="spacer">
+<a href="/q/1602" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/1602/are-non-standard-verbal-declarations-such-as-same-bet-or-i-put-you-all-in-bi" class="question-hyperlink">Are non-standard verbal declarations such as &ldquo;same bet&rdquo; or &ldquo;I put you all-in&rdquo; binding?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/554" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/554/ivc/d3ae');});
+</script>
+<noscript>
+    <div><img src="/posts/554/ivc/d3ae" class="dno" alt="" width="0" height="0"></div>
+</noscript></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/554/complex-split-pot-semantics-for-multiple-all-in-winners-with-differing-amounts")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.poker.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.25.1177
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Poker Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|texas-hold-em|poker-theory|side-pots|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

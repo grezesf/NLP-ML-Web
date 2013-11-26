@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Nim Game in Haskell - Code Review Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codereview/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Code Review Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeReview" />
+    <meta name="twitter:domain" content="codereview.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codereview/img/apple-touch-icon.png?v=bb26b8631f86"/>
+    <meta name="og:title" content="Nim Game in Haskell" />
+    <meta name="og:description" content="I wrote Nim Game in Haskell. Since I&#39;m just learning any review comments are highly appreciated.
+
+module Nim where 
+import Char 
+import List
+import Maybe
+
+--Domain 
+--Nim is a mathematical game of " />
+    <meta name="og:url" content="http://codereview.stackexchange.com/questions/7623/nim-game-in-haskell"/>
+    <link rel="canonical" href="http://codereview.stackexchange.com/questions/7623/nim-game-in-haskell" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codereview/all.css?v=886a92d67293">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Nim Game in Haskell&#39;" href="/feeds/question/7623">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:0,shownCommentCount:0,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:7623});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('196', '7623');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('196');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385413879,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Code Review Stack Exchange","description":"Q&A for peer programmer code reviews","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"c2fcdba836c9d13e2116463b4c52ed93","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"fe5cdf2fdb00","js/full.en.js":"f103476d11b6","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f7623%2fnim-game-in-haskell">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f7623%2fnim-game-in-haskell">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Code Review
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Code Review Stack Exchange is a question and answer site for peer programmer code reviews. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/7623/nim-game-in-haskell" class="question-hyperlink">Nim Game in Haskell</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="7623"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="7623">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">8</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>2</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I wrote <a href="http://en.wikipedia.org/wiki/Nim">Nim Game</a> in Haskell. Since I'm just learning any review comments are highly appreciated.</p>
+
+<pre><code>module Nim where 
+import Char 
+import List
+import Maybe
+
+--Domain 
+--Nim is a mathematical game of strategy 
+--in which two players take turns removing objects from distinct heaps. 
+--On each turn, a player must remove at least one object, and may remove 
+--any number of objects provided they all come from the same heap.
+--Read more at http://en.wikipedia.org/wiki/Nim
+--
+type Board = [Int]  --number of objects in each heap
+type Heap = Int     --Heap id
+type Turn = (Int, Int)  --heap and number of objects to remove 
+
+--Build new board according to old one and turn.
+applyTurn :: Turn -&gt; Board -&gt; Board
+applyTurn t b = map 
+    (\ (i, v) -&gt; if (i == fst t) then v - snd t else v)
+    (zip [1..] b)
+
+--Check if board is empty. When it is, game is over.
+empty :: Board -&gt; Bool
+empty b = all (&lt;= 0) b
+
+--Returns tupples of (heap index, number of object in the heap).
+indexedHeaps :: Board -&gt; [(Heap, Int)]
+indexedHeaps b = zip [1..] b
+
+--Returns heaps that contains one or more objects.
+availableHeaps :: Board -&gt; [Heap]
+availableHeaps b = map fst (filter (\ (_, h) -&gt; h &gt; 0) (indexedHeaps b))
+
+--Return number of objects in the heap.
+availableObjectsByHeap :: Board -&gt; Heap -&gt; Int
+availableObjectsByHeap b h = snd (head (
+    filter (\ (i, _) -&gt; i == h) (indexedHeaps b)))
+
+--IO Utils
+--
+--Read Int from console. There could be validation using predicate.
+promtInt :: String -&gt; (Int -&gt; Bool) -&gt; IO Int
+promtInt msg p = do 
+    putStr (msg ++ "&gt; ")
+    c &lt;- getChar
+    ignored &lt;- getLine
+    let x = ((ord c) - ord('0'))
+    if(p x) 
+        then return x 
+        else promtInt msg p
+
+--Read Int from console. Int should be in range.
+promtIntFromRange :: String -&gt; (Int, Int) -&gt; IO Int
+promtIntFromRange msg (from, to) = promtInt newMsg p where 
+    newMsg = msg ++ "[" ++ show from ++ ";" ++ show to ++"]" 
+    p v = v &gt;= from &amp;&amp; v &lt;= to
+
+--Read Int from console. Int should be in set.
+promtIntFromSet :: String -&gt; [Int] -&gt; IO Int
+promtIntFromSet msg s = promtInt newMsg p where 
+    newMsg = msg ++ show s
+    p v = isJust (find (== v) s)
+
+--Print each string from new line.
+putAllStr :: [String] -&gt; IO()
+putAllStr [x] = do putStrLn x
+putAllStr (x:xs) = do 
+    putAllStr [x]
+    putAllStr xs
+
+--Game specific IO
+--
+--Dialog for inputing turn data.
+readTurn :: Board -&gt; IO(Turn)
+readTurn b = do 
+    heap &lt;- promtIntFromSet "heap" (availableHeaps b)
+    objects &lt;- promtIntFromRange "number" 
+        (1, (availableObjectsByHeap b heap))
+    return (heap, objects)
+
+--Displays board in user friendly interface.
+showBoard :: Board -&gt; IO()
+showBoard b = do 
+    putAllStr (map stringify (indexedHeaps b)) where
+        objectsAtHeap n =  concat(replicate n "*")
+        heapIndex  i = "[" ++ show i ++ "]"
+        stringify (i, n) =  heapIndex i ++ objectsAtHeap n
+
+--Game
+--
+--Actually game.
+play :: IO(Board)-&gt; IO(Board)
+play b = do 
+    board &lt;- b
+    if (empty board)
+    then return [] 
+    else do 
+        showBoard board
+        t &lt;- readTurn board
+        play (return (applyTurn t board))
+
+--Runner function.
+nim :: IO() 
+nim = do    
+    ignored &lt;- play (return [1, 2, 3, 1])
+    putStrLn "done"
+</code></pre>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/haskell" class="post-tag" title="show questions tagged &#39;haskell&#39;" rel="tag">haskell</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/7623" title="short permalink to this question" class="short-link" id="link-post-7623">share</a><span class="lsep">|</span><a href="/posts/7623/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/7623/revisions" title="show all edits to this post">edited <span title="2012-01-09 10:37:37Z" class="relativetime">Jan 9 '12 at 10:37</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2012-01-09 10:24:39Z" class="relativetime">Jan 9 '12 at 10:24</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/8817/stas-kurilin"><div><img src="https://www.gravatar.com/avatar/ed94e87a269db197f3bcfdecd279fefa?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/8817/stas-kurilin">Stas Kurilin</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">192</span><span title="8 bronze badges"><span class="badge3"></span><span class="badgecount">8</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-7623" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-7623" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								3 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/7623/nim-game-in-haskell?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/7623/nim-game-in-haskell?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/7623/nim-game-in-haskell?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="7636"></a>
+<div id="answer-7636" class="answer accepted-answer" data-answerid="7636" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="7636">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">10</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>First, here's an overview on style and idiom without changing anything too significantly.</p>
+
+<pre><code>import Data.Char 
+import Data.List
+import Data.Maybe
+</code></pre>
+
+<p>Switching to the current names for these modules. The non-hierarchical names exist only for compatibility. </p>
+
+<pre><code>type Board = [Integer]         -- number of objects in each heap
+type Heap = Integer            -- Heap id
+type Turn = (Integer, Integer) -- heap and number of objects to remove 
+</code></pre>
+
+<p>There's really no reason to use <code>Int</code> except for number-crunching with small integers. Not that it's likely to matter here, but getting in the habit of using <code>Integer</code> by default means you don't have to worry about bugs due to, say, a counter in a long-running program exceeding the maximum size of <code>Int</code>. Mystery bugs that only occur on large data sets or after running for a long time are <em>not fun</em> to track down.</p>
+
+<p>The only problem is that some standard functions take only <code>Int</code> arguments for no good reason, rather than any integral type. This is a misfeature of the standard libraries and not one you should emulate.</p>
+
+<pre><code>applyTurn :: Turn -&gt; Board -&gt; Board
+applyTurn (heapId, removed) board = zipWith decHeap [1..] board
+  where decHeap idx n | idx == heapId = n - removed
+                      | otherwise     = n
+</code></pre>
+
+<p>Several things here: </p>
+
+<ul>
+<li>Pattern matching on the turn instead of using <code>fst</code> and <code>snd</code>, as well as better names for everything.</li>
+<li>Zipping lists and then mapping a function over that is what <code>zipWith</code> is for.</li>
+<li>Replacing the lambda with a function in the <code>where</code> clause, and using guards on that rather than an <code>if</code> expression.</li>
+</ul>
+
+<p>I've left the algorithm unchanged for now. It could be improved, as Paul Martel shows, but using lists for this purpose at all is really not ideal. I'll return to this point later.</p>
+
+<pre><code>availableHeaps :: Board -&gt; [Heap]
+availableHeaps b = [heapId | (heapId, count) &lt;- indexedHeaps b, count &gt; 0]
+</code></pre>
+
+<p>A slightly different way of writing the same list comprehension Paul Martel used. Many Haskell programmers prefer using map, filter, &amp;c. directly; doing so, it would look like this instead:</p>
+
+<pre><code>availableHeaps b = map fst . filter ((&gt; 0) . snd) $ indexedHeaps b
+</code></pre>
+
+<p>But I think the list comprehension is clearer in this case.</p>
+
+<pre><code>availableObjectsByHeap :: Board -&gt; Heap -&gt; Integer
+availableObjectsByHeap board heapId = board !! (fromInteger heapId - 1)
+</code></pre>
+
+<p>The <code>(!!)</code> function gives zero-based indexing into a list, so we adjust to account for heap numbers starting from 1. It takes an <code>Int</code> argument, as noted above. Using <code>(!!)</code>--or any sort of indexing into a list--continues to be less than ideal, and a sign that some other data structure should be used.</p>
+
+<p>I'll be correcting the spelling of "prompt" as I go, incidentally.</p>
+
+<p>Now, we could try the following to tidy up <code>promptInt</code>:</p>
+
+<pre><code>promptInt :: String -&gt; (Integer -&gt; Bool) -&gt; IO Integer
+promptInt msg p = do 
+    putStr (msg ++ "&gt; ")
+    x &lt;- readLn -- Don't actually do this!
+    if p x
+        then return x 
+        else promptInt msg p
+</code></pre>
+
+<p>Unfortunately, this is a distinct <em>disimprovement</em>. Using <code>readLn</code> raises an exception when it can't parse the user input, which makes it needlessly awkward to use. Rather than messing with catching exceptions, we'll whip up a replacement using the <code>reads</code> function, which returns a list of possible parses, and use <code>Maybe</code> to indicate success vs. failure.</p>
+
+<pre><code>-- Why doesn't this exist in the Prelude?
+maybeRead :: (Read a) =&gt; String -&gt; Maybe a
+maybeRead str = listToMaybe [x | (x, "") &lt;- reads str]
+
+maybeReadLn :: (Read a) =&gt; IO (Maybe a)
+maybeReadLn = fmap maybeRead getLine
+</code></pre>
+
+<p>Now, we can fix <code>promptInt</code> correctly:</p>
+
+<pre><code>promptInt :: String -&gt; (Integer -&gt; Bool) -&gt; IO Integer
+promptInt msg p = do 
+    putStr (msg ++ "&gt; ")
+    mx &lt;- maybeReadLn
+    case mx of
+        Just x | p x -&gt; return x
+        _            -&gt; promptInt msg p
+</code></pre>
+
+<p>Using the standard <code>Read</code> instance instead of doing calculations with <code>ord</code> makes it easier to see what's going on here. The predicate has also been combined with the pattern match, so the default pattern handles both parse failures and invalid inputs.</p>
+
+<pre><code>promptIntFromRange :: String -&gt; (Integer, Integer) -&gt; IO Integer
+promptIntFromRange msg (from, to) = promptInt newMsg inRange 
+  where newMsg = concat [msg, "[", show from, ";", show to, "]"]
+        inRange v = v &gt;= from &amp;&amp; v &lt;= to
+</code></pre>
+
+<p>It's more typical to have <code>where</code> begin a new line, in order to clearly distinguish a <code>where</code> clause from a multi-line expression. Using <code>concat</code> tends to be tidier than repeated <code>(++)</code>, and again improving a name--for an arbitrary predicate <code>p</code> makes sense, but here we have a specific predicate, and should indicate such.</p>
+
+<pre><code>promptIntFromSet :: String -&gt; [Integer] -&gt; IO Integer
+promptIntFromSet msg s = promptInt (msg ++ show s) (`elem` s)
+</code></pre>
+
+<p>This can all be done in-line, since the standard library already has a function for your predicate.</p>
+
+<pre><code>putAllStr :: [String] -&gt; IO ()
+putAllStr xs = mapM_ putStrLn xs
+</code></pre>
+
+<p>You'll probably reinvent large sections of the standard library at various points while learning Haskell. Figuring out that you've done so is half the fun.</p>
+
+<pre><code>printBoard :: Board -&gt; IO ()
+printBoard board = putAllStr $ showHeaps board
+
+showHeaps :: Board -&gt; [String]
+showHeaps board = map showIdxHeap (indexedHeaps board)
+
+showIdxHeap :: (Heap, Integer) -&gt; String
+showIdxHeap (heapId, n) = heapIndex ++ objects
+  where heapIndex = concat ["[", show heapId, "]"]
+        objects = genericReplicate n '*'
+</code></pre>
+
+<p>As Paul Martel did, I've separated the string representation of the board from the printing. Note that <code>String</code> is simply <code>[Char]</code>, so replicating <code>'*'</code> suffices. The use of <code>genericReplicate</code> here is because of using <code>Integer</code> rather than <code>Int</code>.</p>
+
+<pre><code>play :: Board -&gt; IO Board
+play board | empty board = return []
+           | otherwise   = do printBoard board
+                              t &lt;- readTurn board
+                              play $ applyTurn t board
+
+nim :: IO () 
+nim = do play [1, 2, 3, 1]
+         putStrLn "done"
+</code></pre>
+
+<p>There's no reason for <code>play</code> to take an <code>IO Board</code>, so I've removed the superfluous <code>return</code> and binding steps. This also allows using guards for the <code>empty</code> check, removing the conditional expression.</p>
+
+<hr>
+
+<p>Ok. With that out of the way, time to revisit the earlier remarks about data structures. Lists in Haskell are sequential in nature, so indexing into them or replacing a single element is clumsy and inefficient at best. We'd like something more suitable here, and a good default choice is the <code>Data.Map</code> module. </p>
+
+<pre><code>import qualified Data.Map as Map
+
+type HeapId = Integer
+type Turn = (HeapId, Integer)
+type Board = Map.Map HeapId Integer
+</code></pre>
+
+<p>The module is imported qualified to avoid name clashes with various list functions. I've also renamed <code>Heap</code> to <code>HeapId</code> to be more explicit about what it represents.</p>
+
+<pre><code>applyTurn :: Turn -&gt; Board -&gt; Board
+applyTurn (heapId, removed) board = Map.adjust (subtract removed) heapId board
+
+empty :: Board -&gt; Bool
+empty b = Map.null $ availableHeaps b
+
+availableHeaps :: Board -&gt; Board
+availableHeaps b = Map.filter (&gt; 0) b
+</code></pre>
+
+<p>Converting the game state functions to use <code>Data.Map</code>. They're much simpler this way, and some functions I've eliminated entirely.</p>
+
+<pre><code>nim :: IO () 
+nim = do play $ Map.fromList (zip [1..] [1, 2, 3, 1])
+         putStrLn "done"
+</code></pre>
+
+<p>Initializing the game doesn't need to change much, but note the construction using <code>Map.fromList</code>, assigning specific keys to each heap by counting from 1.</p>
+
+<pre><code>promptHeapSize :: String -&gt; Board -&gt; IO (HeapId, Integer)
+promptHeapSize msg board = do 
+    heapId &lt;- promptInt msg' (`Map.member` board)
+    case Map.lookup heapId board of
+        Nothing -&gt; promptHeapSize msg board
+        Just sz -&gt; return (heapId, sz)
+  where msg' = msg ++ show (Map.keys board)
+</code></pre>
+
+<p>Here I've replaced <code>promptIntFromSet</code> with a smarter function that makes sure the requested heap number is valid, and returns the number of objects as well.</p>
+
+<pre><code>readTurn :: Board -&gt; IO Turn
+readTurn b = do 
+    (heapId, heapSz) &lt;- promptHeapSize "heap" b
+    objects &lt;- promptIntFromRange "number" (1, heapSz)
+    return (heapId, objects)
+
+showHeaps :: Board -&gt; [String]
+showHeaps board = map showIdxHeap (Map.assocs board)
+</code></pre>
+
+<p>Only a couple very minor changes here.</p>
+
+<pre><code>runNextTurn :: Board -&gt; IO Board
+runNextTurn b = do 
+    printBoard board
+    t &lt;- readTurn board
+    play $ applyTurn t board
+
+play :: Board -&gt; IO Board
+play board | empty board = return board
+           | otherwise   = runNextTurn board &gt;&gt;= play
+</code></pre>
+
+<p>I split <code>play</code> into two functions--one that does a single turn, and one that loops until the game is done. This doesn't really change anything, but makes it easier if you want to have more complicated interaction than the same loop every time.</p>
+
+<p>The complete program using <code>Data.Map</code>, along with some other minor changes I made along the way, <a href="https://gist.github.com/1588045">can be found here</a>.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/7636" title="short permalink to this answer" class="short-link" id="link-post-7636">share</a><span class="lsep">|</span><a href="/posts/7636/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-01-10 09:25:54Z" class="relativetime">Jan 10 '12 at 9:25</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/4949/c-a-mccann"><div><img src="https://www.gravatar.com/avatar/16083b420cf4d594c36b0e2f68e1dea1?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/4949/c-a-mccann">C. A. McCann</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">216</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-7636" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-11985" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Thanks a lot for so detailed review. It&#39;s shows places where I don&#39;t know syntax/standard library. So I can go further. Also it&#39;s good diff between my and professional Haskell code. I believe this comment will make from me much better programmer.</span>
+	&ndash;&nbsp;
+		<a href="/users/8817/stas-kurilin" 
+		   title="192 reputation" 
+		   class="comment-user owner">Stas Kurilin</a>
+	<span class="comment-date" dir="ltr"><span title="2012-01-10 09:59:54Z" class="relativetime-clean">Jan 10 '12 at 9:59</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-13987" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Wow, that&#39;s an excellent code review!  I&#39;m only wondering why, in the second part of your answer, haven&#39;t you decided to write <code>empty</code> and <code>availableHeaps</code> in a pointfree form?  Arguably it would render the functions even easier to read: <code>availableHeaps = Map.filter (&gt; 0)</code> and <code>empty = Map.null . availableHeaps</code>, or even: <code>empty = Map.null . Map.filter (&gt; 0)</code>.</span>
+	&ndash;&nbsp;
+		<a href="/users/144/bolo" 
+		   title="368 reputation" 
+		   class="comment-user">Bolo</a>
+	<span class="comment-date" dir="ltr"><span title="2012-02-13 00:54:18Z" class="relativetime-clean">Feb 13 '12 at 0:54</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-13989" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Bolo: Mostly hypercorrection for my usual coding style, which heavily uses pointless forms. I try not to inflict that on people new to the language. ;] But yes, I agree, in those two cases the point-free way is probably better in general.</span>
+	&ndash;&nbsp;
+		<a href="/users/4949/c-a-mccann" 
+		   title="216 reputation" 
+		   class="comment-user">C. A. McCann</a>
+	<span class="comment-date" dir="ltr"><span title="2012-02-13 01:27:06Z" class="relativetime-clean">Feb 13 '12 at 1:27</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-7636" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="7627"></a>
+<div id="answer-7627" class="answer" data-answerid="7627" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="7627">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">5</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>These variations seem more direct and make better use of standard functions and idioms</p>
+
+<pre><code>--Build new board according to old one and turn.
+applyTurn :: Turn -&gt; Board -&gt; Board
+applyTurn (heap, removed) b = 
+    let (before, (at:after)) = splitAt (heap-1) b
+    in  before ++ ((at-removed):after)
+
+--Returns heaps that contains one or more objects.
+availableHeaps :: Board -&gt; [Heap]
+availableHeaps b = [fst x | x &lt;- indexedHeaps b, (snd x) &gt; 0]
+</code></pre>
+
+<p>I'm still learning Haskell, too. There MAY be a more usual way of getting the nth element than head (drop (n-1) list).</p>
+
+<pre><code>--Return number of objects in the heap.
+availableObjectsByHeap :: Board -&gt; Heap -&gt; Int
+availableObjectsByHeap b h = head (drop (h-1) b)
+</code></pre>
+
+<p>I broke up your showBoard into putBoard and my showBoard to further isolate the pure code. This also makes a better analogy with "show" which does formatting but not IO</p>
+
+<pre><code>--Format board for user friendly interface.
+showBoard :: Board -&gt; [String]
+showBoard b = map stringify (indexedHeaps b) where
+        objectsAtHeap n =  concat(replicate n "*")
+        heapIndex  i = "[" ++ show i ++ "]"
+        stringify (i, n) =  heapIndex i ++ objectsAtHeap n
+
+--Displays board in user friendly interface.
+putBoard :: Board -&gt; IO()
+putBoard b = do 
+    putAllStr (showBoard b)
+</code></pre>
+
+<p>I just changed showBoard to putBoard, below.</p>
+
+<pre><code>--Game
+--
+--Actually game.
+play :: IO(Board)-&gt; IO(Board)
+play b = do 
+    board &lt;- b
+    if (empty board)
+    then return [] 
+    else do 
+        putBoard board
+        t &lt;- readTurn board
+        play (return (applyTurn t board))
+</code></pre>
+
+<p>Aside from that, "prompt" is usually spelled with one more 'p' than "tuples" has.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/7627" title="short permalink to this answer" class="short-link" id="link-post-7627">share</a><span class="lsep">|</span><a href="/posts/7627/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-01-10 00:23:47Z" class="relativetime">Jan 10 '12 at 0:23</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/9598/paul-martel"><div><img src="https://www.gravatar.com/avatar/e0e65452a0eb9207371a9389706ab472?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/9598/paul-martel">Paul Martel</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,142</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-7627" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-11983" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Thanks a lot. It&#39;s very good answer, but unfortunately I can accept only one.</span>
+	&ndash;&nbsp;
+		<a href="/users/8817/stas-kurilin" 
+		   title="192 reputation" 
+		   class="comment-user owner">Stas Kurilin</a>
+	<span class="comment-date" dir="ltr"><span title="2012-01-10 09:46:47Z" class="relativetime-clean">Jan 10 '12 at 9:46</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-7627" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="7642"></a>
+<div id="answer-7642" class="answer" data-answerid="7642" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="7642">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Here's a simpler way to write the list-based <em>availableHeaps</em>, using <em>findIndices</em> from Data.List:</p>
+
+<pre><code>availableHeaps' :: Board -&gt; [Heap]
+availableHeaps' = findIndices (&gt; 0)
+</code></pre>
+
+<p>Of course the Map version by McCann is more appropriate for the Nim data structure, but it's always good to become familiar with the standard list functions too.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/7642" title="short permalink to this answer" class="short-link" id="link-post-7642">share</a><span class="lsep">|</span><a href="/posts/7642/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-01-10 17:16:17Z" class="relativetime">Jan 10 '12 at 17:16</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/9751/rafael-caetano"><div><img src="https://www.gravatar.com/avatar/47810bcd3821df9ddd24ccaf951f79bd?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/9751/rafael-caetano">Rafael Caetano</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">61</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-7642" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-11998" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Thanks for the point. It&#39;s always good to be familiar with standard API)</span>
+	&ndash;&nbsp;
+		<a href="/users/8817/stas-kurilin" 
+		   title="192 reputation" 
+		   class="comment-user owner">Stas Kurilin</a>
+	<span class="comment-date" dir="ltr"><span title="2012-01-10 18:00:10Z" class="relativetime-clean">Jan 10 '12 at 18:00</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-7642" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/7623/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="7623" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="c2fcdba836c9d13e2116463b4c52ed93">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f7623%2fnim-game-in-haskell%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f7623%2fnim-game-in-haskell%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/haskell" class="post-tag" title="show questions tagged &#39;haskell&#39;" rel="tag">haskell</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/haskell" class="post-tag" title="show questions tagged &#39;haskell&#39;" rel="tag">haskell</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">162</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2012-01-09 10:24:39Z"><b>1 year ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>1247 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2012-01-10 17:16:17Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-codereview.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/1204" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">10
+    </div>
+</a><a href="/questions/1204/game-of-life-in-haskell" class="question-hyperlink">Game of Life in Haskell</a>
+</div>
+<div class="spacer">
+<a href="/q/3310" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/3310/how-might-i-improve-the-structure-of-this-io-based-haskell-source" class="question-hyperlink">How might I improve the structure of this IO based Haskell source?</a>
+</div>
+<div class="spacer">
+<a href="/q/6351" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/6351/basic-directory-text-entry-create-delete-traversal-bash-inspired-in-ha" class="question-hyperlink">Basic Directory / &#39;Text entry&#39; create / delete / traversal (bash inspired) in Haskell</a>
+</div>
+<div class="spacer">
+<a href="/q/9950" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/9950/reversi-othello-game-engine-command-line-interface" class="question-hyperlink">Reversi (Othello) game engine + command line interface</a>
+</div>
+<div class="spacer">
+<a href="/q/12572" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/12572/language-parser-in-haskell" class="question-hyperlink">Language parser in haskell</a>
+</div>
+<div class="spacer">
+<a href="/q/15079" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/15079/haskell-poker-hand-kata" class="question-hyperlink">Haskell Poker Hand Kata</a>
+</div>
+<div class="spacer">
+<a href="/q/15250" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/15250/writing-an-infinitely-running-whiletrue-user-input-function-in-haskell" class="question-hyperlink">Writing an infinitely running( while(true) { } ) user input function in haskell</a>
+</div>
+<div class="spacer">
+<a href="/q/18268" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/18268/brickbreaker-spinoff-in-haskell" class="question-hyperlink">BrickBreaker Spinoff in Haskell</a>
+</div>
+<div class="spacer">
+<a href="/q/18497" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/18497/hangman-is-this-small-haskell-game-clean-and-idiomatic-haskell-code" class="question-hyperlink">Hangman: Is this small Haskell game clean and idiomatic Haskell code?</a>
+</div>
+<div class="spacer">
+<a href="/q/18981" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/18981/a-stack-based-language-interpreter-in-haskell" class="question-hyperlink">A stack-based language interpreter in Haskell</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/7623" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/7623/ivc/22ee');});
+</script>
+<noscript>
+    <div><img src="/posts/7623/ivc/22ee" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-hs</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/7623/nim-game-in-haskell")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codereview.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.25.1176
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Code Review Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|haskell|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

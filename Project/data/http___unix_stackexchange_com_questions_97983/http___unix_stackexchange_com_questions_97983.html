@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>centos - HISTTIMEFORMAT modification. In /etc/bach.rc or /etc/profile? - Unix & Linux Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/unix/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/unix/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Unix &amp; Linux Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackUnix" />
+    <meta name="twitter:domain" content="unix.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/unix/img/apple-touch-icon@2.png?v=32fb07f7ce26"/>
+    <meta name="og:title" content="HISTTIMEFORMAT modification. In /etc/bach.rc or /etc/profile?" />
+    <meta name="og:description" content="I&#39;d like to add the date/time to the output of the history command in CentOS/RHEL 6. I would like this to apply to all users on the machine by default. This itself is easy. It seems to just be a ca..." />
+    <meta name="og:url" content="http://unix.stackexchange.com/questions/97983/histtimeformat-modification-in-etc-bach-rc-or-etc-profile"/>
+    <link rel="canonical" href="http://unix.stackexchange.com/questions/97983/histtimeformat-modification-in-etc-bach-rc-or-etc-profile" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/unix/all.css?v=d9a893265e8d">
+    
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:0,shownCommentCount:0,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:97983});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('106', '97983');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('106');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385432061,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Unix & Linux Stack Exchange","description":"Q&A for users of Linux, FreeBSD and other Un*x-like operating systems.","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f97983%2fhisttimeformat-modification-in-etc-bach-rc-or-etc-profile">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f97983%2fhisttimeformat-modification-in-etc-bach-rc-or-etc-profile">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Unix &amp; Linux
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/unix/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Unix &amp; Linux Stack Exchange is a question and answer site for users of Linux, FreeBSD and other Un*x-like operating systems.. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/97983/histtimeformat-modification-in-etc-bach-rc-or-etc-profile" class="question-hyperlink">HISTTIMEFORMAT modification. In /etc/bach.rc or /etc/profile? [duplicate]</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="97983"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="97983">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+<div class="question-status question-originals-of-duplicate">
+    <p>This question already has an answer here:</p>
+    <ul>
+        <li>
+            <a href="/questions/74076/permanent-environment-variable-for-all-users" dir="ltr">Permanent Environment Variable for all users</a>
+                <span class="question-originals-answer-count">
+                        
+                            1 answer
+                        
+                </span>
+        </li>
+    </ul>
+</div>
+        <p>I'd like to add the date/time to the output of the <code>history</code> command in CentOS/RHEL 6. I would like this to apply to all users on the machine by default. This itself is easy. It seems to just be a case of adding:</p>
+
+<pre><code>export HISTTIMEFORMAT="%Y%m%d %T  "
+</code></pre>
+
+<p>Where should that be added? I've seen some conflicting info on whether to add this to <code>/etc/profile</code> or <code>/etc/bashrc</code>. I believe both would work equally well.</p>
+
+<p>Does anyone have any advice as to which file I should use for this specific modification?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/centos" class="post-tag" title="show questions tagged &#39;centos&#39;" rel="tag">centos</a> <a href="/questions/tagged/command-history" class="post-tag" title="show questions tagged &#39;command-history&#39;" rel="tag">command-history</a> <a href="/questions/tagged/bashrc" class="post-tag" title="show questions tagged &#39;bashrc&#39;" rel="tag">bashrc</a> <a href="/questions/tagged/profile" class="post-tag" title="show questions tagged &#39;profile&#39;" rel="tag">profile</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/97983" title="short permalink to this question" class="short-link" id="link-post-97983">share</a><span class="lsep">|</span><a href="/posts/97983/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-10-28 23:48:55Z" class="relativetime">Oct 28 at 23:48</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/30008/benbradley"><div><img src="https://www.gravatar.com/avatar/087fa2456242aaa2bfa73a5b48a843b4?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/30008/benbradley">benbradley</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">145</span><span title="4 bronze badges"><span class="badge3"></span><span class="badgecount">4</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-97983" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-97983" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+    <div class="question-status">
+        <h2>                    <b>marked</b> as duplicate by <a href="/users/7453/slm">slm</a>, <a href="/users/22222/terdon">terdon</a>, <a href="/users/6761/jasonwryan">jasonwryan</a>, <a href="/users/4358/patrick">Patrick</a>, <a href="/users/33055/anthon">Anthon</a> <span title="2013-10-29 03:53:28Z" class="relativetime">Oct 29 at 3:53</span>
+</h2>
+        <p> This question has been asked before and already has an answer.
+If those answers do not fully address your question, please <a href="/questions/ask">ask a new question</a>.</p>
+    </div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								2 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/97983/histtimeformat-modification-in-etc-bach-rc-or-etc-profile?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/97983/histtimeformat-modification-in-etc-bach-rc-or-etc-profile?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/97983/histtimeformat-modification-in-etc-bach-rc-or-etc-profile?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="97985"></a>
+<div id="answer-97985" class="answer accepted-answer" data-answerid="97985" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="97985">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>I'd create a file with that string in it and add it to this directory, <code>/etc/profiled.d</code>. Call the file <code>custom_histformat.sh</code>, or something similar.</p>
+
+<p>Generally you don't want to add customizations to either of those 2 files (<code>/etc/profile</code> or <code>/etc/bashrc</code>), since they're owned by the system. Customizations can go into the <code>/etc/profile.d</code> directory.</p>
+
+<h3>UPDATE #1</h3>
+
+<p>At the risk of beating a dead horse I thought it important to highlight why one would use <code>/etc/profile.d</code> over the directories that were mentioned in the question or in <a href="http://unix.stackexchange.com/a/97987/7453">@Gilles answer</a>.</p>
+
+<p>If you look through any of the testing around RHCE they'll specify that <code>/etc/profile.d</code> is an appropriate place to make this type of change. So if you're taking the test and answer anything other than this, or <code>/etc/bashrc</code> or <code>/etc/profile</code>, you'd be wrong. Call it a RH-ism but this is just how it's done on distros based on Red Hat.. Other distros have other approaches.</p>
+
+<ul>
+<li><a href="http://www.redhat.com/training/courses/ex300/" rel="nofollow">http://www.redhat.com/training/courses/ex300/</a></li>
+</ul>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/97985" title="short permalink to this answer" class="short-link" id="link-post-97985">share</a><span class="lsep">|</span><a href="/posts/97985/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/97985/revisions" title="show all edits to this post">edited <span title="2013-10-29 02:14:14Z" class="relativetime">Oct 29 at 2:14</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-10-28 23:59:27Z" class="relativetime">Oct 28 at 23:59</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/7453/slm"><div><img src="https://www.gravatar.com/avatar/6a61a40ee46871d39e99835351e178ef?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/7453/slm">slm</a><br>
+        <span class="reputation-score" title="reputation score 43285" dir="ltr">43.3k</span><span title="5 gold badges"><span class="badge1"></span><span class="badgecount">5</span></span><span title="29 silver badges"><span class="badge2"></span><span class="badgecount">29</span></span><span title="76 bronze badges"><span class="badge3"></span><span class="badgecount">76</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-97985" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-151155" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">This is great info. I was not aware of <code>profile.d</code> and what you say makes perfect sense. I also was not sure as to whether this would be something specific to bash that would be best placed in a bash-specific file or something that can apply to all shells. Thanks!</span>
+	&ndash;&nbsp;
+		<a href="/users/30008/benbradley" 
+		   title="145 reputation" 
+		   class="comment-user owner">benbradley</a>
+	<span class="comment-date" dir="ltr"><span title="2013-11-06 16:52:34Z" class="relativetime-clean">Nov 6 at 16:52</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-97985" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="97987"></a>
+<div id="answer-97987" class="answer" data-answerid="97987" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="97987">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>If you define an environment variable for all users, it belongs in <code>/etc/profile</code> or <code>/etc/environment</code>. If you define an environment variable for your account, it belongs in <code>~/.environment</code> or <code>~/.profile</code>.</p>
+
+<p><code>HISTTIMEFORMAT</code> works if you set it in the environment, but you shouldn't do it this way, because different shells may interpret it differently. (I don't think this is an issue for this particular variable however.) You should instead set it in bash's initialization file: <code>~/.bashrc</code>. Some installations have a system-wide bash initialization file like <code>/etc/bashrc</code>, but since this is a user preference, you shouldn't use that.</p>
+
+<p>So put <code>HISTTIMEFORMAT="%Y%m%d %T  "</code> in <code>~/.bashrc</code>.</p>
+
+<p>For the differences between these files, see
+<a href="http://unix.stackexchange.com/questions/3052/alternative-to-bashrc">Alternative to .bashrc</a></p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/97987" title="short permalink to this answer" class="short-link" id="link-post-97987">share</a><span class="lsep">|</span><a href="/posts/97987/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-10-29 00:03:28Z" class="relativetime">Oct 29 at 0:03</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/885/gilles"><div><img src="https://www.gravatar.com/avatar/a717291747c76567bb0f086e15ae6e43?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/885/gilles">Gilles</a><br>
+        <span class="reputation-score" title="reputation score 167248" dir="ltr">167k</span><span title="21 gold badges"><span class="badge1"></span><span class="badgecount">21</span></span><span title="203 silver badges"><span class="badge2"></span><span class="badgecount">203</span></span><span title="448 bronze badges"><span class="badge3"></span><span class="badgecount">448</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-97987" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-149052" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">He wants to do it for all users, so /etc/profile.d is the appropriate place on a RH box. If you look in this directory on any RH based distro it&#39;s littered with example after example of exactly what he&#39;s trying to do.</span>
+	&ndash;&nbsp;
+		<a href="/users/7453/slm" 
+		   title="43285 reputation" 
+		   class="comment-user">slm</a>
+	<span class="comment-date" dir="ltr"><span title="2013-10-29 00:05:19Z" class="relativetime-clean">Oct 29 at 0:05</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-97987" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+				
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/centos" class="post-tag" title="show questions tagged &#39;centos&#39;" rel="tag">centos</a> <a href="/questions/tagged/command-history" class="post-tag" title="show questions tagged &#39;command-history&#39;" rel="tag">command-history</a> <a href="/questions/tagged/bashrc" class="post-tag" title="show questions tagged &#39;bashrc&#39;" rel="tag">bashrc</a> <a href="/questions/tagged/profile" class="post-tag" title="show questions tagged &#39;profile&#39;" rel="tag">profile</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/centos" class="post-tag" title="show questions tagged &#39;centos&#39;" rel="tag">centos</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">1007</span></span><br>
+<a href="/questions/tagged/command-history" class="post-tag" title="show questions tagged &#39;command-history&#39;" rel="tag">command-history</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">152</span></span><br>
+<a href="/questions/tagged/bashrc" class="post-tag" title="show questions tagged &#39;bashrc&#39;" rel="tag">bashrc</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">67</span></span><br>
+<a href="/questions/tagged/profile" class="post-tag" title="show questions tagged &#39;profile&#39;" rel="tag">profile</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">54</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-10-28 23:48:55Z"><b>28 days ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>49 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-10-29 02:14:14Z">28 days ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/74076" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">4</div>
+	</a>
+	<a href="/questions/74076/permanent-environment-variable-for-all-users" class="question-hyperlink">Permanent Environment Variable for all users</a>
+</div><div class="spacer">
+	<a href="/q/3052" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">28</div>
+	</a>
+	<a href="/questions/3052/alternative-to-bashrc" class="question-hyperlink">Alternative to .bashrc</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/20733" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/20733/load-my-profile-for-bash-in-emacs-terminal-buffer-multi-term-mode" class="question-hyperlink">Load my .profile for bash in Emacs terminal buffer? (multi-term mode)</a>
+</div>
+<div class="spacer">
+<a href="/q/20990" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/20990/where-does-etc-profile-file-in-debian-come-from" class="question-hyperlink">Where does /etc/profile file in Debian come from?</a>
+</div>
+<div class="spacer">
+<a href="/q/33704" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/33704/how-to-make-changes-to-etc-profile-take-effect" class="question-hyperlink">How to make changes to /etc/profile take effect</a>
+</div>
+<div class="spacer">
+<a href="/q/36762" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/36762/where-is-the-system-profile-that-gets-sourced-at-login-on-centos-5-8" class="question-hyperlink">Where is the system profile that gets sourced at login on CentOS 5.8?</a>
+</div>
+<div class="spacer">
+<a href="/q/40708" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">12
+    </div>
+</a><a href="/questions/40708/what-is-the-difference-between-profile-bashrc-bash-profile-gnomer" class="question-hyperlink">What is the difference between ~/.profile, ~/.bashrc, ~/.bash_profile, ~/.gnomerc, /etc/bash_bashrc, /etc/screenrc &hellip;?</a>
+</div>
+<div class="spacer">
+<a href="/q/43382" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/43382/profile-in-sco" class="question-hyperlink">.profile in SCO</a>
+</div>
+<div class="spacer">
+<a href="/q/45684" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/45684/what-is-the-difference-between-profile-and-bash-profile" class="question-hyperlink">what is the difference between ~/.profile and ~/.bash_profile</a>
+</div>
+<div class="spacer">
+<a href="/q/50288" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/50288/path-in-etc-profile-not-inherited-by-user-shell" class="question-hyperlink">$PATH in /etc/profile not inherited by user shell</a>
+</div>
+<div class="spacer">
+<a href="/q/56248" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/56248/global-etc-profile-setenv-or-export-overwriting-user-settings-in-profile" class="question-hyperlink">Global /etc/profile setenv or export overwriting user settings in .profile</a>
+</div>
+<div class="spacer">
+<a href="/q/68229" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/68229/how-to-colorize-root-in-red-in-centos" class="question-hyperlink">How to colorize &ldquo;root&rdquo; in red in CentOS?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+		<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/97983/ivc/14ef');});
+</script>
+<noscript>
+    <div><img src="/posts/97983/ivc/14ef" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/97983/histtimeformat-modification-in-etc-bach-rc-or-etc-profile")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.unix.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+                <div id="additional-notices">
+                    Linux is a registered trademark of Linus Torvalds. UNIX is a registered trademark of The Open Group. <br>This site is not affiliated with Linus Torvalds or The Open Group in any way.
+                </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Unix &amp; Linux Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|centos|command-history|bashrc|profile|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

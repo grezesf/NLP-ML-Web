@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>oop - PHP Currency Conversion class with caching - Code Review Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codereview/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Code Review Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeReview" />
+    <meta name="twitter:domain" content="codereview.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codereview/img/apple-touch-icon.png?v=bb26b8631f86"/>
+    <meta name="og:title" content="PHP Currency Conversion class with caching" />
+    <meta name="og:description" content="https://github.com/Prashles/PHP-Currency-Convert-Class
+
+&amp;lt;?php
+
+/*
+*
+* PHP Validation Class
+* 
+* The currency rates are fetched and cached for the whole day
+*
+* http://prash.me
+* " />
+    <meta name="og:url" content="http://codereview.stackexchange.com/questions/19338/php-currency-conversion-class-with-caching"/>
+    <link rel="canonical" href="http://codereview.stackexchange.com/questions/19338/php-currency-conversion-class-with-caching" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codereview/all.css?v=886a92d67293">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;PHP Currency Conversion class with caching&#39;" href="/feeds/question/19338">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:0,shownCommentCount:0,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:19338});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('196', '19338');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('196');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385413181,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Code Review Stack Exchange","description":"Q&A for peer programmer code reviews","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"c2fcdba836c9d13e2116463b4c52ed93","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"fe5cdf2fdb00","js/full.en.js":"f103476d11b6","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f19338%2fphp-currency-conversion-class-with-caching">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f19338%2fphp-currency-conversion-class-with-caching">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Code Review
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Code Review Stack Exchange is a question and answer site for peer programmer code reviews. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/19338/php-currency-conversion-class-with-caching" class="question-hyperlink">PHP Currency Conversion class with caching</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="19338"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="19338">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p><a href="https://github.com/Prashles/PHP-Currency-Convert-Class" rel="nofollow">https://github.com/Prashles/PHP-Currency-Convert-Class</a></p>
+
+<pre><code>&lt;?php
+
+/*
+*
+* PHP Validation Class
+* 
+* The currency rates are fetched and cached for the whole day
+*
+* http://prash.me
+* http://github.com/prashles
+*
+* Uses http://rate-exchange.appspot.com/currency currency API
+* Returns JSON - based on Google's API
+*
+* @author Prash Somaiya
+*
+*/
+
+Class Convert {
+
+    /*
+    * Constructor sets to TRUE if $cacheFolder is writable
+    *
+    * FALSE by default
+    */
+
+    private $cachable = FALSE;
+
+    /*
+    * The folder where the cache files are stored
+    * 
+    * Set in the constructor. //convert by default
+    */
+
+    private $cacheFolder;
+
+    /*
+    * Length of cache in seconds
+    *
+    * Default is 1 day
+    */
+
+    private $cacheTimeout;
+
+    /*
+    * Check if folder is writable for caching
+    *
+    * Set $cache to FALSE on call to disable caching
+    * $folder is where the cache files will be stored
+    *
+    * Set $folder to 'dcf' for the default folder
+    *
+    * Set $cacheTimeout for length of caching in seconds
+    */
+
+    public function __construct($cache = TRUE, $folder = 'dcf', $cacheTimeout = 86400)
+    {
+        $this-&gt;cacheFolder = ($folder == 'dcf') ? dirname(__FILE__).'/convert/' : $folder;
+
+        if (is_writable($this-&gt;cacheFolder) &amp;&amp; $cache == TRUE) {        
+            $this-&gt;cachable     = TRUE;
+            $this-&gt;cacheTimeout = $cacheTimeout;        
+        }
+    }
+
+    /*
+    * Main function for converting
+    *
+    * Set $round to FALSE to return full amount
+    */
+
+    public function convert($amount = 1, $from = 'GBP', $to = 'USD', $round = TRUE)
+    {
+
+        # Check if cache file exists and pull rate
+
+        $rate = $this-&gt;get_cache($from.$to);
+
+        if ($rate !== FALSE) {          
+            $return = $rate * $amount;          
+        }
+
+        else {
+
+            if (!$this-&gt;validate_currency($to, $from)) {
+                throw new Exception('Invalid currency code - must be exactly 3 letters');               
+            }
+
+            $response = $this-&gt;fetch($amount, $from, $to);
+
+            if (isset($response['err'])) {
+                throw new Exception('Invalid input');
+            }
+
+            $return = $response['v'];
+
+            $this-&gt;new_cache($from.$to, $response['rate']);
+
+        }
+
+        return ($round) ? abs(round($return, 2)) : abs($return);
+
+    }
+
+    /*
+    * Fetches data from external API
+    */
+
+    protected function fetch($amount, $from, $to)
+    {
+        $url    = "http://rate-exchange.appspot.com/currency?q={$amount}&amp;from={$from}&amp;to={$to}";
+        $amount = (float) $amount;
+
+        if (in_array('curl', get_loaded_extensions())) {
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_URL, "http://rate-exchange.appspot.com/currency?q={$amount}&amp;from={$from}&amp;to={$to}");
+
+            $response = json_decode(curl_exec($ch), true);
+        }
+        else {
+            $response = json_decode(file_get_contents($url), true);
+        }
+
+        # Caches the rate for future
+        $this-&gt;new_cache($from.$to, $response['rate']);
+
+        return $response;       
+
+    }
+
+    /*
+    * Checks if file is cached then returns rate
+    */
+
+    protected function get_cache($file) {
+
+        if ($this-&gt;cachable &amp;&amp; file_exists($this-&gt;cacheFolder.strtoupper($file).'.convertcache')) {             
+            $file = file($this-&gt;cacheFolder.$file.'.convertcache');
+
+            if ($file[0] &lt; (time() - $this-&gt;cacheTimeout)) {    
+                return FALSE;               
+            }
+
+            return $file[1];                        
+        }
+
+        return FALSE;
+
+    }
+
+    /*
+    * Calculates amount needed in currency to achieve finish currency
+    *
+    * Set $round to FALSE to get full value
+    */
+
+    public function amount_to($finalAmount, $from, $to, $round = TRUE)
+    {
+        $finalAmount = (float) $finalAmount;
+
+        if ($finalAmount == 0) {            
+            return 0;
+        }
+
+        if (!$this-&gt;validate_currency($from, $to)) {        
+            throw new Exception('Invalid currency code - must be exactly 3 letters');           
+        }
+
+        # Gets the rate
+        $rate = $this-&gt;get_rate($from, $to);
+
+        # Work it out
+        $out = $finalAmount / $rate;
+
+        return ($round) ? round($out, 2) : $out;
+    }
+
+    /*
+    * Returns rate of two currencies
+    */
+
+    public function get_rate($from = 'GBP', $to = 'USD')
+    {
+
+        # Check cache
+
+        $rate = $this-&gt;get_cache($from.$to);
+
+        if (!$rate) {           
+            $rate = $this-&gt;fetch(1, $from, $to);
+            $rate = $rate['rate'];          
+        }
+
+        return $rate;
+
+    }
+
+    /*
+    * Deletes all .convertcache files in cache folder
+    */
+
+    public function clear_cache()
+    {
+        $files = glob($this-&gt;cacheFolder.'*.convertcache');
+
+        if (!empty($files)) {
+            array_map('￼unlink', $files);           
+        }
+
+    }
+
+    /*
+    * Validates the currency identifier
+    */
+
+    protected function validate_currency()
+    {
+        foreach (func_get_args() as $val) {     
+            if (strlen($val) !== 3 || !ctype_alpha($val)) {         
+                return FALSE;               
+            }
+        }
+
+        return TRUE;    
+
+    }
+
+    /*
+    * Checks if file is cacheable then creates new file
+    */
+
+    protected function new_cache($file, $rate)
+    {
+
+        if ($this-&gt;cachable) {          
+            $file = strtoupper($file).'.convertcache';
+
+            $data = time().PHP_EOL.$rate;
+            file_put_contents($this-&gt;cacheFolder.$file, $data);         
+        }
+
+    }
+
+}
+</code></pre>
+
+<p>Usage:</p>
+
+<pre><code>&lt;?php
+
+require_once 'classes/convert.php';
+
+$convert = new Convert;
+
+# Convert 15 USD to GBP
+echo $convert-&gt;convert(10, 'USD', 'GBP');
+
+echo '&lt;br/&gt;';
+
+# Displays how much USD you need to get 100 INR - won't show the rounded value
+echo $convert-&gt;amount_to(100, 'USD', 'INR', FALSE);
+</code></pre>
+
+<p>Just made this class. Supports caching. I'd really appreciate any comments on how to make it better etc, just looking to improve!</p>
+
+<p>Thanks :)</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/php" class="post-tag" title="show questions tagged &#39;php&#39;" rel="tag">php</a> <a href="/questions/tagged/oop" class="post-tag" title="show questions tagged &#39;oop&#39;" rel="tag">oop</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/19338" title="short permalink to this question" class="short-link" id="link-post-19338">share</a><span class="lsep">|</span><a href="/posts/19338/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/19338/revisions" title="show all edits to this post">edited <span title="2012-12-05 18:11:57Z" class="relativetime">Dec 5 '12 at 18:11</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2012-12-05 15:45:11Z" class="relativetime">Dec 5 '12 at 15:45</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/19598/prash"><div><img src="https://www.gravatar.com/avatar/76132849bc9c8ce2aeb14cecfa4b4142?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/19598/prash">Prash</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">136</span><span title="4 bronze badges"><span class="badge3"></span><span class="badgecount">4</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-19338" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-19338" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								1 Answer
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/19338/php-currency-conversion-class-with-caching?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/19338/php-currency-conversion-class-with-caching?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/19338/php-currency-conversion-class-with-caching?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="19347"></a>
+<div id="answer-19347" class="answer" data-answerid="19347" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="19347">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Your class does too much. Split it up into multiple pieces:</p>
+
+<ol>
+<li>It converts currencies.</li>
+<li>It validates currency identifier.</li>
+<li>It fetches HTTP resources</li>
+<li>It caches fetched HTTP resources.</li>
+</ol>
+
+<p>Although it does plenty of things, it has no answer to the problem of how to actually recognize which currency any amount is in. Adding two amounts might be valid, because you add GBP and GBP, but might actually be invalid because of GBP and USD. Your variable would only contain the integer or float value.</p>
+
+<p>So split it up. First create a class that actually represents an amount of money in a specified currency. This can be as easy as making a class with two public values, $amount and $currency, but usually you do not want to allow write access to these, so the two values should go into the constructor, stored as private properties, and be accessible via get methods.</p>
+
+<pre><code>class Money_Currency
+{
+    /**
+     * @var float
+     */
+    private $_amount;
+
+    /**
+     * @var string
+     */
+    private $_currency;
+
+    public function __construct($amount, $currency)
+    {
+        $this-&gt;_amount = $amount;
+        $this-&gt;_currency = $currency;
+    }
+
+    public function getAmount()
+    {
+        return $this-&gt;_amount;
+    }
+
+    public function getCurrency()
+    {
+        return $this-&gt;_currency;
+    }
+}
+</code></pre>
+
+<p>Adding or subtracting monetary values is a common task. How can we add two amounts of the same currency? Simple addition. Let's add a method for it. Note that I add the method to the Money_Currency class, which can be discussed. If I do not want to do this, I'd need an independent class that does all the math. If you have such a class, try this different approach. If not, continue following me...</p>
+
+<pre><code>    public function addAmount(Money_Currency $money)
+    {
+        if ($this-&gt;_currency !== $money-&gt;getCurrency()) {
+            throw new InvalidArgumentException('Can only add money from the same currency');
+        }
+
+        $this-&gt;_amount += $money-&gt;getAmount();
+    }
+</code></pre>
+
+<p>So now we are able to do a simple math operation:</p>
+
+<pre><code>$m1 = new Money_Currency(20, 'USD');
+$m2 = new Money_Currency(30, 'USD');
+
+$m1-&gt;addAmount($m2);
+
+echo $m1-&gt;getAmount() . " " . $m1-&gt;getCurrency();
+</code></pre>
+
+<p>Outputs </p>
+
+<pre><code>50 USD
+</code></pre>
+
+<p>Easy. And completely unrelated to your currency conversion so far, but it solves a problem you might have, unless you are only offering a web service that inputs amount and currencies and translates this to the other value.</p>
+
+<p>What about currency conversion? What about adding two different currencies? Decorator pattern to the rescue!</p>
+
+<p>You can build a decorator that implements the same interface, which wraps around a currency object and does the calculations for converting the currency.</p>
+
+<p>Let's fix the interface stuff first:</p>
+
+<pre><code>interface Money_Currency
+{
+    public function getAmount();
+
+    public function getCurrency();
+}
+
+class Money_Currency_Value implements Money_Currency
+{
+    // instead of Money_Currency class from above
+</code></pre>
+
+<p>Then the converter:</p>
+
+<pre><code>class Money_Currency_Converter implements Money_Currency
+{
+    /**
+     * @var Money_Currency
+     */
+    private $_money;
+
+    /**
+     * @var float
+     */
+    private $_conversionrate;
+
+    /**
+     * @var string
+     */
+    private $_sourcecurrency;
+
+    /**
+     * @var string
+     */
+    private $_targetcurrency;
+
+    public function __construct($conversionrate, $sourcecurrency, $targetcurrency)
+    {
+        $this-&gt;_conversionrate = $conversionrate;
+        $this-&gt;_sourcecurrency = $sourcecurrency;
+        $this-&gt;_targetcurrency = $targetcurrency;
+    }
+
+    public function setMoney(Money_Currency $money)
+    {
+        if ($this-&gt;_sourcecurrency !== $money-&gt;getCurrency()) {
+            throw new InvalidArgumentException('The money value is in an incorrect currency for this converter');
+        }
+
+        $this-&gt;_money = $money;
+    }
+
+    public function getAmount()
+    {
+        return $this-&gt;_money-&gt;getAmount() * $this-&gt;_conversionrate;
+    }
+
+    public function getCurrency()
+    {
+        return $this-&gt;_targetcurrency;
+    }
+}
+</code></pre>
+
+<p>Now some test (continues with the objects from above):</p>
+
+<pre><code>$m3 = new Money_Currency_Value(10, 'GBP');
+
+$convertGbpToUsd = new Money_Currency_Converter(1.5, 'GBP', 'USD');
+
+$convertGbpToUsd-&gt;setMoney($m3);
+
+echo "Converted ". $m3-&gt;getAmount() ." ". $m3-&gt;getCurrency() . " into ". $convertGbpToUsd-&gt;getAmount() . " " . $convertGbpToUsd-&gt;getCurrency();
+
+try {
+    $m1-&gt;addAmount($m3); // fails
+} catch (Exception $e) {
+}
+
+$m1-&gt;addAmount($convertGbpToUsd);
+
+echo $m1-&gt;getAmount() . " " . $m1-&gt;getCurrency();
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>Converted 10 GBP into 15 USD
+65 USD
+</code></pre>
+
+<p>(we started with the 50 USD object from above, the conversion rate is completely arbitrary).</p>
+
+<p>What have we got now? We can add amounts of the same currency. We can convert an amount into a different currency. We can also add amounts in different currencies via wrapping them into a converter first. That's pretty much all currency stuff should do.</p>
+
+<p>Now how do you get this nice converter? It is simply a call to a class that generates it for you. This class should only deal with generating the proper conversion object when asked to provide one for conversion from currency A to B. To fulfill this, it needs access to a resource of knowledge, but this resource could be anything. For example, a HTTP client. But the client cannot be universal, it has to be customized for the web service you are using. So in reality you need to create something like a factory that is able to make a request for converting currencies to a certain web service. This call triggers a basic HTTP request with some parameters.</p>
+
+<p>Caching should be done as decorator pattern as well. Decorating an HTTP call with a cache means that in the decorator you see if there is a matching entry in the cache that is still valid (might expire to fetch new updates), if not, it forwards the function call to the real client.</p>
+
+<p>I apologize for not going into details for these tasks at this moment. I hope you got the idea of how to split up responsibilities between classes from the currency conversion example.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/19347" title="short permalink to this answer" class="short-link" id="link-post-19347">share</a><span class="lsep">|</span><a href="/posts/19347/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-12-05 22:18:17Z" class="relativetime">Dec 5 '12 at 22:18</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/17058/sven"><div><img src="https://www.gravatar.com/avatar/fcac0d54f164bbf75415ff5651505f40?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/17058/sven">Sven</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">221</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-19347" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-30990" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Some more thoughts on your current implementation: What happens if the curl extension is not present? What if I want to use a different web service? What if my conversion rates are inside a database? What if I want to use a different cache system like memcache? How about unit testing the whole stuff? But also: How is the programmer supposed to use this stuff in an easy way. Your approach is completely easy, but not configurable, adaptable and extendable for different uses.</span>
+	&ndash;&nbsp;
+		<a href="/users/17058/sven" 
+		   title="221 reputation" 
+		   class="comment-user">Sven</a>
+	<span class="comment-date" dir="ltr"><span title="2012-12-05 22:23:55Z" class="relativetime-clean">Dec 5 '12 at 22:23</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-31071" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Thank you so much for that! So, by splitting it up, should I have the separate classes in different files, or the multiple classes in the same file? When people use this, I don&#39;t want there to be too many files where it can get confusing with directories etc</span>
+	&ndash;&nbsp;
+		<a href="/users/19598/prash" 
+		   title="136 reputation" 
+		   class="comment-user owner">Prash</a>
+	<span class="comment-date" dir="ltr"><span title="2012-12-07 17:17:59Z" class="relativetime-clean">Dec 7 '12 at 17:17</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-31072" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Autoloading will solve this. And if you offer your module via Composer, then it will take care of this. However, the standard is to put one class per file, with a reasonable naming scheme. Read the &quot;PSR-0&quot; standard on how to correctly name your classes: <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md" rel="nofollow">github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md</a></span>
+	&ndash;&nbsp;
+		<a href="/users/17058/sven" 
+		   title="221 reputation" 
+		   class="comment-user">Sven</a>
+	<span class="comment-date" dir="ltr"><span title="2012-12-07 17:41:19Z" class="relativetime-clean">Dec 7 '12 at 17:41</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-19347" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/19338/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="19338" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="c2fcdba836c9d13e2116463b4c52ed93">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f19338%2fphp-currency-conversion-class-with-caching%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f19338%2fphp-currency-conversion-class-with-caching%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/php" class="post-tag" title="show questions tagged &#39;php&#39;" rel="tag">php</a> <a href="/questions/tagged/oop" class="post-tag" title="show questions tagged &#39;oop&#39;" rel="tag">oop</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/php" class="post-tag" title="show questions tagged &#39;php&#39;" rel="tag">php</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">1148</span></span><br>
+<a href="/questions/tagged/oop" class="post-tag" title="show questions tagged &#39;oop&#39;" rel="tag">oop</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">365</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2012-12-05 15:45:11Z"><b>11 months ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>648 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2012-12-05 22:18:17Z">11 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-codereview.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/3563" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/3563/simple-php-auth-class-feedback" class="question-hyperlink">Simple PHP Auth Class feedback</a>
+</div>
+<div class="spacer">
+<a href="/q/8331" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/8331/filemaker-php-api-interface" class="question-hyperlink">FileMaker PHP API Interface</a>
+</div>
+<div class="spacer">
+<a href="/q/11262" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/11262/php-form-generator-class" class="question-hyperlink">PHP Form generator class</a>
+</div>
+<div class="spacer">
+<a href="/q/12346" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/12346/php-class-library" class="question-hyperlink">PHP class library</a>
+</div>
+<div class="spacer">
+<a href="/q/19043" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/19043/a-php-mvc-class" class="question-hyperlink">A PHP MVC class</a>
+</div>
+<div class="spacer">
+<a href="/q/19112" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/19112/optimize-php-class" class="question-hyperlink">Optimize PHP Class</a>
+</div>
+<div class="spacer">
+<a href="/q/23854" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/23854/scope-resolution-operators-and-class-variables-in-php-oop" class="question-hyperlink">Scope Resolution Operators and class variables in PHP OOP</a>
+</div>
+<div class="spacer">
+<a href="/q/28904" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/28904/php-review-of-object-oriented-geoip-class" class="question-hyperlink">PHP review of object oriented GeoIP class</a>
+</div>
+<div class="spacer">
+<a href="/q/29362" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/29362/very-simple-php-pdo-class" class="question-hyperlink">Very simple PHP PDO class</a>
+</div>
+<div class="spacer">
+<a href="/q/30895" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/30895/critique-my-php-cookie-class" class="question-hyperlink">Critique my PHP Cookie class?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/19338" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/19338/ivc/b42f');});
+</script>
+<noscript>
+    <div><img src="/posts/19338/ivc/b42f" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-php</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/19338/php-currency-conversion-class-with-caching")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codereview.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.25.1176
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Code Review Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|php|oop|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

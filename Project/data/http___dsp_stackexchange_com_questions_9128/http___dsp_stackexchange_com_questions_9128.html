@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Basics of frequency spectrum for onset detection using FFT - Signal Processing Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/dsp/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/dsp/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Signal Processing Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackSignals" />
+    <meta name="twitter:domain" content="dsp.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/dsp/img/apple-touch-icon.png?v=ce86280cb8db"/>
+    <meta name="og:title" content="Basics of frequency spectrum for onset detection using FFT" />
+    <meta name="og:description" content="I&#39;m pretty new on signal processing and I&#39;ve been reading a lot the last days in order to understand a little about it. But still there are things that I&#39;m not sure if I got well. Sorry if I don&#39;t ..." />
+    <meta name="og:url" content="http://dsp.stackexchange.com/questions/9128/basics-of-frequency-spectrum-for-onset-detection-using-fft"/>
+    <link rel="canonical" href="http://dsp.stackexchange.com/questions/9128/basics-of-frequency-spectrum-for-onset-detection-using-fft" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/dsp/all.css?v=886a92d67293">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Basics of frequency spectrum for onset detection using FFT&#39;" href="/feeds/question/9128">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:2,shownCommentCount:2,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:9128});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('295', '9128');
+            
+                    });
+    </script>
+
+                <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+                                        tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+                                        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+                                        messageStyle: "none"
+                });
+                </script>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>                
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('295');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385398889,"enableUserHovercards":true,"site":{"name":"Signal Processing Stack Exchange","description":"Q&A for practitioners of the art and science of signal, image and video processing","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"c2fcdba836c9d13e2116463b4c52ed93","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"fe5cdf2fdb00","js/full.en.js":"f103476d11b6","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091","js/mathjax-editing.en.js":"a09844f7b738"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f9128%2fbasics-of-frequency-spectrum-for-onset-detection-using-fft">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f9128%2fbasics-of-frequency-spectrum-for-onset-detection-using-fft">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Signal Processing
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/dsp/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Signal Processing Stack Exchange is a question and answer site for practitioners of the art and science of signal, image and video processing. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/9128/basics-of-frequency-spectrum-for-onset-detection-using-fft" class="question-hyperlink">Basics of frequency spectrum for onset detection using FFT</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="9128"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="9128">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I'm pretty new on signal processing and I've been reading a lot the last days in order to understand a little about it. But still there are things that I'm not sure if I got well. Sorry if I don't use the terms well.</p>
+
+<p>I'm developing an application that detects onsets using a frequency spectrum, using KissFFT. Basically I apply FFT to 1024 samples, so I get 513 values (one for DC and the rest are the different values for each frequency range). I analyse the variations in each frequency range (each value of the resulting array from the FFT) in order to detect the onsets (comparing them to the values' mean from the past half second, and checking that the next values are lower). I want to know in which frequency the onset has been detected. So here are my questions:</p>
+
+<ol>
+<li><p>As I'm analysing music, it doesn't make sense to consider the whole spectrum range, am I right? I mean, based on <a href="http://www.dak.com/reviews/ImagesR/2024_FreqGraph.gif" rel="nofollow">this</a>, I should worry to check only until the 4k range.</p></li>
+<li><p>So, in case the previous sentence is right, I shouldn't take all the 512 spectrum values, but only the first ones. So if my samples are at 44100Hz, and I have a spectrum with 512 values, each one should cover a range of (approximately) 86Hz. Is that correct? In that case, I should only analyse the first 47 array values and safely ignore the rest, I guess.</p></li>
+<li><p>If I want to analyse a wider frequency, would be enough to sum the values from each frequency and calculate the mean? Is that correct?</p></li>
+<li><p>What I'm doing is reasonable? Or I'm just making crazy random stuff?</p></li>
+</ol>
+
+<p>Sorry for making such basic questions, as I said, I'm just entering in this and the more I read, the more confused I get. Thanks</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/fft" class="post-tag" title="show questions tagged &#39;fft&#39;" rel="tag">fft</a> <a href="/questions/tagged/frequency-spectrum" class="post-tag" title="show questions tagged &#39;frequency-spectrum&#39;" rel="tag">frequency-spectrum</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/9128" title="short permalink to this question" class="short-link" id="link-post-9128">share</a><span class="lsep">|</span><a href="/posts/9128/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-05-15 13:16:01Z" class="relativetime">May 15 at 13:16</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/4569/pnikosis"><div><img src="https://www.gravatar.com/avatar/c95a1517bef8a8a91c72c759046c1b7a?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/4569/pnikosis">Pnikosis</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">18</span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-9128" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-15421" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Why are you doing this in the frequency domain ?</span>
+	&ndash;&nbsp;
+		<a href="/users/39/paul-r" 
+		   title="2092 reputation" 
+		   class="comment-user">Paul R</a>
+	<span class="comment-date" dir="ltr"><span title="2013-05-15 15:43:43Z" class="relativetime-clean">May 15 at 15:43</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-15423" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Hi Paul, I&#39;m not sure if I understand the question, I want to detect separate different onsets depending on their frequency (so I can differentiate somehow which instrument <i>group</i> was, separating beats from other sounds, for example).</span>
+	&ndash;&nbsp;
+		<a href="/users/4569/pnikosis" 
+		   title="18 reputation" 
+		   class="comment-user owner">Pnikosis</a>
+	<span class="comment-date" dir="ltr"><span title="2013-05-15 16:47:59Z" class="relativetime-clean">May 15 at 16:47</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-9128" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								3 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/9128/basics-of-frequency-spectrum-for-onset-detection-using-fft?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/9128/basics-of-frequency-spectrum-for-onset-detection-using-fft?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/9128/basics-of-frequency-spectrum-for-onset-detection-using-fft?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="9140"></a>
+<div id="answer-9140" class="answer accepted-answer" data-answerid="9140" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="9140">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><blockquote>
+  <p>As I'm analysing music, it doesn't make sense to consider the whole spectrum range, am I right? I mean, based on this, I should worry to check only until the 4k range.</p>
+</blockquote>
+
+<p>This is not right. What the chart does not show is the approximate energy drop per octave of each instrument. A kick drum, for example, will have strong energy in the low range (say below 120Hz), but often very little within the highs (say above 10kHz).</p>
+
+<p>If you are analysing music, and say there is a kick drum and a distorted guitar (which has dominent frequencies from the fundamental all the way up the spectrum), you are unlikely to be able to detect the kick drum, as the distorted guitar 4k energy will overpower any 4k in the kick. If you however analyse 80Hz - you should 'see' the kick no problem.</p>
+
+<blockquote>
+  <p>So, in case the previous sentence is right, I shouldn't take all the 512 spectrum values, but only the first ones. So if my samples are at 44100Hz, and I have a spectrum with 512 values, each one should cover a range of (approximately) 86Hz. Is that correct? In that case, I should only analyse the first 47 array values and safely ignore the rest, I guess.</p>
+</blockquote>
+
+<p>As explained, the previous sentence is not right.</p>
+
+<p>In addition, a sample rate of 44100Hz can contain frequencies up to 22050Hz (aka the Nyquist frequency = half the sample rate). I'm not sure what KissFFT gives you back, most FFTs will give you a mirrored result, of which you take the first half, and you work out what x-value corresponds to what frequency by calculating the frequency gap. I hope that you get how this is done from this code (alternatively look at the code <a href="http://www.mathworks.co.uk/help/signal/ug/psd-estimate-using-fft.html" rel="nofollow">here</a>):</p>
+
+<pre><code>[ iSamples, iSamplingRate, iBitDepth ] = wavread( '100Hz16b.wav' );
+
+iNyquist       = iSamplingRate / 2;
+iSampleCount   = length( iSamples );
+iAudioDuration = iSampleCount / iSamplingRate;
+
+iFrequencyDelta = 1 / iAudioDuration;
+
+iFFT = fft( iSamples );
+
+# Get half of the set
+iFFT = iFFT( 1:iSampleCount/2 + 1);
+
+iFreqRange = 0: iFrequencyDelta : iNyquist;
+plot( iFreqRange, 10*log10( abs(iFFT) ) );
+</code></pre>
+
+<blockquote>
+  <p>If I want to analyse a wider frequency, would be enough to sum the values from each frequency and calculate the mean? Is that correct?</p>
+</blockquote>
+
+<p>Generally speaking this is correct, but the wider the bandwidth of your analysis is, the harder it will be to detect differences. Say we take the extreme case where you analyse the whole frequency spectrum - you would not be able to distinguish one instrument from another. More on this below.</p>
+
+<blockquote>
+  <p>What I'm doing is reasonable? Or I'm just making crazy random stuff?</p>
+</blockquote>
+
+<p>This is a momentous challenge (PhD stuff), but with a hard effort you might be able to demonstrate some degree of success (depending on the complexity of the material being analysed).</p>
+
+<p>What you have to consider is that the timbre of all sounds can be broken down into two components:</p>
+
+<ul>
+<li>Their spectral content (ie, what frequencies exist and how much energy in each range).</li>
+<li>Their dynamic envelope (how their average level changes over time).</li>
+</ul>
+
+<p>For the latter, do some research on 'beat detection' (but try to ignore anything with DJ in the title) and envelope followers (which is a very common strategy to detect the transient nature of sounds - work better than compering RMS to peak).</p>
+
+<p>While I can't share an untested strategy, you may want to consider (starting with extremely simple material, like a kick drum and a violin going slowly crescendo):</p>
+
+<ul>
+<li>Perform FFT.</li>
+<li>Perform envelope follower on each of the bands you get.</li>
+<li>Take it from here (think patterns and deviations).</li>
+</ul>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/9140" title="short permalink to this answer" class="short-link" id="link-post-9140">share</a><span class="lsep">|</span><a href="/posts/9140/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-05-15 23:17:45Z" class="relativetime">May 15 at 23:17</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/4576/izhaki"><div><img src="https://www.gravatar.com/avatar/35c050eac0eab06a8c3b6fec8c2bb5c0?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/4576/izhaki">Izhaki</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">216</span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-9140" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-9140" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="9130"></a>
+<div id="answer-9130" class="answer" data-answerid="9130" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="9130">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Here are some thoughts concerning your questions:</p>
+
+<ol>
+<li><p>I guess you have to find the relevant frequency range by experiment, because, depending on the instrument, a lot of signal energy can be in the harmonics.</p></li>
+<li><p>If your sampling frequency is 44.1 kHz and you use a 1024 point FFT your frequency interval is about 43 Hz, because the 513 points you mentioned are between DC and half the sampling frequency.</p></li>
+<li><p>You could indeed average some frequency bins, or simply use a shorter FFT length.</p></li>
+<li><p>I would say your methodology is pretty reasonable. Have you checked the literature? You're probably not the first one the do onset detection.</p></li>
+</ol>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/9130" title="short permalink to this answer" class="short-link" id="link-post-9130">share</a><span class="lsep">|</span><a href="/posts/9130/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-05-15 16:13:25Z" class="relativetime">May 15 at 16:13</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/4298/matt-l"><div><img src="https://www.gravatar.com/avatar/f1c5d52034cdaabe6423d5fd7e2a1326?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/4298/matt-l">Matt L.</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">4,069</span><span title="3 silver badges"><span class="badge2"></span><span class="badgecount">3</span></span><span title="18 bronze badges"><span class="badge3"></span><span class="badgecount">18</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-9130" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-15424" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Thanks Matt for the answer, you helped me a lot on this with your answer. I indeed checked some literature, for having an idea how could I detect the onsets (in fact, a week ago I never heard about the onset term, this is how new I am in this area).</span>
+	&ndash;&nbsp;
+		<a href="/users/4569/pnikosis" 
+		   title="18 reputation" 
+		   class="comment-user owner">Pnikosis</a>
+	<span class="comment-date" dir="ltr"><span title="2013-05-15 16:50:17Z" class="relativetime-clean">May 15 at 16:50</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-9130" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="9137"></a>
+<div id="answer-9137" class="answer" data-answerid="9137" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="9137">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><ul>
+<li>Instead of the document you linked to, I suggest you to directly look at spectrograms of actual recordings - you'll see that at the note onsets, there's a lot of high-frequency content (due to the sharp transient/attack - especially for piano, percussions...) - some of it well above 4kHz.</li>
+<li>There's no harm in processing all frequency bands.</li>
+<li>If you want to work with larger frequency bands, you need to sum the magnitudes (or squared magnitude) of the FFT values - not the raw complex values as these could cancel each other.</li>
+<li>What you're doing is called the "spectral energy flux" method, and is indeed a classic onset detection method. The "values' mean from the past half second" you want to use are a special and not that great case of low-pass filter - you can do better in this department! If you want to go this route, I suggest you to have a look at <a href="http://cecs.uci.edu/~papers/icme05/defevent/papers/cr1513.pdf" rel="nofollow">Alonso et al.'s paper</a> - which introduces a bunch of perceptually motivated pre- and post- processing steps in the process to make it work. A simpler and quite efficient method is based on <a href="http://www.eecs.qmul.ac.uk/dafx03/proceedings/pdfs/dafx81.pdf" rel="nofollow">phase and amplitude comparison</a> (there are discontinuity both in amplitude and phase at note onsets).</li>
+</ul>
+
+<p>Regarding your reply to Paul, what you want to achieve (assign a source to an onset) is better done as a post-processing. What you have to keep in mind is that if there is, for example, a piano and a bass playing together, the onsets of the bass will look like vertical lines in the spectrogram, extending to the high frequencies.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/9137" title="short permalink to this answer" class="short-link" id="link-post-9137">share</a><span class="lsep">|</span><a href="/posts/9137/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/9137/revisions" title="show all edits to this post">edited <span title="2013-05-15 20:24:07Z" class="relativetime">May 15 at 20:24</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-05-15 19:54:46Z" class="relativetime">May 15 at 19:54</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/943/pichenettes"><div><img src="https://www.gravatar.com/avatar/a6c441d07aaf67fb6ce90705d5ce6ca3?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/943/pichenettes">pichenettes</a><br>
+        <span class="reputation-score" title="reputation score 11577" dir="ltr">11.6k</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="14 silver badges"><span class="badge2"></span><span class="badgecount">14</span></span><span title="28 bronze badges"><span class="badge3"></span><span class="badgecount">28</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-9137" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-9137" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/9128/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="9128" />
+							<h2 class="space">Your Answer</h2>
+
+
+        <script type="text/javascript">
+            StackExchange.ifUsing("editor", function () {
+                return StackExchange.using("mathjaxEditing", function () {
+                    StackExchange.MarkdownEditor.creationCallbacks.add(function (editor, postfix) {
+                        StackExchange.mathjaxEditing.prepareWmdForMathJax(editor, postfix, [["$", "$"], ["\\\\(","\\\\)"]]);
+                    });
+                });
+            }, "mathjax-editing");
+        </script>
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+noCode: true,            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="c2fcdba836c9d13e2116463b4c52ed93">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f9128%2fbasics-of-frequency-spectrum-for-onset-detection-using-fft%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f9128%2fbasics-of-frequency-spectrum-for-onset-detection-using-fft%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/fft" class="post-tag" title="show questions tagged &#39;fft&#39;" rel="tag">fft</a> <a href="/questions/tagged/frequency-spectrum" class="post-tag" title="show questions tagged &#39;frequency-spectrum&#39;" rel="tag">frequency-spectrum</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/fft" class="post-tag" title="show questions tagged &#39;fft&#39;" rel="tag">fft</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">389</span></span><br>
+<a href="/questions/tagged/frequency-spectrum" class="post-tag" title="show questions tagged &#39;frequency-spectrum&#39;" rel="tag">frequency-spectrum</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">166</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-05-15 13:16:01Z"><b>6 months ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>246 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-05-15 23:17:45Z">6 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/1683" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">12
+    </div>
+</a><a href="/questions/1683/does-using-the-goertzel-algorithm-actually-give-better-frequency-resolution" class="question-hyperlink">Does using the Goertzel algorithm actually give better frequency resolution?</a>
+</div>
+<div class="spacer">
+<a href="/q/3077" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/3077/demodulation-of-bfsk-signal-with-frequency-hopping-using-goertzel-algorithm" class="question-hyperlink">Demodulation of BFSK signal with frequency hopping using Goertzel Algorithm</a>
+</div>
+<div class="spacer">
+<a href="/q/6172" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/6172/commenting-frequency-spectrum-of-a-sampled-data" class="question-hyperlink">Commenting frequency spectrum of a sampled data</a>
+</div>
+<div class="spacer">
+<a href="/q/7657" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/7657/recover-high-frequency-loss-in-a-simulated-power-spectrum" class="question-hyperlink">Recover High Frequency Loss in a Simulated Power Spectrum</a>
+</div>
+<div class="spacer">
+<a href="/q/8962" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/8962/spatial-and-temporal-frequency-of-a-wave" class="question-hyperlink">Spatial and temporal frequency of a wave</a>
+</div>
+<div class="spacer">
+<a href="/q/9912" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/9912/frequency-components-of-an-fft" class="question-hyperlink">Frequency Components of an FFT</a>
+</div>
+<div class="spacer">
+<a href="/q/10049" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/10049/given-an-experimental-fft-plot-how-to-find-the-best-match-from-a-set-of-generat" class="question-hyperlink">Given an experimental FFT plot, how to find the best match from a set of generated FFT plots?</a>
+</div>
+<div class="spacer">
+<a href="/q/10120" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/10120/why-does-spectral-leakage-arise-in-an-fft" class="question-hyperlink">Why does spectral leakage arise in an FFT?</a>
+</div>
+<div class="spacer">
+<a href="/q/10451" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/10451/dft-and-then-idft-does-not-provide-the-same-signal" class="question-hyperlink">DFT and then IDFT does not provide the same signal</a>
+</div>
+<div class="spacer">
+<a href="/q/11258" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/11258/relationship-between-block-size-and-detected-frequencies-in-goertzel-algorithm" class="question-hyperlink">relationship between block size and detected frequencies in goertzel algorithm</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/9128" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/9128/ivc/1ff8');});
+</script>
+<noscript>
+    <div><img src="/posts/9128/ivc/1ff8" class="dno" alt="" width="0" height="0"></div>
+</noscript></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/9128/basics-of-frequency-spectrum-for-onset-detection-using-fft")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.dsp.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.25.1176
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Signal Processing Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|fft|frequency-spectrum|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

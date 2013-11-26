@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>backtesting - What broker/feed/APIsetup allows for recording the most accurate data (cheaply)? - Quantitative Finance Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/quant/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/quant/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Quantitative Finance Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackQuant" />
+    <meta name="twitter:domain" content="quant.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/quant/img/apple-touch-icon.png?v=0b4104039753"/>
+    <meta name="og:title" content="What broker/feed/APIsetup allows for recording the most accurate data (cheaply)?" />
+    <meta name="og:description" content="I&#39;m currently using IB&#39;s Java API and getting feeds through them. However the real-time feed is updated only every 250ms and the historical feed only every second.
+
+I&#39;m primarily looking for ES dat..." />
+    <meta name="og:url" content="http://quant.stackexchange.com/questions/37/what-broker-feed-apisetup-allows-for-recording-the-most-accurate-data-cheaply"/>
+    <link rel="canonical" href="http://quant.stackexchange.com/questions/37/what-broker-feed-apisetup-allows-for-recording-the-most-accurate-data-cheaply" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/quant/all.css?v=51e2a44e1eec">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;What broker/feed/APIsetup allows for recording the most accurate data (cheaply)?&#39;" href="/feeds/question/37">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:1,shownCommentCount:1,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:37});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('204', '37');
+            
+                    });
+    </script>
+
+                <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+                                        tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+                                        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+                                        messageStyle: "none"
+                });
+                </script>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>                
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('204');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385411713,"enableUserHovercards":true,"site":{"name":"Quantitative Finance Stack Exchange","description":"Q&A for finance professionals and academics","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"c2fcdba836c9d13e2116463b4c52ed93","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"fe5cdf2fdb00","js/full.en.js":"f103476d11b6","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091","js/mathjax-editing.en.js":"a09844f7b738"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f37%2fwhat-broker-feed-apisetup-allows-for-recording-the-most-accurate-data-cheaply">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f37%2fwhat-broker-feed-apisetup-allows-for-recording-the-most-accurate-data-cheaply">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Quantitative Finance
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/quant/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Quantitative Finance Stack Exchange is a question and answer site for finance professionals and academics. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/37/what-broker-feed-apisetup-allows-for-recording-the-most-accurate-data-cheaply" class="question-hyperlink">What broker/feed/APIsetup allows for recording the most accurate data (cheaply)?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="37"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="37">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">27</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>27</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I'm currently using IB's Java API and getting feeds through them. However the real-time feed is updated only every 250ms and the historical feed only every second.</p>
+
+<p>I'm primarily looking for ES data and other index futures and ETFs. I'm not looking at FX since that data is the most subjective since there is no exchange.</p>
+
+<p>I want a setup that allows me to get the most accurate real-time tick data and market depth. Tick by tick would be ideal, but probably prohibitively expensive.</p>
+
+<p>What setup gives the most accurate data and depth?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/backtesting" class="post-tag" title="show questions tagged &#39;backtesting&#39;" rel="tag">backtesting</a> <a href="/questions/tagged/data" class="post-tag" title="show questions tagged &#39;data&#39;" rel="tag">data</a> <a href="/questions/tagged/high-frequency" class="post-tag" title="show questions tagged &#39;high-frequency&#39;" rel="tag">high-frequency</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/37" title="short permalink to this question" class="short-link" id="link-post-37">share</a><span class="lsep">|</span><a href="/posts/37/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/37/revisions" title="show all edits to this post">edited <span title="2013-04-04 14:16:46Z" class="relativetime">Apr 4 at 14:16</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature">
+        
+<div class="user-info">
+    <div class="user-details">
+        <span class="community-wiki" title="This post is community owned as of Feb 1 &#39;11 at 3:57. Votes do not generate reputation, and it can be edited by users with 1 rep">
+            community wiki
+        </span>
+    </div><br>
+    <div class="user-details">
+        <a id="history-37" href="/posts/37/revisions" title="show revision history for this post">
+        6 revs, 2 users 88%<br>allen
+
+        </a>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-37" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-959" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I called IB today and they told me that their historical data is close price only.  Is this the case?  I wanted to sign up at IB and use their historical and real-time data (equity/etf) with Ninja Trader.  Does anyone know if this is possible?  Thx</span>
+	&ndash;&nbsp;
+		<a href="/users/610/skimobear" 
+		   title="101 reputation" 
+		   class="comment-user">skimobear</a>
+	<span class="comment-date" dir="ltr"><span title="2011-03-26 02:46:02Z" class="relativetime-clean">Mar 26 '11 at 2:46</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-37" data-rep=1 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								6 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/37/what-broker-feed-apisetup-allows-for-recording-the-most-accurate-data-cheaply?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/37/what-broker-feed-apisetup-allows-for-recording-the-most-accurate-data-cheaply?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/37/what-broker-feed-apisetup-allows-for-recording-the-most-accurate-data-cheaply?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="109"></a>
+<div id="answer-109" class="answer accepted-answer" data-answerid="109" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="109">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">14</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p><a href="http://www.iqfeed.net/index.cfm?displayaction=data&amp;section=services">DTN's IQFeed</a> is really good, if a little expensive. I believe it starts at 80 dollars/month and then you add your exchange fees on top. To get access to the developer API you need to pay 300 dollars for a year's worth of access.</p>
+
+<p>Details:</p>
+
+<ul>
+<li>Real-Time, TRUE Tick-by-Tick Data on US and Canadian Equities (NYSE, NASDAQ, AMEX, Canadian Stock Exchanges)</li>
+<li>Delayed Futures Data (Real-Time Data Available for an additional fee)</li>
+<li>Real-Time Equity/Index Options and Forex Data Available for an additional fee</li>
+<li>Real Time Index quotes</li>
+</ul>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/109" title="short permalink to this answer" class="short-link" id="link-post-109">share</a><span class="lsep">|</span><a href="/posts/109/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/109/revisions" title="show all edits to this post">edited <span title="2011-02-01 19:59:24Z" class="relativetime">Feb 1 '11 at 19:59</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info">
+    <div class="user-details">
+        <span class="community-wiki" title="This post is community owned as of Feb 1 &#39;11 at 17:04. Votes do not generate reputation, and it can be edited by users with 1 rep">
+            community wiki
+        </span>
+    </div><br>
+    <div class="user-details">
+        <a id="history-109" href="/posts/109/revisions" title="show revision history for this post">
+        2 revs, 2 users 77%<br>Zach
+        </a>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-109" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="1" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-66" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Do they have Java api?</span>
+	&ndash;&nbsp;
+		<a href="/users/40/user40" 
+		   title="878 reputation" 
+		   class="comment-user">user40</a>
+	<span class="comment-date" dir="ltr"><span title="2011-02-01 17:08:06Z" class="relativetime-clean">Feb 1 '11 at 17:08</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-71" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Yes; Java, .NET, VB, &amp; C++. I wrote some of the .NET as their documentation on it was pretty sparse, but Java and C++ is well documented.</span>
+	&ndash;&nbsp;
+		<a href="/users/173/wentz" 
+		   title="131 reputation" 
+		   class="comment-user">wentz__</a>
+	<span class="comment-date" dir="ltr"><span title="2011-02-01 17:57:05Z" class="relativetime-clean">Feb 1 '11 at 17:57</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-82" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">4</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I spoke with the IQfeed people and they confirmed that yes, they do actual tick by tick (even if the ticks come every 1ms). I asked about price for ES and SPY realtime data; here&#39;s what they said:  &quot;IQFeed is \$83 per month plus \$20 for market depth plus \$30 for the CME emini exchange fee.&quot; They also said that most people using their feeds use either NinjaTrader or Investor RT.</span>
+	&ndash;&nbsp;
+		<a href="/users/8/allen" 
+		   title="21 reputation" 
+		   class="comment-user owner">allen</a>
+	<span class="comment-date" dir="ltr"><span title="2011-02-01 19:41:06Z" class="relativetime-clean">Feb 1 '11 at 19:41</span></span>
+		<span class="edited-yes" title="this comment was edited 3 times"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-568" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">They are quite cheap in the whole scheme of things and definitely when compared with many other people who provide the same thing. They usually wave the $300 fee if you tell them to.</span>
+	&ndash;&nbsp;
+		<a href="/users/373/steve" 
+		   title="1042 reputation" 
+		   class="comment-user">Steve</a>
+	<span class="comment-date" dir="ltr"><span title="2011-02-14 17:00:39Z" class="relativetime-clean">Feb 14 '11 at 17:00</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-579" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Anyone used Lime Brokerage here? they are ment to be the fastest out there... Any experience?</span>
+	&ndash;&nbsp;
+		<a href="/users/40/user40" 
+		   title="878 reputation" 
+		   class="comment-user">user40</a>
+	<span class="comment-date" dir="ltr"><span title="2011-02-15 07:49:11Z" class="relativetime-clean">Feb 15 '11 at 7:49</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-109" data-rep=1 data-anon=true
+			   class="comments-link " 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>show <b>1</b> more comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="98"></a>
+<div id="answer-98" class="answer" data-answerid="98" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="98">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">7</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>You can download data from 32 forex pairs from the Dukascopy's JForex platform, tick by tick since 2003. I think it is very accurate relative to its price (free).</p>
+
+<p>You can download their different formats by starting <a href="http://www.dukascopy.com/swiss/english/data_feed/historical/" rel="nofollow">here</a>: (no registration required).</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/98" title="short permalink to this answer" class="short-link" id="link-post-98">share</a><span class="lsep">|</span><a href="/posts/98/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/98/revisions" title="show all edits to this post">edited <span title="2011-02-08 22:51:37Z" class="relativetime">Feb 8 '11 at 22:51</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info">
+    <div class="user-details">
+        <span class="community-wiki" title="This post is community owned as of Feb 1 &#39;11 at 14:54. Votes do not generate reputation, and it can be edited by users with 1 rep">
+            community wiki
+        </span>
+    </div><br>
+    <div class="user-details">
+        <a id="history-98" href="/posts/98/revisions" title="show revision history for this post">
+        2 revs, 2 users 56%<br>anon
+        </a>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-98" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="3" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-65" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I need absolute not relative quality... N the end of the day, expensive or not is relative thing. Right?</span>
+	&ndash;&nbsp;
+		<a href="/users/40/user40" 
+		   title="878 reputation" 
+		   class="comment-user">user40</a>
+	<span class="comment-date" dir="ltr"><span title="2011-02-01 17:07:33Z" class="relativetime-clean">Feb 1 '11 at 17:07</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-150" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">The question says most accurate and cheaply, ergo I think relative quality may works. Financial data is usually very expensive and absolute quality is hard to find.</span>
+	&ndash;&nbsp;
+		<a href="/users/82/juan-m-almodovar" 
+		   title="163 reputation" 
+		   class="comment-user">Juan M. Almod&#243;var</a>
+	<span class="comment-date" dir="ltr"><span title="2011-02-03 14:48:35Z" class="relativetime-clean">Feb 3 '11 at 14:48</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-151" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I also use <a href="http://www.tickdata.com/" rel="nofollow">tickdata.com</a> for futures, best quality I have found.</span>
+	&ndash;&nbsp;
+		<a href="/users/82/juan-m-almodovar" 
+		   title="163 reputation" 
+		   class="comment-user">Juan M. Almod&#243;var</a>
+	<span class="comment-date" dir="ltr"><span title="2011-02-03 14:56:25Z" class="relativetime-clean">Feb 3 '11 at 14:56</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-327" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Would be great to update the answer with a link to Dukascopy&#39;s JForex platform, for us that are unfamiliar.</span>
+	&ndash;&nbsp;
+		<a href="/users/279/scott-saad" 
+		   title="101 reputation" 
+		   class="comment-user">Scott Saad</a>
+	<span class="comment-date" dir="ltr"><span title="2011-02-08 19:52:45Z" class="relativetime-clean">Feb 8 '11 at 19:52</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-358" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Updated with link to download. :)</span>
+	&ndash;&nbsp;
+		<a href="/users/279/scott-saad" 
+		   title="101 reputation" 
+		   class="comment-user">Scott Saad</a>
+	<span class="comment-date" dir="ltr"><span title="2011-02-08 22:51:57Z" class="relativetime-clean">Feb 8 '11 at 22:51</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-98" data-rep=1 data-anon=true
+			   class="comments-link " 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>show <b>3</b> more comments</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="57"></a>
+<div id="answer-57" class="answer" data-answerid="57" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="57">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">5</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p><a href="http://ratedata.gaincapital.com/" rel="nofollow">http://ratedata.gaincapital.com/</a> has tick by tick historical data for Forex if that helps.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/57" title="short permalink to this answer" class="short-link" id="link-post-57">share</a><span class="lsep">|</span><a href="/posts/57/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered 
+<a href="/posts/57/revisions" title="show all edits to this post"><span title="2011-02-01 03:35:29Z" class="relativetime">Feb 1 '11 at 3:35</span></a>
+
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info">
+    <div class="user-details">
+        <span class="community-wiki" title="This post is community owned as of Feb 1 &#39;11 at 3:57. Votes do not generate reputation, and it can be edited by users with 1 rep">
+            community wiki
+        </span>
+    </div><br>
+    <div class="user-details">
+        <a id="history-57" href="/posts/57/revisions" title="show revision history for this post">
+        barrycarter
+        </a>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-57" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-57" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I looked at that data, and it seems to give the inside bid/ask sometimes a few times a second, sometimes every 3-10 seconds. I&#39;m looking for much higher resolution, on the order of 10-50ms or less. Also, see my comment above about forex generally.</span>
+	&ndash;&nbsp;
+		<a href="/users/8/allen" 
+		   title="21 reputation" 
+		   class="comment-user owner">allen</a>
+	<span class="comment-date" dir="ltr"><span title="2011-02-01 15:32:30Z" class="relativetime-clean">Feb 1 '11 at 15:32</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-62" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Fair enough. GAIN capital (forex.com) says the data represents every bid/offer, but they might be wrong.</span>
+	&ndash;&nbsp;
+		<a href="/users/59/barrycarter" 
+		   title="785 reputation" 
+		   class="comment-user">barrycarter</a>
+	<span class="comment-date" dir="ltr"><span title="2011-02-01 16:46:42Z" class="relativetime-clean">Feb 1 '11 at 16:46</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-57" data-rep=1 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="42"></a>
+<div id="answer-42" class="answer" data-answerid="42" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="42">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>The <a href="http://www.ctsfutures.com/t4_api.aspx" rel="nofollow">T4 API </a> is free to try for two weeks and it has really good <a href="http://sim.t4login.com/help/api/" rel="nofollow">documentation</a>... if you contact their support they will usually extend your trial period as long as you want. Here are some of the features it has:</p>
+
+<ol>
+<li>Real-time market feed (ticks).</li>
+<li>Historical tick data (as well as second, minute, hour and day charts).</li>
+<li>VB/C#/C++ interface.</li>
+<li>Programming examples that demonstrate the full functionality of the API.</li>
+</ol>
+
+<p>Unfortunately T4 doesn't have any equities, only futures and currencies.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/42" title="short permalink to this answer" class="short-link" id="link-post-42">share</a><span class="lsep">|</span><a href="/posts/42/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/42/revisions" title="show all edits to this post">edited <span title="2011-02-01 06:20:36Z" class="relativetime">Feb 1 '11 at 6:20</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info">
+    <div class="user-details">
+        <span class="community-wiki" title="This post is community owned as of Feb 1 &#39;11 at 3:57. Votes do not generate reputation, and it can be edited by users with 1 rep">
+            community wiki
+        </span>
+    </div><br>
+    <div class="user-details">
+        <a id="history-42" href="/posts/42/revisions" title="show revision history for this post">
+        2 revs<br>Lirik
+        </a>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-42" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-36" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Any Java capable Apis out there (other than IB)?</span>
+	&ndash;&nbsp;
+		<a href="/users/40/user40" 
+		   title="878 reputation" 
+		   class="comment-user">user40</a>
+	<span class="comment-date" dir="ltr"><span title="2011-02-01 07:47:57Z" class="relativetime-clean">Feb 1 '11 at 7:47</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-37" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@user40, I don&#39;t know of any that are free and allow the granularity of IB or T4 (tick feed and tick historical data). IBM has a Java <a href="http://publib.boulder.ibm.com/infocenter/imds/v3r0/index.jsp?topic=/com.ibm.imds.doc/wfo_marketdataapi.html" rel="nofollow">API</a>, but it&#39;s pretty expensive (it starts at 1,850 USD for a 12 month license and goes up to 101,000 USD).</span>
+	&ndash;&nbsp;
+		<a href="/users/78/lirik" 
+		   title="457 reputation" 
+		   class="comment-user">Lirik</a>
+	<span class="comment-date" dir="ltr"><span title="2011-02-01 08:59:43Z" class="relativetime-clean">Feb 1 '11 at 8:59</span></span>
+		<span class="edited-yes" title="this comment was edited 2 times"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-58" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I contacted T4. They said their feed has a 100ms buffer. If true, though not 10-50ms, it&#39;s still a vast improvement over IB. I&#39;m trying to verify.</span>
+	&ndash;&nbsp;
+		<a href="/users/8/allen" 
+		   title="21 reputation" 
+		   class="comment-user owner">allen</a>
+	<span class="comment-date" dir="ltr"><span title="2011-02-01 15:39:53Z" class="relativetime-clean">Feb 1 '11 at 15:39</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-68" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@allen, it should be pretty easy to check if you download the T4 desktop and open up one of the sample projects from the installation directory. I think you will also need Visual Studio 2008 or later.</span>
+	&ndash;&nbsp;
+		<a href="/users/78/lirik" 
+		   title="457 reputation" 
+		   class="comment-user">Lirik</a>
+	<span class="comment-date" dir="ltr"><span title="2011-02-01 17:31:45Z" class="relativetime-clean">Feb 1 '11 at 17:31</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-42" data-rep=1 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="228"></a>
+<div id="answer-228" class="answer" data-answerid="228" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="228">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>A high quality and reliable solution: <br />
+<a href="http://www.nanex.net/" rel="nofollow">http://www.nanex.net/</a></p>
+
+<p>I found out that you can't afford it if you have to ask for the price.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/228" title="short permalink to this answer" class="short-link" id="link-post-228">share</a><span class="lsep">|</span><a href="/posts/228/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered 
+<a href="/posts/228/revisions" title="show all edits to this post"><span title="2011-02-07 21:56:26Z" class="relativetime">Feb 7 '11 at 21:56</span></a>
+
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info">
+    <div class="user-details">
+        <span class="community-wiki" title="This post is community owned as of Feb 7 &#39;11 at 21:56. Votes do not generate reputation, and it can be edited by users with 1 rep">
+            community wiki
+        </span>
+    </div><br>
+    <div class="user-details">
+        <a id="history-228" href="/posts/228/revisions" title="show revision history for this post">
+        user208
+        </a>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-228" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-265" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">nanex.net is is a really good datafeed.  it is the actual market tick data, and has all of the anomalies that are usually filtered out by the time ticks get to an enduser feed like IB.</span>
+	&ndash;&nbsp;
+		<a href="/users/214/glyphard" 
+		   title="2503 reputation" 
+		   class="comment-user">glyphard</a>
+	<span class="comment-date" dir="ltr"><span title="2011-02-07 22:13:13Z" class="relativetime-clean">Feb 7 '11 at 22:13</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-1514" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">3</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Around $600 per month for Nanex, and thats just for the feed (exchange fees are on top of that). It provides the entire US market in one datafeed, with no symbol limit.</span>
+	&ndash;&nbsp;
+		<a href="/users/906/contango" 
+		   title="647 reputation" 
+		   class="comment-user">Contango</a>
+	<span class="comment-date" dir="ltr"><span title="2011-05-23 10:05:58Z" class="relativetime-clean">May 23 '11 at 10:05</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-228" data-rep=1 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="499"></a>
+<div id="answer-499" class="answer" data-answerid="499" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="499">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Try the OEC API at <a href="http://www.openecry.com/services/api_highlights.cfm" rel="nofollow">http://www.openecry.com/services/api_highlights.cfm</a></p>
+
+<p>It is a free .NET based API for Futures.  Very easy to work with and can give you both current and historical tick data.  Not sure of the frequency, however.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/499" title="short permalink to this answer" class="short-link" id="link-post-499">share</a><span class="lsep">|</span><a href="/posts/499/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered 
+<a href="/posts/499/revisions" title="show all edits to this post"><span title="2011-02-14 14:45:47Z" class="relativetime">Feb 14 '11 at 14:45</span></a>
+
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info">
+    <div class="user-details">
+        <span class="community-wiki" title="This post is community owned as of Feb 14 &#39;11 at 14:45. Votes do not generate reputation, and it can be edited by users with 1 rep">
+            community wiki
+        </span>
+    </div><br>
+    <div class="user-details">
+        <a id="history-499" href="/posts/499/revisions" title="show revision history for this post">
+        Jerry
+        </a>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-499" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-499" data-rep=1 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/37/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="37" />
+							<h2 class="space">Your Answer</h2>
+
+
+        <script type="text/javascript">
+            StackExchange.ifUsing("editor", function () {
+                return StackExchange.using("mathjaxEditing", function () {
+                    StackExchange.MarkdownEditor.creationCallbacks.add(function (editor, postfix) {
+                        StackExchange.mathjaxEditing.prepareWmdForMathJax(editor, postfix, [["$", "$"], ["\\\\(","\\\\)"]]);
+                    });
+                });
+            }, "mathjax-editing");
+        </script>
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+noCode: true,            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="c2fcdba836c9d13e2116463b4c52ed93">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f37%2fwhat-broker-feed-apisetup-allows-for-recording-the-most-accurate-data-cheaply%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f37%2fwhat-broker-feed-apisetup-allows-for-recording-the-most-accurate-data-cheaply%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/backtesting" class="post-tag" title="show questions tagged &#39;backtesting&#39;" rel="tag">backtesting</a> <a href="/questions/tagged/data" class="post-tag" title="show questions tagged &#39;data&#39;" rel="tag">data</a> <a href="/questions/tagged/high-frequency" class="post-tag" title="show questions tagged &#39;high-frequency&#39;" rel="tag">high-frequency</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/data" class="post-tag" title="show questions tagged &#39;data&#39;" rel="tag">data</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">105</span></span><br>
+<a href="/questions/tagged/backtesting" class="post-tag" title="show questions tagged &#39;backtesting&#39;" rel="tag">backtesting</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">82</span></span><br>
+<a href="/questions/tagged/high-frequency" class="post-tag" title="show questions tagged &#39;high-frequency&#39;" rel="tag">high-frequency</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">66</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2011-01-31 23:13:33Z"><b>2 years ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>4350 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-04-04 14:16:46Z">7 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/beta/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=quant.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-quant.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/141" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted large">106</div>
+	</a>
+	<a href="/questions/141/what-data-sources-are-available-online" class="question-hyperlink">What data sources are available online?</a>
+</div><div class="spacer">
+	<a href="/q/1199" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">4</div>
+	</a>
+	<a href="/questions/1199/mass-market-data-source" class="question-hyperlink">Mass Market Data Source</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/569" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">20
+    </div>
+</a><a href="/questions/569/what-is-a-good-broker-for-hft" class="question-hyperlink">What is a good broker for HFT?</a>
+</div>
+<div class="spacer">
+<a href="/q/934" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">17
+    </div>
+</a><a href="/questions/934/what-types-of-neural-networks-are-most-appropriate-for-trading" class="question-hyperlink">What types of neural networks are most appropriate for trading?</a>
+</div>
+<div class="spacer">
+<a href="/q/1455" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">-2
+    </div>
+</a><a href="/questions/1455/market-data-for-project" class="question-hyperlink">Market Data For Project</a>
+</div>
+<div class="spacer">
+<a href="/q/1684" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">8
+    </div>
+</a><a href="/questions/1684/how-to-generate-synthetic-fx-data-for-backtesting" class="question-hyperlink">How to generate synthetic FX data for backtesting?</a>
+</div>
+<div class="spacer">
+<a href="/q/1891" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">18
+    </div>
+</a><a href="/questions/1891/how-much-data-is-needed-to-validate-a-short-horizon-trading-strategy" class="question-hyperlink">How much data is needed to validate a short-horizon trading strategy?</a>
+</div>
+<div class="spacer">
+<a href="/q/2868" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">11
+    </div>
+</a><a href="/questions/2868/r-how-feasible-is-it-to-store-and-work-with-tick-data-in-a-database-conne" class="question-hyperlink">R: How feasible is it to store &mdash; and work with &mdash; tick data in a database connected to R?</a>
+</div>
+<div class="spacer">
+<a href="/q/3069" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">7
+    </div>
+</a><a href="/questions/3069/non-sql-methods-for-high-frequency-accounting" class="question-hyperlink">Non-SQL methods for high-frequency accounting?</a>
+</div>
+<div class="spacer">
+<a href="/q/3576" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/3576/what-latency-should-i-use-for-backtesting-a-high-frequency-strategy" class="question-hyperlink">What latency should I use for backtesting a high-frequency strategy?</a>
+</div>
+<div class="spacer">
+<a href="/q/7929" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">6
+    </div>
+</a><a href="/questions/7929/best-way-to-store-hourly-daily-options-data-for-research-purposes" class="question-hyperlink">Best way to store hourly/daily options data for research purposes</a>
+</div>
+<div class="spacer">
+<a href="/q/8534" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/8534/how-to-most-optimally-perform-currency-conversions-when-backtesting-on-portfolio" class="question-hyperlink">How to most optimally perform currency conversions when backtesting on portfolio level?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/37" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/37/ivc/74ee');});
+</script>
+<noscript>
+    <div><img src="/posts/37/ivc/74ee" class="dno" alt="" width="0" height="0"></div>
+</noscript></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/37/what-broker-feed-apisetup-allows-for-recording-the-most-accurate-data-cheaply")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.quant.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.25.1176
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Quantitative Finance Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|backtesting|data|high-frequency|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+</body>
+</html>

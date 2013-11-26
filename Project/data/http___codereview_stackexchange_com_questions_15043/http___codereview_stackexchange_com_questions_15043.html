@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>java - Using switch to avoid duplicate code. Is there a better way? - Code Review Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codereview/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Code Review Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeReview" />
+    <meta name="twitter:domain" content="codereview.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codereview/img/apple-touch-icon.png?v=bb26b8631f86"/>
+    <meta name="og:title" content="Using switch to avoid duplicate code. Is there a better way?" />
+    <meta name="og:description" content="I recently changed one of my methods and used this pattern (names are changed, a dose of humor applied for the exception):
+
+switch (myEnum) {
+case e1:
+    // do stuff
+    if (!alsoApplyCodeForE2) {..." />
+    <meta name="og:url" content="http://codereview.stackexchange.com/questions/15043/using-switch-to-avoid-duplicate-code-is-there-a-better-way"/>
+    <link rel="canonical" href="http://codereview.stackexchange.com/questions/15043/using-switch-to-avoid-duplicate-code-is-there-a-better-way" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codereview/all.css?v=67e9087155b1">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Using switch to avoid duplicate code. Is there a better way?&#39;" href="/feeds/question/15043">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:7,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:15043});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('196', '15043');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('196');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385435102,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Code Review Stack Exchange","description":"Q&A for peer programmer code reviews","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f15043%2fusing-switch-to-avoid-duplicate-code-is-there-a-better-way">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f15043%2fusing-switch-to-avoid-duplicate-code-is-there-a-better-way">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Code Review
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Code Review Stack Exchange is a question and answer site for peer programmer code reviews. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/15043/using-switch-to-avoid-duplicate-code-is-there-a-better-way" class="question-hyperlink">Using switch to avoid duplicate code. Is there a better way?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="15043"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="15043">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I recently changed one of my methods and used this pattern (names are changed, a dose of humor applied for the exception):</p>
+
+<pre><code>switch (myEnum) {
+case e1:
+    // do stuff
+    if (!alsoApplyCodeForE2) {
+        break;
+    } // else fallthrough
+case e2:
+    // do some more stuff
+    break;
+default:
+    throw new NIHException();
+}
+</code></pre>
+
+<p>The <code>// do stuff</code> part uses too many variables to extract it into a method. For <code>e1</code>, in some conditions the code in <code>e2</code> also has to be executed.</p>
+
+<p>Before I structured it this way, I had either duplicated code for the actions or duplicated checks for the conditions. Now, the structure is transparent, can easily be read and understood (as long as one knows how <code>switch</code> works) and there is no more redundancy. Still, this feels weird. Though I'm really proud I have found this solution, I wonder if there's a better way.</p>
+
+<p>Great solution or frowned upon hack? Please review!</p>
+
+<p><strong>Update:</strong></p>
+
+<p>A lot of comments and advice involves inheritance and polymorphism. I think it's hard to judge without context, so this is my code and the neccessary lenghty explanation of the context:</p>
+
+<pre><code>private void assignHandler(MethodNode method,
+                String handleeInternalName, String handlerField) {
+    if (this.guard == NullPointerGuard.checkBeforeCall) {
+        return;
+    }
+    InsnList instructions = method.instructions;
+    final boolean usesLabels = instructions.getFirst() instanceof LabelNode;
+    // search for call of constructor super(...) or this(...)
+    AbstractInsnNode constructorCall = instructions.getFirst();
+    while (!(constructorCall.getOpcode() == INVOKESPECIAL
+            &amp;&amp; constructorCall instanceof MethodInsnNode
+            &amp;&amp; "&lt;init&gt;".equals(((MethodInsnNode) constructorCall).name))) {
+        constructorCall = constructorCall.getNext();
+    }
+    // skip modification on delegation to this(...)
+    if (handleeInternalName.equals(((MethodInsnNode) constructorCall).owner)) {
+        return;
+    }
+    // not delegating to this(...), inject initialization of Handler field
+    AbstractInsnNode node = instructions.getFirst();
+    InsnList storeHandler = null;
+    switch (this.guard) {
+    case assignBeforeSuper:
+        storeHandler = storeHandlerInField(handleeInternalName, handlerField, false);
+        if (usesLabels) {
+            storeHandler.add(new LabelNode());
+            instructions.insert(node, storeHandler);
+        } else {
+            instructions.insertBefore(node, storeHandler);
+        }
+        if (!usesSpawner()) {
+            break;
+        } // else fallthrough
+    case assignAfterSuper:
+        storeHandler = storeHandlerInField(handleeInternalName, handlerField, true);
+        if (usesLabels) {
+            storeHandler.insertBefore(storeHandler.getFirst(), new LabelNode());
+        }
+        instructions.insert(constructorCall, storeHandler);
+        break;
+    default:
+        throw new InstrumentationException(this.guard + " is not implemented yet");
+    } 
+    method.maxStack += usesSpawner() ? 2 : 1;
+}
+</code></pre>
+
+<p>This is for an instrumentation tool using the ASM tree api. This method assigns a <code>handler</code> to a field, which is used in instrumented methods. As a result of my instrumentation, the instrumented class implements an interface and is a handler itself, so a value of <code>this</code> behaves like a NullObject concerning handled methods - it doesn't do anything different but never throws an Exception (when the handled method in the instrumented class is invoked, it will cause a <code>NullPointerException</code> if the handler is <code>null</code> because methods are called on it).</p>
+
+<p>Now, there's 3 different ways to avoid <code>NullPointerException</code>s (my enum):</p>
+
+<ul>
+<li><code>checkBeforeCall</code>: on every call of the handled method, <code>this</code> is used as the handler if it is not set to anything else but <code>null</code>. That's a "slow" approach if the handled method is called very often, as an <code>if</code> is required per call. Pretty please avoid telling me that that's ok and I shouldn't use the other two enum values - that's beside the point :-)</li>
+<li><code>assignAfterSuper</code>: after the super constructor is called, the handler field is initialized. This causes little to no overhead at runtime, but it causes problems if the handled method was overridden and is called in the super constructor, because it will throw the NPE.</li>
+<li><code>assignBeforeSuper</code>: The handler is set to <code>this</code> <strong>before</strong> the super constructor is called. No Java compiler will ever produce this bytecode, but it's valid and the scala guys do it as well. The handler field is then fully initialized after the super constructor was called.</li>
+</ul>
+
+<p>I provide all three methods as the first one is fail-safe, the second is valid and you should be ok in most scenarios and the third is best but could potentially cause trouble in tools.</p>
+
+<p>Now, for each of these initializations, there are two ways to set the handler. One - if you <strong>have</strong> the instrumented instance - is to call a "setHandler" method. That's ok if you have full access to the object, but you're helpless if you don't. The other is to provide a static method, which is called to create a handler. The instrumented instance is passed (so it can be returned itself if no handler is needed) and the result is then used to initialize the field.</p>
+
+<p>Passing <code>this</code> to a static method before the super constructor was called is invalid bytecode. So I use this "spawner" method (if it was specified) after <code>super(...)</code> was called.</p>
+
+<p>So the gory situation: I have an instruction list which I modify. In the relevant two enum-cases I need to consider for constructor instrumentation, I also execute the code for <code>assignAfterSuper</code> on <code>assignBeforeSuper</code>, but only if a static initializer is used (otherwise, it's already set to <code>this</code>). I'm modifiying an instruction list and use a little more state information and factoring any methods out doesn't really make sense, as the parameter list would be longer than the method itself and readability would be diminished. Factoring it out into different classes would also be problematic, as it hurts readability and I have to switch open files when I want to understand the methods behavior or I have to duplicate all code further up or I have to factor it out but can't see what else happens to my InsnList (which is dangerous, because it could mess up the result. I'd like to keep the InsnList for one MethodNode inside of the method so I can see at first glance which changes occur).</p>
+
+<p>Good enough or do you need more context?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/java" class="post-tag" title="show questions tagged &#39;java&#39;" rel="tag">java</a> <a href="/questions/tagged/clean-code" class="post-tag" title="show questions tagged &#39;clean-code&#39;" rel="tag">clean-code</a> <a href="/questions/tagged/style" class="post-tag" title="show questions tagged &#39;style&#39;" rel="tag">style</a> <a href="/questions/tagged/code-smell" class="post-tag" title="show questions tagged &#39;code-smell&#39;" rel="tag">code-smell</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/15043" title="short permalink to this question" class="short-link" id="link-post-15043">share</a><span class="lsep">|</span><a href="/posts/15043/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/15043/revisions" title="show all edits to this post">edited <span title="2012-08-27 13:15:04Z" class="relativetime">Aug 27 '12 at 13:15</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2012-08-24 17:47:53Z" class="relativetime">Aug 24 '12 at 17:47</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/15451/arne"><div><img src="https://www.gravatar.com/avatar/f344d389e6cccd23cec330ad19855c0a?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/15451/arne">Arne</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">437</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="8 bronze badges"><span class="badge3"></span><span class="badgecount">8</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-15043" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="2" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-24409" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="warm">9</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Without really seeing more of the code a common suggestion is to use inheritance and polymorphism.  A first step would be to more common code to code to methods then once that is done decide if a seperate class will encapsulate the functionality you are seeing and the variables used.</span>
+	&ndash;&nbsp;
+		<a href="/users/5140/dreza" 
+		   title="3214 reputation" 
+		   class="comment-user">dreza</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-24 19:42:00Z" class="relativetime-clean">Aug 24 '12 at 19:42</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-24432" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">is it possible that only code for e2 should be executed?</span>
+	&ndash;&nbsp;
+		<a href="/users/3301/denis-tulskiy" 
+		   title="101 reputation" 
+		   class="comment-user">Denis Tulskiy</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-25 13:21:50Z" class="relativetime-clean">Aug 25 '12 at 13:21</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-24439" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Should be a good starting point if you decide to go the route dreza stated (which I believe is the correct route): <a href="http://www.youtube.com/watch?v=4F72VULWFvc" rel="nofollow">youtube.com/watch?v=4F72VULWFvc</a></span>
+	&ndash;&nbsp;
+		<a href="/users/7308/corbin" 
+		   title="3393 reputation" 
+		   class="comment-user">Corbin</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-25 17:57:12Z" class="relativetime-clean">Aug 25 '12 at 17:57</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-24489" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">&#171; The // do stuff part uses too many variables to extract it into a method. &#187; is the first code smell. Try to refactor it in several independant methods, or group the parameters into a dedicated class. After that you can have e1 and e2 each in its own method, and decide to call one, the other, or both.</span>
+	&ndash;&nbsp;
+		<a href="/users/7126/joan-charmant" 
+		   title="254 reputation" 
+		   class="comment-user">Joan Charmant</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-26 19:43:29Z" class="relativetime-clean">Aug 26 '12 at 19:43</span></span>
+		<span class="edited-yes" title="this comment was edited 2 times"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-24500" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@<a href="http://codereview.stackexchange.com/users/7126/joan-charmant">Joan Charmant</a> I do agree with you, but there&#39;s some kinds of problems where it&#39;s not that easy. For me, there&#39;s a threshold for how long a class and a method may get before I am willing to split them. And there&#39;s another one for when I&#39;m willing to split a method into sub methods: Each one has to be easily understood and has to do something a human deems sensible. So a matrix multiply is fine, but when will I need some of LU factorization stuff with the relevant state information in another context? And how should I name that?</span>
+	&ndash;&nbsp;
+		<a href="/users/15451/arne" 
+		   title="437 reputation" 
+		   class="comment-user owner">Arne</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-27 06:35:47Z" class="relativetime-clean">Aug 27 '12 at 6:35</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-15043" data-rep=50 data-anon=true
+			   class="comments-link " 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>show <b>2</b> more comments</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								1 Answer
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/15043/using-switch-to-avoid-duplicate-code-is-there-a-better-way?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/15043/using-switch-to-avoid-duplicate-code-is-there-a-better-way?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/15043/using-switch-to-avoid-duplicate-code-is-there-a-better-way?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="15102"></a>
+<div id="answer-15102" class="answer accepted-answer" data-answerid="15102" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="15102">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>You use of switch is unconventional and in consequence hard to follow. I'd avoid it for that reason. What I see is that that both case are very similar, and so I'd try to refactor them into a function.</p>
+
+<p>Here's my approach:</p>
+
+<pre><code>private void assignHandler(MethodNode method,
+                String handleeInternalName, String handlerField) {
+    if (this.guard == NullPointerGuard.checkBeforeCall) {
+        return;
+    }
+    MethodInsNode constructorCall = findConstructorCall(method);
+
+    // skip modification on delegation to this(...)
+    if (handleeInternalName.equals(constructorCall.owner)) {
+        return;
+    }
+    switch (this.guard) {
+    case assignBeforeSuper:
+        insertHandler(method, handleeInternalName, handlerField, null);
+        if( usesSpawner() )
+        {
+            insertHandler(method, handleeInternalName, handlerField, constructorCall);
+        }
+        break;
+    case assignAfterSuper:
+        insertHandler(method, handleeInternalName, handlerField, constructorCall);
+         break;
+    default:
+        throw new InstrumentationException(this.guard + " is not implemented yet");
+    } 
+}
+
+void insertHandler(MethodNode method, String handleeInternalName, String handlerField, AbstractInsnNode node) // node specified node
+ // to insert before, or null for beginning of method
+{
+    InsnList instructions = method.instructions;
+    final boolean usesLabels = instructions.getFirst() instanceof LabelNode;
+    InsnList storeHandler = storeHandlerInField(handleeInternalName, handlerField, node != null);
+
+
+    // the rest of this function probably belongs in a InstructionInserter class 
+    if(useLabels)
+    {
+        if(node == null)
+        {
+            storeHandler.add( new LabelNode() );
+            node = instructions.getFirst(); // insert after existing label node
+        }
+        else
+        {
+            storeHandler.insert( new LabelNode() );
+        }
+    }
+
+
+    if(node == null)
+    {
+        instructions.insert(storeHandler);
+    }
+    else
+    {
+        instructions.insert(node, storeHandler);
+    }
+
+    method.maxStack++;
+}
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/15102" title="short permalink to this answer" class="short-link" id="link-post-15102">share</a><span class="lsep">|</span><a href="/posts/15102/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-08-27 15:48:26Z" class="relativetime">Aug 27 '12 at 15:48</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1659/winston-ewert"><div class="gravatar-wrapper-32"><img src="http://www.gravatar.com/avatar/dfe8a8bbadcc4f98ee15d55389d205e0?s=128&d=identicon&r=PG" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1659/winston-ewert">Winston Ewert</a><br>
+        <span class="reputation-score" title="reputation score 16685" dir="ltr">16.7k</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="11 silver badges"><span class="badge2"></span><span class="badgecount">11</span></span><span title="35 bronze badges"><span class="badge3"></span><span class="badgecount">35</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-15102" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-24520" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I think you could be right, but I&#39;m not sure yet. And that&#39;s exactly why I posted this. If I use this style, I&#39;d probably also change the <code>switch</code> to an <code>if ... else if ... else ...</code>. But I have strong aversions to pass control of something changing the state of the MethodNode outside of the function, I think it may hurt maintainability because the control flow is easier and better understood if the corresponding code is in close proximity (and the method length doesn&#39;t exceed my tolerance threshold yet). And I still think the <code>switch</code> hurts less than having to skip through the file.</span>
+	&ndash;&nbsp;
+		<a href="/users/15451/arne" 
+		   title="437 reputation" 
+		   class="comment-user owner">Arne</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-27 16:00:52Z" class="relativetime-clean">Aug 27 '12 at 16:00</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-24521" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">... continued: What I love is <code>findConstructorCall</code> (but I think I&#39;ll pass InsnList instead of MethodNode, so it&#39;s a little more generic). I thought of it myself but discarded it, but then I reorganized my method to its current version and now it would probably fit. Thanks!</span>
+	&ndash;&nbsp;
+		<a href="/users/15451/arne" 
+		   title="437 reputation" 
+		   class="comment-user owner">Arne</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-27 16:04:10Z" class="relativetime-clean">Aug 27 '12 at 16:04</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-24527" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Arne, I think the control flow is easier to follow if you break it up into functions. That way its easier to grasp the high level logic of function. I think its easier to see in my version the logic about where the extra instructions get inserted because its not tangled with the low level details regarding label nodes and such.</span>
+	&ndash;&nbsp;
+		<a href="/users/1659/winston-ewert" 
+		   title="16685 reputation" 
+		   class="comment-user">Winston Ewert</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-27 17:18:24Z" class="relativetime-clean">Aug 27 '12 at 17:18</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-24528" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Arne, as for findConstructorCall, does it actually make sense for lists of instructions that aren&#39;t methods? It seems to me that the method only makes sense in that context so MethodNode is the appropriate parameter.</span>
+	&ndash;&nbsp;
+		<a href="/users/1659/winston-ewert" 
+		   title="16685 reputation" 
+		   class="comment-user">Winston Ewert</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-27 17:19:04Z" class="relativetime-clean">Aug 27 '12 at 17:19</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-24530" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">it doesn&#39;t even really make sense for MethodNode - as it&#39;s not necessarily a constructor, could also be a regular method. Still, if I want to use it to construct something else, I can use fragments of InsnList to construct a new MethodNode.</span>
+	&ndash;&nbsp;
+		<a href="/users/15451/arne" 
+		   title="437 reputation" 
+		   class="comment-user owner">Arne</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-27 17:43:30Z" class="relativetime-clean">Aug 27 '12 at 17:43</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-15102" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/15043/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="15043" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f15043%2fusing-switch-to-avoid-duplicate-code-is-there-a-better-way%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f15043%2fusing-switch-to-avoid-duplicate-code-is-there-a-better-way%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/java" class="post-tag" title="show questions tagged &#39;java&#39;" rel="tag">java</a> <a href="/questions/tagged/clean-code" class="post-tag" title="show questions tagged &#39;clean-code&#39;" rel="tag">clean-code</a> <a href="/questions/tagged/style" class="post-tag" title="show questions tagged &#39;style&#39;" rel="tag">style</a> <a href="/questions/tagged/code-smell" class="post-tag" title="show questions tagged &#39;code-smell&#39;" rel="tag">code-smell</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/java" class="post-tag" title="show questions tagged &#39;java&#39;" rel="tag">java</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">1409</span></span><br>
+<a href="/questions/tagged/clean-code" class="post-tag" title="show questions tagged &#39;clean-code&#39;" rel="tag">clean-code</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">303</span></span><br>
+<a href="/questions/tagged/style" class="post-tag" title="show questions tagged &#39;style&#39;" rel="tag">style</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">97</span></span><br>
+<a href="/questions/tagged/code-smell" class="post-tag" title="show questions tagged &#39;code-smell&#39;" rel="tag">code-smell</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">31</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2012-08-24 17:47:53Z"><b>1 year ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>386 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2012-08-27 15:48:26Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/beta/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=codereview.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/16196" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/16196/write-it-better-neat-fast-if-condition" class="question-hyperlink">Write it better/neat/fast (if condition)</a>
+</div>
+<div class="spacer">
+<a href="/q/16225" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/16225/how-to-avoid-passing-variable-to-a-method-again-and-again" class="question-hyperlink">How to avoid passing variable to a method again and again</a>
+</div>
+<div class="spacer">
+<a href="/q/19838" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/19838/illustrating-di-and-ioc-concepts" class="question-hyperlink">Illustrating DI and IoC concepts</a>
+</div>
+<div class="spacer">
+<a href="/q/21637" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/21637/scala-play-controller-refactoring-out-duplication-for-restful-web-services" class="question-hyperlink">Scala Play Controller - Refactoring out Duplication for Restful Web Services</a>
+</div>
+<div class="spacer">
+<a href="/q/25096" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">-1
+    </div>
+</a><a href="/questions/25096/please-review-my-switch-case-code" class="question-hyperlink">Please review my switch case code</a>
+</div>
+<div class="spacer">
+<a href="/q/26642" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">7
+    </div>
+</a><a href="/questions/26642/how-to-get-rid-of-semantic-duplication" class="question-hyperlink">How to get rid of semantic duplication</a>
+</div>
+<div class="spacer">
+<a href="/q/27099" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/27099/ruby-code-review" class="question-hyperlink">Ruby: Code review</a>
+</div>
+<div class="spacer">
+<a href="/q/31014" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/31014/converting-java-int-based-amount-to-coin-metrics-better-implementation-or-styl" class="question-hyperlink">Converting Java int based amount to Coin metrics - better implementation or style?</a>
+</div>
+<div class="spacer">
+<a href="/q/31603" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/31603/search-android-contacts-more-efficiently" class="question-hyperlink">Search Android contacts more efficiently?</a>
+</div>
+<div class="spacer">
+<a href="/q/31634" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/31634/how-to-organize-these-several-lists-of-booleans-to-avoid-code-duplication" class="question-hyperlink">How to organize these several lists of booleans to avoid code duplication?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/15043" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/15043/ivc/822e');});
+</script>
+<noscript>
+    <div><img src="/posts/15043/ivc/822e" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-java</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/15043/using-switch-to-avoid-duplicate-code-is-there-a-better-way")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codereview.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Code Review Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|java|clean-code|style|code-smell|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>
