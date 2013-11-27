@@ -1,0 +1,1817 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>c++ - How can I improve this recursive Sudoku solver? - Code Review Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codereview/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Code Review Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeReview" />
+    <meta name="twitter:domain" content="codereview.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codereview/img/apple-touch-icon.png?v=bb26b8631f86"/>
+    <meta name="og:title" content="How can I improve this recursive Sudoku solver?" />
+    <meta name="og:description" content="I&#39;ve been asked to attach a C++ code sample to my application for an entry-level C++ programmer position in a videogame company.  I&#39;ve created a simple, yet complete console application to solve Su..." />
+    <meta name="og:url" content="http://codereview.stackexchange.com/questions/28746/how-can-i-improve-this-recursive-sudoku-solver"/>
+    <link rel="canonical" href="http://codereview.stackexchange.com/questions/28746/how-can-i-improve-this-recursive-sudoku-solver" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codereview/all.css?v=67e9087155b1">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;How can I improve this recursive Sudoku solver?&#39;" href="/feeds/question/28746">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:2,shownCommentCount:2,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:28746});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('196', '28746');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('196');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385445907,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Code Review Stack Exchange","description":"Q&A for peer programmer code reviews","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f28746%2fhow-can-i-improve-this-recursive-sudoku-solver">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f28746%2fhow-can-i-improve-this-recursive-sudoku-solver">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Code Review
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Code Review Stack Exchange is a question and answer site for peer programmer code reviews. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/28746/how-can-i-improve-this-recursive-sudoku-solver" class="question-hyperlink">How can I improve this recursive Sudoku solver?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="28746"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="28746">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>3</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I've been asked to attach a C++ code sample to my application for an entry-level C++ programmer position in a videogame company.  I've created a simple, yet complete console application to solve Sudoku problems. How can I improve the code that I have?</p>
+
+<p>Please do comment on the algorithm, the code practices, presentation, or anything else.  It's one of my first attempts to also set up unit tests with my code.</p>
+
+<p>Also, I am interested in whether you think this would work well as a code sample in particular – i.e. does it show what people who look at the code samples want to see?</p>
+
+<p><a href="http://ideone.com/iaNvZ4" rel="nofollow">Complete code</a></p>
+
+<pre><code>#include &lt;set&gt;
+#include &lt;string&gt;
+
+#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+#include &lt;cassert&gt;
+
+// ======================================================================================
+
+enum SolutionResult {
+
+    // The position has been solved OK.
+    SR_SOLVED,
+
+    // The current position in invalid.
+    // For that reason, it is useless to even attempt to solve it.
+    SR_INVALID,
+
+    // The current position is valid in its current state, but there 
+    // exists no complete solution that would uphold the sudoku rules.
+    SR_UNSOLVABLE
+
+};
+
+// ======================================================================================
+
+class Sudoku {
+
+protected:
+
+    // 0 = Empty cell
+    short values[9][9];
+
+    // Returns whether all the rows are currently valid, 
+    // i.e. whether no rows contain any duplicate values.
+    bool checkValidRows() {
+
+        for (short row = 0; row &lt; 9; row++) {
+
+            std::set&lt;short&gt; valuesInRow;
+            for (short col = 0; col &lt; 9; col++) {
+
+                short val = this-&gt;values[row][col];
+                if (!val) continue;
+
+                if (valuesInRow.find(val) != valuesInRow.end()) {
+                    return false;
+                }
+
+                valuesInRow.insert(val);
+
+            }
+
+        }
+
+        return true;
+
+    }
+
+    // Returns whether all the columns are currently valid, 
+    // i.e. whether no columns contain any duplicate values.
+    bool checkValidCols() {
+
+        for (short col = 0; col &lt; 9; col++) {
+
+            std::set&lt;short&gt; valuesInCol;
+            for (short row = 0; row &lt; 9; row++) {
+
+                short val = this-&gt;values[row][col];
+                if (!val) continue;
+
+                if (valuesInCol.find(val) != valuesInCol.end()) {
+                    return false;
+                }
+
+                valuesInCol.insert(val);
+
+            }
+
+        }
+
+        return true;
+
+    }
+
+    // Returns whether all the partial squares are currently valid, 
+    // i.e. whether no 3x3 square contains a duplicate value.
+    bool checkValidSquares() {
+
+        for (short squareX = 0; squareX &lt; 3; squareX++) {
+        for (short squareY = 0; squareY &lt; 3; squareY++) {
+
+            std::set&lt;short&gt; valuesInSquare;
+            for (short m = 0; m &lt; 3; m++) {
+                for (short n = 0; n &lt; 3; n++) {
+
+                    short val = this-&gt;values[squareX*3+m][squareY*3+n];
+                    if (val == 0) continue;
+                    if (valuesInSquare.find(val) != valuesInSquare.end()) {
+                        return false;
+                    }
+                    valuesInSquare.insert(val);
+
+                }
+            }
+
+        }
+        }
+
+        return true;
+
+    }
+
+    // Returns whether the current position is valid, i.e., whether its rows, columns, 
+    // and squares are all valid and do not contain a duplicate value.
+    bool checkValid() {
+
+        return this-&gt;checkValidRows() &amp;&amp; this-&gt;checkValidCols() &amp;&amp; this-&gt;checkValidSquares();
+
+    }
+
+public:
+
+    Sudoku() {
+
+        // Start with a blank position.
+        for (short row = 0; row &lt; 9; row++) {
+        for (short col = 0; col &lt; 9; col++) {
+
+            this-&gt;values[row][col] = 0;
+
+        }
+        }
+
+    }
+
+    Sudoku (const short values[9][9]) {
+
+        for (short row = 0; row &lt; 9; row++) {
+        for (short col = 0; col &lt; 9; col++) {
+
+            // Values that are not between [0 .. 9] 
+            // are discarded and replaced with zeroes.
+            short val = values[row][col];
+            if (val &gt;= 0 &amp;&amp; val &lt;= 9) {
+                this-&gt;values[row][col] = val;
+            } 
+            else {
+                this-&gt;values[row][col] = 0;
+            }
+
+        }
+        }
+
+    }
+
+    // This is the solver method.
+    // The way to solution is a standard backtrack exercise.
+    // 
+    // For the next empty space, we put the lowest possible value in, and recursively call the solver
+    // to see whether it can complete all the other spaces in a valid manner – in which case, we are done.
+    // In case that no possible value in the chosen space leads to a valid and complete solution, we clear 
+    // the space entirely and declare the position as unsolvable. In recursion terms, this means that 
+    // we need to attempt to put another value to the previous space, and so on.
+
+    SolutionResult solve() {
+
+        // Check that the situation is valid.
+        if (!this-&gt;checkValid()) return SR_INVALID;
+
+        // For the next empty space:
+        for (short row = 0; row &lt; 9; row++) {
+        for (short col = 0; col &lt; 9; col++) {
+
+            if (this-&gt;values[row][col] &gt; 0) continue;
+
+            // Put an arbitrary value into the space:
+            for (short val = 1; val &lt;= 9; val++) {
+
+                this-&gt;values[row][col] = val;
+
+                // Recursively call the solver and see whether it can complete all 
+                // the other spaces in the same manner. In case that it can, we're done.
+                if (this-&gt;solve() == SR_SOLVED) {
+                    return SR_SOLVED;
+                }
+
+            }
+
+            // We tried all the possible values, and none has lead to a complete and 
+            // valid solution. Clear the space, and return that the position is unsolvable.
+            this-&gt;values[row][col] = 0;
+            return SR_UNSOLVABLE;
+
+        }
+        }
+
+        // There are no more empty spaces. 
+        // We're done.
+        return SR_SOLVED;
+
+    }
+
+    // Formatted output.
+    friend std::ostream&amp; operator&lt;&lt; (std::ostream &amp;os, const Sudoku&amp; s) {
+
+        for (short row = 0; row &lt; 9; row++) {
+
+            os &lt;&lt; std::endl;
+            for (short col = 0; col &lt; 9; col++) {
+
+                os &lt;&lt; ' ';
+                if (s.values[row][col] &gt; 0) {
+                    os &lt;&lt; s.values[row][col];
+                } else {
+                    os &lt;&lt; '.';
+                }
+
+                if (col == 2 || col == 5) {
+                    os &lt;&lt; " |";
+                }
+
+            }
+
+            if (row == 2 || row == 5) {
+                os &lt;&lt; std::endl &lt;&lt; " ------+-------+------";
+            }
+
+        }
+
+        os &lt;&lt; std::endl;
+        return os;
+
+    }
+
+    //
+    static void runUnitTests();
+
+};
+
+// ======================================================================================
+
+int main (int argc, char* argv[])
+{
+    short pos[9][9] = {
+        {0, 0, 4, 0, 0, 0, 0, 0, 0},
+        {6, 0, 2, 1, 0, 0, 0, 0, 0},
+        {1, 0, 8, 3, 4, 2, 5, 6, 7},
+        {0, 0, 9, 7, 0, 0, 4, 2, 3},
+        {4, 0, 6, 8, 0, 0, 0, 0, 1},
+        {7, 1, 3, 9, 2, 0, 8, 0, 0},
+        {0, 0, 0, 5, 3, 0, 2, 8, 4},
+        {0, 0, 0, 4, 1, 0, 6, 0, 0},
+        {3, 0, 0, 0, 0, 6, 1, 0, 0}
+    };
+
+    // Let's test the entire unit.
+    Sudoku::runUnitTests();
+
+    // Let's solve the particular position above:
+
+    Sudoku s (pos);
+    std::cout &lt;&lt; s &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Solver starts, please wait..." &lt;&lt; std::endl;
+
+    switch (s.solve()) {
+
+    case SR_SOLVED:
+        std::cout &lt;&lt; "Solution: " &lt;&lt; std:: endl;
+        std::cout &lt;&lt; s &lt;&lt; std::endl;
+        break;
+
+    case SR_INVALID:
+        std::cout &lt;&lt; "The position is not valid." &lt;&lt; std:: endl;
+        break;
+
+    case SR_UNSOLVABLE:
+        std::cout &lt;&lt; "The position cannot be solved." &lt;&lt; std:: endl;
+        break;
+
+    }
+
+    std::cout &lt;&lt; "Press any key to exit...";
+    getchar();
+    return 0;
+}
+
+// ======================================================================================
+
+void Sudoku::runUnitTests() {
+
+    short dataZeroes[9][9] = {
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0}
+    };
+
+    short dataValidPos1[9][9] = {
+        {5, 3, 4, 6, 7, 8, 9, 1, 2},
+        {6, 7, 2, 1, 9, 5, 3, 4, 8},
+        {1, 9, 8, 3, 4, 2, 5, 6, 7},
+        {8, 5, 9, 7, 6, 1, 4, 2, 3},
+        {4, 2, 6, 8, 5, 3, 7, 9, 1},
+        {7, 1, 3, 9, 2, 4, 8, 5, 6},
+        {9, 6, 1, 5, 3, 7, 2, 8, 4},
+        {2, 8, 7, 4, 1, 9, 6, 3, 5},
+        {3, 4, 5, 2, 8, 6, 1, 7, 9}
+    };
+
+    short dataValidPos2[9][9] = {
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {6, 0, 2, 1, 0, 0, 0, 0, 0},
+        {1, 0, 8, 3, 4, 2, 5, 6, 7},
+        {0, 0, 9, 7, 0, 0, 4, 2, 3},
+        {4, 0, 6, 8, 0, 0, 0, 0, 1},
+        {7, 1, 3, 9, 2, 0, 8, 0, 0},
+        {0, 0, 0, 5, 3, 0, 2, 8, 4},
+        {0, 0, 0, 4, 1, 0, 6, 0, 0},
+        {3, 0, 0, 0, 0, 6, 1, 0, 0}
+    };
+
+    short dataInvalidRows[9][9] = {
+        {5, 3, 4, 6, 7, 8, 9, 1, 5},
+        {6, 7, 2, 1, 9, 5, 3, 4, 8},
+        {1, 9, 8, 3, 4, 2, 0, 6, 7},
+        {8, 5, 9, 7, 6, 1, 4, 2, 3},
+        {4, 2, 6, 8, 5, 3, 7, 9, 1},
+        {7, 1, 3, 9, 2, 4, 8, 5, 6},
+        {9, 6, 1, 5, 3, 7, 2, 8, 4},
+        {2, 8, 7, 4, 1, 9, 6, 3, 0},
+        {3, 4, 5, 2, 8, 6, 1, 7, 9}
+    };
+
+    short dataInvalidCols[9][9] = {
+        {5, 3, 4, 6, 7, 8, 9, 1, 2},
+        {6, 7, 2, 1, 9, 0, 3, 4, 8},
+        {1, 9, 8, 3, 4, 2, 5, 6, 7},
+        {8, 5, 9, 7, 6, 1, 4, 2, 3},
+        {4, 2, 6, 8, 5, 3, 7, 9, 1},
+        {7, 1, 3, 9, 2, 4, 8, 5, 6},
+        {9, 6, 1, 5, 3, 7, 2, 8, 4},
+        {2, 8, 7, 4, 1, 9, 6, 3, 5},
+        {5, 4, 0, 2, 8, 6, 1, 7, 9}
+    };
+
+    short dataInvalidSquares[9][9] = {
+        {5, 3, 4, 6, 7, 8, 9, 1, 2},
+        {6, 5, 2, 1, 9, 0, 3, 4, 8},
+        {1, 9, 8, 3, 4, 2, 5, 6, 7},
+        {8, 0, 9, 7, 6, 1, 4, 2, 3},
+        {4, 2, 6, 8, 5, 3, 7, 9, 1},
+        {7, 1, 3, 9, 2, 4, 8, 5, 6},
+        {9, 6, 1, 5, 3, 7, 2, 8, 4},
+        {2, 8, 7, 4, 1, 9, 6, 3, 5},
+        {3, 4, 5, 2, 8, 6, 1, 7, 9}
+    };
+
+    Sudoku zeroes (dataZeroes);
+    Sudoku validPos1 (dataValidPos1);
+    Sudoku validPos2 (dataValidPos2);
+    Sudoku invalidRows (dataInvalidRows);
+    Sudoku invalidCols (dataInvalidCols);
+    Sudoku invalidSquares (dataInvalidSquares);
+
+    std::cout &lt;&lt; "Unit tests start..." &lt;&lt; std::endl;
+
+    assert(zeroes.checkValidRows());
+    assert(zeroes.checkValidCols());
+    assert(zeroes.checkValidSquares());
+    assert(zeroes.checkValid());
+    assert(zeroes.solve() == SR_SOLVED);
+
+    assert(validPos1.checkValidRows());
+    assert(validPos1.checkValidCols());
+    assert(validPos1.checkValidSquares());
+    assert(validPos1.checkValid());
+    assert(validPos1.solve() == SR_SOLVED);
+
+    assert(validPos2.checkValidRows());
+    assert(validPos2.checkValidCols());
+    assert(validPos2.checkValidSquares());
+    assert(validPos2.checkValid());
+    assert(validPos2.solve() == SR_SOLVED);
+    assert(validPos2.values[0][0] == 5);
+    assert(validPos2.values[0][1] == 3);
+    assert(validPos2.values[0][2] == 4);
+    assert(validPos2.values[0][3] == 6);
+    assert(validPos2.values[0][4] == 7);
+    assert(validPos2.values[0][5] == 8);
+    assert(validPos2.values[0][6] == 9);
+    assert(validPos2.values[0][7] == 1);
+    assert(validPos2.values[0][8] == 2);
+
+    assert(!invalidRows.checkValidRows());
+    assert( invalidRows.checkValidCols());
+    assert( invalidRows.checkValidSquares());
+    assert(!invalidRows.checkValid());
+    assert( invalidRows.solve() == SR_INVALID);
+
+    assert( invalidCols.checkValidRows());
+    assert(!invalidCols.checkValidCols());
+    assert( invalidCols.checkValidSquares());
+    assert(!invalidCols.checkValid());
+    assert( invalidCols.solve() == SR_INVALID);
+
+    assert( invalidSquares.checkValidRows());
+    assert( invalidSquares.checkValidCols());
+    assert(!invalidSquares.checkValidSquares());
+    assert(!invalidSquares.checkValid());
+    assert( invalidSquares.solve() == SR_INVALID);
+
+    std::cout &lt;&lt; "All unit tests OK." &lt;&lt; std::endl;
+
+}
+</code></pre>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/c%2b%2b" class="post-tag" title="show questions tagged &#39;c++&#39;" rel="tag">c++</a> <a href="/questions/tagged/best-practice" class="post-tag" title="show questions tagged &#39;best-practice&#39;" rel="tag">best-practice</a> <a href="/questions/tagged/clean-code" class="post-tag" title="show questions tagged &#39;clean-code&#39;" rel="tag">clean-code</a> <a href="/questions/tagged/recursion" class="post-tag" title="show questions tagged &#39;recursion&#39;" rel="tag">recursion</a> <a href="/questions/tagged/sudoku" class="post-tag" title="show questions tagged &#39;sudoku&#39;" rel="tag">sudoku</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/28746" title="short permalink to this question" class="short-link" id="link-post-28746">share</a><span class="lsep">|</span><a href="/posts/28746/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/28746/revisions" title="show all edits to this post">edited <span title="2013-11-04 22:35:11Z" class="relativetime">Nov 4 at 22:35</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/22222/jamal"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/a4zmY.jpg?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/22222/jamal">Jamal</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,737</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="9 silver badges"><span class="badge2"></span><span class="badgecount">9</span></span><span title="33 bronze badges"><span class="badge3"></span><span class="badgecount">33</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-07-20 16:23:50Z" class="relativetime">Jul 20 at 16:23</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/25449/electrolux"><div><img src="https://www.gravatar.com/avatar/53384d7c748c1d85063c0177db15966c?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/25449/electrolux">electroLux</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">45</span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-28746" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-45186" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Your commenting and huge amount of unneeded whitespace can be improved. I have suggested Jamal. I think he&#39;ll be reviewing that part soon.</span>
+	&ndash;&nbsp;
+		<a href="/users/26426/aseem-bansal" 
+		   title="748 reputation" 
+		   class="comment-user">Aseem Bansal</a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-20 18:41:33Z" class="relativetime-clean">Jul 20 at 18:41</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-45201" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">4</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">You might be interested to read my series on writing a Sudoku solver in C#; I carefully describe the pros and cons of the various small and large choices that I make during the development of the algorithm. <a href="http://blogs.msdn.com/b/ericlippert/archive/tags/graph+colouring/" rel="nofollow">blogs.msdn.com/b/ericlippert/archive/tags/graph+colouring</a></span>
+	&ndash;&nbsp;
+		<a href="/users/4318/eric-lippert" 
+		   title="1383 reputation" 
+		   class="comment-user">Eric Lippert</a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-20 21:22:07Z" class="relativetime-clean">Jul 20 at 21:22</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-28746" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								2 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/28746/how-can-i-improve-this-recursive-sudoku-solver?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/28746/how-can-i-improve-this-recursive-sudoku-solver?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/28746/how-can-i-improve-this-recursive-sudoku-solver?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="28752"></a>
+<div id="answer-28752" class="answer accepted-answer" data-answerid="28752" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="28752">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">9</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>From a brief glance, I can see a number of issues with the code. I'm sorry if I am overly blunt, but it's better that you hear it from me than a recruiter.</p>
+
+<p>In no particular order:</p>
+
+<ul>
+<li><p><strong>Use the language.</strong> Structure your code better. Consider using more classes to represent the board. Don't write a sudoku-solving program. Make it a tiny sudoku-solver library, and include a driver program to use that library. Write reusable code.</p></li>
+<li><p>You have <code>protected</code> members of the class. This usually means the class is designed to be a base class. However, base classes should have a virtual destructor, but yours isn't. You probably want to change <code>protected</code> to <code>private</code>.</p></li>
+<li><p>Make your solver handle boards with multiple solutions.</p></li>
+<li><p>Your explicit use of <code>this</code> just creates clutter, in my opinion.</p></li>
+<li><p>Your code is not exception safe. There is no way to test the state of the solver if <code>solve()</code> throws an exception, for example. You should have a function in the public interface to query the state of the solver.</p></li>
+<li><p>Avoid excessive whitespace and comments.</p></li>
+<li><p>Make member functions that don't mutate state <code>const</code>.</p></li>
+</ul>
+
+<p>For example:</p>
+
+<pre><code>bool checkValidCols() const { /* ... */ }
+</code></pre>
+
+<ul>
+<li><p>Don't hard code sizes. Read your game board from a file. Accept variable-sized boards.</p></li>
+<li><p>Prefer pre-increment to post-increment when pre-increment is what you want. You want to say "increment <code>i</code> by one", not "make a copy of <code>i</code> and then increment the original value by one". This is a good habit in general, because post-increment for user-defined types <em>does</em> make an extra, unnecessary copy.</p></li>
+<li><p>Don't repeat yourself. <code>checkValidRows</code> and <code>checkValidCols</code> is more or less the same function. If you make a bit of an abstraction, the same goes for the square checking.</p></li>
+<li><p>Consider using a one-dimensional array, and/or using one-dimensional or two-dimensional <code>std::array</code> or <code>std::vector</code>.</p></li>
+<li><p>There are indentation issues in the code you have posted.</p></li>
+<li><p>Your solving algorithm is possibly the slowest one I can think of. Do a quick google search and do something smarter.</p></li>
+<li><p>You have very long functions defined inline. It gives the impression that you only know Java, but happen to be writing in C++. Move the implementation code out of the class definition, and structure your code into files.</p></li>
+<li><p>Use a separate unit test library, for example <a href="https://code.google.com/p/googletest/">googletest</a>. Don't <em>always</em> run unit tests when the program runs.</p></li>
+<li><p>Drop the "Press any key to exit" part. It looks very unprofessional.</p></li>
+<li><p>Consider adding read-only access to your board tiles, so that your class can be used as a back-end for a GUI later.</p></li>
+<li><p>Don't pass parameters to <code>main</code> if you are not going to use them.</p></li>
+<li><p>Put a <code>default</code> in your <code>switch</code> to catch errors.</p></li>
+<li><p>Use assertions to ensure pre- and post-conditions and invariants of functions during debugging.</p></li>
+<li><p>Perform error handling, preferably using exceptions. Make your program very robust; you don't want <a href="http://en.wikipedia.org/wiki/Crash_to_desktop">CTD</a> in a game.</p></li>
+<li><p>Have many small unit tests that test exactly a single thing. If a test fails, you should know from its name what has failed. Look at an <a href="https://github.com/cpputest/cpputest/blob/master/tests/SimpleStringTest.cpp#L56">example of unit tests online</a>.</p></li>
+<li><p>Sort your <code>#include</code>s alphabetically.</p></li>
+<li><p>Consider making your solver multi-threaded.</p></li>
+<li><p>Remember to include the other important parts. Primarily: Documentation, and use a proper build system (<code>make</code> is enough for such a simple application). In the documentation, you can include a discussion of your solving algorithm, including analysis of its efficiency (asymptotic complexity/Big-O as a minimum.)</p></li>
+</ul>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/28752" title="short permalink to this answer" class="short-link" id="link-post-28752">share</a><span class="lsep">|</span><a href="/posts/28752/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/28752/revisions" title="show all edits to this post">edited <span title="2013-07-20 19:07:33Z" class="relativetime">Jul 20 at 19:07</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-07-20 18:50:08Z" class="relativetime">Jul 20 at 18:50</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3928/lstor"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/9ACrf.png?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3928/lstor">Lstor</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,046</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="7 silver badges"><span class="badge2"></span><span class="badgecount">7</span></span><span title="25 bronze badges"><span class="badge3"></span><span class="badgecount">25</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-28752" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-45198" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Thanks, that is an excellent list of what I can indeed improve. I&#39;ll probably start over entirely.</span>
+	&ndash;&nbsp;
+		<a href="/users/25449/electrolux" 
+		   title="45 reputation" 
+		   class="comment-user owner">electroLux</a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-20 21:15:57Z" class="relativetime-clean">Jul 20 at 21:15</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-45200" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">It is absolutely OK (and encouraged!) to make a new code review when you have changed your code. Even more so if you start all over.</span>
+	&ndash;&nbsp;
+		<a href="/users/3928/lstor" 
+		   title="2046 reputation" 
+		   class="comment-user">Lstor</a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-20 21:20:29Z" class="relativetime-clean">Jul 20 at 21:20</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-45269" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy"><code>Make your solver handle boards with multiple solutions.</code> Technically a sudoku board only has one solution. If it has more than one solution and you are guessing at any square then it is not really a sudoku board.</span>
+	&ndash;&nbsp;
+		<a href="/users/507/loki-astari" 
+		   title="16992 reputation" 
+		   class="comment-user">Loki Astari</a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-21 21:15:47Z" class="relativetime-clean">Jul 21 at 21:15</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-28752" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="28750"></a>
+<div id="answer-28750" class="answer" data-answerid="28750" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="28750">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">7</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><ul>
+<li><p>Read <a href="http://programmers.stackexchange.com/questions/173118/should-comments-say-why-the-program-is-doing-what-it-is-doing-opinion-on-a-dic">this</a> and <a href="http://programmers.stackexchange.com/questions/119600/beginners-guide-to-writing-comments">this</a> regarding your commenting.  You also shouldn't have that extra whitespace within your functions.</p></li>
+<li><p>I cannot tell if your full solution uses a single file or separate files.  Multiple files are preferred, but a single file is also okay if declarations and definitions are properly structured.</p>
+
+<p>Regarding declarations, you shouldn't have any function definitions in your header (considering you're not using accessors and mutators).  Try this:</p>
+
+<pre><code>class Sudoku {
+
+private: // private is preferred over protected here
+    short values[9][9];
+
+    // these functions should be const
+    bool checkValidRows() const;
+    bool checkValidCols() const;
+    bool checkValidSquares() const;
+
+public:
+    Sudoku();
+    Sudoku(const short values[9][9]);
+    SolutionResult solve();
+    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp;, Sudoku const&amp;);
+};
+</code></pre></li>
+<li><p>You could use a "2D" <code>std::array</code> instead.  It gives you <a href="http://en.cppreference.com/w/cpp/container/array" rel="nofollow">these features</a>, but it looks a bit long as a nested structure (although you can use a <code>typedef</code>):</p>
+
+<pre><code>std::array&lt;std::array&lt;short, 9&gt;, 9&gt; values;
+</code></pre></li>
+<li><p><code>solve()</code> shouldn't be <code>public</code> since it's not part of the interface.  Instead, make it <code>private</code> and <code>void</code>, and have another <code>public</code> function return the appropriate <code>SolutionResult</code>.  You would then need to call <code>solve()</code> somewhere in the class as opposed to <code>main()</code>.</p></li>
+<li><p>For a serious application, you shouldn't need to hard-code your game board.  Even after hiding this behind the class, it would be boring as you would be solving the same board each time (unless you're willing to keep changing it yourself).</p>
+
+<p>Instead, consider having the board randomized with values and making sure it's a valid starting board.  Again, this would be done inside the class.</p>
+
+<p>You then won't need your second constructor.</p></li>
+</ul>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/28750" title="short permalink to this answer" class="short-link" id="link-post-28750">share</a><span class="lsep">|</span><a href="/posts/28750/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/28750/revisions" title="show all edits to this post">edited <span title="2013-11-04 22:15:14Z" class="relativetime">Nov 4 at 22:15</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-07-20 17:54:25Z" class="relativetime">Jul 20 at 17:54</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/22222/jamal"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/a4zmY.jpg?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/22222/jamal">Jamal</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,737</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="9 silver badges"><span class="badge2"></span><span class="badgecount">9</span></span><span title="33 bronze badges"><span class="badge3"></span><span class="badgecount">33</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-28750" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-45184" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I don&#39;t know C++ so I&#39;ll just ask you whether <a href="http://programmers.stackexchange.com/questions/173118/should-comments-say-why-the-program-is-doing-what-it-is-doing-opinion-on-a-dic">this</a> and <a href="http://programmers.stackexchange.com/questions/119600/beginners-guide-to-writing-comments">this</a> should be suggested to the OP for his comments? If you think that they are relevant please do so. It might be helpful to the OP.</span>
+	&ndash;&nbsp;
+		<a href="/users/26426/aseem-bansal" 
+		   title="748 reputation" 
+		   class="comment-user">Aseem Bansal</a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-20 18:36:30Z" class="relativetime-clean">Jul 20 at 18:36</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-45185" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@AseemBansal: Good point.  I also just noticed all the whitespace, too.  I&#39;ll add this.</span>
+	&ndash;&nbsp;
+		<a href="/users/22222/jamal" 
+		   title="2737 reputation" 
+		   class="comment-user">Jamal<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-20 18:39:52Z" class="relativetime-clean">Jul 20 at 18:39</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-45195" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">+1, valid points.</span>
+	&ndash;&nbsp;
+		<a href="/users/3928/lstor" 
+		   title="2046 reputation" 
+		   class="comment-user">Lstor</a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-20 20:51:43Z" class="relativetime-clean">Jul 20 at 20:51</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-45196" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Lstor: Thanks.  I have much to learn from your answer, too.  The one thing that I&#39;m still not savvy with is error-handling.</span>
+	&ndash;&nbsp;
+		<a href="/users/22222/jamal" 
+		   title="2737 reputation" 
+		   class="comment-user">Jamal<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-20 20:55:40Z" class="relativetime-clean">Jul 20 at 20:55</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-45199" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Thanks – solid points!</span>
+	&ndash;&nbsp;
+		<a href="/users/25449/electrolux" 
+		   title="45 reputation" 
+		   class="comment-user owner">electroLux</a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-20 21:17:40Z" class="relativetime-clean">Jul 20 at 21:17</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-28750" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/28746/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="28746" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f28746%2fhow-can-i-improve-this-recursive-sudoku-solver%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f28746%2fhow-can-i-improve-this-recursive-sudoku-solver%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/c%2b%2b" class="post-tag" title="show questions tagged &#39;c++&#39;" rel="tag">c++</a> <a href="/questions/tagged/best-practice" class="post-tag" title="show questions tagged &#39;best-practice&#39;" rel="tag">best-practice</a> <a href="/questions/tagged/clean-code" class="post-tag" title="show questions tagged &#39;clean-code&#39;" rel="tag">clean-code</a> <a href="/questions/tagged/recursion" class="post-tag" title="show questions tagged &#39;recursion&#39;" rel="tag">recursion</a> <a href="/questions/tagged/sudoku" class="post-tag" title="show questions tagged &#39;sudoku&#39;" rel="tag">sudoku</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/c%2b%2b" class="post-tag" title="show questions tagged &#39;c++&#39;" rel="tag">c++</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">964</span></span><br>
+<a href="/questions/tagged/best-practice" class="post-tag" title="show questions tagged &#39;best-practice&#39;" rel="tag">best-practice</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">461</span></span><br>
+<a href="/questions/tagged/clean-code" class="post-tag" title="show questions tagged &#39;clean-code&#39;" rel="tag">clean-code</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">303</span></span><br>
+<a href="/questions/tagged/recursion" class="post-tag" title="show questions tagged &#39;recursion&#39;" rel="tag">recursion</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">81</span></span><br>
+<a href="/questions/tagged/sudoku" class="post-tag" title="show questions tagged &#39;sudoku&#39;" rel="tag">sudoku</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">8</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-07-20 16:23:50Z"><b>4 months ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>455 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-11-04 22:35:11Z">21 days ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/beta/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=codereview.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/9281" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/9281/sudoku-solver-in-haskell" class="question-hyperlink">Sudoku solver in Haskell</a>
+</div>
+<div class="spacer">
+<a href="/q/10908" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/10908/python-sudoku-gui" class="question-hyperlink">Python Sudoku GUI</a>
+</div>
+<div class="spacer">
+<a href="/q/13914" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/13914/is-this-sudoku-a-good-use-of-the-fluent-builder-pattern" class="question-hyperlink">Is this Sudoku a good use of the Fluent Builder Pattern?</a>
+</div>
+<div class="spacer">
+<a href="/q/20888" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/20888/sudoku-valid-arangements-permutations-enumerator" class="question-hyperlink">Sudoku Valid Arangements Permutations Enumerator</a>
+</div>
+<div class="spacer">
+<a href="/q/24546" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/24546/how-can-i-optimize-this-recursive-function" class="question-hyperlink">How can I optimize this recursive function?</a>
+</div>
+<div class="spacer">
+<a href="/q/25824" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/25824/improving-my-floating-point-binary-decimal-octal-hex-converter" class="question-hyperlink">Improving my floating-point binary/decimal/octal/hex converter</a>
+</div>
+<div class="spacer">
+<a href="/q/27534" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/27534/how-could-this-new-approach-to-my-deck-of-cards-project-be-improved" class="question-hyperlink">How could this new approach to my deck of cards project be improved?</a>
+</div>
+<div class="spacer">
+<a href="/q/29935" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">7
+    </div>
+</a><a href="/questions/29935/a-small-printf-like-function-using-variadic-templates" class="question-hyperlink">A small printf-like function using variadic templates</a>
+</div>
+<div class="spacer">
+<a href="/q/32138" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/32138/dssudokusolver-a-javascript-sudoku-solving-algorithm" class="question-hyperlink">DSSudokuSolver - A JavaScript Sudoku solving algorithm</a>
+</div>
+<div class="spacer">
+<a href="/q/32251" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/32251/how-can-i-store-the-fibonacci-sequence-in-a-vector-during-each-recursive-call" class="question-hyperlink">How can I store the fibonacci sequence in a vector during each recursive call?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/28746" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/28746/ivc/b36c');});
+</script>
+<noscript>
+    <div><img src="/posts/28746/ivc/b36c" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-cpp</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/28746/how-can-i-improve-this-recursive-sudoku-solver")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codereview.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Code Review Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|c++|best-practice|clean-code|recursion|sudoku|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

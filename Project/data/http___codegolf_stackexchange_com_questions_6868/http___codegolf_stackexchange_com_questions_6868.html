@@ -1,0 +1,2547 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>code challenge - Generate a (completely deterministic) pseudorandom bit stream - Programming Puzzles & Code Golf Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codegolf/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codegolf/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Programming Puzzles &amp; Code Golf Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeGolf" />
+    <meta name="twitter:domain" content="codegolf.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codegolf/img/apple-touch-icon.png?v=6f55f0b2476f"/>
+    <meta name="og:title" content="Generate a (completely deterministic) pseudorandom bit stream" />
+    <meta name="og:description" content="Inspired by Random with your hands tied:
+
+
+
+The Goal
+
+The goal of this challenge is to write a program that generates a pseudorandom bit stream, which is a string of 1s and 0s that appears to be pu..." />
+    <meta name="og:url" content="http://codegolf.stackexchange.com/questions/6868/generate-a-completely-deterministic-pseudorandom-bit-stream"/>
+    <link rel="canonical" href="http://codegolf.stackexchange.com/questions/6868/generate-a-completely-deterministic-pseudorandom-bit-stream" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codegolf/all.css?v=a1dd281cae8a">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Generate a (completely deterministic) pseudorandom bit stream&#39;" href="/feeds/question/6868">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:8,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:6868});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('200', '6868');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('200');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385453984,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Programming Puzzles & Code Golf Stack Exchange","description":"Q&A for programming puzzle enthusiasts and code golfers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f6868%2fgenerate-a-completely-deterministic-pseudorandom-bit-stream">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f6868%2fgenerate-a-completely-deterministic-pseudorandom-bit-stream">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Programming Puzzles &amp; Code Golf
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codegolf/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Programming Puzzles &amp; Code Golf Stack Exchange is a question and answer site for programming puzzle enthusiasts and code golfers. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/6868/generate-a-completely-deterministic-pseudorandom-bit-stream" class="question-hyperlink">Generate a (completely deterministic) pseudorandom bit stream</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="6868"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6868">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">7</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>2</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>Inspired by <a href="http://codegolf.stackexchange.com/questions/6832/random-with-your-hands-tied">Random with your hands tied</a>:</p>
+
+<hr>
+
+<h2>The Goal</h2>
+
+<p>The goal of this challenge is to write a program that generates a pseudorandom bit stream, which is a string of 1s and 0s that appears to be purely random, but is actually generated in a deterministic way. Your program should output a string of 1 and 0s (with optional whitespace) and should pass the following requirements:</p>
+
+<ol>
+<li>Given unlimited time and memory, your program must continue to output a string of 1s and 0s forever</li>
+<li>Your program must output more than 1000 random bits in about one minute, on a reasonable machine. If this requirement is impossible, then I will lessen it.</li>
+<li>The string of bits can repeat, but the length of the repeating section must be more than 1000 bits.</li>
+<li>The string of bits must pass as many of the randomness tests (described below) as possible.</li>
+<li>The program must not take any input from any external sources or use any built-in rand()-like function.</li>
+<li>Because of the above requirement, the program must output the same exact string of bits each time that it is run. </li>
+</ol>
+
+<hr>
+
+<h2>Randomness Test #1</h2>
+
+<p>The string of pseudorandom bits must not include any obvious pattern upon visual inspection.</p>
+
+<h2>Randomness Test #2 (subject to change based on comments)</h2>
+
+<p>The string of bits must contain an equal distribution of 1s and 0s. To test this (and other things too), the stream of bits is broken into segments that are 3 bits long, such as <code>101|111|001</code>. </p>
+
+<p>Out of all of these segments, 1/8 of them should have three 1s and no 0s, 3/8 of them should have two 1s and one 0, 3/8 of them should have one 1 and two 0s, and 1/8 of them should have no 1s and three 0s.</p>
+
+<h2>Randomness Test #3</h2>
+
+<p>A "run" is defined as a consecutive series of bits that all have the same value. The string <code>1001001110</code> has three runs of size 1 (<code>1..1.....0</code>), two runs of size 2 (<code>.00.00....</code>) and one run of size 3 (<code>......111.</code>).  Notice that runs do not overlap.</p>
+
+<p>Out of a string of 1000 random bits, there should be about 250 runs of size 1, 125 runs of size 2, 62 runs of size 3, etc. In general, for run size R, there should be about <code>1000/(2**(R+1))</code> runs of that size.</p>
+
+<h2>Randomness Test #4</h2>
+
+<p>The first 840 bits are split into two halves of 420 bits each. Each bit on the first half is compared to the corresponding bit on the second half. The two bits should match about fifty percent of the time.</p>
+
+<hr>
+
+<p><a href="http://pastebin.com/8E97YRqf" rel="nofollow">Here</a> is the source code of a Perl program that performs tests 2 through 4. As of now, it requires that the string of bits not contain any whitespace.</p>
+
+<hr>
+
+<h2>Objective Winning Criterion Time!</h2>
+
+<p>The winner is the program that passes all of the 6 requirements and all of the randomness tests to the degree that it is indistinguishable from randomness. If multiple programs accomplish this, then the one that takes the longest amount of time to repeat will win. If multiple programs accomplish this, then I might have to find more randomness tests to act as tie-breakers.</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/code-challenge" class="post-tag" title="show questions tagged &#39;code-challenge&#39;" rel="tag">code-challenge</a> <a href="/questions/tagged/random" class="post-tag" title="show questions tagged &#39;random&#39;" rel="tag">random</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/6868" title="short permalink to this question" class="short-link" id="link-post-6868">share</a><span class="lsep">|</span><a href="/posts/6868/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/6868/revisions" title="show all edits to this post">edited <span title="2012-08-02 22:53:06Z" class="relativetime">Aug 2 '12 at 22:53</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2012-08-02 21:36:38Z" class="relativetime">Aug 2 '12 at 21:36</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/2867/phinotpi"><div><img src="https://www.gravatar.com/avatar/867ffdcb8010add1663ca7d62fa818e5?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/2867/phinotpi">PhiNotPi</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,043</span><span title="6 silver badges"><span class="badge2"></span><span class="badgecount">6</span></span><span title="24 bronze badges"><span class="badge3"></span><span class="badgecount">24</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6868" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="3" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-14416" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">#2 and #3 aren&#39;t really very good criteria for randomness. For #2 especially, a random sample will probably not exhibit this characteristic. Maybe you can do a larger sample size? I would suggest something between 100 and 300.</span>
+	&ndash;&nbsp;
+		<a href="/users/4063/joel-cornett" 
+		   title="241 reputation" 
+		   class="comment-user">Joel Cornett</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-02 22:00:32Z" class="relativetime-clean">Aug 2 '12 at 22:00</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-14417" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">A better measurement method would be a moving average, as the mean over a large window on the bitstream will not change much (and should be around 0.5)</span>
+	&ndash;&nbsp;
+		<a href="/users/4063/joel-cornett" 
+		   title="241 reputation" 
+		   class="comment-user">Joel Cornett</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-02 22:02:19Z" class="relativetime-clean">Aug 2 '12 at 22:02</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-14419" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@JoelCornett Thanks for the advice. I don&#39;t know much about randomness tests. I&#39;ll change #2 to something else, and I&#39;m reading about moving averages.</span>
+	&ndash;&nbsp;
+		<a href="/users/2867/phinotpi" 
+		   title="2043 reputation" 
+		   class="comment-user owner">PhiNotPi</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-02 22:28:52Z" class="relativetime-clean">Aug 2 '12 at 22:28</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-14420" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">No problem. Random sequences tend to clump and not be uniformly distributed, this is a fact that is sometimes used in accounting to detect fraud. (Fraudulent numbers will often be too evenly distributed, because the people inventing them mistake uniformity for randomness)</span>
+	&ndash;&nbsp;
+		<a href="/users/4063/joel-cornett" 
+		   title="241 reputation" 
+		   class="comment-user">Joel Cornett</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-02 22:45:56Z" class="relativetime-clean">Aug 2 '12 at 22:45</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-14538" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Can I use built in crypto functions (Such as AES or SHA-2)?</span>
+	&ndash;&nbsp;
+		<a href="/users/5063/codesinchaos" 
+		   title="111 reputation" 
+		   class="comment-user">CodesInChaos</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-06 12:05:14Z" class="relativetime-clean">Aug 6 '12 at 12:05</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6868" data-rep=50 data-anon=true
+			   class="comments-link " 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>show <b>3</b> more comments</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								9 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/6868/generate-a-completely-deterministic-pseudorandom-bit-stream?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/6868/generate-a-completely-deterministic-pseudorandom-bit-stream?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/6868/generate-a-completely-deterministic-pseudorandom-bit-stream?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="6871"></a>
+<div id="answer-6871" class="answer" data-answerid="6871" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6871">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">6</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h2>C, 61</h2>
+
+<pre><code>main(s,n){for(n=1u&lt;&lt;31;putchar((s%=n)/(n/2)&amp;1|48);s*=65539);}
+</code></pre>
+
+<p>Yeah, I know it's not code golf. This is <a href="http://en.wikipedia.org/wiki/RANDU">obviously rather an anti-solution</a>... but it sure enough fulfills your criteria.</p>
+
+<blockquote>
+  <p>$ ./a.out | head -c840
+  000000001000111101100110110011100100011101110001101001101110011101100111010111010010001001110001111110010001010101101000110101000011110010100101001101110100011111000101000110000111100100010101010100110101101010001110101000011011001010111011110110101000001110011000010100001111110110001000000101100011000110000010110011000010101101011100010011011111111100001010111110111010110001000010110111000010101001000011001001110110001001101011011110111011010100000000001001010100111000000100010011110001010111001110101111100110110111010001101001100000101000111000101000110100001111010110100001100110011011110001011011100010111011100001110100110001010011001110001010110100111111111010110101100110000101111111111000111101100011000111010111010100110001001110101110100011101110001100110110000001100101110100101000101011100000110111101101100110000000101110<br>
+  $ ./a.out | head -c840 | perl tester.pl<br>
+  Test 2: 1 (1) 2.93333333333333 (3) 3.1 (3) 0.966666666666667 (1)<br>
+  Test 3:  214 99 71 24 7 5 1 1 2 2<br>
+  Test 4: 0.495238095238095<br></p>
+</blockquote>
+
+<p>Period length is 2²⁹.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/6871" title="short permalink to this answer" class="short-link" id="link-post-6871">share</a><span class="lsep">|</span><a href="/posts/6871/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-08-03 02:12:05Z" class="relativetime">Aug 3 '12 at 2:12</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/2183/leftaroundabout"><div><img src="https://www.gravatar.com/avatar/50933f6638836741e620669b3940410e?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/2183/leftaroundabout">leftaroundabout</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,446</span><span title="6 silver badges"><span class="badge2"></span><span class="badgecount">6</span></span><span title="13 bronze badges"><span class="badge3"></span><span class="badgecount">13</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6871" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-14424" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">3</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">This goes to show how hard it is to tell randomness from something that is widely known to be one of the worst random number generators in existence. +1.</span>
+	&ndash;&nbsp;
+		<a href="/users/2867/phinotpi" 
+		   title="2043 reputation" 
+		   class="comment-user owner">PhiNotPi</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-03 03:32:13Z" class="relativetime-clean">Aug 3 '12 at 3:32</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6871" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="6928"></a>
+<div id="answer-6928" class="answer" data-answerid="6928" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6928">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h1>Mathematica <strike>78</strike> 53 chars</h1>
+
+<p>The digits of the binary representation of Pi seem to behave as if they are chaotically produced although this is unproven.</p>
+
+<p>The following simple routine deterministically returns as a string the binary digits of pi, corresponding to <code>d</code> decimal digits:</p>
+
+<pre><code>f[d_]:=ToString@FromDigits@RealDigits[N[Pi,d],2][[1]]
+</code></pre>
+
+<p><strong>Usage</strong></p>
+
+<p>If we request the counterpart of 301 decimal digits of Pi, we receive 1000 binary digits.  </p>
+
+<pre><code>f[301]
+StringLength[%]
+
+(* out *)
+1100100100001111110110101010001000100001011010001100001000110100110001001100011001100010100010111000000011011100000111001101000100101001000000100100111000001000100010100110011111001100011101000000001000001011101111101010011000111011000100111001101100100010010100010100101000001000011110011000111000110100000001001101110111101111100101010001100110110011110011010011101001000011000110110011000000101011000010100110110111110010010111110001010000110111010011111110000100110101011011010110110101010001110000100100010111100100100001011011010101110110011000100101111001111110110001101111010001001100010000101110100110100110001101111110110101101011000010111111111101011100101101101111010000000110101101111110110111101110001110000110101111111011010110101000100110011111101001011010111010011111001001000001000101111100010010110001111111100110010010010010100001100110010100011110110011100100010110110011110111000010000000000111110010111000101000010110001110111111000001011001100011011010010010000011011000011100011
+
+1000 (* characters *)
+</code></pre>
+
+<p>Because Pi is a rational number, there is no period.  However, there will be practical constraints due to the hardware one is running.</p>
+
+<p><strong>Test 1</strong>
+Looks good to me.</p>
+
+<p><strong>Test 2</strong></p>
+
+<pre><code>d=301;
+Partition[RealDigits[N[Pi,d],2][[1]],{3}];
+Tally[%]
+(* out *)
+{{{1,1,0},35},{{0,1,0},45},{{0,0,0},41},{{1,1,1},40},
+{{0,1,1},50},{{1,0,1},32},{{1,0,0},43},{{0,0,1},47}}
+</code></pre>
+
+<p>More thorough check:</p>
+
+<pre><code>d=10^6;
+Partition[RealDigits[N[Pi,d],2][[1]],{3}];
+Tally[%]
+
+{{{1,1,0},138565},{{0,1,0},138146},{{0,0,0},138260},{{1,1,1},138427},
+{{0,1,1},139119}, {{1,0,1},138404},{{1,0,0},137926},{{0,0,1},138462}}
+</code></pre>
+
+<p><strong>Test 3: Runs</strong></p>
+
+<pre><code>d=10^6;
+res3=SortBy[Tally@Split@RealDigits[N[Pi,d],2][[1]],Last]/.{a_,b_}:&gt; {Length[a],b}
+ListPlot[res3 ,AxesLabel-&gt; {"Run Length","Runs"},AxesOrigin-&gt;{0,0}]
+</code></pre>
+
+<p>I ran a large number of cases to systematically check out the distribution of runs.
+In approximately 3 million binary digits, there were 830k runs of 1, 416k runs of 2, 208k runs of 3, 104k runs of 4, etc.</p>
+
+<p><img src="http://i.stack.imgur.com/QUjRx.png" alt="runs 2">
+<strong>Test 4: Matching of first and second half of data</strong></p>
+
+<p>The matches are the 212 cases of 0 and 2; the mismatches are the 208 cases where the sum of the respective digits is 1.</p>
+
+<pre><code>d=301;
+Tally[Plus@@Partition[Take[RealDigits[N[Pi,d],2][[1]],840],420]]
+
+(* out *)
+{{1,208},{0,108},{2,104}}
+</code></pre>
+
+<p><strong>Timing</strong></p>
+
+<p>It takes under two seconds to calculate  3321928 binary digits (corresponding to 10^6 decimal digits).</p>
+
+<pre><code>(r=f[10^6]);//AbsoluteTiming
+StringLength[r]
+
+(*out*)
+{1.785928,Null}    
+3321928
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/6928" title="short permalink to this answer" class="short-link" id="link-post-6928">share</a><span class="lsep">|</span><a href="/posts/6928/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/6928/revisions" title="show all edits to this post">edited <span title="2012-08-09 12:22:08Z" class="relativetime">Aug 9 '12 at 12:22</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-08-08 12:58:00Z" class="relativetime">Aug 8 '12 at 12:58</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3967/david-carraher"><div><img src="https://www.gravatar.com/avatar/cabea1674ab4095a3ecb21a008b1b64f?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3967/david-carraher">David Carraher</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">4,636</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="7 silver badges"><span class="badge2"></span><span class="badgecount">7</span></span><span title="27 bronze badges"><span class="badge3"></span><span class="badgecount">27</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6928" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-14580" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I knew someone would do this...</span>
+	&ndash;&nbsp;
+		<a href="/users/2183/leftaroundabout" 
+		   title="2446 reputation" 
+		   class="comment-user">leftaroundabout</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-09 12:01:38Z" class="relativetime-clean">Aug 9 '12 at 12:01</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-14585" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Low-hanging fruit, right?</span>
+	&ndash;&nbsp;
+		<a href="/users/3967/david-carraher" 
+		   title="4636 reputation" 
+		   class="comment-user">David Carraher</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-09 12:19:48Z" class="relativetime-clean">Aug 9 '12 at 12:19</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6928" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="6892"></a>
+<div id="answer-6892" class="answer" data-answerid="6892" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6892">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h2>Python, 90</h2>
+
+<pre><code>g=[19]
+print(''.join("01"[(g.append((11*g[-1]+13)%1024)or g[-1])&gt;512]for i in range(1000)))
+</code></pre>
+
+<p><code>g</code> is the seed value. Random sampling exhibits a remarkably normal distribution repeated random sampling of sample means yielded a mean of <code>0.506</code> and a a standard deviation of <code>.0473</code> (sample size of 1000). Unfortunately, randomness is highly sensitive to initial seed. The seed in the above code gave me the best randomness :p</p>
+
+<p><strong>UPDATE</strong></p>
+
+<p>Let's see how this code holds up to the OP's tests:</p>
+
+<h2>Test #1</h2>
+
+<p>This one's a bit subjective... but it looks pretty irregular to me.</p>
+
+<h2>Test #2</h2>
+
+<blockquote>
+  <p>Three 1's: 0.141<br>
+  Two 1's: 0.371<br>
+  One 1: 0.353<br>
+  Zero 1's: 0.135</p>
+</blockquote>
+
+<h2>Test #3</h2>
+
+<p>Runs by size:</p>
+
+<pre><code>8: 11
+7: 3
+6: 7
+5: 13
+4: 32
+3: 67
+2: 119
+1: 216
+</code></pre>
+
+<h2>Test #4</h2>
+
+<blockquote>
+  <p><s> Ratio of equalities: 0.94 </s> This is a typo. Will update with the correct number soon.</p>
+</blockquote>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/6892" title="short permalink to this answer" class="short-link" id="link-post-6892">share</a><span class="lsep">|</span><a href="/posts/6892/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/6892/revisions" title="show all edits to this post">edited <span title="2012-08-07 18:01:52Z" class="relativetime">Aug 7 '12 at 18:01</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-08-04 05:52:22Z" class="relativetime">Aug 4 '12 at 5:52</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/4063/joel-cornett"><div><img src="https://www.gravatar.com/avatar/001c19bf38a2973dd735cc6791e0d511?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/4063/joel-cornett">Joel Cornett</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">241</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6892" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-14525" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">You can remove the whitespace before &#39;for&#39;.</span>
+	&ndash;&nbsp;
+		<a href="/users/4372/daniero" 
+		   title="1504 reputation" 
+		   class="comment-user">daniero</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-05 19:01:53Z" class="relativetime-clean">Aug 5 '12 at 19:01</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-14526" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Daniero: Thanks. fixed.</span>
+	&ndash;&nbsp;
+		<a href="/users/4063/joel-cornett" 
+		   title="241 reputation" 
+		   class="comment-user">Joel Cornett</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-05 19:56:42Z" class="relativetime-clean">Aug 5 '12 at 19:56</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6892" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="6919"></a>
+<div id="answer-6919" class="answer" data-answerid="6919" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6919">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>The question is essentially equivalent to "implement a stream cipher". So I implement RC4, since it's relatively simple.</p>
+
+<p>I use no key, and drop the first 100000 bits, because the beginning of RC4 is a bit biased, especially since I skipped the key schedule. But I'd expect it to pass your test even without that (saving 20 chars of code).</p>
+
+<p>Normally one would output a full byte per cycle, but converting to binary is rather ugly in C#, so I simply discard everything except the least significant bit.</p>
+
+<pre><code>var s=Enumerable.Range(0,256).ToArray();
+byte i=0,j=0;
+for(int k=0;;k++)
+{
+    i++;
+    j+=(byte)s[i];
+    var t=s[i];s[i]=s[j];s[j]=t;
+    if(k&gt;99999)
+        Console.Write(s[i]+s[j]&amp;1);
+}
+</code></pre>
+
+<p>Or without spaces:</p>
+
+<pre><code>var s=Enumerable.Range(0,256).ToArray();byte i=0,j=0;for(int k=0;;k++){i++;j+=(byte)s[i];var t=s[i];s[i]=s[j];s[j]=t;if(k&gt;99999)Console.Write(s[i]+s[j]&amp;1);}
+</code></pre>
+
+<p>C#, 156 chars, works in LinqPad's statement mode. For a full C# program add the usual boilerplate.</p>
+
+<hr>
+
+<p>We could also use built in crypto primitives(Cheater solution):</p>
+
+<pre><code>var h=SHA256.Create();for(BigInteger i=0;;i++){Console.Write(h.ComputeHash(i.ToByteArray())[0]%2);}
+</code></pre>
+
+<p>(C#, 99 chars, works in LinqPad's statement mode. For the normal C# compiler you'll need to add a bit of boilerplate)</p>
+
+<p>The output of cryptographic hash functions is designed to be indistinguishable from random data, so I expect it to pass all randomness tests(die harder,...) you throw at it, but I'm too lazy to test.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/6919" title="short permalink to this answer" class="short-link" id="link-post-6919">share</a><span class="lsep">|</span><a href="/posts/6919/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/6919/revisions" title="show all edits to this post">edited <span title="2012-08-06 13:10:15Z" class="relativetime">Aug 6 '12 at 13:10</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-08-06 12:19:33Z" class="relativetime">Aug 6 '12 at 12:19</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/5063/codesinchaos"><div class="gravatar-wrapper-32"><img src="http://www.gravatar.com/avatar/57e2ba76e6290c4e9e19821a068bc8c1?s=128&d=identicon&r=PG" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/5063/codesinchaos">CodesInChaos</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">111</span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6919" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6919" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="6913"></a>
+<div id="answer-6913" class="answer" data-answerid="6913" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6913">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h2>Haskell <s>74</s> 58</h2>
+
+<pre><code>main=print$iterate(read.take 9.show.(^3))7&gt;&gt;=show.(`mod`2)
+</code></pre>
+
+<p>Thanks to <strong>shiona</strong> for the simplification.
+Results:</p>
+
+<blockquote>
+  <p>$ ~/golf$ ./pseudorandom | head -c 1000
+  111110110101011110001011110101011110001111011001110101100100111000100100000011000100011101010111000000001110100111100010110000100000001001111011100001101101001111110100111011111110011011101111010110001110011100010000001011011100010111011110011110100110100000110110010011101010001111101011111110000110110110011111011101000011110010000011011010011110110100010011100011011111011010110001100111100100100001110100001110111011111000001101001010100001100111010111011011011001110000100000100000010111011010111011111011011101001100100011111101110101101010111101001111110101110101001011111011111100111110001001001010001011100100101000010101011001101011011001100111101010001110001011110001011111110110100110011000010101100010011011010100000110100001000010110110111101101010000001110001100011010100000011111010111100101110101001000111001000000101111110010110001011011000011111011001100001101000101001111000101011101010001010110010111111110111111101000111010001001010010011101011100101011101000101101000010101100</p>
+  
+  <p>./pseudorandom | head -c 1000 | perl test.pl</p>
+  
+  <p>Test 2: 0.966666666666667 (1) 2.4 (3) 3.3 (3) 1.33333333333333 (1) </p>
+  
+  <p>Test 3:  260 108 66 33 15 11 5 2 </p>
+  
+  <p>Test 4: 0.495238095238095</p>
+</blockquote>
+
+<p>This is also a terrible pseudo-random generator (similar to one used by von-Neuman). For those that were not aware <code>concatMap == (=&lt;&lt;) == flip . (&gt;&gt;=)</code> (for lists)</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/6913" title="short permalink to this answer" class="short-link" id="link-post-6913">share</a><span class="lsep">|</span><a href="/posts/6913/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/6913/revisions" title="show all edits to this post">edited <span title="2012-08-06 22:38:12Z" class="relativetime">Aug 6 '12 at 22:38</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-08-05 22:31:30Z" class="relativetime">Aug 5 '12 at 22:31</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/4420/walpen"><div><img src="https://www.gravatar.com/avatar/7253aed1c51b8a566f2e9aa798939fdb?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/4420/walpen">walpen</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,390</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="3 silver badges"><span class="badge2"></span><span class="badgecount">3</span></span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6913" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-14540" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">You can replace <code>\x-&gt;if odd x then&quot;1&quot;else&quot;0&quot;</code> with <code>show.(`mod`2)</code>.</span>
+	&ndash;&nbsp;
+		<a href="/users/4681/shiona" 
+		   title="647 reputation" 
+		   class="comment-user">shiona</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-06 17:48:55Z" class="relativetime-clean">Aug 6 '12 at 17:48</span></span>
+		<span class="edited-yes" title="this comment was edited 3 times"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-14546" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Dope, thanks for that</span>
+	&ndash;&nbsp;
+		<a href="/users/4420/walpen" 
+		   title="1390 reputation" 
+		   class="comment-user">walpen</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-06 22:02:55Z" class="relativetime-clean">Aug 6 '12 at 22:02</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6913" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="6929"></a>
+<div id="answer-6929" class="answer" data-answerid="6929" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6929">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h2>C, 52 chars</h2>
+
+<pre><code>main(a){for(a=1;putchar(48+a%2);a=a/2^-(a%2)&amp;576);}
+</code></pre>
+
+<p>This is a 10 bit LFSR, test results:</p>
+
+<pre><code>$ ./a.out |head -c 1000 | perl randtest.pl
+Test 2: 1.13333333333333 (1) 2.86666666666667 (3) 3.16666666666667 (3) 0.833333333333333 (1)
+Test 3:  251 122 64 32 16 8 4 2  1
+Test 4: 0.466666666666667
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/6929" title="short permalink to this answer" class="short-link" id="link-post-6929">share</a><span class="lsep">|</span><a href="/posts/6929/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-08-08 17:51:25Z" class="relativetime">Aug 8 '12 at 17:51</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/159/hasturkun"><div><img src="https://www.gravatar.com/avatar/37335856df5e5e73d82bca5a805bd647?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/159/hasturkun">Hasturkun</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">746</span><span title="3 silver badges"><span class="badge2"></span><span class="badgecount">3</span></span><span title="9 bronze badges"><span class="badge3"></span><span class="badgecount">9</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6929" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-14570" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy"><code>a</code> should start out as 1, (assuming it&#39;s called with no arguments). Also you could stick the <code>a=</code> in the middle, something like <code>a=a&#47;2^-!putchar(49-a%2)%576</code> (taking some liberties with the algorithm)</span>
+	&ndash;&nbsp;
+		<a href="/users/4420/walpen" 
+		   title="1390 reputation" 
+		   class="comment-user">walpen</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-09 01:47:29Z" class="relativetime-clean">Aug 9 '12 at 1:47</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-14571" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@walpen: My initial implementation didn&#39;t set <code>a</code>, I changed it because of &quot;<code>The program must not take any input from any external sources</code>&quot;</span>
+	&ndash;&nbsp;
+		<a href="/users/159/hasturkun" 
+		   title="746 reputation" 
+		   class="comment-user">Hasturkun</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-09 09:26:09Z" class="relativetime-clean">Aug 9 '12 at 9:26</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6929" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="6931"></a>
+<div id="answer-6931" class="answer" data-answerid="6931" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6931">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h2>Sage/Python</h2>
+
+<p>This program prints the rightmost binary digits that are common to every sufficiently tall exponentiation tower of form 3<sup>3<sup>3<sup>3<sup>.</sup>.</sup></sup></sup>.  For all that could ever be feasibly generated, these are the rightmost binary digits of <a href="http://en.wikipedia.org/wiki/Graham%27s_number" rel="nofollow">Graham's number</a>. The digit sequence is infinite, and is not periodic.</p>
+
+<pre><code>m = 1; x = 3; last = 0
+while True:
+    m *= 2; x = pow(3,x,m); l = len(bin(x))
+    print '1' if l &gt; last else '0',
+    last = l
+</code></pre>
+
+<p>For 1000 digits, this took less than 2 seconds; however, the time will increase much faster than linearly in the number of digits. </p>
+
+<p>The <a href="http://ideone.com/8uZKn" rel="nofollow">test results using the OP's program</a> are</p>
+
+<pre><code>Test 2: 1.26666666666667 (1) 3.16666666666667 (3) 2.8 (3) 0.766666666666667 (1)
+Test 3:  268 126 61 30 20 7 2  1 1
+Test 4: 0.466666666666667
+</code></pre>
+
+<p>(See <a href="https://sites.google.com/site/res0001/digits-of-graham-s-number/random-rightmost-digits-of-g" rel="nofollow">Are the rightmost digits of G random?</a> for more than 32000 digits and additional statistical tests.)</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/6931" title="short permalink to this answer" class="short-link" id="link-post-6931">share</a><span class="lsep">|</span><a href="/posts/6931/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/6931/revisions" title="show all edits to this post">edited <span title="2012-08-09 12:44:21Z" class="relativetime">Aug 9 '12 at 12:44</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-08-09 04:13:13Z" class="relativetime">Aug 9 '12 at 4:13</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3440/r-e-s"><div><img src="https://www.gravatar.com/avatar/71211990152ed87cdcffcf817743c7e7?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3440/r-e-s">r.e.s.</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">879</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="15 bronze badges"><span class="badge3"></span><span class="badgecount">15</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6931" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6931" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="6882"></a>
+<div id="answer-6882" class="answer" data-answerid="6882" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6882">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p><strong>Java, <strike>371</strike> 317</strong></p>
+
+<p>Based on a 128 bit <a href="http://en.wikipedia.org/wiki/Linear_feedback_shift_register" rel="nofollow">LFSR</a> (bit taps are from <a href="http://www.xilinx.com/support/documentation/application_notes/xapp052.pdf" rel="nofollow">xilinx app note 52</a>)</p>
+
+<p><strong>EDIT:</strong> I was not satisfied with using BigInteger so this version does not. Saved some characters. Output might be a little less random as I could not think of a good 'seeding' method.</p>
+
+<p><strong>New Code:</strong> Arguments: BITS_TO_PRINT</p>
+
+<pre><code>class R{public static void main(String[]a){int L=65536;int[]v={0,128,126,101,99};int[]b=new int[L];for(int x=0;x&lt;L;x++)b[x]=(x*x)&amp;1;for(int i=0;i&lt;Integer.parseInt(a[0])+L;i++){if(1!=(b[v[1]]^b[v[2]]^b[v[3]]^b[v[4]]))b[v[0]]=1;else b[v[0]]=0;if(i&gt;L)System.out.print(b[v[0]]);for(int j=0;j&lt;5;j++)v[j]=(v[j]-1)&amp;(L-1);}}}
+</code></pre>
+
+<p><strong>Old Version:</strong>
+Arguments: SEED, BITS_TO_PRINT</p>
+
+<pre><code>import java.math.BigInteger;class R{public static void main(String[]a){BigInteger v=new BigInteger(a[0]);BigInteger m=new BigInteger("ffffffffffffffffffffffffffffffff",16);for(int i=Integer.parseInt(a[1]);i&gt;0;i--){v=v.shiftLeft(1);if(!(v.testBit(128)^v.testBit(126)^v.testBit(101)^v.testBit(99))){v=v.setBit(0);}v=v.and(m);java.lang.System.out.print(v.testBit(0)?1:0);}}}
+</code></pre>
+
+<p><strong>New Version:</strong> Example output, bits=100:</p>
+
+<pre><code>011001100111000110010100100111011100100111000111001111110110001001100000100111111010111001100100011
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/6882" title="short permalink to this answer" class="short-link" id="link-post-6882">share</a><span class="lsep">|</span><a href="/posts/6882/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/6882/revisions" title="show all edits to this post">edited <span title="2012-09-19 20:49:14Z" class="relativetime">Sep 19 '12 at 20:49</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/6474/noah"><div><img src="https://www.gravatar.com/avatar/7565108d83b56e36a224b80ebc5e4e20?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/6474/noah">Noah</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">13</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-08-03 16:36:16Z" class="relativetime">Aug 3 '12 at 16:36</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/5042/noah"><div><img src="https://www.gravatar.com/avatar/7565108d83b56e36a224b80ebc5e4e20?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/5042/noah">Noah</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">11</span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6882" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-16552" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">BTW, I assume that both Noah accounts from this post are the same person. If that&#39;s so, you can ask a moderator to merge them at <a href="http://meta.codegolf.stackexchange.com/">meta.codegolf.stackexchange.com</a></span>
+	&ndash;&nbsp;
+		<a href="/users/194/peter-taylor" 
+		   title="8375 reputation" 
+		   class="comment-user">Peter Taylor</a>
+	<span class="comment-date" dir="ltr"><span title="2012-09-20 07:05:46Z" class="relativetime-clean">Sep 20 '12 at 7:05</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6882" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="6930"></a>
+<div id="answer-6930" class="answer" data-answerid="6930" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6930">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p><strong>JavaScript - 1ms to 2ms for 1000 pseudo-random bits (139ms to 153ms for 100000 bits)</strong></p>
+
+<p>This solution uses the fact that square roots are irrational, and thus pretty much random.  Basically, it takes the square root of 2 to start, converts it to binary, throws out the leading part that matched the previous root, appends that to the random string, repeats with the next higher number (or back to 2 if the number repeated and was at least 30 bits long), and returns the random string once it is long enough.</p>
+
+<pre><code>var getDeterministicPseudoRandString = function(length){
+    var randString = '';
+
+    var i = 2;
+    var prevRand = '';
+
+    outerLoop:
+    while(randString.length &lt; length){
+        var nextRand, nextFullRand = Math.sqrt(i++).toString(2).substring(1).replace('.', '');
+        nextRand = nextFullRand;
+        for(var j = prevRand.length; j &gt; 0; j--){
+            var replaceString = prevRand.substring(0, j);
+
+            nextRand = nextFullRand;
+
+            if(nextFullRand.indexOf(replaceString) == 0){
+                if(j == prevRand.length &amp;&amp; j &gt; 30){
+                    //start i over at 2
+                    console.log('max i reached: ' + i);
+
+                    i = 2;
+                    continue outerLoop;
+                } else {
+                    nextRand = nextFullRand.replace(replaceString, '');
+                }
+
+                break;
+            }
+        }
+        prevRand = nextFullRand;
+
+        randString += nextRand;
+    }
+
+    return randString.substring(0, length);//Return the substring with the appropriate length
+};
+</code></pre>
+
+<p>I haven't ran it through the tests yet, but I imagine it will do well on them.  <a href="http://jsfiddle.net/briguy37/wbRat/" rel="nofollow">Here's a fiddle</a> so you can see it in action.  For my times, I just ran the program several times and took the fastest and slowest values as the ranges.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/6930" title="short permalink to this answer" class="short-link" id="link-post-6930">share</a><span class="lsep">|</span><a href="/posts/6930/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/6930/revisions" title="show all edits to this post">edited <span title="2012-08-08 22:18:20Z" class="relativetime">Aug 8 '12 at 22:18</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-08-08 21:21:54Z" class="relativetime">Aug 8 '12 at 21:21</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/2334/briguy37"><div><img src="https://www.gravatar.com/avatar/8766927119deb380d2510b8b258f1d27?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/2334/briguy37">Briguy37</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">911</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="12 bronze badges"><span class="badge3"></span><span class="badgecount">12</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6930" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6930" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/6868/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="6868" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f6868%2fgenerate-a-completely-deterministic-pseudorandom-bit-stream%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f6868%2fgenerate-a-completely-deterministic-pseudorandom-bit-stream%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/code-challenge" class="post-tag" title="show questions tagged &#39;code-challenge&#39;" rel="tag">code-challenge</a> <a href="/questions/tagged/random" class="post-tag" title="show questions tagged &#39;random&#39;" rel="tag">random</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/code-challenge" class="post-tag" title="show questions tagged &#39;code-challenge&#39;" rel="tag">code-challenge</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">228</span></span><br>
+<a href="/questions/tagged/random" class="post-tag" title="show questions tagged &#39;random&#39;" rel="tag">random</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">22</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2012-08-02 21:36:38Z"><b>1 year ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>754 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2012-09-19 20:49:14Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/beta/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=codegolf.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-codegolf.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/10553" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">10</div>
+	</a>
+	<a href="/questions/10553/build-a-random-number-generator-that-passes-the-diehard-tests" class="question-hyperlink">Build a random number generator that passes the Diehard tests</a>
+</div><div class="spacer">
+	<a href="/q/6832" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">0</div>
+	</a>
+	<a href="/questions/6832/random-with-your-hands-tied" class="question-hyperlink">Random with your hands tied</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/1663" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/1663/shuffle-a-deck-without-local-variables" class="question-hyperlink">Shuffle a deck without local variables</a>
+</div>
+<div class="spacer">
+<a href="/q/2040" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">8
+    </div>
+</a><a href="/questions/2040/manchester-encode-a-data-stream" class="question-hyperlink">Manchester encode a data stream</a>
+</div>
+<div class="spacer">
+<a href="/q/4772" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">5
+    </div>
+</a><a href="/questions/4772/random-sampling-without-replacement" class="question-hyperlink">Random sampling without replacement</a>
+</div>
+<div class="spacer">
+<a href="/q/4773" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">5
+    </div>
+</a><a href="/questions/4773/sudoku-board-generator" class="question-hyperlink">Sudoku board generator</a>
+</div>
+<div class="spacer">
+<a href="/q/5271" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/5271/generate-number-in-reverse-polish-notation" class="question-hyperlink">Generate number in reverse polish notation</a>
+</div>
+<div class="spacer">
+<a href="/q/5364" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/5364/did-i-win-the-lotto" class="question-hyperlink">Did I win the lotto?</a>
+</div>
+<div class="spacer">
+<a href="/q/5391" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/5391/lorem-ipsum-random-code-generation" class="question-hyperlink">Lorem Ipsum Random Code Generation</a>
+</div>
+<div class="spacer">
+<a href="/q/8357" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/8357/generate-a-valid-sequence-of-numbers-with-specific-rules" class="question-hyperlink">Generate a valid sequence of numbers with specific rules</a>
+</div>
+<div class="spacer">
+<a href="/q/8551" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/8551/dice-from-changing-random-generator" class="question-hyperlink">Dice from Changing Random Generator</a>
+</div>
+<div class="spacer">
+<a href="/q/10553" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">10
+    </div>
+</a><a href="/questions/10553/build-a-random-number-generator-that-passes-the-diehard-tests" class="question-hyperlink">Build a random number generator that passes the Diehard tests</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/6868" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/6868/ivc/e2ec');});
+</script>
+<noscript>
+    <div><img src="/posts/6868/ivc/e2ec" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/6868/generate-a-completely-deterministic-pseudorandom-bit-stream")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codegolf.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Programming Puzzles &amp; Code Golf Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|code-challenge|random|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

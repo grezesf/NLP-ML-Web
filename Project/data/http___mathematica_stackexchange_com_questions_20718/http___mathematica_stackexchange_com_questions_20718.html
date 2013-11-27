@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>programming - Keep function range as a variable - Mathematica Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/mathematica/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/mathematica/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Mathematica Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackMma" />
+    <meta name="twitter:domain" content="mathematica.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/mathematica/img/apple-touch-icon@2.png?v=1b98edea1597"/>
+    <meta name="og:title" content="Keep function range as a variable" />
+    <meta name="og:description" content="Plot[2*x^2 - x + 2, {x, -1, 1}] plots a function of x from -1 to 1. As far as I can see, I cannot &quot;save&quot; this range in a variable:
+
+u = {x, -1, 1};
+Plot[2*x^2 - x + 2, u]
+
+
+Generates Plot::pllim: R..." />
+    <meta name="og:url" content="http://mathematica.stackexchange.com/questions/20718/keep-function-range-as-a-variable"/>
+    <link rel="canonical" href="http://mathematica.stackexchange.com/questions/20718/keep-function-range-as-a-variable" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/mathematica/all.css?v=bff528b8e430">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Keep function range as a variable&#39;" href="/feeds/question/20718">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:6,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:20718});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('387', '20718');
+            
+                    });
+    </script>
+
+                <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+                                        tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+                                        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+                                        messageStyle: "none"
+                });
+                </script>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>                
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('387');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385457658,"styleCode":true,"styleCodeAdditionalLang":"lang-mma.js?v=1","enableUserHovercards":true,"site":{"name":"Mathematica Stack Exchange","description":"Q&A for users of Mathematica","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091","js/mathjax-editing.en.js":"a09844f7b738"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f20718%2fkeep-function-range-as-a-variable">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f20718%2fkeep-function-range-as-a-variable">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Mathematica
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/mathematica/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Mathematica Stack Exchange is a question and answer site for users of Mathematica. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/20718/keep-function-range-as-a-variable" class="question-hyperlink">Keep function range as a variable</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="20718"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="20718">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p><code>Plot[2*x^2 - x + 2, {x, -1, 1}]</code> plots a function of x from -1 to 1. As far as I can see, I cannot "save" this range in a variable:</p>
+
+<pre><code>u = {x, -1, 1};
+Plot[2*x^2 - x + 2, u]
+</code></pre>
+
+<p>Generates <code>Plot::pllim: Range specification u is not of the form {x, xmin, xmax}.</code> Hopefully my intention is obvious, what is the most concise way of accomplishing it?</p>
+
+<p>Because someone will wonder why I could possibly want to do this: I have</p>
+
+<pre><code>NDSolve[..., ..., {t, 0, 100}];
+Plot[..., {t, 0, 100}];
+</code></pre>
+
+<p>I don't want to need to modify both 100's as my desired range changes. Yes, I could use variables t0 and t1, but is what type is the range/domain expression? Why can't I store it directly?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/programming" class="post-tag" title="show questions tagged &#39;programming&#39;" rel="tag">programming</a> <a href="/questions/tagged/evaluation" class="post-tag" title="show questions tagged &#39;evaluation&#39;" rel="tag">evaluation</a> <a href="/questions/tagged/syntax" class="post-tag" title="show questions tagged &#39;syntax&#39;" rel="tag">syntax</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/20718" title="short permalink to this question" class="short-link" id="link-post-20718">share</a><span class="lsep">|</span><a href="/posts/20718/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/20718/revisions" title="show all edits to this post">edited <span title="2013-03-09 01:18:46Z" class="relativetime">Mar 9 at 1:18</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/12/szabolcs"><div><img src="https://www.gravatar.com/avatar/c0a67f946a3b1ec8e5d5bfd5adc6f253?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/12/szabolcs">Szabolcs</a><br>
+        <span class="reputation-score" title="reputation score 40668" dir="ltr">40.7k</span><span title="4 gold badges"><span class="badge1"></span><span class="badgecount">4</span></span><span title="101 silver badges"><span class="badge2"></span><span class="badgecount">101</span></span><span title="249 bronze badges"><span class="badge3"></span><span class="badgecount">249</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-03-05 23:58:58Z" class="relativetime">Mar 5 at 23:58</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/578/superbest"><div><img src="https://www.gravatar.com/avatar/93ad97cd6d264067b56ee1e08fa0b73d?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/578/superbest">Superbest</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">123</span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-20718" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="1" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-63524" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">The reason why what you tried did not work is that Plot has <a href="http://reference.wolfram.com/mathematica/tutorial/NonStandardEvaluation.html" rel="nofollow">the HoldAll attribute</a> (this is to make it work even if <code>x</code> has a value).  Unfortunately I see no <i>convenient</i> way to get around this.  As MrW pointed it out, <code>Plot&#91;..., Evaluate&#91;u&#93;&#93;</code> is not robust: it won&#39;t work if <code>x</code> has a value.  Yes, this <i>is</i> annoying, and I&#39;d also like a really <i>convenient</i> way to store these ranges.</span>
+	&ndash;&nbsp;
+		<a href="/users/12/szabolcs" 
+		   title="40668 reputation" 
+		   class="comment-user">Szabolcs</a>
+	<span class="comment-date" dir="ltr"><span title="2013-03-06 01:16:43Z" class="relativetime-clean">Mar 6 at 1:16</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-63527" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">How about: <code>With&#91;{lims = Sequence&#91;0, 100&#93;},
+ NDSolve&#91;...,..., {x, ##}&#93; &amp;@lims;
+ Plot&#91;..., {x, ##}&#93; &amp;@lims
+ &#93;</code></span>
+	&ndash;&nbsp;
+		<a href="/users/5/rm-rf" 
+		   title="51665 reputation" 
+		   class="comment-user">rm -rf<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-03-06 01:26:03Z" class="relativetime-clean">Mar 6 at 1:26</span></span>
+		<span class="edited-yes" title="this comment was edited 2 times"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-63659" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Maybe I&#39;m missing something, but it seems the key point is to save the <i>limits</i> $-1$ and $1$ in the variable <code>u</code> and that it wouldn&#39;t do any harm to re-specify the variable <code>x</code> explicitly in <code>Plot</code>. So why not <code>u={-1,1}; Plot&#91;f&#91;x&#93;, Evaluate@Prepend&#91;u,x&#93;&#93;</code>? Or is it important that <code>x</code> be referenced within <code>u</code> itself? If so, why?</span>
+	&ndash;&nbsp;
+		<a href="/users/91/whuber" 
+		   title="14501 reputation" 
+		   class="comment-user">whuber</a>
+	<span class="comment-date" dir="ltr"><span title="2013-03-06 18:01:03Z" class="relativetime-clean">Mar 6 at 18:01</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-64323" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Szabolcs Can you think of better tags for this question than <b>syntax</b>?</span>
+	&ndash;&nbsp;
+		<a href="/users/121/mr-wizard" 
+		   title="78927 reputation" 
+		   class="comment-user">Mr.Wizard<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-03-09 00:41:26Z" class="relativetime-clean">Mar 9 at 0:41</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-64326" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Mr.Wizard I tried, please review.  I think this is also related to &quot;macro expansion&quot;.  There were questions about that, but I can&#39;t find them now.  Maybe they were on SO.  This is really about <i>convenience</i>, making it easier to type code.  Maybe we should have a tag for things like that?</span>
+	&ndash;&nbsp;
+		<a href="/users/12/szabolcs" 
+		   title="40668 reputation" 
+		   class="comment-user">Szabolcs</a>
+	<span class="comment-date" dir="ltr"><span title="2013-03-09 01:20:09Z" class="relativetime-clean">Mar 9 at 1:20</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-20718" data-rep=50 data-anon=true
+			   class="comments-link " 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>show <b>1</b> more comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								3 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/20718/keep-function-range-as-a-variable?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/20718/keep-function-range-as-a-variable?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/20718/keep-function-range-as-a-variable?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="20719"></a>
+<div id="answer-20719" class="answer accepted-answer" data-answerid="20719" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="20719">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">6</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h3>Better methods</h3>
+
+<p>My original answer was pretty poor and I'll show you why.</p>
+
+<p>Suppose <code>x</code> has a value assigned: <code>x = 7</code>.  This does not bother <code>Plot</code>:</p>
+
+<pre><code>Plot[2*x^2 - x + 2, {x, -1, 1}]  (* outputs graphic *)
+</code></pre>
+
+<p>It however <em>will</em> prevent my earlier suggestions from working:</p>
+
+<pre><code>Plot[2*x^2 - x + 2, Evaluate@u]
+</code></pre>
+
+<blockquote>
+  <p>During evaluation of In[23]:= Plot::itraw: Raw object 7 cannot be used as an iterator. >></p>
+
+<pre><code>Plot[2 x^2 - x + 2, {7, -1, 1}]
+</code></pre>
+</blockquote>
+
+<p>Instead you should store your range in a way that holds the plot parameter unevaluated:</p>
+
+<pre><code>u = Hold[{x, -1, 1}];
+</code></pre>
+
+<p>Then you need a way to put this inside the <code>Plot</code> expression without it evaluating.  This can be done with a <code>Function</code> and a hold attribute and <code>Apply</code>:</p>
+
+<pre><code>Function[spec, Plot[2*x^2 - x + 2, spec], HoldAll] @@ u  (* outputs graphic *)
+</code></pre>
+
+<p>Or more tersely with the <a href="http://mathematica.stackexchange.com/a/1937/121">"injector pattern"</a>:</p>
+
+<pre><code>u /. _[spec_] :&gt; Plot[2*x^2 - x + 2, spec]  (* outputs graphic *)
+</code></pre>
+
+<hr>
+
+<h3>Old answer</h3>
+
+<p>You just need <a href="http://reference.wolfram.com/mathematica/ref/Evaluate.html"><code>Evaluate</code></a>:</p>
+
+<pre><code>u = {x, -1, 1};
+
+Plot[2*x^2 - x + 2, Evaluate @ u]
+</code></pre>
+
+<p><img src="http://i.stack.imgur.com/CojB6.png" alt="Mathematica graphics"></p>
+
+<p>Or as I often prefer, <code>Function</code>:</p>
+
+<pre><code>Plot[2*x^2 - x + 2, #] &amp; @ u
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/20719" title="short permalink to this answer" class="short-link" id="link-post-20719">share</a><span class="lsep">|</span><a href="/posts/20719/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/20719/revisions" title="show all edits to this post">edited <span title="2013-03-06 00:28:49Z" class="relativetime">Mar 6 at 0:28</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-03-06 00:02:27Z" class="relativetime">Mar 6 at 0:02</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/121/mr-wizard"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/G9df1.png?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/121/mr-wizard">Mr.Wizard</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score 78927" dir="ltr">78.9k</span><span title="12 gold badges"><span class="badge1"></span><span class="badgecount">12</span></span><span title="132 silver badges"><span class="badge2"></span><span class="badgecount">132</span></span><span title="343 bronze badges"><span class="badge3"></span><span class="badgecount">343</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-20719" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-20719" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="20726"></a>
+<div id="answer-20726" class="answer" data-answerid="20726" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="20726">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>To take a more advanced approach in response to Szabolcs's comment, one can use <code>UpValues</code>.  I define a new kind of set function as follows:</p>
+
+<pre><code>SetAttributes[setSpec, HoldAllComplete]
+
+setSpec[s_Symbol, spec__] := s /: h_[pre__, s, post___] := h[pre, spec, post]
+</code></pre>
+
+<p>Then make an assignment, and use it:</p>
+
+<pre><code>setSpec[u, {x, 0, 10}];
+
+Plot[Sin[x], u, PlotStyle -&gt; Red]
+</code></pre>
+
+<p><img src="http://i.stack.imgur.com/NrfiS.png" alt="Mathematica graphics"></p>
+
+<p>Or with more than one specification:</p>
+
+<pre><code>setSpec[v, {x, -3, 3}, {y, -3, 3}, StreamStyle -&gt; "Pointer"]
+
+StreamPlot[{-1 - x^2 + y, 1 + x - y^2}, v,
+ PlotLabel -&gt; s, 
+ StreamScale -&gt; {Full, All, 0.03}]
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/20726" title="short permalink to this answer" class="short-link" id="link-post-20726">share</a><span class="lsep">|</span><a href="/posts/20726/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/20726/revisions" title="show all edits to this post">edited <span title="2013-03-06 01:40:48Z" class="relativetime">Mar 6 at 1:40</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-03-06 01:35:13Z" class="relativetime">Mar 6 at 1:35</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/121/mr-wizard"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/G9df1.png?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/121/mr-wizard">Mr.Wizard</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score 78927" dir="ltr">78.9k</span><span title="12 gold badges"><span class="badge1"></span><span class="badgecount">12</span></span><span title="132 silver badges"><span class="badge2"></span><span class="badgecount">132</span></span><span title="343 bronze badges"><span class="badge3"></span><span class="badgecount">343</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-20726" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-20726" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="20731"></a>
+<div id="answer-20731" class="answer" data-answerid="20731" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="20731">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>I have a simple mind and like simple methods. In this case, I suggest using a <a href="http://reference.wolfram.com/mathematica/tutorial/LettersAndLetterLikeForms.html" rel="nofollow">formal parameter</a>.</p>
+
+<pre><code>u = {\[FormalX], -1, 1};
+</code></pre>
+
+<p>The character <code>\[FormalX]</code> can be typed using the keystrokes [esc]$x]esc].</p>
+
+<p>Using <code>\[FormalX]</code> rather than <code>x</code> is robust because <code>\[FormalX]</code> has the <code>Protected</code> attribute and can not be bound to a value.</p>
+
+<pre><code>\[FormalX] = 42; ValueQ@\[FormalX]
+</code></pre>
+
+<blockquote>
+  <p>Set::wrsym: Symbol <code>\[FormalX]</code> is Protected.</p>
+  
+  <p>False</p>
+</blockquote>
+
+<p>With <code>u</code> defined as above, you can make your plot by evaluating</p>
+
+<pre><code>Plot[2*\[FormalX]^2 - \[FormalX] + 2, Evaluate@u]
+</code></pre>
+
+<p>or by evaluating</p>
+
+<pre><code>With[{u = u}, Plot[2*\[FormalX]^2 - \[FormalX] + 2, u]]
+</code></pre>
+
+<p>Should you dislike the extra typing needed to insert <code>\[FormalX]</code> or should you want the freedom to use a parameter name entirely of your own choosing, you can roll your own formal parameters.</p>
+
+<pre><code>SetAttributes[makeFormal, HoldFirst];
+makeFormal[u_Symbol] := (Clear[u]; Protect[u];)
+
+Unprotect@x;
+x = 42;
+makeFormal@x;
+Print[Attributes[x]];
+ValueQ@x
+</code></pre>
+
+<blockquote>
+  <p>{Protected}</p>
+  
+  <p>False</p>
+</blockquote>
+
+<p>Now <code>x</code> will act just like <code>\[FormalX]</code>.</p>
+
+<pre><code>u = {x, -1, 1};
+Plot[2*x^2 - x + 2, Evaluate@u]
+</code></pre>
+
+<p>The above is now safe because x can no longer take a value.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/20731" title="short permalink to this answer" class="short-link" id="link-post-20731">share</a><span class="lsep">|</span><a href="/posts/20731/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/20731/revisions" title="show all edits to this post">edited <span title="2013-03-06 04:20:51Z" class="relativetime">Mar 6 at 4:20</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-03-06 04:08:19Z" class="relativetime">Mar 6 at 4:08</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3066/m-goldberg"><div><img src="https://www.gravatar.com/avatar/f3b02532d4cb4855881935c002389213?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3066/m-goldberg">m_goldberg</a><br>
+        <span class="reputation-score" title="reputation score 10084" dir="ltr">10.1k</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="13 silver badges"><span class="badge2"></span><span class="badgecount">13</span></span><span title="46 bronze badges"><span class="badge3"></span><span class="badgecount">46</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-20731" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-20731" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/20718/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="20718" />
+							<h2 class="space">Your Answer</h2>
+
+
+        <script type="text/javascript">
+            StackExchange.ifUsing("editor", function () {
+                return StackExchange.using("mathjaxEditing", function () {
+                    StackExchange.MarkdownEditor.creationCallbacks.add(function (editor, postfix) {
+                        StackExchange.mathjaxEditing.prepareWmdForMathJax(editor, postfix, [["$", "$"], ["\\\\(","\\\\)"]]);
+                    });
+                });
+            }, "mathjax-editing");
+        </script>
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f20718%2fkeep-function-range-as-a-variable%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f20718%2fkeep-function-range-as-a-variable%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/programming" class="post-tag" title="show questions tagged &#39;programming&#39;" rel="tag">programming</a> <a href="/questions/tagged/evaluation" class="post-tag" title="show questions tagged &#39;evaluation&#39;" rel="tag">evaluation</a> <a href="/questions/tagged/syntax" class="post-tag" title="show questions tagged &#39;syntax&#39;" rel="tag">syntax</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/programming" class="post-tag" title="show questions tagged &#39;programming&#39;" rel="tag">programming</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">500</span></span><br>
+<a href="/questions/tagged/evaluation" class="post-tag" title="show questions tagged &#39;evaluation&#39;" rel="tag">evaluation</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">274</span></span><br>
+<a href="/questions/tagged/syntax" class="post-tag" title="show questions tagged &#39;syntax&#39;" rel="tag">syntax</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">176</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-03-05 23:58:58Z"><b>8 months ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>232 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-03-09 01:18:46Z">8 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-mathematica.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/23255" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">2</div>
+	</a>
+	<a href="/questions/23255/reuse-parametricplot3d-plotting-options" class="question-hyperlink">Reuse ParametricPlot3D plotting options</a>
+</div><div class="spacer">
+	<a href="/q/1929" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">30</div>
+	</a>
+	<a href="/questions/1929/injecting-a-sequence-of-expressions-into-a-held-expression" class="question-hyperlink">Injecting a sequence of expressions into a held expression</a>
+</div><div class="spacer">
+	<a href="/q/3247" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">25</div>
+	</a>
+	<a href="/questions/3247/consistent-plot-styles-across-multiple-mma-files-and-data-sets" class="question-hyperlink">Consistent Plot Styles across multiple MMA files and data sets</a>
+</div><div class="spacer">
+	<a href="/q/22697" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">10</div>
+	</a>
+	<a href="/questions/22697/custom-functions-by-delegating-options-in-a-specific-way-and-using-core-function" class="question-hyperlink">Custom functions by delegating options in a specific way and using core functions</a>
+</div><div class="spacer">
+	<a href="/q/2414" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">8</div>
+	</a>
+	<a href="/questions/2414/problem-when-defining-variable-in-mathematica" class="question-hyperlink">Problem when defining variable in Mathematica</a>
+</div><div class="spacer">
+	<a href="/q/20713" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">6</div>
+	</a>
+	<a href="/questions/20713/efficient-way-to-utilise-parallel-features-to-make-use-of-many-cores" class="question-hyperlink">Efficient way to utilise Parallel features to make use of many cores</a>
+</div><div class="spacer">
+	<a href="/q/29503" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">5</div>
+	</a>
+	<a href="/questions/29503/passing-list-of-options-to-plot" class="question-hyperlink">Passing list of options to Plot</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/704" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">37
+    </div>
+</a><a href="/questions/704/functions-vs-patterns" class="question-hyperlink">Functions vs. patterns</a>
+</div>
+<div class="spacer">
+<a href="/q/1203" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/1203/using-variables-in-function-names" class="question-hyperlink">Using variables in function names</a>
+</div>
+<div class="spacer">
+<a href="/q/4295" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/4295/can-a-table-iterator-leak-into-a-module" class="question-hyperlink">Can a Table iterator &ldquo;leak&rdquo; into a Module?</a>
+</div>
+<div class="spacer">
+<a href="/q/5217" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/5217/mapping-multiple-parameters-of-a-function-to-specific-values" class="question-hyperlink">Mapping multiple parameters of a function to specific values</a>
+</div>
+<div class="spacer">
+<a href="/q/5989" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/5989/a-number-in-base-b-and-pure-functions-why-doesnt-b-work" class="question-hyperlink">&ldquo;A number in base b&rdquo; and pure functions: why doesn&#39;t b^^# &amp; work?</a>
+</div>
+<div class="spacer">
+<a href="/q/18345" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/18345/array-of-functions-evaluation-in-plot" class="question-hyperlink">Array of functions, evaluation in plot</a>
+</div>
+<div class="spacer">
+<a href="/q/22131" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/22131/is-there-a-way-to-check-whether-two-notebooks-share-the-same-variables" class="question-hyperlink">Is there a way to check whether two notebooks share the same variables?</a>
+</div>
+<div class="spacer">
+<a href="/q/25427" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/25427/solve-this-equation-symbolically" class="question-hyperlink">Solve this equation symbolically</a>
+</div>
+<div class="spacer">
+<a href="/q/27673" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/27673/what-do-the-hashtags-represent-in-the-result-of-solve-and-how-should-i-use-them" class="question-hyperlink">What do the hashtags represent in the result of Solve, and how should I use them?</a>
+</div>
+<div class="spacer">
+<a href="/q/34704" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/34704/plot-producing-many-error-messages-when-given-complicated-function" class="question-hyperlink">Plot producing many error messages when given complicated function</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/20718" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/20718/ivc/21ed');});
+</script>
+<noscript>
+    <div><img src="/posts/20718/ivc/21ed" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-mma</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://mathematica.blogoverflow.com/?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/20718/keep-function-range-as-a-variable")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.mathematica.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+                <div id="additional-notices">
+                    Mathematica is a registered trademark of Wolfram Research, Inc.  While the mark is used herein with the limited permission of Wolfram Research, Stack Exchange and this site disclaim all affiliation therewith.
+                </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Mathematica Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|programming|evaluation|syntax|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

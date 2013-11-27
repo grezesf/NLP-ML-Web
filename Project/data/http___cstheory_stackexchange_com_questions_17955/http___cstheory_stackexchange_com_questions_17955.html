@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>cr.crypto security - A public key cryptographic technique usable without aid of computer - Theoretical Computer Science Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/cstheory/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/cstheory/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Theoretical Computer Science Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCSTheory" />
+    <meta name="twitter:domain" content="cstheory.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/cstheory/img/apple-touch-icon@2.png?v=da033b2b5220"/>
+    <meta name="og:title" content="A public key cryptographic technique usable without aid of computer" />
+    <meta name="og:description" content="I wondered if there is any known algorithm for secure messaging without pre-shared keys (i.e. public key cryptography) that is practical to use without the aid of a computer?
+
+Obviously I would not " />
+    <meta name="og:url" content="http://cstheory.stackexchange.com/questions/17955/a-public-key-cryptographic-technique-usable-without-aid-of-computer"/>
+    <link rel="canonical" href="http://cstheory.stackexchange.com/questions/17955/a-public-key-cryptographic-technique-usable-without-aid-of-computer" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/cstheory/all.css?v=fa4fcddf0343">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;A public key cryptographic technique usable without aid of computer&#39;" href="/feeds/question/17955">
+<script src="//cdn.sstatic.net/Js/citation.en.js?v=796871a7113c" type="text/javascript"></script>    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showCitation:true,showAnswerHelp:true,totalCommentCount:6,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:17955});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('114', '17955');
+            
+                    });
+    </script>
+
+                <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+                                        tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+                                        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+                                        messageStyle: "none"
+                });
+                </script>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>                
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('114');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385450824,"enableUserHovercards":true,"site":{"name":"Theoretical Computer Science Stack Exchange","description":"Q&A for theoretical computer scientists and researchers in related fields","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091","js/mathjax-editing.en.js":"a09844f7b738"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f17955%2fa-public-key-cryptographic-technique-usable-without-aid-of-computer">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f17955%2fa-public-key-cryptographic-technique-usable-without-aid-of-computer">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Theoretical Computer Science
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/cstheory/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Theoretical Computer Science Stack Exchange is a question and answer site for theoretical computer scientists and researchers in related fields. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/17955/a-public-key-cryptographic-technique-usable-without-aid-of-computer" class="question-hyperlink">A public key cryptographic technique usable without aid of computer</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="17955"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="17955">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I wondered if there is any known algorithm for secure messaging without pre-shared keys (i.e. public key cryptography) that is practical to use without the aid of a computer?</p>
+
+<p>Obviously I would not expect it to be as secure as modern 256-bit encryption, but I wondered whether it was theoretically possible that older civilizations ever could have used something akin to public key cryptography, perhaps something with a computational complexity on the order of the Vigenere technique but without the need for a pre-arranged shared key?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/cr.crypto-security" class="post-tag" title="show questions tagged &#39;cr.crypto-security&#39;" rel="tag">cr.crypto-security</a> <a href="/questions/tagged/key-exchange" class="post-tag" title="show questions tagged &#39;key-exchange&#39;" rel="tag">key-exchange</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/17955" title="short permalink to this question" class="short-link" id="link-post-17955">share</a><span class="lsep">|</span><a href="/posts/17955/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/17955/revisions" title="show all edits to this post">edited <span title="2013-06-10 20:21:07Z" class="relativetime">Jun 10 at 20:21</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3247/marzio-de-biasi"><div><img src="https://www.gravatar.com/avatar/7bbe9dc2e20ee1f8adfa17ee73af8f08?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3247/marzio-de-biasi">Marzio De Biasi</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">6,483</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="10 silver badges"><span class="badge2"></span><span class="badgecount">10</span></span><span title="35 bronze badges"><span class="badge3"></span><span class="badgecount">35</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-06-09 22:23:35Z" class="relativetime">Jun 9 at 22:23</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/16348/magnus"><div><img src="https://www.gravatar.com/avatar/a57ee7ba67bd0fa7dfc9ca2817cf2b86?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/16348/magnus">Magnus</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">119</span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-17955" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="1" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-46574" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Do you mean boxes, padlocks, seals, physical keys, etc?</span>
+	&ndash;&nbsp;
+		<a href="/users/6190/mch" 
+		   title="2617 reputation" 
+		   class="comment-user">MCH</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-09 23:05:43Z" class="relativetime-clean">Jun 9 at 23:05</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-46575" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">No I mean an algorithm like Caesar or Vigenere encryption.</span>
+	&ndash;&nbsp;
+		<a href="/users/16348/magnus" 
+		   title="119 reputation" 
+		   class="comment-user owner">Magnus</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-09 23:29:05Z" class="relativetime-clean">Jun 9 at 23:29</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-46590" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Given 1. that public-key cryptography was only published outside the intelligence community less than 40 years ago, and 2. that the essential insight of PKC is that in the digital realm a lock-and-key system can be inverted to keep the key while giving away many copies of the lock, it seems unlikely to me that there are historical analogues.</span>
+	&ndash;&nbsp;
+		<a href="/users/109/andras-salamon" 
+		   title="8874 reputation" 
+		   class="comment-user">Andr&#225;s Salamon</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-10 08:46:47Z" class="relativetime-clean">Jun 10 at 8:46</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-46591" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">However, the Cinderella story about the glass slipper is a kind of analogue of PKC -- the message (the identity of the wearer) is locked until the right private key (in this case, a biometric: the correct foot) is united with the public key (the slipper).  But this is a bit of a stretch.</span>
+	&ndash;&nbsp;
+		<a href="/users/109/andras-salamon" 
+		   title="8874 reputation" 
+		   class="comment-user">Andr&#225;s Salamon</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-10 08:54:01Z" class="relativetime-clean">Jun 10 at 8:54</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-46635" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">See Bruce Schneier&#39;s <a href="http://en.wikipedia.org/wiki/Solitaire_(cipher)" rel="nofollow">Solitaire</a>.</span>
+	&ndash;&nbsp;
+		<a href="/users/111/je" 
+		   title="14990 reputation" 
+		   class="comment-user">JɛﬀE</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-11 02:31:50Z" class="relativetime-clean">Jun 11 at 2:31</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-17955" data-rep=50 data-anon=true
+			   class="comments-link " 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>show <b>1</b> more comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								3 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/17955/a-public-key-cryptographic-technique-usable-without-aid-of-computer?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/17955/a-public-key-cryptographic-technique-usable-without-aid-of-computer?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/17955/a-public-key-cryptographic-technique-usable-without-aid-of-computer?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="17966"></a>
+<div id="answer-17966" class="answer" data-answerid="17966" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="17966">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">6</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Secure cryptographic protocols that can be executed by humans are considered in this paper: <a href="http://link.springer.com/chapter/10.1007%2F3-540-45682-1_4">http://link.springer.com/chapter/10.1007%2F3-540-45682-1_4</a> (Hopper and Blum, "Secure Human Identification Protocols"). Reading the abstract, it sounds like they don't fully solve the problem. I suspect a satisfying solution is not known, but if you want to look into it I would start by looking at papers citing this one. </p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/17966" title="short permalink to this answer" class="short-link" id="link-post-17966">share</a><span class="lsep">|</span><a href="/posts/17966/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-06-10 20:17:38Z" class="relativetime">Jun 10 at 20:17</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/25/aaron-roth"><div><img src="https://www.gravatar.com/avatar/7aece271ecef8c629728d054094c8e54?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/25/aaron-roth">Aaron Roth</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">6,079</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="17 silver badges"><span class="badge2"></span><span class="badgecount">17</span></span><span title="44 bronze badges"><span class="badge3"></span><span class="badgecount">44</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-17966" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-46642" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Thank you for this fascinating link!  Incidentally it&#39;s not protected, I was able to read the whole thing.  However I unfortunately was not able to follow much of it... Any chance you might be able to translate the essence of their algorithm into plain English?</span>
+	&ndash;&nbsp;
+		<a href="/users/16348/magnus" 
+		   title="119 reputation" 
+		   class="comment-user owner">Magnus</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-11 13:06:12Z" class="relativetime-clean">Jun 11 at 13:06</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-17966" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="17960"></a>
+<div id="answer-17960" class="answer" data-answerid="17960" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="17960">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>The Cæsar and Vigenère cipher are <em>breakable</em>. While some private key ciphers such as RC4, SNOW and SNOW2 (which are quite safe if used properly) can in principle be used by hand (albeit very slowly), public key ciphers usually require modular exponentiation of (very) large integers, which seems out of reach even for a determined individual. (Rabin's cipher may be somewhat practical to encrypt but not to decrypt.) Elliptic curve-based methods are even worse. Lattice-based public key encryption requires generating randomness on the encryptor's side, and some non-trivial algorithics on the decryptor's, so also seem to be too difficult to implement by hand.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/17960" title="short permalink to this answer" class="short-link" id="link-post-17960">share</a><span class="lsep">|</span><a href="/posts/17960/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-06-10 03:51:01Z" class="relativetime">Jun 10 at 3:51</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/40/yuval-filmus"><div><img src="https://www.gravatar.com/avatar/b5a2aa5bb3e3ffb92be80ffb5620a5b8?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/40/yuval-filmus">Yuval Filmus</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">7,102</span><span title="15 silver badges"><span class="badge2"></span><span class="badgecount">15</span></span><span title="45 bronze badges"><span class="badge3"></span><span class="badgecount">45</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-17960" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-17960" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="18013"></a>
+<div id="answer-18013" class="answer" data-answerid="18013" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="18013">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>If we look at a related topic, namely interactive identification protocols, we get a problem that has been well-studied.</p>
+
+<p>Unfortunately there are no known protocols that are both secure (against attacks by computers) yet where ordinary humans can reasonably execute the protocol mentally without the aid of the computer.  There have been lots of proposals, but all of them have either been broken or have proven too complicated for ordinary people to follow without making mistakes.</p>
+
+<p>I think many researchers in the security and cryptography community expect that the problem is very hard and that, in all likelihood, no such secure and usable identification protocol exists.  Of course, there is no proof of this -- it is not even clear how you could prove it, since it is not clear how you would formalize "can reasonably be executed by an ordinary human, in everyday life, without aid of a computer".</p>
+
+<p>For a good entrance into the broad literature on interactive identification protocols, the following paper is excellent:</p>
+
+<ul>
+<li><a href="http://www.internetsociety.org/sites/default/files/06_2.pdf" rel="nofollow">On Limitations of Designing Leakage-Resilient Password Systems: Attacks, Principals and Usability</a>.  Qiang Yan, Jin Han, Yingjiu Li and Robert H. Deng.  NDSS 2012.</li>
+</ul>
+
+<p>There's also the seminal paper by Hopper and Blum that motivated a lot of the work in this area:</p>
+
+<ul>
+<li><a href="http://www-users.cs.umn.edu/~hopper/secure_human_identification_protocols.pdf" rel="nofollow">Secure Human Identification Protocols</a>.  Nicholas J. Hopper, Manuel Blum.  ASIACRYPT 2001.</li>
+</ul>
+
+<p>Reading these two papers will give you a good sense of the directions, and a lot of relevant techniques and ideas.  It will also help you understand why the interactive identification problem is so incredibly hard to do securely, without a computer.</p>
+
+<p>Public-key cryptography is a strictly harder problem than interactive identification.  If you could do public-key cryptography, you could also do interactive identification securely.  For instance, I could prove my identity by demonstrating the ability to sign a random challenge chosen by the verifier; or by demonstrating the ability to decrypt a ciphertext chosen by the verifier.  Therefore, my expectation is that there is no way to implement public-key cryptography securely without a computer, either.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/18013" title="short permalink to this answer" class="short-link" id="link-post-18013">share</a><span class="lsep">|</span><a href="/posts/18013/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/18013/revisions" title="show all edits to this post">edited <span title="2013-06-14 06:58:44Z" class="relativetime">Jun 14 at 6:58</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-06-14 06:50:38Z" class="relativetime">Jun 14 at 6:50</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/5038/d-w"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/mYIzP.png?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/5038/d-w">D.W.</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,775</span><span title="6 silver badges"><span class="badge2"></span><span class="badgecount">6</span></span><span title="19 bronze badges"><span class="badge3"></span><span class="badgecount">19</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-18013" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-46740" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Here&#39;s a basic idea for formalizing that: can be executed by a log-space machine with a polylogarithmic length read-only private key. $\:$ I&#39;m not sure whether one would require that the algorithm be deterministic or allow the algorithm to be randomized; in the latter case one would $\;\;$ also require that it be polynomial time (which would be redundant in the first case). $\:$ [continued ...]</span>
+	&ndash;&nbsp;
+		<a href="/users/6973/ricky-demer" 
+		   title="1289 reputation" 
+		   class="comment-user">Ricky Demer</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-14 08:59:35Z" class="relativetime-clean">Jun 14 at 8:59</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-46744" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">[... continued] $\:$ I&#39;m also not sure whether one would make the input tape one-way or two-way and whether one would erase the input tape between rounds or not (these would correspond to how $\;\;$ well the human can notice a change in what is being displayed while also running the algorithm).</span>
+	&ndash;&nbsp;
+		<a href="/users/6973/ricky-demer" 
+		   title="1289 reputation" 
+		   class="comment-user">Ricky Demer</a>
+	<span class="comment-date" dir="ltr"><span title="2013-06-14 09:02:09Z" class="relativetime-clean">Jun 14 at 9:02</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-18013" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/17955/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="17955" />
+							<h2 class="space">Your Answer</h2>
+
+
+        <script type="text/javascript">
+            StackExchange.ifUsing("editor", function () {
+                return StackExchange.using("mathjaxEditing", function () {
+                    StackExchange.MarkdownEditor.creationCallbacks.add(function (editor, postfix) {
+                        StackExchange.mathjaxEditing.prepareWmdForMathJax(editor, postfix, [["$", "$"], ["\\\\(","\\\\)"]]);
+                    });
+                });
+            }, "mathjax-editing");
+        </script>
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+noCode: true,            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f17955%2fa-public-key-cryptographic-technique-usable-without-aid-of-computer%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f17955%2fa-public-key-cryptographic-technique-usable-without-aid-of-computer%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/cr.crypto-security" class="post-tag" title="show questions tagged &#39;cr.crypto-security&#39;" rel="tag">cr.crypto-security</a> <a href="/questions/tagged/key-exchange" class="post-tag" title="show questions tagged &#39;key-exchange&#39;" rel="tag">key-exchange</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/cr.crypto-security" class="post-tag" title="show questions tagged &#39;cr.crypto-security&#39;" rel="tag">cr.crypto-security</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">189</span></span><br>
+<a href="/questions/tagged/key-exchange" class="post-tag" title="show questions tagged &#39;key-exchange&#39;" rel="tag">key-exchange</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">4</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-06-09 22:23:35Z"><b>5 months ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>263 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-06-14 06:58:44Z">5 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+			<div class="module community-bulletin" data-tracker="cb=1">
+    <h4>Community Bulletin</h4>
+    <div class="related">
+            <div class="spacer"> 
+                <div class="bulletin-item-type event-date">event</div>
+                <div class="bulletin-item-content">
+                    <a href="http://meta.cstheory.stackexchange.com/questions/2738/should-we-participate-in-the-stack-exchange-winter-bash" class="question-hyperlink" target="_blank">POLL: Should we participate in the Stack Exchange Winter Bash ?</a>
+                        <span class="event-date" style="white-space: nowrap;">&ndash; <span title="2013-12-16 00:00:00Z">Dec 16</span></span>
+                </div>
+                <br class="cbt" />
+            </div>
+
+    </div>
+</div>
+
+			
+			
+
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/499" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">20
+    </div>
+</a><a href="/questions/499/difference-between-theory-and-practice-of-security-and-cryptography" class="question-hyperlink">Difference between theory and practice of security and cryptography?</a>
+</div>
+<div class="spacer">
+<a href="/q/1527" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">6
+    </div>
+</a><a href="/questions/1527/confidentiality-of-partial-private-keys-in-certificateless-public-key-crypto" class="question-hyperlink">Confidentiality of &ldquo;partial private keys&rdquo; in certificateless public key crypto</a>
+</div>
+<div class="spacer">
+<a href="/q/3526" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">6
+    </div>
+</a><a href="/questions/3526/equivocal-primitives-in-practice" class="question-hyperlink">Equivocal primitives in practice</a>
+</div>
+<div class="spacer">
+<a href="/q/5983" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">22
+    </div>
+</a><a href="/questions/5983/estimating-a-percentile-among-distributed-nodes-without-revealing-values" class="question-hyperlink">Estimating a percentile among distributed nodes without revealing values</a>
+</div>
+<div class="spacer">
+<a href="/q/6321" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/6321/signature-scheme-without-random-oracles" class="question-hyperlink">signature scheme without random oracles</a>
+</div>
+<div class="spacer">
+<a href="/q/9182" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/9182/macing-from-an-arbitrary-high-min-entropy-shared-secret" class="question-hyperlink">MACing from an arbitrary high min-entropy shared secret</a>
+</div>
+<div class="spacer">
+<a href="/q/9510" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/9510/is-public-key-spread-spectrum-communication-possible" class="question-hyperlink">Is public-key spread-spectrum communication possible?</a>
+</div>
+<div class="spacer">
+<a href="/q/10143" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/10143/choices-for-the-group-in-public-key-cryptography" class="question-hyperlink">Choices for the group in Public Key Cryptography</a>
+</div>
+<div class="spacer">
+<a href="/q/11476" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/11476/justifying-simplifying-assumption-about-message-distributions-for-perfectly-secr" class="question-hyperlink">Justifying simplifying assumption about message distributions for perfectly secret encryption?</a>
+</div>
+<div class="spacer">
+<a href="/q/16662" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/16662/a-reduction-proof-of-sk-security-for-the-needham-schroeder-lowe-protocol" class="question-hyperlink">A reduction proof of SK-security for the Needham-Schroeder-Lowe protocol</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/17955" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/17955/ivc/b0ac');});
+</script>
+<noscript>
+    <div><img src="/posts/17955/ivc/b0ac" class="dno" alt="" width="0" height="0"></div>
+</noscript></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://cstheory.blogoverflow.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/17955/a-public-key-cryptographic-technique-usable-without-aid-of-computer")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.cstheory.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Theoretical Computer Science Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|cr.crypto-security|key-exchange|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

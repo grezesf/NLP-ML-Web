@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>public key - encryption and decryption time for RSA-crt in java? - Cryptography Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/crypto/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/crypto/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Cryptography Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCrypto" />
+    <meta name="twitter:domain" content="crypto.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/crypto/img/apple-touch-icon.png?v=4eff82ce3a8b"/>
+    <meta name="og:title" content="encryption and decryption time for RSA-crt in java?" />
+    <meta name="og:description" content="I try compute execution time for encrypt and decrypt data has 1024 bit = 128 byte  in RSA-crt algorithm. I need this results. But I believe this result wrong. because big diffrent between execution..." />
+    <meta name="og:url" content="http://crypto.stackexchange.com/questions/10538/encryption-and-decryption-time-for-rsa-crt-in-java"/>
+    <link rel="canonical" href="http://crypto.stackexchange.com/questions/10538/encryption-and-decryption-time-for-rsa-crt-in-java" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/crypto/all.css?v=67e9087155b1">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;encryption and decryption time for RSA-crt in java?&#39;" href="/feeds/question/10538">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:3,shownCommentCount:3,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:10538});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('281', '10538');
+            
+                    });
+    </script>
+
+                <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+                                        tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+                                        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+                                        messageStyle: "none"
+                });
+                </script>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>                
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('281');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385452508,"enableUserHovercards":true,"site":{"name":"Cryptography Stack Exchange","description":"Q&A for software developers, mathematicians and others interested in cryptography","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091","js/mathjax-editing.en.js":"a09844f7b738"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f10538%2fencryption-and-decryption-time-for-rsa-crt-in-java">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f10538%2fencryption-and-decryption-time-for-rsa-crt-in-java">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Cryptography
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/crypto/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Cryptography Stack Exchange is a question and answer site for software developers, mathematicians and others interested in cryptography. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/10538/encryption-and-decryption-time-for-rsa-crt-in-java" class="question-hyperlink">encryption and decryption time for RSA-crt in java?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="10538"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="10538">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I try compute execution time for encrypt and decrypt data has 1024 bit = 128 byte  in RSA-crt algorithm. I need this results. But I believe this result wrong. because big diffrent between execution time for encrypt and execution time for decrypt. My code is following </p>
+
+<pre><code>&gt;  public static void main(String[] args) {
+&gt; System.out.println("-----------CRT RSA--------");
+&gt; n=1024;//key size
+&gt;  CRTRSA crtrsa = new CRTRSA();
+ int num=10; 
+for (int i = 0; i &lt; 200; i++)
+ {   crtrsa.keygen(); }
+ for (;;) {
+&gt;     long begin = System.currentTimeMillis();
+&gt;     for (int i = 0; i &lt; num; i ++) 
+{   crtrsa.keygen();
+&gt;      }
+&gt;     long end = System.currentTimeMillis();
+&gt;     long time = end - begin;
+&gt;     if (time &gt;= 2000) {
+&gt;         System.out.printf("average Key generation takes: %.2f ms",
+&gt;             (double)time / num);
+&gt;         System.out.println();
+&gt;         break;
+&gt;     }
+&gt;     num *= 2; } //encrypt
+&gt; 
+&gt; num=10; for (int i = 0; i &lt; 200; i ++) {   crtrsa.encrypt(); } for
+&gt; (;;) {
+&gt;     long begin = System.currentTimeMillis();
+&gt;     for (int i = 0; i &lt; num; i ++) {
+&gt;     crtrsa.encrypt();
+&gt;      }
+&gt;     long end = System.currentTimeMillis();
+&gt;     long time = end - begin;
+&gt;     if (time &gt;= 2000) {
+&gt;         System.out.printf("average Encryption takes: %.2f ms",
+&gt;             (double)time / num);
+&gt;         System.out.println();
+&gt;         break;
+&gt;     }
+&gt;     num *= 2; }
+ //Decrypt 
+      num =10; for (int i = 0; i &lt; 200; i ++) {   crtrsa.decrypt(); } for (;;) {
+&gt;     long begin = System.currentTimeMillis();
+&gt;     for (int i = 0; i &lt; num; i ++) {
+&gt;       crtrsa.decrypt();
+&gt;     }
+&gt;     long end = System.currentTimeMillis();
+&gt;     long time = end - begin;
+&gt;     if (time &gt;= 2000) {
+&gt;         System.out.printf("average Decryption takes: %.2f ms",
+&gt;             (double)time / num);
+&gt;         System.out.println();
+&gt;         break;
+&gt;     }
+&gt;     num *= 2; } }
+ private void keygen()
+ { p = BigInteger.probablePrime(n/2, random);
+   q = BigInteger.probablePrime(n/2, random);
+&gt; 
+&gt; N=p.multiply(q);
+&gt; 
+&gt; phi_n=(p.subtract(one)).multiply(q.subtract(one));
+  e=new
+&gt; BigInteger("65537");
+ while(e.gcd(phi_n).intValue()!=1)
+&gt; e=BigInteger.probablePrime(32, random);       
+&gt;          d=e.modInverse(phi_n);
+&gt;  dp=d.mod(p.subtract(one)); 
+dq=d.mod(q.subtract(one)); }
+&gt; 
+&gt; private void encrypt() 
+{ M=new BigInteger(1024,random); C=
+&gt; M.modPow(e,N);
+&gt; }
+&gt; 
+&gt; private void decrypt() {
+&gt; Mp=C.modPow(dp, p);
+ Mq=C.modPow(dq, q);
+&gt; 
+&gt; RM=(((Mp.multiply(q).multiply(q.modInverse(p))).add(Mq.multiply(p).multiply(p.modInverse(q)))).mod(N));
+&gt; } }
+</code></pre>
+
+<p>On my laptop when run program it give me the follow 
+average Key generation takes: 58.60 ms
+average Encryption takes: 0.09 ms
+average Decryption takes: 1.89 ms
+I note big difference between 0.09 ms and 1.89 ms
+I want tell me where my  wrong or any link about this issue.</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/rsa" class="post-tag" title="show questions tagged &#39;rsa&#39;" rel="tag">rsa</a> <a href="/questions/tagged/public-key" class="post-tag" title="show questions tagged &#39;public-key&#39;" rel="tag">public-key</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/10538" title="short permalink to this question" class="short-link" id="link-post-10538">share</a><span class="lsep">|</span><a href="/posts/10538/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-09-24 05:12:44Z" class="relativetime">Sep 24 at 5:12</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/8414/gold-rose"><div class="gravatar-wrapper-32"><img src="http://graph.facebook.com/100004345590491/picture?type=large" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/8414/gold-rose">Gold Rose</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">11</span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-10538" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-20807" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Encryption and signature verification are much faster than decryption and signing when using RSA. The public exponent <code>e</code> is small (typically 17 bits) and the private exponent <code>d</code> (~1024 bits) is large leading to a cheaper calculation for $m^e$.</span>
+	&ndash;&nbsp;
+		<a href="/users/180/codesinchaos" 
+		   title="7572 reputation" 
+		   class="comment-user">CodesInChaos</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-24 07:15:40Z" class="relativetime-clean">Sep 24 at 7:15</span></span>
+		<span class="edited-yes" title="this comment was edited 3 times"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-20808" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">possible duplicate of <a href="http://crypto.stackexchange.com/questions/6378/why-is-rsa-encryption-significantly-faster-than-decryption">Why is RSA encryption significantly faster than decryption?</a></span>
+	&ndash;&nbsp;
+		<a href="/users/180/codesinchaos" 
+		   title="7572 reputation" 
+		   class="comment-user">CodesInChaos</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-24 07:18:18Z" class="relativetime-clean">Sep 24 at 7:18</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-20814" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I want know the natural ratio between execution time for encrypt and execution time for decrypt. any link for this</span>
+	&ndash;&nbsp;
+		<a href="/users/8414/gold-rose" 
+		   title="11 reputation" 
+		   class="comment-user owner">Gold Rose</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-24 10:28:48Z" class="relativetime-clean">Sep 24 at 10:28</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-10538" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								1 Answer
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/10538/encryption-and-decryption-time-for-rsa-crt-in-java?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/10538/encryption-and-decryption-time-for-rsa-crt-in-java?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/10538/encryption-and-decryption-time-for-rsa-crt-in-java?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="10543"></a>
+<div id="answer-10543" class="answer" data-answerid="10543" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="10543">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Performance issues are subtle, and depend a lot on implementation details, but the following can still be said.</p>
+
+<p>RSA encryption and RSA decryption both use <strong>modular exponentiation</strong>. There are many algorithms for that, but for typical RSA key sizes, Montgomery multiplication in a square-and-multiply algorithm are typical (the "multiply" steps can be further reduced with window-based optimizations). As a rough approximation, time to compute a modular exponentiation with a modulus of $n$ bits and an exponent of $k$ bits will be proportional to $k·n^2$.</p>
+
+<p>The <a href="http://en.wikipedia.org/wiki/Chinese_remainder_theorem" rel="nofollow">CRT</a> replace one modular exponentiation with <em>two</em>, but these two exponentiations use half-size modulus and exponents, so each of them is about eight times faster than the non-CRT exponentiation. Thus, CRT speeds up RSA decryption by a factor of about 4. CRT requires knowledge of modulus factorization, so it cannot be applied to encryption, only to decryption.</p>
+
+<p>On the other hand, RSA <em>encryption</em> uses the public exponent, which can be extremely small. A traditional RSA public exponent is 65537, thus 17 bits long. Exponentiation to the power 65537, a 17-bit integer, should be about 60 times faster than exponentiation to a 1024-bit power $d$ (the private exponent). Even with the CTR speed-up, RSA encryption should still be about 15 times faster than RSA decryption.</p>
+
+<p>In practice there are some extra overhead costs in both encryption and decryption (conversions to and from Montgomery representations, CRT reassembly, masking with a random value to protect against timing attacks...) so the "15x" figure can vary quite a lot. Things will also vary depending on the modulus size (you would still use 65537 as public exponent with a 2048-bit modulus, for instance). A 15x ratio is still typical.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/10543" title="short permalink to this answer" class="short-link" id="link-post-10543">share</a><span class="lsep">|</span><a href="/posts/10543/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-09-24 11:09:54Z" class="relativetime">Sep 24 at 11:09</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/28/thomas-pornin"><div><img src="https://www.gravatar.com/avatar/07ccc97c05f3fb80560ebc618a7de8bc?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/28/thomas-pornin">Thomas Pornin</a><br>
+        <span class="reputation-score" title="reputation score 24940" dir="ltr">24.9k</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="47 silver badges"><span class="badge2"></span><span class="badgecount">47</span></span><span title="93 bronze badges"><span class="badge3"></span><span class="badgecount">93</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-10543" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-20818" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">thank you Mr Thomas Pornin then my resul normal??</span>
+	&ndash;&nbsp;
+		<a href="/users/8414/gold-rose" 
+		   title="11 reputation" 
+		   class="comment-user owner">Gold Rose</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-24 11:38:04Z" class="relativetime-clean">Sep 24 at 11:38</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-20828" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@GoldRose yes, it looks normal, for more balanced times you could take a look at Elliptic Curve encryption, but beware that ECC requires a lot of knowledge compared to RSA</span>
+	&ndash;&nbsp;
+		<a href="/users/1172/owlstead" 
+		   title="1989 reputation" 
+		   class="comment-user">owlstead</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-24 17:18:31Z" class="relativetime-clean">Sep 24 at 17:18</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-20834" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">ok thank you for all. I have requesting when read some papers talk about RSA algorithm found some comparative I don&#39;t understand the comparative between encrypt and decrypt time. in comparative the encryption time take time  more than decryption. How that. I know the inversion true. any somebody illustrating about this issue. I very need illustrating this problem. The compare exist into this paper link <a href="http://www.ijarcsse.com/docs/papers/July2012/Volume_2_issue_7/V2I700262.pdf" rel="nofollow">ijarcsse.com/docs/papers/July2012/Volume_2_issue_7/&hellip;</a></span>
+	&ndash;&nbsp;
+		<a href="/users/8414/gold-rose" 
+		   title="11 reputation" 
+		   class="comment-user owner">Gold Rose</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-24 18:56:57Z" class="relativetime-clean">Sep 24 at 18:56</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-20879" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I waiting to any response!!</span>
+	&ndash;&nbsp;
+		<a href="/users/8414/gold-rose" 
+		   title="11 reputation" 
+		   class="comment-user owner">Gold Rose</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-25 17:59:55Z" class="relativetime-clean">Sep 25 at 17:59</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-10543" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/10538/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="10538" />
+							<h2 class="space">Your Answer</h2>
+
+
+        <script type="text/javascript">
+            StackExchange.ifUsing("editor", function () {
+                return StackExchange.using("mathjaxEditing", function () {
+                    StackExchange.MarkdownEditor.creationCallbacks.add(function (editor, postfix) {
+                        StackExchange.mathjaxEditing.prepareWmdForMathJax(editor, postfix, [["$", "$"], ["\\\\(","\\\\)"]]);
+                    });
+                });
+            }, "mathjax-editing");
+        </script>
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+noCode: true,            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f10538%2fencryption-and-decryption-time-for-rsa-crt-in-java%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f10538%2fencryption-and-decryption-time-for-rsa-crt-in-java%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/rsa" class="post-tag" title="show questions tagged &#39;rsa&#39;" rel="tag">rsa</a> <a href="/questions/tagged/public-key" class="post-tag" title="show questions tagged &#39;public-key&#39;" rel="tag">public-key</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/rsa" class="post-tag" title="show questions tagged &#39;rsa&#39;" rel="tag">rsa</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">354</span></span><br>
+<a href="/questions/tagged/public-key" class="post-tag" title="show questions tagged &#39;public-key&#39;" rel="tag">public-key</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">290</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-09-24 05:12:44Z"><b>2 months ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>527 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-09-24 11:09:54Z">2 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-crypto.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/1004" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">10
+    </div>
+</a><a href="/questions/1004/does-rsa-work-for-any-message-m" class="question-hyperlink">Does RSA work for any message M?</a>
+</div>
+<div class="spacer">
+<a href="/q/1474" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/1474/rsa-if-n-35-show-that-e-will-equal-d" class="question-hyperlink">RSA: If n=35, show that e will equal d</a>
+</div>
+<div class="spacer">
+<a href="/q/2123" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">5
+    </div>
+</a><a href="/questions/2123/rsa-encryption-with-private-key-and-decryption-with-a-public-key" class="question-hyperlink">RSA encryption with private key and decryption with a public key</a>
+</div>
+<div class="spacer">
+<a href="/q/3115" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/3115/how-to-decrypt-this-rsa-like-cipher" class="question-hyperlink">How to decrypt this RSA-like cipher</a>
+</div>
+<div class="spacer">
+<a href="/q/3271" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/3271/why-should-the-rsa-private-exponent-have-the-same-size-as-the-modulus" class="question-hyperlink">Why should the RSA private exponent have the same size as the modulus?</a>
+</div>
+<div class="spacer">
+<a href="/q/5586" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/5586/get-rsa-plaintext-without-knowing-private-key" class="question-hyperlink">Get RSA PlainText without Knowing Private Key</a>
+</div>
+<div class="spacer">
+<a href="/q/5628" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/5628/rsa-key-generation-public-exponent-too-big" class="question-hyperlink">RSA Key generation Public exponent too big</a>
+</div>
+<div class="spacer">
+<a href="/q/6378" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/6378/why-is-rsa-encryption-significantly-faster-than-decryption" class="question-hyperlink">Why is RSA encryption significantly faster than decryption?</a>
+</div>
+<div class="spacer">
+<a href="/q/6512" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/6512/question-about-why-rsa-is-hard-to-attack" class="question-hyperlink">Question about why RSA is hard to attack</a>
+</div>
+<div class="spacer">
+<a href="/q/10098" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/10098/rsa-smaller-number-work-out-by-hand-not-working-i-think-i-made-a-mistake" class="question-hyperlink">RSA smaller number work-out-by-hand not working - I think I made a mistake</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/10538" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/10538/ivc/742d');});
+</script>
+<noscript>
+    <div><img src="/posts/10538/ivc/742d" class="dno" alt="" width="0" height="0"></div>
+</noscript></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/10538/encryption-and-decryption-time-for-rsa-crt-in-java")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.crypto.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Cryptography Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|rsa|public-key|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

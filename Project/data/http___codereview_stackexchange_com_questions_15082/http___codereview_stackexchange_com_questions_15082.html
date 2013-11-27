@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Object database schema, should i split my tables? - Code Review Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codereview/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Code Review Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeReview" />
+    <meta name="twitter:domain" content="codereview.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codereview/img/apple-touch-icon.png?v=bb26b8631f86"/>
+    <meta name="og:title" content="Object database schema, should i split my tables?" />
+    <meta name="og:description" content="I have a database schema for a game to hold save files where some tables have a one-to-one relationship to Classes. And i was wondering if i should split up some tables.
+
+Example troop_class table...." />
+    <meta name="og:url" content="http://codereview.stackexchange.com/questions/15082/object-database-schema-should-i-split-my-tables"/>
+    <link rel="canonical" href="http://codereview.stackexchange.com/questions/15082/object-database-schema-should-i-split-my-tables" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codereview/all.css?v=67e9087155b1">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Object database schema, should i split my tables?&#39;" href="/feeds/question/15082">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:3,shownCommentCount:3,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:15082});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('196', '15082');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('196');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385463426,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Code Review Stack Exchange","description":"Q&A for peer programmer code reviews","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f15082%2fobject-database-schema-should-i-split-my-tables">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f15082%2fobject-database-schema-should-i-split-my-tables">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Code Review
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Code Review Stack Exchange is a question and answer site for peer programmer code reviews. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/15082/object-database-schema-should-i-split-my-tables" class="question-hyperlink">Object database schema, should i split my tables?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="15082"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="15082">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">9</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>1</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I have a database schema for a game to hold save files where some tables have a one-to-one relationship to Classes. And i was wondering if i should split up some tables.</p>
+
+<p>Example troop_class table. It could have a PK of { GameID,PostionX,PostionY,PostionZ,Team }, but then team don't really rely on the positions and could be split to two new table game_units Keys{GameID, troop_id} PK{GameID} and troop_team{troop_id, Team} PK{troop_id}.</p>
+
+<p>So i am really wondering i guess if i should break up the one-to-one mapping for table-class and start to normalize and create proper PK instead of using id?  </p>
+
+<pre><code>CREATE TABLE accounts(
+    AccountName VARCHAR(50) UNIQUE NOT NULL,
+    Password BLOB NOT NULL,
+    PRIMARY KEY(AccountName)
+) Engine=InnoDB;
+
+CREATE TABLE maps(
+    maps_id INT NOT NULL UNIQUE,
+    MapName VARCHAR(30) NOT NULL,
+    PRIMARY KEY (maps_id),
+    INDEX(maps_id)
+) ENGINE=InnoDB;
+
+CREATE TABLE game_searching_player(
+    AccountName VARCHAR(50) NOT NULL,
+    MapID INT NOT NULL,
+    PRIMARY KEY (AccountName, MapID),
+    FOREIGN KEY (AccountName) REFERENCES accounts(AccountName)
+                      ON DELETE CASCADE ,
+    FOREIGN KEY (MapID) REFERENCES maps(maps_id)
+                      ON DELETE CASCADE ,
+    INDEX(AccountName)
+) ENGINE=InnoDB;
+
+CREATE TABLE games(
+    games_id INT NOT NULL AUTO_INCREMENT UNIQUE,
+    Player1 VARCHAR(50) NOT NULL,
+    Player2 VARCHAR(50) NOT NULL,
+    WhosTurn INT NOT NULL,
+    TurnHasEnded BOOL NOT NULL,
+    HaveWon BOOL NOT NULL,
+    TurnNumber INT NOT NULL,
+    MapID INT NOT NULL,
+    Type VARCHAR(30) NOT NULL,
+    PRIMARY KEY (games_id),
+    FOREIGN KEY (Player1) REFERENCES accounts(AccountName)
+                      ON DELETE CASCADE ,
+    FOREIGN KEY (Player2) REFERENCES accounts(AccountName)
+                      ON DELETE CASCADE ,
+    FOREIGN KEY (MapID) REFERENCES maps(maps_id)
+                      ON DELETE CASCADE ,
+    INDEX(games_id,Player1, Player2  )
+) ENGINE=InnoDB;    
+
+
+
+CREATE TABLE player(
+    GameID INT NOT NULL,
+    Player VARCHAR(30) NOT NULL, 
+    VictoryResources INT NOT NULL,
+    UniversalResources INT NOT NULL,
+    Type VARCHAR(30) NOT NULL,
+    PRIMARY KEY (GameID, Player),
+    FOREIGN KEY (GameID) REFERENCES games(games_id)
+                      ON DELETE CASCADE ,
+    INDEX(GameID)
+
+) ENGINE=InnoDB;
+
+CREATE TABLE troop_class (
+    troop_class_id INT NOT NULL AUTO_INCREMENT UNIQUE,
+    GameID INT NOT NULL,
+    Health INT NOT NULL,
+    CombatInitiative INT NOT NULL,
+    Spotted BOOL NOT NULL,
+    Entrenched INT NOT NULL, 
+    Initiative INT NOT NULL,
+    Ammo INT NOT NULL,
+    Petrol INT NOT NULL,
+    ActionPoints INT NOT NULL,
+    IsMoving BOOL NOT NULL,
+    PositionX INT NOT NULL,
+    PositionY INT NOT NULL,
+    PositionZ INT NOT NULL,
+    Team VARCHAR(30) NOT NULL,
+    Name VARCHAR(30) NOT NULL,
+    Type VARCHAR(30) NOT NULL,
+    PRIMARY KEY (troop_class_id),
+    FOREIGN KEY (GameID) REFERENCES games(games_id)
+                      ON DELETE CASCADE ,
+    INDEX(GameID)
+) ENGINE=InnoDB;
+
+CREATE TABLE supply_unit(
+    supply_unit_id INT NOT NULL UNIQUE,
+
+    SupplyPetrol INT NOT NULL,
+    SupplyAmmo INT NOT NULL,
+    VictoryResources INT NOT NULL,
+    LoadWeight INT NOT NULL,
+    MaxWeight INT NOT NULL,
+    PRIMARY KEY (supply_unit_id),
+    FOREIGN KEY (supply_unit_id) REFERENCES troop_class(troop_class_id)
+                      ON DELETE CASCADE
+
+) ENGINE=InnoDB;
+
+
+CREATE TABLE central_warehouse (
+    central_warehouse_id INT NOT NULL AUTO_INCREMENT UNIQUE,
+    GameID INT NOT NULL,
+    SupplyPetrol INT NOT NULL,
+    SupplyAmmo INT NOT NULL,
+    VictoryResources INT NOT NULL,
+    LoadWeight INT NOT NULL,
+    MaxWeight INT NOT NULL,
+    PositionX INT NOT NULL,
+    PositionY INT NOT NULL,
+    PositionZ INT NOT NULL,
+    Team VARCHAR(30) NOT NULL,
+    Name VARCHAR(30) NOT NULL,
+    Type VARCHAR(30) NOT NULL,
+    PRIMARY KEY (central_warehouse_id),
+    FOREIGN KEY (GameID) REFERENCES games(games_id)
+                      ON DELETE CASCADE ,
+    INDEX(GameID)
+
+) ENGINE=InnoDB;
+</code></pre>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/database-design" class="post-tag" title="show questions tagged &#39;database-design&#39;" rel="tag">database-design</a> <a href="/questions/tagged/database-schema" class="post-tag" title="show questions tagged &#39;database-schema&#39;" rel="tag">database-schema</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/15082" title="short permalink to this question" class="short-link" id="link-post-15082">share</a><span class="lsep">|</span><a href="/posts/15082/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/15082/revisions" title="show all edits to this post">edited <span title="2012-08-26 18:09:22Z" class="relativetime">Aug 26 '12 at 18:09</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/16061/vikdor"><div><img src="https://www.gravatar.com/avatar/2abbbc6ae4fcfd3a265c9cf945ed5c86?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/16061/vikdor">Vikdor</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">198</span><span title="4 bronze badges"><span class="badge3"></span><span class="badgecount">4</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2012-08-26 11:04:23Z" class="relativetime">Aug 26 '12 at 11:04</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/16077/user16077"><div><img src="https://www.gravatar.com/avatar/92ff2fee13f478b16e75a2ba96895062?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/16077/user16077">user16077</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">46</span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-15082" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-24730" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Not anyone got any ideas?</span>
+	&ndash;&nbsp;
+		<a href="/users/16077/user16077" 
+		   title="46 reputation" 
+		   class="comment-user owner">user16077</a>
+	<span class="comment-date" dir="ltr"><span title="2012-08-31 19:21:27Z" class="relativetime-clean">Aug 31 '12 at 19:21</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-36926" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">It belongs to <a href="http://dba.stackexchange.com">dba.stackexchange.com</a></span>
+	&ndash;&nbsp;
+		<a href="/users/19285/mikrodel" 
+		   title="147 reputation" 
+		   class="comment-user">MikroDel</a>
+	<span class="comment-date" dir="ltr"><span title="2013-03-15 13:36:16Z" class="relativetime-clean">Mar 15 at 13:36</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-37112" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">3</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@MikroDel: Why. He is asking for a review. I don&#39;t disagree that dba.stackexchange.com could provide useful feedback. But this is well within our scope of question.</span>
+	&ndash;&nbsp;
+		<a href="/users/507/loki-astari" 
+		   title="16992 reputation" 
+		   class="comment-user">Loki Astari</a>
+	<span class="comment-date" dir="ltr"><span title="2013-03-18 18:30:43Z" class="relativetime-clean">Mar 18 at 18:30</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-15082" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								3 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/15082/object-database-schema-should-i-split-my-tables?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/15082/object-database-schema-should-i-split-my-tables?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/15082/object-database-schema-should-i-split-my-tables?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="24554"></a>
+<div id="answer-24554" class="answer" data-answerid="24554" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="24554">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Here are a few suggestions, many of which are just "best practices" I've picked up along the way (or simplifications that would make things a bit more concise and easier to read).  There are also a few ideas that will likely prevent common errors from happening to the code as it's maintained in the future (that I've run across in many code reviews).</p>
+
+<ol>
+<li><p>I'd create an id column on the <code>accounts</code> table:</p>
+
+<pre><code>CREATE TABLE accounts(
+  account_id INT UNIQUE NOT NULL,
+  AccountName VARCHAR(50) UNIQUE NOT NULL,
+  Password BLOB NOT NULL,
+  PRIMARY KEY(account_id)
+) Engine=InnoDB;
+</code></pre>
+
+<p>Then the tables that reference <code>accounts</code> like <code>game_searching_player</code> will reference an <code>INT</code> instead of <code>VARCHAR(50)</code> - (I think I see at least 4 references to that column, which would be much simpler if they were <code>int</code>s.)  You may also likely get a small amount of performance improvement by using <code>INT</code> for these keys instead of <code>VARCHAR</code>s.</p></li>
+<li><p>MySQL automatically indexes <code>PRIMARY KEY</code>s, so no need for those explicit <code>INDEX</code> lines.</p>
+
+<p>For example, this:</p>
+
+<pre><code>PRIMARY KEY (maps_id),
+INDEX(maps_id)
+</code></pre>
+
+<p>would become just</p>
+
+<pre><code> PRIMARY KEY (maps_id)
+</code></pre></li>
+<li><p>MySQL's InnoDB engine automatically indexes <code>FOREIGN KEY</code>s, so no need for those explicit <code>INDEX</code> lines either (<code>player</code> and <code>troop_class</code> and <code>game_searching_player</code>).</p>
+
+<p>For example, this:</p>
+
+<pre><code>CREATE TABLE player(
+  ...
+
+  PRIMARY KEY (GameID, Player),
+  FOREIGN KEY (GameID) REFERENCES games(games_id)
+              ON DELETE CASCADE ,
+  INDEX(GameID)
+
+) ENGINE=InnoDB;
+</code></pre>
+
+<p>becomes this:</p>
+
+<pre><code>CREATE TABLE player(
+  ...
+
+  PRIMARY KEY (GameID, Player),
+  FOREIGN KEY (GameID) REFERENCES games(games_id)
+              ON DELETE CASCADE
+
+) ENGINE=InnoDB;
+</code></pre></li>
+<li><p>You don't have <code>AUTO_INCREMENT</code> on all your table IDs, but I suspect that you actually want it on them all, since it will simplify your insertion code.</p></li>
+<li><p>In MySQL all <code>PRIMARY KEY</code>s are also guaranteed to be <code>UNIQUE</code> and <code>NOT NULL</code>, so those attributes aren't really needed on those columns, though my personal preference is that it adds to the readability to leave those attributes on the columns, but thought I'd mention it for reference.</p></li>
+<li><p>Your <code>player</code> table should probably reference the (new) id in the  <code>accounts</code> table (with a <code>ON DELETE CASCADE</code> setting too).  It also looks like <code>player</code>s can have names up to 30 characters long, but <code>account</code>s can have names up to 50 characters.  (The difference in lengths may also of course indicate that I completely mis-understand the purpose of the <code>player</code> and <code>account</code> tables, and that they really shouldn't be related in any way.)</p></li>
+<li><p>While it will work perfectly fine the way you have it shown here, in most of the environments and organizations I've worked with/in, it has been standard best practice to make the name of every table's "id" column be <code>id</code>, rather than including the table name in the column name (like <code>maps_id</code>).  This "coding style" choice allows the code to be more concise and since this is a <em>very</em> common practice, it doesn't add any "cognitive load" as maintainers read your queries/schema/code.  </p></li>
+</ol>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/24554" title="short permalink to this answer" class="short-link" id="link-post-24554">share</a><span class="lsep">|</span><a href="/posts/24554/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-03-30 22:50:08Z" class="relativetime">Mar 30 at 22:50</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/23511/eric-s"><div><img src="https://www.gravatar.com/avatar/44473b68061eef3568daa685d01303bd?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/23511/eric-s">Eric S</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">252</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="9 bronze badges"><span class="badge3"></span><span class="badgecount">9</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-24554" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-37914" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I agree with all, though on my most recent project I switched to using the table&#39;s name in the ID column (#7), e.g., <code>player_id</code>. The reason is that this allows the use of the terse join form <code>account join player using (account_id)</code> as opposed to the longer where clause <code>account, player where account.id = player.account_id</code>. This comes up more when building reports and using the command-line client, but I definitely like it so far.</span>
+	&ndash;&nbsp;
+		<a href="/users/1635/david-harkness" 
+		   title="2102 reputation" 
+		   class="comment-user">David Harkness</a>
+	<span class="comment-date" dir="ltr"><span title="2013-03-31 00:12:25Z" class="relativetime-clean">Mar 31 at 0:12</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-37915" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I&#39;ll also add that I&#39;ve found using singular noun forms for table names to be more readable. Thus <code>map</code> instead of <code>maps</code>. Why? What&#39;s the name of the table that holds the foot items? <code>foots</code> or <code>feet</code>?</span>
+	&ndash;&nbsp;
+		<a href="/users/1635/david-harkness" 
+		   title="2102 reputation" 
+		   class="comment-user">David Harkness</a>
+	<span class="comment-date" dir="ltr"><span title="2013-03-31 00:14:01Z" class="relativetime-clean">Mar 31 at 0:14</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-24554" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="24559"></a>
+<div id="answer-24559" class="answer" data-answerid="24559" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="24559">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>In addition to the others review which are totally great, I would like to add a little thing!</p>
+
+<p>You name your tables and primary keys <strong>using_the_following_notation</strong> (underscores), but then you name your other fields <strong>usingTheFollowingNotation</strong> (camelCase).</p>
+
+<p>Both are valid and great notations. But try to be consistent and use one OR the other, not both at the same time.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/24559" title="short permalink to this answer" class="short-link" id="link-post-24559">share</a><span class="lsep">|</span><a href="/posts/24559/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-03-31 03:18:52Z" class="relativetime">Mar 31 at 3:18</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/15555/hugo-dozois"><div><img src="https://www.gravatar.com/avatar/aad0517bea8711e4a975b031b1541f6d?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/15555/hugo-dozois">Hugo Dozois</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">406</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="18 bronze badges"><span class="badge3"></span><span class="badgecount">18</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-24559" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-24559" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="24556"></a>
+<div id="answer-24556" class="answer" data-answerid="24556" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="24556">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>I've found over the years that it's best to start with the <a href="http://en.wikipedia.org/wiki/Database_normalization" rel="nofollow">normalized form</a> and denormalize as-needed to solve performance and usability problems. Without a full description of what <code>troop_class</code> stores, we're left to guess about a lot of details.</p>
+
+<ol>
+<li><p>Is <code>Team</code> unique for each <code>troop_class</code>? If not--and there's a <code>team</code> table--add a unique <code>int</code> <a href="http://en.wikipedia.org/wiki/Surrogate_key" rel="nofollow">surrogate key</a> to it and use that throughout as Eric S suggested.</p></li>
+<li><p>Avoid using data attributes--especially those that may change over time--in primary keys. Adding the x, y, and z positions to the PK will severely complicate working with these rows since you'll need to update the foreign keys every time the unit moves.</p></li>
+<li><p>Similarly for <code>Type</code>. Is this what one would normally call the "class" of the unit, defining its characteristics that are the same across all units belonging to that class? This information should be extracted to its own <code>class</code> table.</p>
+
+<pre><code>team &lt;---- unit ----&gt; type
+     *   1      1   *
+</code></pre>
+
+<p>Here each <code>unit</code> holds the specifics for a single unit belonging to a team: its position, health, action points, etc. The <code>type</code> table lists the things that don't change about a unit: its ammo and fuel capacity, strength, etc. This minimizes the data duplication across tables and allows you to load up all unit types at the start of the game or in tools for easy reuse throughout.</p></li>
+</ol>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/24556" title="short permalink to this answer" class="short-link" id="link-post-24556">share</a><span class="lsep">|</span><a href="/posts/24556/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-03-31 00:28:09Z" class="relativetime">Mar 31 at 0:28</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1635/david-harkness"><div><img src="https://www.gravatar.com/avatar/9462edf139e6a4a74a19dcd536dcb26d?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1635/david-harkness">David Harkness</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,102</span><span title="4 silver badges"><span class="badge2"></span><span class="badgecount">4</span></span><span title="14 bronze badges"><span class="badge3"></span><span class="badgecount">14</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-24556" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-24556" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/15082/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="15082" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f15082%2fobject-database-schema-should-i-split-my-tables%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f15082%2fobject-database-schema-should-i-split-my-tables%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/database-design" class="post-tag" title="show questions tagged &#39;database-design&#39;" rel="tag">database-design</a> <a href="/questions/tagged/database-schema" class="post-tag" title="show questions tagged &#39;database-schema&#39;" rel="tag">database-schema</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/database-design" class="post-tag" title="show questions tagged &#39;database-design&#39;" rel="tag">database-design</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">42</span></span><br>
+<a href="/questions/tagged/database-schema" class="post-tag" title="show questions tagged &#39;database-schema&#39;" rel="tag">database-schema</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">17</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2012-08-26 11:04:23Z"><b>1 year ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>141 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-03-31 03:18:52Z">8 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/1528" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/1528/database-schema-for-a-school" class="question-hyperlink">Database schema for a school</a>
+</div>
+<div class="spacer">
+<a href="/q/5645" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/5645/how-could-i-improve-my-database-schema" class="question-hyperlink">How could I improve my database schema?</a>
+</div>
+<div class="spacer">
+<a href="/q/5693" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/5693/database-design-review" class="question-hyperlink">Database Design Review</a>
+</div>
+<div class="spacer">
+<a href="/q/11516" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/11516/a-database-schema-for-articles-and-their-revisions" class="question-hyperlink">A database schema for articles and their revisions</a>
+</div>
+<div class="spacer">
+<a href="/q/14093" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/14093/schema-for-google-docs-like-sharing" class="question-hyperlink">Schema for Google Docs-like Sharing</a>
+</div>
+<div class="spacer">
+<a href="/q/14619" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/14619/mysql-database-with-foreign-key-support" class="question-hyperlink">MySQL database with foreign key support</a>
+</div>
+<div class="spacer">
+<a href="/q/16095" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/16095/my-database-schema" class="question-hyperlink">My database schema</a>
+</div>
+<div class="spacer">
+<a href="/q/23568" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/23568/keeping-track-of-peoples-relationships-in-mysql-using-a-people-relation-table" class="question-hyperlink">Keeping track of people&#39;s relationships in MySQL using a people relation table?</a>
+</div>
+<div class="spacer">
+<a href="/q/26828" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/26828/is-this-a-good-schema-to-allow-adding-tags-to-entities-in-unrelated-tables" class="question-hyperlink">Is this a good schema to allow adding tags to entities in unrelated tables</a>
+</div>
+<div class="spacer">
+<a href="/q/32655" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/32655/database-schema-suggestions-for-a-minecraft-logging-plugin" class="question-hyperlink">Database schema suggestions for a Minecraft logging plugin</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/15082" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/15082/ivc/12ec');});
+</script>
+<noscript>
+    <div><img src="/posts/15082/ivc/12ec" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">default</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/15082/object-database-schema-should-i-split-my-tables")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codereview.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Code Review Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|database-design|database-schema|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

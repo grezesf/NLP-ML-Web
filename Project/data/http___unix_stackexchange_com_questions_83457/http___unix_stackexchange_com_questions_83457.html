@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>linux - Setting up a RAID 1 in Funtoo - Unix & Linux Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/unix/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/unix/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Unix &amp; Linux Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackUnix" />
+    <meta name="twitter:domain" content="unix.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/unix/img/apple-touch-icon@2.png?v=32fb07f7ce26"/>
+    <meta name="og:title" content="Setting up a RAID 1 in Funtoo" />
+    <meta name="og:description" content="In short
+
+Following the guide How to Set Up a RAID 1 Under GNU/Linux, I have setup  a RAID 1. Checking the RAID Array for validity in various ways, appeared to be normal.
+
+However, after rebooting ..." />
+    <meta name="og:url" content="http://unix.stackexchange.com/questions/83457/setting-up-a-raid-1-in-funtoo"/>
+    <link rel="canonical" href="http://unix.stackexchange.com/questions/83457/setting-up-a-raid-1-in-funtoo" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/unix/all.css?v=d9a893265e8d">
+    
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:34,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:83457});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('106', '83457');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('106');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385450402,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Unix & Linux Stack Exchange","description":"Q&A for users of Linux, FreeBSD and other Un*x-like operating systems.","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f83457%2fsetting-up-a-raid-1-in-funtoo">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f83457%2fsetting-up-a-raid-1-in-funtoo">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Unix &amp; Linux
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/unix/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Unix &amp; Linux Stack Exchange is a question and answer site for users of Linux, FreeBSD and other Un*x-like operating systems.. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/83457/setting-up-a-raid-1-in-funtoo" class="question-hyperlink">Setting up a RAID 1 in Funtoo [closed]</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="83457"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="83457">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <h1>In short</h1>
+
+<p>Following the guide <a href="http://blog.infertux.com/2012/03/29/how-to-set-up-a-raid-1-under-gnu-slash-linux/" rel="nofollow">How to Set Up a RAID 1 Under GNU/Linux</a>, I have setup  a RAID 1. Checking the RAID Array for validity in various ways, appeared to be normal.</p>
+
+<p>However, after rebooting the system, the RAID Array was not working. The partition in question was not mounted as instructed in <code>/etc/fstab</code>. Assembling the Array manually worked and no data has been lost.</p>
+
+<p>Newly added internal/external disks, which lead to a change of the disk device names (such as a disk being "renamed" from <code>sdd</code> to <code>sde</code> by the system), lead me to accept that it was a problem related with this name-changing fact. This is irrelevant, however, as RAID Arrays are (also) built by using unique UUIDs. </p>
+
+<p>The actual question is <em>why does the Array fail to assemble during the boot process?</em> Or else, <em>what is the boot-script of Funtoo, the operating system under which all of plot takes place, doing regarding the <code>mdadm -assemble</code> process?</em></p>
+
+<h1>The long story</h1>
+
+<p>Following the above referenced step by step guide, I have set up a RAID 1 under Funtoo. Checking the RAID 1 Array for validity was done in several ways, mostly using functionalities of the <code>mdadm</code> tool itself.</p>
+
+<p>Specifically, the Array's details were retrieved by using the <code>mdadm</code> tool with the <code>-D</code> flag. The disks that pertain to the Array were examined by using the <code>-E</code> flag. The respective configuration file <code>mdadm.conf</code> can be simply read for if it contains the correct instruction (i.e which md device, what is its UUID and more). Finally, watching the file <code>/proc/mdadm</code> was important to ensure that both disks were active and "synced".</p>
+
+<p>Below follow even more detailed information about the confronted situation.</p>
+
+<pre><code>mdadm -D /dev/md0
+
+/dev/md0:
+        Version : 1.2
+  Creation Time : Thu Jul 18 00:25:05 2013
+     Raid Level : raid1
+     Array Size : 1953382208 (1862.89 GiB 2000.26 GB)
+  Used Dev Size : 1953382208 (1862.89 GiB 2000.26 GB)
+   Raid Devices : 2
+  Total Devices : 2
+    Persistence : Superblock is persistent
+
+    Update Time : Thu Jul 18 10:33:37 2013
+          State : clean 
+ Active Devices : 2
+Working Devices : 2
+ Failed Devices : 0
+  Spare Devices : 0
+
+           Name : Resilience:0  (local to host Resilience)
+           UUID : 73bf29ca:89bff887:79a26531:b9733d7a
+         Events : 6455
+
+    Number   Major   Minor   RaidDevice State
+       2       8       33        0      active sync   /dev/sdc1
+       1       8       49        1      active sync   /dev/sdd1
+</code></pre>
+
+<p>From the command history, I did the following</p>
+
+<pre><code># trying to follow the guide -- various tests...
+      ...
+      979  18.Jul.13 [ 00:09:07 ] mdadm --zero-superblock /dev/sdd1
+      980  18.Jul.13 [ 00:09:17 ] mdadm --create /dev/md0 --level=1 --raid-disks=2 missing /dev/sdd1
+      990  18.Jul.13 [ 00:15:58 ] mdadm --examine --scan
+
+# creating/checking the configuration file
+
+      992  18.Jul.13 [ 00:16:17 ] cat /etc/mdadm.conf 
+      993  18.Jul.13 [ 00:16:33 ] mdadm --examine --scan | tee /etc/mdadm.conf
+      994  18.Jul.13 [ 00:16:35 ] cat /etc/mdadm.conf 
+
+# after some faulty attempts, finally it goes
+
+      997  18.Jul.13 [ 00:24:45 ] mdadm --stop /dev/md0
+      998  18.Jul.13 [ 00:24:54 ] mdadm --zero-superblock /dev/sdd1
+      999  18.Jul.13 [ 00:25:04 ] mdadm --create /dev/md0 --level=1 --raid-disks=2 missing /dev/sdd1
+     1005  18.Jul.13 [ 00:26:39 ] mdadm --examine --scan | sudo tee /etc/mdadm.conf
+     1046  18.Jul.13 [ 03:42:57 ] mdadm --add /dev/md0 /dev/sdc1
+</code></pre>
+
+<p>The configuration file <code>/etc/mdadm.conf</code> reads:</p>
+
+<pre><code>ARRAY /dev/md/0  metadata=1.2 UUID=73bf29ca:89bff887:79a26531:b9733d7a name=Resilience:0
+</code></pre>
+
+<p>All works fine as can be seen from <code>/proc/mdadm</code>:</p>
+
+<pre><code>Personalities : [raid6] [raid5] [raid4] [raid1] [raid0] [raid10] [linear] [multipath] 
+md0 : active raid1 sdc1[2] sdd1[1]
+      1953382208 blocks super 1.2 [2/2] [UU]
+
+unused devices: &lt;none&gt;
+</code></pre>
+
+<p>Here after, the disks were synced, access was fine. Shutting down the system, adding another disk, external (via USB) or internal, and restarting the system, caused the RAID1 to stop working!  The reason is, if I am not wrong, the change of disk device numbers.</p>
+
+<p>In this example, the former <code>sdd1</code> became <code>sde1</code> while <code>sdd1</code> was reserved by a "new" internal disk or an external USB HDD attached before starting the system and instructed to be automatically mounted.</p>
+
+<p>It was very easy to "recover" the "failed" ARRAY by removing all other disks, stopping the Array and re-assembling it. Some of the commands issued while trying and, finally, successfully getting back the ARRAY were:</p>
+
+<pre><code># booting and unsuccessfully trying to add the "missing" disk
+
+     1091  18.Jul.13 [ 10:22:53 ] mdadm --add /dev/md0 /dev/sdc1
+     1092  18.Jul.13 [ 10:28:26 ] mdadm --assemble /dev/md0 --scan
+     1093  18.Jul.13 [ 10:28:39 ] mdadm --assemble /dev/md0 --scan --force
+     1095  18.Jul.13 [ 10:30:36 ] mdadm --detail /dev/md0
+
+# reading about `mdadm`, trying to "stop", incomplete command though
+
+     1096  18.Jul.13 [ 10:30:45 ] mdadm stop
+     1097  18.Jul.13 [ 10:31:12 ] mdadm --examine /dev/sdd
+     1098  18.Jul.13 [ 10:31:16 ] mdadm --examine /dev/sdd1
+     1099  18.Jul.13 [ 10:31:20 ] mdadm --examine /dev/sdc
+     1100  18.Jul.13 [ 10:31:21 ] mdadm --examine /dev/sdc1
+
+# reading again, stop it -- the right way
+
+     1101  18.Jul.13 [ 10:33:19 ] mdadm --stop /dev/md0
+
+# assemble &amp; check
+
+     1102  18.Jul.13 [ 10:33:25 ] mdadm --assemble /dev/md0 --scan
+     1111  18.Jul.13 [ 10:34:17 ] mdadm --examine /dev/sd[cd]1
+
+# does the Array have a UUID?
+
+     1112  18.Jul.13 [ 10:37:36 ] UUID=$(mdadm -E /dev/sdd1|perl -ne '/Array UUID : (\S+)/ and print $1')
+
+# below, learning how to report on the Array
+
+     1115  18.Jul.13 [ 10:42:26 ] mdadm -D /dev/md0
+     1116  18.Jul.13 [ 10:45:08 ] mdadm --examine /dev/sd[cd]1 &gt;&gt; raid.status
+     1197  18.Jul.13 [ 13:16:59 ] mdadm --detail /dev/md0
+     1198  18.Jul.13 [ 13:17:29 ] mdadm --examine /dev/sd[cd]1
+     1199  18.Jul.13 [ 13:17:41 ] mdadm --help
+     1200  18.Jul.13 [ 13:18:41 ] mdadm --monitor /dev/md0
+     1201  18.Jul.13 [ 13:18:53 ] mdadm --misc /dev/md0
+</code></pre>
+
+<p>However, I would expect this not to happen, and be able to play safe as with the rest of disks/partitions when mounting is based on UUIDs and/or LABELs.</p>
+
+<p>The corresponding entry in <code>/etc/fstab</code> reads (<strong>note</strong>, I skipped the options <code>nosuid,nodev</code>)</p>
+
+<pre><code>/dev/md0        geo     xfs     defaults        0 2
+</code></pre>
+
+<p>Details for <code>sdc1</code>, output from <code>mdadm -E /dev/sdc1</code></p>
+
+<pre><code>/dev/sdc1:
+          Magic : a92b4efc
+        Version : 1.2
+    Feature Map : 0x0
+     Array UUID : 73bf29ca:89bff887:79a26531:b9733d7a
+           Name : Resilience:0  (local to host Resilience)
+  Creation Time : Thu Jul 18 00:25:05 2013
+     Raid Level : raid1
+   Raid Devices : 2
+
+ Avail Dev Size : 3906764800 (1862.89 GiB 2000.26 GB)
+     Array Size : 1953382208 (1862.89 GiB 2000.26 GB)
+  Used Dev Size : 3906764416 (1862.89 GiB 2000.26 GB)
+    Data Offset : 262144 sectors
+   Super Offset : 8 sectors
+          State : clean
+    Device UUID : 5552ba2d:8d79c88f:c995d052:cef0aa03
+
+    Update Time : Fri Jul 19 11:14:19 2013
+       Checksum : 385183dd - correct
+         Events : 6455
+
+
+   Device Role : Active device 0
+   Array State : AA ('A' == active, '.' == missing)
+</code></pre>
+
+<p><strong>Details for the partitions in question</strong></p>
+
+<p>Details for <code>sdd1</code>, output from <code>mdadm -E /dev/sdd1</code></p>
+
+<pre><code>/dev/sdd1:
+          Magic : a92b4efc
+        Version : 1.2
+    Feature Map : 0x0
+     Array UUID : 73bf29ca:89bff887:79a26531:b9733d7a
+           Name : Resilience:0  (local to host Resilience)
+  Creation Time : Thu Jul 18 00:25:05 2013
+     Raid Level : raid1
+   Raid Devices : 2
+
+ Avail Dev Size : 3906764800 (1862.89 GiB 2000.26 GB)
+     Array Size : 1953382208 (1862.89 GiB 2000.26 GB)
+  Used Dev Size : 3906764416 (1862.89 GiB 2000.26 GB)
+    Data Offset : 262144 sectors
+   Super Offset : 8 sectors
+          State : clean
+    Device UUID : 076acfd8:af184e75:f83ce3ae:8e778ba0
+
+    Update Time : Fri Jul 19 11:14:19 2013
+       Checksum : c1df68a0 - correct
+         Events : 6455
+
+
+   Device Role : Active device 1
+   Array State : AA ('A' == active, '.' == missing)
+</code></pre>
+
+<p>After adding, again, a "new" internal disk, and rebooting, I experience the same problem.</p>
+
+<p><code>mdadm -E /dev/sdd1</code> reports</p>
+
+<pre><code>mdadm: No md superblock detected on /dev/sdd1.
+</code></pre>
+
+<p>while <code>mdadm -E /dev/sde1</code></p>
+
+<pre><code>/dev/sde1:
+          Magic : a92b4efc
+        Version : 1.2
+    Feature Map : 0x0
+     Array UUID : 73bf29ca:89bff887:79a26531:b9733d7a
+           Name : Resilience:0  (local to host Resilience)
+  Creation Time : Thu Jul 18 00:25:05 2013
+     Raid Level : raid1
+   Raid Devices : 2
+
+ Avail Dev Size : 3906764800 (1862.89 GiB 2000.26 GB)
+     Array Size : 1953382208 (1862.89 GiB 2000.26 GB)
+  Used Dev Size : 3906764416 (1862.89 GiB 2000.26 GB)
+    Data Offset : 262144 sectors
+   Super Offset : 8 sectors
+          State : clean
+    Device UUID : 076acfd8:af184e75:f83ce3ae:8e778ba0
+
+    Update Time : Fri Jul 19 11:34:47 2013
+       Checksum : c1df6d6c - correct
+         Events : 6455
+
+
+   Device Role : Active device 1
+   Array State : AA ('A' == active, '.' == missing)
+</code></pre>
+
+<p>and <code>mdadm --detail /dev/md0</code></p>
+
+<pre><code>mdadm: md device /dev/md0 does not appear to be active.
+</code></pre>
+
+<p>while <code>cat /proc/mdstat</code> reads</p>
+
+<pre><code>Personalities : [raid6] [raid5] [raid4] [raid1] [raid0] [raid10] [linear] [multipath] 
+md0 : inactive sde1[1](S)
+      1953382400 blocks super 1.2
+
+unused devices: &lt;none&gt;
+</code></pre>
+
+<p>Note, as per <em>Gilles'</em> observation, at this point the reported blocks (1953382400) do not match the ones reported for the <code>Array Size : 1953382208</code>, as can be seen above (or below).  Obviously, something went wrong here.</p>
+
+<p>The (partial) output of <code>mdadm -Evvvvs</code> is</p>
+
+<pre><code>/dev/sde1:
+          Magic : a92b4efc
+        Version : 1.2
+    Feature Map : 0x0
+     Array UUID : 73bf29ca:89bff887:79a26531:b9733d7a
+           Name : Resilience:0  (local to host Resilience)
+  Creation Time : Thu Jul 18 00:25:05 2013
+     Raid Level : raid1
+   Raid Devices : 2
+
+ Avail Dev Size : 3906764800 (1862.89 GiB 2000.26 GB)
+     Array Size : 1953382208 (1862.89 GiB 2000.26 GB)
+  Used Dev Size : 3906764416 (1862.89 GiB 2000.26 GB)
+    Data Offset : 262144 sectors
+   Super Offset : 8 sectors
+          State : clean
+    Device UUID : 076acfd8:af184e75:f83ce3ae:8e778ba0
+
+    Update Time : Fri Jul 19 11:34:47 2013
+       Checksum : c1df6d6c - correct
+         Events : 6455
+
+
+   Device Role : Active device 1
+   Array State : AA ('A' == active, '.' == missing)
+/dev/sde:
+   MBR Magic : aa55
+Partition[0] :   3907026944 sectors at         2048 (type fd)
+
+/dev/sdc1:
+          Magic : a92b4efc
+        Version : 1.2
+    Feature Map : 0x0
+     Array UUID : 73bf29ca:89bff887:79a26531:b9733d7a
+           Name : Resilience:0  (local to host Resilience)
+  Creation Time : Thu Jul 18 00:25:05 2013
+     Raid Level : raid1
+   Raid Devices : 2
+
+ Avail Dev Size : 3906764800 (1862.89 GiB 2000.26 GB)
+     Array Size : 1953382208 (1862.89 GiB 2000.26 GB)
+  Used Dev Size : 3906764416 (1862.89 GiB 2000.26 GB)
+    Data Offset : 262144 sectors
+   Super Offset : 8 sectors
+          State : clean
+    Device UUID : 5552ba2d:8d79c88f:c995d052:cef0aa03
+
+    Update Time : Fri Jul 19 11:34:47 2013
+       Checksum : 385188a9 - correct
+         Events : 6455
+
+
+   Device Role : Active device 0
+   Array State : AA ('A' == active, '.' == missing)
+/dev/sdc:
+   MBR Magic : aa55
+Partition[0] :   3907026944 sectors at         2048 (type fd)
+</code></pre>
+
+<p>Checking with <code>fdisk -l</code>, the previous <strike><code>sdc</code> and</strike> <code>sdd</code> disk<strike>s</strike>, <strike>are</strike>is now <strike><code>sdb</code> and </strike><code>sde</code> (recognise the<strike>m</strike> disks from the size among the rest of the drives). It seems that "it" is still looking at/for <strike><code>sdc1</code></strike><code>sdd1</code>?</p>
+
+<p>Following suggestions found in the comment section, I added more details.</p>
+
+<p>As per <em>derobert's</em> suggestion in the comments, the ARRAY stopped and re-assembled successfully:</p>
+
+<pre><code># stop it!
+mdadm --stop /dev/md0
+mdadm: stopped /dev/md0
+
+# re-assemble -- looks good!
+mdadm --assemble -v --scan
+
+mdadm: looking for devices for /dev/md/0
+mdadm: no RAID superblock on /dev/sdf1
+mdadm: no RAID superblock on /dev/sdf
+mdadm: no RAID superblock on /dev/sde
+mdadm: no RAID superblock on /dev/sdd1
+mdadm: no RAID superblock on /dev/sdd
+mdadm: no RAID superblock on /dev/sdc
+mdadm: no RAID superblock on /dev/sdb
+mdadm: no RAID superblock on /dev/sda6
+mdadm: no RAID superblock on /dev/sda5
+mdadm: no RAID superblock on /dev/sda4
+mdadm: no RAID superblock on /dev/sda3
+mdadm: no RAID superblock on /dev/sda2
+mdadm: no RAID superblock on /dev/sda1
+mdadm: no RAID superblock on /dev/sda
+mdadm: /dev/sde1 is identified as a member of /dev/md/0, slot 1.
+mdadm: /dev/sdc1 is identified as a member of /dev/md/0, slot 0.
+mdadm: added /dev/sde1 to /dev/md/0 as 1
+mdadm: added /dev/sdc1 to /dev/md/0 as 0
+mdadm: /dev/md/0 has been started with 2 drives.
+
+# double-check
+mdadm --detail --scan
+ARRAY /dev/md/0 metadata=1.2 name=Resilience:0 UUID=73bf29ca:89bff887:79a26531:b9733d7a
+</code></pre>
+
+<p><strong>New question</strong>, how is this to be fixed <strike>that without loosing data</strike>? As per the discussion and recommendations in the comments, it is related with the boot process?  <strike>Permissions to the mount point in question perhaps?</strike></p>
+
+<p><code>mdadm</code> was not registered as a boot service. Adding it and rebooting, did not fix the issue though.  A few more, probably interesting, details from <code>dmesg</code> on where it fails:</p>
+
+<pre><code>[   25.356947] md: raid6 personality registered for level 6
+[   25.356952] md: raid5 personality registered for level 5
+[   25.356955] md: raid4 personality registered for level 4
+[   25.383630] md: raid1 personality registered for level 1
+[   25.677100] md: raid0 personality registered for level 0
+[   26.134282] md: raid10 personality registered for level 10
+[   26.257855] md: linear personality registered for level -1
+[   26.382152] md: multipath personality registered for level -4
+[   41.986222] md: bind&lt;sde1&gt;
+[   44.274346] XFS (md0): SB buffer read failed
+[   55.028598] ata7: sas eh calling libata cmd error handler
+[   55.028615] ata7.00: cmd ef/05:fe:00:00:00/00:00:00:00:00/40 tag 0
+[   55.046186] ata7: sas eh calling libata cmd error handler
+[   55.046209] ata7.00: cmd ef/c2:00:00:00:00/00:00:00:00:00/40 tag 0
+[   55.278378] ata8: sas eh calling libata cmd error handler
+[   55.278406] ata8.00: cmd ef/05:fe:00:00:00/00:00:00:00:00/40 tag 0
+[   55.349235] ata8: sas eh calling libata cmd error handler
+[   55.349290] ata8.00: cmd ef/c2:00:00:00:00/00:00:00:00:00/40 tag 0
+[  105.854112] XFS (md0): SB buffer read failed
+</code></pre>
+
+<p><strike>Further checking the XFS partition in question <code>sde1</code></p>
+
+<pre><code>xfs_check /dev/sde1
+xfs_check: /dev/sde1 is not a valid XFS filesystem (unexpected SB magic number 0x00000000)
+xfs_check: WARNING - filesystem uses v1 dirs,limited functionality provided.
+xfs_check: read failed: Invalid argument
+cache_node_purge: refcount was 1, not zero (node=0x22a64a0)
+xfs_check: cannot read root inode (22)
+bad superblock magic number 0, giving up
+</code></pre>
+
+<p>It turns out that the XFS partition in question is not healthy.
+</strike></p>
+
+<p>An XFS filesystem, although not impossible, is likely not the root of the problem here. Partitions that are part of an RAID Array, are according to Gilles' comment, <em>not an XFS filesystem! The filesystem starts at an offset, there's a RAID header first.</em></p>
+
+<h1>Question(s)</h1>
+
+<p><strong>In the beginning</strong></p>
+
+<ul>
+<li><p>Is it possible to "lock" the RAID 1 Array to only work with specific disks/partitions independently from disk device names?</p></li>
+<li><p>Would it be, for example, sufficient to use the Array's UUID in <code>/etc/fstab</code> so as to be immune against changes of the disk device names?</p></li>
+</ul>
+
+<p><strong>After re-searching the problem</strong></p>
+
+<ul>
+<li>At what stage of Funtoo's boot process is the assembmel of the RAID Array attempted? How exactly?  Where can it be modified/adjusted?</li>
+</ul>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/linux" class="post-tag" title="show questions tagged &#39;linux&#39;" rel="tag">linux</a> <a href="/questions/tagged/mount" class="post-tag" title="show questions tagged &#39;mount&#39;" rel="tag">mount</a> <a href="/questions/tagged/disk" class="post-tag" title="show questions tagged &#39;disk&#39;" rel="tag">disk</a> <a href="/questions/tagged/raid1" class="post-tag" title="show questions tagged &#39;raid1&#39;" rel="tag">raid1</a> <a href="/questions/tagged/funtoo" class="post-tag" title="show questions tagged &#39;funtoo&#39;" rel="tag">funtoo</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/83457" title="short permalink to this question" class="short-link" id="link-post-83457">share</a><span class="lsep">|</span><a href="/posts/83457/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/83457/revisions" title="show all edits to this post">edited <span title="2013-07-19 22:42:18Z" class="relativetime">Jul 19 at 22:42</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature">
+        
+<div class="user-info">
+    <div class="user-details">
+        <span class="community-wiki" title="This post is community owned as of Jul 19 at 22:42. Votes do not generate reputation, and it can be edited by users with 100 rep">
+            community wiki
+        </span>
+    </div><br>
+    <div class="user-details">
+        <a id="history-83457" href="/posts/83457/revisions" title="show revision history for this post">
+        14 revs<br><a href="/users/13011">Nikos Alexandris</a>
+        </a>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-83457" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="29" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-123949" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy"><code>&#47;etc&#47;fstab</code> isn&#39;t considered when assembling the array. Your partition type code should be 0xDA. And please post <code>&#47;etc&#47;mdadm&#47;mdadm.conf</code>. Also, when is the assembly being attempted, during initramfs or after?</span>
+	&ndash;&nbsp;
+		<a href="/users/977/derobert" 
+		   title="13080 reputation" 
+		   class="comment-user">derobert</a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-18 16:34:07Z" class="relativetime-clean">Jul 18 at 16:34</span></span>
+		<span class="edited-yes" title="this comment was edited 2 times"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-124053" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Could you explain exactly what broke, without guessing? Mdraid doesn&#39;t use device names, it uses signatures to assemble the array. In other words, <code>&#47;dev&#47;md0</code> is not built from <code>sdc1</code> and <code>sdd1</code>, it&#39;s built from <code>73bf29ca:89bff887:79a26531:b9733d7a</code>. The number <code>&#47;dev&#47;md0</code> is also stable since it comes from <code>&#47;etc&#47;mdadm.conf</code>. However, your bootloader may have been affected.</span>
+	&ndash;&nbsp;
+		<a href="/users/885/gilles" 
+		   title="167283 reputation" 
+		   class="comment-user">Gilles</a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-18 23:39:35Z" class="relativetime-clean">Jul 18 at 23:39</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-124058" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@NikosAlexandris It sounds like you can boot the system with the extra disk attached, and the array doesn&#39;t come up. I&#39;d suggest looking at the boot messages and seeing what is different. Also, you can try (without removing the extra disk) <code>mdadm --stop &#47;dev&#47;md0</code> followed by <code>mdadm --assemble -v --scan</code>. If that puts your array together, then <code>mdadm</code> itself is working, we have to figure out why your OS&#39;s boot scripts aren&#39;t. If that doesn&#39;t put your array together, can we get that output?</span>
+	&ndash;&nbsp;
+		<a href="/users/977/derobert" 
+		   title="13080 reputation" 
+		   class="comment-user">derobert</a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-19 00:10:43Z" class="relativetime-clean">Jul 19 at 0:10</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-124170" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Boot goes in the order 1. Identify disks, create device files for them (/dev/sdX). 2. Assemble arrays, create device files for them (/dev/md0). 3. Mount filesystems. (2) is what is failing, so it&#39;d be very unlikely for a permission issue on the mountpoint to be responsible (as that wouldn&#39;t hit until 3). Plus, this is all done as root, so e.g., SELinux, there aren&#39;t going to be permission problems.</span>
+	&ndash;&nbsp;
+		<a href="/users/977/derobert" 
+		   title="13080 reputation" 
+		   class="comment-user">derobert</a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-19 12:35:09Z" class="relativetime-clean">Jul 19 at 12:35</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-124172" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy"><code>&#47;dev&#47;sde1</code> is not an XFS fileysystem! The filesystem starts at an offset, there&#39;s a RAID header first. TO access a RAID volume with a 1.1 or 1.2 signature level, you need to go through mdraid.</span>
+	&ndash;&nbsp;
+		<a href="/users/885/gilles" 
+		   title="167283 reputation" 
+		   class="comment-user">Gilles</a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-19 12:38:20Z" class="relativetime-clean">Jul 19 at 12:38</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-83457" data-rep=50 data-anon=true
+			   class="comments-link " 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>show <b>29</b> more comments</a>
+    </td>
+</tr>            </table>    
+</div>
+    <div class="question-status">
+        <h2>                    <b>closed</b> as off-topic by <a href="/users/73/michael-mrozek">Michael Mrozek</a><span class="mod-flair" title="moderator">&#9830;</span> <span title="2013-07-22 04:32:02Z" class="relativetime">Jul 22 at 4:32</span>
+</h2>
+        <p><ul class="close-as-off-topic-status-list"><li>This question does not appear to be about Unix or Linux within the scope defined in the <a href="http://unix.stackexchange.com/help/on-topic">help center</a>.</li></ul><span class="close-status-suffix">If this question can be reworded to fit the rules in the 
+<a href="/help/closed-questions">help center</a>, please <a href="/posts/83457/edit">edit the question</a>.</span></p>
+    </div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								2 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/83457/setting-up-a-raid-1-in-funtoo?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/83457/setting-up-a-raid-1-in-funtoo?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/83457/setting-up-a-raid-1-in-funtoo?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="83585"></a>
+<div id="answer-83585" class="answer" data-answerid="83585" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="83585">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>OK—I'm not exactly sure what's going wrong on your box, but how about a quick summary of how this is <em>supposed</em> to work, to aid in troubleshooting.</p>
+
+<p>When you create an array with persistent superblocks (the quite sane default, and the way you've done it), mdadm stores various metadata on each disk. Included in that metadata is the array UUID, the array name, and the slot number. Each disk stores the same UUID and name. The slot number is different for each disk. (If you want to see the metadata, use <code>mdadm -E</code>)</p>
+
+<p>There are three different ways arrays can be assembled on boot:</p>
+
+<ol>
+<li>The kernel can do it. This is what the 0xFD autodetect partition type did. This method discouraged.</li>
+<li>Your distro's scripts may do it as part of <code>udev</code>, using incremental assembly, passing the devices to <code>mdadm</code> as they show up. This is the newest method. When it works right, it handles all kinds of asynchronously probed devices like USB, without kluges. </li>
+<li>Your distro's scripts call <code>mdadm --assemble --scan</code> after all devices are believed to have been recognized. Kluges are required for, e.g., USB (basically, a sleep to make sure the device nodes have been created). In this mode, <code>mdadm</code> checks (by default) <code>/proc/partitions</code> to find all the block devices on the system, and scans each of them for a superblock.</li>
+</ol>
+
+<p>The distro scripts may do this in the initramfs or later. Or, sometimes, some arrays are done from initramfs (the ones required to get the root filesystem) and others later in the boot.</p>
+
+<p>Regardless of how it's done, mdadm matches devices by looking at the UUID, name, and slot number. It needs to find #0 and #1 for your two-disk array. It really doesn't care which device it is (by default—you can configure it to care in mdadm.conf)</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/83585" title="short permalink to this answer" class="short-link" id="link-post-83585">share</a><span class="lsep">|</span><a href="/posts/83585/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-07-19 00:07:38Z" class="relativetime">Jul 19 at 0:07</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/977/derobert"><div><img src="https://www.gravatar.com/avatar/05b48b72766177b3b0a6ff4afdb70790?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/977/derobert">derobert</a><br>
+        <span class="reputation-score" title="reputation score 13080" dir="ltr">13.1k</span><span title="17 silver badges"><span class="badge2"></span><span class="badgecount">17</span></span><span title="43 bronze badges"><span class="badge3"></span><span class="badgecount">43</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-83585" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-124112" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Quite some information here. Thanks. It means that I should proceed in attaching any disk without hesitation then, given all of current details about the disks and status of the Array (see also updated stuff in the &quot;question&quot;) look healthy. Does hardware play any role? Motherboard, ability to hot-swap disks, etc.</span>
+	&ndash;&nbsp;
+		<a href="/users/13011/nikos-alexandris" 
+		   title="182 reputation" 
+		   class="comment-user owner">Nikos Alexandris</a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-19 08:24:21Z" class="relativetime-clean">Jul 19 at 8:24</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-124173" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@NikosAlexandris Hardware of course plays some role. It has to support hot swap (I believe SATA inherently does, and probably SAS too). In order to actually use it, you&#39;ll want hot-swap bays. Next, your controller chip needs to properly signal swap events (modern ones pretty much all do). Finally, the kernel drivers need to support hot swap as well (most do). If all that is in place, then hot swap should work. You will need to issue the appropriate <code>mdadm</code> commands to fail/remove/add drives. I&#39;d personally want to test that first on disks that do <i>not</i> contain important data.</span>
+	&ndash;&nbsp;
+		<a href="/users/977/derobert" 
+		   title="13080 reputation" 
+		   class="comment-user">derobert</a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-19 12:42:54Z" class="relativetime-clean">Jul 19 at 12:42</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-83585" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="83466"></a>
+<div id="answer-83466" class="answer" data-answerid="83466" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="83466">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><blockquote>
+  <p>Is it possible to "lock" the RAID 1 Array to only work with specific disks/partitions independently from disk device names?</p>
+</blockquote>
+
+<p>You should be able to use the aliases under <code>/dev/disk/by-*</code> to accomplish this. I would suggest <code>/dev/disk/by-id/*</code>, as those will directly map to information that should be readily visible on the physical disk, but any one of the directories should hold symlinks that will be useful in your scenario. Which ones to use is largely a matter of taste.</p>
+
+<p>For example, on my system, /dev/disk/by-id/scsi-SATA_ST31000340NS_9QJ26FT9-part1 maps to /dev/sdb1. That is the <em>bus</em>, <em>model</em>, <em>serial</em> and <em>partition</em> number leading to the partition in question. If a drive in the array fails, you can use something like the <code>mdadm</code> command in your question to unambigiously determine which physical drive is the culprit.</p>
+
+<blockquote>
+  <p>Would it be, for example, sufficient to use the Array's UUID in /etc/fstab so as to be immune against changes of the disk device names?</p>
+</blockquote>
+
+<p>I'm not really familiar with MD RAID, but would that not affect only the reference to the entire array? If you are worried about /dev/md0 suddenly showing up as /dev/md1, maybe there are other ways to provide a fixed reference to the array itself?</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/83466" title="short permalink to this answer" class="short-link" id="link-post-83466">share</a><span class="lsep">|</span><a href="/posts/83466/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-07-18 09:52:05Z" class="relativetime">Jul 18 at 9:52</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/2465/michael-kjorling"><div><img src="https://www.gravatar.com/avatar/fe2211d28f1196deadce36ba7f9cd93e?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/2465/michael-kjorling">Michael Kj&#246;rling</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">4,976</span><span title="10 silver badges"><span class="badge2"></span><span class="badgecount">10</span></span><span title="28 bronze badges"><span class="badge3"></span><span class="badgecount">28</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-83466" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-123889" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I have thought about <code>&#47;dev&#47;disk&#47;by-*</code> but, being not an expert, I&#39;d rather ask before I try. I don&#39;t think I worry about <code>md0</code> becoming <code>md-</code>some-number, if this is possible at all. Rather, how not to loose the RAID set-up no matter if I plug-in a new internal or external disk that would show up with a device disk name already &quot;taken&quot; for some/all of the RAID-disks.</span>
+	&ndash;&nbsp;
+		<a href="/users/13011/nikos-alexandris" 
+		   title="182 reputation" 
+		   class="comment-user owner">Nikos Alexandris</a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-18 12:36:30Z" class="relativetime-clean">Jul 18 at 12:36</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-123892" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Quotting: <i>would that not affect only the reference to the entire array?</i> Ehm, I guess so. So I am really after the disks that are parts of the RAID Array.</span>
+	&ndash;&nbsp;
+		<a href="/users/13011/nikos-alexandris" 
+		   title="182 reputation" 
+		   class="comment-user owner">Nikos Alexandris</a>
+	<span class="comment-date" dir="ltr"><span title="2013-07-18 12:39:34Z" class="relativetime-clean">Jul 18 at 12:39</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-83466" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+				
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/linux" class="post-tag" title="show questions tagged &#39;linux&#39;" rel="tag">linux</a> <a href="/questions/tagged/mount" class="post-tag" title="show questions tagged &#39;mount&#39;" rel="tag">mount</a> <a href="/questions/tagged/disk" class="post-tag" title="show questions tagged &#39;disk&#39;" rel="tag">disk</a> <a href="/questions/tagged/raid1" class="post-tag" title="show questions tagged &#39;raid1&#39;" rel="tag">raid1</a> <a href="/questions/tagged/funtoo" class="post-tag" title="show questions tagged &#39;funtoo&#39;" rel="tag">funtoo</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/linux" class="post-tag" title="show questions tagged &#39;linux&#39;" rel="tag">linux</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">5609</span></span><br>
+<a href="/questions/tagged/mount" class="post-tag" title="show questions tagged &#39;mount&#39;" rel="tag">mount</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">486</span></span><br>
+<a href="/questions/tagged/disk" class="post-tag" title="show questions tagged &#39;disk&#39;" rel="tag">disk</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">56</span></span><br>
+<a href="/questions/tagged/raid1" class="post-tag" title="show questions tagged &#39;raid1&#39;" rel="tag">raid1</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">22</span></span><br>
+<a href="/questions/tagged/funtoo" class="post-tag" title="show questions tagged &#39;funtoo&#39;" rel="tag">funtoo</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">8</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-07-18 08:12:49Z"><b>4 months ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>168 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-07-19 22:42:18Z">4 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-unix.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/48434" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">3</div>
+	</a>
+	<a href="/questions/48434/linux-software-raid-1-and-device-name" class="question-hyperlink">Linux software RAID-1 and device name</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/8861" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">14
+    </div>
+</a><a href="/questions/8861/how-to-recover-a-crashed-linux-md-raid5-array" class="question-hyperlink">How to recover a crashed Linux md RAID5 array?</a>
+</div>
+<div class="spacer">
+<a href="/q/44585" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/44585/issue-with-degraded-raid5-after-power-outage" class="question-hyperlink">Issue with degraded raid5 after power outage</a>
+</div>
+<div class="spacer">
+<a href="/q/53305" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/53305/raid5-recovery-trying-with-mdadm-create-missing" class="question-hyperlink">RAID5 recovery trying with &ldquo;mdadm --create &hellip; missing&rdquo;</a>
+</div>
+<div class="spacer">
+<a href="/q/54960" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/54960/how-to-set-up-disk-mirroring-raid-1" class="question-hyperlink">How to set up disk mirroring (RAID-1)</a>
+</div>
+<div class="spacer">
+<a href="/q/59925" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/59925/very-slow-sw-raid-5-in-debian-squeeze" class="question-hyperlink">Very slow SW-RAID 5 in Debian Squeeze</a>
+</div>
+<div class="spacer">
+<a href="/q/64633" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/64633/need-to-break-raid-1-on-linux-server" class="question-hyperlink">Need to Break RAID 1 on Linux Server</a>
+</div>
+<div class="spacer">
+<a href="/q/74694" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/74694/cleaning-dev-md0-filesystem-raid" class="question-hyperlink">cleaning /dev/md0 filesystem ( raid)</a>
+</div>
+<div class="spacer">
+<a href="/q/93976" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">5
+    </div>
+</a><a href="/questions/93976/raid-5-with-4-disks-fails-to-operate-with-one-failed-disk" class="question-hyperlink">RAID 5 with 4 disks fails to operate with one failed disk?</a>
+</div>
+<div class="spacer">
+<a href="/q/97033" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/97033/kernel-failure-with-software-raid-1-due-to-single-drive-read-errors" class="question-hyperlink">Kernel failure with software RAID-1 due to single drive read errors</a>
+</div>
+<div class="spacer">
+<a href="/q/99280" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/99280/raid-configuration-disappears-after-reboot" class="question-hyperlink">RAID configuration disappears after reboot</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+		<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/83457/ivc/b0ac');});
+</script>
+<noscript>
+    <div><img src="/posts/83457/ivc/b0ac" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/83457/setting-up-a-raid-1-in-funtoo")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.unix.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+                <div id="additional-notices">
+                    Linux is a registered trademark of Linus Torvalds. UNIX is a registered trademark of The Open Group. <br>This site is not affiliated with Linus Torvalds or The Open Group in any way.
+                </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Unix &amp; Linux Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|linux|mount|disk|raid1|funtoo|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

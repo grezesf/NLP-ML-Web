@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Encryption technique performance evaluation - Cryptography Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/crypto/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/crypto/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Cryptography Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCrypto" />
+    <meta name="twitter:domain" content="crypto.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/crypto/img/apple-touch-icon.png?v=4eff82ce3a8b"/>
+    <meta name="og:title" content="Encryption technique performance evaluation" />
+    <meta name="og:description" content="I&#39;ve come up with a light weight bit wise encryption algorithm and seems good. Ive tried it with text and image input. But I&#39;ve the following questions I would like to ask
+
+
+What do you think of bi..." />
+    <meta name="og:url" content="http://crypto.stackexchange.com/questions/1258/encryption-technique-performance-evaluation"/>
+    <link rel="canonical" href="http://crypto.stackexchange.com/questions/1258/encryption-technique-performance-evaluation" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/crypto/all.css?v=67e9087155b1">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Encryption technique performance evaluation&#39;" href="/feeds/question/1258">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:6,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:1258});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('281', '1258');
+            
+                    });
+    </script>
+
+                <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+                                        tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+                                        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+                                        messageStyle: "none"
+                });
+                </script>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>                
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('281');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385484326,"enableUserHovercards":true,"site":{"name":"Cryptography Stack Exchange","description":"Q&A for software developers, mathematicians and others interested in cryptography","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"6c07fd052a87c08ef3cc6e062a9ff978","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091","js/mathjax-editing.en.js":"a09844f7b738"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f1258%2fencryption-technique-performance-evaluation">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f1258%2fencryption-technique-performance-evaluation">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Cryptography
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/crypto/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Cryptography Stack Exchange is a question and answer site for software developers, mathematicians and others interested in cryptography. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/1258/encryption-technique-performance-evaluation" class="question-hyperlink">Encryption technique performance evaluation</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="1258"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="1258">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">-1</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I've come up with a light weight bit wise encryption algorithm and seems good. Ive tried it with text and image input. But I've the following questions I would like to ask</p>
+
+<ol>
+<li><p>What do you think of bit wise encryption schemes. Pros and cons (performance and security wise)</p></li>
+<li><p>How could I compare the security level and the performance of my encryption with well known encryption methods.</p></li>
+</ol>
+
+<p>I mean visually the text and the image look encrypted. Totally unrecognized. But is there any way that I can mathematically or analytically measure the security level. And also the performance how can I say this encryption has a better performance than the other.</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/encryption" class="post-tag" title="show questions tagged &#39;encryption&#39;" rel="tag">encryption</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/1258" title="short permalink to this question" class="short-link" id="link-post-1258">share</a><span class="lsep">|</span><a href="/posts/1258/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2011-11-18 10:18:44Z" class="relativetime">Nov 18 '11 at 10:18</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <span class="anonymous-gravatar"></span>
+    </div>
+    <div class="user-details">
+        lferasu<br>
+        
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1258" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="1" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-2013" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">How to compare the security level: publish it with some nice proofs and hope for public scrutiny. Visual inspection is worthless; XOR with the constant <code>0xDEADBEEF</code> will probably also render an image unrecognizable. <i>Qua</i> performance: compare timings.</span>
+	&ndash;&nbsp;
+		<span title="0 reputation" 
+		      class="comment-user">larsmans</span>
+	<span class="comment-date" dir="ltr"><span title="2011-11-18 10:23:37Z" class="relativetime-clean">Nov 18 '11 at 10:23</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-2014" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">What do you mean by &quot;performance&quot; ? Do you mean how <i>well</i> it works, or how <i>fast</i> it works ? (Note that the <code>performance</code> tag should only be used for the latter.)</span>
+	&ndash;&nbsp;
+		<span title="0 reputation" 
+		      class="comment-user">Paul R</span>
+	<span class="comment-date" dir="ltr"><span title="2011-11-18 14:11:45Z" class="relativetime-clean">Nov 18 '11 at 14:11</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-2015" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">What do you understand under &quot;bitwise encryption scheme&quot;? A stream cipher?</span>
+	&ndash;&nbsp;
+		<a href="/users/58/paulo-ebermann" 
+		   title="11222 reputation" 
+		   class="comment-user">Paŭlo Ebermann<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2011-11-18 15:19:23Z" class="relativetime-clean">Nov 18 '11 at 15:19</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-2016" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Welcome to Cryptography Stack Exchange. Your question was migrated here because of being not directly related to software development (the topic of Stack Overflow), and being fully on-topic here. Please register your account here, too, to be able to comment and accept an answer.</span>
+	&ndash;&nbsp;
+		<a href="/users/58/paulo-ebermann" 
+		   title="11222 reputation" 
+		   class="comment-user">Paŭlo Ebermann<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2011-11-18 15:31:10Z" class="relativetime-clean">Nov 18 '11 at 15:31</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-2017" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@larsmans, while I agree with the rest of your comment, XOR with a constant will not render an image unrecognizable. You&#39;d get something similar to this, <a href="http://upload.wikimedia.org/wikipedia/commons/f/f0/Tux_ecb.jpg" rel="nofollow">upload.wikimedia.org/wikipedia/commons/f/f0/Tux_ecb.jpg</a></span>
+	&ndash;&nbsp;
+		<a href="/users/706/mikeazo" 
+		   title="10661 reputation" 
+		   class="comment-user">mikeazo<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2011-11-18 15:54:49Z" class="relativetime-clean">Nov 18 '11 at 15:54</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-1258" data-rep=50 data-anon=true
+			   class="comments-link " 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>show <b>1</b> more comment</a>
+    </td>
+</tr>            </table>    
+</div>
+    <div class="question-status">
+        <h2>                <b>migrated</b> from <a href="http://stackoverflow.com/questions/8180838/encryption-technique-performance-evaluation?noredirect=1" title="encryption technique performance evaluation">stackoverflow.com</a> <span title="2011-11-18 15:23:22Z" class="relativetime">Nov 18 '11 at 15:23</span>
+</h2>
+        <p>This question came from our site for professional and enthusiast programmers.</p>
+    </div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								3 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/1258/encryption-technique-performance-evaluation?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/1258/encryption-technique-performance-evaluation?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/1258/encryption-technique-performance-evaluation?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="1261"></a>
+<div id="answer-1261" class="answer" data-answerid="1261" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="1261">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">8</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Looking at encrypted pictures is not a good test. I mean, if you can <em>visually</em> see non-random looking parts in an encrypted picture or text, then this implies that the encryption system is abysmally bad. But seeing nothing from a visual inspection does not prove that the system is secure; it just suggests that it will not be easily broken by a chimpanzee.</p>
+
+<p>The same can be said, to some degree, about statistical tests like the <a href="http://en.wikipedia.org/wiki/Diehard_tests">Diehard suite</a>. Successfully passing the tests is no proof of security, only proof that you did not make a mistake so obvious that even a brainless generic statistical test would detect it.</p>
+
+<p>To know whether a given encryption system is secure, cryptographers use the following recipe:</p>
+
+<ul>
+<li>They publish the system: complete algorithm description <em>and</em> sample implementation with test vectors (the code is not the description; the description should make no assumption on the involved programming language, and yet be sufficient to reimplement it perfectly in any language).</li>
+<li>They lure other cryptographers into gnawing at it and try to break it. The "luring" is about making the algorithm interesting, either through a some kind of mathematical novelty in the structure (e.g. a reduction proof with regards to a well-known hard problem) or impressive performance (see below).</li>
+<li>After enough time and work, if the cryptographers found nothing bad to say about the algorithm, we can begin to say that it may be worthwhile to consider in future protocol designs.</li>
+</ul>
+
+<p>Let me stress that "enough time" means "<strong>at least five years and one hundred cryptographers</strong>". Yes, it is very expensive unless you can convince cryptographers to work for free. NIST did it quite well back in 1998, for the <a href="http://en.wikipedia.org/wiki/Advanced_Encryption_Standard_process">AES competition</a>: they just promised glory (but not a single dollar !) to the winner, and they all came. But the real source of AES strength is not the three years of competition, it is the ten years of subsequent widespread usage and thorough continuous investigation. We have come up with a few interesting attack ways, not on the algorithm itself but on its implementations (<a href="http://en.wikipedia.org/wiki/Side_channel_attack">side channel attacks</a>); the existence of some results on AES shows that research on AES has kept on, and found nothing fatal. That's the good thing: whatever weakness AES may have is certainly not <em>obvious</em> and we can begin to build trust on that.</p>
+
+<p>Note that there are guaranteed ways to ensure that a given algorithm will <em>not</em> be studied, and thus may never be declared "safe enough":</p>
+
+<ul>
+<li>do not publish the algorithm;</li>
+<li>publish the algorithm only as code (especially in an ill-suited language such as any dialect of Basic);</li>
+<li>patent the algorithm;</li>
+<li>make it considerably slower than the AES.</li>
+</ul>
+
+<p>If you do any of the following, you totally forfeit your chances of seeing your algorithm being independently investigated, and therefore it will never be considered "secure".</p>
+
+<hr />
+
+<p><strong>Performance</strong> is quite easier to evaluate than security. For a symmetric encryption system, the following characteristics are absolute requirements for the system to be considered a non-joke, performance-wise:</p>
+
+<ul>
+<li>The input data shall be any arbitrary sequence of bytes (no restriction like "printable characters only").</li>
+<li>For an input message of size $n$ bytes, the encrypted message should have length at most $n+r$ bytes where $r$ is a small overhead, no more than twenty bytes or so, independently of $n$. Proportional size increase, even by a small amount (such as encrypting 1 GB of data into 1.01 GB), is a total no-go.</li>
+<li>The encryption process shall use only small amounts of RAM and code; apart from the data itself, the code and RAM for state and constants shall fit in the level 1 caches of the CPU. On a modern, "big" CPU like the one in a desktop PC, there is typically 32 kB of level 1 cache for code, and about as much for data. Some smaller architectures have smaller caches (e.g. 8 kB for code and 8 kB for data on a MiPS-based home routeur). The encryption shall be amenable to streaming, i.e. encrypting gigabytes by small successive chunks, while keeping only a few hundreds of bytes of state in RAM.</li>
+<li>The processing time to encrypt $n$ bytes shall be, asymptotically, proportional to $n$ (time to encrypt 2 gigabytes shall be twice the time to encrypt 1 gigabyte).</li>
+</ul>
+
+<p>Given these characteristics, you can define encryption performance with the following formula:</p>
+
+<p>$$ T = k*n + i + f$$</p>
+
+<p>where:</p>
+
+<ul>
+<li>$T$ is the encryption time;</li>
+<li>$n$ is the input data size, in bytes;</li>
+<li>$i$ is the processing time needed to begin the processing (initialization which can be done <em>before</em> seeing the first byte of data; the "key schedule" fits there);</li>
+<li>$f$ is the processing time needed for finalization (after all data bytes have been seen, the time needed to close up things appropriately and output the last encrypted byte);</li>
+<li>$k$ is the asymptotic encryption speed.</li>
+</ul>
+
+<p>If you express all these values in "clock cycles", then $k$ is the encryption speed in "clocks per byte". The smaller the better. To measure $k$, have your code repeatedly encrypt an 8 kB data buffer so that the total processing time takes at least a few second (see <a href="http://stackoverflow.com/questions/2403921/how-can-i-measure-the-speed-of-code-written-in-java-ai-algorithms/2404378#2404378">this answer</a> for a more detailed treatment).</p>
+
+<p>With <a href="http://www.openssl.org/">OpenSSL</a> on a basic desktop machine, I get AES speed close to 17 cycles per byte (the processor is an Intel i7; it can do much better, below 2 cycles per byte, using the special <a href="http://en.wikipedia.org/wiki/AES_instruction_set">AES opcodes</a>, but OpenSSL does not use them). Some <a href="http://en.wikipedia.org/wiki/Stream_cipher">stream ciphers</a> achieve much better performance (e.g. less than 4 cycles per byte with <a href="http://www.ecrypt.eu.org/stream/sosemanukp3.html">Sosemanuk</a>). That's your competition.</p>
+
+<p>Bottom-line: If your system cannot go below 20 cycles per byte on a PC, don't even bother with publishing it: it will not be "interesting enough". Harsh but true: symmetric encryption has gone quite far and is considered to be a "mostly solved" problem. It takes quite a lot of effort to design something which has the slightest chance of being an improvement over already known algorithms.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/1261" title="short permalink to this answer" class="short-link" id="link-post-1261">share</a><span class="lsep">|</span><a href="/posts/1261/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-11-18 21:17:25Z" class="relativetime">Nov 18 '11 at 21:17</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/28/thomas-pornin"><div><img src="https://www.gravatar.com/avatar/07ccc97c05f3fb80560ebc618a7de8bc?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/28/thomas-pornin">Thomas Pornin</a><br>
+        <span class="reputation-score" title="reputation score 24960" dir="ltr">25k</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="47 silver badges"><span class="badge2"></span><span class="badgecount">47</span></span><span title="93 bronze badges"><span class="badge3"></span><span class="badgecount">93</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1261" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-1261" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+<div class="newsletter-anon">
+    <img src="//cdn.sstatic.net/crypto/img/apple-touch-icon.png" class="newsletter-logo" />
+    <div class="newsletter-container">
+        <h2>Did you find this question interesting? Try our newsletter</h2>
+        <p class="newsletter-description">
+            Sign up for our newsletter and get our top new questions delivered to your inbox (<a href="http://stackexchange.com/newsletters/newsletter?site=crypto.stackexchange.com" id="newsletter-preview">see an example</a>).
+        </p>
+        <form id="anon-newsletter-form">
+            <input type="email" id="newsletter-email-input" />
+            <span class="edit-field-overlay">email address</span>
+            <input type="submit" value="Subscribe" id="newsletter-email-submit" />            
+        </form>
+    </div>
+</div>
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+    
+    StackExchange.helpers.bindHelpOverlayEvents($("#newsletter-email-input"));
+    
+    StackExchange.using("gps", function () {
+        StackExchange.gps.track("newsletter.show", { newsletter_type: "nlquestionad" }, true);
+    });
+    
+    $('#anon-newsletter-form').submit(function () {
+        var $form = $(this);
+        var $input = $form.find('#newsletter-email-input');
+        var $submit = $form.find('#newsletter-email-submit');
+
+        var email = $.trim($input.val());
+        if (email.length == 0) {
+            return false;
+        }
+        StackExchange.helpers.addSpinner($form);
+
+        $.ajax({
+            url: '/newsletter/signup/anon',
+            type: 'POST',
+            dataType: 'json',
+            data: { email: email, viaAnonNewsletterAd: true },
+            success: function (data) {
+                if (data.status == 'confirmed' && !data.error) {
+                    $input.attr('disabled', true);
+                    $submit.replaceWith('<div style="margin-top: 10px;"><strong>Subscribed!</strong></div>');
+                }
+                else if (data.status == 'unconfirmed' && !data.error) {
+                    $input.attr('disabled', true);
+                    $submit.replaceWith('<div style="margin-top: 10px;"><strong>Success!</strong> Please click the link in the confirmation email to activate your subscription.</div>');
+                }
+                else {
+                    $form.showErrorMessage(data.error || 'There was a problem signing up for the newsletter. Please try again later.');
+                }
+            },
+            error: function () {
+                $form.showErrorMessage('There was a problem signing up for the newsletter. Please try again later.');
+            },
+            complete: function () {
+                StackExchange.helpers.removeSpinner($form);
+            }
+        });
+
+        return false;
+    });
+</script>
+  
+<a name="1259"></a>
+<div id="answer-1259" class="answer" data-answerid="1259" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="1259">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>I personally believe that we would need to be able to publicly review your algorithm and evaluate it for mathematical weaknesses ourselves. There's not really a way to validate your algorithm for security, though there are some programs which can help to "debug" the algorithm. However, these applications require quite a bit of training to use and are fairly time consuming to utilize effectively. You should start analyzing classical ciphers and try to break other ciphers before inventing your own. Implementing ciphers is also a good way to get a feel for how things work.</p>
+
+<p>When you say "bit wise encryption schemes" I think you mean some kind of stream cipher. While stream ciphers are generally quicker than other kinds of ciphers, such as block ciphers, you'll be hard pressed to get any real evaluation without presenting some kind of math behind your algorithm.</p>
+
+<p>On the topic of performance and security level... there's a program called "diehard" which will run a battery of tests against a fairly large (1 GB or more) output set and help determine whether or not it represents unpredictable pseudorandom output. Another way to test if the output is quite random is to compress it and if you get a bad compression ratio, you know that the data is at least pretty hard to compress meaning it lacks repetitive sections. However, those two tests are just not enough to ensure security. You cannot test for security other than publishing the algorithm and then waiting for someone to break it. That's how all of the good algorithms have come around and how most have died.</p>
+
+<p>I recommend taking a read through Applied Cryptography by Bruce Schneier. Cryptography Engineering coauthored by Bruce Schneier is a more modern read and you will probably get more useful information out of it. Both are great though.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/1259" title="short permalink to this answer" class="short-link" id="link-post-1259">share</a><span class="lsep">|</span><a href="/posts/1259/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-11-18 11:07:12Z" class="relativetime">Nov 18 '11 at 11:07</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1109/michael-j-gray"><div><img src="https://www.gravatar.com/avatar/99fc6c2bf830c9d66e74f4cf37d31645?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1109/michael-j-gray">Michael J. Gray</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">131</span><span title="4 bronze badges"><span class="badge3"></span><span class="badgecount">4</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1259" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-1259" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="1260"></a>
+<div id="answer-1260" class="answer" data-answerid="1260" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="1260">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>All amateur encryption schemes are insecure.  Professional schemes may, or may not, be insecure but the amateur ones always fail.  The fact that you are asking this question indicates that you are an amateur.</p>
+
+<p>If you just want your Aunt Jemima not to be able to read your stuff, then fine.  If your Aunt Jemima works for the NSA then she'll be able to break it.  It all depends on who you are hiding stuff from.</p>
+
+<p>Is your algorithm secure against Linear Cryptanalysis?  Is your algorithm secure against Differential Cryptanalysis?  Both of those you can check yourself by running Linear or Differential attacks.  Alternatively, publish your algorithm in a public forum devoted to cryptography, for example, sci.crypt on Usenet.  Expect it to get torn to shreds by experts.  Post the algorithm.  Don't post cyphertext only; if you do it will just confirm that you don't understand <a href="http://en.wikipedia.org/wiki/Kerckhoffs%27s_principle" rel="nofollow">Kerckhoffs's principle</a>.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/1260" title="short permalink to this answer" class="short-link" id="link-post-1260">share</a><span class="lsep">|</span><a href="/posts/1260/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-11-18 11:42:22Z" class="relativetime">Nov 18 '11 at 11:42</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1176/rossum"><div><img src="https://www.gravatar.com/avatar/81f8fffeec4f2ba3e75aebe941e4e5dd?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1176/rossum">rossum</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">472</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1260" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-2020" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I don&#39;t believe you can say that all amateur encryption schemes are insecure because frankly, things like AES and Serpent are amateur in nature. You cam also make something so complicated and convoluted that it&#39;s very difficult to analyze without knowledge of the actual cipher. So, if this individual hid their cipher implementation and simply posted the ciphertext online, it&#39;s pretty likely that even the NSA would not be able to break it without a fair bit of hints. There have been amateur ciphers in the past that have not been broken by the FBI nor the NSA this way.</span>
+	&ndash;&nbsp;
+		<a href="/users/1109/michael-j-gray" 
+		   title="131 reputation" 
+		   class="comment-user">Michael J. Gray</a>
+	<span class="comment-date" dir="ltr"><span title="2011-11-18 21:55:09Z" class="relativetime-clean">Nov 18 '11 at 21:55</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-1260" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/1258/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="1258" />
+							<h2 class="space">Your Answer</h2>
+
+
+        <script type="text/javascript">
+            StackExchange.ifUsing("editor", function () {
+                return StackExchange.using("mathjaxEditing", function () {
+                    StackExchange.MarkdownEditor.creationCallbacks.add(function (editor, postfix) {
+                        StackExchange.mathjaxEditing.prepareWmdForMathJax(editor, postfix, [["$", "$"], ["\\\\(","\\\\)"]]);
+                    });
+                });
+            }, "mathjax-editing");
+        </script>
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+noCode: true,            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="6c07fd052a87c08ef3cc6e062a9ff978">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f1258%2fencryption-technique-performance-evaluation%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f1258%2fencryption-technique-performance-evaluation%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/encryption" class="post-tag" title="show questions tagged &#39;encryption&#39;" rel="tag">encryption</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">536</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2011-11-18 10:18:44Z"><b>2 years ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>387 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2011-11-18 21:17:25Z">2 years ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/beta/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=crypto.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/596" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">54
+    </div>
+</a><a href="/questions/596/is-modern-encryption-needlessly-complicated" class="question-hyperlink">Is modern encryption needlessly complicated?</a>
+</div>
+<div class="spacer">
+<a href="/q/1247" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/1247/101-advanced-access-content-system-aacs-and-subset-difference-techniques-for" class="question-hyperlink">101: Advanced Access Content System (AACS) and Subset Difference techniques for Broadcast Encryption</a>
+</div>
+<div class="spacer">
+<a href="/q/1563" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">6
+    </div>
+</a><a href="/questions/1563/why-programming-languages-dont-provide-simple-encryption-methods" class="question-hyperlink">Why programming languages don&#39;t provide simple encryption methods?</a>
+</div>
+<div class="spacer">
+<a href="/q/2280" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/2280/why-is-the-iv-passed-in-the-clear-when-it-can-be-easily-encrypted" class="question-hyperlink">Why is the IV passed in the clear when it can be easily encrypted?</a>
+</div>
+<div class="spacer">
+<a href="/q/2507" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">13
+    </div>
+</a><a href="/questions/2507/can-i-encrypt-user-input-in-a-way-i-cant-decrypt-it-for-a-certain-period-of-tim" class="question-hyperlink">Can I encrypt user input in a way I can&#39;t decrypt it for a certain period of time?</a>
+</div>
+<div class="spacer">
+<a href="/q/3634" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/3634/how-to-submit-a-new-method-of-encryption" class="question-hyperlink">How to submit a new method of encryption?</a>
+</div>
+<div class="spacer">
+<a href="/q/3813" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/3813/how-does-order-preserving-encryption-work" class="question-hyperlink">How does order-preserving encryption work?</a>
+</div>
+<div class="spacer">
+<a href="/q/5997" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/5997/two-way-encryption-with-random-iv" class="question-hyperlink">Two way encryption with random IV</a>
+</div>
+<div class="spacer">
+<a href="/q/6448" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/6448/bad-crackable-encryption-example" class="question-hyperlink">Bad/Crackable Encryption Example?</a>
+</div>
+<div class="spacer">
+<a href="/q/6765" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/6765/encrypting-and-decrypting-a-19-digits-long-biginteger" class="question-hyperlink">Encrypting and Decrypting a 19-digits long BigInteger</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/1258" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/1258/ivc/b229');});
+</script>
+<noscript>
+    <div><img src="/posts/1258/ivc/b229" class="dno" alt="" width="0" height="0"></div>
+</noscript></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/1258/encryption-technique-performance-evaluation")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.crypto.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Cryptography Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|encryption|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

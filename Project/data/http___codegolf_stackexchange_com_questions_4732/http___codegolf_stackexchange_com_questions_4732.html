@@ -1,0 +1,3867 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>code challenge - Emulate an Intel 8086 CPU - Programming Puzzles & Code Golf Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codegolf/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codegolf/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Programming Puzzles &amp; Code Golf Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeGolf" />
+    <meta name="twitter:domain" content="codegolf.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codegolf/img/apple-touch-icon.png?v=6f55f0b2476f"/>
+    <meta name="og:title" content="Emulate an Intel 8086 CPU" />
+    <meta name="og:description" content="Note: A couple of answers have arrived. Consider upvoting newer answers too.
+
+
+C from user1662116
+C++ from Darius Goad
+Postscript from luser droog
+C++ from 
+JoeFish
+Javascript from entirelysubjecti..." />
+    <meta name="og:url" content="http://codegolf.stackexchange.com/questions/4732/emulate-an-intel-8086-cpu"/>
+    <link rel="canonical" href="http://codegolf.stackexchange.com/questions/4732/emulate-an-intel-8086-cpu" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codegolf/all.css?v=a1dd281cae8a">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Emulate an Intel 8086 CPU&#39;" href="/feeds/question/4732">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:15,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:4732});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('200', '4732');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('200');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385444820,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Programming Puzzles & Code Golf Stack Exchange","description":"Q&A for programming puzzle enthusiasts and code golfers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f4732%2femulate-an-intel-8086-cpu">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f4732%2femulate-an-intel-8086-cpu">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Programming Puzzles &amp; Code Golf
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codegolf/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Programming Puzzles &amp; Code Golf Stack Exchange is a question and answer site for programming puzzle enthusiasts and code golfers. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/4732/emulate-an-intel-8086-cpu" class="question-hyperlink">Emulate an Intel 8086 CPU</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="4732"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="4732">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">62</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>48</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p><strong>Note:</strong> A couple of answers have arrived. Consider upvoting newer answers too.</p>
+
+<ul>
+<li><a href="http://codegolf.stackexchange.com/a/12482/3428">C from user1662116</a></li>
+<li><a href="http://codegolf.stackexchange.com/a/10497/3428">C++ from Darius Goad</a></li>
+<li><a href="http://codegolf.stackexchange.com/a/9065/3428">Postscript from luser droog</a></li>
+<li><a href="http://codegolf.stackexchange.com/a/9044/3428">C++ from 
+JoeFish</a></li>
+<li><a href="http://codegolf.stackexchange.com/a/8977/3428">Javascript from entirelysubjective</a></li>
+<li><a href="http://codegolf.stackexchange.com/questions/4732/emulate-an-intel-8086-cpu#6514">C from RichTX</a></li>
+<li><a href="http://codegolf.stackexchange.com/questions/4732/emulate-an-intel-8086-cpu#5538">C++ from Dave C</a></li>
+<li><a href="http://codegolf.stackexchange.com/questions/4732/emulate-an-intel-8086-cpu#4985">Haskell from J B</a></li>
+<li><a href="http://codegolf.stackexchange.com/questions/4732/emulate-an-intel-8086-cpu#4980">Python from j-a</a></li>
+</ul>
+
+<hr>
+
+<p>The <a href="http://en.wikipedia.org/wiki/Intel_8086">8086</a> is Intel's first x86 microprocessor. Your task is to write an emulator for it. Since this is relatively advanced, I want to limit  it a litte:</p>
+
+<ul>
+<li>Only the following opcodes need to be implemented:
+<ul>
+<li>mov, push, pop, xchg</li>
+<li>add, adc, sub, sbb, cmp, and, or, xor</li>
+<li>inc, dec</li>
+<li>call, ret, jmp</li>
+<li>jb, jz, jbe, js, jnb, jnz, jnbe, jns</li>
+<li>stc, clc</li>
+<li>hlt, nop</li>
+</ul></li>
+<li>As a result of this, you only need to calculate the carry, zero and sign flags</li>
+<li>Don't implement segments. Assume <code>cs = ds = ss = 0</code>.</li>
+<li>No prefixes</li>
+<li>No kinds of interrupts or port IO</li>
+<li>No string functions</li>
+<li>No two-byte opcodes (0F..)</li>
+<li>No floating point arithmetic</li>
+<li>(obviously) no 32-bit things, sse, mmx, ... whatever has not yet been invented in 1979</li>
+<li>You do not have to count cycles or do any timing</li>
+</ul>
+
+<p>Start with <code>ip = 0</code> and <code>sp = 100h</code>. </p>
+
+<p><hr>
+<strong>Input:</strong> Your emulator should take a binary program in any kind of format you like as input (read from file, predefined array, ...) and load it into memory at address 0.</p>
+
+<p><strong>Output:</strong>
+The video RAM starts at address 8000h, every byte is one (ASCII-)character. Emulate a 80x25 screen to console.</p>
+
+<p>Example:</p>
+
+<pre><code>08000   2E 2E 2E 2E 2E 2E 2E 2E 2E 00 00 00 00 00 00 00   ................
+08010   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+08020   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+08030   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+08040   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+08050   48 65 6C 6C 6F 2C 20 77 6F 72 6C 64 21 00 00 00   Hello,.world!...
+</code></pre>
+
+<p>Note: This is very similiar to the real video mode, which is usually at 0xB8000 and has another byte per character for colors.</p>
+
+<p><strong>Winning criteria:</strong> </p>
+
+<ul>
+<li>All of the mentioned instructions need to be implemented</li>
+<li><p>I made an uncommented test program (<a href="http://copy.freeunix.net/stuff/codegolf">link</a>, <a href="http://copy.freeunix.net/stuff/codegolf.asm">nasm source</a>) that should run properly. It outputs</p>
+
+<pre><code>.........                                                                       
+Hello, world!                                                                   
+0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~ 
+
+
+################################################################################
+##                                                                            ##
+##  0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987                          ##
+##                                                                            ##
+##  0 1 4 9 16 25 36 49 64 81 100 121 144 169 196 225 256 289 324 361 400     ##
+##                                                                            ##
+##  2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97    ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+################################################################################
+</code></pre></li>
+<li><p>I am not quite sure if this should be codegolf; it's kind of a hard task, so any submission will win many upvotes anyway. Please comment.</p></li>
+</ul>
+
+<p>Here are some links to help you on this task:</p>
+
+<ul>
+<li><a href="http://www.logix.cz/michal/doc/i386/chp17-02.htm">instruction format</a>, <a href="http://wiki.osdev.org/X86_Instruction_Encoding">more</a></li>
+<li><a href="http://ref.x86asm.net/geek32.html">opcode table</a></li>
+<li><a href="http://faydoc.tripod.com/cpu/">opcode descriptions</a></li>
+<li><a href="http://www.sandpile.org/x86/opc_rm16.htm">16-bit mod R/M byte decoding</a></li>
+<li><a href="http://www.eecg.toronto.edu/~amza/www.mindsec.com/files/x86regs.html">registers</a>, <a href="http://en.wikipedia.org/wiki/FLAGS_register_%28computing%29">flags register</a></li>
+<li><a href="http://matthieu.benoit.free.fr/cross/data_sheets/Intel_8086_users_manual.htm">1979 Manual</a></li>
+</ul>
+
+<p>This is my first entry to this platform. If there are any mistakes, please point them out; if I missed a detail, simply ask.</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/code-challenge" class="post-tag" title="show questions tagged &#39;code-challenge&#39;" rel="tag">code-challenge</a> <a href="/questions/tagged/advanced" class="post-tag" title="show questions tagged &#39;advanced&#39;" rel="tag">advanced</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/4732" title="short permalink to this question" class="short-link" id="link-post-4732">share</a><span class="lsep">|</span><a href="/posts/4732/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/4732/revisions" title="show all edits to this post">edited <span title="2013-09-09 02:30:18Z" class="relativetime">Sep 9 at 2:30</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2012-01-22 03:52:00Z" class="relativetime">Jan 22 '12 at 3:52</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3428/copy"><div><img src="https://www.gravatar.com/avatar/ba5cd4b361ecdb2a17a8558d980f9d35?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3428/copy">copy</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,916</span><span title="9 silver badges"><span class="badge2"></span><span class="badgecount">9</span></span><span title="21 bronze badges"><span class="badge3"></span><span class="badgecount">21</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-4732" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="10" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-9896" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">4</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">far too advanced for me, but I&#39;m very eager to see answers to this question as it&#39;s precisely the sort of stuff I&#39;m most interested in!  I may take a crack at it later if I&#39;m feeling particularly masochistic...</span>
+	&ndash;&nbsp;
+		<a href="/users/3611/chris-browne" 
+		   title="101 reputation" 
+		   class="comment-user">Chris Browne</a>
+	<span class="comment-date" dir="ltr"><span title="2012-01-23 13:17:52Z" class="relativetime-clean">Jan 23 '12 at 13:17</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-9899" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@ChrisBrowne good luck being masochistic! I am currently turning my 8086 into a 80386 and have learned <b>a lot</b> from this project so far.</span>
+	&ndash;&nbsp;
+		<a href="/users/3428/copy" 
+		   title="2916 reputation" 
+		   class="comment-user owner">copy</a>
+	<span class="comment-date" dir="ltr"><span title="2012-01-23 17:24:42Z" class="relativetime-clean">Jan 23 '12 at 17:24</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10038" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@JB remember it&#39;s the less intuitive one: <code>mem&#91;sp - 2&#93; = reg; sp = sp - 2</code></span>
+	&ndash;&nbsp;
+		<a href="/users/3428/copy" 
+		   title="2916 reputation" 
+		   class="comment-user owner">copy</a>
+	<span class="comment-date" dir="ltr"><span title="2012-01-30 16:12:40Z" class="relativetime-clean">Jan 30 '12 at 16:12</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-17698" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@JoeFish nasm has generated some instructions that were added on the 80386. <code>83</code> is the same opgroup (add, or, ...) as <code>81</code> with a sign-extended single byte immediate (<code>81</code> has a word immediate). So <code>and cx, 1</code> can be assembled as <code>83 E1 01</code> or <code>81 E1 01 00</code></span>
+	&ndash;&nbsp;
+		<a href="/users/3428/copy" 
+		   title="2916 reputation" 
+		   class="comment-user owner">copy</a>
+	<span class="comment-date" dir="ltr"><span title="2012-11-15 23:23:02Z" class="relativetime-clean">Nov 15 '12 at 23:23</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-18144" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@copy It is never too late to make a golf competition for every single language/host pair</span>
+	&ndash;&nbsp;
+		<a href="/users/2286/yauhen-yakimovich" 
+		   title="131 reputation" 
+		   class="comment-user">Yauhen Yakimovich</a>
+	<span class="comment-date" dir="ltr"><span title="2012-12-17 00:21:17Z" class="relativetime-clean">Dec 17 '12 at 0:21</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-4732" data-rep=50 data-anon=true
+			   class="comments-link " 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>show <b>10</b> more comments</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								9 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/4732/emulate-an-intel-8086-cpu?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/4732/emulate-an-intel-8086-cpu?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/4732/emulate-an-intel-8086-cpu?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="4980"></a>
+<div id="answer-4980" class="answer" data-answerid="4980" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="4980">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">41</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p><img src="http://i.stack.imgur.com/WVQsb.png" alt="Result">
+I included an interactive debugger as well. </p>
+
+<pre><code>CF:0 ZF:0 SF:0 IP:0x0000
+AX:0x0000  CX:0x0000  DX:0x0000  BX:0x0000  SP:0x0100  BP:0x0000  SI:0x0000  DI:0x0000
+AL:  0x00  CL:  0x00  DL:  0x00  BL:  0x00  AH:  0x00  CH:  0x00  DH:  0x00  BH:  0x00
+stack: 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 ...
+cmp SP, 0x100
+[Enter]:step [R]:run [B 0xadr]:add break [M 0xadr]:see RAM [Q]:quit
+
+B 0x10
+M 0x1
+M 0x1: 0xfc 0x00 0x01 0x74 0x01 0xf4 0xbc 0x00 0x10 0xb0 0x2e 0xbb ...
+R
+
+CF:0 ZF:0 SF:1 IP:0x0010
+AX:0x002e  CX:0x0000  DX:0x0000  BX:0xffff  SP:0x1000  BP:0x0000  SI:0x0000  DI:0x0000
+AL:  0x2e  CL:  0x00  DL:  0x00  BL:  0xff  AH:  0x00  CH:  0x00  DH:  0x00  BH:  0x00
+stack: 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 ...
+cmp BX, 0xffff
+[Enter]:step [R]:run [B 0xadr]:add break [M 0xadr]:see RAM [Q]:quit
+</code></pre>
+
+<p>There are three files: emu8086.py (required) console.py (optional for display output), disasm.py (optional, to get a listing of the asm in the codegolf).</p>
+
+<p>To run with the display (note uses curses):</p>
+
+<pre><code>python emu8086.py 
+</code></pre>
+
+<p>To run with interactive debugger:</p>
+
+<pre><code>python emu8086.py a b
+</code></pre>
+
+<p>To run with non-interactive "debugger":</p>
+
+<pre><code>python emu8086.py a
+</code></pre>
+
+<p>The program "<a href="http://copy.freeunix.net/stuff/codegolf">codegolf</a>" should be in the same directory.</p>
+
+<p><a href="http://pastebin.com/HuMwBU4R">emu8086.py</a></p>
+
+<p><a href="http://pastebin.com/2JYP4fnx">console.py</a></p>
+
+<p><a href="http://pastebin.com/ZfJxhksB">disasm.py</a></p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/4980" title="short permalink to this answer" class="short-link" id="link-post-4980">share</a><span class="lsep">|</span><a href="/posts/4980/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/4980/revisions" title="show all edits to this post">edited <span title="2012-02-26 23:19:54Z" class="relativetime">Feb 26 '12 at 23:19</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-02-26 19:32:21Z" class="relativetime">Feb 26 '12 at 19:32</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3838/j-a"><div><img src="https://www.gravatar.com/avatar/3ac651d9512cecad86af937a7eaca34e?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3838/j-a">j-a</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">511</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-4980" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-10558" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="warm">5</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">That&#39;s one hell of a first Code Golf post. +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 ...</span>
+	&ndash;&nbsp;
+		<a href="/users/3284/dillon-cower" 
+		   title="1597 reputation" 
+		   class="comment-user">Dillon Cower</a>
+	<span class="comment-date" dir="ltr"><span title="2012-02-26 22:59:17Z" class="relativetime-clean">Feb 26 '12 at 22:59</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10559" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@DC thanks :) was a fun challenge!</span>
+	&ndash;&nbsp;
+		<a href="/users/3838/j-a" 
+		   title="511 reputation" 
+		   class="comment-user">j-a</a>
+	<span class="comment-date" dir="ltr"><span title="2012-02-26 23:20:55Z" class="relativetime-clean">Feb 26 '12 at 23:20</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10561" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Still can&#39;t believe someone actually did this :-)  Great job!</span>
+	&ndash;&nbsp;
+		<a href="/users/3428/copy" 
+		   title="2916 reputation" 
+		   class="comment-user owner">copy</a>
+	<span class="comment-date" dir="ltr"><span title="2012-02-26 23:46:59Z" class="relativetime-clean">Feb 26 '12 at 23:46</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-17930" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Amazing! Congratulations! How many lines it had in the end?</span>
+	&ndash;&nbsp;
+		<a href="/users/6458/will-p" 
+		   title="191 reputation" 
+		   class="comment-user">Will P</a>
+	<span class="comment-date" dir="ltr"><span title="2012-11-30 18:56:46Z" class="relativetime-clean">Nov 30 '12 at 18:56</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-4980" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="4985"></a>
+<div id="answer-4985" class="answer" data-answerid="4985" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="4985">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">33</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h1>Haskell, <s>256</s> 234 lines</h1>
+
+<p>I've had this work-in-progress one for some time, I intended to polish it a bit more before publishing, but now the fun's officially started, there's not much point in keeping it hidden anymore.  I noticed while extracting it that it's exactly 256 lines long, so I suppose it is at a "remarkable" point of its existence.</p>
+
+<p><em>What's in:</em> barely enough of the 8086 instruction set to run the example binary flawlessly.  <strong>Self-modifying code is supported.</strong> (prefetch: zero bytes)<br>
+Ironically, the first sufficient iterations of the code were longer and supported less of the opcode span.  Refactoring ended up beneficial both to code length and to opcode coverage.</p>
+
+<p><em>What's out:</em> obviously, segments, prefixes and multibyte opcodes, interrupts, I/O ports, string operations, and FP.  I initially did follow the original <code>PUSH SP</code> behavior, but had to drop it after a few iterations.</p>
+
+<p>Carry flag results are probably very messed up in a few cases of <code>ADC</code>/<code>SBB</code>.</p>
+
+<p>Anyway, here's the code:</p>
+
+<pre><code>{-# LANGUAGE FlexibleContexts #-}
+
+import Prelude hiding (read)
+import Data.Char (chr,isPrint)
+import Data.Word (Word8,Word16)
+import Data.Int (Int8)
+import Data.Bits
+import Data.IORef
+import Data.Array ((!))
+import Data.Array.IO
+import Control.Monad.Reader
+import Control.Exception (bracket_)
+import System
+import System.IO (hSetEncoding,stdin,latin1)
+
+ifte t f c = if c then t else f
+
+concatBytes :: Word8 -&gt; Word8 -&gt; Word16
+concatBytes l h = (fromIntegral l) .|. (fromIntegral h `shiftL` 8)
+
+byteToWordSE :: Word8 -&gt; Word16
+byteToWordSE = (fromIntegral :: Int8 -&gt; Word16) .
+               (fromIntegral :: Word8 -&gt; Int8)
+
+wordToByteL,wordToByteH :: Word16 -&gt; Word8
+wordToByteL = fromIntegral
+wordToByteH = fromIntegral . (`shiftR` 8)
+
+byte = undefined :: Word8
+word = undefined :: Word16
+
+type Place = (IOArray Word16 Word8,Word16)
+[regAl,regAh,regCl,regCh,regDl,regDh,regBl,regBh] = [0..7]
+[regAx,regCx,regDx,regBx,regSp,regBp,regSi,regDi] = [0,2..14]
+
+data Proc = Proc {
+    ram :: IOArray Word16 Word8
+  , regs :: IOArray Word16 Word8
+  , ip :: IORef Word16
+  , cf :: IORef Bool
+  , zf :: IORef Bool
+  , sf :: IORef Bool
+}
+
+readProc  ext   = liftIO .      readIORef    . ext =&lt;&lt; ask
+writeProc ext f = liftIO . flip writeIORef f . ext =&lt;&lt; ask
+
+modifyIP f = do
+  ipRef &lt;- liftM ip ask
+  old &lt;- liftIO $ readIORef ipRef
+  liftIO $ modifyIORef ipRef f
+  return old
+
+readInstr8 = modifyIP (+1) &gt;&gt;= readRam
+readInstr16 = liftM2 concatBytes readInstr8 readInstr8
+
+class (Ord a,Bits a) =&gt; Width a where
+  read :: MonadIO m =&gt; Place -&gt; m a
+  write :: MonadIO m =&gt; Place -&gt; a -&gt; m ()
+
+instance Width Word8 where
+  read = liftIO . uncurry readArray
+  write p = liftIO . uncurry writeArray p
+
+instance Width Word16 where
+  read (p,a) = liftM2 concatBytes (read (p,a)) (read (p,a+1))
+  write (p,a) val = do
+    write (p,a)   $ wordToByteL val
+    write (p,a+1) $ wordToByteH val
+
+readReg reg  = ask &gt;&gt;= \p -&gt; read (regs p,reg)
+readRam addr = ask &gt;&gt;= \p -&gt; read (ram p,addr)
+writeReg reg val  = ask &gt;&gt;= \p -&gt; write (regs p,reg) val
+writeRam addr val = ask &gt;&gt;= \p -&gt; write (ram p,addr) val
+
+decodeReg8  n = fromIntegral $ (n `shiftL` 1) .|. (n `shiftR` 2)
+decodeReg16 n = fromIntegral $  n `shiftL` 1
+readDecodedReg8 = readReg . decodeReg8
+readDecodedReg16 = readReg . decodeReg16
+
+readModRM = do
+  modRM &lt;- readInstr8
+  let mod   =  modRM           `shiftR` 6
+      opReg = (modRM .&amp;. 0x38) `shiftR` 3
+      rm    =  modRM .&amp;. 0x07
+  proc &lt;- ask
+  operand &lt;- case mod of
+               0 -&gt; do
+                 addr &lt;- case rm of
+                           1 -&gt; liftM2 (+) (readReg regBx) (readReg regDi)
+                           2 -&gt; liftM2 (+) (readReg regBp) (readReg regSi)
+                           6 -&gt; readInstr16
+                           7 -&gt; readReg regBx
+                 return (ram proc,addr)
+               2 -&gt; do
+                 addr &lt;- case rm of
+                           5 -&gt; liftM2 (+) (readReg regDi) readInstr16
+                           7 -&gt; liftM2 (+) (readReg regBx) readInstr16
+                 return (ram proc,addr)
+               3 -&gt; return (regs proc,2*fromIntegral rm)
+  return (operand,opReg,opReg)
+
+push16 val = do -- PUSH by value (doesn't reproduce PUSH SP behavior)
+  sp &lt;- liftM (subtract 2) (readReg regSp)
+  writeReg regSp sp
+  writeRam sp (val :: Word16)
+pop16 = do
+  sp &lt;- readReg regSp
+  val &lt;- readRam sp
+  writeReg regSp (sp+2)
+  return val
+
+jump cond = when cond . void . modifyIP . (+) . byteToWordSE =&lt;&lt; readInstr8
+
+alu :: (Width w,MonadIO m,MonadReader Proc m) =&gt; w -&gt; m w -&gt; m w -&gt; Place -&gt; (w -&gt; w -&gt; m (Bool,Maybe Bool,w)) -&gt; m ()
+alu _ a b r op = do
+  (rw,c,v) &lt;- join (liftM2 op a b)
+  when rw $ write r v
+  maybe (return ()) (writeProc cf) c
+  writeProc zf (v == 0)
+  writeProc sf (testBit v (bitSize v - 1))
+decodeALU 0 = (\a b -&gt; return (True, Just (a &gt;= negate b),       a   +   b))
+decodeALU 1 = (\a b -&gt; return (True, Just False,                 a  .|.  b))
+decodeALU 2 = (\a b -&gt; liftM (ifte 1 0) (readProc cf) &gt;&gt;= \c -&gt;
+                       return (True, Just (a &gt;= negate (b + c)), a + b + c))
+decodeALU 3 = (\a b -&gt; liftM (ifte 1 0) (readProc cf) &gt;&gt;= \c -&gt;
+                       return (True, Just (a &lt; b + c),           a - b - c))
+decodeALU 4 = (\a b -&gt; return (True, Just False,                 a  .&amp;.  b))
+decodeALU 5 = (\a b -&gt; return (True, Just (a &lt;= b),              a   -   b))
+decodeALU 6 = (\a b -&gt; return (True, Just False,                 a `xor` b))
+decodeALU 7 = (\a b -&gt; return (False,Just (a &lt;= b),              a   -   b))
+opIncDec    =  \a b -&gt; return (True, Nothing,                    a   +   b)
+
+processInstr = do
+  opcode &lt;- readInstr8
+  regs &lt;- liftM regs ask
+  let zReg = (regs,decodeReg16 (opcode .&amp;. 0x07))
+  if opcode &lt; 0x40 then -- no segment or BCD
+    let aluOp = (opcode .&amp;. 0x38) `shiftR` 3 in case opcode .&amp;. 0x07 of
+    0 -&gt; do
+      (operand,reg,_) &lt;- readModRM
+      alu byte (read operand) (readDecodedReg8 reg) operand (decodeALU aluOp)
+    1 -&gt; do
+      (operand,reg,_) &lt;- readModRM
+      alu word (read operand) (readDecodedReg16 reg) operand (decodeALU aluOp)
+    4 -&gt; alu byte (readReg regAl) readInstr8 (regs,regAl) (decodeALU aluOp)
+  else case opcode .&amp;. 0xF8 of -- 16-bit (mostly) reg ops
+    0x40 -&gt; alu word (read zReg) (return   1 ) zReg opIncDec -- 16b INC
+    0x48 -&gt; alu word (read zReg) (return (-1)) zReg opIncDec -- 16b DEC
+    0x50 -&gt; read zReg &gt;&gt;= push16                        -- 16b PUSH reg
+    0x58 -&gt; pop16 &gt;&gt;= write zReg                        -- 16b POP reg
+    0x90 -&gt; do                                          -- 16b XCHG (or NOP)
+      v1 &lt;- read zReg
+      v2 &lt;- readReg regAx
+      write zReg (v2 :: Word16)
+      writeReg regAx (v1 :: Word16)
+    0xB0 -&gt; readInstr8  &gt;&gt;= write zReg -- (BUG!)        -- 8b MOV reg,imm
+    0xB8 -&gt; readInstr16 &gt;&gt;= write zReg                  -- 16b MOV reg,imm
+    _ -&gt; case if opcode == 0x80 then 0x82 else opcode of
+      0x72 -&gt; jump       =&lt;&lt; (readProc cf)              -- JB/JNAE/JC
+      0x74 -&gt; jump       =&lt;&lt; (readProc zf)              -- JE/JZ
+      0x75 -&gt; jump . not =&lt;&lt; (readProc zf)              -- JNE/JNZ
+      0x76 -&gt; jump       =&lt;&lt; liftM2 (||) (readProc cf) (readProc zf) -- JBE
+      0x77 -&gt; jump . not =&lt;&lt; liftM2 (||) (readProc cf) (readProc zf) -- JA
+      0x79 -&gt; jump . not =&lt;&lt; (readProc sf)              -- JNS
+      0x81 -&gt; do                                        -- 16b arith to imm
+        (operand,_,op) &lt;- readModRM
+        alu word (read operand) readInstr16 operand (decodeALU op)
+      0x82 -&gt; do                                        -- 8b arith to imm
+        (operand,_,op) &lt;- readModRM
+        alu byte (read operand) readInstr8 operand (decodeALU op)
+      0x83 -&gt; do                                        -- 16b arith to 8s imm
+        (operand,_,op) &lt;- readModRM
+        alu word (read operand) (liftM byteToWordSE readInstr8) operand
+            (decodeALU op)
+      0x86 -&gt; do                                        -- 8b XCHG reg,RM
+        (operand,reg,_) &lt;- readModRM
+        v1 &lt;- readDecodedReg8 reg
+        v2 &lt;- read operand
+        writeReg (decodeReg8 reg) (v2 :: Word8)
+        write operand v1
+      0x88 -&gt; do                                        -- 8b MOV RM,reg
+        (operand,reg,_) &lt;- readModRM
+        readDecodedReg8 reg &gt;&gt;= write operand
+      0x89 -&gt; do                                        -- 16b MOV RM,reg
+        (operand,reg,_) &lt;- readModRM
+        readDecodedReg16 reg &gt;&gt;= write operand
+      0x8A -&gt; do                                        -- 8b MOV reg,RM
+        (operand,reg,_) &lt;- readModRM
+        val &lt;- read operand 
+        writeReg (decodeReg8 reg) (val :: Word8)
+      0x8B -&gt; do                                        -- 16b MOV reg,RM
+        (operand,reg,_) &lt;- readModRM
+        val &lt;- read operand 
+        writeReg (decodeReg16 reg) (val :: Word16)
+      0xC3 -&gt; pop16 &gt;&gt;= writeProc ip                    -- RET
+      0xC7 -&gt; do                                        -- 16b MOV RM,imm
+        (operand,_,_) &lt;- readModRM
+        readInstr16 &gt;&gt;= write operand
+      0xE8 -&gt; readInstr16 &gt;&gt;= modifyIP . (+) &gt;&gt;= push16 -- CALL relative
+      0xEB -&gt; jump True                                 -- JMP short
+      0xF4 -&gt; liftIO (exitWith ExitSuccess)             -- HLT
+      0xF9 -&gt; writeProc cf True                         -- STC
+      0xFE -&gt; do                                        -- 8-bit INC/DEC RM
+        (operand,_,op) &lt;- readModRM
+        alu byte (read operand) (return $ 1-2*op) operand
+            (\a b -&gt; return (True,Nothing,a+b)) -- kinda duplicate :(
+
+main = do
+  ramRef &lt;- newArray (0,0xFFFF) 0 :: IO (IOArray Word16 Word8)
+  hSetEncoding stdin latin1
+  mapM_ (uncurry (writeArray ramRef)) .
+    zip [0..] .
+    map (fromIntegral . fromEnum) =&lt;&lt;
+    getContents
+  regFile &lt;- newArray (0,15) 0 :: IO (IOArray Word16 Word8)
+  ip &lt;- newIORef 0
+  cf &lt;- newIORef False
+  zf &lt;- newIORef False
+  sf &lt;- newIORef False
+  let proc = Proc ramRef regFile ip cf zf sf
+  runReaderT (writeReg regSp (0x100 :: Word16)) proc
+
+  bracket_ (return ()) 
+           (dumpScreen ramRef) 
+           (forever . flip runReaderT proc $ processInstr)
+
+dumpScreen ramRef = do
+  mem &lt;- freeze ramRef
+  forM_ [0..25] $ \i -&gt; do
+    forM_ [0..79] $ \j -&gt; do
+      let c = chr . fromIntegral $ mem ! (0x8000 + 80*i + j)
+      putChar (if isPrint c then c else ' ')
+    putChar '\n'
+</code></pre>
+
+<p>The output for the provided sample binary matches the specification perfectly.  Try it out using an invocation such as:</p>
+
+<pre><code>runhaskell 8086.hs &lt;8086.bin
+</code></pre>
+
+<p>Most non-implemented operations will simply result in a pattern matching failure.</p>
+
+<p>I still intend to factor quite a bit more, and implement actual live output with curses.</p>
+
+<p>Update 1: got it down to 234 lines.  Better organized the code by functionality, re-aligned what could be, tried to stick to 80 columns.  And refactored the ALU multiple times.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/4985" title="short permalink to this answer" class="short-link" id="link-post-4985">share</a><span class="lsep">|</span><a href="/posts/4985/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/4985/revisions" title="show all edits to this post">edited <span title="2012-02-27 23:11:41Z" class="relativetime">Feb 27 '12 at 23:11</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-02-27 15:57:20Z" class="relativetime">Feb 27 '12 at 15:57</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/199/j-b"><div><img src="https://www.gravatar.com/avatar/1eda356bddd3b93818cb1310a7bc952f?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/199/j-b">J B</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">6,327</span><span title="7 silver badges"><span class="badge2"></span><span class="badgecount">7</span></span><span title="38 bronze badges"><span class="badge3"></span><span class="badgecount">38</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-4985" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-10573" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Nice one. It&#39;s really short, especially compared to my solution and the other one. Your code looks very good too, although I need to learn Haskell first.</span>
+	&ndash;&nbsp;
+		<a href="/users/3428/copy" 
+		   title="2916 reputation" 
+		   class="comment-user owner">copy</a>
+	<span class="comment-date" dir="ltr"><span title="2012-02-27 18:17:52Z" class="relativetime-clean">Feb 27 '12 at 18:17</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10614" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">3</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Nice work! Very short. I should learn haskell.</span>
+	&ndash;&nbsp;
+		<a href="/users/3838/j-a" 
+		   title="511 reputation" 
+		   class="comment-user">j-a</a>
+	<span class="comment-date" dir="ltr"><span title="2012-02-29 17:48:00Z" class="relativetime-clean">Feb 29 '12 at 17:48</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-4985" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="5538"></a>
+<div id="answer-5538" class="answer" data-answerid="5538" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="5538">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">19</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h1>C++</h1>
+
+<p>I would like to submit our entry for this code challenge.  It was written in c++ and runs the test program perfectly.  We have implemented 90% of One Byte Op Codes and Basic Segmentation(some disabled because it does not work with the test program).</p>
+
+<p>Program Write Up:
+<a href="http://davecarruth.com/index.php/2012/04/15/creating-an-8086-emulator">http://davecarruth.com/index.php/2012/04/15/creating-an-8086-emulator</a></p>
+
+<p>You can find the code in a zip file at the end of the Blog Post.</p>
+
+<p>Screenshot executing test program:
+<img src="http://i.stack.imgur.com/f9wnZ.png" alt="enter image description here"></p>
+
+<p>This took quite a bit of time... if you have any questions or comments then feel free to message me.  It was certainly a great exercise in partner programming.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/5538" title="short permalink to this answer" class="short-link" id="link-post-5538">share</a><span class="lsep">|</span><a href="/posts/5538/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/5538/revisions" title="show all edits to this post">edited <span title="2012-04-16 12:10:08Z" class="relativetime">Apr 16 '12 at 12:10</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-04-16 01:19:48Z" class="relativetime">Apr 16 '12 at 1:19</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3799/dave-c"><div><img src="https://www.gravatar.com/avatar/099ab03baf0daaefd7f25ae07c1e05bf?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3799/dave-c">Dave C</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">289</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-5538" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-11478" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">It&#39;s always good when people have fun on this challenge :) Just a couple of notes: My test program should work (and was tested) with all segments zeroed. Looking at some of your code, I noticed that the <code>ret imm</code> instruction is wrong (see <a href="http://faydoc.tripod.com/cpu/ret.htm" rel="nofollow">here</a>) and you&#39;re missing the <code>0xff</code> group. I like your error messages though: <i>throw &quot;Immediate value can not store a value, retard.&quot;;</i></span>
+	&ndash;&nbsp;
+		<a href="/users/3428/copy" 
+		   title="2916 reputation" 
+		   class="comment-user owner">copy</a>
+	<span class="comment-date" dir="ltr"><span title="2012-04-16 17:44:51Z" class="relativetime-clean">Apr 16 '12 at 17:44</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-11480" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">We had two main issues with the test program:
+
+1) Segmentation - when there is a CALL we were pushing the CS on the stack... one of the functions in the test program didn&#39;t like this.
+2)  The test program expected our memory to be initialized to zero.
+
+Anyways, we had a lot of fun, thank so much for posting!</span>
+	&ndash;&nbsp;
+		<a href="/users/3799/dave-c" 
+		   title="289 reputation" 
+		   class="comment-user">Dave C</a>
+	<span class="comment-date" dir="ltr"><span title="2012-04-16 21:00:38Z" class="relativetime-clean">Apr 16 '12 at 21:00</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-11488" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">You might have made a mistake there: Near jumps (<a href="http://faydoc.tripod.com/cpu/call.htm" rel="nofollow">0xE8</a>) don&#39;t push the <code>cs</code> register</span>
+	&ndash;&nbsp;
+		<a href="/users/3428/copy" 
+		   title="2916 reputation" 
+		   class="comment-user owner">copy</a>
+	<span class="comment-date" dir="ltr"><span title="2012-04-17 16:57:22Z" class="relativetime-clean">Apr 17 '12 at 16:57</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-11499" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">That would be the problem, good catch!  You seem very experienced with the 8086, did you program for it?</span>
+	&ndash;&nbsp;
+		<a href="/users/3799/dave-c" 
+		   title="289 reputation" 
+		   class="comment-user">Dave C</a>
+	<span class="comment-date" dir="ltr"><span title="2012-04-18 22:19:32Z" class="relativetime-clean">Apr 18 '12 at 22:19</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-11509" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I am actually working on a x86 emulator project by myself. It&#39;s running freedos quite well and I currently work on full 32 bit support; just did not post here because it might not be fair to other posters (and the source code is slightly messed up).</span>
+	&ndash;&nbsp;
+		<a href="/users/3428/copy" 
+		   title="2916 reputation" 
+		   class="comment-user owner">copy</a>
+	<span class="comment-date" dir="ltr"><span title="2012-04-19 14:01:11Z" class="relativetime-clean">Apr 19 '12 at 14:01</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-5538" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="8977"></a>
+<div id="answer-8977" class="answer" data-answerid="8977" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="8977">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">17</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p><strong>Javascript</strong></p>
+
+<p>I am writing a 486 emulator in javascript inspired by jslinux.
+If I had known how much work it would be, I would probably never have started, but now I want to finish it.</p>
+
+<p>Then I came across your challenge and was very happy to have a 8086 program to test with.</p>
+
+<p><img src="http://i.stack.imgur.com/Whyvv.png" alt="http://i.stack.imgur.com/54a6S.png"></p>
+
+<p>You can "see" it run live here: <a href="http://codinguncut.com/jsmachine/">http://codinguncut.com/jsmachine/</a></p>
+
+<p>I had one issue when printing out the graphics buffer.
+Where there should be spaces, the memory contains "00" elements. Is it correct to interpret "0x00" as space or do I have a bug in my emulator?</p>
+
+<p>Cheers,</p>
+
+<p>Johannes</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/8977" title="short permalink to this answer" class="short-link" id="link-post-8977">share</a><span class="lsep">|</span><a href="/posts/8977/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/8977/revisions" title="show all edits to this post">edited <span title="2012-11-13 20:49:41Z" class="relativetime">Nov 13 '12 at 20:49</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3428/copy"><div><img src="https://www.gravatar.com/avatar/ba5cd4b361ecdb2a17a8558d980f9d35?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3428/copy">copy</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,916</span><span title="9 silver badges"><span class="badge2"></span><span class="badgecount">9</span></span><span title="21 bronze badges"><span class="badge3"></span><span class="badgecount">21</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-11-13 18:39:25Z" class="relativetime">Nov 13 '12 at 18:39</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/6816/entirelysubjective"><div><img src="https://www.gravatar.com/avatar/d4e0c4f6e66e95ce85e81d71e291eb8b?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/6816/entirelysubjective">entirelysubjective</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">171</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-8977" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-17661" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Interesting, I actually know your name from your Screencasts, which I watched after the Haskell response in this challenge (and I also started an x86 emulator in Javascript). Yes, zero bytes should appear as spaces. I have also added the screenshot to your post. +1 anyway :-)</span>
+	&ndash;&nbsp;
+		<a href="/users/3428/copy" 
+		   title="2916 reputation" 
+		   class="comment-user owner">copy</a>
+	<span class="comment-date" dir="ltr"><span title="2012-11-13 20:56:50Z" class="relativetime-clean">Nov 13 '12 at 20:56</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-18143" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Johannes I had a quick look through mycpu-min.js code. From what I can tell you have used only a few ideas from cpux86.js (of FB&#39;s jslinux). Congrats! A good job. Any chances to see non-compiled mycpu.js somewhere? Hopefully on <a href="https://github.com/codinguncut" rel="nofollow">github.com/codinguncut</a></span>
+	&ndash;&nbsp;
+		<a href="/users/2286/yauhen-yakimovich" 
+		   title="131 reputation" 
+		   class="comment-user">Yauhen Yakimovich</a>
+	<span class="comment-date" dir="ltr"><span title="2012-12-17 00:08:46Z" class="relativetime-clean">Dec 17 '12 at 0:08</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-20336" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@YauhenYakimovich No, I have not reused any of jslinux code. I have implemented so far all 286 instructions minus paging and segmentation (mmu). My plan was to release the code under GPL, but I would really like to commercialize the idea for running i.e. Freedos or Reactos so I am still unsure about licensing. The truth is, it will take me a LONG time to implement full memory mgmt. and then a long time to get it to run at speed. I will definitely share at github.com/codinguncut. Thanks for your feedback, Johannes</span>
+	&ndash;&nbsp;
+		<a href="/users/6816/entirelysubjective" 
+		   title="171 reputation" 
+		   class="comment-user">entirelysubjective</a>
+	<span class="comment-date" dir="ltr"><span title="2013-02-24 00:02:12Z" class="relativetime-clean">Feb 24 at 0:02</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-8977" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="6514"></a>
+<div id="answer-6514" class="answer" data-answerid="6514" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6514">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">16</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h1>C</h1>
+
+<p>Great Challenge and my first one. I created an account just because the challenge intrigued me so much. The down side is that I couldn't stop thinking of the challenge when I had real, paying, programming work to do.</p>
+
+<p>I feel compelled to get a completed 8086 emulation running, but that's another challenge ;-)</p>
+
+<p>The code is written in ANSI-C, so just compile/link the .c files together, pass in the codegolf binary, and go.</p>
+
+<p><a href="http://caprockgames.com/codegolf/codegolf_8086.zip">source zipped</a></p>
+
+<p><img src="http://i.stack.imgur.com/ixeWN.png" alt="enter image description here"></p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/6514" title="short permalink to this answer" class="short-link" id="link-post-6514">share</a><span class="lsep">|</span><a href="/posts/6514/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/6514/revisions" title="show all edits to this post">edited <span title="2012-06-30 14:56:39Z" class="relativetime">Jun 30 '12 at 14:56</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3428/copy"><div><img src="https://www.gravatar.com/avatar/ba5cd4b361ecdb2a17a8558d980f9d35?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3428/copy">copy</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,916</span><span title="9 silver badges"><span class="badge2"></span><span class="badgecount">9</span></span><span title="21 bronze badges"><span class="badge3"></span><span class="badgecount">21</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-06-30 02:44:38Z" class="relativetime">Jun 30 '12 at 2:44</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/4762/richtx"><div><img src="https://www.gravatar.com/avatar/b501300721f4fa92499434f83afde34e?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/4762/richtx">RichTX</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">161</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6514" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-13746" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Nice job RichTX!</span>
+	&ndash;&nbsp;
+		<a href="/users/3799/dave-c" 
+		   title="289 reputation" 
+		   class="comment-user">Dave C</a>
+	<span class="comment-date" dir="ltr"><span title="2012-07-03 15:25:02Z" class="relativetime-clean">Jul 3 '12 at 15:25</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-13806" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Thanks Dave. You too. I didn&#39;t understand the expectation of making the code as small as possible when I started, but it was still a challenge.</span>
+	&ndash;&nbsp;
+		<a href="/users/4762/richtx" 
+		   title="161 reputation" 
+		   class="comment-user">RichTX</a>
+	<span class="comment-date" dir="ltr"><span title="2012-07-06 15:38:42Z" class="relativetime-clean">Jul 6 '12 at 15:38</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-17954" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">+1 I peeked at your code to figure out how the carry flag works.</span>
+	&ndash;&nbsp;
+		<a href="/users/2381/luser-droog" 
+		   title="1224 reputation" 
+		   class="comment-user">luser droog</a>
+	<span class="comment-date" dir="ltr"><span title="2012-12-03 06:14:27Z" class="relativetime-clean">Dec 3 '12 at 6:14</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-25426" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">The link is down for me.</span>
+	&ndash;&nbsp;
+		<a href="/users/4558/tyilo" 
+		   title="101 reputation" 
+		   class="comment-user">Tyilo</a>
+	<span class="comment-date" dir="ltr"><span title="2013-10-18 00:13:10Z" class="relativetime-clean">Oct 18 at 0:13</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6514" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="9065"></a>
+<div id="answer-9065" class="answer" data-answerid="9065" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="9065">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">16</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h1>Postscript (<del>130</del> <del>200</del> <del>367</del> <del>517</del> <del>531</del> <del><em>222</em></del> 246 lines)</h1>
+
+<p><del>Still a work-in-progress, but</del> I wanted to show some code in an effort to encourage others to <em>show some code</em>.</p>
+
+<p>The register set is represented as one string, so the various byte- and word- sized registers can naturally overlap by referring to substrings. Substrings are used as pointers throughout, so that a register and a memory location (substring of the memory string) can be treated uniformly in the operator functions.</p>
+
+<p>Then there are a handful of words to get and store data (byte or word) from a "pointer", from memory, from mem[(IP)] (incrementing IP). Then there are a few functions to fetch the MOD-REG-R/M byte and set the REG and R/M and MOD variables, and decode them using tables. Then the operator functions, keyed to the opcode byte. So the execution loop is simply <code>fetchb load exec</code>.</p>
+
+<p><del>I've only got a handful of opcodes implemented, but g</del>Getting the operand decoding felt like such a milestone that I wanted to share it.</p>
+
+<p><em>edit:</em> Added words to sign-extend negative numbers. More opcodes. Bugfix in the register assignments. Comments. Still working on flags and filling-out the operators. Output presents some choices: output text to stdout on termination, continuously output using vt100 codes, output to the image window using CP437 font.</p>
+
+<p><em>edit:</em> Finished writing, begun debugging. It gets the first four dots of output! Then the carry goes wrong. Sleepy.</p>
+
+<p><em>edit:</em> I think I've got the Carry Flag sorted. Some of the story happened on <a href="https://groups.google.com/d/topic/comp.lang.postscript/6-wfOlxeugk/discussion">comp.lang.postscript</a>. I've added some debugging apparatus, and the output goes to the graphics window (using my previously-written <a href="http://code.google.com/p/xpost/downloads/detail?name=cp437.ps">Code-Page 437 Type-3 font</a>), so the text output can be full of traces and dumps. It writes "Hello World!" and then there's that suspicious caret. Then a whole lotta nothin'. :( We'll get there. Thanks for all the encouragement!</p>
+
+<p><em>edit:</em> Runs the test to completion. The final few bugs were: XCHG doing 2{read store}repeat which of course copies rather than exchanges, AND not setting flags, (FE) INC trying to get a word from a byte pointer.</p>
+
+<p><em>edit:</em> Total re-write from scratch using the concise table from the manual (<em>turned a new page!</em>). I'm starting to think that factoring-out the <em>store</em> from the opcodes was a bad idea, but it helped keep the optab pretty. No screenshot this time. I added an instruction counter and a mod-trigger to dump the video memory, so it interleaves easily with the debug info.</p>
+
+<p><em>edit:</em> Runs the test program, again! The final few bugs for the shorter re-write were neglecting to sign-extend the immediate byte in opcodes 83 (the "Immediate" group) and EB (short JMP). 24-line increase covers additional debugging routines needed to track down those final bugs.</p>
+
+<pre><code>%!
+%a8086.ps Draught2:BREVITY
+[/NULL&lt;0000&gt;/nul 0
+/mem 16#ffff string %16-bit memory
+/CF 0 /OF 0 /AF 0 /ZF 0 /SF 0
+/regs 20 string &gt;&gt;begin %register byte storage
+0{AL AH CL CH DL DH BL BH}{regs 2 index 1 getinterval def 1 add}forall pop
+0{AX CX DX BX SP BP SI DI IP FL}{regs 2 index 2 getinterval def 2 add}forall pop
+
+%getting and fetching
+[/*b{0 get} %get byte from pointer
+/*w{dup *b exch 1 get bbw} %get word from pointer
+/*{{*b *w}W get exec} %get data(W) from pointer
+/bbw{8 bitshift add} %lo-byte hi-byte -&gt; word
+/shiftmask{2 copy neg bitshift 3 1 roll 1 exch bitshift 1 sub and}
+/fetchb{IP *w mem exch get bytedump   IP dup *w 1 add storew} % byte(IP++)
+/fetchw{fetchb fetchb bbw} % word(IP),IP+=2
+
+%storing and accessing
+/storeb{16#ff and 0 exch put} % ptr val8 -&gt; -
+/storew{2 copy storeb -8 bitshift 16#ff and 1 exch put} % ptr val16 -&gt; -
+/stor{{storeb storew}W get exec} % ptr val(W) -&gt; -
+/memptr{16#ffff and mem exch {1 2}W get getinterval} % addr -&gt; ptr(W)
+
+%decoding the mod-reg-reg/mem byte
+/mrm{fetchb 3 shiftmask /RM exch def 3 shiftmask /REG exch def /MOD exch def}
+/REGTAB[[AL CL DL BL AH CH DH BH][AX CX DX BX SP BP SI DI]]
+/decreg{REGTAB W get REG get} % REGTAB[W][REG]
+%2 indexes,   with immed byte,   with immed word
+/2*w{exch *w exch *w add}/fba{fetchb add}/fwa{fetchw add}
+/RMTAB[[{BX SI 2*w}{BX DI 2*w}{BP SI 2*w}{BP DI 2*w}
+    {SI *w}{DI *w}{fetchw}{BX *w}]
+[{BX SI 2*w fba}{BX DI 2*w fba}{BP SI 2*w fba}{BP DI 2*w fba}
+    {SI *w fba}{DI *w fba}{BP *w fba}{BX *w fba}]
+[{BX SI 2*w fwa}{BX DI 2*w fwa}{BP SI 2*w fwa}{BP DI 2*w fwa}
+    {SI *w fwa}{DI *w fwa}{BP *w fwa}{BX *w fwa}]]
+/decrm{MOD 3 eq{REGTAB W get RM get} %MOD=3:register mode
+    {RMTAB MOD get RM get exec memptr}ifelse} % RMTAB[MOD][RM] -&gt; addr -&gt; ptr
+
+%setting and storing flags
+/flagw{OF 11 bitshift SF 7 bitshift or ZF 6 bitshift or AF 4 bitshift CF or}
+/wflag{dup 1 and /CF exch def dup -4 bitshift 1 and /AF exch def
+    dup -6 bitshift 1 and /ZF exch def dup -7 bitshift 1 and /SF exch def
+    dup -11 bitshift 1 and /OF exch def}
+/nz1{0 ne{1}{0}ifelse}
+/logflags{/CF 0 def /OF 0 def /AF 0 def %clear mathflags
+    dup {16#80 16#8000}W get and nz1 /SF exch def
+    dup {16#ff 16#ffff}W get and 0 eq{1}{0}ifelse /ZF exch def}
+/mathflags{{z y x}{exch def}forall
+    /CF z {16#ff00 16#ffff0000}W get and nz1 def
+    /OF z x xor z y xor and {16#80 16#8000}W get and nz1 def
+    /AF x y xor z xor 16#10 and nz1 def
+    z} %leave the result on stack
+
+%opcodes (each followed by 'stor')  %% { OPTAB fetchb get exec stor } loop
+/ADD{2 copy add logflags mathflags}
+/OR{or logflags}
+/ADC{CF add ADD}
+/SBB{D 1 xor {exch}repeat CF add 2 copy sub logflags mathflags}
+/AND{and logflags}
+/SUB{D 1 xor {exch}repeat 2 copy sub logflags mathflags}
+/XOR{xor logflags}
+/CMP{3 2 roll pop NULL 3 1 roll SUB} %dummy stor target
+/INC{t CF exch dup * 1 ADD 3 2 roll /CF exch def}
+/DEC{t CF exch dup * 1 SUB 3 2 roll /CF exch def}
+/PUSH{SP dup *w 2 sub storew   *w SP *w memptr exch}
+/POP{SP *w memptr *w   SP dup *w 2 add storew}
+
+/jrel{w {CBW IP *w add IP exch}{NULL exch}ifelse}
+/JO{fetchb OF 1 eq jrel }
+/JNO{fetchb OF 0 eq jrel }
+/JB{fetchb CF 1 eq jrel }
+/JNB{fetchb CF 0 eq jrel }
+/JZ{fetchb ZF 1 eq jrel }
+/JNZ{fetchb ZF 0 eq jrel }
+/JBE{fetchb CF ZF or 1 eq jrel }
+/JNBE{fetchb CF ZF or 0 eq jrel }
+/JS{fetchb SF 1 eq jrel }
+/JNS{fetchb SF 0 eq jrel }
+/JL{fetchb SF OF xor 1 eq jrel }
+/JNL{fetchb SF OF xor 0 eq jrel }
+/JLE{fetchb SF OF xor ZF or 1 eq jrel }
+/JNLE{fetchb SF OF xor ZF or 0 eq jrel }
+
+/bw{dup 16#80 and 0 ne{16#ff xor 1 add 16#ffff xor 1 add}if}
+/IMMTAB{ADD OR ADC SBB AND SUB XOR CMP }cvlit
+/immed{ W 2 eq{ /W 1 def
+            mrm decrm dup * fetchb bw
+    }{ mrm decrm dup * {fetchb fetchw}W get exec }ifelse
+    exch IMMTAB REG get dup == exec }
+
+%/TEST{ }
+/XCHG{3 2 roll pop 2 copy exch * 4 2 roll * stor }
+/AXCH{w dup AX XCHG }
+/NOP{ NULL nul }
+/pMOV{D{exch}repeat pop }
+/mMOV{ 3 1 roll pop pop }
+/MOV{ }
+/LEA{w mrm decreg RMTAB MOD get RM get exec }
+
+/CBW{dup 16#80 and 0 ne {16#ff xor 1 add 16#ffff xor 1 add } if }
+/CWD{dup 16#8000 and 0 ne {16#ffff xor 1 add neg } if }
+/CALL{w xp /xp{}def fetchw IP PUSH storew IP dup *w 3 2 roll add dsp /dsp{}def }
+%/WAIT{ }
+/PUSHF{NULL dup flagw storew 2 copy PUSH }
+/POPF{NULL dup POP *w wflag }
+%/SAHF{ }
+%/LAHF{ }
+
+%/MOVS{ }
+%/CMPS{ }
+%/STOS{ }
+%/LODS{ }
+%/SCAS{ }
+/RET{w IP POP storew SP dup * 3 2 roll add }
+%/LES{ }
+%/LDS{ }
+
+/JMP{IP dup fetchw exch *w add}
+/sJMP{IP dup fetchb bw exch *w add}
+
+/HLT{exit}
+/CMC{/CF CF 1 xor def NULL nul}
+/CLC{/CF 0 def NULL nul}
+/STC{/CF 1 def NULL nul}
+
+/NOT{not logflags }
+/NEG{neg logflags }
+/GRP1TAB{TEST --- NOT NEG MUL IMUL DIV IDIV } cvlit
+/Grp1{mrm decrm dup * GRP1TAB REG get
+dup ==
+exec }
+/GRP2TAB{INC DEC {id CALL}{l id CALL}{id JMP}{l id JMP} PUSH --- } cvlit
+/Grp2{mrm decrm GRP2TAB REG get
+dup ==
+exec }
+
+%optab shortcuts
+/2*{exch * exch *}
+/rm{mrm decreg decrm D index 3 1 roll 2*} % fetch,decode mrm -&gt; dest *reg *r-m
+/rmp{mrm decreg decrm D index 3 1 roll} % fetch,decode mrm -&gt; dest reg r-m
+/ia{ {{AL dup *b fetchb}{AX dup *w fetchw}}W get exec } %immed to accumulator
+/is{/W 2 def}
+/b{/W 0 def} %select byte operation
+/w{/W 1 def} %select word operation
+/t{/D 1 def} %dest = reg
+/f{/D 0 def} %dest = r/m
+/xp{} /dsp{}
+%/far{ /xp { &lt;0000&gt; PUSH storew } /dsp { fetchw pop } def }
+/i{ {fetchb fetchw}W get exec }
+
+/OPTAB{
+{b f rm ADD}{w f rm ADD}{b t rm ADD}{w t rm ADD}{b ia ADD}{w ia ADD}{ES PUSH}{ES POP} %00-07
+ {b f rm OR}{w f rm OR}{b t rm OR}{w t rm OR}{b ia OR}{w ia OR}{CS PUSH}{}            %08-0F
+{b f rm ADC}{w f rm ADC}{b t rm ADC}{w t rm ADC}{b ia ADC}{w ia ADC}{SS PUSH}{SS POP} %10-17
+ {b f rm SBB}{w f rm SBB}{b t rm SBB}{w t rm SBB}{b ia SBB}{w ia SBB}{DS PUSH}{DS POP}%18-1F
+{b f rm AND}{w f rm AND}{b t rm AND}{w t rm AND}{b ia AND}{w ia AND}{ES SEG}{DAA}     %20-27
+ {b f rm SUB}{w f rm SUB}{b t rm SUB}{w t rm SUB}{b ia SUB}{w ia SUB}{CS SEG}{DAS}    %28-2F
+{b f rm XOR}{w f rm XOR}{b t rm XOR}{w t rm XOR}{b ia XOR}{w ia XOR}{SS SEG}{AAA}     %30-37
+ {b f rm CMP}{w f rm CMP}{b t rm CMP}{w t rm CMP}{b ia CMP}{w ia CMP}{DS SEG}{AAS}    %38-3F
+{w AX INC}{w CX INC}{w DX INC}{w BX INC}{w SP INC}{w BP INC}{w SI INC}{w DI INC}      %40-47
+ {w AX DEC}{w CX DEC}{w DX DEC}{w BX DEC}{w SP DEC}{w BP DEC}{w SI DEC}{w DI DEC}     %48-4F
+{AX PUSH}{CX PUSH}{DX PUSH}{BX PUSH}{SP PUSH}{BP PUSH}{SI PUSH}{DI PUSH}              %50-57
+ {AX POP}{CX POP}{DX POP}{BX POP}{SP POP}{BP POP}{SI POP}{DI POP}                     %58-5F
+{}{}{}{}{}{}{}{}  {}{}{}{}{}{}{}{}                                                    %60-6F
+{JO}{JNO}{JB}{JNB}{JZ}{JNZ}{JBE}{JNBE} {JS}{JNS}{JP}{JNP}{JL}{JNL}{JLE}{JNLE}         %70-7F
+
+{b f immed}{w f immed}{b f immed}{is f immed}{b TEST}{w TEST}{b rmp XCHG}{w rmp XCHG}   %80-87
+ {b f rm pMOV}{w f rm pMOV}{b t rm pMOV}{w t rm pMOV}                                 %88-8B
+   {sr f rm pMOV}{LEA}{sr t rm pMOV}{w mrm decrm POP}                                 %8C-8F
+{NOP}{CX AXCH}{DX AXCH}{BX AXCHG}{SP AXCH}{BP AXCH}{SI AXCH}{DI AXCH}             %90-97
+ {CBW}{CWD}{far CALL}{WAIT}{PUSHF}{POPF}{SAHF}{LAHF}                                  %98-9F
+{b AL m MOV}{w AX m MOV}{b m AL MOV}{b AX m MOV}{MOVS}{MOVS}{CMPS}{CMPS}              %A0-A7
+ {b i a TEST}{w i a TEST}{STOS}{STOS}{LODS}{LODS}{SCAS}{SCAS}                         %A8-AF
+{b AL i MOV}{b CL i MOV}{b DL i MOV}{b BL i MOV}                                      %B0-B3
+ {b AH i MOV}{b CH i MOV}{b DH i MOV}{b BH i MOV}                                     %B4-B7
+ {w AX i MOV}{w CX i MOV}{w DX i MOV}{w BX i MOV}                                     %B8-BB
+ {w SP i MOV}{w BP i MOV}{w SI i MOV}{w DI i MOV}                                     %BC-BF
+{}{}{fetchw RET}{0 RET}{LES}{LDS}{b f rm i mMOV}{w f rm i mMOV}                       %C0-B7
+ {}{}{fetchw RET}{0 RET}{3 INT}{fetchb INT}{INTO}{IRET}                               %C8-CF
+{b Shift}{w Shift}{b v Shift}{w v Shift}{AAM}{AAD}{}{XLAT}                            %D0-D7
+ {0 ESC}{1 ESC}{2 ESC}{3 ESC}{4 ESC}{5 ESC}{6 ESC}{7 ESC}                             %D8-DF
+{LOOPNZ}{LOOPZ}{LOOP}{JCXZ}{b IN}{w IN}{b OUT}{w OUT}                                 %E0-E7
+ {CALL}{JMP}{far JMP}{sJMP}{v b IN}{v w IN}{v b OUT}{v w OUT}                         %E8-EF
+{LOCK}{}{REP}{z REP}{HLT}{CMC}{b Grp1}{w Grp}                                         %F0-F7
+ {CLC}{STC}{CLI}{STI}{CLD}{STD}{b Grp2}{w Grp2}                                       %F8-FF
+}cvlit
+
+/break{ /hook /pause load def }
+/c{ /hook {} def }
+/doprompt{
+    (\nbreak&gt;)print
+    flush(%lineedit)(r)file
+    cvx {exec}stopped pop }
+/pause{ doprompt }
+/hook{}
+
+/stdout(%stdout)(w)file
+/bytedump{ &lt;00&gt; dup 0 3 index put stdout exch writehexstring ( )print }
+/regdump{ REGTAB 1 get{ stdout exch writehexstring ( )print }forall
+    stdout IP writehexstring ( )print
+    {(NC )(CA )}CF get print
+    {(NO )(OV )}OF get print
+    {(NS )(SN )}SF get print
+    {(NZ )(ZR )}ZF get print
+    stdout 16#1d3 w memptr writehexstring
+    (\n)print
+}
+/mainloop{{
+    %regdump
+    OPTAB fetchb get
+    dup ==
+    exec
+    %pstack flush
+    %hook
+    stor
+    /ic ic 1 add def ictime
+}loop}
+
+/printvideo{
+    0 1 28 {
+        80 mul 16#8000 add mem exch 80 getinterval {
+            dup 0 eq { pop 32 } if
+                    dup 32 lt 1 index 126 gt or { pop 46 } if
+            stdout exch write
+        } forall (\n)print
+    } for
+    (\n)print
+}
+/ic 0
+/ictime{ic 10 mod 0 eq {onq} if}
+/timeq 10
+/onq{ %printvideo
+}
+&gt;&gt;begin
+currentdict{dup type/arraytype eq 1 index xcheck and
+    {bind def}{pop pop}ifelse}forall
+
+SP 16#100 storew
+(codegolf.8086)(r)file mem readstring pop
+pop[
+
+mainloop
+printvideo
+
+%eof
+</code></pre>
+
+<p>And the output (with the tail-end of abbreviated debugging output). </p>
+
+<pre><code>75 {JNZ}
+19 43 {w BX INC}
+83 {is f immed}
+fb 64 CMP
+76 {JBE}
+da f4 {HLT}
+.........
+Hello, world!
+0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+
+
+################################################################################
+##                                                                            ##
+##  0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987                          ##
+##                                                                            ##
+##  0 1 4 9 16 25 36 49 64 81 100 121 144 169 196 225 256 289 324 361 400     ##
+##                                                                            ##
+##  2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97    ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+##                                                                            ##
+################################################################################
+
+
+
+
+
+GS&lt;1&gt;
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/9065" title="short permalink to this answer" class="short-link" id="link-post-9065">share</a><span class="lsep">|</span><a href="/posts/9065/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/9065/revisions" title="show all edits to this post">edited <span title="2012-12-20 05:22:42Z" class="relativetime">Dec 20 '12 at 5:22</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-11-24 09:57:17Z" class="relativetime">Nov 24 '12 at 9:57</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/2381/luser-droog"><div><img src="https://www.gravatar.com/avatar/db1bf62fae51d5bafb8f1db7fb677176?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/2381/luser-droog">luser droog</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,224</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="9 silver badges"><span class="badge2"></span><span class="badgecount">9</span></span><span title="26 bronze badges"><span class="badge3"></span><span class="badgecount">26</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-9065" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-17931" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">3</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I wonder... Is the hot-key to close an application alt-F4 <i>because</i> F4h is the 8086 HLT opcode?</span>
+	&ndash;&nbsp;
+		<a href="/users/2381/luser-droog" 
+		   title="1224 reputation" 
+		   class="comment-user">luser droog</a>
+	<span class="comment-date" dir="ltr"><span title="2012-11-30 21:49:06Z" class="relativetime-clean">Nov 30 '12 at 21:49</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-18029" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">3</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I just want to tell you that you are absolutely awesome for implementing this in Postscript.</span>
+	&ndash;&nbsp;
+		<a href="/users/1496/cemper93" 
+		   title="503 reputation" 
+		   class="comment-user">cemper93</a>
+	<span class="comment-date" dir="ltr"><span title="2012-12-09 13:32:18Z" class="relativetime-clean">Dec 9 '12 at 13:32</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-20327" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">That code is <i>short</i>.  It deserves more upvotes.  Have mine, for a start.</span>
+	&ndash;&nbsp;
+		<a href="/users/199/j-b" 
+		   title="6327 reputation" 
+		   class="comment-user">J B</a>
+	<span class="comment-date" dir="ltr"><span title="2013-02-23 10:34:36Z" class="relativetime-clean">Feb 23 at 10:34</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-20328" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Thanks. I took a lot of inspiration from yours.</span>
+	&ndash;&nbsp;
+		<a href="/users/2381/luser-droog" 
+		   title="1224 reputation" 
+		   class="comment-user">luser droog</a>
+	<span class="comment-date" dir="ltr"><span title="2013-02-23 17:22:26Z" class="relativetime-clean">Feb 23 at 17:22</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-21025" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">wait... postscript is a programming language?! ;)</span>
+	&ndash;&nbsp;
+		<a href="/users/7648/naxa" 
+		   title="101 reputation" 
+		   class="comment-user">naxa</a>
+	<span class="comment-date" dir="ltr"><span title="2013-03-30 19:35:51Z" class="relativetime-clean">Mar 30 at 19:35</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-9065" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="12482"></a>
+<div id="answer-12482" class="answer" data-answerid="12482" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="12482">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">14</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h1>C - 7143 lines (CPU itself 3162 lines)</h1>
+
+<p>EDIT: The Windows build now has drop-down menus to change out virtual disks.</p>
+
+<p>I've written a full 80186/V20 PC emulator (with CGA/MCGA/VGA, sound blaster, adlib, mouse, etc), it's not a trivial thing to emulate an 8086 by any means. It took many months to get fully accurate. Here's the CPU module only out of my emulator.</p>
+
+<p><a href="http://sourceforge.net/p/fake86/code/ci/master/tree/src/fake86/cpu.c">http://sourceforge.net/p/fake86/code/ci/master/tree/src/fake86/cpu.c</a></p>
+
+<p>I'll be the first to admit I use wayyy too many global variables in this emulator. I started writing this when I was still pretty new to C, and it shows. I need to clean some of it up one of these days. Most of the other source files in it don't look so ugly.</p>
+
+<p>You can see all of the code (and some screenshots, one is below) through here: <a href="http://sourceforge.net/p/fake86">http://sourceforge.net/p/fake86</a></p>
+
+<p>I would be very very happy to help anybody else out who is wanting to write their own, because it's a lot of fun, and you learn a LOT about the CPU! Disclaimer: I didn't add the V20's 8080 emulation since its almost never been used in a PC program. Seems like a lot of work for no gain.</p>
+
+<p><img src="http://i.stack.imgur.com/uTwXZ.jpg" alt="Street Fighter 2!"></p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/12482" title="short permalink to this answer" class="short-link" id="link-post-12482">share</a><span class="lsep">|</span><a href="/posts/12482/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/12482/revisions" title="show all edits to this post">edited <span title="2013-09-27 17:53:32Z" class="relativetime">Sep 27 at 17:53</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-09-08 04:28:49Z" class="relativetime">Sep 8 at 4:28</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/9062/mike-c"><div><img src="https://www.gravatar.com/avatar/2901570874987156d1b45af3929827a0?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/9062/mike-c">Mike C</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">335</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="8 bronze badges"><span class="badge3"></span><span class="badgecount">8</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-12482" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-24424" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Good job! Do the games actually run at full speed?</span>
+	&ndash;&nbsp;
+		<a href="/users/3428/copy" 
+		   title="2916 reputation" 
+		   class="comment-user owner">copy</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-09 02:27:13Z" class="relativetime-clean">Sep 9 at 2:27</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-24426" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Thanks. Yeah, it runs many times faster than an 8088. On a modern system it can do 486-like speeds. On a real good processor, it&#39;s like a low-end Pentium. Unfortunately emulating a CPU can&#39;t be multithreaded really. I do all the video rendering in it&#39;s own thread though.
+
+I&#39;ve run it on my old 400 MHz PowePC G3 also, on that it is down to true 8088 speeds.</span>
+	&ndash;&nbsp;
+		<a href="/users/9062/mike-c" 
+		   title="335 reputation" 
+		   class="comment-user">Mike C</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-09 03:09:49Z" class="relativetime-clean">Sep 9 at 3:09</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-24757" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Awesome!  I also wanted to implement more op codes and segmentation; however, was unable to find very many test programs to run on it. Did you download old roms?</span>
+	&ndash;&nbsp;
+		<a href="/users/3799/dave-c" 
+		   title="289 reputation" 
+		   class="comment-user">Dave C</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-23 12:03:58Z" class="relativetime-clean">Sep 23 at 12:03</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-24913" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Dave, no actually there is a serious lack of 8086 test roms out there surprisingly as you found out too. The way I went about it was to just start by making a generic XT BIOS ROM run correctly. If that much works, your segmentation is likely fine. After that, it was just debugging until DOS started working... then on to apps and games! :)</span>
+	&ndash;&nbsp;
+		<a href="/users/9062/mike-c" 
+		   title="335 reputation" 
+		   class="comment-user">Mike C</a>
+	<span class="comment-date" dir="ltr"><span title="2013-09-27 17:42:41Z" class="relativetime-clean">Sep 27 at 17:42</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-12482" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="9044"></a>
+<div id="answer-9044" class="answer" data-answerid="9044" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="9044">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">12</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h1>C++ 1064 lines</h1>
+
+<p>Fantastic project. I did an <a href="http://www.intellivision.us/intvgames/nostalgia/nostalgia.php">Intellivision emulator</a> many years ago, so it was great to flex my bit-banging muscles again.</p>
+
+<p>After about a week's work, I could not have been more excited when this happened:</p>
+
+<pre>
+.........
+╤╤╤╤╤╤╤╤╤╤╤╤╤╤
+0123456789:;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+
+
+################################################################################
+########################################################################
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+    0 1 4 9 ♠a ♣b ♠c    d ♦f ☺h   ` §☺b ,♦d E   f `♠i ↓♣b 8♠e Y h ↑♦b =☺f   `
+
+    2 3 4 5 6 7 8 9  a ☺a ☻a ♥a ♦a ♣a ♠a aa     a  b ☺b ☻b ♥b ♦b ♣b ♠b bb       b
+ c ☺c ☻c ♥c ♦c ♣c ♠c cc         c  d ☺d ☻d ♥d ♦d ♣d ♠d dd       d  e ☺e ☻e ♥e ♦e ♣e ♠e
+ ee     e  f ☺f ☻f ♥f ♦f ♣f ♠f ff       f  g ☺g ☻g ♥g ♦g ♣g ♠g g        g  h ☺h ☻h ♥
+h ♦h ♣h ♠h hh   h  i ☺i ☻i ♥i ♦i ♣i ♠i ii       i   `
+</pre>
+
+<p>A little debugging later and...SHAZAM!
+<img src="http://i.stack.imgur.com/t2aSC.jpg" alt="enter image description here"></p>
+
+<p>Also, I rebuilt the original test program without the 80386 extensions, since I wanted to build my emulator true to the 8086 and not fudge in any extra instructions. Direct link to code here: <a href="http://www.manskirtbrewing.com/emu86/emu86.zip">Zip file</a>.</p>
+
+<p>Ok I'm having too much fun with this. I broke out memory and screen management, and now the screen updates when the screen buffer is written to. I made a video :)</p>
+
+<p><a href="http://www.youtube.com/watch?v=qnAssaTpmnA">http://www.youtube.com/watch?v=qnAssaTpmnA</a></p>
+
+<p>Updates: First pass of segmenting is in. Very few instructions are actually implemented, but I tested it by moving the CS/DS and SS around, and everything still runs fine.</p>
+
+<p>Also added rudimentary interrupt handling. Very rudimentary. But I did implement int 21h to print a string. Added a few lines to the test source and uploaded that as well.</p>
+
+<pre><code>start:
+    sti
+    mov ah, 9
+    mov dx, joetext
+    int 21h
+...
+
+joetext:
+    db 'This was printed by int 21h$', 0
+</code></pre>
+
+<p><img src="http://i.stack.imgur.com/A06Kx.jpg" alt="enter image description here"></p>
+
+<p>If anyone has some fairly simple assembly code that would test the segments out, I'd love to play with it.</p>
+
+<p>I'm trying to figure out how far I want to take this. Full CPU emulation? VGA mode? Now I'm writing DOSBox.</p>
+
+<p>12/6: Check it out, VGA mode!</p>
+
+<p><img src="http://i.stack.imgur.com/XOidp.png" alt="enter image description here"></p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/9044" title="short permalink to this answer" class="short-link" id="link-post-9044">share</a><span class="lsep">|</span><a href="/posts/9044/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/9044/revisions" title="show all edits to this post">edited <span title="2012-12-06 21:52:58Z" class="relativetime">Dec 6 '12 at 21:52</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-11-21 06:27:46Z" class="relativetime">Nov 21 '12 at 6:27</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/4777/joefish"><div><img src="https://www.gravatar.com/avatar/f162dad12566f6f9d77d1fb32e4b730e?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/4777/joefish">JoeFish</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">441</span><span title="3 silver badges"><span class="badge2"></span><span class="badgecount">3</span></span><span title="8 bronze badges"><span class="badge3"></span><span class="badgecount">8</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-9044" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-17847" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Any chance that you can post your code on a free site that doesn&#39;t require registration? Thanks</span>
+	&ndash;&nbsp;
+		<a href="/users/3799/dave-c" 
+		   title="289 reputation" 
+		   class="comment-user">Dave C</a>
+	<span class="comment-date" dir="ltr"><span title="2012-11-26 13:55:52Z" class="relativetime-clean">Nov 26 '12 at 13:55</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-17852" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">D&#39;oh I didn&#39;t realize it required registration. Sorry about that! I&#39;ll try to do it when I get home tonight.</span>
+	&ndash;&nbsp;
+		<a href="/users/4777/joefish" 
+		   title="441 reputation" 
+		   class="comment-user">JoeFish</a>
+	<span class="comment-date" dir="ltr"><span title="2012-11-26 15:04:28Z" class="relativetime-clean">Nov 26 '12 at 15:04</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-17877" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@DaveC, check the latest edit.</span>
+	&ndash;&nbsp;
+		<a href="/users/4777/joefish" 
+		   title="441 reputation" 
+		   class="comment-user">JoeFish</a>
+	<span class="comment-date" dir="ltr"><span title="2012-11-27 03:52:16Z" class="relativetime-clean">Nov 27 '12 at 3:52</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-17953" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I wonder if there&#39;s a camelForth port. That would test the segments.</span>
+	&ndash;&nbsp;
+		<a href="/users/2381/luser-droog" 
+		   title="1224 reputation" 
+		   class="comment-user">luser droog</a>
+	<span class="comment-date" dir="ltr"><span title="2012-12-03 05:37:56Z" class="relativetime-clean">Dec 3 '12 at 5:37</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-18004" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">That&#39;s awesome! +1 again. btw, there <i>is</i> an 8086 port of camel forth <a href="http://www.bradrodriguez.com/papers/index.html" rel="nofollow">bradrodriguez.com/papers/index.html</a> .</span>
+	&ndash;&nbsp;
+		<a href="/users/2381/luser-droog" 
+		   title="1224 reputation" 
+		   class="comment-user">luser droog</a>
+	<span class="comment-date" dir="ltr"><span title="2012-12-07 07:09:33Z" class="relativetime-clean">Dec 7 '12 at 7:09</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-9044" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="10497"></a>
+<div id="answer-10497" class="answer" data-answerid="10497" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="10497">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">7</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><h1>C++ - 4455 lines</h1> 
+
+<p>And no, I didn't just do the question's requirements. I did the ENTIRE 8086, including 16 never-before KNOWN opcodes. reenigne helped with figuring those opcodes out.</p>
+
+<p><a href="https://github.com/Alegend45/IBM5150">https://github.com/Alegend45/IBM5150</a></p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/10497" title="short permalink to this answer" class="short-link" id="link-post-10497">share</a><span class="lsep">|</span><a href="/posts/10497/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/10497/revisions" title="show all edits to this post">edited <span title="2013-01-21 15:11:22Z" class="relativetime">Jan 21 at 15:11</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/6526/air-blob"><div class="gravatar-wrapper-32"><img src="http://www.gravatar.com/avatar/58ff9a61d4f88381d3fe30dfe3b39346?s=128&amp;d=identicon&amp;r=PG" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/6526/air-blob">air_blob</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">185</span><span title="11 bronze badges"><span class="badge3"></span><span class="badgecount">11</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-01-21 02:30:38Z" class="relativetime">Jan 21 at 2:30</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/6973/darius-goad"><div><img src="https://www.gravatar.com/avatar/30609663f28b8d47a053eb2375787c12?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/6973/darius-goad">Darius Goad</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">93</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-10497" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="4" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-19682" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">where is the 4455-line file? oh, I found it. the <code>#include &quot;cpu.h&quot;</code> is hard to see.</span>
+	&ndash;&nbsp;
+		<a href="/users/2381/luser-droog" 
+		   title="1224 reputation" 
+		   class="comment-user">luser droog</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-21 08:59:49Z" class="relativetime-clean">Jan 21 at 8:59</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-19683" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">(w)holy switch statement!</span>
+	&ndash;&nbsp;
+		<a href="/users/2381/luser-droog" 
+		   title="1224 reputation" 
+		   class="comment-user">luser droog</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-21 09:00:09Z" class="relativetime-clean">Jan 21 at 9:00</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-19691" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Yeah, it&#39;s about to get worse, too, since I&#39;m about to include NEC V20 support as well.</span>
+	&ndash;&nbsp;
+		<a href="/users/6973/darius-goad" 
+		   title="93 reputation" 
+		   class="comment-user">Darius Goad</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-21 15:06:12Z" class="relativetime-clean">Jan 21 at 15:06</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-19767" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I&#39;ve looked through <a href="http://www.reenigne.org/blog/" rel="nofollow">reenigne&#39;s blog</a>. Can&#39;t find anything about these extra opcodes. Is it online somewhere?</span>
+	&ndash;&nbsp;
+		<a href="/users/2381/luser-droog" 
+		   title="1224 reputation" 
+		   class="comment-user">luser droog</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-22 19:26:00Z" class="relativetime-clean">Jan 22 at 19:26</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-19787" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">He hasn&#39;t updated his blog in a while. He&#39;s on #ibm5150 on EFNET, though, so you could ask him there.</span>
+	&ndash;&nbsp;
+		<a href="/users/6973/darius-goad" 
+		   title="93 reputation" 
+		   class="comment-user">Darius Goad</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-24 00:43:09Z" class="relativetime-clean">Jan 24 at 0:43</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-10497" data-rep=50 data-anon=true
+			   class="comments-link " 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>show <b>4</b> more comments</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/4732/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="4732" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f4732%2femulate-an-intel-8086-cpu%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f4732%2femulate-an-intel-8086-cpu%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/code-challenge" class="post-tag" title="show questions tagged &#39;code-challenge&#39;" rel="tag">code-challenge</a> <a href="/questions/tagged/advanced" class="post-tag" title="show questions tagged &#39;advanced&#39;" rel="tag">advanced</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/code-challenge" class="post-tag" title="show questions tagged &#39;code-challenge&#39;" rel="tag">code-challenge</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">228</span></span><br>
+<a href="/questions/tagged/advanced" class="post-tag" title="show questions tagged &#39;advanced&#39;" rel="tag">advanced</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">19</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2012-01-22 03:52:00Z"><b>1 year ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>8220 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-09-27 17:53:32Z">1 month ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-codegolf.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+<div class="module" id="chat-feature">
+    
+
+    
+<h4><a href="http://chat.stackexchange.com" id="h-chat-link">Visit Chat</a></h4>
+
+<div class="related" id="ad502-rooms"></div>
+<script type="text/javascript">
+// <!--
+    StackExchange.ready(
+    function () {
+        var options = {
+            chatUrl: 'http://chat.stackexchange.com',
+            reloadUrl: '/api/recent-chat',
+            preloadData: {"activeUsers":65,"activeRooms":35,"rooms":[]} 
+        };
+
+        StackExchange.chatAd.init(options);
+    });
+// -->
+</script>
+
+</div>    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/beta/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=codegolf.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/10507" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">-2</div>
+	</a>
+	<a href="/questions/10507/emulate-an-intel-8086-completely" class="question-hyperlink">Emulate an Intel 8086&hellip; COMPLETELY</a>
+</div><div class="spacer">
+	<a href="/q/6281" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">20</div>
+	</a>
+	<a href="/questions/6281/draw-a-sierpinski-triangle" class="question-hyperlink">Draw A Sierpinski Triangle</a>
+</div><div class="spacer">
+	<a href="/q/4370" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">10</div>
+	</a>
+	<a href="/questions/4370/simulate-any-1d-cellular-automaton" class="question-hyperlink">Simulate any 1D cellular automaton</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/1082" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">18
+    </div>
+</a><a href="/questions/1082/add-a-feature-to-a-programming-language" class="question-hyperlink">Add a feature to a programming language</a>
+</div>
+<div class="spacer">
+<a href="/q/3565" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">5
+    </div>
+</a><a href="/questions/3565/detect-loops-in-a-linked-list" class="question-hyperlink">Detect loops in a linked list</a>
+</div>
+<div class="spacer">
+<a href="/q/5359" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/5359/implement-a-model-of-computation-using-a-type-system" class="question-hyperlink">Implement a model of computation using a type system</a>
+</div>
+<div class="spacer">
+<a href="/q/10507" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">-2
+    </div>
+</a><a href="/questions/10507/emulate-an-intel-8086-completely" class="question-hyperlink">Emulate an Intel 8086&hellip; COMPLETELY</a>
+</div>
+<div class="spacer">
+<a href="/q/10656" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/10656/breakout-in-half-an-hour" class="question-hyperlink">Breakout in half an hour</a>
+</div>
+<div class="spacer">
+<a href="/q/11175" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">16
+    </div>
+</a><a href="/questions/11175/reimplementing-tetris" class="question-hyperlink">(Re)Implementing Tetris</a>
+</div>
+<div class="spacer">
+<a href="/q/11383" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">24
+    </div>
+</a><a href="/questions/11383/fault-tolerant-hello-world-a-k-a-the-interview" class="question-hyperlink">Fault-Tolerant Hello World (a.k.a. the Interview)</a>
+</div>
+<div class="spacer">
+<a href="/q/11404" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">7
+    </div>
+</a><a href="/questions/11404/display-a-bezier-curve-in-the-browser" class="question-hyperlink">Display a b&#233;zier curve in the browser</a>
+</div>
+<div class="spacer">
+<a href="/q/12844" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">5
+    </div>
+</a><a href="/questions/12844/emulate-a-mos-6502-cpu" class="question-hyperlink">Emulate a MOS 6502 CPU</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/4732" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/4732/ivc/b22c');});
+</script>
+<noscript>
+    <div><img src="/posts/4732/ivc/b22c" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/4732/emulate-an-intel-8086-cpu")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codegolf.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Programming Puzzles &amp; Code Golf Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|code-challenge|advanced||']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

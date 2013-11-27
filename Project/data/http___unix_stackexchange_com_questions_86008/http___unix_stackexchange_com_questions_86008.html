@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>shell - Bash script to rename files from a text file source - Unix & Linux Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/unix/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/unix/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Unix &amp; Linux Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackUnix" />
+    <meta name="twitter:domain" content="unix.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/unix/img/apple-touch-icon@2.png?v=32fb07f7ce26"/>
+    <meta name="og:title" content="Bash script to rename files from a text file source" />
+    <meta name="og:description" content="I&#39;m fairly new to bash; I can just about perform simple administrative tasks with simple commands 1 at a time. However, I&#39;ve been tasked with renaming some files in a directory using a text file as..." />
+    <meta name="og:url" content="http://unix.stackexchange.com/questions/86008/bash-script-to-rename-files-from-a-text-file-source"/>
+    <link rel="canonical" href="http://unix.stackexchange.com/questions/86008/bash-script-to-rename-files-from-a-text-file-source" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/unix/all.css?v=d9a893265e8d">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Bash script to rename files from a text file source&#39;" href="/feeds/question/86008">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:1,shownCommentCount:1,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:86008});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('106', '86008');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('106');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385455249,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Unix & Linux Stack Exchange","description":"Q&A for users of Linux, FreeBSD and other Un*x-like operating systems.","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f86008%2fbash-script-to-rename-files-from-a-text-file-source">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f86008%2fbash-script-to-rename-files-from-a-text-file-source">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Unix &amp; Linux
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/unix/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Unix &amp; Linux Stack Exchange is a question and answer site for users of Linux, FreeBSD and other Un*x-like operating systems.. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/86008/bash-script-to-rename-files-from-a-text-file-source" class="question-hyperlink">Bash script to rename files from a text file source</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="86008"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="86008">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">6</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I'm fairly new to bash; I can just about perform simple administrative tasks with simple commands 1 at a time. However, I've been tasked with renaming some files in a directory using a text file as the source for my renaming and would really appreciate a few pointers, as I am well out of my depth. </p>
+
+<p>Let me explain:</p>
+
+<pre><code>New File Name.xlsx 0.1  000011F4.dat 
+New File Name.xlsx 0.2  000011F5.dat 
+New File Name.xlsx 0.3  000011F6.dat 
+New File Name.xlsx 0.4  000011F7.dat 
+New File Name.xlsx 0.5  000011F8.dat 
+New File Name.xlsx 0.6  000011F9.dat 
+</code></pre>
+
+<p>The source text file I have resembles the above somewhat. The intention is that the first 'column' is the new name for the file, the middle is the version and the third is the current filename. </p>
+
+<p>I need to rename the .dat files in the directory, changing them to the names presented in the first column. I also need to prepend the version number 0.1, 0.2 etc... to the beginning of each file.</p>
+
+<p>I have a few questions: </p>
+
+<p>Is it a massive problem that the files have whitespace in them? Would it be better adding " " around each file string? </p>
+
+<p>Basically I have no idea where to start and any help would be massively appreciated. As you can see it's slightly more complex than a usual renaming, giving the need to add the version column to the beginning of the filename and the whitespace in the list.</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/bash" class="post-tag" title="show questions tagged &#39;bash&#39;" rel="tag">bash</a> <a href="/questions/tagged/shell" class="post-tag" title="show questions tagged &#39;shell&#39;" rel="tag">shell</a> <a href="/questions/tagged/scripting" class="post-tag" title="show questions tagged &#39;scripting&#39;" rel="tag">scripting</a> <a href="/questions/tagged/rename" class="post-tag" title="show questions tagged &#39;rename&#39;" rel="tag">rename</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/86008" title="short permalink to this question" class="short-link" id="link-post-86008">share</a><span class="lsep">|</span><a href="/posts/86008/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/86008/revisions" title="show all edits to this post">edited <span title="2013-08-08 18:20:16Z" class="relativetime">Aug 8 at 18:20</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/33055/anthon"><div><img src="https://www.gravatar.com/avatar/a38a4f5f180194ac457cdc057f1be6e3?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/33055/anthon">Anthon</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">5,831</span><span title="6 gold badges"><span class="badge1"></span><span class="badgecount">6</span></span><span title="11 silver badges"><span class="badge2"></span><span class="badgecount">11</span></span><span title="29 bronze badges"><span class="badge3"></span><span class="badgecount">29</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-08-08 17:42:26Z" class="relativetime">Aug 8 at 17:42</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/44778/user2472419"><div><img src="https://www.gravatar.com/avatar/34299732f28a5050da7f225b869ada47?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/44778/user2472419">user2472419</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">33</span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-86008" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-128159" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">It isn&#39;t an insurmountable problem that the filenames have spaces in them, but it <i>does</i> rule out using many simple approaches. Without spaces this would be pretty trivial with <code>awk</code> or <code>cut</code>, but with the spaces you have to go with uglier, longer commands as in the answers given.</span>
+	&ndash;&nbsp;
+		<a href="/users/34494/evilsoup" 
+		   title="1023 reputation" 
+		   class="comment-user">evilsoup</a>
+	<span class="comment-date" dir="ltr"><span title="2013-08-08 21:04:56Z" class="relativetime-clean">Aug 8 at 21:04</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-86008" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								4 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/86008/bash-script-to-rename-files-from-a-text-file-source?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/86008/bash-script-to-rename-files-from-a-text-file-source?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/86008/bash-script-to-rename-files-from-a-text-file-source?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="86010"></a>
+<div id="answer-86010" class="answer accepted-answer" data-answerid="86010" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="86010">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">6</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>This ought to work:</p>
+
+<pre><code>sh &lt;(sed -r 's/^\s*(.*)\s+([0-9\.]+)\s+([0-9A-Z]{8}\.dat)\s*$/mv -iv \3 "\2 \1"/' files)
+</code></pre>
+
+<p>... where <code>files</code> is the name of your source file.</p>
+
+<p>What this does is pass the result of the <code>sed</code> command to a new instance of <code>sh</code> (the shell), using <a href="http://www.gnu.org/software/bash/manual/html_node/Process-Substitution.html">process substitution</a>. The output of the <code>sed</code> command is:</p>
+
+<pre><code>mv -iv 000011F4.dat "0.1 New File Name.xlsx"
+mv -iv 000011F5.dat "0.2 New File Name.xlsx"
+mv -iv 000011F6.dat "0.3 New File Name.xlsx"
+mv -iv 000011F7.dat "0.4 New File Name.xlsx"
+mv -iv 000011F8.dat "0.5 New File Name.xlsx"
+mv -iv 000011F9.dat "0.6 New File Name.xlsx"
+</code></pre>
+
+<p>Taking the <code>sed</code> command apart, it searches for a pattern:</p>
+
+<ul>
+<li><code>^</code> - the beginning of the line</li>
+<li><code>\s*</code> - any whitespace at the start</li>
+<li><code>(.*)</code> - any characters (the parentheses store the result to <code>\1</code>)</li>
+<li><code>\s+</code> - at least one whitespace character</li>
+<li><code>([0-9\.]+)</code> - at least one of <code>0-9</code> and <code>.</code> (stored to <code>\2</code>)</li>
+<li><code>\s+</code> - at least one whitespace character</li>
+<li><code>([0-9A-Z]{8}\.dat)</code> - 8 characters in <code>0-9</code> or <code>A-Z</code>, followed by <code>.dat</code> (stored to <code>\3</code>)</li>
+<li><code>\s*</code> - any whitespace at the end</li>
+<li><code>$</code> - the end of the line</li>
+</ul>
+
+<p>... and replaces it with <code>mv -iv \3 "\2 \1"</code>, where <code>\1</code> to <code>\3</code> are the previously stored values. You can use something other than a space between the version number and the rest of the filename, if you like.</p>
+
+<p>Here's the result:</p>
+
+<pre><code>$ ls -l
+total 60
+-rw-rw-r-- 1 z z   0 Aug  8 14:15 000011F4.dat
+-rw-rw-r-- 1 z z   0 Aug  8 14:15 000011F5.dat
+-rw-rw-r-- 1 z z   0 Aug  8 14:15 000011F6.dat
+-rw-rw-r-- 1 z z   0 Aug  8 14:15 000011F7.dat
+-rw-rw-r-- 1 z z   0 Aug  8 14:15 000011F8.dat
+-rw-rw-r-- 1 z z   0 Aug  8 14:15 000011F9.dat
+-rw-rw-r-- 1 z z 222 Aug  8 13:47 files
+$ sh &lt;(sed -r 's/^\s*(.*)\s+([0-9\.]+)\s+([0-9A-Z]{8}\.dat)\s*$/mv -iv \3 "\2 \1"/' files)
+`000011F4.dat' -&gt; `0.1 New File Name.xlsx'
+`000011F5.dat' -&gt; `0.2 New File Name.xlsx'
+`000011F6.dat' -&gt; `0.3 New File Name.xlsx'
+`000011F7.dat' -&gt; `0.4 New File Name.xlsx'
+`000011F8.dat' -&gt; `0.5 New File Name.xlsx'
+`000011F9.dat' -&gt; `0.6 New File Name.xlsx'
+$ ls -l
+total 60
+-rw-rw-r-- 1 z z   0 Aug  8 14:15 0.1 New File Name.xlsx
+-rw-rw-r-- 1 z z   0 Aug  8 14:15 0.2 New File Name.xlsx
+-rw-rw-r-- 1 z z   0 Aug  8 14:15 0.3 New File Name.xlsx
+-rw-rw-r-- 1 z z   0 Aug  8 14:15 0.4 New File Name.xlsx
+-rw-rw-r-- 1 z z   0 Aug  8 14:15 0.5 New File Name.xlsx
+-rw-rw-r-- 1 z z   0 Aug  8 14:15 0.6 New File Name.xlsx
+-rw-rw-r-- 1 z z 222 Aug  8 13:47 files
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/86010" title="short permalink to this answer" class="short-link" id="link-post-86010">share</a><span class="lsep">|</span><a href="/posts/86010/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/86010/revisions" title="show all edits to this post">edited <span title="2013-08-08 18:17:52Z" class="relativetime">Aug 8 at 18:17</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-08-08 18:04:44Z" class="relativetime">Aug 8 at 18:04</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/27282/zero-piraeus"><div><img src="https://www.gravatar.com/avatar/3a6ff7904d56fe1e2ac8d855c6fb254d?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/27282/zero-piraeus">Zero Piraeus</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">606</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="12 bronze badges"><span class="badge3"></span><span class="badgecount">12</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-86010" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="2" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-128178" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Thanks alot. You&#39;ve saved my bacon, I also appreciate the accompanying explanation, it&#39;s nice to see what&#39;s going on in a command before you run it. To be totally honest, I&#39;m still not 100% certain what&#39;s happening. Is that using the sort of syntax you&#39;d see in a regular expression? More specifically, I don&#39;t quite understand how that has defined the variables /1 /2 and /3 Thanks as well to the other responses, I appreciate the help!</span>
+	&ndash;&nbsp;
+		<a href="/users/44778/user2472419" 
+		   title="33 reputation" 
+		   class="comment-user owner">user2472419</a>
+	<span class="comment-date" dir="ltr"><span title="2013-08-08 22:19:01Z" class="relativetime-clean">Aug 8 at 22:19</span></span>
+		<span class="edited-yes" title="this comment was edited 2 times"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-128316" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Actually, this worked when I tested it at home last night but hasn&#39;t worked today in production. Apparently there&#39;s a problem with /dev/fd/63. I browsed to it and it doesn&#39;t exist, any ideas anybody? Google hasn&#39;t been much help on this one. Cheers.</span>
+	&ndash;&nbsp;
+		<a href="/users/44778/user2472419" 
+		   title="33 reputation" 
+		   class="comment-user owner">user2472419</a>
+	<span class="comment-date" dir="ltr"><span title="2013-08-09 15:04:37Z" class="relativetime-clean">Aug 9 at 15:04</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-128320" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">What do you get if you don&#39;t do the process substitution? That is to say, just run <code>sed -r &#39;s&#47;^\s*(.*)\s+(&#91;0-9\.&#93;+)\s+(&#91;0-9A-Z&#93;{8}\.dat)\s*$&#47;mv -iv \3 &quot;\2 \1&quot;&#47;&#39; files</code> without the <code>sh &lt;(...)</code> part.</span>
+	&ndash;&nbsp;
+		<a href="/users/27282/zero-piraeus" 
+		   title="606 reputation" 
+		   class="comment-user">Zero Piraeus</a>
+	<span class="comment-date" dir="ltr"><span title="2013-08-09 15:07:33Z" class="relativetime-clean">Aug 9 at 15:07</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-128722" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Sorry for the delay in reply and thanks again for your help with this. If I run the command as above, I get a syntax error: bash: syntax error near unexpected token `)&#39;</span>
+	&ndash;&nbsp;
+		<a href="/users/44778/user2472419" 
+		   title="33 reputation" 
+		   class="comment-user owner">user2472419</a>
+	<span class="comment-date" dir="ltr"><span title="2013-08-12 08:12:16Z" class="relativetime-clean">Aug 12 at 8:12</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-128724" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">In fact, it did execute, I forgot to remove the last ). However, nothing appears to have been renamed, I get a large list of mv commands after it has executed but all the files remain unchanged</span>
+	&ndash;&nbsp;
+		<a href="/users/44778/user2472419" 
+		   title="33 reputation" 
+		   class="comment-user owner">user2472419</a>
+	<span class="comment-date" dir="ltr"><span title="2013-08-12 08:27:44Z" class="relativetime-clean">Aug 12 at 8:27</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-86010" data-rep=50 data-anon=true
+			   class="comments-link " 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>show <b>2</b> more comments</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="86013"></a>
+<div id="answer-86013" class="answer" data-answerid="86013" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="86013">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><pre><code>sed 's/^\(.*\.xlsx\) \+\([[:digit:]]\+\.[[:digit:]]\+\) \+\(.[^ ]*\)/"\3" "\2\1"/' \
+  &lt;file_list | xargs -n 2 mv
+</code></pre>
+
+<p>This divides the line into the part before <code>.xlsx</code>, which is the second part of the new name, which becomes accessible as <code>\1</code>. The it grabs the version and assigns it to <code>\2</code>. Then comes the old file name, ignoring a trailing space.</p>
+
+<p>This is quoted an provided to <code>mv</code> as an argument. The <code>-n 2</code> ensures that <code>mv</code> receives two arguments, the old and the new file name.</p>
+
+<p>The spaces do not pose any problem, what complicates matters is that your input list is not well structured. If the columns would be swapped and the file names quoted, you could just use <code>xargs</code> and <code>mv</code>, without prior manipulation.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/86013" title="short permalink to this answer" class="short-link" id="link-post-86013">share</a><span class="lsep">|</span><a href="/posts/86013/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-08-08 18:14:45Z" class="relativetime">Aug 8 at 18:14</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/12779/marco"><div><img src="https://www.gravatar.com/avatar/256af740a1dd30546ac2745e8293997c?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/12779/marco">Marco</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">7,307</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="9 silver badges"><span class="badge2"></span><span class="badgecount">9</span></span><span title="33 bronze badges"><span class="badge3"></span><span class="badgecount">33</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-86013" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-86013" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="86047"></a>
+<div id="answer-86047" class="answer" data-answerid="86047" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="86047">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>The spaces in the file name, and the use of multiple spaces between some columns, make this harder, but by no means insurmountable.</p>
+
+<p>Read the list file line by line. Usually one would use <a href="http://unix.stackexchange.com/questions/18886/why-is-while-ifs-read-used-so-often-instead-of-ifs-while-read/18936#18936"><code>while IFS= read -r; do …</code></a>, but here it might be more robust to strip leading and trailing whitespace. For each line:</p>
+
+<ul>
+<li>Break each line into three parts. One way to do that is with regex matching. <code>[[:space:]]+</code> matches one or more whitespace character (space or tab); <code>[[:space:]]+</code> matches one or more non-whitespace characters. Parenthesized groups can be retrieved via the <code>BASH_REMATCH</code> variable.<br>
+Another way, less convenient here, would be with <code>${VAR##PATTERN}</code> and <code>${VAR%PATTERN}</code> to strip off a prefix or suffix from a variable respectively.</li>
+<li>Finally perform the move. Don't forget to log any errors.</li>
+</ul>
+
+<p>Putting it all together:</p>
+
+<pre><code>ret=0
+while read line; do
+  if [[ $line =~ (.*[^[:space:]])[[:space:]]+([^[:space:]]+)[[:space:]]+([^[:space:]]+) ]]; then
+    new_name="${BASH_REMATCH[1]}"
+    version="${BASH_REMATCH[2]}"
+    old_name="${BASH_REMATCH[3]}"
+    mv -- "$old_name" "$version$new_name" || ret=1
+  else
+    echo "Malformed line: $line"
+  fi
+done &lt;name_list.txt
+exit $ret
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/86047" title="short permalink to this answer" class="short-link" id="link-post-86047">share</a><span class="lsep">|</span><a href="/posts/86047/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-08-09 00:09:45Z" class="relativetime">Aug 9 at 0:09</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/885/gilles"><div><img src="https://www.gravatar.com/avatar/a717291747c76567bb0f086e15ae6e43?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/885/gilles">Gilles</a><br>
+        <span class="reputation-score" title="reputation score 167283" dir="ltr">167k</span><span title="21 gold badges"><span class="badge1"></span><span class="badgecount">21</span></span><span title="203 silver badges"><span class="badge2"></span><span class="badgecount">203</span></span><span title="449 bronze badges"><span class="badge3"></span><span class="badgecount">449</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-86047" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-86047" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="86057"></a>
+<div id="answer-86057" class="answer" data-answerid="86057" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="86057">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>An <code>awk</code> solution is to run this command:</p>
+
+<pre><code>awk '{print "/bin/mv", $NF, "\"" $(NF-1), gensub(/^([^.]+\.xlsx).*/, "\\1", 1) "\"" | "bash" } ; END { close("bash") }' sourcefile
+</code></pre>
+
+<p>The preceding command passes to the <code>bash</code> shell the output of the command:</p>
+
+<pre><code>awk '{print "/bin/mv", $NF, "\"" $(NF-1), gensub(/^([^.]+\.xlsx).*/, "\\1", 1) "\""}' sourcefile
+</code></pre>
+
+<p>which should be run first to make sure it is really what you want to execute!&nbsp; This <code>awk</code> command prints, for each line in the source file, the <code>/bin/mv</code> command, followed by the last whitespace-delimited field in the line, followed by a double quotation mark, followed by the second-to-last field in the line, followed by the result of replacing the entire line by everything through the string <code>.xlsx</code>, followed by a double quotation mark.</p>
+
+<p>Here is a variant you might prefer:</p>
+
+<pre><code>awk '{print "/bin/mv", $NF, "\"" "0." FNR, gensub(/^([^.]+\.xlsx).*/, "\\1", 1) "\"" | "bash" } ; END { close("bash") }' sourcefile
+</code></pre>
+
+<p>The variable <code>FNR</code> is the line number (so you can omit from your source file the entries 0.1, 0.2, 0.3, ...).</p>
+
+<p>The whitespace in file names is not what I would call a &#8220;massive problem,&#8221; but I would recommend against it.&nbsp; You could use something like this final version, which changes the spaces to underscores in your new file names:</p>
+
+<pre><code>awk '{print "/bin/mv", $NF, "0." FNR "_" gensub(" ","_", "g", gensub(/^([^.]+\.xlsx).*/, "\\1", 1)) | "bash" } ; END { close("bash") }' sourcefile
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/86057" title="short permalink to this answer" class="short-link" id="link-post-86057">share</a><span class="lsep">|</span><a href="/posts/86057/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-08-09 01:44:55Z" class="relativetime">Aug 9 at 1:44</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/16439/greg-marks"><div><img src="https://www.gravatar.com/avatar/d73407bbb68c7f47c08f3c7e16b008e3?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/16439/greg-marks">Greg Marks</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">181</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-86057" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-86057" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/86008/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="86008" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f86008%2fbash-script-to-rename-files-from-a-text-file-source%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f86008%2fbash-script-to-rename-files-from-a-text-file-source%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/bash" class="post-tag" title="show questions tagged &#39;bash&#39;" rel="tag">bash</a> <a href="/questions/tagged/shell" class="post-tag" title="show questions tagged &#39;shell&#39;" rel="tag">shell</a> <a href="/questions/tagged/scripting" class="post-tag" title="show questions tagged &#39;scripting&#39;" rel="tag">scripting</a> <a href="/questions/tagged/rename" class="post-tag" title="show questions tagged &#39;rename&#39;" rel="tag">rename</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/bash" class="post-tag" title="show questions tagged &#39;bash&#39;" rel="tag">bash</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">2901</span></span><br>
+<a href="/questions/tagged/shell" class="post-tag" title="show questions tagged &#39;shell&#39;" rel="tag">shell</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">1911</span></span><br>
+<a href="/questions/tagged/scripting" class="post-tag" title="show questions tagged &#39;scripting&#39;" rel="tag">scripting</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">558</span></span><br>
+<a href="/questions/tagged/rename" class="post-tag" title="show questions tagged &#39;rename&#39;" rel="tag">rename</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">227</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-08-08 17:42:26Z"><b>3 months ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>205 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-08-09 01:44:55Z">3 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-unix.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/unix/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=unix.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/18886" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">25</div>
+	</a>
+	<a href="/questions/18886/why-is-while-ifs-read-used-so-often-instead-of-ifs-while-read" class="question-hyperlink">Why is `while IFS= read` used so often, instead of `IFS=; while read..`?</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/1136" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">19
+    </div>
+</a><a href="/questions/1136/batch-renaming-files" class="question-hyperlink">Batch renaming files</a>
+</div>
+<div class="spacer">
+<a href="/q/12230" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/12230/batch-file-rename-using-mapping-file" class="question-hyperlink">Batch File Rename Using Mapping File</a>
+</div>
+<div class="spacer">
+<a href="/q/12253" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/12253/checking-an-argument-to-a-bash-script-is-a-string-of-all-digits" class="question-hyperlink">checking an argument to a bash script is a string of all digits</a>
+</div>
+<div class="spacer">
+<a href="/q/25337" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/25337/simple-shell-script-needed-to-move-database-files" class="question-hyperlink">Simple shell script needed to move database files</a>
+</div>
+<div class="spacer">
+<a href="/q/32203" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/32203/renaming-files-from-bash-in-linux" class="question-hyperlink">Renaming files from bash in linux</a>
+</div>
+<div class="spacer">
+<a href="/q/32290" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/32290/pass-command-line-arguments-to-bash-script" class="question-hyperlink">Pass command line arguments to bash script</a>
+</div>
+<div class="spacer">
+<a href="/q/33756" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/33756/rename-a-lot-of-files-with-all-types-of-characters-with-posix-portability" class="question-hyperlink">Rename a lot of files with all types of characters, with POSIX portability</a>
+</div>
+<div class="spacer">
+<a href="/q/57754" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/57754/how-to-rename-files-with-sed-and-csv" class="question-hyperlink">How to rename files with sed and csv</a>
+</div>
+<div class="spacer">
+<a href="/q/73451" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/73451/cd-into-directory-from-history-in-a-bash-script-or-alias-e-g" class="question-hyperlink">CD into directory from HISTORY in a bash script or alias e.g. $(!!)</a>
+</div>
+<div class="spacer">
+<a href="/q/88100" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/88100/importing-data-from-a-text-file-to-a-bash-script" class="question-hyperlink">importing data from a text file to a bash script</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/86008" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/86008/ivc/236d');});
+</script>
+<noscript>
+    <div><img src="/posts/86008/ivc/236d" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">default</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/86008/bash-script-to-rename-files-from-a-text-file-source")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.unix.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+                <div id="additional-notices">
+                    Linux is a registered trademark of Linus Torvalds. UNIX is a registered trademark of The Open Group. <br>This site is not affiliated with Linus Torvalds or The Open Group in any way.
+                </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Unix &amp; Linux Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|bash|shell|scripting|rename|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

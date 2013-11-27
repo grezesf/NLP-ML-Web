@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>cryptography - Is this algorithm for a random string cryptographically secure? - Information Security Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/security/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/security/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Information Security Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackSecurity" />
+    <meta name="twitter:domain" content="security.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/security/img/apple-touch-icon@2.png?v=497726d850f9"/>
+    <meta name="og:title" content="Is this algorithm for a random string cryptographically secure?" />
+    <meta name="og:description" content="I&#39;ve pieced together this algorithm (if it can be called that) from various bits of code I&#39;ve seen online, and I&#39;m wondering how cryptographically secure it is. It&#39;s used to generate passwords:
+
+fu..." />
+    <meta name="og:url" content="http://security.stackexchange.com/questions/6205/is-this-algorithm-for-a-random-string-cryptographically-secure"/>
+    <link rel="canonical" href="http://security.stackexchange.com/questions/6205/is-this-algorithm-for-a-random-string-cryptographically-secure" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/security/all.css?v=d8e2635c1981">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Is this algorithm for a random string cryptographically secure?&#39;" href="/feeds/question/6205">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:2,shownCommentCount:2,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:6205});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('162', '6205');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('162');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385486698,"enableUserHovercards":true,"site":{"name":"Information Security Stack Exchange","description":"Q&A for Information security professionals","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"6c07fd052a87c08ef3cc6e062a9ff978","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f6205%2fis-this-algorithm-for-a-random-string-cryptographically-secure">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f6205%2fis-this-algorithm-for-a-random-string-cryptographically-secure">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Information Security
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/security/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Information Security Stack Exchange is a question and answer site for Information security professionals. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/6205/is-this-algorithm-for-a-random-string-cryptographically-secure" class="question-hyperlink">Is this algorithm for a random string cryptographically secure?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="6205"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6205">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>1</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I've pieced together this algorithm (if it can be called that) from various bits of code I've seen online, and I'm wondering how cryptographically secure it is. It's used to generate passwords:</p>
+
+<pre><code>function seed_random() {
+    $seed = crc32(uniqid(sha1(microtime(true) . getmypid()), true));
+    mt_srand($seed);
+    $n = mt_rand(1, 200);
+    for ($i = 0; $i &lt; $n; $i++) {
+        mt_rand();
+    }
+}
+
+function mt_rand_custom($min, $max) {
+    seed_random();
+    return mt_rand($min, $max);
+}
+
+function random_password($length) {
+    $legal_characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'_!@#$^*?&lt;&gt;[]{}~(),";
+    seed_random();
+    $command = 'head -c 500 /dev/urandom | tr -dc %s | head -c %s; echo';
+    return shell_exec(sprintf($command, $legal_characters, $length));
+}
+
+function generate_password() {
+    return random_password(10);
+}
+</code></pre>
+
+<p>I know security, especially in a web environment, depends on numerous other things (e.g. is the password being sent over SSL) but I'm curious about this specific set of functions. Thank you for the feedback.</p>
+
+<p>EDIT: Even though the sample is no longer using the mt_random_custom function, any feedback on that would be greatly appreciated as well, so I left it in. </p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/cryptography" class="post-tag" title="show questions tagged &#39;cryptography&#39;" rel="tag">cryptography</a> <a href="/questions/tagged/web-application" class="post-tag" title="show questions tagged &#39;web-application&#39;" rel="tag">web-application</a> <a href="/questions/tagged/php" class="post-tag" title="show questions tagged &#39;php&#39;" rel="tag">php</a> <a href="/questions/tagged/random" class="post-tag" title="show questions tagged &#39;random&#39;" rel="tag">random</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/6205" title="short permalink to this question" class="short-link" id="link-post-6205">share</a><span class="lsep">|</span><a href="/posts/6205/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/6205/revisions" title="show all edits to this post">edited <span title="2011-10-05 18:36:39Z" class="relativetime">Oct 5 '11 at 18:36</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/655/thomas-pornin"><div><img src="https://www.gravatar.com/avatar/07ccc97c05f3fb80560ebc618a7de8bc?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/655/thomas-pornin">Thomas Pornin</a><br>
+        <span class="reputation-score" title="reputation score 106758" dir="ltr">107k</span><span title="19 gold badges"><span class="badge1"></span><span class="badgecount">19</span></span><span title="194 silver badges"><span class="badge2"></span><span class="badgecount">194</span></span><span title="377 bronze badges"><span class="badge3"></span><span class="badgecount">377</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2011-08-12 20:39:27Z" class="relativetime">Aug 12 '11 at 20:39</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/4217/ricardo-altamirano"><div><img src="https://www.gravatar.com/avatar/5aab27ac128d8b89b554faa71f4b114d?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/4217/ricardo-altamirano">Ricardo Altamirano</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">121</span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6205" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-10428" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Why do you use a random password length? This alone makes it difficult to estimate the entropy of your generated password (as it is very depending of this length).</span>
+	&ndash;&nbsp;
+		<a href="/users/1396/paulo-ebermann" 
+		   title="1509 reputation" 
+		   class="comment-user">Paŭlo Ebermann</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-12 21:18:16Z" class="relativetime-clean">Aug 12 '11 at 21:18</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10429" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Although this generator is meant for general use, it&#39;s primary goal was for a site with 15 characters as the minimum password length. You&#39;re right, I probably don&#39;t need the upper bound. I&#39;ll just set it at 10, for the sake of simplicity.</span>
+	&ndash;&nbsp;
+		<a href="/users/4217/ricardo-altamirano" 
+		   title="121 reputation" 
+		   class="comment-user owner">Ricardo Altamirano</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-12 21:22:33Z" class="relativetime-clean">Aug 12 '11 at 21:22</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6205" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								2 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/6205/is-this-algorithm-for-a-random-string-cryptographically-secure?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/6205/is-this-algorithm-for-a-random-string-cryptographically-secure?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/6205/is-this-algorithm-for-a-random-string-cryptographically-secure?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="6208"></a>
+<div id="answer-6208" class="answer accepted-answer" data-answerid="6208" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6208">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">8</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>In your code, you <em>have</em> to fill <code>$legal_characters</code> with the list of characters that you accept as part of a password. E.g.:</p>
+
+<pre><code>$legal_characters = "abcdefghijklmnopqrstuvwxyz";
+</code></pre>
+
+<p>if you want passwords consisting of lowercase letters (all lowercase latin letters, but no other characters and no accents).</p>
+
+<p>This code is a bit weird; it uses <code>mt_rand()</code> (an internal PRNG) seeded with the current time and the process ID to get the <em>length</em> of the password, between 15 and 60 characters. Then it uses <code>/dev/urandom</code> for the password itself, which is smart since <code>mt_rand()</code> is not cryptographically secure (especially since the process ID is not something which is very secret, and neither is the current time).</p>
+
+<p>The actual password generation work thus: it produces 500 random bytes (from <code>/dev/urandom</code>), then removes all those which are not in the set of accepted characters (that's the "<code>tr</code>"), and finally truncates again the remaining sequence of characters to the desired length. This process generates uniformly random sequences, so that's good, and <code>/dev/urandom</code> is the appropriate PRNG for that. Note, though, a few caveats:</p>
+
+<ul>
+<li><p>If the set of "legal characters" is small, you could end with a shorter password. E.g. if you want passwords with only digits from 1 to 6, there will be, on average, only 12 or so matching bytes in the 500 random bytes. The code has no failsafe for "too short". If you set <code>$legal_characters</code> to all 26 lowercase letters, then about 1 byte in 10 will be legal (byte values range from 0 to 255, and 26/256 is close to 1/10) and, on average, the "<code>tr</code>" part will yield about 50 characters, and it is extremely improbable that it will yield less than 20. Still, this is worth noting and there <em>should</em> be a failsafe.</p></li>
+<li><p>It makes little sense to have a variable length for the password. If a password of minimal length is acceptable security-wise, then all passwords could have that length. And if it is <em>not</em> acceptable, then why do you use that minimal length ? You'd better use a single, fixed length, rather than a range. This would allow you to remove <code>seed_random()</code> and <code>mt_rand_custom()</code>, substantially simplifying the code.</p></li>
+<li><p>A "password" is something that a human being will be able to type an memorize -- hence "word". Will he memorize a 60-character sequence ? I am sure there is a medical name for such a condition.</p></li>
+<li><p>You should set the length of the passwords to an "appropriate" value such that the entropy will be high enough. If there are <em>x</em> legal characters and the password length is <em>n</em>, then the entropy will be <em>x<sup>n</sup></em>. What entropy is needed depends on the intended usage. For authenticating users on a Web site, through an appropriate SSL tunnel, 2<sup>40</sup> ("40 bits" of entropy) is more than enough, which translates to 9 lowercase letters (26<sup>9</sup> is greater than 2<sup>40</sup>).</p></li>
+<li><p>The code uses unixisms (<code>/dev/urandom</code>, <code>head</code>, <code>tr</code>...) and will have a hard time running on, say, a Windows server (and PHP <a href="http://windows.php.net/" rel="nofollow">runs on Windows, too</a>).</p></li>
+</ul>
+
+<hr />
+
+<p><strong>Summary:</strong> the passwords will be strong, but the code is weird. You should drop the variable length, and if your users can swallow 60-character passwords, then please congratulate them for me. Or sell them to a zoo. Here is a simplified code which should be OK (warning: I do not use PHP so I am improvising here):</p>
+
+<pre><code>function generate_password() {
+    return shell_exec('head -c 500 /dev/urandom | tr -dc abcdefghijklmnopqrstuvwxyz | head -c 9; echo');
+}
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/6208" title="short permalink to this answer" class="short-link" id="link-post-6208">share</a><span class="lsep">|</span><a href="/posts/6208/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/6208/revisions" title="show all edits to this post">edited <span title="2011-08-12 22:52:08Z" class="relativetime">Aug 12 '11 at 22:52</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-08-12 21:47:53Z" class="relativetime">Aug 12 '11 at 21:47</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/655/thomas-pornin"><div><img src="https://www.gravatar.com/avatar/07ccc97c05f3fb80560ebc618a7de8bc?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/655/thomas-pornin">Thomas Pornin</a><br>
+        <span class="reputation-score" title="reputation score 106758" dir="ltr">107k</span><span title="19 gold badges"><span class="badge1"></span><span class="badgecount">19</span></span><span title="194 silver badges"><span class="badge2"></span><span class="badgecount">194</span></span><span title="377 bronze badges"><span class="badge3"></span><span class="badgecount">377</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6208" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-10433" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Thanks for all the input; I snipped the declared value of <code>$legal_characters</code> because it was a long value, so I put a comment in place of the actual value. I added the true value back in for the sake of readability. It is always <i>at least</i> the set of characters stated, if not more.
+
+ - I&#39;m confused why <code>tr</code> would yield on average 100 characters when using 26 lowercase letters. 6/256*500 ~= 12, as you said, but 26/256*500 ~= 500*1/10 ~= 50. I ran that same calculation initially with the 81 characters in <code>$legal_characters</code> (500*81/256 ~= 160) and figured that would be enough.</span>
+	&ndash;&nbsp;
+		<a href="/users/4217/ricardo-altamirano" 
+		   title="121 reputation" 
+		   class="comment-user owner">Ricardo Altamirano</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-12 22:13:33Z" class="relativetime-clean">Aug 12 '11 at 22:13</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10434" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Also, I figured I could always increase the number of bytes drawn from /dev/urandom if need be, and I could do that within the problem itself through a simple string substitution. mt_rand_custom() wasn&#39;t really related to the function itself; variable length was something to mix up the output, nothing more. It&#39;s not really related to the strength of the algorithm. I&#39;m not worried about supporting Windows servers, either, because my client has no intention (or the funds, for that matter) to run a Windows servers, and that single command is easy enough to swap out.</span>
+	&ndash;&nbsp;
+		<a href="/users/4217/ricardo-altamirano" 
+		   title="121 reputation" 
+		   class="comment-user owner">Ricardo Altamirano</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-12 22:17:41Z" class="relativetime-clean">Aug 12 '11 at 22:17</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10435" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">And to spam with <i>one</i> more comment, whether or not the users will remember a 60 character password is beyond me. Maybe they&#39;ll surprise me. From a learning standpoint I&#39;m more interested in the strength or weakness of the algorithm. Thanks for the feedback!</span>
+	&ndash;&nbsp;
+		<a href="/users/4217/ricardo-altamirano" 
+		   title="121 reputation" 
+		   class="comment-user owner">Ricardo Altamirano</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-12 22:19:08Z" class="relativetime-clean">Aug 12 '11 at 22:19</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10440" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Sorry about the &quot;one hundred&quot;, it was a mistake on my part. You understood it well enough. I edited the offending part.</span>
+	&ndash;&nbsp;
+		<a href="/users/655/thomas-pornin" 
+		   title="106758 reputation" 
+		   class="comment-user">Thomas Pornin</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-12 22:53:04Z" class="relativetime-clean">Aug 12 '11 at 22:53</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10441" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Not a problem; I just wanted to make sure at least that part of my math was correct. I really appreciate your answer, though (and so thorough!) Thank you again. I&#39;d vote it up if I had enough reputation.</span>
+	&ndash;&nbsp;
+		<a href="/users/4217/ricardo-altamirano" 
+		   title="121 reputation" 
+		   class="comment-user owner">Ricardo Altamirano</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-12 23:03:55Z" class="relativetime-clean">Aug 12 '11 at 23:03</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6208" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="6212"></a>
+<div id="answer-6212" class="answer" data-answerid="6212" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="6212">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p><strong>Analysis.</strong> Your code has some shortcomings:</p>
+
+<ol>
+<li><p><strong>Buggy use of system().</strong> I suspect your shell command isn't going to do what you want it to, because you haven't quoted various shell metacharacters.  Instead of <code>tr -dc %s</code>, you need <code>tr -dc '%s'</code>, and then you need to escape the single-quote in $legal_characters.</p></li>
+<li><p><strong>Too-broad set of characters.</strong> This isn't going to generate passwords that can be reliably used on all sites. Many sites impose restrictions on which characters are allowed in passwords (e.g., they may prohibit single-quote).  As a result, if you use your script in practice, you'll find it often generates passwords that some sites will reject.  I'd suggest limiting the range of characters to a-zA-Z0-9, for maximum portability.  This is not going to significantly reduce entropy or password security, but it'll make your script more useful.</p></li>
+<li><p><strong>Dead code.</strong> You have useless dead code (<code>mt_rand_custom()</code>).  That code is also crummy stuff and not secure for cryptographic purposes, but that's a tangent: if you want to ask about that code, put it in a separate question.  Don't stuff two questions into one post.</p></li>
+</ol>
+
+<p><strong>Solution.</strong> @Thomas Pornin's one-line shell command is much better.  Personally, I'd improve it slightly by allowing capital letters and numbers:</p>
+
+<pre><code>head -c 500 /dev/urandom | tr -dc a-zA-Z0-9 | head -c 12; echo
+</code></pre>
+
+<p>This is enough to get you 71 bits of entropy, which should be more than enough for a website password, and the resulting passwords should be accepted by pretty much every web site out there.</p>
+
+<p>(If you want a shorter password, replacing the <code>12</code> by <code>10</code> gets you a 10-character password with 59 bits of entropy, which is probably still enough for all reasonable purposes.  A 8-character password would have 47 bits of entropy, which is also probably enough, as long as the web site's password hash database is not compromised -- and for most users, that's not the main thing they need to worry about.  A 8-character site-specific password is good enough to prevent online password guessing attacks, which is probably the most important threat that most users face.)</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/6212" title="short permalink to this answer" class="short-link" id="link-post-6212">share</a><span class="lsep">|</span><a href="/posts/6212/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/6212/revisions" title="show all edits to this post">edited <span title="2011-08-15 02:19:45Z" class="relativetime">Aug 15 '11 at 2:19</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-08-13 01:19:36Z" class="relativetime">Aug 13 '11 at 1:19</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/971/d-w"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/mYIzP.png?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/971/d-w">D.W.</a><br>
+        <span class="reputation-score" title="reputation score 49275" dir="ltr">49.3k</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="71 silver badges"><span class="badge2"></span><span class="badgecount">71</span></span><span title="189 bronze badges"><span class="badge3"></span><span class="badgecount">189</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-6212" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="6" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-10457" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">1. The shell command is working perfectly now, without escaping, but I&#39;ll keep that in mind. 
+2. The set of characters is easy enough to change dynamically; I&#39;ll probably change it to include fewer symbols, though. 
+3. mt_rand_custom was used in the original question to generate a random length for the password, but was removed to focus on the other code (see comments above). 
+Thanks for the help!</span>
+	&ndash;&nbsp;
+		<a href="/users/4217/ricardo-altamirano" 
+		   title="121 reputation" 
+		   class="comment-user owner">Ricardo Altamirano</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-13 13:28:20Z" class="relativetime-clean">Aug 13 '11 at 13:28</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10505" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">8 character lower, upper case letters and numbers password stored as NTLM is crackable in about 15 hours on 3GHz C2D using brute-force, or in about 5 minutes using 500GB rainbow tables...</span>
+	&ndash;&nbsp;
+		<a href="/users/3306/hubert-kario" 
+		   title="1281 reputation" 
+		   class="comment-user">Hubert Kario</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-14 14:04:33Z" class="relativetime-clean">Aug 14 '11 at 14:04</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10512" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Hubert, the primary risk most website users need to defend against is online password guessing. Any decent website should ensure that password hashes don&#39;t fall into the hands of an adversary; only in exceptional cases do attackers have access to password hashes that let them mount offline attacks. (BTW we&#39;re talking about website passwords, so they&#39;re not going to be hashed with NTLM.)  If you want to defend against offline attacks, you can increase the password length to 10 characters (that&#39;s 59 bits of entropy) or 12 characters (71 bits).</span>
+	&ndash;&nbsp;
+		<a href="/users/971/d-w" 
+		   title="49275 reputation" 
+		   class="comment-user">D.W.</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-14 17:26:13Z" class="relativetime-clean">Aug 14 '11 at 17:26</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10515" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@D.W.: &quot;Any decent website&quot; Oh, you mean, ones run by the likes of Sony or US federal agencies? No website is &quot;decent&quot;, you have to assume the worst. Rainbow tables for SHA1 and MD5 hashes are not much larger...</span>
+	&ndash;&nbsp;
+		<a href="/users/3306/hubert-kario" 
+		   title="1281 reputation" 
+		   class="comment-user">Hubert Kario</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-14 17:53:36Z" class="relativetime-clean">Aug 14 '11 at 17:53</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-10534" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@pythonscript, you might want to read a little more about best practices for password hashing.  (1) Best practice is to use bcrypt or PBKDF2, to slow down offline password search, if the password dictionary is leaked.  (2) &quot;salt is encrypted with 256-bit AES&quot; - huh?  That doesn&#39;t sound like you&#39;re using the salt properly.  The proper use of salt is to generate a new random salt for each user, and store two items associated with that user&#39;s account: the salt, and Hash(password, salt).</span>
+	&ndash;&nbsp;
+		<a href="/users/971/d-w" 
+		   title="49275 reputation" 
+		   class="comment-user">D.W.</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-15 02:17:12Z" class="relativetime-clean">Aug 15 '11 at 2:17</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-6212" data-rep=50 data-anon=true
+			   class="comments-link " 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>show <b>6</b> more comments</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/6205/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="6205" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+noCode: true,            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="6c07fd052a87c08ef3cc6e062a9ff978">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f6205%2fis-this-algorithm-for-a-random-string-cryptographically-secure%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f6205%2fis-this-algorithm-for-a-random-string-cryptographically-secure%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/cryptography" class="post-tag" title="show questions tagged &#39;cryptography&#39;" rel="tag">cryptography</a> <a href="/questions/tagged/web-application" class="post-tag" title="show questions tagged &#39;web-application&#39;" rel="tag">web-application</a> <a href="/questions/tagged/php" class="post-tag" title="show questions tagged &#39;php&#39;" rel="tag">php</a> <a href="/questions/tagged/random" class="post-tag" title="show questions tagged &#39;random&#39;" rel="tag">random</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/web-application" class="post-tag" title="show questions tagged &#39;web-application&#39;" rel="tag">web-application</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">893</span></span><br>
+<a href="/questions/tagged/cryptography" class="post-tag" title="show questions tagged &#39;cryptography&#39;" rel="tag">cryptography</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">790</span></span><br>
+<a href="/questions/tagged/php" class="post-tag" title="show questions tagged &#39;php&#39;" rel="tag">php</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">325</span></span><br>
+<a href="/questions/tagged/random" class="post-tag" title="show questions tagged &#39;random&#39;" rel="tag">random</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">70</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2011-08-12 20:39:27Z"><b>2 years ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>774 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2011-10-05 18:36:39Z">2 years ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-security.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/78" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">19
+    </div>
+</a><a href="/questions/78/what-cryptographic-algorithms-are-not-considered-secure" class="question-hyperlink">What cryptographic algorithms are not considered secure?</a>
+</div>
+<div class="spacer">
+<a href="/q/3241" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/3241/thoughts-on-tiny-encryption-algorithm-tea-anyone" class="question-hyperlink">Thoughts on Tiny Encryption Algorithm (TEA, anyone)?</a>
+</div>
+<div class="spacer">
+<a href="/q/3936" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">42
+    </div>
+</a><a href="/questions/3936/is-a-rand-from-dev-urandom-secure-for-a-login-key" class="question-hyperlink">Is a rand from /dev/urandom secure for a login key?</a>
+</div>
+<div class="spacer">
+<a href="/q/7193" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">10
+    </div>
+</a><a href="/questions/7193/cryptographic-security-of-dynamically-generated-non-random-salts" class="question-hyperlink">Cryptographic Security of Dynamically Generated, Non-Random Salts</a>
+</div>
+<div class="spacer">
+<a href="/q/17988" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">8
+    </div>
+</a><a href="/questions/17988/how-insecure-are-non-cryptographic-random-number-generators" class="question-hyperlink">How insecure are non-cryptographic random number generators?</a>
+</div>
+<div class="spacer">
+<a href="/q/20029" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">9
+    </div>
+</a><a href="/questions/20029/generate-cryptographically-strong-pseudorandom-numbers-in-javascript" class="question-hyperlink">Generate cryptographically strong pseudorandom numbers in Javascript?</a>
+</div>
+<div class="spacer">
+<a href="/q/21551" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/21551/do-the-popular-smartphone-operating-system-have-a-cryptographically-secure-rando" class="question-hyperlink">Do the popular smartphone operating system have a cryptographically secure random source?</a>
+</div>
+<div class="spacer">
+<a href="/q/42327" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">8
+    </div>
+</a><a href="/questions/42327/how-does-a-weakness-in-a-random-number-generator-lead-to-a-compromise-of-the-ent" class="question-hyperlink">How does a weakness in a random number generator lead to a compromise of the entire cryptographic process?</a>
+</div>
+<div class="spacer">
+<a href="/q/44364" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/44364/how-to-generate-cryptographically-strong-pseudorandom-data-very-rapidly" class="question-hyperlink">How to generate cryptographically strong pseudorandom data very rapidly?</a>
+</div>
+<div class="spacer">
+<a href="/q/44409" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/44409/if-the-code-to-shuffle-an-array-is-known-is-it-possible-for-the-randomized-shuf" class="question-hyperlink">If the code to shuffle an array is known, is it possible for the randomized shuffle to stay secure?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/6205" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/6205/ivc/73a8');});
+</script>
+<noscript>
+    <div><img src="/posts/6205/ivc/73a8" class="dno" alt="" width="0" height="0"></div>
+</noscript></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://security.blogoverflow.com/?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/6205/is-this-algorithm-for-a-random-string-cryptographically-secure")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.security.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Information Security Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|cryptography|web-application|php|random|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

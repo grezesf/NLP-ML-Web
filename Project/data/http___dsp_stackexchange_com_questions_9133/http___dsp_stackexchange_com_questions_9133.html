@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>filters - &#39;Best fit&#39; motion curve for an unachievable profile - Signal Processing Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/dsp/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/dsp/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Signal Processing Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackSignals" />
+    <meta name="twitter:domain" content="dsp.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/dsp/img/apple-touch-icon.png?v=ce86280cb8db"/>
+    <meta name="og:title" content="&#39;Best fit&#39; motion curve for an unachievable profile" />
+    <meta name="og:description" content="I have a discrete function that represents a 1d position in space over time.  I have a motion system that would like to achieve this curve, but, due to constraints on jerk (3rd derivative) and " />
+    <meta name="og:url" content="http://dsp.stackexchange.com/questions/9133/best-fit-motion-curve-for-an-unachievable-profile"/>
+    <link rel="canonical" href="http://dsp.stackexchange.com/questions/9133/best-fit-motion-curve-for-an-unachievable-profile" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/dsp/all.css?v=67e9087155b1">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;&#39;Best fit&#39; motion curve for an unachievable profile&#39;" href="/feeds/question/9133">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:4,shownCommentCount:4,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:9133});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('295', '9133');
+            
+                    });
+    </script>
+
+                <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+                                        tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+                                        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+                                        messageStyle: "none"
+                });
+                </script>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>                
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('295');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385454627,"enableUserHovercards":true,"site":{"name":"Signal Processing Stack Exchange","description":"Q&A for practitioners of the art and science of signal, image and video processing","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091","js/mathjax-editing.en.js":"a09844f7b738"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f9133%2fbest-fit-motion-curve-for-an-unachievable-profile">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f9133%2fbest-fit-motion-curve-for-an-unachievable-profile">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Signal Processing
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/dsp/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Signal Processing Stack Exchange is a question and answer site for practitioners of the art and science of signal, image and video processing. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/9133/best-fit-motion-curve-for-an-unachievable-profile" class="question-hyperlink">&#39;Best fit&#39; motion curve for an unachievable profile</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="9133"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="9133">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">7</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I have a discrete function that represents a 1d position in space over time.  I have a motion system that would like to achieve this curve, but, due to constraints on jerk (3rd derivative) and acceleration (2nd derivative), it cannot actually achieve the motion.  This occurs due to a discontinuity in the function, where it goes from a flat signal to a sharp rise.</p>
+
+<p>I'm looking for an algorithm that will take the discrete series and produce a new series that approximates the original, without violating the upper limits on the magnitude of the second and third derivatives.  I don't have a strict definition for how I'd like to minimize the error for the position, but a standard sum mean-squared error fit is probably reasonable.  For the derivative, I'm approximating using the standard centered difference $\frac{f(x+1)-f(x-1)}{(2{\Delta}t)}$.</p>
+
+<p>I've tried simply applying the limits and driving toward the target position as fast as possible, but this is unstable (it doesn't properly consider the de-jerk and decel time and therefore overshoots the target and oscillates.)  I've considered applying a repeated low-pass filter until the constraints are met, but this seems like a bit of a hack and I'm not convinced it will give me a very good fit.  Is there some way to create a filter that specifically limits the derivatives of the signal?</p>
+
+<hr>
+
+<p>A few additional notes:</p>
+
+<ol>
+<li><p>The new series must have the same length as the original series.  This motion occurs at the same time as another operation and the two are strictly synchronized.  It is acceptable, however, if it can't achieve the final position within the constraints; this just means that the parallel operation is too aggressive for the motion to follow.  This should not occur, in practice, when configured properly.</p></li>
+<li><p>I've started investigating an iterative approach that identifies a point that violates the constraints, then adjusts for the error and splits the negative of the error between the two neighboring points, so that the sum of the function values will be preserved.  It then computes the error at the neighbor and transfers the remaining error to the left or right, respectively.  If it reaches the end of the function and there is still error, it just chops to the limits.  I don't know if this approach has any sound theoretical grounding, but I'll experiment and see how it performs with my signals.</p></li>
+</ol>
+
+<hr>
+
+<p>More notes:</p>
+
+<p>It's reasonable to approximate the jerk (third derivative) function as a linear combination of non-overlapping step and impulse functions.  For a typical input series, it looks something like this (the blue vs. red is my current attempt at filtering; this is mainly just to convey an idea of the shape):</p>
+
+<p><img src="http://i.stack.imgur.com/h9wO8.png" alt="Jerk Series"></p>
+
+<p>Here is a typical acceleration profile:</p>
+
+<p><img src="http://i.stack.imgur.com/3RX1m.png" alt="Accel Series"></p>
+
+<p>Here is a typical velocity profile (the climb at the start is what causes all the trouble; the physics of the problem make the system prefer to start moving at close to infinite velocity right from the get-go, but practical considerations get in the way):</p>
+
+<p><img src="http://i.stack.imgur.com/mL9wv.png" alt="Velocity Series"></p>
+
+<p>For those who are interested, here is the raw tab-delimited data series from which the central-difference derivatives were approximated to produce the above graphs:</p>
+
+<pre><code>x   4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.5 4.510544858 4.529570168 4.548595479 4.567620789 4.5866461   4.60567141  4.624696721 4.643722031 4.662747342 4.681772652 4.700797963 4.719823273 4.738848584 4.757873894 4.776899204 4.795924515 4.814949825 4.833975136 4.853000446 4.872025757 4.891051067 4.910076378 4.929101688 4.948126999 4.967152309 4.98617762  5.00520293  5.024228241 5.043253551 5.062278862 5.081304172 5.100329483 5.119354793 5.138380104 5.157405414 5.176430725 5.195456035 5.214481346 5.233506656 5.252531967 5.271557277 5.290582588 5.309607898 5.328633209 5.347658519 5.36668383  5.38570914  5.404734451 5.423759761 5.442785072 5.461810382 5.480714657 5.497626044 5.514537431 5.531448818 5.548360206 5.565271593 5.58218298  5.599094367 5.616005754 5.632917141 5.649828528 5.666739915 5.683651302 5.700562689 5.717474077 5.734385464 5.751296851 5.768208238 5.785119625 5.802031012 5.818942399 5.835853786 5.852765173 5.869676561 5.886587948 5.903499335 5.920410722 5.937322109 5.954233496 5.971144883 5.98805627  6.004967657 6.021879044 6.038790432 6.055701819 6.072613206 6.089524593 6.10643598  6.123347367 6.140258754 6.157170141 6.174081528 6.190992916 6.207904303 6.22481569  6.241727077 6.258638464 6.275549851 6.292461238 6.309372625 6.326284012 6.343195399 6.360106787 6.377018174 6.393929561 6.410840948 6.427752335 6.444663722 6.461575109 6.478486496 6.495397883 6.512309271 6.529220658 6.546132045 6.563043432 6.579954819 6.596866206 6.613777593 6.63068898  6.647600367 6.664511754 6.681423142 6.698334529 6.715245916 6.732157303 6.74906869  6.765980077 6.782891464 6.79783353  6.807698506 6.817563482 6.827428457 6.837293433 6.847158409 6.857023385 6.866888361 6.876753336 6.886618312 6.896483288 6.906348264 6.91621324  6.926078215 6.935943191 6.945808167 6.955673143 6.965538119 6.975403095 6.98526807  6.995133046 7.004998022 7.014862998 7.024727974 7.034592949 7.044457925 7.054322901 7.064187877 7.074052853 7.083917828 7.093782804 7.10364778  7.113512756 7.123377732 7.133242707 7.143107683 7.152972659 7.162837635 7.172702611 7.182567587 7.192432562 7.202297538 7.212162514 7.22202749  7.231892466 7.241757441 7.251622417 7.261487393 7.271352369 7.281217345 7.29108232  7.300947296 7.310812272 7.320677248 7.330542224 7.3404072   7.350272175 7.360137151 7.370002127 7.379867103 7.389732079 7.399597054 7.40946203  7.419327006 7.429191982 7.439056958 7.448921933 7.45668417  7.46311785  7.46955153  7.47598521  7.48241889  7.488852569 7.495286249 7.501719929 7.508153609 7.514587289 7.521020969 7.527454649 7.533888329 7.540322008 7.546755688 7.553189368 7.559623048 7.566056728 7.572490408 7.578924088 7.585357768 7.591791447 7.598225127 7.604658807 7.611092487 7.617471594 7.622952136 7.628432678 7.63391322  7.639393762 7.644874304 7.650354846 7.655835389 7.661315931 7.666796473 7.672277015 7.677757557 7.683238099 7.688718641 7.694199183 7.699679725 7.705160268 7.71064081  7.716121352 7.721601894 7.727082436 7.732562978 7.73804352  7.743524062 7.749004605 7.754485147 7.759965689 7.765446231 7.770926773 7.776407315 7.781828236 7.786267475 7.790706714 7.795145953 7.799585192 7.804024432 7.808463671 7.81290291  7.817342149 7.821781388 7.826220627 7.830659866 7.835099105 7.839538344 7.843977584 7.848416823 7.852856062 7.857295301 7.86173454  7.866173779 7.870613018 7.875052257 7.879491497 7.883930736 7.888369975 7.892809214 7.897248453 7.901687692 7.906126931 7.91056617  7.915005409 7.919444649 7.923883888 7.928323127 7.932762366 7.937201605 7.941640844 7.946080083 7.950519322 7.954958561 7.959397801 7.96383704  7.968276279 7.972715518 7.977154757 7.980384921 7.982851165 7.985317409 7.987783653 7.990249897 7.992716141 7.995182385 7.997648629 8.000114873 8.002581117 8.005047361 8.007513605 8.009979849 8.012446092 8.014912336 8.01737858  8.019844824 8.022311068 8.024777312 8.027243556 8.0297098   8.032176044 8.034642288 8.037108532 8.039574776 8.04204102  8.044507264 8.046973508 8.049439752 8.051905996 8.05437224  8.056838484 8.059304728 8.061633119 8.063606114 8.065579109 8.067552105 8.0695251   8.071498095 8.07347109  8.075444085 8.07741708  8.079390076 8.081363071 8.083336066 8.085309061 8.087282056 8.089255051 8.091228046 8.093201042 8.09410447  8.094332124 8.094559777 8.09478743  8.095015084 8.095242737 8.09547039  8.095698043 8.095925697 8.09615335  8.096381003 8.096608657 8.09683631  8.097063963 8.097291616 8.09751927  8.097746923 8.097974576 8.09820223  8.098429883 8.098657536 8.098885189 8.099112843 8.099340496 8.099568149 8.099795803 8.100023456 8.100251109 8.100478762 8.100706416 8.100934069 8.101161722 8.101389376 8.101617029 8.101844682 8.102072336 8.102299989 8.102527642 8.102755295 8.102982949 8.103210602 8.103438255 8.103665909 8.103893562 8.104121215 8.104348868 8.104576522 8.104804175 8.105031828 8.105259482 8.105487135 8.105714788 8.105942441 8.106170095 8.106397748 8.106625401 8.106853055 8.107080708 8.107308361 8.107536014 8.107763668 8.107991321 8.108218974 8.108446628 8.108674183 8.108899792 8.109120089 8.109331659 8.109531087 8.109714959 8.10987986  8.110022376 8.110139158 8.11022965  8.110297009 8.110344649 8.110375986 8.110394434 8.110403409 8.110406324 8.110406324
+</code></pre>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/filters" class="post-tag" title="show questions tagged &#39;filters&#39;" rel="tag">filters</a> <a href="/questions/tagged/discrete-signals" class="post-tag" title="show questions tagged &#39;discrete-signals&#39;" rel="tag">discrete-signals</a> <a href="/questions/tagged/motion" class="post-tag" title="show questions tagged &#39;motion&#39;" rel="tag">motion</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/9133" title="short permalink to this question" class="short-link" id="link-post-9133">share</a><span class="lsep">|</span><a href="/posts/9133/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/9133/revisions" title="show all edits to this post">edited <span title="2013-05-21 17:35:08Z" class="relativetime">May 21 at 17:35</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-05-15 17:00:00Z" class="relativetime">May 15 at 17:00</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/4573/dan-bryant"><div><img src="https://www.gravatar.com/avatar/c0ae91bcdb6558aac9315dba1b7f9d4c?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/4573/dan-bryant">Dan Bryant</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">151</span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-9133" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-15425" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Welcome to DSP.SE. Interesting question.</span>
+	&ndash;&nbsp;
+		<a href="/users/90/jason-r" 
+		   title="11840 reputation" 
+		   class="comment-user">Jason R</a>
+	<span class="comment-date" dir="ltr"><span title="2013-05-15 17:04:40Z" class="relativetime-clean">May 15 at 17:04</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-15429" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">How about some variant of a PID controller?</span>
+	&ndash;&nbsp;
+		<a href="/users/923/jim-clay" 
+		   title="6715 reputation" 
+		   class="comment-user">Jim Clay</a>
+	<span class="comment-date" dir="ltr"><span title="2013-05-15 18:00:37Z" class="relativetime-clean">May 15 at 18:00</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-15431" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Jim, that might work, but it seems a bit complicated for the task and would require tuning to make it perform well.  I&#39;m also not sure it would be much better than a simple repeated low-pass filter.</span>
+	&ndash;&nbsp;
+		<a href="/users/4573/dan-bryant" 
+		   title="151 reputation" 
+		   class="comment-user owner">Dan Bryant</a>
+	<span class="comment-date" dir="ltr"><span title="2013-05-15 18:09:21Z" class="relativetime-clean">May 15 at 18:09</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-15443" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I&#39;m wondering whether taking <a href="http://dsp.stackexchange.com/a/8869/80">the system described in this question/answer</a> and, in the Kalman filter loop, forcing the jerk and acceleration to be constrained as you want might do the right thing.  I have no time to play now; it&#39;ll be the weekend before  I have a chance... the model state will need to be increased to include the jerk, as well as the constraints.</span>
+	&ndash;&nbsp;
+		<a href="/users/80/peter-k" 
+		   title="4887 reputation" 
+		   class="comment-user">Peter K.<span class="mod-flair" title="moderator">&#9830;</span></a>
+	<span class="comment-date" dir="ltr"><span title="2013-05-16 07:45:44Z" class="relativetime-clean">May 16 at 7:45</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-9133" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								1 Answer
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/9133/best-fit-motion-curve-for-an-unachievable-profile?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/9133/best-fit-motion-curve-for-an-unachievable-profile?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/9133/best-fit-motion-curve-for-an-unachievable-profile?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="9225"></a>
+<div id="answer-9225" class="answer" data-answerid="9225" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="9225">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>This is just an idea. Don't know if it will work. In cubic spline interpolation a curve is constructed by piece-wise cubic polynomials</p>
+
+<p>$P(x) = a + bx + cx^2 + dx^3$</p>
+
+<p>The coefficients for the $j^{th}$ cubic (which extends from the $j^{th}$  to the $(j+1)^{th}$ point) are found by directly specifying the first derivatives at the nodes and also specifying that the curve must pass through the points. I'm no where near an expert in this but it goes something like this</p>
+
+<p>$P_j(x_j) = P_{j-1}(x_j) \\
+P_j(x_{j+1}) = P_{j+1}(x_{j+1}) \\
+P'_j(x_j) = P'_{j-1}(x_j) \\
+P'_j(x_{j+1}) = P'_{j+1}(x_{j+1})$ </p>
+
+<p>Now using this idea to your problem maybe you could use $5^{th}$ order polynomials on this form</p>
+
+<p>$P(x) = x^2(a + bx + cx^2 + dx^3)$</p>
+
+<p>and use the constraints on the second and third order derivatives like this</p>
+
+<p>$P''_j(x_j) = P''_{j-1}(x_j) \\
+P''_j(x_{j+1}) = P''_{j+1}(x_{j+1}) \\
+P'''_j(x_j) = P'''_{j-1}(x_j) \\
+P'''_j(x_{j+1}) = P'''_{j+1}(x_{j+1})$ </p>
+
+<p>Edit: From the discrete function that represents the 1d position in space over time the acc and jerk values are computed (is that feasible in your case?). If they exceed some max value they are saturated to that max value. Then you construct a continuous 1D position function that has the acc and jerk values at the times you specified. Then this curve is evaluated at the times of interest and thereby you have a new discrete function that represents the 1d position in space over time but with the desired acc and jerk values. I don't know if this makes more sense. It takes some effort to test if it works. If you want to give it a try I suggest you search for cubic spline interpolation to learn how it works with position and velocity. Then use the same principles but just on acc and jerk. If I have to be more specific I will have to read up on cubic spline interpolation myself. </p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/9225" title="short permalink to this answer" class="short-link" id="link-post-9225">share</a><span class="lsep">|</span><a href="/posts/9225/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/9225/revisions" title="show all edits to this post">edited <span title="2013-05-21 19:16:48Z" class="relativetime">May 21 at 19:16</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-05-21 08:26:03Z" class="relativetime">May 21 at 8:26</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/199/niaren"><div><img src="https://www.gravatar.com/avatar/b5c9ad04ec851c4da9953fcf1d195f9c?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/199/niaren">niaren</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,312</span><span title="5 silver badges"><span class="badge2"></span><span class="badgecount">5</span></span><span title="8 bronze badges"><span class="badge3"></span><span class="badgecount">8</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-9225" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-15607" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Is the intention of this to compute a piecewise continuous function that fits the discrete series?  If so, do you have an idea of how to perform the jerk/accel limiting operation on the polynomials?  If so, I can re-sample from the continous function, but it&#39;s unclear to me how I would modify the polynomial coefficients to achieve the desired maximal limit constraints.</span>
+	&ndash;&nbsp;
+		<a href="/users/4573/dan-bryant" 
+		   title="151 reputation" 
+		   class="comment-user owner">Dan Bryant</a>
+	<span class="comment-date" dir="ltr"><span title="2013-05-21 17:16:53Z" class="relativetime-clean">May 21 at 17:16</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-9225" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/9133/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="9133" />
+							<h2 class="space">Your Answer</h2>
+
+
+        <script type="text/javascript">
+            StackExchange.ifUsing("editor", function () {
+                return StackExchange.using("mathjaxEditing", function () {
+                    StackExchange.MarkdownEditor.creationCallbacks.add(function (editor, postfix) {
+                        StackExchange.mathjaxEditing.prepareWmdForMathJax(editor, postfix, [["$", "$"], ["\\\\(","\\\\)"]]);
+                    });
+                });
+            }, "mathjax-editing");
+        </script>
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+noCode: true,            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f9133%2fbest-fit-motion-curve-for-an-unachievable-profile%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f9133%2fbest-fit-motion-curve-for-an-unachievable-profile%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/filters" class="post-tag" title="show questions tagged &#39;filters&#39;" rel="tag">filters</a> <a href="/questions/tagged/discrete-signals" class="post-tag" title="show questions tagged &#39;discrete-signals&#39;" rel="tag">discrete-signals</a> <a href="/questions/tagged/motion" class="post-tag" title="show questions tagged &#39;motion&#39;" rel="tag">motion</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/filters" class="post-tag" title="show questions tagged &#39;filters&#39;" rel="tag">filters</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">351</span></span><br>
+<a href="/questions/tagged/discrete-signals" class="post-tag" title="show questions tagged &#39;discrete-signals&#39;" rel="tag">discrete-signals</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">220</span></span><br>
+<a href="/questions/tagged/motion" class="post-tag" title="show questions tagged &#39;motion&#39;" rel="tag">motion</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">7</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-05-15 17:00:00Z"><b>6 months ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>191 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-11-17 22:07:23Z">8 days ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-dsp.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/8860" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">5</div>
+	</a>
+	<a href="/questions/8860/more-on-kalman-filter-for-position-and-velocity" class="question-hyperlink">More on: Kalman filter for position and velocity</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/378" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">12
+    </div>
+</a><a href="/questions/378/what-is-the-best-first-order-iir-approximation-to-a-moving-average-filter" class="question-hyperlink">What is the best first-order IIR approximation to a moving average filter?</a>
+</div>
+<div class="spacer">
+<a href="/q/2251" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/2251/how-best-to-digitize-a-noisy-phone-recording-for-filtering" class="question-hyperlink">How best to digitize a noisy phone recording for filtering?</a>
+</div>
+<div class="spacer">
+<a href="/q/2441" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/2441/how-to-analyze-a-pattern-of-discrete-events-belonging-to-a-24-hour-and-90-minut" class="question-hyperlink">How to analyze a pattern of discrete events belonging to a 24 hour and ~90 minute cycle?</a>
+</div>
+<div class="spacer">
+<a href="/q/3351" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">6
+    </div>
+</a><a href="/questions/3351/kalman-filter-best-way-to-handle-derived-measurements" class="question-hyperlink">Kalman Filter - best way to handle &ldquo;derived&rdquo; measurements?</a>
+</div>
+<div class="spacer">
+<a href="/q/3363" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/3363/state-of-the-art-motion-blur-recovery" class="question-hyperlink">State of the art motion blur recovery</a>
+</div>
+<div class="spacer">
+<a href="/q/4853" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/4853/best-way-to-resample-a-signal-image" class="question-hyperlink">Best way to resample a signal (image)?</a>
+</div>
+<div class="spacer">
+<a href="/q/7695" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/7695/voice-sample-prediction-scheme" class="question-hyperlink">Voice sample prediction scheme</a>
+</div>
+<div class="spacer">
+<a href="/q/9537" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/9537/determine-parameters-of-gaussian-distribution-to-fit-a-certain-image-filter" class="question-hyperlink">Determine Parameters of gaussian distribution to fit a certain Image-Filter</a>
+</div>
+<div class="spacer">
+<a href="/q/9592" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/9592/fitting-fixed-number-of-complex-exponentials-to-complex-signal" class="question-hyperlink">Fitting fixed number of complex exponentials to complex signal</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/9133" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/9133/ivc/222d');});
+</script>
+<noscript>
+    <div><img src="/posts/9133/ivc/222d" class="dno" alt="" width="0" height="0"></div>
+</noscript></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/9133/best-fit-motion-curve-for-an-unachievable-profile")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.dsp.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Signal Processing Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|filters|discrete-signals|motion|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

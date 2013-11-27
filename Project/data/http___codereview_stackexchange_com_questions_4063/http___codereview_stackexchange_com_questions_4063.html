@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>PHP Google Weather API wrapper - Code Review Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codereview/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Code Review Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeReview" />
+    <meta name="twitter:domain" content="codereview.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codereview/img/apple-touch-icon.png?v=bb26b8631f86"/>
+    <meta name="og:title" content="PHP Google Weather API wrapper" />
+    <meta name="og:description" content="I&#39;m an amateur programmer (self-taught). Anyway, this class provides a few methods to access Google&#39;s unofficial weather API. I&#39;m having trouble on how to go about handling parsing errors in parse_..." />
+    <meta name="og:url" content="http://codereview.stackexchange.com/questions/4063/php-google-weather-api-wrapper"/>
+    <link rel="canonical" href="http://codereview.stackexchange.com/questions/4063/php-google-weather-api-wrapper" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codereview/all.css?v=67e9087155b1">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;PHP Google Weather API wrapper&#39;" href="/feeds/question/4063">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:1,shownCommentCount:1,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:4063});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('196', '4063');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('196');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385450411,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Code Review Stack Exchange","description":"Q&A for peer programmer code reviews","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f4063%2fphp-google-weather-api-wrapper">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f4063%2fphp-google-weather-api-wrapper">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Code Review
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Code Review Stack Exchange is a question and answer site for peer programmer code reviews. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/4063/php-google-weather-api-wrapper" class="question-hyperlink">PHP Google Weather API wrapper</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="4063"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="4063">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">5</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I'm an amateur programmer (self-taught). Anyway, this class provides a few methods to access Google's unofficial weather API. I'm having trouble on how to go about handling parsing errors in parse_xml() so any suggestions there would also be helpful.</p>
+
+<pre><code>&lt;?php
+  class weather {
+  private $_location;
+  private $_url = 'http://www.google.com/ig/api?weather=';
+  private $_isParsed = false;
+  private $_wData;
+
+  public $lastError;
+
+  public function __construct( $location) {
+      // Set location
+      $this-&gt;_location = $location;
+
+      // urlencode doesn't seem to work so manually add the + for whitespace
+      $this-&gt;_url = preg_replace('/\s{1}/', '+',$this-&gt;_url .= $location);
+      $this-&gt;parse_xml($this-&gt;get_xml());
+  }
+
+  public function get_temp($type = "f") {
+      if (!$this-&gt;_isParsed)
+          return false;
+
+      // User specificed celsius, return celsius
+      if ($type == "c")
+          return $this-&gt;_wData['current']['temp_c'];
+
+      // return fahrenheit
+      return $this-&gt;_wData['current']['temp_f'];
+  }
+
+  public function get_condition() {
+      if (!$this-&gt;_isParsed)
+              return false;
+      // provide current conditions only
+      return $this-&gt;_wData['current']['condition'];
+  }
+
+  public function get_forecast_for_day($day) {
+      if (!$this-&gt;_isParsed)
+          return false;
+      return $this-&gt;_wData['forecast'][$day];
+  }
+  public function get_forecast_assoc() {
+      if (!$this-&gt;_isParsed)
+          return false;
+      return $this-&gt;_wData['forecast'];
+  }
+
+  public function get_cond_assoc() {
+      if (!$this-&gt;_isParsed)
+          return false;
+      return $this-&gt;_wData['current'];
+  }
+
+  public function dump_wData() {
+      if (!$this-&gt;_isParsed)
+          return false;
+      return $this-&gt;_wData;
+  }
+
+  public static function to_celsius($f) {
+      // Convert Fahrenheit to Celsius.
+      // I figured this would be quicker than trying to parse the XML.
+      return floor(((int)$f - 32) * (5 / 9));
+  }
+
+  private function get_xml() {
+      // Download raw XML to be parsed.
+      $ch = curl_init($this-&gt;_url);
+
+      // I don't know why I altered the useragent. It must have been for a good reason. Oh well.
+      curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; rv:5.0.1) Gecko/20100101 Firefox/5.0.1');
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      $rawXML = curl_exec($ch);
+
+      if (!$rawXML)
+          return false;
+      curl_close($ch);
+      return $rawXML;
+  }
+
+  private function parse_xml($xData) {
+      libxml_use_internal_errors(true);
+      try {
+        $weather = new SimpleXMLElement($xData);
+      } catch (Exception $err) {
+          // Set $lastError to getMessage()
+          $this-&gt;lastError = $err-&gt;getMessage();
+         return false;
+      }
+      // Select the current_conditions node ($cNode)
+      $cNode = $weather-&gt;weather[0]-&gt;current_conditions;
+
+      // ========= Set up our current conditions array ====================
+
+      // Tempreature - temp_f Fahrenheit, temp_c celsius - set as floats.
+      $this-&gt;_wData['current']['temp_f'] = (float)$cNode-&gt;temp_f-&gt;attributes()-&gt;data;
+      $this-&gt;_wData['current']['temp_c'] = weather::to_celsius($this-&gt;_wData['current']['temp_f']);
+
+      // Condition
+      $this-&gt;_wData['current']['condition'] = (string)$cNode-&gt;condition-&gt;attributes()-&gt;data;
+
+      // Condition Icon - icon url is not absolute, append google.com
+      $this-&gt;_wData['current']['icon'] = (string)"http://www.google.com" . $cNode-&gt;icon-&gt;attributes()-&gt;data;
+
+      // Wind Condition
+      $this-&gt;_wData['current']['wind'] = (string)$cNode-&gt;wind_condition-&gt;attributes()-&gt;data;
+
+      // ============= Set up our forecast array =============
+      $fNode = $weather-&gt;weather[0]-&gt;forecast_conditions;
+
+      // Iterate through each day of the week and create an assoc array.
+      foreach ($fNode as $forecast) {
+          // Get the day.
+          $day = (string)$forecast-&gt;day_of_week-&gt;attributes()-&gt;data;
+
+          // Insert an array of info for that day
+          $this-&gt;_wData['forecast'][$day] = array (
+              "high" =&gt; (float)$forecast-&gt;high-&gt;attributes()-&gt;data,
+              "low" =&gt; (float)$forecast-&gt;low-&gt;attributes()-&gt;data,
+              "icon" =&gt; (string)"http://www.google.com" . $forecast-&gt;icon-&gt;attributes()-&gt;data,
+              "condition" =&gt; (string)$forecast-&gt;condition-&gt;attributes()-&gt;data
+            );
+      } //foreach ($fNode as $forecast)
+      // Let the class know wData is ready for use.
+      $this-&gt;_isParsed = true;
+  } //private function parse_xml($xData)
+
+}
+?&gt;
+</code></pre>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/php" class="post-tag" title="show questions tagged &#39;php&#39;" rel="tag">php</a> <a href="/questions/tagged/api" class="post-tag" title="show questions tagged &#39;api&#39;" rel="tag">api</a> <a href="/questions/tagged/google" class="post-tag" title="show questions tagged &#39;google&#39;" rel="tag">google</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/4063" title="short permalink to this question" class="short-link" id="link-post-4063">share</a><span class="lsep">|</span><a href="/posts/4063/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2011-08-13 01:06:13Z" class="relativetime">Aug 13 '11 at 1:06</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/6283/crazylunatic"><div><img src="https://www.gravatar.com/avatar/a17eb1325a4fbb3b65b1dd2f30c5b033?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/6283/crazylunatic">CrazyLunatic</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">28</span><span title="4 bronze badges"><span class="badge3"></span><span class="badgecount">4</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-4063" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-6084" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">amateur doesn&#39;t mean self-taught, it just means unpaid. There&#39;s plenty of us who went from amateur to professional self-taught :)</span>
+	&ndash;&nbsp;
+		<a href="/users/5785/jimmy-hoffa" 
+		   title="940 reputation" 
+		   class="comment-user">Jimmy Hoffa</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-13 17:00:39Z" class="relativetime-clean">Aug 13 '11 at 17:00</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-4063" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								3 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/4063/php-google-weather-api-wrapper?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/4063/php-google-weather-api-wrapper?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/4063/php-google-weather-api-wrapper?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="4161"></a>
+<div id="answer-4161" class="answer accepted-answer" data-answerid="4161" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="4161">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p><strong>Use methods to get the data</strong>, this is a kind of dependency injection and will allow you to test the code with out having to hit google's server everytime. It will also avoid the <code>if($this-&gt;_isParsed)</code> on all your functions.</p>
+
+<p>Additionally, move the 'parsing' - which is really just navigating the XML structure - to the functions that return the data. This removes your <code>parse_xml</code> function (which would now be just a function that creates the <code>SimpleXML</code> object), and allows you to throw exceptions only when requested data is missing/unexpected (or return just return false, if that's how you want your client to act).</p>
+
+<p>Here's some example code. </p>
+
+<p><em>I tend to use camelCase, I'm not trying to change your style, it's just second nature.</em></p>
+
+<pre><code>&lt;?php
+class GoogleWeather{
+  protected $api = 'http://www.google.com/ig/api?weather=';
+  protected $xml;
+  protected $response;
+  protected $location;
+
+  public function __construct( $location) {
+    // Set location
+    $this-&gt;location = $location;
+  }
+
+  public function setResponse($response)
+  {
+    $this-&gt;response = $response;
+  }
+
+  public function getResponse()
+  {
+    //if the xml hasn't been fetched, then fetch it
+    if(empty($this-&gt;response)){
+      $this-&gt;setResponse($this-&gt;fetchData());
+    }
+    return $this-&gt;response;
+  }
+
+  //was get_xml renamed to avoid confusion
+  public function fetchData()
+  {
+    // Download raw XML to be parsed.
+    $ch = curl_init($this-&gt;api . urlencode($this-&gt;location));
+
+    // I don't know why I altered the useragent. It must have been for a good reason. Oh well.
+    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; rv:5.0.1) Gecko/20100101 Firefox/5.0.1');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $rawXML = curl_exec($ch); 
+
+    if (!$rawXML){
+      //check the curl error for a better message
+      throw new Exception('could not fetch data'); 
+    }
+    curl_close($ch);
+    return $rawXML;
+  }
+
+  public function getXml()
+  {
+    if(empty($this-&gt;xml)){
+      try{
+        $this-&gt;xml = new SimpleXMLElement($this-&gt;getResponse());
+      } catch (Exception $e) {
+        //there's no real recovery here, except maybe to retry fetching the data
+        throw new Exception('bad response from from API');
+      }
+
+      //check for 'problem_cause' element
+      if(isset($this-&gt;xml-&gt;weather-&gt;problem_cause)){
+        throw new Exception('API responded with error');
+      }
+    }
+    return $this-&gt;xml;
+  }
+
+  public function getCondition()
+  {
+    //make sure there's data
+    if(!isset($this-&gt;getXml()-&gt;weather-&gt;current_conditions)){
+      //you could throw an exception and assume any code using this is 
+      //calling it in a try block
+      throw new Exception('could not find conditions');
+    }
+
+    return $this-&gt;getXml()-&gt;weather-&gt;current_conditions;
+  }
+
+  public function getTemp($type = 'f')
+  {
+    //validate type
+    if(!in_array($type, array('f','c'))){
+      throw Exception('invalid temp type: ' . $type);
+    }
+
+    $element = 'temp_' . $type;
+    //make sure there's data
+    if(!isset($this-&gt;getCondition()-&gt;{$element}['data'])){
+      throw new Exception('could not find temp');
+    }
+
+    //cast as float and return
+    return (float) $this-&gt;getCondition()-&gt;{$element}['data'];
+  }
+}
+</code></pre>
+
+<p>You can avoid navigating the <code>SimpleXML</code> object multiple times for the same data using the same basic concept the other lazy loading functions use (<code>getXML()</code>, <code>getResponse()</code>). </p>
+
+<p>Instead of using object properties, I just put a static variable in the method - since the location can not change, there's no never a need to unset all the data. </p>
+
+<p>However, if the location could change, the same could be accomplished with <code>$this-&gt;data[$property]</code> - obviously resetting <code>$this-&gt;data</code> to <code>array()</code> every time the location is changed.</p>
+
+<p>Here's an improved <code>getTemp()</code>:</p>
+
+<pre><code>  public function getTemp($type = 'f')
+  {
+    static $temp = array();
+
+    //validate type
+    if(!in_array($type, array('f','c'))){
+      throw Exception('invalid temp type: ' . $type);
+    }
+
+    if(isset($temp[$type])){
+      return $temp[$type];
+    }
+
+    $element = 'temp_' . $type;
+    //make sure there's data
+    if(!isset($this-&gt;getCondition()-&gt;{$element}['data'])){
+      throw new Exception('could not find temp');
+    }
+
+    //cast as float and return
+    $temp[$type] = $this-&gt;getCondition()-&gt;{$element}['data'];
+    return $temp[$type];
+  }
+</code></pre>
+
+<p>I'd be interested in seeing if there's any significant performance gained over navigating the <code>SimpleXML</code> object each time.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/4161" title="short permalink to this answer" class="short-link" id="link-post-4161">share</a><span class="lsep">|</span><a href="/posts/4161/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/4161/revisions" title="show all edits to this post">edited <span title="2011-08-18 00:19:16Z" class="relativetime">Aug 18 '11 at 0:19</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-08-17 02:35:47Z" class="relativetime">Aug 17 '11 at 2:35</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/391/tim-lytle"><div><img src="https://www.gravatar.com/avatar/2b28f82a3764d50d9404fe170bdf2779?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/391/tim-lytle">Tim Lytle</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">181</span><span title="4 bronze badges"><span class="badge3"></span><span class="badgecount">4</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-4161" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-6211" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I don&#39;t know the overhead involved in querying into the SimpleXML object, I&#39;m assuming it&#39;s not much, but just for safety I would lazy load in your getCondition and getTemp, have member level temp and condition, and first thing method does is check <code>if(isset($this-&gt;condition)) { return $this-&gt;condition; }</code> then set <code>$this-&gt;condition</code> at the end of getCondition() after parsing it out, otherwise this makes perfect sense.</span>
+	&ndash;&nbsp;
+		<a href="/users/5785/jimmy-hoffa" 
+		   title="940 reputation" 
+		   class="comment-user">Jimmy Hoffa</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-17 11:16:14Z" class="relativetime-clean">Aug 17 '11 at 11:16</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-6219" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Jimmy Hoffa Yeah, that could certainly be added. I&#39;ll try to update with that in a bit.</span>
+	&ndash;&nbsp;
+		<a href="/users/391/tim-lytle" 
+		   title="181 reputation" 
+		   class="comment-user">Tim Lytle</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-17 17:06:48Z" class="relativetime-clean">Aug 17 '11 at 17:06</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-6236" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Jimmy Hoffa updated with your suggestion (well, a variation of it).</span>
+	&ndash;&nbsp;
+		<a href="/users/391/tim-lytle" 
+		   title="181 reputation" 
+		   class="comment-user">Tim Lytle</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-18 00:19:44Z" class="relativetime-clean">Aug 18 '11 at 0:19</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-4161" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="4071"></a>
+<div id="answer-4071" class="answer" data-answerid="4071" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="4071">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>I'm a C# developer myself but I like this altogether, very clean and easy to read and understand even though it's not a language I've worked in.</p>
+
+<p>The layout of the class is clean with the members and methods nicely ordered and clear to their purpose.</p>
+
+<p>The only suggestions I have are:
+seperate it into 2 classes, the one that has the gets, and the one that does the parsing. Make the <code>GoogleWeatherResponseParser</code> a member of your <code>GoogleWeatherDataAccess</code> and you can either construct the parser at construction, or a more testable approach is that it's handed to the constructor.</p>
+
+<p>If it's handed to the constructor, the consumer of the data access would construct the parser and be able to check if it was parsed successfully or not before handing it to the data access. Then the data access would only have to check at construction and throw an exception, never checking in the individual methods making them cleaner.</p>
+
+<p>Also, you could then write unit tests that hand in various versions of the <code>GoogleWeatherResponseParser</code> to the <code>GoogleWeatherDataAccess</code> at construction and verify that the data the data access hands out is as you expected. Not sure how common unit tests are in PHP, but they are immensely helpful in allowing you to change code knowing that you'll be notified if you broke something.</p>
+
+<p>Edit: Oh and you're dead right about doing the celsius calculation as opposed to the xml parse step.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/4071" title="short permalink to this answer" class="short-link" id="link-post-4071">share</a><span class="lsep">|</span><a href="/posts/4071/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-08-13 17:17:16Z" class="relativetime">Aug 13 '11 at 17:17</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/5785/jimmy-hoffa"><div><img src="https://www.gravatar.com/avatar/dd4c08b8a0735e8dffdbee8bd2ebf666?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/5785/jimmy-hoffa">Jimmy Hoffa</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">940</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="9 bronze badges"><span class="badge3"></span><span class="badgecount">9</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-4071" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-6206" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I disagree about splitting it into two objects, as it&#39;s already two objects. The actual parsing is done by the <code>SimpleXML</code> object, all the class has to be is a wrapper around that, allowing easy access to the data (easier than knowing where in the XML tree to find the data). I believe the real change should be navigating the tree when needed, and not all at once (in the <code>parse_xml</code> method). If the code did that, I think it would look like your two object suggestion, since the <code>SimpleXML</code> object would replace your suggested <code>GoogleWeatherResponseParser</code>.</span>
+	&ndash;&nbsp;
+		<a href="/users/391/tim-lytle" 
+		   title="181 reputation" 
+		   class="comment-user">Tim Lytle</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-17 02:39:12Z" class="relativetime-clean">Aug 17 '11 at 2:39</span></span>
+		<span class="edited-yes" title="this comment was edited 3 times"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-6210" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@Tim I am unfamiliar with the php frameworks SimpleXML object, but my logic was based on the single responsibility principle and seperation of concerns, right now the one class is concerned with the http request, the response parsing, and the data serving to clients. My suggestion was there be one object for managing the request/parsing (which could use lazy loads for delayed execution) and one for data serving to clients, or in more standard terms a data provider and a data access, in which they do not need to know eachothers implementations.</span>
+	&ndash;&nbsp;
+		<a href="/users/5785/jimmy-hoffa" 
+		   title="940 reputation" 
+		   class="comment-user">Jimmy Hoffa</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-17 11:10:05Z" class="relativetime-clean">Aug 17 '11 at 11:10</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-6235" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@ Jimmy Hoffa - wasn&#39;t meaning to disagree with the principle, just that using SimpleXML already separates the two (and in this case, I find it enough).</span>
+	&ndash;&nbsp;
+		<a href="/users/391/tim-lytle" 
+		   title="181 reputation" 
+		   class="comment-user">Tim Lytle</a>
+	<span class="comment-date" dir="ltr"><span title="2011-08-18 00:11:08Z" class="relativetime-clean">Aug 18 '11 at 0:11</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-4071" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="4461"></a>
+<div id="answer-4461" class="answer" data-answerid="4461" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="4461">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>If I could make a few suggestions, both for readability and to avoid problems in the future.</p>
+
+<ol>
+<li>Indent from the class name.</li>
+</ol>
+
+<p>Instead of </p>
+
+<pre><code>&lt;?php
+  class weather {
+  private $_location;
+  private $_url = 'http://www.google.com/ig/api?weather=';
+  private $_isParsed = false;
+  private $_wData;
+</code></pre>
+
+<p>write</p>
+
+<pre><code>&lt;?php
+  class weather {
+    private $_location;
+    private $_url = 'http://www.google.com/ig/api?weather=';
+    private $_isParsed = false;
+    private $_wData;
+</code></pre>
+
+<p>2  Always use parenthesis with an if statement</p>
+
+<p>instead of  </p>
+
+<pre><code>public function get_cond_assoc() {
+    if (!$this-&gt;_isParsed)
+        return false;
+    return $this-&gt;_wData['current'];
+}
+</code></pre>
+
+<p>use</p>
+
+<pre><code>public function get_cond_assoc() {
+    if (!$this-&gt;_isParsed)
+    {
+        return false;
+    }
+    return $this-&gt;_wData['current'];
+}
+</code></pre>
+
+<p>This may seem unnecessary since your construction is perfectly legal, but the first time you spend 2 hours hunting down a bug caused by not putting in the braces you'll thank me :)</p>
+
+<p>3 Dont typecast unnecessarily</p>
+
+<p>The (string) here is unnecessary and confusing.</p>
+
+<pre><code> // Condition Icon - icon url is not absolute, append google.com
+  $this-&gt;_wData['current']['icon'] = (string)"http://www.google.com" .
+                                      $cNode-&gt;icon-&gt;attributes()-&gt;data;
+</code></pre>
+
+<p>These are just a few pointers to make your code a bit more readable and less likely to cause you headaches in the future.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/4461" title="short permalink to this answer" class="short-link" id="link-post-4461">share</a><span class="lsep">|</span><a href="/posts/4461/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-08-28 20:44:40Z" class="relativetime">Aug 28 '11 at 20:44</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/6699/toby-allen"><div><img src="https://www.gravatar.com/avatar/1e037aa722c82abdf479a505a36bf1ed?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/6699/toby-allen">Toby Allen</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">121</span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-4461" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-4461" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/4063/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="4063" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f4063%2fphp-google-weather-api-wrapper%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f4063%2fphp-google-weather-api-wrapper%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/php" class="post-tag" title="show questions tagged &#39;php&#39;" rel="tag">php</a> <a href="/questions/tagged/api" class="post-tag" title="show questions tagged &#39;api&#39;" rel="tag">api</a> <a href="/questions/tagged/google" class="post-tag" title="show questions tagged &#39;google&#39;" rel="tag">google</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/php" class="post-tag" title="show questions tagged &#39;php&#39;" rel="tag">php</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">1149</span></span><br>
+<a href="/questions/tagged/api" class="post-tag" title="show questions tagged &#39;api&#39;" rel="tag">api</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">72</span></span><br>
+<a href="/questions/tagged/google" class="post-tag" title="show questions tagged &#39;google&#39;" rel="tag">google</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">26</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2011-08-13 01:06:13Z"><b>2 years ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>1392 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2011-08-28 20:44:40Z">2 years ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-codereview.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/337" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/337/php-sdk-for-googles-geocoding-api" class="question-hyperlink">PHP SDK for Google&#39;s Geocoding API</a>
+</div>
+<div class="spacer">
+<a href="/q/4404" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/4404/gmail-contacts-api-connection-review" class="question-hyperlink">Gmail Contacts API Connection Review</a>
+</div>
+<div class="spacer">
+<a href="/q/9223" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/9223/filemaker-php-api-interface-v1-6-3" class="question-hyperlink">FileMaker PHP API Interface v1.6.3</a>
+</div>
+<div class="spacer">
+<a href="/q/14402" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/14402/php-pdo-wrapper-class" class="question-hyperlink">PHP PDO wrapper class</a>
+</div>
+<div class="spacer">
+<a href="/q/18117" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/18117/loading-javascript-libraries-with-php-api" class="question-hyperlink">Loading Javascript Libraries with PHP API</a>
+</div>
+<div class="spacer">
+<a href="/q/18577" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/18577/php-session-wrapper-class" class="question-hyperlink">Php session wrapper class</a>
+</div>
+<div class="spacer">
+<a href="/q/19397" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/19397/php-api-design-anything-done-badly" class="question-hyperlink">PHP api design - anything done badly?</a>
+</div>
+<div class="spacer">
+<a href="/q/19859" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/19859/accessing-a-rest-api-with-php" class="question-hyperlink">Accessing a REST API with PHP</a>
+</div>
+<div class="spacer">
+<a href="/q/26157" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/26157/how-is-this-for-an-api-structure" class="question-hyperlink">How is this for an API structure</a>
+</div>
+<div class="spacer">
+<a href="/q/31468" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/31468/code-review-on-an-api-wrapper-in-c-wanted" class="question-hyperlink">Code review on an API wrapper in C# wanted</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/4063" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/4063/ivc/b0ac');});
+</script>
+<noscript>
+    <div><img src="/posts/4063/ivc/b0ac" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-php</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/4063/php-google-weather-api-wrapper")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codereview.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Code Review Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|php|api|google|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>java - Reducing number of blank spaces - Code Review Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/codereview/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Code Review Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackCodeReview" />
+    <meta name="twitter:domain" content="codereview.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/codereview/img/apple-touch-icon.png?v=bb26b8631f86"/>
+    <meta name="og:title" content="Reducing number of blank spaces" />
+    <meta name="og:description" content="This program takes blank spaces before some chars like &gt; &amp;lt; /&gt;, and if there is more than one blank space in the line, it will reduce to one.
+
+return source.replaceAll(&quot;\\s{2,}&quot;, &quot; " />
+    <meta name="og:url" content="http://codereview.stackexchange.com/questions/35210/reducing-number-of-blank-spaces"/>
+    <link rel="canonical" href="http://codereview.stackexchange.com/questions/35210/reducing-number-of-blank-spaces" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/codereview/all.css?v=67e9087155b1">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Reducing number of blank spaces&#39;" href="/feeds/question/35210">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:4,shownCommentCount:4,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:35210});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('196', '35210');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('196');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385485320,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Code Review Stack Exchange","description":"Q&A for peer programmer code reviews","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"6c07fd052a87c08ef3cc6e062a9ff978","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f35210%2freducing-number-of-blank-spaces">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f35210%2freducing-number-of-blank-spaces">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Code Review
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/codereview/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Code Review Stack Exchange is a question and answer site for peer programmer code reviews. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/35210/reducing-number-of-blank-spaces" class="question-hyperlink">Reducing number of blank spaces</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="35210"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="35210">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>This program takes blank spaces before some chars like > &lt; />, and if there is more than one blank space in the line, it will reduce to one.</p>
+
+<pre><code>return source.replaceAll("\\s{2,}", " ").replaceAll("[[\\&gt;][\\s]][[\\s][\\&gt;]]", "&gt;").replaceAll("[[\\&lt;][\\s]][[\\s][\\&lt;]]", "&lt;").replaceAll("[\\s][/&gt;]", "/&gt;");
+</code></pre>
+
+<p>How can I improve my regex code?</p>
+
+<p>My test code is:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;nfeProc xmlns="http://www.portalfiscal.inf.br/nfe"  versao="2.00" &gt; 
+&lt;NFe xmlns="http://www.portalfiscal.inf.br/nfe"&gt;&lt;infNFe Id="NFe31130821483359001109550010002217051649842350" versao="2.00"&gt;&lt;ide&gt;&lt;cUF&gt;31&lt;/cUF&gt;&lt;cNF&gt;64984235&lt;/cNF&gt;&lt;natOp&gt;VENDA PROD.ESTAB.SUBST.TRIBUTA&lt;/natOp&gt;&lt;indPag&gt;1&lt;/indPag&gt;&lt;mod&gt;55&lt;/mod&gt;&lt;serie&gt;1&lt;/serie&gt;&lt;nNF&gt;221705&lt;/nNF&gt;&lt;dEmi&gt;2013-08-07&lt;/dEmi&gt;&lt;dSaiEnt&gt;2013-08-07&lt;/dSaiEnt&gt;&lt;tpNF&gt;1&lt;/tpNF&gt;&lt;cMunFG&gt;3147105&lt;/cMunFG&gt;&lt;tpImp&gt;2&lt;/tpImp&gt;&lt;tpEmis&gt;1&lt;/tpEmis&gt;&lt;cDV&gt;0&lt;/cDV&gt;&lt;tpAmb&gt;1&lt;/tpAmb&gt;&lt;finNFe&gt;1&lt;/finNFe&gt;&lt;procEmi&gt;0&lt;/procEmi&gt;&lt;verProc&gt;4.0.0.36&lt;/verProc&gt;&lt;/ide&gt;&lt;emit&gt;&lt;CNPJ&gt;21483359001109&lt;/CNPJ&gt;&lt;xNome&gt;COOPERATIVA DOS GRANJEIROS DO OESTE DE MINAS LTDA&lt;/xNome&gt;&lt;xFant&gt;ABATEDOURO&lt;/xFant&gt;&lt;enderEmit&gt;&lt;xLgr&gt;Rod RODOVIA BR 262&lt;/xLgr&gt;&lt;nro&gt;S/N&lt;/nro&gt;&lt;xCpl&gt;KM - 402&lt;/xCpl&gt;&lt;xBairro&gt;POVOADO GOMES&lt;/xBairro&gt;&lt;cMun&gt;3147105&lt;/cMun&gt;&lt;xMun&gt;PARA DE MINAS&lt;/xMun&gt;&lt;UF&gt;MG&lt;/UF&gt;&lt;CEP&gt;35661470&lt;/CEP&gt;&lt;cPais&gt;1058&lt;/cPais&gt;&lt;xPais&gt;Brasil&lt;/xPais&gt;&lt;fone&gt;03732365566&lt;/fone&gt;&lt;/enderEmit&gt;&lt;IE&gt;4713164920659&lt;/IE&gt;&lt;CRT&gt;3&lt;/CRT&gt;&lt;/emit&gt;&lt;dest&gt;&lt;CNPJ&gt;07121048000105&lt;/CNPJ&gt;&lt;xNome&gt;SUPERMERCADO SAFRA LTDA&lt;/xNome&gt;&lt;enderDest&gt;&lt;xLgr&gt;RUA TEOFILO ANDRADE&lt;/xLgr&gt;&lt;nro&gt;7&lt;/nro&gt;&lt;xBairro&gt;CENTRO&lt;/xBairro&gt;&lt;cMun&gt;3121407&lt;/cMun&gt;&lt;xMun&gt;DESTERRO DE ENTRE RIOS&lt;/xMun&gt;&lt;UF&gt;MG&lt;/UF&gt;&lt;CEP&gt;35494000&lt;/CEP&gt;&lt;cPais&gt;1058&lt;/cPais&gt;&lt;xPais&gt;Brasil&lt;/xPais&gt;&lt;fone&gt;3137361535&lt;/fone&gt;&lt;/enderDest&gt;&lt;IE&gt;2142099300090&lt;/IE&gt;&lt;/dest&gt;&lt;det nItem="1"&gt;&lt;prod&gt;&lt;cProd&gt;11007&lt;/cProd&gt;&lt;cEAN&gt;7898296060227&lt;/cEAN&gt;&lt;xProd&gt;COXA S/ COXA FRANGO CONGELADO CX. 20KG&lt;/xProd&gt;&lt;NCM&gt;02071400&lt;/NCM&gt;&lt;EXTIPI&gt;00&lt;/EXTIPI&gt;&lt;CFOP&gt;5401&lt;/CFOP&gt;&lt;uCom&gt;KG&lt;/uCom&gt;&lt;qCom&gt;100&lt;/qCom&gt;&lt;vUnCom&gt;3.7&lt;/vUnCom&gt;&lt;vProd&gt;370.00&lt;/vProd&gt;&lt;cEANTrib&gt;7898296060227&lt;/cEANTrib&gt;&lt;uTrib&gt;KG&lt;/uTrib&gt;&lt;qTrib&gt;100&lt;/qTrib&gt;&lt;vUnTrib&gt;3.7&lt;/vUnTrib&gt;&lt;indTot&gt;1&lt;/indTot&gt;&lt;xPed&gt;103197&lt;/xPed&gt;&lt;nItemPed&gt;3&lt;/nItemPed&gt;&lt;/prod&gt;&lt;imposto&gt;&lt;ICMS&gt;&lt;ICMS70&gt;&lt;orig&gt;0&lt;/orig&gt;&lt;CST&gt;70&lt;/CST&gt;&lt;modBC&gt;3&lt;/modBC&gt;&lt;pRedBC&gt;61.11&lt;/pRedBC&gt;&lt;vBC&gt;143.89&lt;/vBC&gt;&lt;pICMS&gt;18.00&lt;/pICMS&gt;&lt;vICMS&gt;25.90&lt;/vICMS&gt;&lt;modBCST&gt;4&lt;/modBCST&gt;&lt;pMVAST&gt;15.00&lt;/pMVAST&gt;&lt;pRedBCST&gt;0.39&lt;/pRedBCST&gt;&lt;vBCST&gt;165.48&lt;/vBCST&gt;&lt;pICMSST&gt;18.00&lt;/pICMSST&gt;&lt;vICMSST&gt;3.89&lt;/vICMSST&gt;&lt;/ICMS70&gt;&lt;/ICMS&gt;&lt;IPI&gt;&lt;cEnq&gt;999&lt;/cEnq&gt;&lt;IPINT&gt;&lt;CST&gt;53&lt;/CST&gt;&lt;/IPINT&gt;&lt;/IPI&gt;&lt;PIS&gt;&lt;PISNT&gt;&lt;CST&gt;06&lt;/CST&gt;&lt;/PISNT&gt;&lt;/PIS&gt;&lt;COFINS&gt;&lt;COFINSNT&gt;&lt;CST&gt;06&lt;/CST&gt;&lt;/COFINSNT&gt;&lt;/COFINS&gt;&lt;/imposto&gt;&lt;infAdProd&gt;7898296060227 -&lt;/infAdProd&gt;&lt;/det&gt;&lt;det nItem="2"&gt;&lt;prod&gt;&lt;cProd&gt;11046&lt;/cProd&gt;&lt;cEAN&gt;7898296060173&lt;/cEAN&gt;&lt;xProd&gt;FRANGO CONGELADO CX. 20KG&lt;/xProd&gt;&lt;NCM&gt;02071200&lt;/NCM&gt;&lt;EXTIPI&gt;00&lt;/EXTIPI&gt;&lt;CFOP&gt;5401&lt;/CFOP&gt;&lt;uCom&gt;KG&lt;/uCom&gt;&lt;qCom&gt;200&lt;/qCom&gt;&lt;vUnCom&gt;3&lt;/vUnCom&gt;&lt;vProd&gt;600.00&lt;/vProd&gt;&lt;cEANTrib&gt;7898296060173&lt;/cEANTrib&gt;&lt;uTrib&gt;KG&lt;/uTrib&gt;&lt;qTrib&gt;200&lt;/qTrib&gt;&lt;vUnTrib&gt;3&lt;/vUnTrib&gt;&lt;indTot&gt;1&lt;/indTot&gt;&lt;xPed&gt;103197&lt;/xPed&gt;&lt;nItemPed&gt;1&lt;/nItemPed&gt;&lt;/prod&gt;&lt;imposto&gt;&lt;ICMS&gt;&lt;ICMS70&gt;&lt;orig&gt;0&lt;/orig&gt;&lt;CST&gt;70&lt;/CST&gt;&lt;modBC&gt;3&lt;/modBC&gt;&lt;pRedBC&gt;61.11&lt;/pRedBC&gt;&lt;vBC&gt;233.34&lt;/vBC&gt;&lt;pICMS&gt;18.00&lt;/pICMS&gt;&lt;vICMS&gt;42.00&lt;/vICMS&gt;&lt;modBCST&gt;4&lt;/modBCST&gt;&lt;pMVAST&gt;15.00&lt;/pMVAST&gt;&lt;pRedBCST&gt;0.39&lt;/pRedBCST&gt;&lt;vBCST&gt;268.34&lt;/vBCST&gt;&lt;pICMSST&gt;18.00&lt;/pICMSST&gt;&lt;vICMSST&gt;6.30&lt;/vICMSST&gt;&lt;/ICMS70&gt;&lt;/ICMS&gt;&lt;IPI&gt;&lt;cEnq&gt;999&lt;/cEnq&gt;&lt;IPINT&gt;&lt;CST&gt;53&lt;/CST&gt;&lt;/IPINT&gt;&lt;/IPI&gt;&lt;PIS&gt;&lt;PISNT&gt;&lt;CST&gt;06&lt;/CST&gt;&lt;/PISNT&gt;&lt;/PIS&gt;&lt;COFINS&gt;&lt;COFINSNT&gt;&lt;CST&gt;06&lt;/CST&gt;&lt;/COFINSNT&gt;&lt;/COFINS&gt;&lt;/imposto&gt;&lt;infAdProd&gt;7898296060173 -&lt;/infAdProd&gt;&lt;/det&gt;&lt;det nItem="3"&gt;&lt;prod&gt;&lt;cProd&gt;11004&lt;/cProd&gt;&lt;cEAN&gt;7898296060203&lt;/cEAN&gt;&lt;xProd&gt;PEITO FRANGO CONGELADO CX. 20 KG&lt;/xProd&gt;&lt;NCM&gt;02071400&lt;/NCM&gt;&lt;EXTIPI&gt;00&lt;/EXTIPI&gt;&lt;CFOP&gt;5401&lt;/CFOP&gt;&lt;uCom&gt;KG&lt;/uCom&gt;&lt;qCom&gt;100&lt;/qCom&gt;&lt;vUnCom&gt;3.9&lt;/vUnCom&gt;&lt;vProd&gt;390.00&lt;/vProd&gt;&lt;cEANTrib&gt;7898296060203&lt;/cEANTrib&gt;&lt;uTrib&gt;KG&lt;/uTrib&gt;&lt;qTrib&gt;100&lt;/qTrib&gt;&lt;vUnTrib&gt;3.9&lt;/vUnTrib&gt;&lt;indTot&gt;1&lt;/indTot&gt;&lt;xPed&gt;103197&lt;/xPed&gt;&lt;nItemPed&gt;4&lt;/nItemPed&gt;&lt;/prod&gt;&lt;imposto&gt;&lt;ICMS&gt;&lt;ICMS70&gt;&lt;orig&gt;0&lt;/orig&gt;&lt;CST&gt;70&lt;/CST&gt;&lt;modBC&gt;3&lt;/modBC&gt;&lt;pRedBC&gt;61.11&lt;/pRedBC&gt;&lt;vBC&gt;151.67&lt;/vBC&gt;&lt;pICMS&gt;18.00&lt;/pICMS&gt;&lt;vICMS&gt;27.30&lt;/vICMS&gt;&lt;modBCST&gt;4&lt;/modBCST&gt;&lt;pMVAST&gt;15.00&lt;/pMVAST&gt;&lt;pRedBCST&gt;0.39&lt;/pRedBCST&gt;&lt;vBCST&gt;174.42&lt;/vBCST&gt;&lt;pICMSST&gt;18.00&lt;/pICMSST&gt;&lt;vICMSST&gt;4.10&lt;/vICMSST&gt;&lt;/ICMS70&gt;&lt;/ICMS&gt;&lt;IPI&gt;&lt;cEnq&gt;999&lt;/cEnq&gt;&lt;IPINT&gt;&lt;CST&gt;53&lt;/CST&gt;&lt;/IPINT&gt;&lt;/IPI&gt;&lt;PIS&gt;&lt;PISNT&gt;&lt;CST&gt;06&lt;/CST&gt;&lt;/PISNT&gt;&lt;/PIS&gt;&lt;COFINS&gt;&lt;COFINSNT&gt;&lt;CST&gt;06&lt;/CST&gt;&lt;/COFINSNT&gt;&lt;/COFINS&gt;&lt;/imposto&gt;&lt;infAdProd&gt;7898296060203 -&lt;/infAdProd&gt;&lt;/det&gt;&lt;total&gt;&lt;ICMSTot&gt;&lt;vBC&gt;528.90&lt;/vBC&gt;&lt;vICMS&gt;95.20&lt;/vICMS&gt;&lt;vBCST&gt;608.24&lt;/vBCST&gt;&lt;vST&gt;14.29&lt;/vST&gt;&lt;vProd&gt;1360.00&lt;/vProd&gt;&lt;vFrete&gt;0.00&lt;/vFrete&gt;&lt;vSeg&gt;0.00&lt;/vSeg&gt;&lt;vDesc&gt;0.00&lt;/vDesc&gt;&lt;vII&gt;0.00&lt;/vII&gt;&lt;vIPI&gt;0.00&lt;/vIPI&gt;&lt;vPIS&gt;0.00&lt;/vPIS&gt;&lt;vCOFINS&gt;0.00&lt;/vCOFINS&gt;&lt;vOutro&gt;0.00&lt;/vOutro&gt;&lt;vNF&gt;1374.29&lt;/vNF&gt;&lt;/ICMSTot&gt;&lt;/total&gt;&lt;transp&gt;&lt;modFrete&gt;0&lt;/modFrete&gt;&lt;transporta&gt;&lt;CNPJ&gt;21483359001109&lt;/CNPJ&gt;&lt;xNome&gt;COOPERATIVA DOS GRANJEIROS DO OESTE DE MINAS LTDA ABATEDOURO&lt;/xNome&gt;&lt;IE&gt;4713164920659&lt;/IE&gt;&lt;xEnder&gt;Rod RODOVIA BR 262 N. S/N KM - 402&lt;/xEnder&gt;&lt;xMun&gt;PARA DE MINAS&lt;/xMun&gt;&lt;UF&gt;MG&lt;/UF&gt;&lt;/transporta&gt;&lt;veicTransp&gt;&lt;placa&gt;HIH2860&lt;/placa&gt;&lt;UF&gt;MG&lt;/UF&gt;&lt;/veicTransp&gt;&lt;vol&gt;&lt;qVol&gt;500&lt;/qVol&gt;&lt;esp&gt;VOLUMES&lt;/esp&gt;&lt;pesoL&gt;400.000&lt;/pesoL&gt;&lt;pesoB&gt;400.000&lt;/pesoB&gt;&lt;/vol&gt;&lt;/transp&gt;&lt;cobr&gt;&lt;fat&gt;&lt;nFat&gt;221705&lt;/nFat&gt;&lt;vOrig&gt;1374.29&lt;/vOrig&gt;&lt;vLiq&gt;1374.29&lt;/vLiq&gt;&lt;/fat&gt;&lt;dup&gt;&lt;nDup&gt;000221705-01&lt;/nDup&gt;&lt;dVenc&gt;2013-08-28&lt;/dVenc&gt;&lt;vDup&gt;1374.29&lt;/vDup&gt;&lt;/dup&gt;&lt;/cobr&gt;&lt;infAdic&gt;&lt;infAdFisco&gt;REDUCAO DE 61,11% CONF LETRA A1 ITEM 19 DA - PARTE 1 DO ANEXO IV RICMS 43.080/02 - E C/ COBRANCA POR ST - -&lt;/infAdFisco&gt;&lt;infCpl&gt;ORDEM DE CARGA: 18313&lt;/infCpl&gt;&lt;/infAdic&gt;&lt;/infNFe&gt;&lt;Signature xmlns="http://www.w3.org/2000/09/xmldsig#"&gt;&lt;SignedInfo&gt;&lt;CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" /&gt;&lt;SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /&gt;&lt;Reference URI="#NFe31130821483359001109550010002217051649842350"&gt;&lt;Transforms&gt;&lt;Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /&gt;&lt;Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" /&gt;&lt;/Transforms&gt;&lt;DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /&gt;&lt;DigestValue&gt;JOjHIJzegFkL7ZfGkfAgSwP0+s4=&lt;/DigestValue&gt;&lt;/Reference&gt;&lt;/SignedInfo&gt;&lt;SignatureValue&gt;Qvsom1D+sQZdrq9Y5rfMCEDBUPeRD5iToj3prhoUh0Mfy1zR0dLzTIyp56qIGsPXYogheRuR9PQVzqEc3AK5alK3tkEf+T+zYz3F/xAb7Fyo+/txye625R0D4zm23xvINlLcg0Jhs4S+OIwvDjkX6ICD/bQbP0U55mhqSW71hAYzHkRWiitmy5MJQ00YphvPBw2ikaHrFEy8cy/gYxzs3HWOHHk51AavnhQ/eqK2VcJP7NTAXeECJniz21tVE3CwzLLCRqJhm8nNAsVt8zwV0BTX0nk4osW4GtGUgQWuF5u3roHdYNfNn3MVVdV1OBr3JHHVV8RwyFpWuX6ZuQTI0g==&lt;/SignatureValue&gt;&lt;KeyInfo&gt;&lt;X509Data&gt;&lt;X509Certificate&gt;MIIHtjCCBZ6gAwIBAgIQMjAxMjEyMDQxMDI2NTI3MzANBgkqhkiG9w0BAQsFADCBijELMAkGA1UEBhMCQlIxEzARBgNVBAoTCklDUC1CcmFzaWwxNjA0BgNVBAsTLVNlY3JldGFyaWEgZGEgUmVjZWl0YSBGZWRlcmFsIGRvIEJyYXNpbCAtIFJGQjEuMCwGA1UEAxMlQXV0b3JpZGFkZSBDZXJ0aWZpY2Fkb3JhIFNFUlBST1JGQiB2MzAeFw0xMjEyMDQxMzE5NTdaFw0xMzEyMDQxMjExNDRaMIIBCjELMAkGA1UEBhMCQlIxEzARBgNVBAoTCklDUC1CcmFzaWwxNjA0BgNVBAsTLVNlY3JldGFyaWEgZGEgUmVjZWl0YSBGZWRlcmFsIGRvIEJyYXNpbCAtIFJGQjERMA8GA1UECxMIQ09SUkVJT1MxEzARBgNVBAsTCkFSQ09SUkVJT1MxFjAUBgNVBAsTDVJGQiBlLUNOUEogQTExFjAUBgNVBAcTDVBBUkEgREUgTUlOQVMxCzAJBgNVBAgTAk1HMUkwRwYDVQQDE0BDT09QRVJBVElWQSBET1MgR1JBTkpFSVJPUyBETyBPRVNURSBERSBNSU5BUyBMVERBOjIxNDgzMzU5MDAwMTM3MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1Az+l21IUDupjr82IL5wM4ciBz2hI5tRil65M86plIyewjws8Cdx7XcxG/lO43SzlgTIb6q9xrDWFSIvpSG10GzDmrFzgstaAs3gPlMIy/xanulswB3Tp3Yyf9S+E5CUUCoaOwpMn2ww4jhEs0oae7CEFqDRHA3CTDST+f+qs7E6J/V/5oonPIBJxo0B8SHGBQ1iMNWw9UH+OVyCoBp1ma3lcfBhDdqTsJEkEPtFJEn47oxNDWqgoJnjHgViUhACS8LRKNWbN2lmmjwaEuHSYHg7JOgCaU9LohvCd6L46OziH+e3BP/HijblVx5WnN4yQHsXKP6P0mTojWBVq7uFawIDAQABo4ICkzCCAo8wDAYDVR0TAQH/BAIwADAfBgNVHSMEGDAWgBSxZ7Ed5xyud0IUrX+eCQ7mhbC3rjAOBgNVHQ8BAf8EBAMCBeAwYAYDVR0gBFkwVzBVBgZgTAECAQowSzBJBggrBgEFBQcCARY9aHR0cHM6Ly9jY2Quc2VycHJvLmdvdi5ici9hY3NlcnByb3JmYi9kb2NzL2RwY2Fjc2VycHJvcmZiLnBkZjCBtgYDVR0RBIGuMIGroDgGBWBMAQMEoC8ELTIyMDcxOTQ5MTYyNTY3MzU2NjgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMKAgBgVgTAEDAqAXBBVBTlRPTklPIERFIE1FTE8gU0lMVkGgGQYFYEwBAwOgEAQOMjE0ODMzNTkwMDAxMzegFwYFYEwBAwegDgQMMDAwMDAwMDAwMDAwgRlpbmZvcm1hdGljYUBjb2dyYW4uY29tLmJyMCAGA1UdJQEB/wQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDCBwAYDVR0fBIG4MIG1MDSgMqAwhi5odHRwOi8vY2NkLnNlcnByby5nb3YuYnIvbGNyL2Fjc2VycHJvcmZidjMuY3JsMDWgM6Axhi9odHRwOi8vY2NkMi5zZXJwcm8uZ292LmJyL2xjci9hY3NlcnByb3JmYnYzLmNybDBGoESgQoZAaHR0cDovL3JlcG9zaXRvcmlvLmljcGJyYXNpbC5nb3YuYnIvbGNyL3NlcnByby9hY3NlcnByb3JmYnYzLmNybDBOBggrBgEFBQcBAQRCMEAwPgYIKwYBBQUHMAKGMmh0dHA6Ly9jY2Quc2VycHJvLmdvdi5ici9jYWRlaWFzL2Fjc2VycHJvcmZidjMucDdiMA0GCSqGSIb3DQEBCwUAA4ICAQCv4rUWP0AkysbiVpsrnJFI3Z7TPeKsNeuAIQgTtV9HY7Mq3wmorcZmvidxb1spBp7/7HJuXUO2FmWO4/pCHijYtKQ68o5LxAZ1jswQlrHMEyTbfLi7Y2iN/C7cR2KDg/TG7CxzNrVgJvw+vMHngaNUfqHzBUz++kLtynjXGxiSOg/4RfTP82zkfqdT1sisVNw3n1ZyZpOGAkWAyv8kjsBPKUZlL+lfDYrf9clr9JUSA4UI91cxYMQubFAPvXBKe18OPGZ1P2SINJpwiH/K2MHb7OIydln4Y+vfmoVq/lVwFbmqZNCGRbncv5ZU/qhybmeHyL1P0af1edDmV2kWB6CNDVaUE4KI+Zm3TJwYvC3aasYULvgb+cG1qvh5i+D/VzN+x/ue2x/8KMMGgEhK/OqojES3RGy9ALjz+1QOQbkIo8Yv3/Ram0HcMBRGMdjn68EubyZCPw13ipCjeSTxhLokrFsSiaMjN805wHLoa7IS7KZhR7IjM8RmRP8/SV3lqE4xi8LWe718Ef6olLwPAYWMLD/dPqtCNXdQvZ6M0a0mWfjLx1bbMIbetp9J4pdcr4aAON2lL194ilX6q4g93RktJJAsygJHo7GwiNf89IpuOMz5AT5tDGAV7V4+J2ObSCzIVz8QJClKTuc9+xcbtCHI37T7XREcG+JAOQaBJYvMng==&lt;/X509Certificate&gt;&lt;/X509Data&gt;&lt;/KeyInfo&gt;&lt;/Signature&gt;&lt;/NFe&gt;
+&lt;protNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="2.00"&gt;&lt;infProt&gt;&lt;tpAmb&gt;1&lt;/tpAmb&gt;&lt;verAplic&gt;13_0_94&lt;/verAplic&gt;&lt;chNFe&gt;31130821483359001109550010002217051649842350&lt;/chNFe&gt;&lt;dhRecbto&gt;2013-08-07T01:52:47&lt;/dhRecbto&gt;&lt;nProt&gt;131131174998806&lt;/nProt&gt;&lt;digVal&gt;JOjHIJzegFkL7ZfGkfAgSwP0+s4=&lt;/digVal&gt;&lt;cStat&gt;100&lt;/cStat&gt;&lt;xMotivo&gt;Autorizado o uso da NF-e&lt;/xMotivo&gt;&lt;/infProt&gt;&lt;/protNFe&gt;
+&lt;/nfeProc&gt;
+</code></pre>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/java" class="post-tag" title="show questions tagged &#39;java&#39;" rel="tag">java</a> <a href="/questions/tagged/regex" class="post-tag" title="show questions tagged &#39;regex&#39;" rel="tag">regex</a> <a href="/questions/tagged/xml" class="post-tag" title="show questions tagged &#39;xml&#39;" rel="tag">xml</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/35210" title="short permalink to this question" class="short-link" id="link-post-35210">share</a><span class="lsep">|</span><a href="/posts/35210/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/35210/revisions" title="show all edits to this post">edited <span title="2013-11-12 13:19:44Z" class="relativetime">Nov 12 at 13:19</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/22222/jamal"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/a4zmY.jpg?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/22222/jamal">Jamal</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,737</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="9 silver badges"><span class="badge2"></span><span class="badgecount">9</span></span><span title="33 bronze badges"><span class="badge3"></span><span class="badgecount">33</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-11-11 23:47:28Z" class="relativetime">Nov 11 at 23:47</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/22453/diego-macario"><div><img src="https://www.gravatar.com/avatar/71dba90caa2fba9b0b81fceaa94b571c?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/22453/diego-macario">Diego Macario</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">28</span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-35210" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-56982" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="warm">7</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Why do you need this? If you have a decent XML-parser then does it really matter how many spaces there are before <code>&gt;</code>-characters? Because you <b>DO</b> use a XML-parser to parse your XML data, don&#39;t you?</span>
+	&ndash;&nbsp;
+		<a href="/users/31562/simon-andre-forsberg" 
+		   title="1394 reputation" 
+		   class="comment-user">Simon Andr&#233; Forsberg</a>
+	<span class="comment-date" dir="ltr"><span title="2013-11-12 00:16:49Z" class="relativetime-clean">Nov 12 at 0:16</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-57006" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">because some documents have <code>\n</code> and I want to take it off.</span>
+	&ndash;&nbsp;
+		<a href="/users/22453/diego-macario" 
+		   title="28 reputation" 
+		   class="comment-user owner">Diego Macario</a>
+	<span class="comment-date" dir="ltr"><span title="2013-11-12 11:50:51Z" class="relativetime-clean">Nov 12 at 11:50</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-57009" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">2</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Why? What harm has <code>\n</code> ever done to you?</span>
+	&ndash;&nbsp;
+		<a href="/users/31562/simon-andre-forsberg" 
+		   title="1394 reputation" 
+		   class="comment-user">Simon Andr&#233; Forsberg</a>
+	<span class="comment-date" dir="ltr"><span title="2013-11-12 12:33:00Z" class="relativetime-clean">Nov 12 at 12:33</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-57017" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">can brake the string sequence</span>
+	&ndash;&nbsp;
+		<a href="/users/22453/diego-macario" 
+		   title="28 reputation" 
+		   class="comment-user owner">Diego Macario</a>
+	<span class="comment-date" dir="ltr"><span title="2013-11-12 13:44:08Z" class="relativetime-clean">Nov 12 at 13:44</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-35210" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								2 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/35210/reducing-number-of-blank-spaces?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/35210/reducing-number-of-blank-spaces?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/35210/reducing-number-of-blank-spaces?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="35228"></a>
+<div id="answer-35228" class="answer accepted-answer" data-answerid="35228" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="35228">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>This will suffice:</p>
+
+<pre><code>source.replaceAll("\\s+([&lt;&gt; ]|/&gt;)", "$1");
+</code></pre>
+
+<p><img src="https://www.debuggex.com/i/di6o0MQJ9GZe1NlZ.png" alt="Regular expression visualization"></p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/35228" title="short permalink to this answer" class="short-link" id="link-post-35228">share</a><span class="lsep">|</span><a href="/posts/35228/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-11-12 13:13:45Z" class="relativetime">Nov 12 at 13:13</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/32036/rzymek"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/dc9d9e6dcf4587bc889ca1a7ab7a8a57?s=128&d=identicon&r=PG" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/32036/rzymek">rzymek</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">181</span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-35228" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-57018" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I know this is pretty simple but would you please try to explain it a little bit?</span>
+	&ndash;&nbsp;
+		<a href="/users/18427/malachi" 
+		   title="1598 reputation" 
+		   class="comment-user">Malachi</a>
+	<span class="comment-date" dir="ltr"><span title="2013-11-12 13:48:16Z" class="relativetime-clean">Nov 12 at 13:48</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-57019" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">\O/ so fine, could you suggest to me some reading to know about regex?
+
+Because I want to know about <code>$1</code> and how do you generate this image?</span>
+	&ndash;&nbsp;
+		<a href="/users/22453/diego-macario" 
+		   title="28 reputation" 
+		   class="comment-user owner">Diego Macario</a>
+	<span class="comment-date" dir="ltr"><span title="2013-11-12 13:50:08Z" class="relativetime-clean">Nov 12 at 13:50</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-57021" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@DiegoMacario For more reading about regex, see <a href="http://www.regular-expressions.info" rel="nofollow">regular-expressions.info</a></span>
+	&ndash;&nbsp;
+		<a href="/users/31562/simon-andre-forsberg" 
+		   title="1394 reputation" 
+		   class="comment-user">Simon Andr&#233; Forsberg</a>
+	<span class="comment-date" dir="ltr"><span title="2013-11-12 14:07:09Z" class="relativetime-clean">Nov 12 at 14:07</span></span>
+		<span class="edited-yes" title="this comment was edited 2 times"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-57024" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Thanks so much brow</span>
+	&ndash;&nbsp;
+		<a href="/users/22453/diego-macario" 
+		   title="28 reputation" 
+		   class="comment-user owner">Diego Macario</a>
+	<span class="comment-date" dir="ltr"><span title="2013-11-12 14:27:33Z" class="relativetime-clean">Nov 12 at 14:27</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-57033" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">+1 for the image from <a href="https://www.debuggex.com/" rel="nofollow">debuggex.com</a></span>
+	&ndash;&nbsp;
+		<a href="/users/30212/voiceofunreason" 
+		   title="436 reputation" 
+		   class="comment-user">VoiceOfUnreason</a>
+	<span class="comment-date" dir="ltr"><span title="2013-11-12 18:27:14Z" class="relativetime-clean">Nov 12 at 18:27</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-35228" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="35221"></a>
+<div id="answer-35221" class="answer" data-answerid="35221" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="35221">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>The way to improve this code is to throw it away and start again. Regular expressions are not the right way to parse XML.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/35221" title="short permalink to this answer" class="short-link" id="link-post-35221">share</a><span class="lsep">|</span><a href="/posts/35221/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-11-12 09:03:06Z" class="relativetime">Nov 12 at 9:03</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/31476/michael-kay"><div><img src="https://www.gravatar.com/avatar/792f262681f81e4d78d89852eb370538?s=32&d=identicon&r=PG&f=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/31476/michael-kay">Michael Kay</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">147</span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-35221" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-57007" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">So whats the best way to do it?</span>
+	&ndash;&nbsp;
+		<a href="/users/22453/diego-macario" 
+		   title="28 reputation" 
+		   class="comment-user owner">Diego Macario</a>
+	<span class="comment-date" dir="ltr"><span title="2013-11-12 11:52:03Z" class="relativetime-clean">Nov 12 at 11:52</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-57020" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">3</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Don&#39;t just say it&#39;s the wrong way, explain why.</span>
+	&ndash;&nbsp;
+		<a href="/users/30823/user1021726" 
+		   title="357 reputation" 
+		   class="comment-user">user1021726</a>
+	<span class="comment-date" dir="ltr"><span title="2013-11-12 14:03:45Z" class="relativetime-clean">Nov 12 at 14:03</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-35221" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/35210/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="35210" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="6c07fd052a87c08ef3cc6e062a9ff978">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f35210%2freducing-number-of-blank-spaces%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f35210%2freducing-number-of-blank-spaces%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/java" class="post-tag" title="show questions tagged &#39;java&#39;" rel="tag">java</a> <a href="/questions/tagged/regex" class="post-tag" title="show questions tagged &#39;regex&#39;" rel="tag">regex</a> <a href="/questions/tagged/xml" class="post-tag" title="show questions tagged &#39;xml&#39;" rel="tag">xml</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/java" class="post-tag" title="show questions tagged &#39;java&#39;" rel="tag">java</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">1413</span></span><br>
+<a href="/questions/tagged/regex" class="post-tag" title="show questions tagged &#39;regex&#39;" rel="tag">regex</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">107</span></span><br>
+<a href="/questions/tagged/xml" class="post-tag" title="show questions tagged &#39;xml&#39;" rel="tag">xml</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">81</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-11-11 23:47:28Z"><b>14 days ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>74 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-11-12 13:19:44Z">14 days ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-codereview.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/611" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/611/how-to-reduce-this-archive-detection-function-and-make-it-supports-wildcards" class="question-hyperlink">How to reduce this archive detection function and make it supports wildcards</a>
+</div>
+<div class="spacer">
+<a href="/q/4337" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/4337/clean-up-python-file-moving-script-based-on-xml-elements" class="question-hyperlink">clean up python file moving script based on xml elements</a>
+</div>
+<div class="spacer">
+<a href="/q/10180" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/10180/please-review-my-xml-schema-for-an-xml-representation-of-csv" class="question-hyperlink">Please review my XML Schema for an XML representation of CSV</a>
+</div>
+<div class="spacer">
+<a href="/q/11113" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">9
+    </div>
+</a><a href="/questions/11113/reduce-length-of-condition" class="question-hyperlink">Reduce length of condition</a>
+</div>
+<div class="spacer">
+<a href="/q/15122" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/15122/lots-of-regex-match-against-huge-number-range-php" class="question-hyperlink">Lots of RegEx match against huge number range (PHP)</a>
+</div>
+<div class="spacer">
+<a href="/q/16497" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/16497/improve-the-space-and-time-complexity" class="question-hyperlink">Improve the space and time complexity</a>
+</div>
+<div class="spacer">
+<a href="/q/18626" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/18626/minimize-number-of-lists" class="question-hyperlink">Minimize Number of Lists</a>
+</div>
+<div class="spacer">
+<a href="/q/26752" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/26752/do-i-need-to-reduce-the-number-of-levels-in-the-code" class="question-hyperlink">Do I need to reduce the number of levels in the code?</a>
+</div>
+<div class="spacer">
+<a href="/q/31371" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">-1
+    </div>
+</a><a href="/questions/31371/multiple-of-a-number-through-a-regular-expression" class="question-hyperlink">Multiple of a number through a regular expression</a>
+</div>
+<div class="spacer">
+<a href="/q/31477" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">5
+    </div>
+</a><a href="/questions/31477/reducing-cyclomatic-complexity" class="question-hyperlink">Reducing cyclomatic complexity</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/35210" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/35210/ivc/b369');});
+</script>
+<noscript>
+    <div><img src="/posts/35210/ivc/b369" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-java</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/35210/reducing-number-of-blank-spaces")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.codereview.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Code Review Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|java|regex|xml|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

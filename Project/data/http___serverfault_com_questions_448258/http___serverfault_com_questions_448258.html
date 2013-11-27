@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>How to Deploy an ASP.NET Web API- and Browser-based Application to a Production Environment - Server Fault</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/serverfault/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/serverfault/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Server Fault" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ServerFault" />
+    <meta name="twitter:domain" content="serverfault.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/serverfault/img/apple-touch-icon@2.png?v=9b1f48ae296b"/>
+    <meta name="og:title" content="How to Deploy an ASP.NET Web API- and Browser-based Application to a Production Environment" />
+    <meta name="og:description" content="
+  Possible Duplicate:
+  How to Deploy an ASP.NET Web API- and Browser-based Application to a Production Environment  
+
+
+
+
+We have an ASP.NET Web API server that serves up a SQL Server data driven " />
+    <meta name="og:url" content="http://serverfault.com/questions/448258/how-to-deploy-an-asp-net-web-api-and-browser-based-application-to-a-production"/>
+    <link rel="canonical" href="http://serverfault.com/questions/448258/how-to-deploy-an-asp-net-web-api-and-browser-based-application-to-a-production" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/serverfault/all.css?v=6698159a1bca">
+    
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:5,shownCommentCount:5,highlightColor:'#F3F1D9',backgroundColor:'#FFF',questionId:448258});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('2', '448258');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('2');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385455031,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Server Fault","description":"Q&A for professional system and network administrators","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LcDNwYAAAAAAG_X1rC8kTtLBP6XS2Ym1N0n9kSY","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f448258%2fhow-to-deploy-an-asp-net-web-api-and-browser-based-application-to-a-production">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f448258%2fhow-to-deploy-an-asp-net-web-api-and-browser-based-application-to-a-production">log in</a>
+
+ <span class="lsep">|</span>
+                    <a href="http://careers.serverfault.com">careers 2.0</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Server Fault
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/serverfault/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Server Fault is a question and answer site for professional system and network administrators. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/448258/how-to-deploy-an-asp-net-web-api-and-browser-based-application-to-a-production" class="question-hyperlink">How to Deploy an ASP.NET Web API- and Browser-based Application to a Production Environment [duplicate]</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="448258"  id="question">
+    
+                <script type="text/javascript">
+                var ados = ados || {};ados.run = ados.run || [];
+                ados.run.push(function() { ados_add_placement(22,8278,"adzerk247003706",4).setZone(49) ; });                    
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk247003706">
+            </div>  
+
+
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="448258">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>1</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <blockquote>
+  <p><strong>Possible Duplicate:</strong><br>
+  <a href="http://serverfault.com/questions/448006/how-to-deploy-an-asp-net-web-api-and-browser-based-application-to-a-production">How to Deploy an ASP.NET Web API- and Browser-based Application to a Production Environment</a>  </p>
+</blockquote>
+
+
+
+<p>We have an ASP.NET Web API server that serves up a SQL Server data driven website. The API uses JSON to transfer data from SQL Server to the front end.  </p>
+
+<p>We need to move it to an internal production environment (nothing will be exposed on the public Internet) and we’re having problems - or just not understanding what needs to be done.</p>
+
+<p>There are two domains:</p>
+
+<ol>
+<li>The corporate domain - where all users login normally.  </li>
+<li>The process domain - contains the database the Web API needs to access.</li>
+</ol>
+
+<p>The IT staff wants to put a DMZ between the two domains to house the IIS app and shield the users on the corporate domain from having access into the process domain directly.  </p>
+
+<p>The ideal configuration is:</p>
+
+<pre><code>corp domain (end users) &lt;–&gt; firewall (open port 80) &lt;–&gt; DMZ (web server running IIS) &lt;–&gt; firewall (open port 80 or 1433????) &lt;–&gt; process domain (IIS for Web API and SQL Server)
+</code></pre>
+
+<p>We don’t really understand how to deploy our browser/Web API application in this scenario.</p>
+
+<ol>
+<li>Do we need to break up our application so that all the client code  is on the IIS server in the DMZ, while the Web API gets installed on the server in the process domain?</li>
+<li>Does the entire app (client code and Web API) stay together on the IIS server in the DMZ, which then somehow accesses the SQL Server instance to get data?</li>
+<li>From the IIS server and app in the DMZ, would you simply access the Web API on the server in the process domain by going to <code>http://server/appname/api/getitmes</code>?</li>
+<li>In the second firewall between the DMZ and the process domain, would you have to open port 1433 or just port 80 since the Web API is a HTTP endpoint?</li>
+<li>Or, is there some better way of deployment (i.e., how ASP.NET Web API single page applications written all in HTML5 and JavaScript supposed to be deployed to production environments?)?</li>
+</ol>
+
+<blockquote>
+  <p>NB: The servers are Win2k8 R2, SQL Server 2k8 R2, and IIS 7.5.</p>
+</blockquote>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/asp.net" class="post-tag" title="show questions tagged &#39;asp.net&#39;" rel="tag">asp.net</a> <a href="/questions/tagged/asp.net-mvc" class="post-tag" title="show questions tagged &#39;asp.net-mvc&#39;" rel="tag">asp.net-mvc</a> <a href="/questions/tagged/sql-server-2008" class="post-tag" title="show questions tagged &#39;sql-server-2008&#39;" rel="tag">sql-server-2008</a> <a href="/questions/tagged/iis" class="post-tag" title="show questions tagged &#39;iis&#39;" rel="tag">iis</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/448258" title="short permalink to this question" class="short-link" id="link-post-448258">share</a><span class="lsep">|</span><a href="/posts/448258/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2012-11-12 22:17:36Z" class="relativetime">Nov 12 '12 at 22:17</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/69508/lmttag"><div><img src="https://www.gravatar.com/avatar/6dcb3226007c3adcb5f7d5a9cf9bd37f?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/69508/lmttag">lmttag</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">152</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-448258" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-487822" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">When you say &quot;single page&quot; do you mean that all page interactions are handled via the client (i.e. Javascript) and that all requests to the WebApi are done through Javascript/AJAX? If so, you&#39;ll have to put your WebApi so that it is accessible by the end users (since they will be trying to access it directly from their browser). I can&#39;t quite tell from the description if the DMZ is forwarding requests or not.</span>
+	&ndash;&nbsp;
+		<span title="0 reputation" 
+		      class="comment-user">Chris</span>
+	<span class="comment-date" dir="ltr"><span title="2012-11-13 07:50:51Z" class="relativetime-clean">Nov 13 '12 at 7:50</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-487841" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Hello Chris.  Thanks for replying.  You are correct; that is, the application as it stands right now is a SPA in which the client gets all the HTML/CSS/JS on the initial request and after that only REST calls are made to the Web API.  The Web API controllers on the server issue SQL queries directly to the database and return JSON data (in the case of GETs, for example).
+
+To clarify, you&#39;re suggesting putting everything (the HTML, CSS, JS, Web API assemblies, etc.) all on the IIS server in the DMZ and then send only queries to the SQL Server through port 1433?  ...</span>
+	&ndash;&nbsp;
+		<a href="/users/69508/lmttag" 
+		   title="152 reputation" 
+		   class="comment-user owner">lmttag</a>
+	<span class="comment-date" dir="ltr"><span title="2012-11-13 16:20:32Z" class="relativetime-clean">Nov 13 '12 at 16:20</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-487842" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">...  I was having trouble with this scenario.  From a client browser (mobile Safari since this app is intended for mobile devices), I type in the URL to the IIS server (e.g., <a href="http://servername/appname" rel="nofollow">servername/appname</a>) and get the HTML/CSS/JS downloaded to the browser.  Inside one of my JS files, I make an AJAX call to the Web API (e.g., <a href="http://servername/appname/api/getitems" rel="nofollow">servername/appname/api/getitems</a>).  This all work locally when IIS and SQL Server are all on the same machine.  Is there something else I need to do different to work in production where IIS and SQL Server are on two separate servers?  ...</span>
+	&ndash;&nbsp;
+		<a href="/users/69508/lmttag" 
+		   title="152 reputation" 
+		   class="comment-user owner">lmttag</a>
+	<span class="comment-date" dir="ltr"><span title="2012-11-13 16:20:54Z" class="relativetime-clean">Nov 13 '12 at 16:20</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-487844" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">...  Assuming the firewall stuff between the two servers is correct, do I just need to change my DB connection string to find the SQL Server?  Or?
+
+Thanks!
+
+It appears that this post was migrated from stackoverflow.com, so now there&#39;s two on serverfault.  Sorry.</span>
+	&ndash;&nbsp;
+		<a href="/users/69508/lmttag" 
+		   title="152 reputation" 
+		   class="comment-user owner">lmttag</a>
+	<span class="comment-date" dir="ltr"><span title="2012-11-13 16:21:20Z" class="relativetime-clean">Nov 13 '12 at 16:21</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-487964" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Yes, all you should have to change are your connection strings.</span>
+	&ndash;&nbsp;
+		<a href="/users/3550/chris-lively" 
+		   title="1622 reputation" 
+		   class="comment-user">Chris Lively</a>
+	<span class="comment-date" dir="ltr"><span title="2012-11-13 19:21:17Z" class="relativetime-clean">Nov 13 '12 at 19:21</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-448258" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+    <div class="question-status">
+        <h2>                <b>migrated</b> from <a href="http://stackoverflow.com/questions/13352484/how-to-deploy-an-asp-net-web-api-and-browser-based-application-to-a-production?noredirect=1" title="how to deploy an asp net web api and browser based application to a production">stackoverflow.com</a> <span title="2012-11-13 15:49:00Z" class="relativetime">Nov 13 '12 at 15:49</span>
+</h2>
+        <p>This question came from our site for professional and enthusiast programmers.</p>
+    </div>
+    <div class="question-status">
+        <h2>                    <b>marked</b> as duplicate by <a href="/users/42617/brent-pabst">Brent Pabst</a>, <a href="/users/118258/hopelessn00b">HopelessN00b</a>, <a href="/users/33417/chris-s">Chris S</a><span class="mod-flair" title="moderator">&#9830;</span> <span title="2012-11-13 16:31:00Z" class="relativetime">Nov 13 '12 at 16:31</span>
+</h2>
+        <p> This question has been asked before and already has an answer.
+If those answers do not fully address your question, please <a href="/questions/ask">ask a new question</a>.</p>
+    </div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								1 Answer
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/448258/how-to-deploy-an-asp-net-web-api-and-browser-based-application-to-a-production?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/448258/how-to-deploy-an-asp-net-web-api-and-browser-based-application-to-a-production?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/448258/how-to-deploy-an-asp-net-web-api-and-browser-based-application-to-a-production?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="448260"></a>
+<div id="answer-448260" class="answer accepted-answer" data-answerid="448260" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="448260">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Typically speaking your code is going to be deployed on the IIS server.  This means your "web api" and website.  </p>
+
+<p>Quite frankly I don't think your using the correct terms here as what you seem to be saying is that you have a web site which communicates with a web service that then communicates with the sql server for data access.</p>
+
+<p>The web service and website would be on one or more web servers outside the DMZ.  The database server would be inside the DMZ.  The DMZ should be configured to only allow requests from your web server(s) to go to the database server.  Usually over port 1433 or whatever port SQL is configured to use.</p>
+
+<p>Outside the DMZ, a firewall should be in place to limit access to that web server on ports 80 or 443.  80 if it's not SSL, 443 if SSL is enabled.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/448260" title="short permalink to this answer" class="short-link" id="link-post-448260">share</a><span class="lsep">|</span><a href="/posts/448260/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2012-11-13 16:00:55Z" class="relativetime">Nov 13 '12 at 16:00</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3550/chris-lively"><div><img src="https://www.gravatar.com/avatar/71cff04d631f9c0023f3f5c711db5565?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3550/chris-lively">Chris Lively</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,622</span><span title="4 gold badges"><span class="badge1"></span><span class="badgecount">4</span></span><span title="13 silver badges"><span class="badge2"></span><span class="badgecount">13</span></span><span title="28 bronze badges"><span class="badge3"></span><span class="badgecount">28</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-448260" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-487851" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Hi Chris.  Thanks for replying.  Yeah, you&#39;re probably correct about me not using correct terms.  Since I&#39;m no networking/security expert (I&#39;m a developer and, up until now, we&#39;ve only had to worry about installing our Windows forms apps on a single server with simple Windows authentication), I&#39;m just trying to understand some things so I can speak somewhat intelligently to IT people, and figure out if we have to change our application in any way.  What you&#39;ve said (in addition to the other replies) makes sense.  I&#39;ll investigate further.  Thanks again.</span>
+	&ndash;&nbsp;
+		<a href="/users/69508/lmttag" 
+		   title="152 reputation" 
+		   class="comment-user owner">lmttag</a>
+	<span class="comment-date" dir="ltr"><span title="2012-11-13 16:28:41Z" class="relativetime-clean">Nov 13 '12 at 16:28</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-448260" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+				
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/asp.net" class="post-tag" title="show questions tagged &#39;asp.net&#39;" rel="tag">asp.net</a> <a href="/questions/tagged/asp.net-mvc" class="post-tag" title="show questions tagged &#39;asp.net-mvc&#39;" rel="tag">asp.net-mvc</a> <a href="/questions/tagged/sql-server-2008" class="post-tag" title="show questions tagged &#39;sql-server-2008&#39;" rel="tag">sql-server-2008</a> <a href="/questions/tagged/iis" class="post-tag" title="show questions tagged &#39;iis&#39;" rel="tag">iis</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/iis" class="post-tag" title="show questions tagged &#39;iis&#39;" rel="tag">iis</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">3146</span></span><br>
+<a href="/questions/tagged/sql-server-2008" class="post-tag" title="show questions tagged &#39;sql-server-2008&#39;" rel="tag">sql-server-2008</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">1709</span></span><br>
+<a href="/questions/tagged/asp.net" class="post-tag" title="show questions tagged &#39;asp.net&#39;" rel="tag">asp.net</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">959</span></span><br>
+<a href="/questions/tagged/asp.net-mvc" class="post-tag" title="show questions tagged &#39;asp.net-mvc&#39;" rel="tag">asp.net-mvc</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">139</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2012-11-12 22:17:36Z"><b>1 year ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>782 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2012-11-13 16:00:55Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			            <script type="text/javascript">
+                var ados = ados || {};ados.run = ados.run || [];
+                ados.run.push(function() { ados_add_placement(22,8278,"adzerk22907619",17).setZone(50) ; });                    
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk22907619">
+            </div>  
+    <div id="hireme">
+        <script type="text/javascript">
+window.careers_adurl="//careers.stackoverflow.com/gethired/js",window.careers_cssurl="//cdn-careers.sstatic.net/careers/gethired/sidebar.min.css?v=3c55a7a05afd",window.careers_leaderboardcssurl="//cdn-careers.sstatic.net/careers/gethired/ninja.min.css?v=78ccbfa5c59f",window.careers_companycssurl="//cdn-careers.sstatic.net/careers/gethired/company",window.careers_adselector="div.hireme, div#hireme",StackExchange.ready(function(){$.ajax({url:"//cdn-careers.sstatic.net/careers/gethired/loader.min.js?v=de73430809b3",dataType:"script",cache:!0})});        </script>
+    </div>
+
+
+
+			
+  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/448006" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">2</div>
+	</a>
+	<a href="/questions/448006/how-to-deploy-an-asp-net-web-api-and-browser-based-application-to-a-production" class="question-hyperlink">How to Deploy an ASP.NET Web API- and Browser-based Application to a Production Environment</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/110469" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/110469/how-to-host-asp-net-application-externally" class="question-hyperlink">How to host ASP.NET application externally?</a>
+</div>
+<div class="spacer">
+<a href="/q/150375" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/150375/asp-net-mvc-2-web-application-inside-a-web-site" class="question-hyperlink">asp.net mvc 2 web application inside a Web site?</a>
+</div>
+<div class="spacer">
+<a href="/q/197170" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/197170/diagnosing-poor-performance-on-iis-asp-net-mssql-app" class="question-hyperlink">Diagnosing poor performance on IIS / ASP.NET / MSSQL app</a>
+</div>
+<div class="spacer">
+<a href="/q/221135" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">5
+    </div>
+</a><a href="/questions/221135/what-are-the-key-performance-metrics-to-monitor-for-a-deployed-asp-net-web-appli" class="question-hyperlink">What are the key performance metrics to monitor for a deployed ASP.NET web application?</a>
+</div>
+<div class="spacer">
+<a href="/q/237489" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/237489/how-to-publish-an-asp-net-mvc-application-to-a-free-host" class="question-hyperlink">How to publish an ASP.NET MVC application to a free host</a>
+</div>
+<div class="spacer">
+<a href="/q/373097" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/373097/deploying-and-publishing-my-first-asp-net-mvc-3-web-application" class="question-hyperlink">Deploying and publishing my first asp.net mvc 3 web application</a>
+</div>
+<div class="spacer">
+<a href="/q/448006" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/448006/how-to-deploy-an-asp-net-web-api-and-browser-based-application-to-a-production" class="question-hyperlink">How to Deploy an ASP.NET Web API- and Browser-based Application to a Production Environment</a>
+</div>
+<div class="spacer">
+<a href="/q/473777" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/473777/capturing-memory-io-counters-for-asp-net-web-applications-in-iis" class="question-hyperlink">Capturing Memory / IO counters for ASP.NET Web Applications in IIS</a>
+</div>
+<div class="spacer">
+<a href="/q/516644" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/516644/how-to-deploy-an-mvc-4-application-to-a-windows-web-server-based-dedicated-hosti" class="question-hyperlink">How to deploy an MVC 4 application to a Windows Web Server based dedicated hosting?</a>
+</div>
+<div class="spacer">
+<a href="/q/532411" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/532411/asp-net-webapi-application-gives-404-error-when-deployed-to-iis7" class="question-hyperlink">Asp.NET WebApi application gives 404 error when deployed to IIS7</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+		<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/448258/ivc/222d');});
+</script>
+<noscript>
+    <div><img src="/posts/448258/ivc/222d" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.serverfault.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://engine.adzerk.net/r?e=eyJhdiI6NDE0LCJhdCI6MjAsImNtIjo5NTQsImNoIjoxMTc4LCJjciI6Mjg0NCwiZG0iOjQsImZjIjoyODY2LCJmbCI6Mjc1MSwibnciOjIyLCJydiI6MCwicHIiOjExNSwic3QiOjAsInVyIjoiaHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL2Fib3V0L2NvbnRhY3QiLCJyZSI6MX0&amp;s=VDtCBUNLxM-9o4t1cLMpl1AJKh4">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/448258/how-to-deploy-an-asp-net-web-api-and-browser-based-application-to-a-production")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.serverfault.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Server Fault works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+<script type="text/javascript">var p = "http", d = "static"; if (document.location.protocol == "https:") { p += "s"; d = "engine"; } var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = p + "://" + d + ".adzerk.net/ados.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script>
+<script type="text/javascript">
+    var ados = ados || {};
+    ados.run = ados.run || [];
+    ados.run.push(function () { ados_setKeywords('asp.net,asp.net-mvc,sql-server-2008,iis');; ados_load(); });         
+</script>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-2']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|asp.net|asp.net-mvc|sql-server-2008|iis|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

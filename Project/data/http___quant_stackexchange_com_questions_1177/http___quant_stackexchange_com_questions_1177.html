@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Why is volatility mean-reverting? - Quantitative Finance Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/quant/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/quant/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Quantitative Finance Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackQuant" />
+    <meta name="twitter:domain" content="quant.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/quant/img/apple-touch-icon.png?v=0b4104039753"/>
+    <meta name="og:title" content="Why is volatility mean-reverting?" />
+    <meta name="og:description" content="We all know it does mean revert. The question is why. What&#39;s making volatility mean-revert? Is it some sort of cyclical behaviour of option traders? The way it&#39;s calculated? Why?
+" />
+    <meta name="og:url" content="http://quant.stackexchange.com/questions/1177/why-is-volatility-mean-reverting"/>
+    <link rel="canonical" href="http://quant.stackexchange.com/questions/1177/why-is-volatility-mean-reverting" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/quant/all.css?v=a664a1f7a618">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Why is volatility mean-reverting?&#39;" href="/feeds/question/1177">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:2,shownCommentCount:2,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:1177});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('204', '1177');
+            
+                    });
+    </script>
+
+                <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+                                        tex2jax: { inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+                                        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+                                        messageStyle: "none"
+                });
+                </script>
+                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>                
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('204');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385469003,"enableUserHovercards":true,"site":{"name":"Quantitative Finance Stack Exchange","description":"Q&A for finance professionals and academics","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091","js/mathjax-editing.en.js":"a09844f7b738"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f1177%2fwhy-is-volatility-mean-reverting">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f1177%2fwhy-is-volatility-mean-reverting">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Quantitative Finance
+                        <span class="beta-title">beta</span>
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/quant/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Quantitative Finance Stack Exchange is a question and answer site for finance professionals and academics. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/1177/why-is-volatility-mean-reverting" class="question-hyperlink">Why is volatility mean-reverting?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="1177"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="1177">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">17</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>9</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>We all know it does mean revert. The question is why. What's making volatility mean-revert? Is it some sort of cyclical behaviour of option traders? The way it's calculated? Why?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/volatility" class="post-tag" title="show questions tagged &#39;volatility&#39;" rel="tag">volatility</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/1177" title="short permalink to this question" class="short-link" id="link-post-1177">share</a><span class="lsep">|</span><a href="/posts/1177/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/1177/revisions" title="show all edits to this post">edited <span title="2011-05-18 17:50:53Z" class="relativetime">May 18 '11 at 17:50</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/35/chrisaycock"><div><img src="https://www.gravatar.com/avatar/0a838e5ef0f378f35f9c7875ec37f647?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/35/chrisaycock">chrisaycock</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">5,800</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="13 silver badges"><span class="badge2"></span><span class="badgecount">13</span></span><span title="58 bronze badges"><span class="badge3"></span><span class="badgecount">58</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2011-05-18 17:03:54Z" class="relativetime">May 18 '11 at 17:03</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/40/user40"><div><img src="https://www.gravatar.com/avatar/ae07c608f8559edb99d6435b9fd9a7bc?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/40/user40">user40</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">878</span><span title="10 silver badges"><span class="badge2"></span><span class="badgecount">10</span></span><span title="22 bronze badges"><span class="badge3"></span><span class="badgecount">22</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1177" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-3406" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Are you asking about <i>realized</i> volatility or <i>implied</i> volatility?</span>
+	&ndash;&nbsp;
+		<a href="/users/37/pteetor" 
+		   title="1322 reputation" 
+		   class="comment-user">pteetor</a>
+	<span class="comment-date" dir="ltr"><span title="2011-12-03 04:12:14Z" class="relativetime-clean">Dec 3 '11 at 4:12</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-3430" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@pteetor would your answer to the question change depending on whether it is <i>realized</i> or <i>implied</i>?  I think it wouldn&#39;t.  If you disagree, could be an interesting new question.</span>
+	&ndash;&nbsp;
+		<a href="/users/1106/tal-fishman" 
+		   title="7002 reputation" 
+		   class="comment-user">Tal Fishman</a>
+	<span class="comment-date" dir="ltr"><span title="2011-12-05 20:36:07Z" class="relativetime-clean">Dec 5 '11 at 20:36</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-1177" data-rep=1 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								7 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/1177/why-is-volatility-mean-reverting?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/1177/why-is-volatility-mean-reverting?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/1177/why-is-volatility-mean-reverting?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="1180"></a>
+<div id="answer-1180" class="answer accepted-answer" data-answerid="1180" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="1180">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">20</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Volatility is mean reverting if the underlying security doesn't drop to zero.</p>
+
+<p>If the security has some underlying "value" then its price is co-integrated with that "value".    The volatility is the uncertainty of that price as it tracks the security's "value".</p>
+
+<p><img src="http://i.stack.imgur.com/k7zxM.jpg" alt="enter image description here"></p>
+
+<p>Edit 12/03/2011 =================================================</p>
+
+<p>@pteetor,</p>
+
+<p>I may have missed something, but the question was "<strong>Why</strong> is volatility mean-reverting?".   I realize that the standard answer is that the VIX (I'm assuming he's asking about the VIX) is related to the historical volatility of the S&amp;P.   A simple version of that relationship provides a reasonable R^2 (see Fig. 1).   It relates the VIX to the S&amp;P "wiggliness" (30-day standard deviation of the daily log differences of the S&amp;P), but it doesn't explain <strong>why</strong> more or less "wiggliness" takes place.   To explain that, I have to look at the underlying fundamentals.</p>
+
+<p><img src="http://i.stack.imgur.com/m9NE5.jpg" alt="enter image description here"></p>
+
+<p>Figure 2 below, shows the S&amp;P Price (in gray) and what I think is the underlying S&amp;P <strong>VALUE</strong> (in red).  Both lines refer to the left hand scale.   This <strong>VALUE</strong> is calculated from my estimate of sustainable earnings and the appropriate P/E ratio.   It is what I think an <strong>Investor</strong> would set for the "value" (money generating value) of the S&amp;P.</p>
+
+<p>The blue line is the VIX, and is read on the right hand scale.   On the right hand side of the graph, I have divided the VIX range into three regions.   From past experience, a VIX of 20 or less seems to be a time of "Don't Worry, Be Happy".  Personally, that's when I worry the most, but the market seems to be in a care-free state, so I tagged it as such.   Next, for a VIX from about 20 to 40, the market seems to be in an "I'm Nervous" state (not care-free, but also not panicky).   For a VIX above 40, a "Panic" state seems to show up.</p>
+
+<p>Our current VIX of 28 puts us in the "I'm Nervous" state.</p>
+
+<p><img src="http://i.stack.imgur.com/2U8Pq.jpg" alt="enter image description here"></p>
+
+<p>Now to the issue of <strong>WHY</strong>.</p>
+
+<p>Don't the Happy/Nervous/Panicky states of the VIX have to be consistent with the level of the S&amp;P Price (not just its "wiggliness")?  If I'm "Happy" then I'm happy with the level of the Price.    If I'm "Nervous" aren't I nervous about the level of the Price?   If I'm "Panicky" then isn't the level of the Price nose-diving?</p>
+
+<p>As an <strong>Investor</strong>, the only way I can be "Happy" with the level of the Price is for the Price to be somewhere near or below my estimate of the <strong>VALUE</strong> of the S&amp;P.  That happened from 1991 to 1997, 2003 to 2007, and part of 2010 and 2011.</p>
+
+<p>As an <strong>Investor</strong>, I will be "Nervous" with the level of the Price when the Price is too high compared to the <strong>VALUE</strong> or when some external "thing" is going on (for example, the Euro-mess).   That happened in 1990, 1997 to 2003, part of 2007, 2008, 2009, 2010, and 2011. </p>
+
+<p>And, as stated above, when "Panic" takes place, the market sells everything and the Price level nose-dives (1998 LTCM/Russian thing, 9/11/2001, July and Sept 2002, Sept 2008, the Debt-mess in 2010 and 2011).</p>
+
+<p>So, if all of the above fits the hypothesis, then "<strong>Why</strong> is volatility mean-reverting?" can be answered as.....the market has, and probably will continue to spend most of its time in the "Don't Worry, Be Happy" state or the "I'm Nervous" state (i.e. reverting to a state that is not extreme).</p>
+
+<p>I agree that my three-sentence answer at the top of this post left out a lot of details, but it is the short version of the same answer.</p>
+
+<p>Edit 12/09/2011 =======================================================</p>
+
+<p>@pteetor,</p>
+
+<p>I must be getting old and forgetful.   In your comment below, you asked for references (which I forgot to include above).   Here are a few:</p>
+
+<p><a href="http://faculty.fuqua.duke.edu/~charvey/Research/Working_Papers/W104_The_equity_risk.pdf" rel="nofollow">http://faculty.fuqua.duke.edu/~charvey/Research/Working_Papers/W104_The_equity_risk.pdf</a></p>
+
+<p><a href="http://research.stlouisfed.org/wp/2006/2006-007.pdf" rel="nofollow">http://research.stlouisfed.org/wp/2006/2006-007.pdf</a></p>
+
+<p><a href="http://papers.ssrn.com/sol3/papers.cfm?abstract_id=1268567" rel="nofollow">http://papers.ssrn.com/sol3/papers.cfm?abstract_id=1268567</a></p>
+
+<p>With a little Googling, you'll find more.</p>
+
+<p>In my answer above, I purposely didn't get into my technique for setting the "value" of the S&amp;P.   It always starts an argument about which is best, Modified Gordon Models, Modified Miller-Modigliani Models, Modified XXXX Models, or whatever.   The bottom line is, no matter what valuation technique you use, you'll always find some form of "equity risk premium" that is related to volatility.   It's just common sense......there has to be a "price" for being "Nervous" or "Happy".   </p>
+
+<p>Another issue that usually comes up has to do with using Historical Volatility versus Implied Volatility.   All I can say is, the volatility part of the equity risk premium existed long before options were traded.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/1180" title="short permalink to this answer" class="short-link" id="link-post-1180">share</a><span class="lsep">|</span><a href="/posts/1180/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/1180/revisions" title="show all edits to this post">edited <span title="2011-12-09 22:53:12Z" class="relativetime">Dec 9 '11 at 22:53</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-05-18 18:06:24Z" class="relativetime">May 18 '11 at 18:06</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/392/bill-080"><div><img src="https://www.gravatar.com/avatar/27d4e9fbd7e97aaeb04090b8f851c0eb?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/392/bill-080">bill_080</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">2,747</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="3 silver badges"><span class="badge2"></span><span class="badgecount">3</span></span><span title="13 bronze badges"><span class="badge3"></span><span class="badgecount">13</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1180" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-3395" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">4</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Though this is the accepted answer, user1443 (below) has it right in my opinion.</span>
+	&ndash;&nbsp;
+		<a href="/users/254/brian-b" 
+		   title="7073 reputation" 
+		   class="comment-user">Brian B</a>
+	<span class="comment-date" dir="ltr"><span title="2011-12-02 14:42:39Z" class="relativetime-clean">Dec 2 '11 at 14:42</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-3407" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@bill: Can you cite some reference for this hypothesis? I don&#39;t recall encountering this reasoning before. Also, those graphs are pretty, but they don&#39;t illustrate your thesis. Rather, they illustrate that implied volatility often rises when prices fall sharply... which seems off-topic.</span>
+	&ndash;&nbsp;
+		<a href="/users/37/pteetor" 
+		   title="1322 reputation" 
+		   class="comment-user">pteetor</a>
+	<span class="comment-date" dir="ltr"><span title="2011-12-03 04:14:59Z" class="relativetime-clean">Dec 3 '11 at 4:14</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-3413" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@pteetor: I added my response as an edit to my answer.</span>
+	&ndash;&nbsp;
+		<a href="/users/392/bill-080" 
+		   title="2747 reputation" 
+		   class="comment-user">bill_080</a>
+	<span class="comment-date" dir="ltr"><span title="2011-12-04 02:20:36Z" class="relativetime-clean">Dec 4 '11 at 2:20</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-3507" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@pteetor: In my previous edit, I forgot to provide links.   Sorry, I simply forgot.  I added some links in my second edit.</span>
+	&ndash;&nbsp;
+		<a href="/users/392/bill-080" 
+		   title="2747 reputation" 
+		   class="comment-user">bill_080</a>
+	<span class="comment-date" dir="ltr"><span title="2011-12-09 22:54:39Z" class="relativetime-clean">Dec 9 '11 at 22:54</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-1180" data-rep=1 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="2497"></a>
+<div id="answer-2497" class="answer" data-answerid="2497" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="2497">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">14</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Volatility is mean reverting because you can prove by contradiction that it cannot be otherwise. You have an intuitive understanding of why, but you need something closer to a proof.</p>
+
+<p>Assume volatility is not mean reverting. At time t, the effect of the random component of the volatility on its level will be $\sigma \cdot \sqrt{t}$  </p>
+
+<p>For an arbitrarily large <code>t</code> (far enough into the future), the probability that the final volatility is in the same order of magnitude as where it started approaches 0. This means if you look at it evolve for long enough, you are certain it will eventually become arbitrarily large or arbitrarily small, which would be nonsense.</p>
+
+<p>Therefore volatility cannot NOT be mean reverting.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/2497" title="short permalink to this answer" class="short-link" id="link-post-2497">share</a><span class="lsep">|</span><a href="/posts/2497/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/2497/revisions" title="show all edits to this post">edited <span title="2011-12-05 20:33:43Z" class="relativetime">Dec 5 '11 at 20:33</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/141/scott-weinstein"><div><img src="https://www.gravatar.com/avatar/7cb176f136e258d185f53f93fe706c31?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/141/scott-weinstein">Scott Weinstein</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">103</span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-12-02 05:47:01Z" class="relativetime">Dec 2 '11 at 5:47</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1443/user1443"><div><img src="https://www.gravatar.com/avatar/74a3926215e7adca0771f265782faaa7?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1443/user1443">user1443</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">381</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="7 bronze badges"><span class="badge3"></span><span class="badgecount">7</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-2497" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-3508" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">A random-walk model also has finite variance and no mean-reversion. The best prediction &#39;k&#39; steps ahead for a RW model is also not arbitrarily large or arbitrarily small but simply the value today. Therefore, assuming that volatility is not mean-reverting does not necessarily lead to arbitrarily large or small non-sensical outcomes. That means theoretically volatility could not be mean reverting and exhibit finite variance (although empirically this is not true).</span>
+	&ndash;&nbsp;
+		<a href="/users/1800/quant-guy" 
+		   title="7779 reputation" 
+		   class="comment-user">Quant Guy</a>
+	<span class="comment-date" dir="ltr"><span title="2011-12-10 00:06:47Z" class="relativetime-clean">Dec 10 '11 at 0:06</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-3509" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Another quick point - the square root of time rule you cite is valid only if the underlying return is a time-homogenous i.i.d. invariant. In other words, if the return distribution changes with time (as implied by volatility mean reversion), the underlying return is not a time-homogenous invariant and the use of the square root of time rule is invalid: <a href="http://papers.ssrn.com/sol3/papers.cfm?abstract_id=1548162" rel="nofollow">papers.ssrn.com/sol3/papers.cfm?abstract_id=1548162</a></span>
+	&ndash;&nbsp;
+		<a href="/users/1800/quant-guy" 
+		   title="7779 reputation" 
+		   class="comment-user">Quant Guy</a>
+	<span class="comment-date" dir="ltr"><span title="2011-12-10 00:14:14Z" class="relativetime-clean">Dec 10 '11 at 0:14</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-2497" data-rep=1 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="2493"></a>
+<div id="answer-2493" class="answer" data-answerid="2493" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="2493">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">5</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>It is mean reverting due to the addition of new information into the market.</p>
+
+<p>Imagine a very very simple case: the world only has two traders trading chicken feet. Trader A and B both think it's worth around \$10-\$11 per foot because historically, they have been trading that range all else constant. So vol is low.</p>
+
+<p>Suddenly, GSK announces chicken feet cause cancer, trader A thinks they're worthless and trader B thinks some people dont care so he thinks they're worth \$5. It'll trade in the \$0 - \$5 range (higher vol). As the truth slowly unfolds, their opinions will converge (lower vol).</p>
+
+<p>Becareful though, this doesn't mean you can capitalize on shorting vol when vol is above the mean (vice versa), realized vol may kill you. And market usually reflects mean reversion if you look at the term structure during crisis, front few months gets bid way more than the back months so you'll have a very descending term structure.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/2493" title="short permalink to this answer" class="short-link" id="link-post-2493">share</a><span class="lsep">|</span><a href="/posts/2493/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/2493/revisions" title="show all edits to this post">edited <span title="2011-12-03 13:28:47Z" class="relativetime">Dec 3 '11 at 13:28</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/38/karol-piczak"><div><img src="https://www.gravatar.com/avatar/8b029ab8275cf08b3ae2cd5742080f36?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/38/karol-piczak">Karol Piczak</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,184</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="10 silver badges"><span class="badge2"></span><span class="badgecount">10</span></span><span title="29 bronze badges"><span class="badge3"></span><span class="badgecount">29</span></span>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-12-01 20:36:15Z" class="relativetime">Dec 1 '11 at 20:36</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1726/dkm"><div><img src="https://www.gravatar.com/avatar/3be83ce9af78f1e02fd9638dcaecdd1b?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1726/dkm">DKM</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">365</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-2493" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-2493" data-rep=1 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="1178"></a>
+<div id="answer-1178" class="answer" data-answerid="1178" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="1178">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>I would give a kind of commonsense answer: Volatility is basically measuring the range of fluctuation of the underlying. There is always some fluctuation (noise), some average range, but there are times when people are panicking and esp. risk-averse (falling stocks, crashes, high vola) and there are times when people are esp. calm (rising stocks, low vola).</p>
+
+<p>So its a little bit how our world is and what drives markets in general (fear, greed -> lots of psychology) ...and no, there is nothing special about options traders here...</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/1178" title="short permalink to this answer" class="short-link" id="link-post-1178">share</a><span class="lsep">|</span><a href="/posts/1178/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-05-18 17:57:05Z" class="relativetime">May 18 '11 at 17:57</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/12/vonjd"><div><img src="https://www.gravatar.com/avatar/8ef0c2c5574359e5d9a14be8e0368181?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/12/vonjd">vonjd</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">7,518</span><span title="19 silver badges"><span class="badge2"></span><span class="badgecount">19</span></span><span title="64 bronze badges"><span class="badge3"></span><span class="badgecount">64</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1178" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-1178" data-rep=1 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="1179"></a>
+<div id="answer-1179" class="answer" data-answerid="1179" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="1179">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Do you believe it would be otherwise? Certainly we wouldn't expect low volatility to revert upwards, so you must be asking about why volatility spikes are short-lived.</p>
+
+<p>Volatility spikes are often news related, either micro (merger announcement, bankruptcy notice, patent rejected, etc) or macro (rate changes, commodity bubble bursting, etc). That news isn't perpetual; the dust settles at some point and the world moves on.</p>
+
+<p>Related question: Why do media frenzies die down? Same answer.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/1179" title="short permalink to this answer" class="short-link" id="link-post-1179">share</a><span class="lsep">|</span><a href="/posts/1179/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-05-18 17:58:17Z" class="relativetime">May 18 '11 at 17:58</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/35/chrisaycock"><div><img src="https://www.gravatar.com/avatar/0a838e5ef0f378f35f9c7875ec37f647?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/35/chrisaycock">chrisaycock</a><span class="mod-flair" title="moderator">&#9830;</span><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">5,800</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="13 silver badges"><span class="badge2"></span><span class="badgecount">13</span></span><span title="58 bronze badges"><span class="badge3"></span><span class="badgecount">58</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1179" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-1179" data-rep=1 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="2558"></a>
+<div id="answer-2558" class="answer" data-answerid="2558" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="2558">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>This is a hard question because you have to explain i) why does volatility mean revert, AND the opposite effect ii) why does volatility exhibit clustering/persistence? GARCH models can describe this behavior but they do not explain.</p>
+
+<p>We need a model of investor behavior that can explain both phenomenon. I think Rama Cont has a strong answer in his 2005 paper <a href="http://www.proba.jussieu.fr/pageperso/ramacont/papers/clustering.pdf" rel="nofollow">Volatility Clustering in Financial Markets:
+Empirical Facts and Agent–Based Models</a>:</p>
+
+<blockquote>
+  <p>Many market microstructure models – especially those with learning or
+  evolution– converge over large time intervals to an equilibrium where
+  prices and other aggregate quantities cease to fluctuate randomly. By
+  contrast, in the present model, prices fluctuate endlessly and the
+  volatility exhibits mean-reverting behavior. Suppose we are in a
+  period of “low volatility”; the amplitude |rt| of returns is small.
+  <strong>Agents who update their thresholds will therefore update them to small
+  values, become more sensitive to news arrivals, thus generating higher
+  excess demand and thus increasing the amplitude of returns.
+  Conversely, in a period of high volatility, agents will update their
+  threshold values to high values and become less reactive to the
+  incoming signal: this increase in investor inertia will thus decrease
+  the amplitude of returns</strong>. The mean reversion time in the volatility
+  corresponds here to the time it takes for agents to adjust their
+  thresholds to current market conditions, which is of order τc = 1/q.
+  When the amplitude of the noise is small it can be shown that
+  volatility decays exponentially in time and increases through upward
+  “jumps”. This behavior is actually similar to that of a class of
+  stochastic volatility models, introduced by Barndorff-Nielsen and
+  Shephard and successfully used to describe various econometric
+  properties of returns.</p>
+</blockquote>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/2558" title="short permalink to this answer" class="short-link" id="link-post-2558">share</a><span class="lsep">|</span><a href="/posts/2558/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-12-10 01:07:55Z" class="relativetime">Dec 10 '11 at 1:07</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1800/quant-guy"><div><img src="https://www.gravatar.com/avatar/5c73f77756ec42dafa64d6469e4e08ff?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1800/quant-guy">Quant Guy</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">7,779</span><span title="15 silver badges"><span class="badge2"></span><span class="badgecount">15</span></span><span title="48 bronze badges"><span class="badge3"></span><span class="badgecount">48</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-2558" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-2558" data-rep=1 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="1414"></a>
+<div id="answer-1414" class="answer" data-answerid="1414" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="1414">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>It is not the volatility that mean reverts, but the price! The volatility (attempts to) measure the deviations from the "equilibrium" or the "stable price" (even though we might never observe it). </p>
+
+<p>It is not really a cyclical behaviour of traders, but one can look at it as a <em>continuous</em> game of tug of war between the bulls and bears where any player can change sides at any time depending on her perception of future movements of price. </p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/1414" title="short permalink to this answer" class="short-link" id="link-post-1414">share</a><span class="lsep">|</span><a href="/posts/1414/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-07-07 08:25:49Z" class="relativetime">Jul 7 '11 at 8:25</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1053/val"><div><img src="https://www.gravatar.com/avatar/f4e6900ef93de6eec49deb3b0da99fd2?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1053/val">Val</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">150</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="4 bronze badges"><span class="badge3"></span><span class="badgecount">4</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-1414" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-3367" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">This is not true. Volatility doesn&#39;t matter the deviation from the equilibrium because there&#39;s not such thing as equilibrium price. I think you would think that because u expect vix to trade in the low 10s when spy goes to say 135 (your equilibrium price). However, spy can trade 100 and vix trades low 10 if fundamental supports that spy level and the most market agree spy should trade 100.</span>
+	&ndash;&nbsp;
+		<a href="/users/1726/dkm" 
+		   title="365 reputation" 
+		   class="comment-user">DKM</a>
+	<span class="comment-date" dir="ltr"><span title="2011-12-01 20:11:14Z" class="relativetime-clean">Dec 1 '11 at 20:11</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-1414" data-rep=1 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/1177/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="1177" />
+							<h2 class="space">Your Answer</h2>
+
+
+        <script type="text/javascript">
+            StackExchange.ifUsing("editor", function () {
+                return StackExchange.using("mathjaxEditing", function () {
+                    StackExchange.MarkdownEditor.creationCallbacks.add(function (editor, postfix) {
+                        StackExchange.mathjaxEditing.prepareWmdForMathJax(editor, postfix, [["$", "$"], ["\\\\(","\\\\)"]]);
+                    });
+                });
+            }, "mathjax-editing");
+        </script>
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+noCode: true,            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f1177%2fwhy-is-volatility-mean-reverting%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f1177%2fwhy-is-volatility-mean-reverting%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/volatility" class="post-tag" title="show questions tagged &#39;volatility&#39;" rel="tag">volatility</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/volatility" class="post-tag" title="show questions tagged &#39;volatility&#39;" rel="tag">volatility</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">142</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2011-05-18 17:03:54Z"><b>2 years ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>3790 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2011-12-10 01:07:55Z">1 year ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <script type="text/javascript">
+        var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = 'http://engine.adzerk.net/z/12057/adzerk2_2_17_76?keywords=x-host-quant.stackexchange.com'; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);
+    </script>
+    <div class="everyonelovesstackoverflow" id="adzerk2">
+    </div>  
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/beta/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=quant.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/603" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">12
+    </div>
+</a><a href="/questions/603/why-are-garch-models-used-to-forecast-volatility-if-residuals-are-often-correlat" class="question-hyperlink">Why are GARCH models used to forecast volatility if residuals are often correlated?</a>
+</div>
+<div class="spacer">
+<a href="/q/1231" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">5
+    </div>
+</a><a href="/questions/1231/tradable-volatility" class="question-hyperlink">Tradable Volatility</a>
+</div>
+<div class="spacer">
+<a href="/q/2944" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">5
+    </div>
+</a><a href="/questions/2944/why-are-there-so-many-different-ways-of-calculating-historical-volatility" class="question-hyperlink">Why are there so many different ways of calculating historical volatility</a>
+</div>
+<div class="spacer">
+<a href="/q/3216" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">12
+    </div>
+</a><a href="/questions/3216/statistical-arbitrage-option-overlay-strategies-volatility-trading" class="question-hyperlink">statistical arbitrage option overlay strategies / volatility trading</a>
+</div>
+<div class="spacer">
+<a href="/q/3894" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">6
+    </div>
+</a><a href="/questions/3894/why-does-the-price-of-a-derivative-not-depend-on-the-derivative-with-which-you-h" class="question-hyperlink">Why does the price of a derivative not depend on the derivative with which you hedge volatility risk?</a>
+</div>
+<div class="spacer">
+<a href="/q/4153" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/4153/what-does-this-formula-to-derive-annualized-volatility-from-var-mean" class="question-hyperlink">What does this formula (to derive annualized volatility from VaR) mean?</a>
+</div>
+<div class="spacer">
+<a href="/q/7149" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/7149/why-are-there-different-estimators-for-stock-volatility-realized-variance-rav" class="question-hyperlink">Why are there different estimators for stock volatility? (realized variance, RAV, etc)</a>
+</div>
+<div class="spacer">
+<a href="/q/7340" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/7340/why-fx-vanilla-options-are-quoted-in-volatility" class="question-hyperlink">Why FX Vanilla Options are quoted in volatility</a>
+</div>
+<div class="spacer">
+<a href="/q/8203" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/8203/volatility-estimation" class="question-hyperlink">Volatility Estimation</a>
+</div>
+<div class="spacer">
+<a href="/q/9165" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/9165/basis-point-implied-volatility-of-ty-notes" class="question-hyperlink">Basis point implied volatility of TY notes</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/1177" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/1177/ivc/112c');});
+</script>
+<noscript>
+    <div><img src="/posts/1177/ivc/112c" class="dno" alt="" width="0" height="0"></div>
+</noscript></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/1177/why-is-volatility-mean-reverting")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.quant.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Quantitative Finance Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|volatility|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>sql - How can I optimize this MySQL query further? - Database Administrators Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/dba/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/dba/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Database Administrators Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackDBAs" />
+    <meta name="twitter:domain" content="dba.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/dba/img/apple-touch-icon@2.png?v=246e2cb2439c"/>
+    <meta name="og:title" content="How can I optimize this MySQL query further?" />
+    <meta name="og:description" content="I have a query that is taking a particularly long time to run (15+ seconds) and it is only getting worse with time as my dataset grows. I have optimized this in the past, and have added indices, " />
+    <meta name="og:url" content="http://dba.stackexchange.com/questions/2863/how-can-i-optimize-this-mysql-query-further"/>
+    <link rel="canonical" href="http://dba.stackexchange.com/questions/2863/how-can-i-optimize-this-mysql-query-further" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/dba/all.css?v=52912e79406c">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;How can I optimize this MySQL query further?&#39;" href="/feeds/question/2863">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:13,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:2863});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('182', '2863');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('182');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385454406,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Database Administrators Stack Exchange","description":"Q&A for database professionals who wish to improve their database skills and learn from others in the community","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f2863%2fhow-can-i-optimize-this-mysql-query-further">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f2863%2fhow-can-i-optimize-this-mysql-query-further">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Database Administrators
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/dba/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Database Administrators Stack Exchange is a question and answer site for database professionals who wish to improve their database skills and learn from others in the community. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/2863/how-can-i-optimize-this-mysql-query-further" class="question-hyperlink">How can I optimize this MySQL query further?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="2863"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="2863">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">8</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>3</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I have a query that is taking a particularly long time to run (15+ seconds) and it is only getting worse with time as my dataset grows. I have optimized this in the past, and have added indices, code-level sorting and other optimizations, but it needs some further refining.</p>
+
+<pre><code>SELECT sounds.*, avg(ratings.rating) AS avg_rating, count(ratings.rating) AS votes FROM `sounds` 
+INNER JOIN ratings ON sounds.id = ratings.rateable_id 
+WHERE (ratings.rateable_type = 'Sound' 
+   AND sounds.blacklisted = false 
+   AND sounds.ready_for_deployment = true 
+   AND sounds.deployed = true 
+   AND sounds.type = "Sound" 
+   AND sounds.created_at &gt; "2011-03-26 21:25:49") 
+GROUP BY ratings.rateable_id
+</code></pre>
+
+<p>The query's purpose is to get me the <code>sound id</code>'s and the average rating of the most recent, released sounds. There are about 1500 sounds, and 2 Million ratings.</p>
+
+<p>I have several indices on <code>sounds</code></p>
+
+<pre><code>mysql&gt; show index from sounds;
++--------+------------+------------------------------------------+--------------+----------------------+-----------+-------------+----------+--------+------+------------+————+
+| Table  | Non_unique | Key_name                                 | Seq_in_index | Column_name          | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment |
++--------+------------+------------------------------------------+--------------+----------------------+-----------+-------------+----------+--------+------+------------+————+
+| sounds |          0 | PRIMARY                                  |            1 | id                   | A         |        1388 |     NULL | NULL   |      | BTREE      |         | 
+| sounds |          1 | sounds_ready_for_deployment_and_deployed |            1 | deployed             | A         |           5 |     NULL | NULL   | YES  | BTREE      |         | 
+| sounds |          1 | sounds_ready_for_deployment_and_deployed |            2 | ready_for_deployment | A         |          12 |     NULL | NULL   | YES  | BTREE      |         | 
+| sounds |          1 | sounds_name                              |            1 | name                 | A         |        1388 |     NULL | NULL   |      | BTREE      |         | 
+| sounds |          1 | sounds_description                       |            1 | description          | A         |        1388 |      128 | NULL   | YES  | BTREE      |         | 
++--------+------------+------------------------------------------+--------------+----------------------+-----------+-------------+----------+--------+------+------------+---------+
+</code></pre>
+
+<p>and several on <code>ratings</code></p>
+
+<pre><code>mysql&gt; show index from ratings;
++---------+------------+-----------------------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+————+
+| Table   | Non_unique | Key_name                                | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment |
++---------+------------+-----------------------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+————+
+| ratings |          0 | PRIMARY                                 |            1 | id          | A         |     2008251 |     NULL | NULL   |      | BTREE      |         | 
+| ratings |          1 | index_ratings_on_rateable_id_and_rating |            1 | rateable_id | A         |          18 |     NULL | NULL   |      | BTREE      |         | 
+| ratings |          1 | index_ratings_on_rateable_id_and_rating |            2 | rating      | A         |        9297 |     NULL | NULL   | YES  | BTREE      |         | 
++---------+------------+-----------------------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+
+</code></pre>
+
+<p>Here is the <code>EXPLAIN</code></p>
+
+<pre><code>mysql&gt; EXPLAIN SELECT sounds.*, avg(ratings.rating) AS avg_rating, count(ratings.rating) AS votes FROM sounds INNER JOIN ratings ON sounds.id = ratings.rateable_id WHERE (ratings.rateable_type = 'Sound' AND sounds.blacklisted = false AND sounds.ready_for_deployment = true AND sounds.deployed = true AND sounds.type = "Sound" AND sounds.created_at &gt; "2011-03-26 21:25:49") GROUP BY ratings.rateable_id;
++----+-------------+---------+--------+--------------------------------------------------+-----------------------------------------+---------+-----------------------------------------+---------+——————+
+| id | select_type | table   | type   | possible_keys                                    | key                                     | key_len | ref                                     | rows    | Extra       |
++----+-------------+---------+--------+--------------------------------------------------+-----------------------------------------+---------+-----------------------------------------+---------+——————+
+|  1 | SIMPLE      | ratings | index  | index_ratings_on_rateable_id_and_rating          | index_ratings_on_rateable_id_and_rating | 9       | NULL                                    | 2008306 | Using where | 
+|  1 | SIMPLE      | sounds  | eq_ref | PRIMARY,sounds_ready_for_deployment_and_deployed | PRIMARY                                 | 4       | redacted_production.ratings.rateable_id |       1 | Using where | 
++----+-------------+---------+--------+--------------------------------------------------+-----------------------------------------+---------+-----------------------------------------+---------+-------------+
+</code></pre>
+
+<p>I do cache the results once obtained, so site performance is not much of an issue, but my cache warmers are taking longer and longer to run due to this call taking so long, and that is starting to become an issue. This doesn't seem like a lot of numbers to crunch in one query…</p>
+
+<p><strong>What more can I do to make this perform better</strong>? </p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/mysql" class="post-tag" title="show questions tagged &#39;mysql&#39;" rel="tag">mysql</a> <a href="/questions/tagged/sql" class="post-tag" title="show questions tagged &#39;sql&#39;" rel="tag">sql</a> <a href="/questions/tagged/performance" class="post-tag" title="show questions tagged &#39;performance&#39;" rel="tag">performance</a> <a href="/questions/tagged/index" class="post-tag" title="show questions tagged &#39;index&#39;" rel="tag">index</a> <a href="/questions/tagged/optimization" class="post-tag" title="show questions tagged &#39;optimization&#39;" rel="tag">optimization</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/2863" title="short permalink to this question" class="short-link" id="link-post-2863">share</a><span class="lsep">|</span><a href="/posts/2863/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/2863/revisions" title="show all edits to this post">edited <span title="2011-08-23 04:24:32Z" class="relativetime">Aug 23 '11 at 4:24</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/877/rolandomysqldba"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/Tyn6s.jpg?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/877/rolandomysqldba">RolandoMySQLDBA</a><br>
+        <span class="reputation-score" title="reputation score 49562" dir="ltr">49.6k</span><span title="6 gold badges"><span class="badge1"></span><span class="badgecount">6</span></span><span title="45 silver badges"><span class="badge2"></span><span class="badgecount">45</span></span><span title="123 bronze badges"><span class="badge3"></span><span class="badgecount">123</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2011-05-21 21:39:39Z" class="relativetime">May 21 '11 at 21:39</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1882/coneybeare"><div><img src="https://www.gravatar.com/avatar/c0577af50b9980045ea1294c69ed9f52?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1882/coneybeare">coneybeare</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">108</span><span title="9 bronze badges"><span class="badge3"></span><span class="badgecount">9</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-2863" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="8" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-3626" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Can you show the <code>EXPLAIN</code> output? <code>EXPLAIN SELECT sounds.*, avg(ratings.rating) AS avg_rating, count(ratings.rating) AS votes FROM sounds INNER JOIN ratings ON sounds.id = ratings.rateable_id WHERE (ratings.rateable_type = &#39;Sound&#39; AND sounds.blacklisted = false AND sounds.ready_for_deployment = true AND sounds.deployed = true AND sounds.type = &quot;Sound&quot; AND sounds.created_at &gt; &quot;2011-03-26 21:25:49&quot;) GROUP BY ratings.rateable_id</code></span>
+	&ndash;&nbsp;
+		<a href="/users/180/derek-downey" 
+		   title="10638 reputation" 
+		   class="comment-user">Derek Downey</a>
+	<span class="comment-date" dir="ltr"><span title="2011-05-21 21:47:14Z" class="relativetime-clean">May 21 '11 at 21:47</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-3627" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">updated. thanks for asking</span>
+	&ndash;&nbsp;
+		<a href="/users/1882/coneybeare" 
+		   title="108 reputation" 
+		   class="comment-user owner">coneybeare</a>
+	<span class="comment-date" dir="ltr"><span title="2011-05-21 22:09:08Z" class="relativetime-clean">May 21 '11 at 22:09</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-3631" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@coneybeare This was a very interesting challenge for me today !!! +1 for you question. I wish more questions like this come along in the near future.</span>
+	&ndash;&nbsp;
+		<a href="/users/877/rolandomysqldba" 
+		   title="49562 reputation" 
+		   class="comment-user">RolandoMySQLDBA</a>
+	<span class="comment-date" dir="ltr"><span title="2011-05-22 01:25:42Z" class="relativetime-clean">May 22 '11 at 1:25</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-3635" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@coneybeare It looks like the new EXPLAIN only reads 21540 rows (359 X 60) instead of 2,008,306. Please run the EXPLAIN on the query I originally suggested in my answer. I would like to see the number of rows that come from that.</span>
+	&ndash;&nbsp;
+		<a href="/users/877/rolandomysqldba" 
+		   title="49562 reputation" 
+		   class="comment-user">RolandoMySQLDBA</a>
+	<span class="comment-date" dir="ltr"><span title="2011-05-22 02:45:04Z" class="relativetime-clean">May 22 '11 at 2:45</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-3638" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@RolandoMySQLDBA The new explain does indeed show that smaller amount of rows with the index, however, the time to execute the query was still about 15 seconds, showing no improvement</span>
+	&ndash;&nbsp;
+		<a href="/users/1882/coneybeare" 
+		   title="108 reputation" 
+		   class="comment-user owner">coneybeare</a>
+	<span class="comment-date" dir="ltr"><span title="2011-05-22 03:22:08Z" class="relativetime-clean">May 22 '11 at 3:22</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-2863" data-rep=50 data-anon=true
+			   class="comments-link " 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>show <b>8</b> more comments</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								4 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/2863/how-can-i-optimize-this-mysql-query-further?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/2863/how-can-i-optimize-this-mysql-query-further?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/2863/how-can-i-optimize-this-mysql-query-further?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="2865"></a>
+<div id="answer-2865" class="answer accepted-answer" data-answerid="2865" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="2865">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">6</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>After looking over the query, the tables, and the WHERE AND GROUP BY clauses, I recommend the following:</p>
+
+<p>Recommendation #1) Refactor the Query</p>
+
+<p>I reorganized the query to do three(3) things:</p>
+
+<ol>
+<li>create smaller temp tables</li>
+<li>Process the WHERE clause on those temp tables</li>
+<li>Delay joining to the very last</li>
+</ol>
+
+<p>Here is my proposed query:</p>
+
+<pre><code>SELECT
+  sounds.*,srkeys.avg_rating,srkeys.votes
+FROM
+(
+  SELECT AA.id,avg(BB.rating) AS avg_rating, count(BB.rating) AS votes
+  (
+    SELECT id FROM sounds
+    WHERE blacklisted = false 
+    AND   ready_for_deployment = true 
+    AND   deployed = true 
+    AND   type = "Sound" 
+    AND   created_at &gt; '2011-03-26 21:25:49'
+  ) AA INNER JOIN
+  (
+    SELECT AAA.ratings,AAA.rateable_id
+    FROM ratings AAA
+    WHERE rateable_type = 'Sound'
+  ) BB
+  ON AA.id = BB.rateable_id
+  GROUP BY BB.rateable_id
+) srkeys INNER JOIN sounds USING (id);
+</code></pre>
+
+<p>Recommendation #2) Index the sounds table with an index that will accommodate the WHERE clause</p>
+
+<p>The columns of this index include all the columns from the WHERE clause with static values first and moving target last</p>
+
+<pre><code>ALTER TABLE sounds ADD INDEX support_index
+(blacklisted,ready_for_deployment,deployed,type,created_at);
+</code></pre>
+
+<p>I sincerely believe you will be pleasantly surprised. Give it a Try !!!</p>
+
+<p>UPDATE 2011-05-21 19:04</p>
+
+<p>I just saw the cardinality. OUCH !!! Cardinality of 1 for rateable_id. Boy, I feel stupid !!!</p>
+
+<p>UPDATE 2011-05-21 19:20</p>
+
+<p>Maybe making the index will be enough to improve things.</p>
+
+<p>UPDATE 2011-05-21 22:56</p>
+
+<p>Please run this:</p>
+
+<pre><code>EXPLAIN SELECT
+  sounds.*,srkeys.avg_rating,srkeys.votes
+FROM
+(
+  SELECT AA.id,avg(BB.rating) AS avg_rating, count(BB.rating) AS votes FROM
+  (
+    SELECT id FROM sounds
+    WHERE blacklisted = false 
+    AND   ready_for_deployment = true 
+    AND   deployed = true 
+    AND   type = "Sound" 
+    AND   created_at &gt; '2011-03-26 21:25:49'
+  ) AA INNER JOIN
+  (
+    SELECT AAA.ratings,AAA.rateable_id
+    FROM ratings AAA
+    WHERE rateable_type = 'Sound'
+  ) BB
+  ON AA.id = BB.rateable_id
+  GROUP BY BB.rateable_id
+) srkeys INNER JOIN sounds USING (id);
+</code></pre>
+
+<p>UPDATE 2011-05-21 23:34</p>
+
+<p>I refactored it again. Try This One Please:</p>
+
+<pre><code>EXPLAIN
+  SELECT AA.id,avg(BB.rating) AS avg_rating, count(BB.rating) AS votes FROM
+  (
+    SELECT id FROM sounds
+    WHERE blacklisted = false 
+    AND   ready_for_deployment = true 
+    AND   deployed = true 
+    AND   type = "Sound" 
+    AND   created_at &gt; '2011-03-26 21:25:49'
+  ) AA INNER JOIN
+  (
+    SELECT AAA.ratings,AAA.rateable_id
+    FROM ratings AAA
+    WHERE rateable_type = 'Sound'
+  ) BB
+  ON AA.id = BB.rateable_id
+  GROUP BY BB.rateable_id
+;
+</code></pre>
+
+<p>UPDATE 2011-05-21 23:55</p>
+
+<p>I refactored it again. Try This One Please (Last Time):</p>
+
+<pre><code>EXPLAIN
+  SELECT A.id,avg(B.rating) AS avg_rating, count(B.rating) AS votes FROM
+  (
+    SELECT BB.* FROM
+    (
+      SELECT id FROM sounds
+      WHERE blacklisted = false 
+      AND   ready_for_deployment = true 
+      AND   deployed = true 
+      AND   type = "Sound" 
+      AND   created_at &gt; '2011-03-26 21:25:49'
+    ) AA INNER JOIN sounds BB USING (id)
+  ) A INNER JOIN
+  (
+    SELECT AAA.ratings,AAA.rateable_id
+    FROM ratings AAA
+    WHERE rateable_type = 'Sound'
+  ) B
+  ON A.id = B.rateable_id
+  GROUP BY B.rateable_id;
+</code></pre>
+
+<p>UPDATE 2011-05-22 00:12</p>
+
+<p>I hate giving up !!!!</p>
+
+<pre><code>EXPLAIN
+  SELECT A.*,avg(B.rating) AS avg_rating, count(B.rating) AS votes FROM
+  (
+    SELECT BB.* FROM
+    (
+      SELECT id FROM sounds
+      WHERE blacklisted = false 
+      AND   ready_for_deployment = true 
+      AND   deployed = true 
+      AND   type = "Sound" 
+      AND   created_at &gt; '2011-03-26 21:25:49'
+    ) AA INNER JOIN sounds BB USING (id)
+  ) A,
+  (
+    SELECT AAA.ratings,AAA.rateable_id
+    FROM ratings AAA
+    WHERE rateable_type = 'Sound'
+    AND AAA.rateable_id = A.id
+  ) B
+  GROUP BY B.rateable_id;
+</code></pre>
+
+<p>UPDATE 2011-05-22 07:51</p>
+
+<p>It has been bothering me that ratings is coming back with 2 million rows in the EXPLAIN. Then, it hit me. You might need another index on the ratings table which starts with rateable_type:</p>
+
+<pre><code>ALTER TABLE ratings ADD INDEX
+rateable_type_rateable_id_ndx (rateable_type,rateable_id);
+</code></pre>
+
+<p>The goal of this index is to reduce the temp table that manipulates ratings so that it is less that 2 million. If we can get that temp table significantly smaller (at least half), then we can have a better hope in your query and mine working faster too.</p>
+
+<p>After making that index, please Retry my original proposed query and also try yours:</p>
+
+<pre><code>SELECT
+  sounds.*,srkeys.avg_rating,srkeys.votes
+FROM
+(
+  SELECT AA.id,avg(BB.rating) AS avg_rating, count(BB.rating) AS votes
+  (
+    SELECT id FROM sounds
+    WHERE blacklisted = false 
+    AND   ready_for_deployment = true 
+    AND   deployed = true 
+    AND   type = "Sound" 
+    AND   created_at &gt; '2011-03-26 21:25:49'
+  ) AA INNER JOIN
+  (
+    SELECT AAA.ratings,AAA.rateable_id
+    FROM ratings AAA
+    WHERE rateable_type = 'Sound'
+  ) BB
+  ON AA.id = BB.rateable_id
+  GROUP BY BB.rateable_id
+) srkeys INNER JOIN sounds USING (id);
+</code></pre>
+
+<p>UPDATE 2011-05-22 18:39 : FINAL WORDS</p>
+
+<p><a href="http://stackoverflow.com/questions/5983156/fetching-a-single-row-from-join-table/6023217#6023217">I had refactored a query in a stored procedure and added an index to help answer a question on speeding things up. I got 6 upvotes, had the answer accepted,and picked up a 200 bounty.</a></p>
+
+<p><a href="http://dba.stackexchange.com/questions/872/mysql-index-when-joining-to-tables-not-being-used-performance-optimizing-questi/2808#2808">I had also refactored another query (marginal results) and added an index (dramatic results). I got 2 upvotes and had the answer accepted.</a></p>
+
+<p><a href="http://stackoverflow.com/questions/6012329/can-anyone-speed-up-my-mysql-stored-procedure/6020122#6020122">I added an index for yet another query challange and was upvoted once</a></p>
+
+<p><a href="http://dba.stackexchange.com/questions/2863/how-can-i-optimize-this-mysql-query-further/2865#2865">and now your question</a>.</p>
+
+<p><a href="http://www.youtube.com/watch?v=ZVisY-fEoMw&amp;feature=mh_lolz&amp;list=FLQMRlk3a_ARM" rel="nofollow">Wanting to answers all questions like these (including yours) were inspired by a YouTube video I watched on refactoring queries.</a> </p>
+
+<p>Thank you again, @coneybeare !!! I wanted to answer this question to fullest extent possible, not just accept points or accolades. Now, I can feel that I earned the points !!!</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/2865" title="short permalink to this answer" class="short-link" id="link-post-2865">share</a><span class="lsep">|</span><a href="/posts/2865/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/2865/revisions" title="show all edits to this post">edited <span title="2011-05-22 22:38:45Z" class="relativetime">May 22 '11 at 22:38</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-05-21 22:59:35Z" class="relativetime">May 21 '11 at 22:59</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/877/rolandomysqldba"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/Tyn6s.jpg?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/877/rolandomysqldba">RolandoMySQLDBA</a><br>
+        <span class="reputation-score" title="reputation score 49562" dir="ltr">49.6k</span><span title="6 gold badges"><span class="badge1"></span><span class="badgecount">6</span></span><span title="45 silver badges"><span class="badge2"></span><span class="badgecount">45</span></span><span title="123 bronze badges"><span class="badge3"></span><span class="badgecount">123</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-2865" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="2" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-3633" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I added the index, no improvement on time. Here is the new EXPLAIN: <a href="http://cloud.coneybeare.net/6y7c" rel="nofollow">cloud.coneybeare.net/6y7c</a></span>
+	&ndash;&nbsp;
+		<a href="/users/1882/coneybeare" 
+		   title="108 reputation" 
+		   class="comment-user owner">coneybeare</a>
+	<span class="comment-date" dir="ltr"><span title="2011-05-22 02:03:52Z" class="relativetime-clean">May 22 '11 at 2:03</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-3637" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">The EXPLAIN on the query from recommendation 1: <a href="http://cloud.coneybeare.net/6xZ2" rel="nofollow">cloud.coneybeare.net/6xZ2</a> It took about 30 seconds to run this query</span>
+	&ndash;&nbsp;
+		<a href="/users/1882/coneybeare" 
+		   title="108 reputation" 
+		   class="comment-user owner">coneybeare</a>
+	<span class="comment-date" dir="ltr"><span title="2011-05-22 03:19:40Z" class="relativetime-clean">May 22 '11 at 3:19</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-3640" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I did have to edit your syntax a little for some reason (I added a FROM before the first query, and I had to get rid of AAA alias). Here is the EXPLAIN: <a href="http://cloud.coneybeare.net/6xlq" rel="nofollow">cloud.coneybeare.net/6xlq</a>  The actual query took about 30 seconds to run</span>
+	&ndash;&nbsp;
+		<a href="/users/1882/coneybeare" 
+		   title="108 reputation" 
+		   class="comment-user owner">coneybeare</a>
+	<span class="comment-date" dir="ltr"><span title="2011-05-22 03:40:22Z" class="relativetime-clean">May 22 '11 at 3:40</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-3642" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@RolandoMySQLDBA: EXPLAIN on your 23:55 update: <a href="http://cloud.coneybeare.net/6wrN" rel="nofollow">cloud.coneybeare.net/6wrN</a> The actual query ran over a minute so i killed the process</span>
+	&ndash;&nbsp;
+		<a href="/users/1882/coneybeare" 
+		   title="108 reputation" 
+		   class="comment-user owner">coneybeare</a>
+	<span class="comment-date" dir="ltr"><span title="2011-05-22 04:04:46Z" class="relativetime-clean">May 22 '11 at 4:04</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-3644" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">The second inner select cannot access the A select table, thus A.id throws error.</span>
+	&ndash;&nbsp;
+		<a href="/users/1882/coneybeare" 
+		   title="108 reputation" 
+		   class="comment-user owner">coneybeare</a>
+	<span class="comment-date" dir="ltr"><span title="2011-05-22 04:57:21Z" class="relativetime-clean">May 22 '11 at 4:57</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-2865" data-rep=50 data-anon=true
+			   class="comments-link " 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>show <b>2</b> more comments</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="2864"></a>
+<div id="answer-2864" class="answer" data-answerid="2864" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="2864">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Thanks for the EXPLAIN output. As you can tell from that statement, the reason it's taking so long is the full tablescan on the ratings table. Nothing in the WHERE statement is filtering down the 2million rows. </p>
+
+<p>You could add an index on ratings.type, but my guess is the CARDINALITY is going to be real low and you'll still be scanning quite a few rows on <code>ratings</code>.</p>
+
+<p>Alternatively you can try to use <a href="http://dev.mysql.com/doc/refman/5.5/en/index-hints.html" rel="nofollow">index hints</a> to force mysql to use the sounds indexes. </p>
+
+<p>Updated:</p>
+
+<p>If it were me, I'd add an index on <code>sounds.created</code> as that has the best chance of filtering the rows and will probably force the mysql query optimizer to use the sounds table indexes. Just beware of queries that use long created time frames (1 year, 3 months, just depends on the size of the sounds table).</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/2864" title="short permalink to this answer" class="short-link" id="link-post-2864">share</a><span class="lsep">|</span><a href="/posts/2864/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/2864/revisions" title="show all edits to this post">edited <span title="2011-05-21 23:20:42Z" class="relativetime">May 21 '11 at 23:20</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-05-21 22:36:17Z" class="relativetime">May 21 '11 at 22:36</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/180/derek-downey"><div><img src="https://www.gravatar.com/avatar/02d7a969158de31296de03770ab1621d?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/180/derek-downey">Derek Downey</a><br>
+        <span class="reputation-score" title="reputation score 10638" dir="ltr">10.6k</span><span title="4 gold badges"><span class="badge1"></span><span class="badgecount">4</span></span><span title="27 silver badges"><span class="badge2"></span><span class="badgecount">27</span></span><span title="57 bronze badges"><span class="badge3"></span><span class="badgecount">57</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-2864" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-3628" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Looks like your suggestion was notable for @coneybeare. +1 from me as well.</span>
+	&ndash;&nbsp;
+		<a href="/users/877/rolandomysqldba" 
+		   title="49562 reputation" 
+		   class="comment-user">RolandoMySQLDBA</a>
+	<span class="comment-date" dir="ltr"><span title="2011-05-22 01:15:37Z" class="relativetime-clean">May 22 '11 at 1:15</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-3632" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">The index on created didnt shave off any time. Here is the updated EXPLAIN. <a href="http://cloud.coneybeare.net/6xvc" rel="nofollow">cloud.coneybeare.net/6xvc</a></span>
+	&ndash;&nbsp;
+		<a href="/users/1882/coneybeare" 
+		   title="108 reputation" 
+		   class="comment-user owner">coneybeare</a>
+	<span class="comment-date" dir="ltr"><span title="2011-05-22 01:58:12Z" class="relativetime-clean">May 22 '11 at 1:58</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-2864" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="2866"></a>
+<div id="answer-2866" class="answer" data-answerid="2866" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="2866">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>If this has to be an <strong>"on-the-fly"</strong> available query, then that limits your options a bit.</p>
+
+<p>I'm going to suggest divide and conquer for this problem. </p>
+
+<pre><code>--
+-- Create an in-memory table
+CREATE TEMPORARY TABLE rating_aggregates (
+rateable_id INT,
+avg_rating NUMERIC,
+votes NUMERIC
+);
+--
+-- For now, just aggregate. 
+INSERT INTO rating_aggregates
+SELECT ratings.rateable_id, 
+avg(ratings.rating) AS avg_rating, 
+count(ratings.rating) AS votes FROM `sounds`  
+WHERE ratings.rateable_type = 'Sound' 
+GROUP BY ratings.rateable_id;
+--
+-- Now get your final product --
+SELECT 
+sounds.*, 
+rating_aggregates.avg_rating, 
+rating_aggregates.votes AS votes,
+rating_aggregates.rateable_id 
+FROM rating_aggregates 
+INNER JOIN sounds ON (sounds.id = rating_aggregates.rateable_id) 
+WHERE 
+ratings.rateable_type = 'Sound' 
+   AND sounds.blacklisted = false 
+   AND sounds.ready_for_deployment = true 
+   AND sounds.deployed = true 
+   AND sounds.type = "Sound" 
+   AND sounds.created_at &gt; "2011-03-26 21:25:49";
+</code></pre>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/2866" title="short permalink to this answer" class="short-link" id="link-post-2866">share</a><span class="lsep">|</span><a href="/posts/2866/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-05-22 00:51:10Z" class="relativetime">May 22 '11 at 0:51</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/50/randy-melder"><div><img src="https://www.gravatar.com/avatar/d72b99303c2026baffad2a589af54bd6?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/50/randy-melder">randy melder</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,896</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="9 silver badges"><span class="badge2"></span><span class="badgecount">9</span></span><span title="26 bronze badges"><span class="badge3"></span><span class="badgecount">26</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-2866" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-3629" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">seems @coneybeare saw something in your suggestion. +1 from me !!!</span>
+	&ndash;&nbsp;
+		<a href="/users/877/rolandomysqldba" 
+		   title="49562 reputation" 
+		   class="comment-user">RolandoMySQLDBA</a>
+	<span class="comment-date" dir="ltr"><span title="2011-05-22 01:16:57Z" class="relativetime-clean">May 22 '11 at 1:16</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-3634" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I actually couldn&#39;t get this to work. I was getting sql errors that I was unsure of how to approach. I have never really worked with temporary tables</span>
+	&ndash;&nbsp;
+		<a href="/users/1882/coneybeare" 
+		   title="108 reputation" 
+		   class="comment-user owner">coneybeare</a>
+	<span class="comment-date" dir="ltr"><span title="2011-05-22 02:39:41Z" class="relativetime-clean">May 22 '11 at 2:39</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-3636" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I did get it eventually ( I had to add FROM <code>sounds</code>, <code>ratings</code> to the middle query), but it locked up my sql box and I had to kill the process.</span>
+	&ndash;&nbsp;
+		<a href="/users/1882/coneybeare" 
+		   title="108 reputation" 
+		   class="comment-user owner">coneybeare</a>
+	<span class="comment-date" dir="ltr"><span title="2011-05-22 02:49:10Z" class="relativetime-clean">May 22 '11 at 2:49</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-2866" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="4190"></a>
+<div id="answer-4190" class="answer" data-answerid="4190" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="4190">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">0</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Use JOINs, not subqueries.  Did any of your subquery attempt help?</p>
+
+<p>SHOW CREATE TABLE sounds \G</p>
+
+<p>SHOW CREATE TABLE ratings \G</p>
+
+<p>Often it is beneficial to have "compound" indexes, not single-column ones.  Perhaps
+INDEX(type, created_at)</p>
+
+<p>You are filtering on both tables in a JOIN; that is likely to be a performance problem.</p>
+
+<blockquote>
+  <p>There are about 1500 sounds, and 2 Million ratings.</p>
+</blockquote>
+
+<p>Recommend you have an auto_increment id on <code>ratings</code>, build a summary table, and use the AI id for keeping track of where you "left off".  However, do not store averages in a summary table:</p>
+
+<blockquote>
+  <p>avg(ratings.rating) AS avg_rating,</p>
+</blockquote>
+
+<p>Instead, keep the SUM(ratings.rating).  The average of averages is mathematically incorrect for computing an average; (sum of sums) / (sum of counts) is correct.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/4190" title="short permalink to this answer" class="short-link" id="link-post-4190">share</a><span class="lsep">|</span><a href="/posts/4190/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2011-07-29 00:04:01Z" class="relativetime">Jul 29 '11 at 0:04</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1876/rick-james"><div><img src="https://www.gravatar.com/avatar/1ee974306d2def46eb69534fbcf95cc5?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1876/rick-james">Rick James</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,644</span><span title="4 silver badges"><span class="badge2"></span><span class="badgecount">4</span></span><span title="6 bronze badges"><span class="badge3"></span><span class="badgecount">6</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-4190" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-4190" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/2863/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="2863" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f2863%2fhow-can-i-optimize-this-mysql-query-further%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f2863%2fhow-can-i-optimize-this-mysql-query-further%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/mysql" class="post-tag" title="show questions tagged &#39;mysql&#39;" rel="tag">mysql</a> <a href="/questions/tagged/sql" class="post-tag" title="show questions tagged &#39;sql&#39;" rel="tag">sql</a> <a href="/questions/tagged/performance" class="post-tag" title="show questions tagged &#39;performance&#39;" rel="tag">performance</a> <a href="/questions/tagged/index" class="post-tag" title="show questions tagged &#39;index&#39;" rel="tag">index</a> <a href="/questions/tagged/optimization" class="post-tag" title="show questions tagged &#39;optimization&#39;" rel="tag">optimization</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/mysql" class="post-tag" title="show questions tagged &#39;mysql&#39;" rel="tag">mysql</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">4618</span></span><br>
+<a href="/questions/tagged/sql" class="post-tag" title="show questions tagged &#39;sql&#39;" rel="tag">sql</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">2410</span></span><br>
+<a href="/questions/tagged/performance" class="post-tag" title="show questions tagged &#39;performance&#39;" rel="tag">performance</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">909</span></span><br>
+<a href="/questions/tagged/index" class="post-tag" title="show questions tagged &#39;index&#39;" rel="tag">index</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">638</span></span><br>
+<a href="/questions/tagged/optimization" class="post-tag" title="show questions tagged &#39;optimization&#39;" rel="tag">optimization</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">305</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2011-05-21 21:39:39Z"><b>2 years ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>1097 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2011-08-23 04:24:32Z">2 years ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/dba/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=dba.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+
+<style type="text/css">
+    .ads { margin-left: 60px; }
+    .ad-container { width: 220px; height: 250px; margin-right: 20px; margin-bottom: 20px; }
+    .ad-container .ad { height: 250px; }
+    .ad-container .footer-container { overflow: hidden; height: 30px; position: relative; top: -30px; }
+    .ad-container .footer-container .footer { font-family: Arial,Helvetic,Sans-Serif; font-size: 12px; text-align: center; padding-top: 9px; background-color: #000; color: #EFF; opacity: 0.9; filter: alpha(opacity=90); top: 30px; height: 30px; position: relative; }
+    .ad-container a:hover { text-decoration: underline; }
+    #adzerk2 { height: 250px; }
+</style>
+<script type="text/javascript">
+    StackExchange.ready(function () {
+        $(".ad-container").hover(
+            function () {
+                $(".ad-container .footer-container .footer").stop(true, true).animate({ top: "0px" }, "fast");
+            },
+            function () {
+                $(".ad-container .footer-container .footer").animate({ top: "30px" }, "fast");
+            });
+    });
+</script>
+    <div class="ad-container">    
+        <div class="ad">    
+        <a href="http://meta.dba.stackexchange.com/ads/ct/863?url=http%3a%2f%2fwww.pgbarman.org" rel="nofollow" target="_blank"><img src="http://i.stack.imgur.com/LzwkD.png" alt="Barman - Backup and Recovery Manager for PostgreSQL" title="Barman - Backup and Recovery Manager for PostgreSQL" width="220" height="250"></a>
+        </div>
+        <div class="footer-container">
+            <div class="footer">
+                11 votes · <a href="http://meta.dba.stackexchange.com/questions/857#863" title="click to comment on this ad" target="_blank">comment</a> · <a href="http://meta.dba.stackexchange.com/ads/display/857" target="_blank">stats</a>
+            </div>
+        </div>
+    </div>
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/872" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">4</div>
+	</a>
+	<a href="/questions/872/mysql-index-when-joining-to-tables-not-being-used-performance-optimizing-quest" class="question-hyperlink">MySQL: Index when joining to tables not being used (Performance optimizing question)</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/7643" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/7643/help-optimizing-query-in-the-mysql-slow-query-log" class="question-hyperlink">Help optimizing query in the MySQL slow-query log</a>
+</div>
+<div class="spacer">
+<a href="/q/12080" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/12080/how-can-i-optimize-performance-on-a-mysql-ndbcluster" class="question-hyperlink">How can I optimize performance on a MySQL ndbcluster?</a>
+</div>
+<div class="spacer">
+<a href="/q/22979" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">5
+    </div>
+</a><a href="/questions/22979/how-can-i-improve-the-speed-of-a-query-on-a-20-million-row-table" class="question-hyperlink">How can I improve the speed of a query on a 20 million+ row table?</a>
+</div>
+<div class="spacer">
+<a href="/q/28124" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/28124/simple-slow-query-not-using-indexes" class="question-hyperlink">Simple Slow Query Not Using Indexes</a>
+</div>
+<div class="spacer">
+<a href="/q/28387" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/28387/mysql-large-query-with-subqueries-optimization" class="question-hyperlink">Mysql: Large Query with subqueries optimization</a>
+</div>
+<div class="spacer">
+<a href="/q/28522" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/28522/mysql-large-query-with-subqueries-optimization" class="question-hyperlink">Mysql: Large Query with subqueries optimization</a>
+</div>
+<div class="spacer">
+<a href="/q/41751" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">3
+    </div>
+</a><a href="/questions/41751/how-can-i-get-this-query-to-use-its-index" class="question-hyperlink">How can I get this query to use it&#39;s index?</a>
+</div>
+<div class="spacer">
+<a href="/q/42188" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/42188/how-can-i-improve-this-query" class="question-hyperlink">How can I improve this query?</a>
+</div>
+<div class="spacer">
+<a href="/q/48072" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/48072/why-does-mysql-ignore-the-index-even-on-force-for-this-order-by" class="question-hyperlink">Why does MySQL ignore the index even on force for this order by?</a>
+</div>
+<div class="spacer">
+<a href="/q/51485" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/51485/slow-query-with-order-by-with-index-created-more-than-4mins-on-0-6million-recor" class="question-hyperlink">Slow query with ORDER BY with index created (more than 4mins on 0.6million records</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/2863" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/2863/ivc/222d');});
+</script>
+<noscript>
+    <div><img src="/posts/2863/ivc/222d" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-sql</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://dba.blogoverflow.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/2863/how-can-i-optimize-this-mysql-query-further")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.dba.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Database Administrators Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|mysql|sql|performance|index|optimization|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>

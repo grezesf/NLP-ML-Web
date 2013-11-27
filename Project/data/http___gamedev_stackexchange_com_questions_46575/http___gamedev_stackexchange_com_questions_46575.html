@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>security - How should multiplayer games handle authentication? - Game Development Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/gamedev/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/gamedev/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Game Development Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackGameDev" />
+    <meta name="twitter:domain" content="gamedev.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/gamedev/img/apple-touch-icon@2.png?v=9bca23db2259"/>
+    <meta name="og:title" content="How should multiplayer games handle authentication?" />
+    <meta name="og:description" content="I&#39;ve been lurking around to understand how an authentication system would work in games, but after many searches, it seems that working with ssl/certificates could be a little complicated for just a " />
+    <meta name="og:url" content="http://gamedev.stackexchange.com/questions/46575/how-should-multiplayer-games-handle-authentication"/>
+    <link rel="canonical" href="http://gamedev.stackexchange.com/questions/46575/how-should-multiplayer-games-handle-authentication" />
+
+    
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=e3d47b73fa12" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/gamedev/all.css?v=c4a1a59e8551">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;How should multiplayer games handle authentication?&#39;" href="/feeds/question/46575">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:4,shownCommentCount:4,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:46575});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('53', '46575');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('53');
+                        });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1385453964,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Game Development Stack Exchange","description":"Q&A for professional and independent game developers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","enableSocialMediaInSharePopup":true},"user":{"fkey":"f51c005c36aeb04be7163e16a81b52d5","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"e0bbd4760e83","js/moderator.en.js":"1a411fd265fe","js/full-anon.en.js":"8a881a0975af","js/full.en.js":"e87912181c10","js/wmd.en.js":"bd9234d44a40","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"d1d834ef85d2","js/help.en.js":"d3cc74d8a93a","js/tageditor.en.js":"6d51a5f8d7f3","js/tageditornew.en.js":"111b781cf314","js/inline-tag-editing.en.js":"f951bd09dc69","js/revisions.en.js":"33fd38144303","js/review.en.js":"f45b4ec094ea","js/tagsuggestions.en.js":"e4e7b952fcc7","js/post-validation.en.js":"c275fe37d674","js/explore-qlist.en.js":"73825bd006fc","js/events.en.js":"53bc48767091"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script type="text/javascript">
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <div id="portalLink">
+                <a class="genu" href="http://stackexchange.com" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user"></span>
+<span id="hlinks-nav">                        <a href="/users/login?returnurl=%2fquestions%2f46575%2fhow-should-multiplayer-games-handle-authentication">sign up</a>
+
+ <span class="lsep">|</span>
+                    <a href="/users/login?returnurl=%2fquestions%2f46575%2fhow-should-multiplayer-games-handle-authentication">log in</a>
+
+ <span class="lsep">|</span>
+</span>
+<span id="hlinks-custom"></span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    Game Development
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/gamedev/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Tell me more</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            Game Development Stack Exchange is a question and answer site for professional and independent game developers. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            }
+            if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/46575/how-should-multiplayer-games-handle-authentication" class="question-hyperlink">How should multiplayer games handle authentication?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="46575"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="46575">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">12</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>10</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>I've been lurking around to understand how an authentication system would work in games, but after many searches, it seems that working with ssl/certificates could be a little complicated for just a multiplayer game with a lot less capacity than an MMO. </p>
+
+<p>I know that successful multiplayer games need this, but I'd like to check if other multiplayer games commonly take this precautions.</p>
+
+<p><strong>EDIT</strong>: I'll describe what I have in mind. The server not only handles game logic, but also authentication. So, in order to play on a specific server (that everyone could start), you first need to register an account on the server, and each time you want to play there, login as usual (password/name user).</p>
+
+<p>My question is, would not providing a secure channel for logging in/registering an account be forgivable/understandable in this context? Also I'm interested to know how games with a similar architecture would handle this matter.</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/multiplayer" class="post-tag" title="show questions tagged &#39;multiplayer&#39;" rel="tag">multiplayer</a> <a href="/questions/tagged/security" class="post-tag" title="show questions tagged &#39;security&#39;" rel="tag">security</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/q/46575" title="short permalink to this question" class="short-link" id="link-post-46575">share</a><span class="lsep">|</span><a href="/posts/46575/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/46575/revisions" title="show all edits to this post">edited <span title="2013-01-02 22:47:23Z" class="relativetime">Jan 2 at 22:47</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/13085/jim"><div><img src="https://www.gravatar.com/avatar/88753efb648678b6c14d64fe715b216b?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/13085/jim">Jim</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">604</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="6 silver badges"><span class="badge2"></span><span class="badgecount">6</span></span><span title="19 bronze badges"><span class="badge3"></span><span class="badgecount">19</span></span>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            asked <span title="2013-01-01 15:08:14Z" class="relativetime">Jan 1 at 15:08</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/23893/wolfrevo-kcats"><div><img src="https://www.gravatar.com/avatar/8b2ae2f0cfcf6a092050594e17e230a4?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/23893/wolfrevo-kcats">Wolfrevo Kcats</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">168</span><span title="10 bronze badges"><span class="badge3"></span><span class="badgecount">10</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-46575" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-76290" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">SSL certs are complicated and painful to manage. I recommend you stay away.</span>
+	&ndash;&nbsp;
+		<a href="/users/1929/ashes999" 
+		   title="5049 reputation" 
+		   class="comment-user">ashes999</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-01 18:28:19Z" class="relativetime-clean">Jan 1 at 18:28</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-76315" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@ashes999 Actually the pain comes from having them signed by CA authorities. For a game that does not communicate with the server through a browser you can use a self signed everlasting certificate, you can even have the clients verify that the correct certificate is used. Given a good library it is fairly easy to set up.</span>
+	&ndash;&nbsp;
+		<a href="/users/3505/ebusiness" 
+		   title="7130 reputation" 
+		   class="comment-user">eBusiness</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-01 21:07:59Z" class="relativetime-clean">Jan 1 at 21:07</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-76322" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">There are app hosting solutions that give you free SSL via subdomains and their wildcard certs.  You can hence use HTTPS without ever even needing to think about SSL certificates themselves.  Just as another option.</span>
+	&ndash;&nbsp;
+		<a href="/users/7697/sean-middleditch" 
+		   title="18780 reputation" 
+		   class="comment-user">Sean Middleditch</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-01 21:59:22Z" class="relativetime-clean">Jan 1 at 21:59</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-76371" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@eBusiness you&#39;re right.</span>
+	&ndash;&nbsp;
+		<a href="/users/1929/ashes999" 
+		   title="5049 reputation" 
+		   class="comment-user">ashes999</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-02 03:12:46Z" class="relativetime-clean">Jan 2 at 3:12</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-46575" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								3 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/46575/how-should-multiplayer-games-handle-authentication?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/46575/how-should-multiplayer-games-handle-authentication?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/46575/how-should-multiplayer-games-handle-authentication?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="46595"></a>
+<div id="answer-46595" class="answer accepted-answer" data-answerid="46595" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="46595">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">20</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>Specifically regarding the last bit of your question: No, it is never forgivable to have an insecure authentication system.  Users are rarely enlightened when it comes to computer security.  Users use the same password for your little game as they do for their Google account, Facebook account, bank account, and so on.  Even if you can claim that it's their fault for using poor Internet security habits, you're the one who will be held responsible if your game is used as an attack vector to steal users' login credentials.  As a developer who knows better, the only ethical options are to properly secure your authentication process or to not have one at all.</p>
+
+<p>As some unsolicited but related advice, users don't want to be required to sign up for your game anyway.  They might do so if they want to play your game badly enough, but having Yet Another Freaking Login to sign up for is going to just drive away many potential players.  Users are sick to death of making a new account for every single site, service, and game out there, <em>especially</em> if they require any kind of email validation or the like.  If you can, either avoid having a login at all, or use an existing third-party authentication service that users likely already have an account with.  You will have more players that way.  This goes triple if you plan on having any kind of in-app purchases.</p>
+
+<p><strong>Web Games</strong></p>
+
+<p>A popular option -- particularly for Web games, though it also works for traditional games -- is to use a Web-based third-party authentication service.  Facebook and Google both have well-documented APIs (both based on standardized APIs, iirc) for authentication.  They do require the ability to open a browser window and direct the user towards their services, but this is pretty easy to do on most non-console platforms, and of course trivial for Web games.</p>
+
+<p>Those services take care of all the messy details of encrypting login traffic over the wire, securely storing login credentials, and validating user logins.  Your game server then needs only implement the portion of the protocol that receives a cookie from the user and asks the authentication service if the cookie is valid or not, which can be done with a simple HTTP in most cases.</p>
+
+<p>I won't claim most traditional multiplayer games do this, because they don't, but I will claim that most online casual Web games do this.</p>
+
+<p>For traditional (non-Web) games, facilitating this login procedure is possible by either embedding a browser (Awesomium, Chromium Embedded Framework, or straight up Webkit being popular choices) or by calling out to an external browser (this takes some more fanagling to get the auth cookie out of though, and isn't really any easier than embedding one of the aforementioned libraries).</p>
+
+<p>A typical example of this approach is any Facebook game.</p>
+
+<p><strong>Traditional Games using HTTPS</strong></p>
+
+<p>Having a simple HTTPS service for login is increasingly normal.  Many games use custom protocols, but most of these are incomplete (they have secure login, but no secure way to create/update an account, so they need the HTTPS service anyway) or are simply horrifically insecure.</p>
+
+<p>You don't even need to go about getting a custom SSL cert.  There are online app hosting providers that give you a subdomain and use a wildcard SSL cert.  You can put your authentication service at mygame.someservice.com, which is covered by the *.someservice.com wildcard cert that Some Service maintains, and you're good to go.</p>
+
+<p>The idea here is that the user logs in to your service, which generates a unique session cookie, which the user can then pass into your main game server.  The server then asks the login system if the cookie is valid for the requested user.  There's usually a <em>very</em> short timeout on the cookie, on the order of seconds (15-30, for example), and it's generally invalidated once used, making replay attacks impossible.</p>
+
+<p>Note that HTTPS is my most recommended option if you plan on sending payment information over the wire from inside the client itself.  However, it's significantly better to use a third-party for this.  If you think securing something as simple as a password is too much work, you don't even want to even think about trying to meet the minimum (and honestly quite inadequate) PCI compliance rules for storing and processing credit card numbers.  You'll have better sales uptake anyway if you have users use trusted third-party payment services that they're already on file with.</p>
+
+<p>One strong advantage of separating your login service from the main game server is that it allows external functionality to be tied to user accounts independent of the game.  You might have some account features (viewing avatars or such) on your website, or perhaps you allow linking Facebook accounts into your accounts, or perhaps you have multiple games sharing a single underlying account platform (e.g., the Galaxy at War features of Mass Effect 3).</p>
+
+<p>A popular example game using HTTPS for authentication is Minecraft.</p>
+
+<p><strong>Third-Party Web Authentication with Native Client Games</strong></p>
+
+<p>It is possible to use third-party services like Facebook Connect or Google with a native client.  Facebook for example has a native SDK for iOS and Android, as does Google.  Some services likewise have native SDKs for traditional PC clients.</p>
+
+<p>If the target service does not having a native SDK and requires the use of a Web browser, you could just embed a browser in your game.  However, some users may be distrustful of using an embedded browser to enter login information.</p>
+
+<p>You can also use an external browser.  There are a few ways to pull this off.  Some require a little bit more OS-integration than others.  Some require you to have an external Web service running alongside (or at least reachable by) your main game server.  Note that since Facebook and Google generally require a URL that is authenticated, you will need a public website landing page to use these protocols in (almost) all cases.</p>
+
+<p>The most fool-proof and reliable, if not quite the easiest, is to bounce your login request from your client through your main website.  Your client connects to the main game server as an authenticated guest user and receives a unique session token.  The game server does not allow the client to actually do much while in this state; the game doesn't know who the player is, so the player cannot yet chat, start a match, or so on.</p>
+
+<p>The client then launches the external browser pointing at the login URL of your game's domain, passing this session token as a parameter in the URL.  The site then goes through the usual login handshake for Facebook/Google.</p>
+
+<p>At this point, your webserver knows that the user has logged in, and can associate that with the session token it received from the client.  This verification can then communicated to the game server, elevating the client's unauthenticated guest connection into an authenticated user session.  This can be done by having the webserver directly communicate with the game server, if possible.  Or the game server can periodically poll the webserver for authentication status of pending guest connections.  Or the client can periodically poll the webserver to see if login is complete and, when it is, signal the game server to request verification from the webserver.</p>
+
+<p>All of these require that your game server and webserver be able to communicate, but <em>any</em> third party authentication service will require your game server to be able to communicate with the outside world, so this shouldn't be a surprise.</p>
+
+<p>This authentication method is found in some small-to-mid-sized MMOs.</p>
+
+<p>Note that this all also works for making payment requests through an external service, like PayPal, Amazon Payments, Google Wallet, etc.</p>
+
+<p><strong>Direct TLS Connection</strong></p>
+
+<p>It is not too difficult to start a TLS session over a custom stream protocol.  Libraries like OpenSSL, GnuTLS, NSS, and various OS-specific libraries provide a stream wrapper API that layers over a low-level transport/protocol.  You generally just need to feed bytes through the wrapper API and it deals with the handshake and encryption.</p>
+
+<p>The tricky parts here are ensuring your use of TLS is safe.  Some of the common libraries for example will by default require a valid signed certificate from a trusted authority.  Some of the common libraries require that, but by default don't trust any authorities.  Some of them do not require that the cert be valid at all.</p>
+
+<p>It is recommended that you always require a valid cert.  Allowing invalid certs will not allow an attacker who is merely eavesdropping to steal a password, but it will still allow man-in-the-middle attacks.</p>
+
+<p>This approach requires the absolute least in terms of external dependencies while still allowing maximum security.</p>
+
+<p>Examples of games using this now include most big traditional MMOs.</p>
+
+<p><strong>Secure(ish) Traditional Games</strong></p>
+
+<p>Games that don't use a separate service and don't use TLS typically have to implement some kind of nonce-based login protocol in their main game protocol.  With this method, the server generates a random number (a nonce) and sends that to the client.  The client then hashes that nonce with the user's password (and username, possibly some other data) and sends that response to the server.  The server then compares this hashed value with the credentials it has on file.  This keeps the user's password secrete over the wire and ensures that you can't use a simple replay attack on the hashed password, like many other weak hash-based login schemes.</p>
+
+<p>A problem is that the user has no way to submit a new password to the service over this protocol securely.  Typical implementations also store the user's password in plaintext on the server, which is a horrible practice (if your server gets hacked, your user probably just had his email/facebook/bank password stolen, because he was using the same password for your game as everywhere else, because users tend to do that).</p>
+
+<p>There are enhanced versions of that basic login scheme.  The most basic -- though still not ideally secure -- is for the server to send the password hash salt with the nonce value during login.  This allows the server to stored a hashed (and salted) password securely while allowing the client to generate the same hash during login.  This does allow an attacker to get the salt for a particular user's password, but this is not particularly useful without also getting the original hashed password (which is not sent over the wire during login).  During creation/updating of the password, the client sends the whole hashed password (with salt), which the attacker can sniff.  If the hash function used is strong enough (say, sha-2/512) then pure brute forcing is not feasible, though the attacker can still easily brute-force weak passwords (which is why enforcing some minimum password length, minimum distribution of letters/numbers/symbols, and comparing to a dictionary of known/obvious/weak passwords is important).  The fact that the attacker can still get the hashed password is why it still more secure to do the entire password exchange over a secured, encrypted channel.</p>
+
+<p>A number of popular game networking libraries implement some optional form of this protocol.  I believe SmartFox is one such example, though I haven't looked at it in depth (I generally ignore any such library auth system and use the HTTPS method, since it's dead simple to implement and significantly stronger).  A number of early non-Web Internet games also used this approach, particularly before Steam, XBL, and so on came around.</p>
+
+<p><strong>Unsecure Traditional Games</strong></p>
+
+<p>A lot of games unfortunately just send a username/password in plaintext.  Maybe they hash the password, which vaguely kind-of protects the users actual password (not nearly well enough) but a replay attack makes logging into the game service trivial.</p>
+
+<p>Don't do this.  It's irresponsible and lazy.  The Internet naivete of the 1990's that popularized these login methods is no longer a viable excuse.</p>
+
+<p>Many early pre-Facebook Flash and Web games took this approach.  I don't know of any specific examples off the top of my head; I'd like to believe they're all long dead, but the world just isn't that lucky.</p>
+
+<p><strong>No Authentication</strong></p>
+
+<p>Most games just don't do authentication.  The player connects, sends over some handle to uniquely identify himself, and a match starts.  There is no global server that tries to validate that only one real human is ever allowed to claim to be "CaptainMisterDude".  The local server just ensures that only one currently connected player has any particular handle, and that's the end of it.  Local servers use name-based and IP-based blacklisting for trouble makers.  This is common for FPS deathmatch style games even today.</p>
+
+<p>If you don't need any permanent state for accounts, this is by far the easiest solution, and quite "secure" since there's nothing there to actually hack or steal.  Obviously this doesn't work too well if you do need to store account information between game sessions.</p>
+
+<p>Quake is an example of a game using this method of "authenticating" users.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/46595" title="short permalink to this answer" class="short-link" id="link-post-46595">share</a><span class="lsep">|</span><a href="/posts/46595/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+        <a href="/posts/46595/revisions" title="show all edits to this post">edited <span title="2013-01-02 02:13:35Z" class="relativetime">Jan 2 at 2:13</span></a>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-01-01 22:13:27Z" class="relativetime">Jan 1 at 22:13</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/7697/sean-middleditch"><div><img src="https://www.gravatar.com/avatar/75a39ed05f3fccdceed285a8009b117e?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/7697/sean-middleditch">Sean Middleditch</a><br>
+        <span class="reputation-score" title="reputation score 18780" dir="ltr">18.8k</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="20 silver badges"><span class="badge2"></span><span class="badgecount">20</span></span><span title="54 bronze badges"><span class="badge3"></span><span class="badgecount">54</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-46595" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="10" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-76324" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Why do you write so much about HTTPS? HTTP is not particularly suited for a gaming protocol. A purpose-built binary protocol in a TLS tunnel should be the way to go.</span>
+	&ndash;&nbsp;
+		<a href="/users/3505/ebusiness" 
+		   title="7130 reputation" 
+		   class="comment-user">eBusiness</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-01 22:28:26Z" class="relativetime-clean">Jan 1 at 22:28</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-76326" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="warm">5</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">For login?  It&#39;s perfectly suited.  You don&#39;t login 30 times/second.  You login once when you start the client and then you&#39;re done.  The HTTPS login returns a cookie which the purpose-built binary protocol uses to authenticate the connection without needing the password itself.</span>
+	&ndash;&nbsp;
+		<a href="/users/7697/sean-middleditch" 
+		   title="18780 reputation" 
+		   class="comment-user">Sean Middleditch</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-01 22:30:09Z" class="relativetime-clean">Jan 1 at 22:30</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-76327" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">Just because it&#39;s not a performance issue doesn&#39;t mean mean it&#39;s not a bloated approach that add unnecessary complexity.</span>
+	&ndash;&nbsp;
+		<a href="/users/3505/ebusiness" 
+		   title="7130 reputation" 
+		   class="comment-user">eBusiness</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-01 22:38:32Z" class="relativetime-clean">Jan 1 at 22:38</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-76328" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">I would use those exact same words to describe your proposed approach.  To each his own. :)</span>
+	&ndash;&nbsp;
+		<a href="/users/7697/sean-middleditch" 
+		   title="18780 reputation" 
+		   class="comment-user">Sean Middleditch</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-01 22:40:18Z" class="relativetime-clean">Jan 1 at 22:40</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-76369" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@eBusiness: I added a section about using TLS over a custom protocol, per your suggestion.</span>
+	&ndash;&nbsp;
+		<a href="/users/7697/sean-middleditch" 
+		   title="18780 reputation" 
+		   class="comment-user">Sean Middleditch</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-02 02:15:28Z" class="relativetime-clean">Jan 2 at 2:15</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-46595" data-rep=50 data-anon=true
+			   class="comments-link " 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>show <b>10</b> more comments</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="46578"></a>
+<div id="answer-46578" class="answer" data-answerid="46578" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="46578">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>SSL would help the clients to identify legitimate servers, vs "fake" servers, by using a server-certificate signed by a known CA. I strongly suspect that most games do not bother to do this.</p>
+
+<p>There are, however, good reasons why they might want to. Some licensing avoidance / cheating mechanisms might work by using a rogue server, or a "man in the middle" server. </p>
+
+<p>I expect the major multiplayer networks such as Steam and Microsoft, have such protection built-in though.</p>
+
+<p>Web-based game can simply use HTTPS, but I don't know if that works for Websockets (a trivial Google should answer it).</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/46578" title="short permalink to this answer" class="short-link" id="link-post-46578">share</a><span class="lsep">|</span><a href="/posts/46578/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-01-01 16:05:34Z" class="relativetime">Jan 1 at 16:05</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/4484/markr"><div><img src="https://www.gravatar.com/avatar/dd83377030d6a31872da863de8a77ee0?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/4484/markr">MarkR</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,480</span><span title="4 silver badges"><span class="badge2"></span><span class="badgecount">4</span></span><span title="9 bronze badges"><span class="badge3"></span><span class="badgecount">9</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-46578" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-46578" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="46576"></a>
+<div id="answer-46576" class="answer downvoted-answer" data-answerid="46576" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="46576">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">-3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+
+
+
+<td class="answercell">
+    <div class="post-text"><p>You don't need SSL for authentication, just make a normal login system with usernames and passwords.</p>
+
+<p>To avoid some of the less common cases of account stealing it may be a good idea to run the login process on an encrypted channel, but you can add that feature later on if so desired.</p>
+</div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="/a/46576" title="short permalink to this answer" class="short-link" id="link-post-46576">share</a><span class="lsep">|</span><a href="/posts/46576/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+<div class="user-info ">
+    <div class="user-action-time">
+        
+        
+            answered <span title="2013-01-01 15:43:21Z" class="relativetime">Jan 1 at 15:43</span>
+        
+
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3505/ebusiness"><div><img src="https://www.gravatar.com/avatar/17d8504e08f80290fce98a133d4a017e?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3505/ebusiness">eBusiness</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">7,130</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="6 silver badges"><span class="badge2"></span><span class="badgecount">6</span></span><span title="23 bronze badges"><span class="badge3"></span><span class="badgecount">23</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-46576" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="6" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-76287" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">It is usually accepted that a low-security password like that of a gaming account is passed over an unencrypted channel. It is preferable to use an encrypted channel, but I&#39;m pretty sure that you won&#39;t get in trouble for not doing so.</span>
+	&ndash;&nbsp;
+		<a href="/users/3505/ebusiness" 
+		   title="7130 reputation" 
+		   class="comment-user">eBusiness</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-01 18:05:16Z" class="relativetime-clean">Jan 1 at 18:05</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-76304" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">4</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@eBusiness: Blizzard, EA, Ubisoft, NCSoft, Funcom, and SOE would beg to differ with you.</span>
+	&ndash;&nbsp;
+		<a href="/users/7728/trevor-powell" 
+		   title="11836 reputation" 
+		   class="comment-user">Trevor Powell</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-01 19:59:53Z" class="relativetime-clean">Jan 1 at 19:59</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-76312" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">3</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@eBusiness: a great number of (foolish) users use the same or similar login credentials for game services as they do for email, bank accounts, etc.  The designer of any online service who assumes its users&#39; login information is non-precious has its head in the sand.</span>
+	&ndash;&nbsp;
+		<a href="/users/7697/sean-middleditch" 
+		   title="18780 reputation" 
+		   class="comment-user">Sean Middleditch</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-01 20:29:48Z" class="relativetime-clean">Jan 1 at 20:29</span></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-76318" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="warm">7</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">@eBusiness I have issues with the ethics of advising people that it&#39;s fine to transmit a user&#39;s passwords in plaintext.  Particularly using the &quot;you&#39;ll get away with it&quot; justification.  It&#39;s answers <b>exactly</b> like this one which continue to facilitate and perpetuate identity theft.  But hey, if you don&#39;t get caught, then no harm was done, right?  Not a thought in the world for the users.</span>
+	&ndash;&nbsp;
+		<a href="/users/7728/trevor-powell" 
+		   title="11836 reputation" 
+		   class="comment-user">Trevor Powell</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-01 21:12:12Z" class="relativetime-clean">Jan 1 at 21:12</span></span>
+		<span class="edited-yes" title="this comment was edited 1 time"></span>
+				</div>
+
+        </td>
+    </tr>
+    <tr id="comment-76343" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="comment-score">
+                            
+                                <span title="number of &#39;useful comment&#39; votes received" 
+                                        class="cool">1</span>   
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+	<span class="comment-copy">If you allow people to create their own username and password combinations for your game and they send them in plaintext, then it&#39;s not just this game account that is at risk, but potentially many of their other accounts. At the very least, if you can&#39;t afford to protect the data stream, protect their other accounts by generating their password for them, ensuring it is unique to your app.</span>
+	&ndash;&nbsp;
+		<a href="/users/1101/kylotan" 
+		   title="19143 reputation" 
+		   class="comment-user">Kylotan</a>
+	<span class="comment-date" dir="ltr"><span title="2013-01-01 23:27:14Z" class="relativetime-clean">Jan 1 at 23:27</span></span>
+				</div>
+
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-46576" data-rep=50 data-anon=true
+			   class="comments-link " 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>show <b>6</b> more comments</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/46575/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="46575" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f51c005c36aeb04be7163e16a81b52d5">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f46575%2fhow-should-multiplayer-games-handle-authentication%23new-answer">login</a></h3>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f46575%2fhow-should-multiplayer-games-handle-authentication%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/multiplayer" class="post-tag" title="show questions tagged &#39;multiplayer&#39;" rel="tag">multiplayer</a> <a href="/questions/tagged/security" class="post-tag" title="show questions tagged &#39;security&#39;" rel="tag">security</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+							<div class="module question-stats">
+					<p class="label-key">tagged</p>
+					<div class="tagged"><a href="/questions/tagged/multiplayer" class="post-tag" title="show questions tagged &#39;multiplayer&#39;" rel="tag">multiplayer</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">304</span></span><br>
+<a href="/questions/tagged/security" class="post-tag" title="show questions tagged &#39;security&#39;" rel="tag">security</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">&times;</span>&nbsp;<span class="item-multiplier-count">51</span></span><br>
+</div>
+					<table id="qinfo">
+						<tr>
+							<td>
+								<p class="label-key">asked</p>
+							</td>
+							<td style="padding-left: 10px">
+								<p class="label-key" title="2013-01-01 15:08:14Z"><b>10 months ago</b></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="label-key">viewed</p>
+							</td>
+
+							<td style="padding-left: 10px">
+								<p class="label-key">
+									<b>857 times</b>
+								</p>
+							</td>
+						</tr>
+							<tr>
+								<td>
+									<p class="label-key">active</p>
+								</td>
+								<td style="padding-left: 10px">
+									<p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2013-01-02 22:47:23Z">10 months ago</a></b></p>
+								</td>
+							</tr>
+					</table>
+				</div>
+						
+			
+    <div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/gamedev/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=gamedev.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+
+			  
+    
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+<div class="spacer">
+	<a href="/q/49061" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">23</div>
+	</a>
+	<a href="/questions/49061/how-do-i-protect-my-game-with-cd-key-serial-number" class="question-hyperlink">How do I protect my game with CD key / serial number?</a>
+</div>			</div>
+</div>
+
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+					<div class="related" data-tracker="rq=1">
+						<div class="spacer">
+<a href="/q/453" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">13
+    </div>
+</a><a href="/questions/453/what-are-some-ways-to-prevent-or-reduce-cheating-in-online-multiplayer-games" class="question-hyperlink">What are some ways to prevent or reduce cheating in online multiplayer games?</a>
+</div>
+<div class="spacer">
+<a href="/q/9893" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">13
+    </div>
+</a><a href="/questions/9893/how-to-protect-your-real-time-online-shooter-from-potential-bots" class="question-hyperlink">How to protect your real time online shooter from potential bots</a>
+</div>
+<div class="spacer">
+<a href="/q/10120" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/10120/required-security-precautions-for-flash-as3-multiplayer-game" class="question-hyperlink">Required Security Precautions for Flash / AS3 Multiplayer Game</a>
+</div>
+<div class="spacer">
+<a href="/q/25545" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">9
+    </div>
+</a><a href="/questions/25545/authentication-for-a-multiplayer-game-via-sockets" class="question-hyperlink">Authentication for a multiplayer game via sockets</a>
+</div>
+<div class="spacer">
+<a href="/q/32741" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">4
+    </div>
+</a><a href="/questions/32741/game-multiplayer-service-development" class="question-hyperlink">game multiplayer service development</a>
+</div>
+<div class="spacer">
+<a href="/q/33922" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/33922/prevent-multiplayer-cheating" class="question-hyperlink">Prevent Multiplayer Cheating</a>
+</div>
+<div class="spacer">
+<a href="/q/43430" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">21
+    </div>
+</a><a href="/questions/43430/techniques-to-prevent-non-official-clients-in-network-gaming" class="question-hyperlink">Techniques to prevent non-official clients in network gaming?</a>
+</div>
+<div class="spacer">
+<a href="/q/49061" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">23
+    </div>
+</a><a href="/questions/49061/how-do-i-protect-my-game-with-cd-key-serial-number" class="question-hyperlink">How do I protect my game with CD key / serial number?</a>
+</div>
+<div class="spacer">
+<a href="/q/58581" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">3
+    </div>
+</a><a href="/questions/58581/handling-actions-in-component-based-multiplayer-game" class="question-hyperlink">Handling actions in component based multiplayer game</a>
+</div>
+<div class="spacer">
+<a href="/q/59573" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/59573/are-frequent-game-updates-a-solution-for-preventing-multiplayer-cheating" class="question-hyperlink">Are frequent game updates a solution for preventing multiplayer cheating?</a>
+</div>
+
+					</div>
+				</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text"><a href="/feeds/question/46575" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+	<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/46575/ivc/e2ec');});
+</script>
+<noscript>
+    <div><img src="/posts/46575/ivc/e2ec" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">default</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://blog.stackexchange.com?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on", "/questions/46575/how-should-multiplayer-games-handle-authentication")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.gamedev.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2013 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+ with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.11.26.1178
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Game Development Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-24']);
+        _gaq.push(['_setDomainName','.stackexchange.com']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|multiplayer|security|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    var _comscore = _comscore || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc, s);
+        
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+        
+    })();
+    _comscore.push({ c1: "2", c2: "17440561" });
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>            
+</body>
+</html>
