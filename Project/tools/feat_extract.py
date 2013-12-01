@@ -62,7 +62,7 @@ def main ():
     for (path, dirs, files) in os.walk(raw_data_dir):
         for f in files:
             # work on .html files that are not revisions
-            if ".html" in f and "revision" not in f and cpt<5:
+            if ".html" in f and "revision" not in f and cpt<1:
                 cpt +=1
                 print "working on " + path + '/' + f
 
@@ -117,8 +117,9 @@ def extract_score(f_soup):
 
     return score
 
-# def extract_tags(f_soup):
-#     # find tags
+def extract_tags(f_soup):
+    # find tags
+    print f_soup
 
 # Call to main 
 if __name__=='__main__':
