@@ -51,7 +51,8 @@ def main ():
     arff_file.write("@ATTRIBUTE name string\n")
     # feature 2: score
     arff_file.write("@ATTRIBUTE score numeric\n")
-
+    # feature 3: tags
+    arff_file.write("@ATTRIBUTE tags string\n")
  
     # write data line
     arff_file.write("\n@DATA\n")
@@ -62,7 +63,7 @@ def main ():
     for (path, dirs, files) in os.walk(raw_data_dir):
         for f in files:
             # work on .html files that are not revisions
-            if ".html" in f and "revision" not in f and cpt<1:
+            if ".html" in f and "revision" not in f and cpt<5:
                 cpt +=1
                 print "working on " + path + '/' + f
 
@@ -88,22 +89,34 @@ def main ():
                 feat = extract_score(f_soup)
                 feat_values.append(feat)
 
+                # feature 3: tags
+                feat = extract_tags(f_soup)
+                feat_values.append(feat)
+
+                # feature 4: text
+                feat = extract_text(f_soup)
+                feat_values.append(feat)
 
                 # write the values to the file
                 for v in feat_values[:-1]:
-                    if type(v) == str:
-                        # if the value is a string, add quotation marks for WEKA
+
+                    if type(v) == unicode:
+                        # if the value is a string (ascii or unicode), add quotation marks for WEKA
+                        arff_file.write('\'' + v.encode('ascii', 'ignore') + '\',')
+                    elif type(v) == str:
                         arff_file.write('\'' + v + '\',')
                     else:
-                        # if it's not a string, write it as is
-                        arff_file.write(str(v)+',')
-                # last value had linebreak, not comma
-                if type(feat_values[-1]) == str:
-                    arff_file.write('\'' + type(feat_values[-1]) + '\',')
+                        # if it's not a string (int etc.), write it as is
+                        arff_file.write(str(v) + ',')
+
+                # last value has linebreak, not comma
+                if type(feat_values[-1]) == unicode:
+                    arff_file.write('\'' + feat_values[-1].encode('ascii', 'ignore') + '\n')
+
                 else:
                     arff_file.write(str(feat_values[-1]) + '\n')
 
-                print feat_values
+                
     # close arff file
     arff_file.close()
 
@@ -114,12 +127,31 @@ def extract_score(f_soup):
     # find score
     # its the first of the vote-count-post
     score = f_soup.find_all("span", {"class":"vote-count-post "})[0].getText()
+    return int(score)
 
-    return score
 
 def extract_tags(f_soup):
-    # find tags
-    print f_soup
+    # finds tags
+    tag_list = []
+    tags = f_soup.find_all("div", {"class" : "post-taglist"})
+    for tag in tags:
+        tag_list.append(tag.getText().strip())
+
+    tags_string = ' '.join(tag_list)
+    # returns list of tags as 1 string
+    return tags_string 
+
+def extract_text(f_soup):
+    title = f_soup.find_all("div", {"id" : "question-header"})[0].getText().strip()
+    question = f_soup.find_all("div", {"class" : "post-text"})[0].getText().strip()
+    answers = f_soup.find_all("div", {"class" : "post-text"})[1:]
+    ans_list = []
+    for a in answers:
+        ans_list.append(a.getText().strip())
+    answers_string = ' '.join(ans_list)
+    text = title + ' '+ question + ' ' +  answers_string
+    return text
+
 
 # Call to main 
 if __name__=='__main__':
