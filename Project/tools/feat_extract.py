@@ -16,10 +16,11 @@ def main ():
 
     # directory containing the raw .html files
     raw_data_dir = os.path.abspath(os.path.normpath(sys.argv[1]))
-
+    print raw_data_dir
     # directory where the results will be saved
     arff_dir = os.path.dirname(os.path.abspath(os.path.normpath(sys.argv[2])))
-    arff_name = os.path.basename(os.path.abspath(os.path.normpath(sys.argv[2])))
+    # arff_name = os.path.basename(os.path.abspath(os.path.normpath(sys.argv[2])))
+    arff_name = 'practice_arff_file.arff'
 
     # create the arff file
     try:
@@ -102,7 +103,7 @@ def main ():
                 else:
                     arff_file.write(str(feat_values[-1]) + '\n')
 
-
+                print feat_values
     # close arff file
     arff_file.close()
 
@@ -116,6 +117,8 @@ def extract_score(f_soup):
 
     return score
 
+# def extract_tags(f_soup):
+#     # find tags
 
 # Call to main 
 if __name__=='__main__':
