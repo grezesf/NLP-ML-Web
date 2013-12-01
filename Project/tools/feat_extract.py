@@ -20,6 +20,7 @@ def main ():
     # directory where the results will be saved
     arff_dir = os.path.dirname(os.path.abspath(os.path.normpath(sys.argv[2])))
     # arff_name = os.path.basename(os.path.abspath(os.path.normpath(sys.argv[2])))
+    # hard coded practice arff file - not sure what you wanted here???
     arff_name = 'practice_arff_file.arff'
 
     # create the arff file
@@ -53,7 +54,14 @@ def main ():
     arff_file.write("@ATTRIBUTE score numeric\n")
     # feature 3: tags
     arff_file.write("@ATTRIBUTE tags string\n")
- 
+    # feature 4: text
+    arff_file.write("@ATTRIBUTE text string\n")
+    # feature 5: title
+    arff_file.write("@ATTRIBUTE title string\n")
+    # feature 6: numberofanswers
+    arff_file.write("@ATTRIBUTE numberofanswers numeric\n")
+    # feature 7: media
+    arff_file.write("@ATTRIBUTE media string\n")
     # write data line
     arff_file.write("\n@DATA\n")
 
@@ -63,7 +71,7 @@ def main ():
     for (path, dirs, files) in os.walk(raw_data_dir):
         for f in files:
             # work on .html files that are not revisions
-            if ".html" in f and "revision" not in f and cpt<5:
+            if ".html" in f and "revision" not in f and cpt<75:
                 cpt +=1
                 print "working on " + path + '/' + f
 
@@ -97,6 +105,18 @@ def main ():
                 feat = extract_text(f_soup)
                 feat_values.append(feat)
 
+                # feature 5: title (question?)
+                feat = extract_title(f_soup)
+                feat_values.append(feat)
+
+                # feature 6: number of answers (per question)
+                feat = extract_number_answers(f_soup)
+                feat_values.append(feat)
+
+                # feature 7: media
+                feat = extract_media(f_soup)
+                feat_values.append(feat)
+
                 # write the values to the file
                 for v in feat_values[:-1]:
 
@@ -111,7 +131,7 @@ def main ():
 
                 # last value has linebreak, not comma
                 if type(feat_values[-1]) == unicode:
-                    arff_file.write('\'' + feat_values[-1].encode('ascii', 'ignore') + '\n')
+                    arff_file.write('\'' + feat_values[-1].encode('ascii', 'ignore') + '\'\n')
 
                 else:
                     arff_file.write(str(feat_values[-1]) + '\n')
@@ -127,6 +147,7 @@ def extract_score(f_soup):
     # find score
     # its the first of the vote-count-post
     score = f_soup.find_all("span", {"class":"vote-count-post "})[0].getText()
+
     return int(score)
 
 
@@ -139,9 +160,11 @@ def extract_tags(f_soup):
 
     tags_string = ' '.join(tag_list)
     # returns list of tags as 1 string
+
     return tags_string 
 
 def extract_text(f_soup):
+    # finds text (title, question, and all answers)
     title = f_soup.find_all("div", {"id" : "question-header"})[0].getText().strip()
     question = f_soup.find_all("div", {"class" : "post-text"})[0].getText().strip()
     answers = f_soup.find_all("div", {"class" : "post-text"})[1:]
@@ -150,7 +173,46 @@ def extract_text(f_soup):
         ans_list.append(a.getText().strip())
     answers_string = ' '.join(ans_list)
     text = title + ' '+ question + ' ' +  answers_string
+
     return text
+
+def extract_title(f_soup):
+    # finds title (aka question title)
+    title = f_soup.find_all("div", {"id" : "question-header"})[0].getText().strip()
+
+    return title
+
+def extract_number_answers(f_soup):
+    # counts number of answers
+    answers = f_soup.find_all("div", {"class" : "post-text"})
+    number_of_answers = len(answers)
+
+    return number_of_answers
+
+def extract_media(f_soup):
+    # extras media, tells if non-linguistic info (pictures, links, code) is included
+    media = []
+    posts = f_soup.find_all("div", {"class": 'post-text'})
+    for p in posts:
+        for picture in p.find_all("img"):
+            if picture != None:
+                media.append('picture')
+
+        for link in p.find_all("a"):
+            if link != None:
+                media.append('link')
+
+        for code in p.find_all("pre"):
+            if code != None:
+                media.append('code')
+
+    media_string = ' '.join(media)
+
+    if media_string != '':
+        return media_string
+    else:
+        return None
+
 
 
 # Call to main 
