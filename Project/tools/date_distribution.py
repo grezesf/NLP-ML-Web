@@ -34,7 +34,7 @@ for (path, dirs, files) in os.walk(data_path):
             try:
                 # find score
                 # its the first of the vote-count-post
-                score = soup.find_all("span", {"class":"vote-count-post "})[0].getText()
+                score = soup.find("span", {"class":"vote-count-post "}).getText()
 
                 # print score
 
