@@ -3,6 +3,7 @@ import os
 import sys
 from bs4 import BeautifulSoup
 import datetime
+import re
 
 # README
 # this script extract desired features from the raw data set
@@ -181,16 +182,20 @@ def extract_tags(f_soup):
     for tag in tags:
         tag_list.append(tag.getText().strip())
 
-    tags_string = ' '.join(tag_list)
+    text = ' '.join(tag_list)
     # returns list of tags as 1 string
 
-    return tags_string.replace('\'','')
+    # remove non-alphanumeric char
+    text = re.sub(r'[^a-zA-Z0-9]+', ' ', text)
+    return text
 
 def extract_title(f_soup):
     # finds title (aka question title)
     title = f_soup.find_all("div", {"id" : "question-header"})[0].getText().strip()
+    text = title
 
-    return title.replace('\'','')
+    text = re.sub(r'[^a-zA-Z0-9]+', ' ', text)
+    return text
 
 
 def extract_question(f_soup):
@@ -198,7 +203,9 @@ def extract_question(f_soup):
     question = f_soup.find_all("div", {"class" : "post-text"})[0].getText().strip()
     question_cleaned = ' '.join(question.split())
 
-    return question_cleaned.replace('\'','')
+    text = question_cleaned
+    text = re.sub(r'[^a-zA-Z0-9]+', ' ', text)
+    return text
 
 
 def extract_answer(f_soup):
@@ -211,7 +218,9 @@ def extract_answer(f_soup):
         ans_list.append(ans_cleaned)
     answers_string = ' '.join(ans_list)
 
-    return answers_string.replace('\'','')
+    text = answers_string
+    text = re.sub(r'[^a-zA-Z0-9]+', ' ', text)
+    return text
 
 
 def extract_number_answers(f_soup):
