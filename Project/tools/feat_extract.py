@@ -71,14 +71,14 @@ def main ():
     # write data line
     arff_file.write("\n@DATA\n")
 
-    cpt = 0
+    
 
     # walk the directory for data files
     for (path, dirs, files) in os.walk(raw_data_dir):
         for f in files:
             # work on .html files that are not revisions
-            if ".html" in f and "revision" not in f and cpt<6000:
-                cpt +=1
+            if ".html" in f and "revision" not in f:
+
                 print "working on " + path + '/' + f
 
                 # open the file
