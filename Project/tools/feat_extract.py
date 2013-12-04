@@ -184,13 +184,13 @@ def extract_tags(f_soup):
     tags_string = ' '.join(tag_list)
     # returns list of tags as 1 string
 
-    return tags_string 
+    return tags_string.replace('\'','')
 
 def extract_title(f_soup):
     # finds title (aka question title)
     title = f_soup.find_all("div", {"id" : "question-header"})[0].getText().strip()
 
-    return title
+    return title.replace('\'','')
 
 
 def extract_question(f_soup):
@@ -198,7 +198,7 @@ def extract_question(f_soup):
     question = f_soup.find_all("div", {"class" : "post-text"})[0].getText().strip()
     question_cleaned = ' '.join(question.split())
 
-    return question_cleaned
+    return question_cleaned.replace('\'','')
 
 
 def extract_answer(f_soup):
@@ -211,7 +211,7 @@ def extract_answer(f_soup):
         ans_list.append(ans_cleaned)
     answers_string = ' '.join(ans_list)
 
-    return answers_string
+    return answers_string.replace('\'','')
 
 
 def extract_number_answers(f_soup):
