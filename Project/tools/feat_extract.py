@@ -54,25 +54,31 @@ def main ():
     arff_file.write("@ATTRIBUTE score numeric\n")
     # feature 3: tags
     arff_file.write("@ATTRIBUTE tags string\n")
-    # feature 4: text
-    arff_file.write("@ATTRIBUTE text string\n")
-    # feature 5: title
+    # feature 4: title
     arff_file.write("@ATTRIBUTE title string\n")
-    # feature 6: numberofanswers
+    # feature 5: question
+    arff_file.write("@ATTRIBUTE question string\n")
+    # feature 6: answers
+    arff_file.write("@ATTRIBUTE answers string\n")
+    # feature 7: numberofanswers
     arff_file.write("@ATTRIBUTE numberofanswers numeric\n")
-    # feature 7: media
-    arff_file.write("@ATTRIBUTE media string\n")
+    # feature 8: questionmedia
+    arff_file.write("@ATTRIBUTE questionmedia {NONE, CODE, PIC, LINK, CODELINK, CODEPIC, LINKPIC, THREE}\n")
+    # feature 9: answermedia
+    arff_file.write("@ATTRIBUTE answermedia {NONE, CODE, PIC, LINK, CODELINK, CODEPIC, LINKPIC, THREE}\n")
+    # feature 10: favoritecount
+    arff_file.write("@ATTRIBUTE favoritecount numeric\n")
     # write data line
     arff_file.write("\n@DATA\n")
 
-    cpt = 0
+    
 
     # walk the directory for data files
     for (path, dirs, files) in os.walk(raw_data_dir):
         for f in files:
             # work on .html files that are not revisions
-            if ".html" in f and "revision" not in f and cpt<75:
-                cpt +=1
+            if ".html" in f and "revision" not in f:
+
                 print "working on " + path + '/' + f
 
                 # open the file
@@ -101,24 +107,36 @@ def main ():
                 feat = extract_tags(f_soup)
                 feat_values.append(feat)
 
-                # feature 4: text
-                feat = extract_text(f_soup)
-                feat_values.append(feat)
-
-                # feature 5: title (question?)
+                # feature 4: title 
                 feat = extract_title(f_soup)
                 feat_values.append(feat)
 
-                # feature 6: number of answers (per question)
+                # feature 5: question
+                feat = extract_question(f_soup)
+                feat_values.append(feat)
+
+                # feature 6: answers
+                feat = extract_answer(f_soup)
+                feat_values.append(feat)
+
+                # feature 7: number of answers (per question)
                 feat = extract_number_answers(f_soup)
                 feat_values.append(feat)
 
-                # feature 7: media
-                feat = extract_media(f_soup)
+                # feature 8: questionmedia
+                feat = extract_question_media(f_soup)
                 feat_values.append(feat)
 
-                # write the values to the file
-                for v in feat_values[:-1]:
+                # feature 9: answermedia
+                feat = extract_answer_media(f_soup)
+                feat_values.append(feat)
+
+                #feature 10: favoritecount
+                feat = extract_favcount(f_soup)
+                feat_values.append(feat)
+
+                # write the values to the file, not including answer&question media
+                for v in feat_values[:-3]:
 
                     if type(v) == unicode:
                         # if the value is a string (ascii or unicode), add quotation marks for WEKA
@@ -129,12 +147,17 @@ def main ():
                         # if it's not a string (int etc.), write it as is
                         arff_file.write(str(v) + ',')
 
+                # write categories to file without quotes
+                arff_file.write(feat_values[-3] + ',')
+                arff_file.write(feat_values[-2] + ',')
+
                 # last value has linebreak, not comma
                 if type(feat_values[-1]) == unicode:
                     arff_file.write('\'' + feat_values[-1].encode('ascii', 'ignore') + '\'\n')
-
                 else:
                     arff_file.write(str(feat_values[-1]) + '\n')
+
+
 
                 
     # close arff file
@@ -161,26 +184,35 @@ def extract_tags(f_soup):
     tags_string = ' '.join(tag_list)
     # returns list of tags as 1 string
 
-    return tags_string 
-
-def extract_text(f_soup):
-    # finds text (title, question, and all answers)
-    title = f_soup.find_all("div", {"id" : "question-header"})[0].getText().strip()
-    question = f_soup.find_all("div", {"class" : "post-text"})[0].getText().strip()
-    answers = f_soup.find_all("div", {"class" : "post-text"})[1:]
-    ans_list = []
-    for a in answers:
-        ans_list.append(a.getText().strip())
-    answers_string = ' '.join(ans_list)
-    text = title + ' '+ question + ' ' +  answers_string
-
-    return text
+    return tags_string.replace('\'','')
 
 def extract_title(f_soup):
     # finds title (aka question title)
     title = f_soup.find_all("div", {"id" : "question-header"})[0].getText().strip()
 
-    return title
+    return title.replace('\'','')
+
+
+def extract_question(f_soup):
+    # finds question 
+    question = f_soup.find_all("div", {"class" : "post-text"})[0].getText().strip()
+    question_cleaned = ' '.join(question.split())
+
+    return question_cleaned.replace('\'','')
+
+
+def extract_answer(f_soup):
+    # finds answers
+    answers = f_soup.find_all("div", {"class" : "post-text"})[1:]
+    ans_list = []
+    for a in answers:
+        ans = a.getText().strip()
+        ans_cleaned = ' '.join(ans.split())
+        ans_list.append(ans_cleaned)
+    answers_string = ' '.join(ans_list)
+
+    return answers_string.replace('\'','')
+
 
 def extract_number_answers(f_soup):
     # counts number of answers
@@ -189,31 +221,64 @@ def extract_number_answers(f_soup):
 
     return number_of_answers
 
-def extract_media(f_soup):
-    # extras media, tells if non-linguistic info (pictures, links, code) is included
+def extract_question_media(f_soup):
+    # extracts media for question, tells if non-linguistic info (pictures, links, code) is included 
+    media = []
+    p = f_soup.find_all("div", {"class": 'post-text'})[0]
+    pics = p.find_all("img")
+    links = p.find_all("a")
+    code = p.find_all("pre")
+
+    if code != [] and 'CODE' not in media:
+        media.append('CODE')
+    elif pics != [] and 'PIC' not in media:
+        media.append('PIC')
+    elif links != [] and 'LINK' not in media:
+        media.append('LINK')
+
+    if media != [] and len(media) != 3:
+        ordered_media = sorted(media)
+        return ''.join(ordered_media)
+
+    elif len(media) == 3:
+        return 'THREE'
+    else:
+        return 'NONE'
+
+def extract_answer_media(f_soup):
+    # extracts media for answers, tells if non-linguistic info (pictures, links, code) is included 
     media = []
     posts = f_soup.find_all("div", {"class": 'post-text'})
-    for p in posts:
-        for picture in p.find_all("img"):
-            if picture != None:
-                media.append('picture')
+    for p in posts[1:]:
+        pics = p.find_all("img")
+        links = p.find_all("a")
+        code = p.find_all("pre")
+        if code != [] and 'CODE' not in media:
+            media.append('CODE')
+        elif pics != [] and 'PIC' not in media:
+            media.append('PIC')
+        elif links != [] and 'LINK' not in media:
+            media.append('LINK')
 
-        for link in p.find_all("a"):
-            if link != None:
-                media.append('link')
-
-        for code in p.find_all("pre"):
-            if code != None:
-                media.append('code')
-
-    media_string = ' '.join(media)
-
-    if media_string != '':
-        return media_string
+    if media != [] and len(media) != 3:
+        ordered_media = sorted(media)
+        return ''.join(ordered_media)
+        
+    elif len(media) == 3:
+        return 'THREE'
     else:
-        return None
+        return 'NONE'
+
+def extract_favcount(f_soup):
+    # extracts favorite count (only for questions)
+    favorite_count = f_soup.find("div", {"class" : "favoritecount"}).find("b").getText()
+    if favorite_count != '':
+        return int(favorite_count)
+    else:
+        return 0
 
 
+        
 
 # Call to main 
 if __name__=='__main__':
