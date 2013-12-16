@@ -20,10 +20,10 @@ def main ():
     raw_data_dir = os.path.abspath(os.path.normpath(sys.argv[1]))
     print raw_data_dir
     # directory where the results will be saved
-    arff_dir = os.path.dirname(os.path.abspath(os.path.normpath(sys.argv[2])))
+    # arff_dir = os.path.dirname(os.path.abspath(os.path.normpath(sys.argv[2])))
     # arff_name = os.path.basename(os.path.abspath(os.path.normpath(sys.argv[2])))
     # hard coded practice arff file - not sure what you wanted here???
-    arff_name = 'practice_arff_file.arff'
+    # arff_name = 'practice_arff_file.arff'
 
     # create the arff file
     # try:
@@ -64,7 +64,7 @@ def main ():
             # work on .html files that are not revisions
             if ".html" in f and "revision" not in f:
 
-                print "working on " + path + '/' + f
+                print "\n" + "working on " + path + '/' + f
 
                 # open the file
                 with open(path + '/' + f, 'r') as open_f:
@@ -83,8 +83,18 @@ def main ():
                 # feature 1: name
                 feat = f
                 feat_values.append(feat)
+                print feat
 
+                # print extract_title(f_soup) + '\n'
+                # print extract_question(f_soup) + '\n'
+                # print extract_answer(f_soup) + '\n'
 
+            else:
+                with open(path + '/' + f, 'r') as open_f:
+                    f_soup =  BeautifulSoup(open_f)
+
+                
+                extract_revision(f_soup)
 
                 # write the values to the file, not including answer&question media
                 # for v in feat_values[:-3]:
@@ -117,27 +127,20 @@ def main ():
     # return nothing
     return None
 
-def extract_score(f_soup):
-    # find score
-    # its the first of the vote-count-post
-    score = f_soup.find_all("span", {"class":"vote-count-post "})[0].getText()
 
-    return int(score)
+# def extract_tags(f_soup):
+#     # finds tags
+#     tag_list = []
+#     tags = f_soup.find_all("div", {"class" : "post-taglist"})
+#     for tag in tags:
+#         tag_list.append(tag.getText().strip())
 
+#     text = ' '.join(tag_list)
+#     # returns list of tags as 1 string
 
-def extract_tags(f_soup):
-    # finds tags
-    tag_list = []
-    tags = f_soup.find_all("div", {"class" : "post-taglist"})
-    for tag in tags:
-        tag_list.append(tag.getText().strip())
-
-    text = ' '.join(tag_list)
-    # returns list of tags as 1 string
-
-    # remove non-alphanumeric char
-    text = re.sub(r'[^a-zA-Z0-9]+', ' ', text)
-    return text
+#     # remove non-alphanumeric char
+#     text = re.sub(r'[^a-zA-Z0-9]+', ' ', text)
+#     return text
 
 def extract_title(f_soup):
     # finds title (aka question title)
@@ -172,72 +175,30 @@ def extract_answer(f_soup):
     text = re.sub(r'[^a-zA-Z0-9]+', ' ', text)
     return text
 
+def extract_revision(f_soup):
+  
+    revisions = f_soup.find_all("div", {"class" : "post-text inline-diff"})
+    for r in revisions:
+        # print r
+        revs = r.find_all("span", {"class" : re.compile("diff-")})
+        for i in revs:
+            print i
+        # deletions = r.find("span", {"class" : "diff-delete"})
+        # additions = r.find("span", {"class" : "diff-add"})
+        # try:
+        #     print 'DELETION: ' + deletions.getText()
+        #     print 'ADDITION: ' + additions.getText()
+        # except:
+        #     print 'NONE'
+        # deletions = r.find_all("span", {"class" : "diff-delete"})
+        # additions = f_soup.find_all("span", {"class" : "diff-add"})
+        # print 'DELETIONS:'
+        # for d in deletions:
+        #     print d.getText().strip()
+        # print 'ADDITIONS'
+        # for a in additions:
+        #     print a.getText().strip()
 
-def extract_number_answers(f_soup):
-    # counts number of answers
-    answers = f_soup.find_all("div", {"class" : "post-text"})
-    number_of_answers = len(answers)
-
-    return number_of_answers
-
-def extract_question_media(f_soup):
-    # extracts media for question, tells if non-linguistic info (pictures, links, code) is included 
-    media = []
-    p = f_soup.find_all("div", {"class": 'post-text'})[0]
-    pics = p.find_all("img")
-    links = p.find_all("a")
-    code = p.find_all("pre")
-
-    if code != [] and 'CODE' not in media:
-        media.append('CODE')
-    elif pics != [] and 'PIC' not in media:
-        media.append('PIC')
-    elif links != [] and 'LINK' not in media:
-        media.append('LINK')
-
-    if media != [] and len(media) != 3:
-        ordered_media = sorted(media)
-        return ''.join(ordered_media)
-
-    elif len(media) == 3:
-        return 'THREE'
-    else:
-        return 'NONE'
-
-def extract_answer_media(f_soup):
-    # extracts media for answers, tells if non-linguistic info (pictures, links, code) is included 
-    media = []
-    posts = f_soup.find_all("div", {"class": 'post-text'})
-    for p in posts[1:]:
-        pics = p.find_all("img")
-        links = p.find_all("a")
-        code = p.find_all("pre")
-        if code != [] and 'CODE' not in media:
-            media.append('CODE')
-        elif pics != [] and 'PIC' not in media:
-            media.append('PIC')
-        elif links != [] and 'LINK' not in media:
-            media.append('LINK')
-
-    if media != [] and len(media) != 3:
-        ordered_media = sorted(media)
-        return ''.join(ordered_media)
-        
-    elif len(media) == 3:
-        return 'THREE'
-    else:
-        return 'NONE'
-
-def extract_favcount(f_soup):
-    # extracts favorite count (only for questions)
-    favorite_count = f_soup.find("div", {"class" : "favoritecount"}).find("b").getText()
-    if favorite_count != '':
-        return int(favorite_count)
-    else:
-        return 0
-
-
-        
 
 # Call to main 
 if __name__=='__main__':
