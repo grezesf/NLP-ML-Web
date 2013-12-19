@@ -20,21 +20,22 @@ def main ():
     raw_data_dir = os.path.abspath(os.path.normpath(sys.argv[1]))
     print raw_data_dir
 
-    edits_file = open('../data/pair_edits.txt', 'w')
+    # file to save results in
+    edits_file = open(os.path.abspath(os.path.normpath(sys.argv[2])), 'w+')
 
 
     # walk the directory for data files
     counter = 1
     for (path, dirs, files) in os.walk(raw_data_dir):
         for f in files:
-            # work on .html files that are not revisions
-   
+            # work on .html files thatare revisions
             if "revision" in f:
+
+                # open file
                 with open(path + '/' + f, 'r') as open_f:
                     f_soup =  BeautifulSoup(open_f)
 
-                
-                    
+                    # find additions and deletions
                     revisions = f_soup.find_all("div", {"class" : "post-text inline-diff"})
                     for r in revisions:
                         revs = r.find_all("span", {"class" : re.compile("diff-")})
@@ -43,9 +44,10 @@ def main ():
                                 index = revs.index(i)
                                 following_i = revs[index + 1]
 
+                                # extract stings
                                 if i['class']  == ['diff-delete'] and following_i['class'] == ['diff-add']:
-                                    delete = i.getText().encode('ascii', 'ignore')
-                                    add = following_i.getText().encode('ascii', 'ignore')
+                                    delete = i.getText().encode('ascii', 'ignore').replace("\n", " ")
+                                    add = following_i.getText().encode('ascii', 'ignore').replace("\n", " ")
                                     print 'edit pair', counter
                                     print 'writing to file, deletion' + delete
                                     print 'writing to file, addition' + add
