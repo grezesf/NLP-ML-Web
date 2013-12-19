@@ -44,7 +44,7 @@ def correct(word):
 counter = 0
 capital_correction = 0
 # Opens text file containing edits and reads them
-edit_pairs = open('../data/pair_edits.txt', 'r').readlines()
+edit_pairs = open('../features/pair-edits.txt', 'r').readlines()
 
 for line in edit_pairs:
 
