@@ -69,13 +69,15 @@ for line in edit_pairs:
 
       edits_list = known_edits2(word)
       if changed_word in edits_list:
-        print ' SPELLING CORRECTION: ' + word + ' ... ' + changed_word 
+        # print ' SPELLING CORRECTION: ' + word + ' ... ' + changed_word 
+        counter +=1
         if word == changed_word:
           # if the addition and the deletion are the same we know that a capitalization correction was made
           capital_correction += 1
-  
+    else:
+      print 'Deletion= ' + deletion + '\n' + 'Addition= ' + addition
 
-        counter +=1
+      
 
 print 'Total spelling corrections:',counter
 print 'Subtotal capitalization corrections:', capital_correction
