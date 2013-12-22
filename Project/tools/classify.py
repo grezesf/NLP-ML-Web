@@ -52,11 +52,12 @@ for line in edit_pairs:
 
   # If deletion in line, then take the deletion and following addition as an edit pair
   if 'DELETION' in line:
-    deletion = line.split(':')[-1].strip()
-    addition = edit_pairs[index+1].split(':')[-1].strip()
+    deletion = line.split(':')[-1].strip().replace("\n", " ")
+    addition = edit_pairs[index+1].split(':')[-1].strip().replace("\n", " ")
     # print 'DELETION '+ deletion + ' ADDITION ' + addition
 
     # for spelling edits only consider revisions that consist of one word, we do not consider revisions that are sentences
+    isSpelling = False
     if len(deletion.split()) == 1 and len(addition.split()) ==1:
 
       #ignores capitalization, lower cases everyword
@@ -67,19 +68,20 @@ for line in edit_pairs:
       #if the addition word is in the correction list formulated by the spell checker, it is classified as a spelling correction
       edits_list = known_edits2(word)
       if changed_word in edits_list:
-        # print ' SPELLING CORRECTION: ' + word + ' ... ' + changed_word 
-        counter +=1
-        if word == changed_word:
-          # if the addition and the deletion are the same we know that a capitalization correction was made
-          capital_correction += 1
-          edit_distance = nltk.metrics.distance.edit_distance(deletion,addition)
-          print '"%s","%s",%d' %(word,changed_word, edit_distance)
-    else:
+        # it is a spelling error
+        isSpelling = True
+
+    # if it is not a spelling error
+    if (isSpelling == False):
       # print 'Deletion= ' + deletion + '\n' + 'Addition= ' + addition
       # for any revisions that are more than 1 word, we calculate edit distance between the two strings 
       edit_distance = nltk.metrics.distance.edit_distance(deletion, addition)
       # print 'Edit distance between pre and post string = ' , edit_distance , '\n' 
-      print '"%s","%s",%d' %(deletion, addition, edit_distance)
+      # print '"%s","%s",%d' %(deletion, addition, edit_distance)
+      print deletion
+      print addition
+      print edit_distance
+      print 
 
       
 

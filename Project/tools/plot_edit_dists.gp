@@ -5,9 +5,9 @@ f1(x) = a/(b+x**2) + c
 a = 10000
 b = 10
 c = -1
-fit [1:1000] f1(x) "../results/data exploration/score-distribution.dat" via a,b,c
+fit [0:1000] f1(x) "../results/dist_count.dat" via a,b,c
 set boxwidth 0.5
 set style fill solid
-set xlabel "Scores"
+set xlabel "Edit distances"
 set ylabel "# of instances"
-plot "../results/data exploration/score-distribution.dat" with boxes, f1(x)
+plot "../results/dist_count.dat" with boxes

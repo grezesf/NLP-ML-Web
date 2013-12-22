@@ -51,6 +51,7 @@ Table 1
 
 
 \raggedright
+
 Our edit pairs vary in length from 1 character, to one word, to a few words, to a full sentence. Sometimes a correction is a complete deletion, an addition, or a substitution. In Table 1, revision 24 and revisions 163-167 are examples of fluency edits. Where revision 186 and 237 are factual edits. It is fair to assume that, fluency edits consist of small changes, such as spelling corrections, capitalizations, and punctuation. Factual edits, then consist of longer edits.This basic intuition, follows from Bronner and Monz, "longer edits are likely to be factual and shorter edits are likely to be fluency edits" (Bonner and Monz 2013). It is important to note that the simplest edit to categorize and identify are spelling errors. Using a spell checker, we found and compiled for our revision edit pairs a list of spelling corrections. Consequently, our first step in classification splits our data into 2 groups: spelling(uninteresting) corrections and interesting corrections. We chose to ignore the spelling corrections, as any spell checker could easily suggest edits of that nature, and therefore, focus on the interesting corrections, classifying those into factual versus fluency. The baseline method we therefore use is character-level edit distance (Levenshtein, 1966) between pre and post edited text, to distinguish between fluency and factual edits. Figure 3 below shows  
 \\[.5cm]
 
@@ -63,6 +64,25 @@ Figure 3
 \raggedright
 \subsection{Results}
 \subsection{Suggesting Revisions}
+
+Our edit pairs vary in length from 1 character, to one word, to a few words, to a full sentence. Sometimes a correction is a complete deletion, an addition, or a substitution. In Table 1, revision 24 and revisions 163-167 are examples of fluency edits. Where revision 186 and 237 are factual edits. It is fair to assume that, fluency edits consist of small changes, such as spelling corrections, capitalizations, and punctuation. Factual edits, then consist of longer edits.This basic intuition, follows from Bronner and Monz, "longer edits are likely to be factual and shorter edits are likely to be fluency edits" (Bonner and Monz 2013). The baseline method we therefore use is character-level edit distance (Levenshtein, 1966) between pre- and post-edited text. The simplest edit to categorize and identify are spelling errors, using a spell checker we were able to easily find and compile a list of spelling corrections.
+
+Once we set aside all the edits that could be simply categorized as spelling, we started inspecting the more interesting edits. To this end we searched for the most common deletion-addition pairs that also had an edit distance greater than 1. 
+
+\subsection{Results and Possible Suggestions for Revisions}
+Of the 20000 edit pairs we extracted from our data, approximately 3000 were found to be spelling correction by our simple spell-checker. Of the remaining 17000, about 600 appeared more than once and had an edit distance greater than 1. From a manual inspection of these 600 pairs, the following categories emerged.
+\newline
+
+{\bfseries Spelling Errors:} some of the edit pairs captured are simply spelling errors that were missed by the previous classification. These can be grammatical: your $\rightarrow$ you're; semantical: right $\rightarrow$ write. Suggesting these kind of edits seems difficult, as they really depend the meaning of the sentence.\\
+
+{\bfseries Stylistic Improvements:} some of the pairs, such as: im $\rightarrow$ I'm, pants $\rightarrow$ trousers, virtually every $\rightarrow$ many; are examples of stylistic improvement that almost certainly improve the question. This type of revision should be suggested and is a path to explore in the future.\\
+
+{\bfseries Named Entities:} interestingly, a number of revisions found are related to named entities. Identifying these give us a database entities and their correct spelling. Suggesting this proper spelling should be an improvement to the question in most cases. This result could incidentally be useful in a related NLP task of Named Entity Recognition.\\
+Some examples of edits related to named entities are: cayogenMod $\rightarrow$ CyanogenMod, MAC OSX $\rightarrow$ Mac OS X,torrent $\rightarrow$ BitTorrent, stackexchange $\rightarrow$ Stack Exchange, rainbow dash $\rightarrow$ Rainbow Dash and a number more. We feel this to be a promising area of future studies.
+
+{\bfseries Miscelaneous:} a fair number of re-occurring edit pairs are not interesting, though it is surprising that they have occurred at least twice, seeing how esoteric some are. Some are correction of large mistakes, and the addition is not related to the deletion. Some are symbol manipulation, making them difficult to interpret out of context: \$n\$ $\rightarrow$ \$n=3\$.\\
+Some though seems to be potentially interesting: to speech $\rightarrow$ -to-speech, although this particular one could be considered a stylistic improvement.
+
 
 \section{Conclusion}
 \section{Future Work}
