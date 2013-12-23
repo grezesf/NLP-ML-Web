@@ -10,6 +10,34 @@ This README file describes the data, files and how to use the tools.
 Python 2.7 +
 Beautiful Soup 4
 
+### FILE DESCRIPTION
+
+/data/
+This folder contains the bulk of our data scraped from the web
+    master_list.txt: is a list of all the visited links
+    site_list.txt: a list of all the StackExchange.com websites. Used by scrape_SE.py
+Each sub_folder contains the saved html of the visited page, a txt fle with the link, and the html file of the revisions
+
+/features/
+Contains the interesting features extracted from the raw /data/. These files are what the machine learning algorithms used.
+
+/results/
+Contains the results from our experiments.
+
+/tools/
+Contains our scripts
+    average_distribution.py: reads a .dat file containing the age-score points of our data and computes the average at each age
+    build_site_list.py: This script displays all the StackExchange sub-categories saved as site_list.txt in /data
+    classify.py: This script classifies edits into meaning-preserving and meaning-altering
+    date_distribution.py: The use of this script is to find the distribution of date over our data set of questions, it takes a folder of files (each file is a question site html), and prints list of dates and scores
+    dictionary.txt: this file is used by our spell checker
+    edit_analyzer.py: this script performs a number of statistical analysis of our mean-changing edits
+    feat_extract.py: this script extract desired features from the raw data set and converts them to WEKA readable .arff format
+    feat_extract_task2.py: this script extract desired features from the raw data set, used for the second part of our experiments
+    score_distribution.py: The use of this script is to find the distribution of scores over our data set of questions
+    scrape_SE.py: our stackExchange.com web scraper
+    plot_*.gp: various gnuplot scripts
+
 
 ### PROJECT OVERVIEW
 Stack Exchange question/answer improvements
@@ -21,44 +49,4 @@ Stack Exchange question/answer improvements
     a question's upvotes; and more ambitiously suggesting edits to the text, based on past revisions.
 
 
-    * Task 1: Features - Rank/Score correlation
-Before anything useful can be done, we need to know what features can be useful for our tasks.
-
-Step 1: build data
-build_site_list.py (done)
-    tiny script that finds all the Stack Exchange sub-websites
-scrape_SE.py
-    script that explores and saves the raw html of question links. Adds (not replaces) to the current dataset.
-    input: latest list of links
-feat_extract.py
-    script that build the .arff from the above raw data
-    input: folder containing the raw html
-
-Features to extract
-    Possible targets:
-        vote-count-post (aka score) (for both)
-        normalized score (to define) (for both)
-
-        favoritecount (questions only)
-        number of answers (questions only)
-
-        Rank (answers only)
-        vote-accepted-on (if the question owner accepted this answer) (answers only)
-
-
-    * Sub-task 1.1: Data exploration: Normalized score
-        How does the score (vote-count-post) depend on how old the question/answers is?
-        re-score by average? median? threshold?
-    Result:
-        the score seems to slightly increase with age
-        a simple linear fit gives
-        scores ~= 0.00986813 * ages_in_days + 3.1622
-        possible score normalization: score - 0.00986813*age
-
-    Features:
-        - text & properties of the text, linguistic or other
-        - attached media (code snippets, pictures, links videos)
-        - tags
-        - title
-        - nature (question, answer)
-        - combinations of the aboves
+   

@@ -4,7 +4,7 @@ import os
 import sys
 
 ### README
-# this script read a .dat file containing the age-score points of our data
+# this script reads a .dat file containing the age-score points of our data
 # and computes the average at each age
 
 # path to data
